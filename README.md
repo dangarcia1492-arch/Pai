@@ -1,2 +1,8697 @@
 # pai
 pai planning
+build an app on a digital ocean droplet, minimum fuss, use app builder by github. 
+
+
+
+dashboard is the earlier style, the news page n the lext hand nav is News Desk
+
+
+
+country pages like this / topic page has 6 topics, IP and AI, AI Governance Notes, Standards and Frameworks, and inside each content displayed, heres the one for IP /  .another left hand nav item authorites like this / deeper hto, i do have 2300 or so items, synced from airtabe. comunity divided into two things. Facuty profles and Forum / lists like this / another version of the dashboard below, maybe better? feels polished more than the other but also less enteprise. tell me what you tink
+
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>PrinciplesAI Platform — V1 Mockup</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+
+    --teal:#0e8a7d;--teal-light:#e5f5f2;--teal-dark:#0a6b61;
+
+    --bg:#f8f9fa;--surface:#fff;
+
+    --ink:#0f172a;--secondary:#475467;--muted:#6c7686;
+
+    --border:#d5d8dd;
+
+    --green:#0e8a7d;--amber:#d97706;--red:#a02528;
+
+    --green-bg:#e5f5f2;--amber-bg:#fef6e5;--red-bg:#fde8eb;--blue-bg:#e8f0fe;--blue:#1a6bea;
+
+    --serif:'Source Serif 4',Georgia,serif;
+
+    --sans:'Source Sans 3',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+
+    --sidebar-collapsed:52px;--sidebar-expanded:280px;
+
+    --header-height:48px;
+
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+html{font-size:15px;-webkit-text-size-adjust:100%}
+
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
+
+button{cursor:pointer}
+
+
+
+/* ===== ICON SIDEBAR ===== */
+
+.icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden}
+
+.icon-sidebar:hover{width:var(--sidebar-expanded)}
+
+.icon-sidebar .sidebar-brand{display:flex;align-items:center;height:52px;padding:0 14px;gap:10px;flex-shrink:0;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+
+.icon-sidebar .sidebar-brand .brand-icon{width:24px;height:24px;background:var(--teal);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+.icon-sidebar .sidebar-brand .brand-icon svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none}
+
+.icon-sidebar .sidebar-brand .brand-text{font-family:var(--serif);font-weight:700;font-size:.88rem;color:var(--ink);opacity:0;transition:opacity .15s .05s;white-space:nowrap}
+
+.icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
+
+.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:8px 4px;overflow-y:auto;overflow-x:hidden}
+
+.sidebar-nav-item{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:3px;cursor:pointer;position:relative;color:var(--muted);transition:color .15s,background .15s;white-space:nowrap;flex-shrink:0}
+
+.sidebar-nav-item:hover{color:var(--secondary);background:#f4f5f7}
+
+.sidebar-nav-item.active{color:var(--teal)}
+
+.sidebar-nav-item.active::before{content:'';position:absolute;left:-4px;top:8px;bottom:8px;width:3px;background:var(--teal);border-radius:0 2px 2px 0}
+
+.sidebar-nav-item svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.6;fill:none;flex-shrink:0}
+
+.sidebar-nav-item .nav-label{font-size:.84rem;font-weight:500;opacity:0;transition:opacity .15s .05s}
+
+.icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
+
+
+
+/* ===== DRILL-IN SIDEBAR REGIONS ===== */
+
+.sidebar-regions-wrap{overflow:hidden;max-height:0;opacity:0;transition:max-height .35s cubic-bezier(0.16,1,0.3,1),opacity .3s cubic-bezier(0.16,1,0.3,1);overflow-y:auto;padding:0 6px}
+
+.sidebar-regions-wrap.open{max-height:80vh;opacity:1}
+
+.icon-sidebar:not(:hover) .sidebar-regions-wrap{max-height:0 !important;opacity:0 !important;padding:0}
+
+.icon-sidebar:hover .sidebar-regions-wrap.open{max-height:80vh;opacity:1}
+
+.sidebar-regions-wrap::-webkit-scrollbar{width:4px}
+
+.sidebar-regions-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+.sidebar-regions-wrap::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+
+
+/* Drill-in container */
+
+.drill-container{position:relative;min-height:40px}
+
+
+
+/* Cards view and list view */
+
+.drill-cards-view,.drill-list-view{transition:opacity .2s cubic-bezier(0.16,1,0.3,1),transform .2s cubic-bezier(0.16,1,0.3,1)}
+
+.drill-cards-view.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;right:0;transform:translateX(-8px)}
+
+.drill-list-view{opacity:0;pointer-events:none;position:absolute;top:0;left:0;right:0;transform:translateX(8px)}
+
+.drill-list-view.active{opacity:1;pointer-events:auto;position:relative;transform:translateX(0)}
+
+.drill-cards-view:not(.hidden){opacity:1;position:relative;transform:translateX(0)}
+
+
+
+/* Region cards - single column, full width */
+
+.sidebar-region-card{display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:3px;margin-bottom:6px;cursor:pointer;transition:border-color .15s,background .15s;min-height:56px;background:var(--surface)}
+
+.sidebar-region-card:hover{border-color:#999;background:var(--bg)}
+
+.sidebar-region-card:active{background:#eef0f3}
+
+.sidebar-region-card .src-svg{width:44px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+
+.sidebar-region-card .src-svg svg{width:100%;height:100%}
+
+.sidebar-region-card .src-info{flex:1;min-width:0;overflow:hidden}
+
+.sidebar-region-card .src-name{font-size:.82rem;font-weight:580;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.sidebar-region-card .src-count{font-size:.72rem;color:var(--muted);white-space:nowrap}
+
+
+
+/* Drill-in back link */
+
+.drill-back{display:flex;align-items:center;gap:4px;font-size:.75rem;font-weight:600;color:var(--teal);cursor:pointer;padding:4px 2px 8px;transition:color .12s}
+
+.drill-back:hover{color:var(--teal-dark);text-decoration:none}
+
+.drill-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+
+
+/* Drill-in region header */
+
+.drill-region-header{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:0 2px 6px;border-bottom:1px solid var(--border);margin-bottom:4px}
+
+
+
+/* Drill-in separator line */
+
+.drill-separator{border:none;border-top:1px solid var(--border);margin:8px 0}
+
+
+
+/* Drill-in jurisdiction items */
+
+.drill-jur-item{display:flex;align-items:center;padding:5px 8px;font-size:.82rem;font-weight:480;color:var(--secondary);cursor:pointer;border-radius:3px;transition:color .12s,background .12s;position:relative;border-left:3px solid transparent;margin-left:0}
+
+.drill-jur-item:hover{color:var(--ink);background:rgba(0,0,0,.03)}
+
+.drill-jur-item.active{color:var(--teal);border-left-color:var(--teal);transition:border-left-color .15s cubic-bezier(0.16,1,0.3,1)}
+
+.drill-jur-item.has-detail{font-weight:520}
+
+.drill-jur-item .drill-chevron{margin-left:auto;font-size:.72rem;color:var(--muted);flex-shrink:0;opacity:.6}
+
+.drill-jur-item.federal-item{font-weight:520;color:var(--secondary)}
+
+
+
+/* Stagger animation for list items */
+
+.drill-list-view.active .drill-jur-item{animation:drillItemIn .2s cubic-bezier(0.16,1,0.3,1) both}
+
+@keyframes drillItemIn{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:translateY(0)}}
+
+
+
+/* Sidebar nav item with tree - chevron indicator */
+
+.sidebar-nav-item .jur-nav-chevron{font-size:.72rem;margin-left:auto;opacity:0;transition:opacity .15s .05s,transform .2s cubic-bezier(0.16,1,0.3,1);color:var(--muted);flex-shrink:0}
+
+.icon-sidebar:hover .sidebar-nav-item .jur-nav-chevron{opacity:1}
+
+.sidebar-nav-item .jur-nav-chevron.rotated{transform:rotate(90deg)}
+
+.sidebar-user{border-top:1px solid var(--border);padding:8px 4px;flex-shrink:0;display:flex;align-items:center}
+
+.sidebar-user .sidebar-nav-item{gap:10px}
+
+.user-avatar{width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+
+
+
+/* ===== HEADER BAR ===== */
+
+.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:16px;z-index:200;transition:left .25s cubic-bezier(.4,0,.2,1)}
+
+.header-nav-arrows{display:flex;gap:4px}
+
+.header-nav-arrows button{width:28px;height:28px;border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background .12s}
+
+.header-nav-arrows button:hover{background:var(--bg)}
+
+.header-nav-arrows button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+
+.header-user-name{font-size:.82rem;font-weight:500;color:var(--secondary);white-space:nowrap}
+
+.header-search{flex:1;max-width:420px;display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;background:var(--bg);border-radius:3px;border:1px solid transparent;transition:border-color .12s,background .12s}
+
+.header-search:focus-within{background:var(--surface);border-color:var(--border)}
+
+.header-search svg{width:15px;height:15px;stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0}
+
+.header-search input{flex:1;font-size:.8rem;background:transparent}
+
+.header-search input::placeholder{color:var(--muted)}
+
+.header-right{display:flex;align-items:center;gap:12px;margin-left:auto}
+
+.header-icon-btn{width:32px;height:32px;border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--muted);position:relative;transition:background .12s,color .12s}
+
+.header-icon-btn:hover{background:var(--bg);color:var(--secondary)}
+
+.header-icon-btn svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.7;fill:none}
+
+.header-icon-btn .badge-count{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+.flag-btn{display:flex;align-items:center;gap:4px;font-size:.78rem;color:var(--secondary);cursor:pointer;padding:4px 8px;border-radius:3px;transition:background .12s}
+
+.flag-btn:hover{background:var(--bg)}
+
+.flag-btn .flag{font-size:1.1rem}
+
+
+
+/* ===== PAGE TABS ===== */
+
+.page-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--surface);position:fixed;top:var(--header-height);left:var(--sidebar-collapsed);right:0;z-index:150;padding:0 24px;overflow-x:auto;transition:left .25s cubic-bezier(.4,0,.2,1)}
+
+.page-tab{padding:10px 16px;font-size:.78rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s;white-space:nowrap}
+
+.page-tab:hover{color:var(--secondary)}
+
+.page-tab.active{color:var(--teal);font-weight:600;border-bottom-color:var(--teal)}
+
+
+
+/* ===== MAIN CONTENT ===== */
+
+.main-content{margin-left:var(--sidebar-collapsed);padding-top:calc(var(--header-height) + 42px);min-height:100vh;transition:margin-left .25s cubic-bezier(.4,0,.2,1)}
+
+.page-view{display:none;padding:28px 32px 60px;max-width:1320px;margin:0 auto}
+
+.page-view.active{display:block}
+
+
+
+/* ===== TYPOGRAPHY ===== */
+
+.serif{font-family:var(--serif)}
+
+h1.page-title{font-family:var(--serif);font-size:1.8rem;font-weight:700;line-height:1.2;letter-spacing:-0.01em;color:var(--ink)}
+
+h1.page-title em{font-style:italic;color:var(--teal)}
+
+h2{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--ink);letter-spacing:-0.005em}
+
+h3{font-size:.92rem;font-weight:600;color:var(--ink)}
+
+h4{font-size:.82rem;font-weight:600;color:var(--ink)}
+
+.text-sm{font-size:.8rem}.text-xs{font-size:.72rem}
+
+.text-muted{color:var(--muted)}.text-secondary{color:var(--secondary)}
+
+
+
+/* ===== CARDS ===== */
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border)}
+
+.card-body{padding:18px 20px}
+
+
+
+/* ===== STATS ===== */
+
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:24px}
+
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:18px 20px;border-top:2px solid var(--border)}
+
+.stat-value{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:var(--teal);line-height:1.2}
+
+.stat-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:3px}
+
+.stat-delta{font-size:.72rem;font-weight:600;margin-top:4px;color:var(--teal)}
+
+
+
+/* ===== BADGES ===== */
+
+.badge{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:11px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+
+.badge-green{background:var(--green-bg);color:var(--green)}
+
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+
+.badge-red{background:var(--red-bg);color:var(--red)}
+
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+
+.badge-neutral{background:#eef0f3;color:var(--secondary)}
+
+.badge-teal{background:var(--teal);color:#fff}
+
+.badge-dark{background:var(--ink);color:#fff}
+
+
+
+/* ===== STATUS BADGES (for matrix) ===== */
+
+.status{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:3px}
+
+.status-yes{background:var(--green-bg);color:var(--green)}
+
+.status-partial{background:var(--amber-bg);color:var(--amber)}
+
+.status-no{background:var(--red-bg);color:var(--red)}
+
+.status-limited{background:var(--blue-bg);color:var(--blue)}
+
+
+
+/* ===== BUTTONS ===== */
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;padding:0 16px;font-size:.82rem;font-weight:600;border-radius:3px;transition:all .12s;white-space:nowrap;text-decoration:none;cursor:pointer}
+
+.btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+
+.btn-teal{background:var(--teal);color:#fff;border:1px solid var(--teal)}.btn-teal:hover{background:var(--teal-dark);text-decoration:none}
+
+.btn-outline{background:var(--surface);color:var(--secondary);border:1px solid var(--border)}.btn-outline:hover{background:var(--bg);text-decoration:none}
+
+.btn-ghost{background:transparent;color:var(--secondary);border:1px solid transparent}.btn-ghost:hover{background:var(--bg);text-decoration:none}
+
+.btn-sm{height:30px;padding:0 12px;font-size:.78rem}
+
+
+
+/* ===== FILTER BAR ===== */
+
+.filter-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+
+.filter-btn{display:inline-flex;align-items:center;height:30px;padding:0 12px;font-size:.75rem;font-weight:600;color:var(--secondary);background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .12s}
+
+.filter-btn:hover{border-color:var(--muted)}
+
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+
+
+/* ===== TABLE ===== */
+
+table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+
+.data-table th{text-align:left;padding:10px 14px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap}
+
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+
+.data-table tbody tr:hover{background:var(--bg)}
+
+
+
+/* ===== HIGHLIGHT CARDS (Home) ===== */
+
+.highlight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+
+.highlight-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:18px 20px;border-top:2px solid var(--teal)}
+
+.highlight-card .hl-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px}
+
+.highlight-card .hl-value{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ink);line-height:1.35}
+
+.highlight-card .hl-sub{font-size:.78rem;color:var(--secondary);margin-top:4px}
+
+
+
+/* ===== BRIEFING CARD ===== */
+
+.briefing-card{background:linear-gradient(135deg,#0a6b61,#0e8a7d);border-radius:3px;padding:24px;color:#fff}
+
+.briefing-card .bc-badge{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:.72rem;font-weight:700;background:rgba(255,255,255,.2);color:#fff;margin-bottom:12px}
+
+.briefing-card h3{font-family:var(--serif);font-size:1rem;font-weight:600;color:#fff;margin-bottom:4px}
+
+.briefing-card .bc-meta{font-size:.75rem;opacity:.8;margin-bottom:14px}
+
+.briefing-card .bc-btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#fff;color:var(--teal);font-size:.78rem;font-weight:700;border-radius:3px;cursor:pointer}
+
+
+
+/* ===== TRENDING PILLS ===== */
+
+.trending-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:.78rem;font-weight:500;color:var(--ink);margin:3px}
+
+.trending-pill .tp-count{font-size:.72rem;font-weight:700;color:var(--teal)}
+
+
+
+/* ===== NEWS DISPATCH ===== */
+
+.dispatch-row{display:flex;align-items:flex-start;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+
+.dispatch-row:hover{background:var(--bg)}
+
+.dispatch-date{font-size:.72rem;color:var(--muted);min-width:60px;flex-shrink:0;padding-top:2px;font-variant-numeric:tabular-nums}
+
+.dispatch-flag{font-size:1rem;flex-shrink:0}
+
+.dispatch-body{flex:1;min-width:0}
+
+.dispatch-headline{font-size:.88rem;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:2px}
+
+.dispatch-sub{font-size:.78rem;color:var(--secondary);line-height:1.5}
+
+.dispatch-badges{display:flex;align-items:center;gap:6px;flex-shrink:0}
+
+.dispatch-stars{color:var(--amber);font-size:.72rem;letter-spacing:1px}
+
+.dispatch-editor{font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--teal);background:var(--teal-light);padding:2px 6px;border-radius:3px}
+
+
+
+/* ===== LEAD STORY ===== */
+
+.lead-story{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:24px;margin-bottom:20px}
+
+.lead-story .ls-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;border-radius:3px;margin-bottom:10px}
+
+.lead-story .ls-meta{font-size:.75rem;color:var(--muted);margin-bottom:8px}
+
+.lead-story h2{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:8px}
+
+.lead-story .ls-standfirst{font-size:.88rem;color:var(--secondary);line-height:1.5;margin-bottom:14px}
+
+.lead-story .ls-link{font-size:.82rem;font-weight:600;color:var(--teal)}
+
+
+
+/* ===== ASK THE DESK ===== */
+
+.ask-desk{display:flex;align-items:center;gap:12px;background:var(--teal-light);border:1px solid #c2e5df;border-radius:3px;padding:10px 16px;margin-bottom:20px}
+
+.ask-desk input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:3px;height:34px;padding:0 12px;font-size:.82rem}
+
+.ask-desk .ad-label{font-size:.75rem;font-weight:600;color:var(--teal);white-space:nowrap}
+
+.ask-desk .ad-sla{font-size:.72rem;color:var(--muted);white-space:nowrap}
+
+
+
+/* ===== JURISDICTION DETAIL ===== */
+
+.jur-hero{display:flex;gap:32px;margin-bottom:28px;align-items:flex-start}
+
+.jur-info{flex:1}
+
+.jur-silhouette{width:180px;height:140px;background:var(--teal-light);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+.jur-silhouette svg{width:80px;height:80px;fill:var(--teal);opacity:.3}
+
+.jur-breadcrumb{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:10px}
+
+.jur-breadcrumb span{color:var(--teal)}
+
+.jur-country-name{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+
+.jur-body-count{font-size:.88rem;color:var(--secondary);margin-bottom:16px}
+
+.jur-export-btns{display:flex;gap:8px}
+
+
+
+/* ===== STATES GRID (USA) ===== */
+
+.states-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+.state-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:16px 18px;transition:border-color .12s}
+
+.state-card:hover{border-color:var(--muted)}
+
+.state-card-header{display:flex;align-items:center;justify-content:space-between}
+
+.state-card-header h4{font-family:var(--serif);font-size:.92rem;font-weight:600;color:var(--ink)}
+
+@media(max-width:1100px){.states-grid{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:768px){.states-grid{grid-template-columns:1fr}}
+
+
+
+/* ===== AUTHORITY CARDS ===== */
+
+.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:18px 20px;transition:border-color .12s}
+
+.auth-card:hover{border-color:var(--muted)}
+
+.auth-card .ac-type{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px}
+
+.auth-card .ac-name{font-family:var(--serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+
+.auth-card .ac-link{font-size:.75rem;color:var(--teal)}
+
+
+
+/* ===== MATRIX TABLE (Topics) ===== */
+
+.matrix-wrap{overflow-x:auto;margin-bottom:24px}
+
+.matrix-table{width:100%;border-collapse:collapse;font-size:.78rem}
+
+.matrix-table th{padding:10px 12px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:2px solid var(--border);background:var(--surface);text-align:left;white-space:nowrap;min-width:140px}
+
+.matrix-table th:first-child{min-width:160px;position:sticky;left:0;background:var(--surface);z-index:2}
+
+.matrix-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+
+.matrix-table td:first-child{font-weight:600;position:sticky;left:0;background:var(--surface);z-index:1}
+
+.matrix-table tbody tr:hover td{background:var(--bg)}
+
+.matrix-cell{display:flex;flex-direction:column;gap:2px}
+
+.matrix-cell .mc-note{font-size:.72rem;color:var(--secondary);font-weight:400}
+
+
+
+/* ===== CALLOUT BOX ===== */
+
+.callout{border-left:3px solid var(--teal);background:var(--teal-light);border-radius:0 3px 3px 0;padding:16px 20px;margin-bottom:24px}
+
+.callout h4{font-family:var(--serif);font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+
+.callout p{font-size:.82rem;color:var(--secondary);line-height:1.5}
+
+
+
+/* ===== KEY LEGEND ===== */
+
+.key-legend{display:flex;align-items:center;gap:16px;margin-bottom:16px;font-size:.75rem;color:var(--secondary);flex-wrap:wrap}
+
+.key-legend .kl-item{display:flex;align-items:center;gap:5px}
+
+.key-legend .kl-dot{width:10px;height:10px;border-radius:2px}
+
+.key-legend .kl-dot.yes{background:var(--green-bg);border:1px solid var(--green)}
+
+.key-legend .kl-dot.partial{background:var(--amber-bg);border:1px solid var(--amber)}
+
+.key-legend .kl-dot.no{background:var(--red-bg);border:1px solid var(--red)}
+
+.key-legend .kl-dot.limited{background:var(--blue-bg);border:1px solid var(--blue)}
+
+
+
+/* ===== TABS ===== */
+
+.inner-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:18px}
+
+.inner-tab{padding:8px 14px;font-size:.78rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s}
+
+.inner-tab:hover{color:var(--secondary)}
+
+.inner-tab.active{color:var(--teal);font-weight:600;border-bottom-color:var(--teal)}
+
+.pin-default{font-size:.72rem;color:var(--muted);margin-left:auto;padding:8px 0;cursor:pointer}
+
+.pin-default:hover{color:var(--teal)}
+
+
+
+/* ===== GRID HELPERS ===== */
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+.grid-sidebar-layout{display:grid;grid-template-columns:1fr 340px;gap:24px}
+
+.flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}
+
+.gap-8{gap:8px}.gap-12{gap:12px}.gap-16{gap:16px}.gap-24{gap:24px}
+
+.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}.mb-24{margin-bottom:24px}
+
+
+
+/* ===== LIVE DOT ===== */
+
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-right:4px;animation:pulse 2s infinite}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+
+
+/* ===== COMMUNITY ===== */
+
+.community-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:18px 20px}
+
+.community-card .cc-avatar{width:36px;height:36px;border-radius:50%;background:var(--teal-light);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0}
+
+.community-card .cc-name{font-weight:600;font-size:.88rem}
+
+.community-card .cc-role{font-size:.75rem;color:var(--muted)}
+
+
+
+/* ===== ACCOUNT ===== */
+
+.account-section{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:24px;margin-bottom:16px}
+
+.account-section h3{margin-bottom:14px}
+
+.account-field{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+
+.account-field:last-child{border-bottom:none}
+
+.account-field .af-label{font-size:.82rem;color:var(--muted);min-width:140px}
+
+.account-field .af-value{font-size:.82rem;font-weight:500;color:var(--ink)}
+
+
+
+/* ===== JURISDICTION PROMPT (empty state) ===== */
+
+.jur-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;color:var(--muted)}
+
+.jur-empty-state svg{width:80px;height:80px;stroke:var(--border);stroke-width:1;fill:none;margin-bottom:20px}
+
+.jur-empty-state h2{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--secondary);margin-bottom:8px}
+
+.jur-empty-state p{font-size:.88rem;max-width:380px;line-height:1.5}
+
+
+
+/* ===== CONTENT TYPE SECTIONS (Jurisdiction Detail) ===== */
+
+.content-type-section{margin-top:28px}
+
+.content-type-header{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-top:1px solid var(--border);padding-top:20px}
+
+.content-type-header h3{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ink);letter-spacing:-0.005em}
+
+.content-type-header .ct-count{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:.72rem;font-weight:700;background:#eef0f3;color:var(--secondary)}
+
+.content-type-items{margin-top:4px}
+
+.content-type-item{display:flex;align-items:flex-start;gap:16px;padding:10px 0;border-bottom:1px solid #eef0f3}
+
+.content-type-item:last-child{border-bottom:none}
+
+.ct-item-date{font-size:.72rem;color:var(--muted);min-width:72px;flex-shrink:0;padding-top:2px;font-variant-numeric:tabular-nums}
+
+.ct-item-body{flex:1;min-width:0}
+
+.ct-item-title{font-size:.85rem;font-weight:600;color:var(--ink);line-height:1.4}
+
+.ct-item-summary{font-size:.78rem;color:var(--secondary);line-height:1.45;margin-top:2px}
+
+.ct-item-status{flex-shrink:0}
+
+.content-type-empty{padding:16px 0 8px 16px;border-left:2px solid var(--teal);margin:8px 0 0 0}
+
+.content-type-empty p{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.5;max-width:640px}
+
+
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:1100px){.grid-sidebar-layout{grid-template-columns:1fr}.highlight-row{grid-template-columns:1fr 1fr 1fr}.grid-4{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:768px){.highlight-row{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+
+
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<!-- ===== ICON SIDEBAR ===== -->
+
+<nav class="icon-sidebar" id="iconSidebar">
+
+    <div class="sidebar-brand">
+
+        <div class="brand-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg></div>
+
+        <span class="brand-text">PrinciplesAI</span>
+
+    </div>
+
+    <div class="sidebar-nav-items">
+
+        <div class="sidebar-nav-item active" data-page="home" onclick="showPage('home')">
+
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+
+            <span class="nav-label">Dashboard</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="jurisdictions" onclick="toggleJurRegions(event)">
+
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+
+            <span class="nav-label">Jurisdictions</span>
+
+            <span class="jur-nav-chevron" id="jurNavChevron">&#9656;</span>
+
+        </div>
+
+        <!-- Sidebar Region Cards (drill-in) -->
+
+        <div class="sidebar-regions-wrap" id="sidebarRegionsWrap"></div>
+
+        <div class="sidebar-nav-item" data-page="news" onclick="showPage('news')">
+
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+
+            <span class="nav-label">News</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="topics" onclick="showPage('topics')">
+
+            <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+
+            <span class="nav-label">Topics</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="authorities" onclick="showPage('authorities')">
+
+            <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg>
+
+            <span class="nav-label">Authorities</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="lists" onclick="showPage('lists')">
+
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+
+            <span class="nav-label">Lists</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="community" onclick="showPage('community')">
+
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+
+            <span class="nav-label">Community</span>
+
+        </div>
+
+    </div>
+
+    <div class="sidebar-user">
+
+        <div class="sidebar-nav-item" data-page="account" onclick="showPage('account')">
+
+            <div class="user-avatar">D</div>
+
+            <span class="nav-label">David</span>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ===== HEADER BAR ===== -->
+
+<header class="header-bar">
+
+    <div class="header-nav-arrows">
+
+        <button><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+
+        <button><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+
+    </div>
+
+    <span class="header-user-name">David &middot; PrinciplesAI</span>
+
+    <div class="header-search">
+
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+
+        <input type="text" placeholder="Search jurisdictions, enforcement, case law...">
+
+    </div>
+
+    <div class="header-right">
+
+        <div class="flag-btn"><span class="flag">&#x1F1EC;&#x1F1E7;</span> UK</div>
+
+        <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="badge-count">3</span></button>
+
+        <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="badge-count">5</span></button>
+
+        <button class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
+
+    </div>
+
+</header>
+
+
+
+<!-- ===== PAGE TABS ===== -->
+
+<div class="page-tabs">
+
+    <div class="page-tab active" data-page="home" onclick="showPage('home')">Home</div>
+
+    <div class="page-tab" data-page="news" onclick="showPage('news')">News</div>
+
+    <div class="page-tab" data-page="jurisdictions" onclick="showPage('jurisdictions')">Jurisdictions</div>
+
+    <div class="page-tab" data-page="topics" onclick="showPage('topics')">Topics</div>
+
+    <div class="page-tab" data-page="authorities" onclick="showPage('authorities')">Authorities</div>
+
+    <div class="page-tab" data-page="lists" onclick="showPage('lists')">Lists</div>
+
+    <div class="page-tab" data-page="community" onclick="showPage('community')">Community</div>
+
+    <div class="page-tab" data-page="account" onclick="showPage('account')">Account</div>
+
+</div>
+
+
+
+<!-- ===== MAIN CONTENT ===== -->
+
+<div class="main-content">
+
+
+
+<!-- ==================== HOME ==================== -->
+
+<div class="page-view active" id="page-home">
+
+    <!-- Greeting -->
+
+    <div class="flex items-center justify-between mb-24">
+
+        <div class="flex items-center gap-16">
+
+            <div class="user-avatar" style="width:48px;height:48px;font-size:1rem">D</div>
+
+            <div>
+
+                <h1 class="page-title" style="font-size:1.5rem">Hello, David</h1>
+
+                <p class="text-sm text-secondary">Friday 10 April 2026 &mdash; 23 new updates across your tracked jurisdictions</p>
+
+            </div>
+
+        </div>
+
+        <div class="flex items-center gap-12">
+
+            <a href="#" style="font-family:var(--serif);font-weight:600;font-size:.82rem;color:var(--teal)">PrinciplesAI</a>
+
+            <a href="#" class="btn btn-outline btn-sm">Customize</a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Highlight cards -->
+
+    <div class="highlight-row">
+
+        <div class="highlight-card">
+
+            <div class="hl-label">Your home</div>
+
+            <div class="hl-value">United Kingdom</div>
+
+            <div class="hl-sub"><span class="badge badge-blue" style="height:18px;font-size:.72rem;margin-right:4px">Europe</span> 847 records</div>
+
+        </div>
+
+        <div class="highlight-card">
+
+            <div class="hl-label">Legislation moving</div>
+
+            <div class="hl-value">AI governance</div>
+
+            <div class="hl-sub"><span style="font-weight:700;color:var(--teal)">14 bills</span> in progress across 9 jurisdictions</div>
+
+        </div>
+
+        <div class="highlight-card">
+
+            <div class="hl-label">Next deadline</div>
+
+            <div class="hl-value">EU AI Act: Prohibited Systems</div>
+
+            <div class="hl-sub"><span class="badge badge-amber" style="height:18px;font-size:.72rem">12 days</span></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Stats -->
+
+    <div class="stats-row">
+
+        <div class="stat-card">
+
+            <div class="stat-value">337</div>
+
+            <div class="stat-label">Jurisdictions tracked</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">1,602</div>
+
+            <div class="stat-label">Regulatory bodies</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">174</div>
+
+            <div class="stat-label">Laws &amp; regulations</div>
+
+            <div class="stat-delta">+109 in progress</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">23</div>
+
+            <div class="stat-label">Records this week</div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Three-column: Briefing, While You Were Away, Trending -->
+
+    <div class="grid-3 mb-24">
+
+        <!-- PAI Briefing -->
+
+        <div class="briefing-card">
+
+            <div class="bc-badge">NEW</div>
+
+            <h3>PAI Briefing: EU AI Act Enforcement Begins</h3>
+
+            <div class="bc-meta">Dr. Sarah Chen &middot; 18 min</div>
+
+            <div class="bc-btn">&#9654; Watch Now</div>
+
+        </div>
+
+
+
+        <!-- While you were away -->
+
+        <div class="card">
+
+            <div class="card-header"><h3>While you were away</h3></div>
+
+            <div class="card-body">
+
+                <p class="text-sm text-secondary mb-12">23 new records in the last 7 days</p>
+
+                <div class="flex gap-8" style="flex-wrap:wrap">
+
+                    <span class="badge badge-red">3 Alert</span>
+
+                    <span class="badge badge-blue">17 Guidance</span>
+
+                    <span class="badge badge-amber">3 Enforcement</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Trending topics -->
+
+        <div class="card">
+
+            <div class="card-header"><h3>Trending topics</h3></div>
+
+            <div class="card-body" style="padding:12px 16px">
+
+                <div class="trending-pill">Official Guidelines <span class="tp-count">58</span></div>
+
+                <div class="trending-pill">Case Law <span class="tp-count">13</span></div>
+
+                <div class="trending-pill">Facial Recognition <span class="tp-count">9</span></div>
+
+                <div class="trending-pill">Copyright &amp; AI <span class="tp-count">7</span></div>
+
+                <div class="trending-pill">Data Protection <span class="tp-count">41</span></div>
+
+                <div class="trending-pill">Autonomous Systems <span class="tp-count">5</span></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Tabbed section -->
+
+    <div class="card">
+
+        <div style="display:flex;align-items:center;border-bottom:1px solid var(--border);padding:0 20px">
+
+            <div class="inner-tabs" style="border-bottom:none;margin-bottom:0">
+
+                <div class="inner-tab active">Activity</div>
+
+                <div class="inner-tab">Global AI Laws</div>
+
+                <div class="inner-tab">US AI Laws</div>
+
+                <div class="inner-tab">EU AI Act</div>
+
+            </div>
+
+            <span class="pin-default">&#128204; Pin as default</span>
+
+        </div>
+
+        <div class="card-body" style="padding:0">
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EE;&#x1F1F9;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Italy: Garante fines Intesa Sanpaolo &euro;31.8m for unauthorised data access</div>
+
+                    <div class="dispatch-sub">Major GDPR enforcement action targeting banking sector data governance failures</div>
+
+                </div>
+
+                <span class="badge badge-red" style="flex-shrink:0">Alert</span>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1FA;&#x1F1F8;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">US: NIST releases updated AI Risk Management Framework v2.1</div>
+
+                    <div class="dispatch-sub">Expanded guidance on foundation model evaluation and red-teaming requirements</div>
+
+                </div>
+
+                <span class="badge badge-blue" style="flex-shrink:0">Guidance</span>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EC;&#x1F1E7;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">UK: ICO publishes consultation on AI and data protection compliance</div>
+
+                    <div class="dispatch-sub">60-day public consultation on draft guidance for AI developers and deployers</div>
+
+                </div>
+
+                <span class="badge badge-green" style="flex-shrink:0">Consultation</span>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EA;&#x1F1FA;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">EU: European Commission adopts delegated act on high-risk AI classification</div>
+
+                    <div class="dispatch-sub">Clarifying criteria for Annex III categorisation under the AI Act</div>
+
+                </div>
+
+                <span class="badge badge-blue" style="flex-shrink:0">Legislation</span>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">8 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1E8;&#x1F1E6;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Canada: AIDA moves to Senate committee review stage</div>
+
+                    <div class="dispatch-sub">Artificial Intelligence and Data Act faces amendments on enforcement powers</div>
+
+                </div>
+
+                <span class="badge badge-amber" style="flex-shrink:0">Bill</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== NEWS ==================== -->
+
+<div class="page-view" id="page-news">
+
+    <div class="mb-8" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal)">PRINCIPLESAI</div>
+
+    <h1 class="page-title mb-8" style="font-size:2rem">Your <em>inbox</em></h1>
+
+    <div class="flex items-center gap-16 mb-24">
+
+        <span class="text-sm text-secondary">56 stories today &middot; 11 in your watchlist &middot; 42 unread</span>
+
+        <span class="text-sm" style="color:var(--green)"><span class="live-dot"></span>Live &middot; checker updated 4 min ago</span>
+
+    </div>
+
+
+
+    <!-- Lead story -->
+
+    <div class="lead-story">
+
+        <div class="ls-badge">TODAY'S LEAD</div>
+
+        <div class="ls-meta">10 April 2026 &middot; Italy &middot; Data Protection</div>
+
+        <h2>Italy: Garante fines Intesa Sanpaolo &euro;31.8m for failing to detect employee's unauthorised client data access</h2>
+
+        <div class="ls-standfirst">Italy's data protection authority has imposed its largest-ever fine on a financial institution after a bank employee accessed personal records of over 3,500 clients, including high-profile political figures, without authorisation over a period of more than two years. The decision raises critical questions about internal monitoring obligations and the adequacy of technical safeguards under GDPR Article 32.</div>
+
+        <a href="#" class="ls-link">Read full story &rarr;</a>
+
+    </div>
+
+
+
+    <!-- Ask the Desk -->
+
+    <div class="ask-desk">
+
+        <span class="ad-label">ASK THE DESK</span>
+
+        <input type="text" placeholder="A question for the analyst team?">
+
+        <button class="btn btn-teal btn-sm">Send</button>
+
+        <span class="ad-sla">2 day SLA</span>
+
+    </div>
+
+
+
+    <!-- Filters -->
+
+    <div class="filter-bar">
+
+        <div class="filter-btn active">For you <strong style="margin-left:4px">11</strong></div>
+
+        <div class="filter-btn">VIEW All</div>
+
+        <div class="filter-btn">TYPE Any</div>
+
+        <div class="filter-btn">REGION All</div>
+
+        <div class="filter-btn">TOPIC All</div>
+
+        <div class="filter-btn">TIME Today</div>
+
+    </div>
+
+
+
+    <!-- Dispatch list -->
+
+    <div class="grid-sidebar-layout">
+
+        <div class="card" style="overflow:hidden">
+
+            <div class="dispatch-row" style="background:var(--teal-light)">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EE;&#x1F1F9;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Italy: Garante fines Intesa Sanpaolo &euro;31.8m for unauthorised data access</div>
+
+                    <div class="dispatch-sub">Banking sector GDPR enforcement &middot; Internal monitoring obligations</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-red">Alert</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+
+                    <span class="dispatch-editor">Editor's Lead</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1FA;&#x1F1F8;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">NIST releases updated AI Risk Management Framework v2.1</div>
+
+                    <div class="dispatch-sub">Foundation model evaluation &middot; Red-teaming guidance</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-blue">Lead</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EC;&#x1F1E7;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">UK: FCA issues guidance on AI use in financial services</div>
+
+                    <div class="dispatch-sub">Consumer protection &middot; Algorithmic trading safeguards</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-neutral">Guidance</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EA;&#x1F1FA;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">EU AI Office publishes first harmonised standards request</div>
+
+                    <div class="dispatch-sub">Technical standards &middot; Conformity assessment</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-blue">Lead</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EF;&#x1F1F5;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Japan: Cabinet approves AI Basic Act draft</div>
+
+                    <div class="dispatch-sub">Comprehensive AI law &middot; Risk-based classification</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-amber">Bill</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1E6;&#x1F1FA;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Australia: ACCC launches inquiry into AI in digital platforms</div>
+
+                    <div class="dispatch-sub">Competition law &middot; Market power in AI</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-neutral">Inquiry</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1F0;&#x1F1F7;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">South Korea: PIPC updates AI privacy guidelines</div>
+
+                    <div class="dispatch-sub">Personal data in AI training &middot; Consent mechanisms</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-neutral">Guidance</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Story detail panel -->
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <h2 style="font-size:1.05rem;margin-bottom:12px">Italy: Garante fines Intesa Sanpaolo &euro;31.8m for failing to detect employee's unauthorised client data access</h2>
+
+                <p class="text-sm text-secondary" style="line-height:1.5;margin-bottom:16px">Italy's Garante per la protezione dei dati personali imposed a &euro;31.8 million fine on Intesa Sanpaolo after an employee accessed the personal records of over 3,500 clients without authorisation. The investigation revealed that the bank's monitoring systems failed to flag the repeated access over a period exceeding two years.</p>
+
+                <p class="text-sm text-secondary" style="line-height:1.5;margin-bottom:16px">The regulator found violations of GDPR Articles 5(1)(f), 25, and 32, concluding that the bank's technical and organisational measures were insufficient to ensure appropriate security of personal data processing.</p>
+
+                <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:14px">
+
+                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Type</span><span class="text-xs" style="font-weight:600">Enforcement Action</span></div>
+
+                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Jurisdiction</span><span class="text-xs" style="font-weight:600">Italy</span></div>
+
+                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Date</span><span class="text-xs" style="font-weight:600">10 April 2026</span></div>
+
+                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Authority</span><span class="text-xs" style="font-weight:600">Garante per la protezione dei dati personali</span></div>
+
+                    <div class="flex justify-between"><span class="text-xs text-muted">Source</span><a href="#" class="text-xs" style="font-weight:600;color:var(--teal)">Garante official decision</a></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== JURISDICTIONS ==================== -->
+
+<div class="page-view" id="page-jurisdictions">
+
+    <div id="jur-detail-container"></div>
+
+</div>
+
+
+
+<!-- ==================== TOPICS ==================== -->
+
+<div class="page-view" id="page-topics">
+
+    <div class="flex items-center justify-between mb-16">
+
+        <div>
+
+            <h1 class="page-title">AI &amp; Copyright: <em>Cross-Jurisdictional Matrix</em></h1>
+
+            <p class="text-sm text-secondary" style="margin-top:4px">Comparing copyright and intellectual property requirements across jurisdictions</p>
+
+        </div>
+
+        <div class="flex items-center gap-8">
+
+            <button class="btn btn-outline btn-sm">&#8592; Prev topic</button>
+
+            <button class="btn btn-outline btn-sm">Next topic &rarr;</button>
+
+            <button class="btn btn-teal btn-sm">Download CSV</button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Key -->
+
+    <div class="key-legend mb-16">
+
+        <strong style="font-size:.72rem;color:var(--ink)">Key:</strong>
+
+        <div class="kl-item"><div class="kl-dot yes"></div> Yes = Binding legal requirement</div>
+
+        <div class="kl-item"><div class="kl-dot partial"></div> Partial = Guidance / emerging</div>
+
+        <div class="kl-item"><div class="kl-dot no"></div> No = No specific requirement</div>
+
+        <div class="kl-item"><div class="kl-dot limited"></div> Limited = Sector-specific only</div>
+
+    </div>
+
+
+
+    <!-- Callout -->
+
+    <div class="callout">
+
+        <h4>Why this matters now</h4>
+
+        <p>The intersection of AI and copyright law is the fastest-moving area of tech regulation in 2026. Major jurisdictions are taking divergent approaches to whether AI-generated works qualify for copyright protection, whether training on copyrighted data constitutes fair use, and what disclosure obligations apply to AI developers. These differences create significant compliance complexity for organisations operating across borders.</p>
+
+    </div>
+
+
+
+    <!-- Matrix table -->
+
+    <div class="matrix-wrap">
+
+        <table class="matrix-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Jurisdiction</th>
+
+                    <th>AI Works Copyrightable?</th>
+
+                    <th>TDM Exception?</th>
+
+                    <th>Training on Copyrighted Data</th>
+
+                    <th>Disclosure Required?</th>
+
+                    <th>Liability Framework</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>&#x1F1EA;&#x1F1FA; European Union</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span><span class="mc-note">Human authorship required</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">DSM Arts 3-4</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Opt-out mechanism</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">AI Act Art. 52</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1FA;&#x1F1F8; United States</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span><span class="mc-note">Thaler v. Vidal (2023)</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">Fair use doctrine</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Pending litigation</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1EC;&#x1F1E7; United Kingdom</td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">CDPA s.9(3)</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Under review</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Implied</span><span class="mc-note">Code of Practice</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Voluntary code</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1EF;&#x1F1F5; Japan</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span><span class="mc-note">Human creativity needed</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">Art. 30-4 Copyright Act</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">Broad non-enjoyment exception</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1E8;&#x1F1F3; China</td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Beijing Internet Court (2023)</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Consent required</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">AIGC Measures Art. 12</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">Provider liable</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1F0;&#x1F1F7; South Korea</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Under consultation</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1E8;&#x1F1E6; Canada</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span><span class="mc-note">Human author required</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Fair dealing</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- Key tension -->
+
+    <div class="callout" style="margin-top:24px">
+
+        <h4>Key tension</h4>
+
+        <p>Japan's expansive text and data mining exception stands in sharp contrast to the EU's opt-out mechanism. Organisations training models on data sourced from multiple jurisdictions must navigate fundamentally different legal frameworks simultaneously, with no international harmonisation in sight.</p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== AUTHORITIES ==================== -->
+
+<div class="page-view" id="page-authorities">
+
+    <div class="flex items-center justify-between mb-24">
+
+        <div>
+
+            <h1 class="page-title">Regulatory <em>Authorities</em></h1>
+
+            <p class="text-sm text-secondary" style="margin-top:4px">1,602 regulatory bodies across 337 jurisdictions</p>
+
+        </div>
+
+        <div class="flex items-center gap-8">
+
+            <button class="btn btn-outline btn-sm">Export</button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="filter-bar">
+
+        <div class="filter-btn active">All</div>
+
+        <div class="filter-btn">Data Protection</div>
+
+        <div class="filter-btn">AI-Specific</div>
+
+        <div class="filter-btn">Cybersecurity</div>
+
+        <div class="filter-btn">Financial</div>
+
+        <div class="filter-btn">Competition</div>
+
+        <div class="filter-btn">Sector Regulators</div>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <div style="overflow-x:auto">
+
+            <table class="data-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Authority</th>
+
+                        <th>Type</th>
+
+                        <th>Jurisdiction</th>
+
+                        <th>AI Mandate</th>
+
+                        <th>Status</th>
+
+                        <th>Last Activity</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td style="font-weight:600">European AI Office</td>
+
+                        <td><span class="badge badge-blue" style="height:18px;font-size:.72rem">AI-Specific</span></td>
+
+                        <td>&#x1F1EA;&#x1F1FA; European Union</td>
+
+                        <td>Primary</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>10 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">CNIL</td>
+
+                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
+
+                        <td>&#x1F1EB;&#x1F1F7; France</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>9 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">ICO</td>
+
+                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
+
+                        <td>&#x1F1EC;&#x1F1E7; United Kingdom</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>9 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">NIST</td>
+
+                        <td><span class="badge badge-amber" style="height:18px;font-size:.72rem">Standards Body</span></td>
+
+                        <td>&#x1F1FA;&#x1F1F8; United States</td>
+
+                        <td>Standards</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>10 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">FTC</td>
+
+                        <td><span class="badge badge-red" style="height:18px;font-size:.72rem">Consumer Protection</span></td>
+
+                        <td>&#x1F1FA;&#x1F1F8; United States</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>7 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">Garante</td>
+
+                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
+
+                        <td>&#x1F1EE;&#x1F1F9; Italy</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>10 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">CAC</td>
+
+                        <td><span class="badge badge-blue" style="height:18px;font-size:.72rem">AI-Specific</span></td>
+
+                        <td>&#x1F1E8;&#x1F1F3; China</td>
+
+                        <td>Primary</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>5 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">PIPC</td>
+
+                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
+
+                        <td>&#x1F1F0;&#x1F1F7; South Korea</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>9 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">BaFin</td>
+
+                        <td><span class="badge badge-amber" style="height:18px;font-size:.72rem">Financial Regulator</span></td>
+
+                        <td>&#x1F1E9;&#x1F1EA; Germany</td>
+
+                        <td>Sector</td>
+
+                        <td><span style="color:var(--amber);font-weight:600">&#9679;</span> Limited</td>
+
+                        <td>3 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">ACCC</td>
+
+                        <td><span class="badge badge-red" style="height:18px;font-size:.72rem">Competition</span></td>
+
+                        <td>&#x1F1E6;&#x1F1FA; Australia</td>
+
+                        <td>Inquiry</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>9 Apr 2026</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== LISTS ==================== -->
+
+<div class="page-view" id="page-lists">
+
+    <div class="flex items-center justify-between mb-24">
+
+        <div>
+
+            <h1 class="page-title">Your <em>Lists</em></h1>
+
+            <p class="text-sm text-secondary" style="margin-top:4px">Curated collections of jurisdictions, topics, and regulatory intelligence</p>
+
+        </div>
+
+        <button class="btn btn-teal btn-sm">+ New List</button>
+
+    </div>
+
+
+
+    <div class="filter-bar">
+
+        <div class="filter-btn active">All Lists</div>
+
+        <div class="filter-btn">Jurisdictions</div>
+
+        <div class="filter-btn">Topics</div>
+
+        <div class="filter-btn">Authorities</div>
+
+        <div class="filter-btn">Shared with me</div>
+
+    </div>
+
+
+
+    <div class="grid-3 mb-24">
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Priority Jurisdictions</h4>
+
+                        <span class="text-xs text-muted">12 jurisdictions &middot; Updated 2h ago</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">EU</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">UK</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">US</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">China</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">+8</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>AI Act Compliance</h4>
+
+                        <span class="text-xs text-muted">34 items &middot; Updated 1d ago</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">High-Risk AI</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">GPAI</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Deadlines</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--red-bg);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Enforcement Watch</h4>
+
+                        <span class="text-xs text-muted">8 items &middot; Updated 4h ago</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Fines</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Sanctions</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Orders</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--green-bg);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Copyright &amp; IP Tracker</h4>
+
+                        <span class="text-xs text-muted">19 items &middot; Updated 3d ago</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">TDM</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Fair Use</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">AI Output</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--teal-light);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Team Shared: APAC Watch</h4>
+
+                        <span class="text-xs text-muted">26 items &middot; 3 collaborators</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Japan</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Korea</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Singapore</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Australia</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer;border-style:dashed">
+
+            <div class="card-body" style="display:flex;align-items:center;justify-content:center;min-height:120px">
+
+                <div style="text-align:center;color:var(--muted)">
+
+                    <div style="font-size:1.5rem;margin-bottom:4px">+</div>
+
+                    <div class="text-sm">Create new list</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== COMMUNITY ==================== -->
+
+<div class="page-view" id="page-community">
+
+    <div class="flex items-center justify-between mb-24">
+
+        <div>
+
+            <h1 class="page-title">The <em>Community</em></h1>
+
+            <p class="text-sm text-secondary" style="margin-top:4px">Connect with regulatory intelligence professionals worldwide</p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Stats -->
+
+    <div class="stats-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:28px">
+
+        <div class="stat-card">
+
+            <div class="stat-value">2,847</div>
+
+            <div class="stat-label">Members</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">156</div>
+
+            <div class="stat-label">Organisations</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">34</div>
+
+            <div class="stat-label">Discussion threads</div>
+
+            <div class="stat-delta">+7 this week</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">12</div>
+
+            <div class="stat-label">Upcoming events</div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="grid-sidebar-layout">
+
+        <div>
+
+            <h2 class="mb-16">Recent Discussions</h2>
+
+            <div class="card mb-16">
+
+                <div class="dispatch-row">
+
+                    <div style="width:32px;height:32px;border-radius:50%;background:var(--blue-bg);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">SC</div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">How are organisations preparing for the EU AI Act prohibited systems deadline?</div>
+
+                        <div class="dispatch-sub">Sarah Chen &middot; 3h ago &middot; 24 replies</div>
+
+                    </div>
+
+                    <span class="badge badge-blue" style="flex-shrink:0">Hot</span>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="width:32px;height:32px;border-radius:50%;background:var(--green-bg);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">MR</div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Japan's AI Basic Act: What should non-Japanese companies prepare for?</div>
+
+                        <div class="dispatch-sub">Marco Rossi &middot; 8h ago &middot; 11 replies</div>
+
+                    </div>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="width:32px;height:32px;border-radius:50%;background:var(--amber-bg);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">KP</div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Best practices for AI copyright compliance across APAC jurisdictions</div>
+
+                        <div class="dispatch-sub">Kim Park &middot; 1d ago &middot; 7 replies</div>
+
+                    </div>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="width:32px;height:32px;border-radius:50%;background:var(--red-bg);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">AL</div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Garante fine impact: What changes should financial institutions make now?</div>
+
+                        <div class="dispatch-sub">Anna Lindqvist &middot; 1d ago &middot; 18 replies</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <h2 class="mb-16">Upcoming Events</h2>
+
+            <div class="card">
+
+                <div class="dispatch-row">
+
+                    <div style="text-align:center;min-width:44px;flex-shrink:0">
+
+                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">APR</div>
+
+                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">18</div>
+
+                    </div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Webinar: EU AI Act Enforcement Readiness</div>
+
+                        <div class="dispatch-sub">15:00 CET &middot; Live &middot; 234 registered</div>
+
+                    </div>
+
+                    <button class="btn btn-teal btn-sm" style="flex-shrink:0">Register</button>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="text-align:center;min-width:44px;flex-shrink:0">
+
+                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">APR</div>
+
+                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">24</div>
+
+                    </div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Roundtable: AI Copyright Law in Practice</div>
+
+                        <div class="dispatch-sub">10:00 GMT &middot; Virtual &middot; 56 registered</div>
+
+                    </div>
+
+                    <button class="btn btn-outline btn-sm" style="flex-shrink:0">Register</button>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="text-align:center;min-width:44px;flex-shrink:0">
+
+                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">MAY</div>
+
+                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">7</div>
+
+                    </div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Conference: Global AI Regulation Summit 2026</div>
+
+                        <div class="dispatch-sub">Brussels &middot; In-person &middot; 420 registered</div>
+
+                    </div>
+
+                    <button class="btn btn-outline btn-sm" style="flex-shrink:0">Register</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Sidebar: Active Members -->
+
+        <div>
+
+            <h2 class="mb-16">Active Members</h2>
+
+            <div style="display:flex;flex-direction:column;gap:10px">
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar">SC</div>
+
+                    <div><div class="cc-name">Dr. Sarah Chen</div><div class="cc-role">Head of AI Policy &middot; TechCorp</div></div>
+
+                </div>
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar" style="background:var(--blue-bg);color:var(--blue)">MR</div>
+
+                    <div><div class="cc-name">Marco Rossi</div><div class="cc-role">Senior Counsel &middot; Linklaters</div></div>
+
+                </div>
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar" style="background:var(--amber-bg);color:var(--amber)">KP</div>
+
+                    <div><div class="cc-name">Kim Park</div><div class="cc-role">Regulatory Affairs &middot; Samsung</div></div>
+
+                </div>
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar" style="background:var(--red-bg);color:var(--red)">AL</div>
+
+                    <div><div class="cc-name">Anna Lindqvist</div><div class="cc-role">DPO &middot; Nordea Bank</div></div>
+
+                </div>
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar" style="background:var(--green-bg);color:var(--green)">JW</div>
+
+                    <div><div class="cc-name">James Wright</div><div class="cc-role">Policy Director &middot; Ada Lovelace Inst.</div></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== ACCOUNT ==================== -->
+
+<div class="page-view" id="page-account">
+
+    <div class="flex items-center gap-16 mb-24">
+
+        <div class="user-avatar" style="width:56px;height:56px;font-size:1.2rem">D</div>
+
+        <div>
+
+            <h1 class="page-title">David Mitchell</h1>
+
+            <p class="text-sm text-secondary">Head of Regulatory Intelligence &middot; PrinciplesAI</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="grid-2" style="grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+
+        <div>
+
+            <div class="account-section">
+
+                <h3>Profile</h3>
+
+                <div class="account-field"><span class="af-label">Full Name</span><span class="af-value">David Mitchell</span></div>
+
+                <div class="account-field"><span class="af-label">Email</span><span class="af-value">d.mitchell@principlesai.com</span></div>
+
+                <div class="account-field"><span class="af-label">Organisation</span><span class="af-value">PrinciplesAI</span></div>
+
+                <div class="account-field"><span class="af-label">Role</span><span class="af-value">Head of Regulatory Intelligence</span></div>
+
+                <div class="account-field"><span class="af-label">Home Jurisdiction</span><span class="af-value">&#x1F1EC;&#x1F1E7; United Kingdom</span></div>
+
+                <div class="account-field"><span class="af-label">Timezone</span><span class="af-value">Europe/London (GMT+1)</span></div>
+
+            </div>
+
+
+
+            <div class="account-section">
+
+                <h3>Notification Preferences</h3>
+
+                <div class="account-field"><span class="af-label">Email Digest</span><span class="af-value" style="color:var(--green)">Daily at 08:00</span></div>
+
+                <div class="account-field"><span class="af-label">Critical Alerts</span><span class="af-value" style="color:var(--green)">Instant</span></div>
+
+                <div class="account-field"><span class="af-label">Weekly Summary</span><span class="af-value" style="color:var(--green)">Monday 09:00</span></div>
+
+                <div class="account-field"><span class="af-label">Community Replies</span><span class="af-value" style="color:var(--muted)">Off</span></div>
+
+            </div>
+
+        </div>
+
+
+
+        <div>
+
+            <div class="account-section">
+
+                <h3>Subscription</h3>
+
+                <div class="account-field"><span class="af-label">Plan</span><span class="af-value"><span class="badge badge-teal" style="height:18px;font-size:.72rem">Enterprise</span></span></div>
+
+                <div class="account-field"><span class="af-label">Seats</span><span class="af-value">12 / 20 used</span></div>
+
+                <div class="account-field"><span class="af-label">Renewal</span><span class="af-value">1 September 2026</span></div>
+
+                <div class="account-field"><span class="af-label">API Access</span><span class="af-value" style="color:var(--green)">Enabled</span></div>
+
+                <div class="account-field"><span class="af-label">API Calls (MTD)</span><span class="af-value">14,302 / 50,000</span></div>
+
+            </div>
+
+
+
+            <div class="account-section">
+
+                <h3>Tracked Jurisdictions</h3>
+
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+
+                    <span class="badge badge-neutral">&#x1F1EA;&#x1F1FA; EU</span>
+
+                    <span class="badge badge-neutral">&#x1F1EC;&#x1F1E7; UK</span>
+
+                    <span class="badge badge-neutral">&#x1F1FA;&#x1F1F8; US</span>
+
+                    <span class="badge badge-neutral">&#x1F1E8;&#x1F1F3; China</span>
+
+                    <span class="badge badge-neutral">&#x1F1EF;&#x1F1F5; Japan</span>
+
+                    <span class="badge badge-neutral">&#x1F1F0;&#x1F1F7; South Korea</span>
+
+                    <span class="badge badge-neutral">&#x1F1E8;&#x1F1E6; Canada</span>
+
+                    <span class="badge badge-neutral">&#x1F1E6;&#x1F1FA; Australia</span>
+
+                    <span class="badge badge-neutral">&#x1F1F8;&#x1F1EC; Singapore</span>
+
+                    <span class="badge badge-neutral">&#x1F1EE;&#x1F1F3; India</span>
+
+                    <span class="badge badge-neutral">&#x1F1E7;&#x1F1F7; Brazil</span>
+
+                    <span class="badge badge-neutral">&#x1F1E8;&#x1F1FF; Czech Republic</span>
+
+                </div>
+
+                <button class="btn btn-outline btn-sm" style="margin-top:12px">Manage Jurisdictions</button>
+
+            </div>
+
+
+
+            <div class="account-section">
+
+                <h3>Security</h3>
+
+                <div class="account-field"><span class="af-label">Two-Factor</span><span class="af-value" style="color:var(--green)">Enabled (TOTP)</span></div>
+
+                <div class="account-field"><span class="af-label">Last Login</span><span class="af-value">10 Apr 2026, 08:14</span></div>
+
+                <div class="account-field"><span class="af-label">Sessions</span><span class="af-value">2 active</span></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+</div><!-- end .main-content -->
+
+
+
+<script>
+
+/* ===== Jurisdiction Data ===== */
+
+var jurisdictionData = {
+
+    'Czech Republic': {
+
+        flag: '\u{1F1E8}\u{1F1FF}',
+
+        region: 'Europe',
+
+        population: '10.7m',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Partial',
+
+        techLawStatus: 'partial',
+
+        techLawNote: 'AI Act (via EU)',
+
+        leadAuthority: 'DPA (UOOU)',
+
+        consultations: 2,
+
+        bills: 3,
+
+        enforcement: 1,
+
+        enforcementYear: '2026',
+
+        bodyCount: 4,
+
+        authorities: [
+
+            { type: 'Data Protection Authority', badge: 'blue', name: 'Office for Personal Data Protection (UOOU)', link: 'uoou.gov.cz' },
+
+            { type: 'Cybersecurity Agency', badge: 'amber', name: 'National Cyber and Information Security Agency (NUKIB)', link: 'nukib.cz' },
+
+            { type: 'Innovation Office', badge: 'neutral', name: 'Czech AI Observatory (Ministry of Industry)', link: 'mpo.cz' },
+
+            { type: 'Market Surveillance', badge: 'green', name: 'Czech Trade Inspection Authority (COI)', link: 'coi.cz' }
+
+        ],
+
+        alerts: [
+
+            { date: '8 Apr', headline: 'NUKIB publishes cybersecurity requirements for AI systems in critical infrastructure', sub: 'New technical standards for AI deployment in energy and transport sectors', badge: 'blue', badgeLabel: 'Guidance' },
+
+            { date: '2 Apr', headline: 'UOOU opens consultation on automated decision-making under GDPR Art. 22', sub: 'Seeking public input on guidance for AI-powered profiling in financial services', badge: 'green', badgeLabel: 'Consultation' },
+
+            { date: '28 Mar', headline: 'Czech parliament introduces AI in Public Administration Bill', sub: 'Requirements for transparency and human oversight in government AI systems', badge: 'amber', badgeLabel: 'Bill' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [],
+
+            consultations: [],
+
+            enforcement: [],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'China': {
+
+        flag: '\u{1F1E8}\u{1F1F3}',
+
+        region: 'APAC',
+
+        population: '1.43B',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Yes',
+
+        techLawStatus: 'yes',
+
+        techLawNote: 'Multiple (GenAI Measures, Algorithm Provisions, Deep Synthesis)',
+
+        leadAuthority: 'CAC',
+
+        consultations: 2,
+
+        bills: 1,
+
+        enforcement: 8,
+
+        enforcementYear: '2026',
+
+        bodyCount: 5,
+
+        authorities: [
+
+            { type: 'AI Regulator', badge: 'blue', name: 'Cyberspace Administration of China (CAC)', link: 'cac.gov.cn' },
+
+            { type: 'Telecoms/Tech Regulator', badge: 'amber', name: 'Ministry of Industry and Information Technology (MIIT)', link: 'miit.gov.cn' },
+
+            { type: 'Market Regulator', badge: 'green', name: 'State Administration for Market Regulation (SAMR)', link: 'samr.gov.cn' },
+
+            { type: 'Standards Body', badge: 'neutral', name: 'National Information Security Standardization Technical Committee (TC260)', link: 'tc260.org.cn' },
+
+            { type: 'Data Protection', badge: 'blue', name: 'PIPL Enforcement Bureau', link: 'cac.gov.cn' }
+
+        ],
+
+        alerts: [
+
+            { date: '7 Apr', headline: 'CAC publishes updated guidance on generative AI service compliance inspections', sub: 'Expanded requirements for content moderation and algorithm filing', badge: 'blue', badgeLabel: 'Guidance' },
+
+            { date: '1 Apr', headline: 'TC260 releases draft standard on AI model security assessment', sub: 'New technical standard for evaluating safety of large language models', badge: 'green', badgeLabel: 'Consultation' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [
+
+                { title: 'Interim Measures for the Management of Generative AI Services', date: 'Aug 2023', summary: 'Comprehensive regulation of generative AI services including content moderation, algorithm filing, and user protection requirements.', status: 'In force', statusClass: 'green' },
+
+                { title: 'Provisions on the Management of Algorithmic Recommendations', date: 'Mar 2022', summary: 'Rules governing algorithmic recommendation systems including transparency, user control, and anti-manipulation provisions.', status: 'In force', statusClass: 'green' },
+
+                { title: 'Provisions on the Management of Deep Synthesis', date: 'Jan 2023', summary: 'Regulation of deepfakes and synthetic content including labelling requirements and content provenance tracking.', status: 'In force', statusClass: 'green' }
+
+            ],
+
+            decisions: [
+
+                { title: 'Beijing Internet Court \u2014 Li Yunkai v Liu Yuanchun', date: '2023', summary: 'Landmark ruling on whether AI-generated images qualify for copyright protection under Chinese law. Court held that sufficient human creative input in prompting can establish copyrightability.', status: 'Decided', statusClass: 'blue' }
+
+            ],
+
+            caseLaw: [],
+
+            guidance: [],
+
+            consultations: [],
+
+            enforcement: [],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'United Kingdom': {
+
+        flag: '\u{1F1EC}\u{1F1E7}',
+
+        region: 'Europe',
+
+        population: '67.7M',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Emerging',
+
+        techLawStatus: 'partial',
+
+        techLawNote: 'AI Bill expected May 2026',
+
+        leadAuthority: 'DSIT',
+
+        consultations: 3,
+
+        bills: 2,
+
+        enforcement: 14,
+
+        enforcementYear: '2026',
+
+        bodyCount: 6,
+
+        authorities: [
+
+            { type: 'Data Protection', badge: 'blue', name: 'Information Commissioner\u2019s Office (ICO)', link: 'ico.org.uk' },
+
+            { type: 'Government Agency', badge: 'neutral', name: 'Dept for Science, Innovation & Technology (DSIT)', link: 'gov.uk/dsit' },
+
+            { type: 'Telecoms Regulator', badge: 'amber', name: 'Office of Communications (Ofcom)', link: 'ofcom.org.uk' },
+
+            { type: 'Competition Authority', badge: 'red', name: 'Competition and Markets Authority (CMA)', link: 'gov.uk/cma' },
+
+            { type: 'Financial Regulator', badge: 'amber', name: 'Financial Conduct Authority (FCA)', link: 'fca.org.uk' },
+
+            { type: 'Cybersecurity Agency', badge: 'green', name: 'National Cyber Security Centre (NCSC)', link: 'ncsc.gov.uk' }
+
+        ],
+
+        alerts: [
+
+            { date: '9 Apr', headline: 'UK government confirms AI bill expected following King\u2019s Speech', sub: 'Comprehensive AI regulation framework to be introduced in Parliament', badge: 'amber', badgeLabel: 'Bill' },
+
+            { date: '5 Apr', headline: 'ICO orders NHS hospital trust to clear 95-request FoI backlog', sub: 'Enforcement notice issued under Freedom of Information Act 2000', badge: 'red', badgeLabel: 'Enforcement' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [
+
+                { title: 'Online Safety Act 2023', date: 'Oct 2023', summary: 'Comprehensive online safety framework imposing duties on platforms regarding illegal and harmful content, with implications for AI-powered content moderation systems.', status: 'In force', statusClass: 'green' },
+
+                { title: 'Data Protection and Digital Information Act', date: '2024', summary: 'Reform of the UK data protection framework post-Brexit, with provisions affecting automated decision-making and AI-related data processing.', status: 'In force', statusClass: 'green' },
+
+                { title: 'AI Bill', date: 'Expected May 2026', summary: 'Anticipated comprehensive AI regulation establishing risk-based framework, regulatory sandboxes, and cross-sector coordination requirements.', status: 'Expected', statusClass: 'amber' }
+
+            ],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [
+
+                { title: 'ICO AI and Data Protection guidance', date: 'Updated 2024', summary: 'Detailed guidance on lawful basis for AI training, fairness in automated decision-making, transparency obligations, and data protection impact assessments for AI systems.', status: 'Current', statusClass: 'green' }
+
+            ],
+
+            consultations: [],
+
+            enforcement: [
+
+                { title: 'ICO fines Clearview AI \u00a37.5m', date: 'May 2022', summary: 'The ICO imposed a \u00a37.5 million fine on Clearview AI for collecting facial recognition data from UK residents without consent, ordering deletion of all UK data.', status: 'Final', statusClass: 'red' },
+
+                { title: 'ICO orders NHS trust to process FoI backlog', date: 'Mar 2026', summary: 'Enforcement notice requiring an NHS hospital trust to clear a backlog of 95 unanswered Freedom of Information requests within 60 days.', status: 'Active', statusClass: 'red' }
+
+            ],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'Nigeria': {
+
+        flag: '\u{1F1F3}\u{1F1EC}',
+
+        region: 'Africa',
+
+        population: '230M',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Emerging',
+
+        techLawStatus: 'partial',
+
+        techLawNote: 'NDPA 2023 + AI strategy pending',
+
+        leadAuthority: 'NITDA',
+
+        consultations: 0,
+
+        bills: 1,
+
+        enforcement: 2,
+
+        enforcementYear: '2026',
+
+        bodyCount: 4,
+
+        authorities: [
+
+            { type: 'Government Agency', badge: 'blue', name: 'National Information Technology Development Agency (NITDA)', link: 'nitda.gov.ng' },
+
+            { type: 'Data Protection Commission', badge: 'blue', name: 'Nigeria Data Protection Commission (NDPC)', link: 'ndpc.gov.ng' },
+
+            { type: 'Telecoms Regulator', badge: 'amber', name: 'Nigerian Communications Commission (NCC)', link: 'ncc.gov.ng' },
+
+            { type: 'Financial Regulator', badge: 'amber', name: 'Central Bank of Nigeria (CBN)', link: 'cbn.gov.ng' }
+
+        ],
+
+        alerts: [
+
+            { date: '4 Apr', headline: 'NITDA releases National AI Strategy consultation draft', sub: 'Framework for responsible AI development and deployment in Nigeria', badge: 'green', badgeLabel: 'Consultation' },
+
+            { date: '22 Mar', headline: 'NDPC issues first enforcement notice under NDPA', sub: 'Data protection enforcement action against fintech company', badge: 'red', badgeLabel: 'Enforcement' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [
+
+                { title: 'Nigeria Data Protection Act 2023', date: 'Jun 2023', summary: 'Comprehensive data protection legislation establishing the Nigeria Data Protection Commission, data subject rights, and obligations for data controllers and processors.', status: 'In force', statusClass: 'green' }
+
+            ],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [
+
+                { title: 'NITDA National AI Strategy consultation draft', date: '2026', summary: 'Draft national strategy for responsible AI development covering ethical principles, capacity building, infrastructure requirements, and governance frameworks for the Nigerian context.', status: 'Draft', statusClass: 'amber' }
+
+            ],
+
+            consultations: [],
+
+            enforcement: [],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'United States': {
+
+        flag: '\u{1F1FA}\u{1F1F8}',
+
+        region: 'North America',
+
+        population: '334M',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Sector-specific',
+
+        techLawStatus: 'partial',
+
+        techLawNote: 'No comprehensive federal AI law',
+
+        leadAuthority: 'Multiple (no single lead)',
+
+        consultations: 5,
+
+        bills: 12,
+
+        enforcement: 31,
+
+        enforcementYear: '2026',
+
+        bodyCount: 6,
+
+        authorities: [
+
+            { type: 'Competition/Consumer Protection', badge: 'red', name: 'Federal Trade Commission (FTC)', link: 'ftc.gov' },
+
+            { type: 'Standards Body', badge: 'amber', name: 'National Institute of Standards and Technology (NIST)', link: 'nist.gov' },
+
+            { type: 'Financial Regulator', badge: 'amber', name: 'Securities and Exchange Commission (SEC)', link: 'sec.gov' },
+
+            { type: 'Health Regulator', badge: 'green', name: 'Food and Drug Administration (FDA)', link: 'fda.gov' },
+
+            { type: 'Transport', badge: 'neutral', name: 'National Highway Traffic Safety Administration (NHTSA)', link: 'nhtsa.dot.gov' },
+
+            { type: 'IP', badge: 'blue', name: 'U.S. Copyright Office', link: 'copyright.gov' }
+
+        ],
+
+        states: [
+
+            { name: 'California', desc: 'AI transparency bills, CCPA/CPRA enforcement', bills: 8 },
+
+            { name: 'New York', desc: 'NYC Local Law 144 (automated employment decisions)', bills: 3 },
+
+            { name: 'Colorado', desc: 'SB 24-205 (algorithmic discrimination)', bills: 4 },
+
+            { name: 'Texas', desc: 'AI Advisory Council established', bills: 5 },
+
+            { name: 'Illinois', desc: 'BIPA enforcement, AI Video Interview Act', bills: 3 },
+
+            { name: 'Florida', desc: 'AI in insurance regulation', bills: 2 }
+
+        ],
+
+        alerts: [
+
+            { date: '6 Apr', headline: 'Thomson Reuters v Ross Intelligence ruling', sub: 'Federal court issues landmark decision on AI training data and fair use', badge: 'red', badgeLabel: 'Case Law' },
+
+            { date: '1 Apr', headline: 'Colorado algorithmic discrimination law takes effect', sub: 'SB 24-205 imposes new obligations on developers and deployers of high-risk AI systems', badge: 'amber', badgeLabel: 'Legislation' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [
+
+                { title: 'Colorado SB 24-205 Algorithmic Discrimination', date: 'Apr 2025', summary: 'Comprehensive state law requiring developers and deployers of high-risk AI systems to conduct impact assessments and provide notice to consumers affected by algorithmic discrimination.', status: 'In force', statusClass: 'green' },
+
+                { title: 'NYC Local Law 144', date: 'Jul 2023', summary: 'Requires bias audits for automated employment decision tools used in New York City, with public disclosure of audit results and candidate notification requirements.', status: 'In force', statusClass: 'green' }
+
+            ],
+
+            decisions: [],
+
+            caseLaw: [
+
+                { title: 'Thomson Reuters v Ross Intelligence', date: '2025', summary: 'Federal court ruling on whether AI training on copyrighted legal databases constitutes fair use. Significant implications for the legality of using copyrighted material to train AI models.', status: 'Decided', statusClass: 'blue' },
+
+                { title: 'Thaler v Perlmutter', date: '2025', summary: 'Court upheld the U.S. Copyright Office\u2019s refusal to register a work generated entirely by AI, affirming the requirement for human authorship in copyright protection.', status: 'Decided', statusClass: 'blue' }
+
+            ],
+
+            guidance: [],
+
+            consultations: [],
+
+            enforcement: [
+
+                { title: 'FTC v Rite Aid \u2014 AI facial recognition ban', date: '2023', summary: 'FTC ordered Rite Aid to stop using AI facial recognition technology after the system disproportionately produced false-positive matches for women and people of colour, leading to wrongful accusations.', status: 'Final', statusClass: 'red' }
+
+            ],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'Germany': {
+
+        flag: '\u{1F1E9}\u{1F1EA}',
+
+        region: 'Europe',
+
+        population: '84.5M',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Yes',
+
+        techLawStatus: 'yes',
+
+        techLawNote: 'EU AI Act (as EU member) + national implementation',
+
+        leadAuthority: 'BfDI',
+
+        consultations: 1,
+
+        bills: 2,
+
+        enforcement: 6,
+
+        enforcementYear: '2026',
+
+        bodyCount: 5,
+
+        authorities: [
+
+            { type: 'Data Protection', badge: 'blue', name: 'Federal Commissioner for Data Protection (BfDI)', link: 'bfdi.bund.de' },
+
+            { type: 'Cybersecurity Agency', badge: 'amber', name: 'Federal Office for Information Security (BSI)', link: 'bsi.bund.de' },
+
+            { type: 'Telecoms Regulator', badge: 'neutral', name: 'Federal Network Agency (BNetzA)', link: 'bundesnetzagentur.de' },
+
+            { type: 'Competition Authority', badge: 'red', name: 'Federal Cartel Office (BKartA)', link: 'bundeskartellamt.de' },
+
+            { type: 'IP Office', badge: 'green', name: 'German Patent and Trade Mark Office (DPMA)', link: 'dpma.de' }
+
+        ],
+
+        alerts: [
+
+            { date: '8 Apr', headline: 'LfDI Baden-W\u00fcrttemberg assumes chair of Data Protection Conference for 2026', sub: 'State-level DPA takes rotating leadership of federal-state coordination body', badge: 'blue', badgeLabel: 'Guidance' },
+
+            { date: '3 Apr', headline: 'BSI warns of AI-generated phishing campaign targeting federal agencies', sub: 'Advisory issued on generative AI-powered social engineering attacks', badge: 'red', badgeLabel: 'Alert' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [
+
+                { title: 'BSI AI security guidelines for federal agencies', date: '2024', summary: 'Technical guidelines from the Federal Office for Information Security covering secure development, deployment, and operation of AI systems within federal government infrastructure.', status: 'Current', statusClass: 'green' }
+
+            ],
+
+            consultations: [],
+
+            enforcement: [
+
+                { title: 'LfDI Baden-W\u00fcrttemberg \u2014 \u20ac10.4M fine against social media platform', date: '2023', summary: 'State data protection authority imposed a \u20ac10.4 million fine on a social media platform for failures in data subject access request handling and insufficient technical and organisational measures.', status: 'Final', statusClass: 'red' }
+
+            ],
+
+            cyberAdvisories: []
+
+        }
+
+    }
+
+};
+
+
+
+/* ===== Content type configuration ===== */
+
+var contentTypeConfig = [
+
+    { key: 'legislation', label: 'Legislation', emptyMsg: function(c) { return "We're building comprehensive legislative coverage for " + c + ". As new AI, privacy, and cybersecurity statutes are enacted, they'll appear here with full text references and status tracking."; }},
+
+    { key: 'decisions', label: 'Decisions', emptyMsg: function(c) { return "Regulatory decisions for " + c + " are being catalogued. When authorities issue binding decisions on AI governance, data protection, or cybersecurity, you'll find the full record here."; }},
+
+    { key: 'caseLaw', label: 'Case Law', emptyMsg: function(c) { return "Court decisions involving AI, data protection, and technology law in " + c + " will be tracked here as cases are decided. Our analysts monitor key courts and tribunals."; }},
+
+    { key: 'guidance', label: 'Guidance', emptyMsg: function(c) { return "Supervisory guidance and regulatory interpretation from " + c + "'s authorities will appear here. We track official guidance documents, opinions, and advisory notices."; }},
+
+    { key: 'consultations', label: 'Consultations', emptyMsg: function(c) { return "Active and closed public consultations in " + c + " will be listed here with deadlines, submission links, and outcome tracking."; }},
+
+    { key: 'enforcement', label: 'Enforcement', emptyMsg: function(c) { return "Enforcement actions \u2014 fines, sanctions, and compliance orders \u2014 from " + c + "'s regulators will be recorded here with full detail and source links."; }},
+
+    { key: 'cyberAdvisories', label: 'Cyber Advisories', emptyMsg: function(c) { return "Cybersecurity advisories and incident notices relevant to " + c + " will appear here. We monitor national CERTs, cybersecurity agencies, and cross-border alerts."; }}
+
+];
+
+
+
+/* ===== Region SVG Outlines (small versions for sidebar) ===== */
+
+var regionSVGs = {
+
+    'Europe': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M62 18 L58 14 L52 16 L48 12 L44 14 L40 12 L38 16 L42 20 L40 24 L36 22 L32 24 L28 22 L24 26 L20 28 L18 34 L22 38 L20 42 L24 46 L22 50 L26 54 L30 52 L34 56 L38 58 L36 62 L40 66 L44 68 L48 72 L52 74 L56 72 L60 76 L64 78 L68 82 L72 80 L76 82 L80 78 L76 74 L72 70 L68 66 L72 62 L76 58 L80 54 L84 50 L88 46 L92 42 L96 38 L100 34 L104 30 L108 26 L112 22 L108 20 L104 22 L100 20 L96 22 L92 24 L88 22 L84 24 L80 22 L76 24 L72 22 L68 24 L64 22 L62 18Z M28 8 L24 12 L20 10 L16 14 L20 18 L24 16 L28 18 L32 14 L28 8Z M44 4 L40 8 L44 12 L48 8 L44 4Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'APAC': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 8 L56 12 L52 16 L48 20 L44 24 L40 28 L36 32 L32 36 L28 40 L32 44 L36 48 L40 52 L44 56 L48 60 L52 64 L56 60 L60 56 L64 52 L68 48 L72 44 L76 40 L80 36 L84 40 L88 44 L92 48 L96 52 L100 56 L104 60 L108 64 L112 60 L116 56 L120 52 L116 48 L112 44 L108 40 L104 36 L100 32 L96 28 L92 24 L88 20 L84 16 L80 12 L76 8 L72 12 L68 16 L64 12 L60 8Z M120 76 L116 80 L120 84 L124 88 L128 92 L132 96 L136 100 L140 104 L144 100 L148 96 L152 92 L156 88 L160 84 L156 80 L152 76 L148 80 L144 84 L140 80 L136 76 L132 80 L128 76 L124 80 L120 76Z M64 68 L60 72 L56 76 L60 80 L64 84 L68 80 L72 76 L76 72 L72 68 L68 72 L64 68Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'Africa': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M72 6 L66 8 L62 12 L58 10 L54 14 L50 18 L46 22 L42 26 L40 32 L42 38 L44 44 L46 50 L48 56 L50 62 L54 68 L58 74 L62 80 L66 86 L72 92 L78 98 L84 104 L90 108 L96 110 L100 106 L104 100 L106 94 L108 88 L110 82 L112 76 L114 70 L116 64 L118 58 L118 52 L116 46 L114 40 L112 34 L110 28 L108 22 L104 16 L100 12 L96 8 L90 6 L84 4 L78 4 L72 6Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'North America': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 4 L52 6 L46 10 L40 16 L34 22 L28 28 L24 34 L22 40 L24 46 L28 52 L32 56 L36 60 L40 64 L44 68 L48 72 L52 76 L56 80 L60 84 L64 88 L68 92 L72 96 L76 100 L80 104 L84 100 L88 96 L92 92 L96 88 L100 92 L104 96 L108 100 L112 96 L116 92 L120 88 L124 84 L128 80 L132 76 L136 72 L140 68 L142 62 L140 56 L136 50 L132 44 L128 38 L124 32 L120 26 L116 20 L110 14 L104 10 L98 6 L92 4 L86 2 L80 2 L74 2 L68 2 L60 4Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'Latin America': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M70 2 L64 4 L58 8 L54 12 L50 16 L48 22 L50 28 L54 32 L58 36 L62 40 L64 46 L66 52 L68 58 L72 64 L76 70 L78 76 L80 82 L84 88 L88 94 L92 100 L96 106 L100 110 L104 114 L108 116 L112 112 L114 106 L112 100 L110 94 L108 88 L106 82 L104 76 L102 70 L100 64 L98 58 L96 52 L94 46 L92 40 L90 34 L88 28 L86 22 L84 16 L80 10 L76 6 L70 2Z M56 4 L52 6 L50 10 L54 12 L58 8 L56 4Z M48 10 L44 12 L42 16 L46 18 L50 14 L48 10Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'Middle East': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M40 24 L36 28 L34 34 L38 40 L42 44 L46 48 L50 52 L54 56 L58 60 L62 64 L66 68 L70 72 L74 76 L78 80 L84 84 L90 86 L96 88 L102 86 L108 82 L112 78 L116 74 L120 70 L124 66 L128 62 L132 58 L136 52 L138 46 L136 40 L132 36 L128 32 L124 28 L120 24 L116 20 L110 18 L104 16 L98 18 L92 20 L86 22 L80 24 L74 26 L68 28 L62 26 L56 24 L50 22 L44 22 L40 24Z M100 60 L96 64 L92 68 L88 72 L92 76 L96 80 L100 84 L104 80 L108 76 L112 72 L108 68 L104 64 L100 60Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'Caribbean': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 40 L26 44 L30 48 L36 50 L42 48 L46 44 L50 40 L54 36 L58 40 L62 44 L58 48 L54 44 L50 48 L46 52 L42 56 L38 52 L34 48 L30 44 Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M70 28 L66 32 L70 36 L76 38 L82 36 L86 32 L82 28 L76 26 L70 28Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M96 36 L92 40 L96 44 L102 46 L108 44 L112 40 L108 36 L102 34 L96 36Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M120 50 L116 54 L120 58 L126 60 L132 58 L136 54 L132 50 L126 48 L120 50Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M140 64 L136 68 L140 72 L146 74 L152 72 L156 68 L152 64 L146 62 L140 64Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M160 44 L156 48 L160 52 L166 54 L172 52 L176 48 L172 44 L166 42 L160 44Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><ellipse cx="88" cy="62" rx="8" ry="5" stroke="#c8ccd2" stroke-width="1.3"/><ellipse cx="110" cy="74" rx="6" ry="4" stroke="#c8ccd2" stroke-width="1.3"/></svg>'
+
+};
+
+
+
+/* ===== Full Jurisdiction Lists Per Region (drill-in data) ===== */
+
+var drillData = {
+
+    'Europe': {
+
+        header: 'EUROPE',
+
+        federal: { label: 'EU Federal', key: null },
+
+        separator1: true,
+
+        members: [
+
+            'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic',
+
+            'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece',
+
+            'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg',
+
+            'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia',
+
+            'Slovenia', 'Spain', 'Sweden'
+
+        ],
+
+        separator2: true,
+
+        nonMembers: ['United Kingdom', 'Switzerland', 'Norway', 'Iceland']
+
+    },
+
+    'North America': {
+
+        header: 'NORTH AMERICA',
+
+        subRegions: {
+
+            'USA': {
+
+                headerLabel: 'NORTH AMERICA \u00b7 USA',
+
+                federal: { label: 'US Federal', key: 'United States' },
+
+                members: [
+
+                    'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
+
+                    'Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa',
+
+                    'Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan',
+
+                    'Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada',
+
+                    'New Hampshire','New Jersey','New Mexico','New York','North Carolina',
+
+                    'North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island',
+
+                    'South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont',
+
+                    'Virginia','Washington','West Virginia','Wisconsin','Wyoming'
+
+                ]
+
+            },
+
+            'Canada': {
+
+                headerLabel: 'NORTH AMERICA \u00b7 CANADA',
+
+                federal: { label: 'Federal', key: null },
+
+                members: [
+
+                    'Alberta','British Columbia','Manitoba','New Brunswick',
+
+                    'Newfoundland and Labrador','Northwest Territories','Nova Scotia',
+
+                    'Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'
+
+                ]
+
+            }
+
+        },
+
+        jurisdictions: ['United States', 'Canada']
+
+    },
+
+    'APAC': {
+
+        header: 'APAC',
+
+        jurisdictions: [
+
+            'Australia', 'Bangladesh', 'Brunei', 'Cambodia', 'China', 'Hong Kong',
+
+            'India', 'Indonesia', 'Japan', 'Laos', 'Macau', 'Malaysia', 'Mongolia',
+
+            'Myanmar', 'Nepal', 'New Zealand', 'Pakistan', 'Philippines', 'Singapore',
+
+            'South Korea', 'Sri Lanka', 'Taiwan', 'Thailand', 'Vietnam'
+
+        ],
+
+        subRegions: {
+
+            'Australia': {
+
+                headerLabel: 'APAC \u00b7 AUSTRALIA',
+
+                federal: { label: 'Federal', key: null },
+
+                members: [
+
+                    'Australian Capital Territory','New South Wales','Northern Territory',
+
+                    'Queensland','South Australia','Tasmania','Victoria','Western Australia'
+
+                ]
+
+            }
+
+        }
+
+    },
+
+    'Africa': {
+
+        header: 'AFRICA',
+
+        jurisdictions: [
+
+            'Algeria','Angola','Benin','Botswana','Burkina Faso','Cameroon','Chad','Congo',
+
+            'C\u00f4te d\'Ivoire','DRC','Egypt','Ethiopia','Gabon','Ghana','Guinea','Kenya',
+
+            'Libya','Madagascar','Malawi','Mali','Mauritius','Morocco','Mozambique','Namibia',
+
+            'Niger','Nigeria','Rwanda','Senegal','Sierra Leone','Somalia','South Africa',
+
+            'South Sudan','Sudan','Tanzania','Togo','Tunisia','Uganda','Zambia','Zimbabwe'
+
+        ]
+
+    },
+
+    'Latin America': {
+
+        header: 'LATIN AMERICA',
+
+        jurisdictions: [
+
+            'Argentina','Bolivia','Brazil','Chile','Colombia','Costa Rica','Cuba',
+
+            'Dominican Republic','Ecuador','El Salvador','Guatemala','Haiti','Honduras',
+
+            'Mexico','Nicaragua','Panama','Paraguay','Peru','Uruguay','Venezuela'
+
+        ]
+
+    },
+
+    'Middle East': {
+
+        header: 'MIDDLE EAST',
+
+        jurisdictions: [
+
+            'Bahrain','Iran','Iraq','Israel','Jordan','Kuwait','Lebanon','Oman',
+
+            'Palestine','Qatar','Saudi Arabia','Syria','Turkey','UAE','Yemen'
+
+        ]
+
+    },
+
+    'Caribbean': {
+
+        header: 'CARIBBEAN',
+
+        jurisdictions: [
+
+            'Antigua and Barbuda','Bahamas','Barbados','Belize','Dominica','Grenada',
+
+            'Guyana','Jamaica','Saint Kitts and Nevis','Saint Lucia','Saint Vincent',
+
+            'Suriname','Trinidad and Tobago'
+
+        ]
+
+    }
+
+};
+
+
+
+/* Germany sub-drill from Europe */
+
+var germanyDrill = {
+
+    headerLabel: 'GERMANY',
+
+    backLabel: 'Europe',
+
+    federal: { label: 'Federal', key: 'Germany' },
+
+    members: [
+
+        'Baden-W\u00fcrttemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg',
+
+        'Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia',
+
+        'Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt',
+
+        'Schleswig-Holstein','Thuringia'
+
+    ]
+
+};
+
+
+
+/* Items that have detail pages */
+
+var detailItems = {'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'Germany':1,'US Federal':1,'Czech Republic':1};
+
+/* Items that drill deeper (show chevron) */
+
+var drillableItems = {'Australia':1,'Canada':1,'Germany':1,'United States':1};
+
+
+
+var currentJurisdiction = null;
+
+var drillStack = []; // stack of views: [{type:'regions'}, {type:'region',name:'Europe'}, {type:'sub',name:'Germany'}]
+
+
+
+/* ===== Build Sidebar ===== */
+
+function buildSidebarRegions() {
+
+    var wrap = document.getElementById('sidebarRegionsWrap');
+
+    wrap.innerHTML = '<div class="drill-container" id="drillContainer"></div>';
+
+    drillStack = [{type:'regions'}];
+
+    renderDrillView();
+
+}
+
+
+
+function renderDrillView() {
+
+    var container = document.getElementById('drillContainer');
+
+    var current = drillStack[drillStack.length - 1];
+
+
+
+    if (current.type === 'regions') {
+
+        renderRegionCards(container);
+
+    } else if (current.type === 'region') {
+
+        renderRegionList(container, current.name);
+
+    } else if (current.type === 'sub') {
+
+        renderSubList(container, current.parentRegion, current.name);
+
+    }
+
+}
+
+
+
+function renderRegionCards(container) {
+
+    var regions = ['Europe', 'APAC', 'Africa', 'North America', 'Latin America', 'Middle East', 'Caribbean'];
+
+    var counts = {
+
+        'Europe': 31, 'APAC': 24, 'Africa': 39, 'North America': 48,
+
+        'Latin America': 20, 'Middle East': 15, 'Caribbean': 13
+
+    };
+
+    var html = '<div class="drill-cards-view" id="drillCardsView">';
+
+    for (var i = 0; i < regions.length; i++) {
+
+        var r = regions[i];
+
+        var rSafe = r.replace(/'/g, "\\'");
+
+        html += '<div class="sidebar-region-card" onclick="drillIntoRegion(\'' + rSafe + '\')">';
+
+        html += '<div class="src-svg">' + regionSVGs[r] + '</div>';
+
+        html += '<div class="src-info">';
+
+        html += '<div class="src-name">' + r + '</div>';
+
+        html += '<div class="src-count">' + counts[r] + ' jurisdictions</div>';
+
+        html += '</div>';
+
+        html += '</div>';
+
+    }
+
+    html += '</div>';
+
+    container.innerHTML = html;
+
+}
+
+
+
+function drillIntoRegion(regionName) {
+
+    drillStack.push({type:'region', name:regionName});
+
+    var container = document.getElementById('drillContainer');
+
+    // Crossfade: hide cards, show list
+
+    var cardsView = container.querySelector('.drill-cards-view');
+
+    if (cardsView) cardsView.classList.add('hidden');
+
+    setTimeout(function() {
+
+        renderRegionList(container, regionName);
+
+    }, 50);
+
+}
+
+
+
+function drillBack() {
+
+    if (drillStack.length <= 1) return;
+
+    drillStack.pop();
+
+    var container = document.getElementById('drillContainer');
+
+    var current = drillStack[drillStack.length - 1];
+
+    if (current.type === 'regions') {
+
+        renderRegionCards(container);
+
+    } else if (current.type === 'region') {
+
+        renderRegionList(container, current.name);
+
+    }
+
+}
+
+
+
+function renderRegionList(container, regionName) {
+
+    var data = drillData[regionName];
+
+    if (!data) return;
+
+    var html = '<div class="drill-list-view active" id="drillListView">';
+
+
+
+    // Back link
+
+    html += '<div class="drill-back" onclick="drillBack()">';
+
+    html += '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
+
+    html += 'Regions</div>';
+
+
+
+    // Region header
+
+    html += '<div class="drill-region-header">' + data.header + '</div>';
+
+
+
+    // Handle different structures
+
+    if (data.federal) {
+
+        // Europe-style: federal + members + separator + non-members
+
+        html += renderFederalItem(data.federal, 0);
+
+        html += '<hr class="drill-separator">';
+
+        for (var i = 0; i < data.members.length; i++) {
+
+            html += renderJurItem(data.members[i], i + 1, regionName);
+
+        }
+
+        if (data.separator2 && data.nonMembers) {
+
+            html += '<hr class="drill-separator">';
+
+            for (var j = 0; j < data.nonMembers.length; j++) {
+
+                html += renderJurItem(data.nonMembers[j], data.members.length + 1 + j, regionName);
+
+            }
+
+        }
+
+    } else if (data.subRegions && data.jurisdictions) {
+
+        // North America style: top-level items that drill into sub-regions
+
+        for (var k = 0; k < data.jurisdictions.length; k++) {
+
+            var jName = data.jurisdictions[k];
+
+            html += renderJurItem(jName, k, regionName);
+
+        }
+
+    } else if (data.jurisdictions) {
+
+        // Simple list
+
+        for (var m = 0; m < data.jurisdictions.length; m++) {
+
+            html += renderJurItem(data.jurisdictions[m], m, regionName);
+
+        }
+
+    }
+
+
+
+    html += '</div>';
+
+    container.innerHTML = html;
+
+}
+
+
+
+function renderSubList(container, parentRegion, subName) {
+
+    var data = drillData[parentRegion];
+
+    var subData;
+
+    var backLabel = parentRegion;
+
+
+
+    // Special case: Germany from Europe
+
+    if (subName === 'Germany' && parentRegion === 'Europe') {
+
+        subData = germanyDrill;
+
+        backLabel = 'Europe';
+
+    } else if (data && data.subRegions && data.subRegions[subName]) {
+
+        subData = data.subRegions[subName];
+
+        backLabel = parentRegion;
+
+    }
+
+    if (!subData) return;
+
+
+
+    var html = '<div class="drill-list-view active" id="drillListView">';
+
+
+
+    // Back link
+
+    html += '<div class="drill-back" onclick="drillBack()">';
+
+    html += '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
+
+    html += (subData.backLabel || backLabel) + '</div>';
+
+
+
+    // Header
+
+    html += '<div class="drill-region-header">' + (subData.headerLabel || subName.toUpperCase()) + '</div>';
+
+
+
+    // Federal item
+
+    if (subData.federal) {
+
+        html += renderFederalItem(subData.federal, 0);
+
+        html += '<hr class="drill-separator">';
+
+    }
+
+
+
+    // Members
+
+    for (var i = 0; i < subData.members.length; i++) {
+
+        html += renderJurItem(subData.members[i], i + 1, parentRegion);
+
+    }
+
+
+
+    html += '</div>';
+
+    container.innerHTML = html;
+
+}
+
+
+
+function renderFederalItem(fed, idx) {
+
+    var hasDetail = fed.key && detailItems[fed.key];
+
+    var cls = 'drill-jur-item federal-item';
+
+    if (hasDetail) cls += ' has-detail';
+
+    var onclick = '';
+
+    if (fed.key) {
+
+        var safe = fed.key.replace(/'/g, "\\'");
+
+        onclick = ' onclick="sidebarSelectJurisdiction(\'' + safe + '\', event)"';
+
+    }
+
+    return '<div class="' + cls + '" style="animation-delay:' + (idx * 20) + 'ms"' + onclick + '>' + fed.label + '</div>';
+
+}
+
+
+
+function renderJurItem(name, idx, parentRegion) {
+
+    var hasDetail = detailItems[name];
+
+    var isDrillable = drillableItems[name];
+
+    var cls = 'drill-jur-item';
+
+    if (hasDetail) cls += ' has-detail';
+
+    var delay = idx * 20;
+
+    var safeName = name.replace(/'/g, "\\'");
+
+
+
+    var onclick;
+
+    if (isDrillable) {
+
+        onclick = ' onclick="drillIntoSub(\'' + (parentRegion || '').replace(/'/g, "\\'") + '\',\'' + safeName + '\', event)"';
+
+    } else if (hasDetail) {
+
+        onclick = ' onclick="sidebarSelectJurisdiction(\'' + safeName + '\', event)"';
+
+    } else {
+
+        onclick = ' onclick="sidebarSelectJurisdiction(\'' + safeName + '\', event)"';
+
+    }
+
+
+
+    var html = '<div class="' + cls + '" style="animation-delay:' + delay + 'ms"' + onclick + '>';
+
+    html += name;
+
+    if (isDrillable) {
+
+        html += '<span class="drill-chevron">\u25b8</span>';
+
+    }
+
+    html += '</div>';
+
+    return html;
+
+}
+
+
+
+function drillIntoSub(parentRegion, subName, e) {
+
+    if (e) e.stopPropagation();
+
+
+
+    // If item also has detail, check if we should drill or show detail
+
+    // For drillable items, always drill
+
+    drillStack.push({type:'sub', parentRegion:parentRegion, name:subName});
+
+    var container = document.getElementById('drillContainer');
+
+    renderSubList(container, parentRegion, subName);
+
+}
+
+
+
+/* ===== Select Jurisdiction from Sidebar ===== */
+
+function sidebarSelectJurisdiction(name, e) {
+
+    if (e) e.stopPropagation();
+
+
+
+    // Clear active states on all sidebar jurisdiction items
+
+    document.querySelectorAll('.drill-jur-item').forEach(function(item) {
+
+        item.classList.remove('active');
+
+    });
+
+
+
+    // Set active on clicked item
+
+    if (e && e.currentTarget) e.currentTarget.classList.add('active');
+
+
+
+    // Map special names
+
+    var lookupName = name;
+
+    if (name === 'US Federal') lookupName = 'United States';
+
+
+
+    // Show jurisdiction detail if we have data
+
+    if (jurisdictionData[lookupName]) {
+
+        showJurisdictionDetail(lookupName);
+
+    } else {
+
+        // Navigate to jurisdictions page with empty state
+
+        showPage('jurisdictions');
+
+    }
+
+}
+
+
+
+/* ===== Render Content Type Sections ===== */
+
+function renderContentTypeSections(name) {
+
+    var d = jurisdictionData[name];
+
+    if (!d || !d.contentTypes) return '';
+
+    var html = '';
+
+
+
+    for (var i = 0; i < contentTypeConfig.length; i++) {
+
+        var cfg = contentTypeConfig[i];
+
+        var items = d.contentTypes[cfg.key] || [];
+
+
+
+        html += '<div class="content-type-section">';
+
+        html += '<div class="content-type-header">';
+
+        html += '<h3>' + cfg.label + '</h3>';
+
+        html += '<span class="ct-count">' + items.length + '</span>';
+
+        html += '</div>';
+
+
+
+        if (items.length > 0) {
+
+            html += '<div class="content-type-items">';
+
+            for (var j = 0; j < items.length; j++) {
+
+                var item = items[j];
+
+                html += '<div class="content-type-item">';
+
+                html += '<span class="ct-item-date">' + item.date + '</span>';
+
+                html += '<div class="ct-item-body">';
+
+                html += '<div class="ct-item-title">' + item.title + '</div>';
+
+                html += '<div class="ct-item-summary">' + item.summary + '</div>';
+
+                html += '</div>';
+
+                if (item.status) {
+
+                    html += '<span class="ct-item-status"><span class="status status-' + item.statusClass + '">' + item.status + '</span></span>';
+
+                }
+
+                html += '</div>';
+
+            }
+
+            html += '</div>';
+
+        } else {
+
+            html += '<div class="content-type-empty">';
+
+            html += '<p>' + cfg.emptyMsg(name) + '</p>';
+
+            html += '</div>';
+
+        }
+
+
+
+        html += '</div>';
+
+    }
+
+    return html;
+
+}
+
+
+
+/* ===== Render Jurisdiction Detail ===== */
+
+function renderJurisdictionDetail(name) {
+
+    var d = jurisdictionData[name];
+
+    if (!d) d = jurisdictionData['Czech Republic'];
+
+    if (!name || !jurisdictionData[name]) name = 'Czech Republic';
+
+
+
+    var html = '';
+
+
+
+    // Breadcrumb
+
+    html += '<div class="jur-breadcrumb mb-8"><span>JURISDICTIONS</span> &gt; <span>' + d.region.toUpperCase() + '</span> &gt; <span>' + name.toUpperCase() + '</span></div>';
+
+
+
+    // Export buttons
+
+    html += '<div class="flex items-center justify-between mb-16">';
+
+    html += '<div class="jur-export-btns">';
+
+    html += '<button class="btn btn-outline btn-sm">PDF</button>';
+
+    html += '<button class="btn btn-outline btn-sm">Word</button>';
+
+    html += '<button class="btn btn-outline btn-sm">Cite</button>';
+
+    html += '<span class="text-xs text-muted" style="margin-left:8px">Updated 2h ago</span>';
+
+    html += '</div></div>';
+
+
+
+    // Hero
+
+    html += '<div class="jur-hero">';
+
+    html += '<div class="jur-info">';
+
+    html += '<h1 class="jur-country-name">' + d.flag + ' ' + name + '</h1>';
+
+    html += '<p class="jur-body-count">' + d.bodyCount + ' official bodies monitored</p>';
+
+    html += '</div>';
+
+    html += '<div class="jur-silhouette"><svg viewBox="0 0 100 60"><path d="M15 45 L25 20 L40 15 L55 10 L70 15 L85 25 L80 40 L65 50 L50 48 L35 52 L20 50 Z"/></svg></div>';
+
+    html += '</div>';
+
+
+
+    // Stat cards
+
+    html += '<div class="stats-row" style="grid-template-columns:repeat(6,1fr)">';
+
+    html += '<div class="stat-card"><div class="stat-value" style="font-size:1.2rem">' + d.population + '</div><div class="stat-label">Population</div><div class="text-xs text-muted" style="margin-top:2px">' + d.populationNote + '</div></div>';
+
+    html += '<div class="stat-card"><div style="margin-bottom:4px"><span class="status status-' + d.techLawStatus + '">' + d.techLaw + '</span></div><div class="stat-label">Tech-Specific Law</div><div class="text-xs text-secondary" style="margin-top:4px">' + d.techLawNote + '</div></div>';
+
+    html += '<div class="stat-card"><div class="stat-value" style="font-size:1rem">' + d.leadAuthority + '</div><div class="stat-label">Lead Authority</div></div>';
+
+    html += '<div class="stat-card"><div class="stat-value">' + d.consultations + '</div><div class="stat-label">Open Consultations</div></div>';
+
+    html += '<div class="stat-card"><div class="stat-value">' + d.bills + '</div><div class="stat-label">Bills in Progress</div></div>';
+
+    html += '<div class="stat-card"><div class="stat-value">' + d.enforcement + '</div><div class="stat-label">Enforcement YTD</div><div class="text-xs text-muted" style="margin-top:2px">' + d.enforcementYear + '</div></div>';
+
+    html += '</div>';
+
+
+
+    // Authorities
+
+    var authLabel = (name === 'United States') ? 'Federal Authorities' : 'Relevant AI Authorities';
+
+    html += '<h2 class="mb-16">' + authLabel + '</h2>';
+
+    var authCols = d.authorities.length <= 4 ? 'repeat(4,1fr)' : 'repeat(' + Math.min(d.authorities.length, 4) + ',1fr)';
+
+    html += '<div class="grid-4 mb-24" style="grid-template-columns:' + authCols + '">';
+
+    for (var i = 0; i < d.authorities.length; i++) {
+
+        var a = d.authorities[i];
+
+        html += '<div class="auth-card">';
+
+        html += '<div class="ac-type"><span class="badge badge-' + a.badge + '" style="height:18px;font-size:.72rem">' + a.type + '</span></div>';
+
+        html += '<div class="ac-name">' + a.name + '</div>';
+
+        html += '<a href="#" class="ac-link">' + a.link + ' &rarr;</a>';
+
+        html += '</div>';
+
+    }
+
+    html += '</div>';
+
+
+
+    // USA States section
+
+    if (d.states) {
+
+        html += '<h2 class="mb-16">States &amp; Territories</h2>';
+
+        html += '<div class="states-grid mb-24">';
+
+        for (var s = 0; s < d.states.length; s++) {
+
+            var st = d.states[s];
+
+            html += '<div class="state-card">';
+
+            html += '<div class="state-card-header"><h4>' + st.name + '</h4><span class="badge badge-teal" style="height:18px;font-size:.72rem">' + st.bills + ' bills</span></div>';
+
+            html += '<p class="text-sm text-secondary" style="margin-top:6px;line-height:1.5">' + st.desc + '</p>';
+
+            html += '</div>';
+
+        }
+
+        html += '</div>';
+
+        html += '<div style="margin-bottom:24px"><a href="#" style="font-size:.82rem;font-weight:600;color:var(--teal)">+ 44 more states &amp; territories &rarr;</a></div>';
+
+    }
+
+
+
+    // Content Type Sections
+
+    html += renderContentTypeSections(name);
+
+
+
+    // Recent Activity
+
+    html += '<div class="content-type-section">';
+
+    html += '<div class="content-type-header">';
+
+    html += '<h3>Recent Activity</h3>';
+
+    html += '<span class="ct-count">' + d.alerts.length + '</span>';
+
+    html += '</div></div>';
+
+    html += '<div class="card">';
+
+    for (var r = 0; r < d.alerts.length; r++) {
+
+        var al = d.alerts[r];
+
+        html += '<div class="dispatch-row">';
+
+        html += '<span class="dispatch-date">' + al.date + '</span>';
+
+        html += '<div class="dispatch-body">';
+
+        html += '<div class="dispatch-headline">' + al.headline + '</div>';
+
+        html += '<div class="dispatch-sub">' + al.sub + '</div>';
+
+        html += '</div>';
+
+        html += '<span class="badge badge-' + al.badge + '">' + al.badgeLabel + '</span>';
+
+        html += '</div>';
+
+    }
+
+    html += '</div>';
+
+
+
+    return html;
+
+}
+
+
+
+/* ===== Render Empty State for Jurisdictions ===== */
+
+function renderJurisdictionEmpty() {
+
+    return '<div class="jur-empty-state">' +
+
+        '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>' +
+
+        '<h2>Select a jurisdiction</h2>' +
+
+        '<p>Browse regions in the sidebar and select a jurisdiction to view its regulatory intelligence profile.</p>' +
+
+        '</div>';
+
+}
+
+
+
+function showJurisdictionDetail(name) {
+
+    currentJurisdiction = name;
+
+    var detailView = document.getElementById('jur-detail-container');
+
+    if (detailView) {
+
+        detailView.innerHTML = renderJurisdictionDetail(name);
+
+    }
+
+    showPage('jurisdictions');
+
+
+
+    // Make sure the sidebar regions are open
+
+    var wrap = document.getElementById('sidebarRegionsWrap');
+
+    var chevron = document.getElementById('jurNavChevron');
+
+    if (!wrap.classList.contains('open')) {
+
+        wrap.classList.add('open');
+
+        if (chevron) chevron.classList.add('rotated');
+
+    }
+
+}
+
+
+
+function showPage(pageId) {
+
+    // Update page views
+
+    document.querySelectorAll('.page-view').forEach(function(p) { p.classList.remove('active'); });
+
+    var target = document.getElementById('page-' + pageId);
+
+    if (target) target.classList.add('active');
+
+
+
+    // Update page tabs
+
+    document.querySelectorAll('.page-tab').forEach(function(t) {
+
+        t.classList.toggle('active', t.dataset.page === pageId);
+
+    });
+
+
+
+    // Update sidebar nav items
+
+    document.querySelectorAll('.sidebar-nav-item').forEach(function(n) {
+
+        n.classList.toggle('active', n.dataset.page === pageId);
+
+    });
+
+
+
+    // If navigating to jurisdictions, show empty state or current detail
+
+    if (pageId === 'jurisdictions') {
+
+        var detailView = document.getElementById('jur-detail-container');
+
+        if (detailView && !detailView.innerHTML.trim()) {
+
+            detailView.innerHTML = renderJurisdictionEmpty();
+
+        }
+
+    }
+
+}
+
+
+
+/* ===== Toggle Jurisdiction Regions in Sidebar ===== */
+
+function toggleJurRegions(e) {
+
+    e.stopPropagation();
+
+    var sidebar = document.getElementById('iconSidebar');
+
+    var wrap = document.getElementById('sidebarRegionsWrap');
+
+    var chevron = document.getElementById('jurNavChevron');
+
+    var isCollapsed = sidebar.offsetWidth <= 60;
+
+
+
+    if (isCollapsed) {
+
+        sidebar.style.width = 'var(--sidebar-expanded)';
+
+        wrap.classList.add('open');
+
+        if (chevron) chevron.classList.add('rotated');
+
+        setTimeout(function() { sidebar.style.width = ''; }, 300);
+
+    } else {
+
+        wrap.classList.toggle('open');
+
+        if (chevron) chevron.classList.toggle('rotated', wrap.classList.contains('open'));
+
+    }
+
+
+
+    showPage('jurisdictions');
+
+
+
+    // Show empty state if no jurisdiction selected
+
+    var detailView = document.getElementById('jur-detail-container');
+
+    if (detailView && !currentJurisdiction) {
+
+        detailView.innerHTML = renderJurisdictionEmpty();
+
+    }
+
+}
+
+
+
+// Inner tab switching (non-functional but interactive)
+
+document.querySelectorAll('.inner-tab').forEach(function(tab) {
+
+    tab.addEventListener('click', function() {
+
+        this.parentElement.querySelectorAll('.inner-tab').forEach(function(t) { t.classList.remove('active'); });
+
+        this.classList.add('active');
+
+    });
+
+});
+
+
+
+// Filter button toggling
+
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+
+    btn.addEventListener('click', function() {
+
+        var siblings = this.parentElement.querySelectorAll('.filter-btn');
+
+        siblings.forEach(function(s) { s.classList.remove('active'); });
+
+        this.classList.add('active');
+
+    });
+
+});
+
+
+
+// Build sidebar regions on page load
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    buildSidebarRegions();
+
+});
+
+</script>
+
+</body>
+
+</html>
+
+
+
+jurisdiciton / 
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>PrinciplesAI Platform — V1 Mockup</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+
+    --teal:#0e8a7d;--teal-light:#e5f5f2;--teal-dark:#0a6b61;
+
+    --bg:#f8f9fa;--surface:#fff;
+
+    --ink:#0f172a;--secondary:#475467;--muted:#6c7686;
+
+    --border:#d5d8dd;
+
+    --green:#0e8a7d;--amber:#d97706;--red:#a02528;
+
+    --green-bg:#e5f5f2;--amber-bg:#fef6e5;--red-bg:#fde8eb;--blue-bg:#e8f0fe;--blue:#1a6bea;
+
+    --serif:'Source Serif 4',Georgia,serif;
+
+    --sans:'Source Sans 3',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+
+    --sidebar-collapsed:52px;--sidebar-expanded:280px;
+
+    --header-height:48px;
+
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+html{font-size:15px;-webkit-text-size-adjust:100%}
+
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
+
+button{cursor:pointer}
+
+
+
+/* ===== ICON SIDEBAR ===== */
+
+.icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden}
+
+.icon-sidebar:hover{width:var(--sidebar-expanded)}
+
+.icon-sidebar .sidebar-brand{display:flex;align-items:center;height:52px;padding:0 14px;gap:10px;flex-shrink:0;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+
+.icon-sidebar .sidebar-brand .brand-icon{width:24px;height:24px;background:var(--teal);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+.icon-sidebar .sidebar-brand .brand-icon svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none}
+
+.icon-sidebar .sidebar-brand .brand-text{font-family:var(--serif);font-weight:700;font-size:.88rem;color:var(--ink);opacity:0;transition:opacity .15s .05s;white-space:nowrap}
+
+.icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
+
+.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:8px 4px;overflow-y:auto;overflow-x:hidden}
+
+.sidebar-nav-item{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:3px;cursor:pointer;position:relative;color:var(--muted);transition:color .15s,background .15s;white-space:nowrap;flex-shrink:0}
+
+.sidebar-nav-item:hover{color:var(--secondary);background:#f4f5f7}
+
+.sidebar-nav-item.active{color:var(--teal)}
+
+.sidebar-nav-item.active::before{content:'';position:absolute;left:-4px;top:8px;bottom:8px;width:3px;background:var(--teal);border-radius:0 2px 2px 0}
+
+.sidebar-nav-item svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.6;fill:none;flex-shrink:0}
+
+.sidebar-nav-item .nav-label{font-size:.84rem;font-weight:500;opacity:0;transition:opacity .15s .05s}
+
+.icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
+
+
+
+/* ===== DRILL-IN SIDEBAR REGIONS ===== */
+
+.sidebar-regions-wrap{overflow:hidden;max-height:0;opacity:0;transition:max-height .35s cubic-bezier(0.16,1,0.3,1),opacity .3s cubic-bezier(0.16,1,0.3,1);overflow-y:auto;padding:0 6px}
+
+.sidebar-regions-wrap.open{max-height:80vh;opacity:1}
+
+.icon-sidebar:not(:hover) .sidebar-regions-wrap{max-height:0 !important;opacity:0 !important;padding:0}
+
+.icon-sidebar:hover .sidebar-regions-wrap.open{max-height:80vh;opacity:1}
+
+.sidebar-regions-wrap::-webkit-scrollbar{width:4px}
+
+.sidebar-regions-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+.sidebar-regions-wrap::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+
+
+/* Drill-in container */
+
+.drill-container{position:relative;min-height:40px}
+
+
+
+/* Cards view and list view */
+
+.drill-cards-view,.drill-list-view{transition:opacity .2s cubic-bezier(0.16,1,0.3,1),transform .2s cubic-bezier(0.16,1,0.3,1)}
+
+.drill-cards-view.hidden{opacity:0;pointer-events:none;position:absolute;top:0;left:0;right:0;transform:translateX(-8px)}
+
+.drill-list-view{opacity:0;pointer-events:none;position:absolute;top:0;left:0;right:0;transform:translateX(8px)}
+
+.drill-list-view.active{opacity:1;pointer-events:auto;position:relative;transform:translateX(0)}
+
+.drill-cards-view:not(.hidden){opacity:1;position:relative;transform:translateX(0)}
+
+
+
+/* Region cards - single column, full width */
+
+.sidebar-region-card{display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:3px;margin-bottom:6px;cursor:pointer;transition:border-color .15s,background .15s;min-height:56px;background:var(--surface)}
+
+.sidebar-region-card:hover{border-color:#999;background:var(--bg)}
+
+.sidebar-region-card:active{background:#eef0f3}
+
+.sidebar-region-card .src-svg{width:44px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+
+.sidebar-region-card .src-svg svg{width:100%;height:100%}
+
+.sidebar-region-card .src-info{flex:1;min-width:0;overflow:hidden}
+
+.sidebar-region-card .src-name{font-size:.82rem;font-weight:580;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.sidebar-region-card .src-count{font-size:.72rem;color:var(--muted);white-space:nowrap}
+
+
+
+/* Drill-in back link */
+
+.drill-back{display:flex;align-items:center;gap:4px;font-size:.75rem;font-weight:600;color:var(--teal);cursor:pointer;padding:4px 2px 8px;transition:color .12s}
+
+.drill-back:hover{color:var(--teal-dark);text-decoration:none}
+
+.drill-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+
+
+/* Drill-in region header */
+
+.drill-region-header{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:0 2px 6px;border-bottom:1px solid var(--border);margin-bottom:4px}
+
+
+
+/* Drill-in separator line */
+
+.drill-separator{border:none;border-top:1px solid var(--border);margin:8px 0}
+
+
+
+/* Drill-in jurisdiction items */
+
+.drill-jur-item{display:flex;align-items:center;padding:5px 8px;font-size:.82rem;font-weight:480;color:var(--secondary);cursor:pointer;border-radius:3px;transition:color .12s,background .12s;position:relative;border-left:3px solid transparent;margin-left:0}
+
+.drill-jur-item:hover{color:var(--ink);background:rgba(0,0,0,.03)}
+
+.drill-jur-item.active{color:var(--teal);border-left-color:var(--teal);transition:border-left-color .15s cubic-bezier(0.16,1,0.3,1)}
+
+.drill-jur-item.has-detail{font-weight:520}
+
+.drill-jur-item .drill-chevron{margin-left:auto;font-size:.72rem;color:var(--muted);flex-shrink:0;opacity:.6}
+
+.drill-jur-item.federal-item{font-weight:520;color:var(--secondary)}
+
+
+
+/* Stagger animation for list items */
+
+.drill-list-view.active .drill-jur-item{animation:drillItemIn .2s cubic-bezier(0.16,1,0.3,1) both}
+
+@keyframes drillItemIn{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:translateY(0)}}
+
+
+
+/* Sidebar nav item with tree - chevron indicator */
+
+.sidebar-nav-item .jur-nav-chevron{font-size:.72rem;margin-left:auto;opacity:0;transition:opacity .15s .05s,transform .2s cubic-bezier(0.16,1,0.3,1);color:var(--muted);flex-shrink:0}
+
+.icon-sidebar:hover .sidebar-nav-item .jur-nav-chevron{opacity:1}
+
+.sidebar-nav-item .jur-nav-chevron.rotated{transform:rotate(90deg)}
+
+.sidebar-user{border-top:1px solid var(--border);padding:8px 4px;flex-shrink:0;display:flex;align-items:center}
+
+.sidebar-user .sidebar-nav-item{gap:10px}
+
+.user-avatar{width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+
+
+
+/* ===== HEADER BAR ===== */
+
+.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:16px;z-index:200;transition:left .25s cubic-bezier(.4,0,.2,1)}
+
+.header-nav-arrows{display:flex;gap:4px}
+
+.header-nav-arrows button{width:28px;height:28px;border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background .12s}
+
+.header-nav-arrows button:hover{background:var(--bg)}
+
+.header-nav-arrows button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+
+.header-user-name{font-size:.82rem;font-weight:500;color:var(--secondary);white-space:nowrap}
+
+.header-search{flex:1;max-width:420px;display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;background:var(--bg);border-radius:3px;border:1px solid transparent;transition:border-color .12s,background .12s}
+
+.header-search:focus-within{background:var(--surface);border-color:var(--border)}
+
+.header-search svg{width:15px;height:15px;stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0}
+
+.header-search input{flex:1;font-size:.8rem;background:transparent}
+
+.header-search input::placeholder{color:var(--muted)}
+
+.header-right{display:flex;align-items:center;gap:12px;margin-left:auto}
+
+.header-icon-btn{width:32px;height:32px;border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--muted);position:relative;transition:background .12s,color .12s}
+
+.header-icon-btn:hover{background:var(--bg);color:var(--secondary)}
+
+.header-icon-btn svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.7;fill:none}
+
+.header-icon-btn .badge-count{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+.flag-btn{display:flex;align-items:center;gap:4px;font-size:.78rem;color:var(--secondary);cursor:pointer;padding:4px 8px;border-radius:3px;transition:background .12s}
+
+.flag-btn:hover{background:var(--bg)}
+
+.flag-btn .flag{font-size:1.1rem}
+
+
+
+/* ===== PAGE TABS ===== */
+
+.page-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--surface);position:fixed;top:var(--header-height);left:var(--sidebar-collapsed);right:0;z-index:150;padding:0 24px;overflow-x:auto;transition:left .25s cubic-bezier(.4,0,.2,1)}
+
+.page-tab{padding:10px 16px;font-size:.78rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s;white-space:nowrap}
+
+.page-tab:hover{color:var(--secondary)}
+
+.page-tab.active{color:var(--teal);font-weight:600;border-bottom-color:var(--teal)}
+
+
+
+/* ===== MAIN CONTENT ===== */
+
+.main-content{margin-left:var(--sidebar-collapsed);padding-top:calc(var(--header-height) + 42px);min-height:100vh;transition:margin-left .25s cubic-bezier(.4,0,.2,1)}
+
+.page-view{display:none;padding:28px 32px 60px;max-width:1320px;margin:0 auto}
+
+.page-view.active{display:block}
+
+
+
+/* ===== TYPOGRAPHY ===== */
+
+.serif{font-family:var(--serif)}
+
+h1.page-title{font-family:var(--serif);font-size:1.8rem;font-weight:700;line-height:1.2;letter-spacing:-0.01em;color:var(--ink)}
+
+h1.page-title em{font-style:italic;color:var(--teal)}
+
+h2{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--ink);letter-spacing:-0.005em}
+
+h3{font-size:.92rem;font-weight:600;color:var(--ink)}
+
+h4{font-size:.82rem;font-weight:600;color:var(--ink)}
+
+.text-sm{font-size:.8rem}.text-xs{font-size:.72rem}
+
+.text-muted{color:var(--muted)}.text-secondary{color:var(--secondary)}
+
+
+
+/* ===== CARDS ===== */
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border)}
+
+.card-body{padding:18px 20px}
+
+
+
+/* ===== STATS ===== */
+
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:24px}
+
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:18px 20px;border-top:2px solid var(--border)}
+
+.stat-value{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:var(--teal);line-height:1.2}
+
+.stat-label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:3px}
+
+.stat-delta{font-size:.72rem;font-weight:600;margin-top:4px;color:var(--teal)}
+
+
+
+/* ===== BADGES ===== */
+
+.badge{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:11px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+
+.badge-green{background:var(--green-bg);color:var(--green)}
+
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+
+.badge-red{background:var(--red-bg);color:var(--red)}
+
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+
+.badge-neutral{background:#eef0f3;color:var(--secondary)}
+
+.badge-teal{background:var(--teal);color:#fff}
+
+.badge-dark{background:var(--ink);color:#fff}
+
+
+
+/* ===== STATUS BADGES (for matrix) ===== */
+
+.status{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:3px}
+
+.status-yes{background:var(--green-bg);color:var(--green)}
+
+.status-partial{background:var(--amber-bg);color:var(--amber)}
+
+.status-no{background:var(--red-bg);color:var(--red)}
+
+.status-limited{background:var(--blue-bg);color:var(--blue)}
+
+
+
+/* ===== BUTTONS ===== */
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;padding:0 16px;font-size:.82rem;font-weight:600;border-radius:3px;transition:all .12s;white-space:nowrap;text-decoration:none;cursor:pointer}
+
+.btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+
+.btn-teal{background:var(--teal);color:#fff;border:1px solid var(--teal)}.btn-teal:hover{background:var(--teal-dark);text-decoration:none}
+
+.btn-outline{background:var(--surface);color:var(--secondary);border:1px solid var(--border)}.btn-outline:hover{background:var(--bg);text-decoration:none}
+
+.btn-ghost{background:transparent;color:var(--secondary);border:1px solid transparent}.btn-ghost:hover{background:var(--bg);text-decoration:none}
+
+.btn-sm{height:30px;padding:0 12px;font-size:.78rem}
+
+
+
+/* ===== FILTER BAR ===== */
+
+.filter-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+
+.filter-btn{display:inline-flex;align-items:center;height:30px;padding:0 12px;font-size:.75rem;font-weight:600;color:var(--secondary);background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .12s}
+
+.filter-btn:hover{border-color:var(--muted)}
+
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+
+
+/* ===== TABLE ===== */
+
+table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+
+.data-table th{text-align:left;padding:10px 14px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap}
+
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+
+.data-table tbody tr:hover{background:var(--bg)}
+
+
+
+/* ===== HIGHLIGHT CARDS (Home) ===== */
+
+.highlight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+
+.highlight-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:18px 20px;border-top:2px solid var(--teal)}
+
+.highlight-card .hl-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px}
+
+.highlight-card .hl-value{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ink);line-height:1.35}
+
+.highlight-card .hl-sub{font-size:.78rem;color:var(--secondary);margin-top:4px}
+
+
+
+/* ===== BRIEFING CARD ===== */
+
+.briefing-card{background:linear-gradient(135deg,#0a6b61,#0e8a7d);border-radius:3px;padding:24px;color:#fff}
+
+.briefing-card .bc-badge{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:.72rem;font-weight:700;background:rgba(255,255,255,.2);color:#fff;margin-bottom:12px}
+
+.briefing-card h3{font-family:var(--serif);font-size:1rem;font-weight:600;color:#fff;margin-bottom:4px}
+
+.briefing-card .bc-meta{font-size:.75rem;opacity:.8;margin-bottom:14px}
+
+.briefing-card .bc-btn{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#fff;color:var(--teal);font-size:.78rem;font-weight:700;border-radius:3px;cursor:pointer}
+
+
+
+/* ===== TRENDING PILLS ===== */
+
+.trending-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:.78rem;font-weight:500;color:var(--ink);margin:3px}
+
+.trending-pill .tp-count{font-size:.72rem;font-weight:700;color:var(--teal)}
+
+
+
+/* ===== NEWS DISPATCH ===== */
+
+.dispatch-row{display:flex;align-items:flex-start;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+
+.dispatch-row:hover{background:var(--bg)}
+
+.dispatch-date{font-size:.72rem;color:var(--muted);min-width:60px;flex-shrink:0;padding-top:2px;font-variant-numeric:tabular-nums}
+
+.dispatch-flag{font-size:1rem;flex-shrink:0}
+
+.dispatch-body{flex:1;min-width:0}
+
+.dispatch-headline{font-size:.88rem;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:2px}
+
+.dispatch-sub{font-size:.78rem;color:var(--secondary);line-height:1.5}
+
+.dispatch-badges{display:flex;align-items:center;gap:6px;flex-shrink:0}
+
+.dispatch-stars{color:var(--amber);font-size:.72rem;letter-spacing:1px}
+
+.dispatch-editor{font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--teal);background:var(--teal-light);padding:2px 6px;border-radius:3px}
+
+
+
+/* ===== LEAD STORY ===== */
+
+.lead-story{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:24px;margin-bottom:20px}
+
+.lead-story .ls-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;border-radius:3px;margin-bottom:10px}
+
+.lead-story .ls-meta{font-size:.75rem;color:var(--muted);margin-bottom:8px}
+
+.lead-story h2{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:8px}
+
+.lead-story .ls-standfirst{font-size:.88rem;color:var(--secondary);line-height:1.5;margin-bottom:14px}
+
+.lead-story .ls-link{font-size:.82rem;font-weight:600;color:var(--teal)}
+
+
+
+/* ===== ASK THE DESK ===== */
+
+.ask-desk{display:flex;align-items:center;gap:12px;background:var(--teal-light);border:1px solid #c2e5df;border-radius:3px;padding:10px 16px;margin-bottom:20px}
+
+.ask-desk input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:3px;height:34px;padding:0 12px;font-size:.82rem}
+
+.ask-desk .ad-label{font-size:.75rem;font-weight:600;color:var(--teal);white-space:nowrap}
+
+.ask-desk .ad-sla{font-size:.72rem;color:var(--muted);white-space:nowrap}
+
+
+
+/* ===== JURISDICTION DETAIL ===== */
+
+.jur-hero{display:flex;gap:32px;margin-bottom:28px;align-items:flex-start}
+
+.jur-info{flex:1}
+
+.jur-silhouette{width:180px;height:140px;background:var(--teal-light);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+.jur-silhouette svg{width:80px;height:80px;fill:var(--teal);opacity:.3}
+
+.jur-breadcrumb{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:10px}
+
+.jur-breadcrumb span{color:var(--teal)}
+
+.jur-country-name{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+
+.jur-body-count{font-size:.88rem;color:var(--secondary);margin-bottom:16px}
+
+.jur-export-btns{display:flex;gap:8px}
+
+
+
+/* ===== STATES GRID (USA) ===== */
+
+.states-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+.state-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:16px 18px;transition:border-color .12s}
+
+.state-card:hover{border-color:var(--muted)}
+
+.state-card-header{display:flex;align-items:center;justify-content:space-between}
+
+.state-card-header h4{font-family:var(--serif);font-size:.92rem;font-weight:600;color:var(--ink)}
+
+@media(max-width:1100px){.states-grid{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:768px){.states-grid{grid-template-columns:1fr}}
+
+
+
+/* ===== AUTHORITY CARDS ===== */
+
+.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:18px 20px;transition:border-color .12s}
+
+.auth-card:hover{border-color:var(--muted)}
+
+.auth-card .ac-type{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px}
+
+.auth-card .ac-name{font-family:var(--serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+
+.auth-card .ac-link{font-size:.75rem;color:var(--teal)}
+
+
+
+/* ===== MATRIX TABLE (Topics) ===== */
+
+.matrix-wrap{overflow-x:auto;margin-bottom:24px}
+
+.matrix-table{width:100%;border-collapse:collapse;font-size:.78rem}
+
+.matrix-table th{padding:10px 12px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:2px solid var(--border);background:var(--surface);text-align:left;white-space:nowrap;min-width:140px}
+
+.matrix-table th:first-child{min-width:160px;position:sticky;left:0;background:var(--surface);z-index:2}
+
+.matrix-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+
+.matrix-table td:first-child{font-weight:600;position:sticky;left:0;background:var(--surface);z-index:1}
+
+.matrix-table tbody tr:hover td{background:var(--bg)}
+
+.matrix-cell{display:flex;flex-direction:column;gap:2px}
+
+.matrix-cell .mc-note{font-size:.72rem;color:var(--secondary);font-weight:400}
+
+
+
+/* ===== CALLOUT BOX ===== */
+
+.callout{border-left:3px solid var(--teal);background:var(--teal-light);border-radius:0 3px 3px 0;padding:16px 20px;margin-bottom:24px}
+
+.callout h4{font-family:var(--serif);font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+
+.callout p{font-size:.82rem;color:var(--secondary);line-height:1.5}
+
+
+
+/* ===== KEY LEGEND ===== */
+
+.key-legend{display:flex;align-items:center;gap:16px;margin-bottom:16px;font-size:.75rem;color:var(--secondary);flex-wrap:wrap}
+
+.key-legend .kl-item{display:flex;align-items:center;gap:5px}
+
+.key-legend .kl-dot{width:10px;height:10px;border-radius:2px}
+
+.key-legend .kl-dot.yes{background:var(--green-bg);border:1px solid var(--green)}
+
+.key-legend .kl-dot.partial{background:var(--amber-bg);border:1px solid var(--amber)}
+
+.key-legend .kl-dot.no{background:var(--red-bg);border:1px solid var(--red)}
+
+.key-legend .kl-dot.limited{background:var(--blue-bg);border:1px solid var(--blue)}
+
+
+
+/* ===== TABS ===== */
+
+.inner-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:18px}
+
+.inner-tab{padding:8px 14px;font-size:.78rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s}
+
+.inner-tab:hover{color:var(--secondary)}
+
+.inner-tab.active{color:var(--teal);font-weight:600;border-bottom-color:var(--teal)}
+
+.pin-default{font-size:.72rem;color:var(--muted);margin-left:auto;padding:8px 0;cursor:pointer}
+
+.pin-default:hover{color:var(--teal)}
+
+
+
+/* ===== GRID HELPERS ===== */
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+.grid-sidebar-layout{display:grid;grid-template-columns:1fr 340px;gap:24px}
+
+.flex{display:flex}.items-center{align-items:center}.justify-between{justify-content:space-between}
+
+.gap-8{gap:8px}.gap-12{gap:12px}.gap-16{gap:16px}.gap-24{gap:24px}
+
+.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}.mb-24{margin-bottom:24px}
+
+
+
+/* ===== LIVE DOT ===== */
+
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-right:4px;animation:pulse 2s infinite}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+
+
+/* ===== COMMUNITY ===== */
+
+.community-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:18px 20px}
+
+.community-card .cc-avatar{width:36px;height:36px;border-radius:50%;background:var(--teal-light);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0}
+
+.community-card .cc-name{font-weight:600;font-size:.88rem}
+
+.community-card .cc-role{font-size:.75rem;color:var(--muted)}
+
+
+
+/* ===== ACCOUNT ===== */
+
+.account-section{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:24px;margin-bottom:16px}
+
+.account-section h3{margin-bottom:14px}
+
+.account-field{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+
+.account-field:last-child{border-bottom:none}
+
+.account-field .af-label{font-size:.82rem;color:var(--muted);min-width:140px}
+
+.account-field .af-value{font-size:.82rem;font-weight:500;color:var(--ink)}
+
+
+
+/* ===== JURISDICTION PROMPT (empty state) ===== */
+
+.jur-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;color:var(--muted)}
+
+.jur-empty-state svg{width:80px;height:80px;stroke:var(--border);stroke-width:1;fill:none;margin-bottom:20px}
+
+.jur-empty-state h2{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--secondary);margin-bottom:8px}
+
+.jur-empty-state p{font-size:.88rem;max-width:380px;line-height:1.5}
+
+
+
+/* ===== CONTENT TYPE SECTIONS (Jurisdiction Detail) ===== */
+
+.content-type-section{margin-top:28px}
+
+.content-type-header{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-top:1px solid var(--border);padding-top:20px}
+
+.content-type-header h3{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ink);letter-spacing:-0.005em}
+
+.content-type-header .ct-count{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:10px;font-size:.72rem;font-weight:700;background:#eef0f3;color:var(--secondary)}
+
+.content-type-items{margin-top:4px}
+
+.content-type-item{display:flex;align-items:flex-start;gap:16px;padding:10px 0;border-bottom:1px solid #eef0f3}
+
+.content-type-item:last-child{border-bottom:none}
+
+.ct-item-date{font-size:.72rem;color:var(--muted);min-width:72px;flex-shrink:0;padding-top:2px;font-variant-numeric:tabular-nums}
+
+.ct-item-body{flex:1;min-width:0}
+
+.ct-item-title{font-size:.85rem;font-weight:600;color:var(--ink);line-height:1.4}
+
+.ct-item-summary{font-size:.78rem;color:var(--secondary);line-height:1.45;margin-top:2px}
+
+.ct-item-status{flex-shrink:0}
+
+.content-type-empty{padding:16px 0 8px 16px;border-left:2px solid var(--teal);margin:8px 0 0 0}
+
+.content-type-empty p{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.5;max-width:640px}
+
+
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:1100px){.grid-sidebar-layout{grid-template-columns:1fr}.highlight-row{grid-template-columns:1fr 1fr 1fr}.grid-4{grid-template-columns:repeat(2,1fr)}}
+
+@media(max-width:768px){.highlight-row{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+
+
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<!-- ===== ICON SIDEBAR ===== -->
+
+<nav class="icon-sidebar" id="iconSidebar">
+
+    <div class="sidebar-brand">
+
+        <div class="brand-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg></div>
+
+        <span class="brand-text">PrinciplesAI</span>
+
+    </div>
+
+    <div class="sidebar-nav-items">
+
+        <div class="sidebar-nav-item active" data-page="home" onclick="showPage('home')">
+
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+
+            <span class="nav-label">Dashboard</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="jurisdictions" onclick="toggleJurRegions(event)">
+
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+
+            <span class="nav-label">Jurisdictions</span>
+
+            <span class="jur-nav-chevron" id="jurNavChevron">&#9656;</span>
+
+        </div>
+
+        <!-- Sidebar Region Cards (drill-in) -->
+
+        <div class="sidebar-regions-wrap" id="sidebarRegionsWrap"></div>
+
+        <div class="sidebar-nav-item" data-page="news" onclick="showPage('news')">
+
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+
+            <span class="nav-label">News</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="topics" onclick="showPage('topics')">
+
+            <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+
+            <span class="nav-label">Topics</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="authorities" onclick="showPage('authorities')">
+
+            <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg>
+
+            <span class="nav-label">Authorities</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="lists" onclick="showPage('lists')">
+
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+
+            <span class="nav-label">Lists</span>
+
+        </div>
+
+        <div class="sidebar-nav-item" data-page="community" onclick="showPage('community')">
+
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+
+            <span class="nav-label">Community</span>
+
+        </div>
+
+    </div>
+
+    <div class="sidebar-user">
+
+        <div class="sidebar-nav-item" data-page="account" onclick="showPage('account')">
+
+            <div class="user-avatar">D</div>
+
+            <span class="nav-label">David</span>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ===== HEADER BAR ===== -->
+
+<header class="header-bar">
+
+    <div class="header-nav-arrows">
+
+        <button><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+
+        <button><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+
+    </div>
+
+    <span class="header-user-name">David &middot; PrinciplesAI</span>
+
+    <div class="header-search">
+
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+
+        <input type="text" placeholder="Search jurisdictions, enforcement, case law...">
+
+    </div>
+
+    <div class="header-right">
+
+        <div class="flag-btn"><span class="flag">&#x1F1EC;&#x1F1E7;</span> UK</div>
+
+        <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="badge-count">3</span></button>
+
+        <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="badge-count">5</span></button>
+
+        <button class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
+
+    </div>
+
+</header>
+
+
+
+<!-- ===== PAGE TABS ===== -->
+
+<div class="page-tabs">
+
+    <div class="page-tab active" data-page="home" onclick="showPage('home')">Home</div>
+
+    <div class="page-tab" data-page="news" onclick="showPage('news')">News</div>
+
+    <div class="page-tab" data-page="jurisdictions" onclick="showPage('jurisdictions')">Jurisdictions</div>
+
+    <div class="page-tab" data-page="topics" onclick="showPage('topics')">Topics</div>
+
+    <div class="page-tab" data-page="authorities" onclick="showPage('authorities')">Authorities</div>
+
+    <div class="page-tab" data-page="lists" onclick="showPage('lists')">Lists</div>
+
+    <div class="page-tab" data-page="community" onclick="showPage('community')">Community</div>
+
+    <div class="page-tab" data-page="account" onclick="showPage('account')">Account</div>
+
+</div>
+
+
+
+<!-- ===== MAIN CONTENT ===== -->
+
+<div class="main-content">
+
+
+
+<!-- ==================== HOME ==================== -->
+
+<div class="page-view active" id="page-home">
+
+    <!-- Greeting -->
+
+    <div class="flex items-center justify-between mb-24">
+
+        <div class="flex items-center gap-16">
+
+            <div class="user-avatar" style="width:48px;height:48px;font-size:1rem">D</div>
+
+            <div>
+
+                <h1 class="page-title" style="font-size:1.5rem">Hello, David</h1>
+
+                <p class="text-sm text-secondary">Friday 10 April 2026 &mdash; 23 new updates across your tracked jurisdictions</p>
+
+            </div>
+
+        </div>
+
+        <div class="flex items-center gap-12">
+
+            <a href="#" style="font-family:var(--serif);font-weight:600;font-size:.82rem;color:var(--teal)">PrinciplesAI</a>
+
+            <a href="#" class="btn btn-outline btn-sm">Customize</a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Highlight cards -->
+
+    <div class="highlight-row">
+
+        <div class="highlight-card">
+
+            <div class="hl-label">Your home</div>
+
+            <div class="hl-value">United Kingdom</div>
+
+            <div class="hl-sub"><span class="badge badge-blue" style="height:18px;font-size:.72rem;margin-right:4px">Europe</span> 847 records</div>
+
+        </div>
+
+        <div class="highlight-card">
+
+            <div class="hl-label">Legislation moving</div>
+
+            <div class="hl-value">AI governance</div>
+
+            <div class="hl-sub"><span style="font-weight:700;color:var(--teal)">14 bills</span> in progress across 9 jurisdictions</div>
+
+        </div>
+
+        <div class="highlight-card">
+
+            <div class="hl-label">Next deadline</div>
+
+            <div class="hl-value">EU AI Act: Prohibited Systems</div>
+
+            <div class="hl-sub"><span class="badge badge-amber" style="height:18px;font-size:.72rem">12 days</span></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Stats -->
+
+    <div class="stats-row">
+
+        <div class="stat-card">
+
+            <div class="stat-value">337</div>
+
+            <div class="stat-label">Jurisdictions tracked</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">1,602</div>
+
+            <div class="stat-label">Regulatory bodies</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">174</div>
+
+            <div class="stat-label">Laws &amp; regulations</div>
+
+            <div class="stat-delta">+109 in progress</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">23</div>
+
+            <div class="stat-label">Records this week</div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Three-column: Briefing, While You Were Away, Trending -->
+
+    <div class="grid-3 mb-24">
+
+        <!-- PAI Briefing -->
+
+        <div class="briefing-card">
+
+            <div class="bc-badge">NEW</div>
+
+            <h3>PAI Briefing: EU AI Act Enforcement Begins</h3>
+
+            <div class="bc-meta">Dr. Sarah Chen &middot; 18 min</div>
+
+            <div class="bc-btn">&#9654; Watch Now</div>
+
+        </div>
+
+
+
+        <!-- While you were away -->
+
+        <div class="card">
+
+            <div class="card-header"><h3>While you were away</h3></div>
+
+            <div class="card-body">
+
+                <p class="text-sm text-secondary mb-12">23 new records in the last 7 days</p>
+
+                <div class="flex gap-8" style="flex-wrap:wrap">
+
+                    <span class="badge badge-red">3 Alert</span>
+
+                    <span class="badge badge-blue">17 Guidance</span>
+
+                    <span class="badge badge-amber">3 Enforcement</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Trending topics -->
+
+        <div class="card">
+
+            <div class="card-header"><h3>Trending topics</h3></div>
+
+            <div class="card-body" style="padding:12px 16px">
+
+                <div class="trending-pill">Official Guidelines <span class="tp-count">58</span></div>
+
+                <div class="trending-pill">Case Law <span class="tp-count">13</span></div>
+
+                <div class="trending-pill">Facial Recognition <span class="tp-count">9</span></div>
+
+                <div class="trending-pill">Copyright &amp; AI <span class="tp-count">7</span></div>
+
+                <div class="trending-pill">Data Protection <span class="tp-count">41</span></div>
+
+                <div class="trending-pill">Autonomous Systems <span class="tp-count">5</span></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Tabbed section -->
+
+    <div class="card">
+
+        <div style="display:flex;align-items:center;border-bottom:1px solid var(--border);padding:0 20px">
+
+            <div class="inner-tabs" style="border-bottom:none;margin-bottom:0">
+
+                <div class="inner-tab active">Activity</div>
+
+                <div class="inner-tab">Global AI Laws</div>
+
+                <div class="inner-tab">US AI Laws</div>
+
+                <div class="inner-tab">EU AI Act</div>
+
+            </div>
+
+            <span class="pin-default">&#128204; Pin as default</span>
+
+        </div>
+
+        <div class="card-body" style="padding:0">
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EE;&#x1F1F9;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Italy: Garante fines Intesa Sanpaolo &euro;31.8m for unauthorised data access</div>
+
+                    <div class="dispatch-sub">Major GDPR enforcement action targeting banking sector data governance failures</div>
+
+                </div>
+
+                <span class="badge badge-red" style="flex-shrink:0">Alert</span>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1FA;&#x1F1F8;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">US: NIST releases updated AI Risk Management Framework v2.1</div>
+
+                    <div class="dispatch-sub">Expanded guidance on foundation model evaluation and red-teaming requirements</div>
+
+                </div>
+
+                <span class="badge badge-blue" style="flex-shrink:0">Guidance</span>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EC;&#x1F1E7;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">UK: ICO publishes consultation on AI and data protection compliance</div>
+
+                    <div class="dispatch-sub">60-day public consultation on draft guidance for AI developers and deployers</div>
+
+                </div>
+
+                <span class="badge badge-green" style="flex-shrink:0">Consultation</span>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EA;&#x1F1FA;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">EU: European Commission adopts delegated act on high-risk AI classification</div>
+
+                    <div class="dispatch-sub">Clarifying criteria for Annex III categorisation under the AI Act</div>
+
+                </div>
+
+                <span class="badge badge-blue" style="flex-shrink:0">Legislation</span>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">8 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1E8;&#x1F1E6;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Canada: AIDA moves to Senate committee review stage</div>
+
+                    <div class="dispatch-sub">Artificial Intelligence and Data Act faces amendments on enforcement powers</div>
+
+                </div>
+
+                <span class="badge badge-amber" style="flex-shrink:0">Bill</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== NEWS ==================== -->
+
+<div class="page-view" id="page-news">
+
+    <div class="mb-8" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal)">PRINCIPLESAI</div>
+
+    <h1 class="page-title mb-8" style="font-size:2rem">Your <em>inbox</em></h1>
+
+    <div class="flex items-center gap-16 mb-24">
+
+        <span class="text-sm text-secondary">56 stories today &middot; 11 in your watchlist &middot; 42 unread</span>
+
+        <span class="text-sm" style="color:var(--green)"><span class="live-dot"></span>Live &middot; checker updated 4 min ago</span>
+
+    </div>
+
+
+
+    <!-- Lead story -->
+
+    <div class="lead-story">
+
+        <div class="ls-badge">TODAY'S LEAD</div>
+
+        <div class="ls-meta">10 April 2026 &middot; Italy &middot; Data Protection</div>
+
+        <h2>Italy: Garante fines Intesa Sanpaolo &euro;31.8m for failing to detect employee's unauthorised client data access</h2>
+
+        <div class="ls-standfirst">Italy's data protection authority has imposed its largest-ever fine on a financial institution after a bank employee accessed personal records of over 3,500 clients, including high-profile political figures, without authorisation over a period of more than two years. The decision raises critical questions about internal monitoring obligations and the adequacy of technical safeguards under GDPR Article 32.</div>
+
+        <a href="#" class="ls-link">Read full story &rarr;</a>
+
+    </div>
+
+
+
+    <!-- Ask the Desk -->
+
+    <div class="ask-desk">
+
+        <span class="ad-label">ASK THE DESK</span>
+
+        <input type="text" placeholder="A question for the analyst team?">
+
+        <button class="btn btn-teal btn-sm">Send</button>
+
+        <span class="ad-sla">2 day SLA</span>
+
+    </div>
+
+
+
+    <!-- Filters -->
+
+    <div class="filter-bar">
+
+        <div class="filter-btn active">For you <strong style="margin-left:4px">11</strong></div>
+
+        <div class="filter-btn">VIEW All</div>
+
+        <div class="filter-btn">TYPE Any</div>
+
+        <div class="filter-btn">REGION All</div>
+
+        <div class="filter-btn">TOPIC All</div>
+
+        <div class="filter-btn">TIME Today</div>
+
+    </div>
+
+
+
+    <!-- Dispatch list -->
+
+    <div class="grid-sidebar-layout">
+
+        <div class="card" style="overflow:hidden">
+
+            <div class="dispatch-row" style="background:var(--teal-light)">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EE;&#x1F1F9;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Italy: Garante fines Intesa Sanpaolo &euro;31.8m for unauthorised data access</div>
+
+                    <div class="dispatch-sub">Banking sector GDPR enforcement &middot; Internal monitoring obligations</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-red">Alert</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+
+                    <span class="dispatch-editor">Editor's Lead</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1FA;&#x1F1F8;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">NIST releases updated AI Risk Management Framework v2.1</div>
+
+                    <div class="dispatch-sub">Foundation model evaluation &middot; Red-teaming guidance</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-blue">Lead</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EC;&#x1F1E7;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">UK: FCA issues guidance on AI use in financial services</div>
+
+                    <div class="dispatch-sub">Consumer protection &middot; Algorithmic trading safeguards</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-neutral">Guidance</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">10 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EA;&#x1F1FA;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">EU AI Office publishes first harmonised standards request</div>
+
+                    <div class="dispatch-sub">Technical standards &middot; Conformity assessment</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-blue">Lead</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1EF;&#x1F1F5;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Japan: Cabinet approves AI Basic Act draft</div>
+
+                    <div class="dispatch-sub">Comprehensive AI law &middot; Risk-based classification</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-amber">Bill</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1E6;&#x1F1FA;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">Australia: ACCC launches inquiry into AI in digital platforms</div>
+
+                    <div class="dispatch-sub">Competition law &middot; Market power in AI</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-neutral">Inquiry</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+
+                </div>
+
+            </div>
+
+            <div class="dispatch-row">
+
+                <span class="dispatch-date">9 Apr</span>
+
+                <span class="dispatch-flag">&#x1F1F0;&#x1F1F7;</span>
+
+                <div class="dispatch-body">
+
+                    <div class="dispatch-headline">South Korea: PIPC updates AI privacy guidelines</div>
+
+                    <div class="dispatch-sub">Personal data in AI training &middot; Consent mechanisms</div>
+
+                </div>
+
+                <div class="dispatch-badges">
+
+                    <span class="badge badge-neutral">Guidance</span>
+
+                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Story detail panel -->
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <h2 style="font-size:1.05rem;margin-bottom:12px">Italy: Garante fines Intesa Sanpaolo &euro;31.8m for failing to detect employee's unauthorised client data access</h2>
+
+                <p class="text-sm text-secondary" style="line-height:1.5;margin-bottom:16px">Italy's Garante per la protezione dei dati personali imposed a &euro;31.8 million fine on Intesa Sanpaolo after an employee accessed the personal records of over 3,500 clients without authorisation. The investigation revealed that the bank's monitoring systems failed to flag the repeated access over a period exceeding two years.</p>
+
+                <p class="text-sm text-secondary" style="line-height:1.5;margin-bottom:16px">The regulator found violations of GDPR Articles 5(1)(f), 25, and 32, concluding that the bank's technical and organisational measures were insufficient to ensure appropriate security of personal data processing.</p>
+
+                <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:14px">
+
+                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Type</span><span class="text-xs" style="font-weight:600">Enforcement Action</span></div>
+
+                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Jurisdiction</span><span class="text-xs" style="font-weight:600">Italy</span></div>
+
+                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Date</span><span class="text-xs" style="font-weight:600">10 April 2026</span></div>
+
+                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Authority</span><span class="text-xs" style="font-weight:600">Garante per la protezione dei dati personali</span></div>
+
+                    <div class="flex justify-between"><span class="text-xs text-muted">Source</span><a href="#" class="text-xs" style="font-weight:600;color:var(--teal)">Garante official decision</a></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== JURISDICTIONS ==================== -->
+
+<div class="page-view" id="page-jurisdictions">
+
+    <div id="jur-detail-container"></div>
+
+</div>
+
+
+
+<!-- ==================== TOPICS ==================== -->
+
+<div class="page-view" id="page-topics">
+
+    <div class="flex items-center justify-between mb-16">
+
+        <div>
+
+            <h1 class="page-title">AI &amp; Copyright: <em>Cross-Jurisdictional Matrix</em></h1>
+
+            <p class="text-sm text-secondary" style="margin-top:4px">Comparing copyright and intellectual property requirements across jurisdictions</p>
+
+        </div>
+
+        <div class="flex items-center gap-8">
+
+            <button class="btn btn-outline btn-sm">&#8592; Prev topic</button>
+
+            <button class="btn btn-outline btn-sm">Next topic &rarr;</button>
+
+            <button class="btn btn-teal btn-sm">Download CSV</button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Key -->
+
+    <div class="key-legend mb-16">
+
+        <strong style="font-size:.72rem;color:var(--ink)">Key:</strong>
+
+        <div class="kl-item"><div class="kl-dot yes"></div> Yes = Binding legal requirement</div>
+
+        <div class="kl-item"><div class="kl-dot partial"></div> Partial = Guidance / emerging</div>
+
+        <div class="kl-item"><div class="kl-dot no"></div> No = No specific requirement</div>
+
+        <div class="kl-item"><div class="kl-dot limited"></div> Limited = Sector-specific only</div>
+
+    </div>
+
+
+
+    <!-- Callout -->
+
+    <div class="callout">
+
+        <h4>Why this matters now</h4>
+
+        <p>The intersection of AI and copyright law is the fastest-moving area of tech regulation in 2026. Major jurisdictions are taking divergent approaches to whether AI-generated works qualify for copyright protection, whether training on copyrighted data constitutes fair use, and what disclosure obligations apply to AI developers. These differences create significant compliance complexity for organisations operating across borders.</p>
+
+    </div>
+
+
+
+    <!-- Matrix table -->
+
+    <div class="matrix-wrap">
+
+        <table class="matrix-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Jurisdiction</th>
+
+                    <th>AI Works Copyrightable?</th>
+
+                    <th>TDM Exception?</th>
+
+                    <th>Training on Copyrighted Data</th>
+
+                    <th>Disclosure Required?</th>
+
+                    <th>Liability Framework</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>&#x1F1EA;&#x1F1FA; European Union</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span><span class="mc-note">Human authorship required</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">DSM Arts 3-4</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Opt-out mechanism</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">AI Act Art. 52</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1FA;&#x1F1F8; United States</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span><span class="mc-note">Thaler v. Vidal (2023)</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">Fair use doctrine</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Pending litigation</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1EC;&#x1F1E7; United Kingdom</td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">CDPA s.9(3)</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Under review</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Implied</span><span class="mc-note">Code of Practice</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Voluntary code</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1EF;&#x1F1F5; Japan</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span><span class="mc-note">Human creativity needed</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">Art. 30-4 Copyright Act</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">Broad non-enjoyment exception</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1E8;&#x1F1F3; China</td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Beijing Internet Court (2023)</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Consent required</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">AIGC Measures Art. 12</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-yes">Yes</span><span class="mc-note">Provider liable</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1F0;&#x1F1F7; South Korea</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Under consultation</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>&#x1F1E8;&#x1F1E6; Canada</td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span><span class="mc-note">Human author required</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span><span class="mc-note">Fair dealing</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Partial</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-no">No</span></div></td>
+
+                    <td><div class="matrix-cell"><span class="status status-partial">Emerging</span></div></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- Key tension -->
+
+    <div class="callout" style="margin-top:24px">
+
+        <h4>Key tension</h4>
+
+        <p>Japan's expansive text and data mining exception stands in sharp contrast to the EU's opt-out mechanism. Organisations training models on data sourced from multiple jurisdictions must navigate fundamentally different legal frameworks simultaneously, with no international harmonisation in sight.</p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== AUTHORITIES ==================== -->
+
+<div class="page-view" id="page-authorities">
+
+    <div class="flex items-center justify-between mb-24">
+
+        <div>
+
+            <h1 class="page-title">Regulatory <em>Authorities</em></h1>
+
+            <p class="text-sm text-secondary" style="margin-top:4px">1,602 regulatory bodies across 337 jurisdictions</p>
+
+        </div>
+
+        <div class="flex items-center gap-8">
+
+            <button class="btn btn-outline btn-sm">Export</button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="filter-bar">
+
+        <div class="filter-btn active">All</div>
+
+        <div class="filter-btn">Data Protection</div>
+
+        <div class="filter-btn">AI-Specific</div>
+
+        <div class="filter-btn">Cybersecurity</div>
+
+        <div class="filter-btn">Financial</div>
+
+        <div class="filter-btn">Competition</div>
+
+        <div class="filter-btn">Sector Regulators</div>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <div style="overflow-x:auto">
+
+            <table class="data-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Authority</th>
+
+                        <th>Type</th>
+
+                        <th>Jurisdiction</th>
+
+                        <th>AI Mandate</th>
+
+                        <th>Status</th>
+
+                        <th>Last Activity</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td style="font-weight:600">European AI Office</td>
+
+                        <td><span class="badge badge-blue" style="height:18px;font-size:.72rem">AI-Specific</span></td>
+
+                        <td>&#x1F1EA;&#x1F1FA; European Union</td>
+
+                        <td>Primary</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>10 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">CNIL</td>
+
+                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
+
+                        <td>&#x1F1EB;&#x1F1F7; France</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>9 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">ICO</td>
+
+                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
+
+                        <td>&#x1F1EC;&#x1F1E7; United Kingdom</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>9 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">NIST</td>
+
+                        <td><span class="badge badge-amber" style="height:18px;font-size:.72rem">Standards Body</span></td>
+
+                        <td>&#x1F1FA;&#x1F1F8; United States</td>
+
+                        <td>Standards</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>10 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">FTC</td>
+
+                        <td><span class="badge badge-red" style="height:18px;font-size:.72rem">Consumer Protection</span></td>
+
+                        <td>&#x1F1FA;&#x1F1F8; United States</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>7 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">Garante</td>
+
+                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
+
+                        <td>&#x1F1EE;&#x1F1F9; Italy</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>10 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">CAC</td>
+
+                        <td><span class="badge badge-blue" style="height:18px;font-size:.72rem">AI-Specific</span></td>
+
+                        <td>&#x1F1E8;&#x1F1F3; China</td>
+
+                        <td>Primary</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>5 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">PIPC</td>
+
+                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
+
+                        <td>&#x1F1F0;&#x1F1F7; South Korea</td>
+
+                        <td>Extended</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>9 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">BaFin</td>
+
+                        <td><span class="badge badge-amber" style="height:18px;font-size:.72rem">Financial Regulator</span></td>
+
+                        <td>&#x1F1E9;&#x1F1EA; Germany</td>
+
+                        <td>Sector</td>
+
+                        <td><span style="color:var(--amber);font-weight:600">&#9679;</span> Limited</td>
+
+                        <td>3 Apr 2026</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-weight:600">ACCC</td>
+
+                        <td><span class="badge badge-red" style="height:18px;font-size:.72rem">Competition</span></td>
+
+                        <td>&#x1F1E6;&#x1F1FA; Australia</td>
+
+                        <td>Inquiry</td>
+
+                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
+
+                        <td>9 Apr 2026</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== LISTS ==================== -->
+
+<div class="page-view" id="page-lists">
+
+    <div class="flex items-center justify-between mb-24">
+
+        <div>
+
+            <h1 class="page-title">Your <em>Lists</em></h1>
+
+            <p class="text-sm text-secondary" style="margin-top:4px">Curated collections of jurisdictions, topics, and regulatory intelligence</p>
+
+        </div>
+
+        <button class="btn btn-teal btn-sm">+ New List</button>
+
+    </div>
+
+
+
+    <div class="filter-bar">
+
+        <div class="filter-btn active">All Lists</div>
+
+        <div class="filter-btn">Jurisdictions</div>
+
+        <div class="filter-btn">Topics</div>
+
+        <div class="filter-btn">Authorities</div>
+
+        <div class="filter-btn">Shared with me</div>
+
+    </div>
+
+
+
+    <div class="grid-3 mb-24">
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Priority Jurisdictions</h4>
+
+                        <span class="text-xs text-muted">12 jurisdictions &middot; Updated 2h ago</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">EU</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">UK</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">US</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">China</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">+8</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>AI Act Compliance</h4>
+
+                        <span class="text-xs text-muted">34 items &middot; Updated 1d ago</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">High-Risk AI</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">GPAI</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Deadlines</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--red-bg);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Enforcement Watch</h4>
+
+                        <span class="text-xs text-muted">8 items &middot; Updated 4h ago</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Fines</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Sanctions</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Orders</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--green-bg);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Copyright &amp; IP Tracker</h4>
+
+                        <span class="text-xs text-muted">19 items &middot; Updated 3d ago</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">TDM</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Fair Use</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">AI Output</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer">
+
+            <div class="card-body">
+
+                <div class="flex items-center gap-12 mb-12">
+
+                    <div style="width:36px;height:36px;border-radius:3px;background:var(--teal-light);display:flex;align-items:center;justify-content:center">
+
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Team Shared: APAC Watch</h4>
+
+                        <span class="text-xs text-muted">26 items &middot; 3 collaborators</span>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;flex-wrap:wrap;gap:4px">
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Japan</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Korea</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Singapore</span>
+
+                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Australia</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="card" style="cursor:pointer;border-style:dashed">
+
+            <div class="card-body" style="display:flex;align-items:center;justify-content:center;min-height:120px">
+
+                <div style="text-align:center;color:var(--muted)">
+
+                    <div style="font-size:1.5rem;margin-bottom:4px">+</div>
+
+                    <div class="text-sm">Create new list</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== COMMUNITY ==================== -->
+
+<div class="page-view" id="page-community">
+
+    <div class="flex items-center justify-between mb-24">
+
+        <div>
+
+            <h1 class="page-title">The <em>Community</em></h1>
+
+            <p class="text-sm text-secondary" style="margin-top:4px">Connect with regulatory intelligence professionals worldwide</p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Stats -->
+
+    <div class="stats-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:28px">
+
+        <div class="stat-card">
+
+            <div class="stat-value">2,847</div>
+
+            <div class="stat-label">Members</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">156</div>
+
+            <div class="stat-label">Organisations</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">34</div>
+
+            <div class="stat-label">Discussion threads</div>
+
+            <div class="stat-delta">+7 this week</div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-value">12</div>
+
+            <div class="stat-label">Upcoming events</div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="grid-sidebar-layout">
+
+        <div>
+
+            <h2 class="mb-16">Recent Discussions</h2>
+
+            <div class="card mb-16">
+
+                <div class="dispatch-row">
+
+                    <div style="width:32px;height:32px;border-radius:50%;background:var(--blue-bg);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">SC</div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">How are organisations preparing for the EU AI Act prohibited systems deadline?</div>
+
+                        <div class="dispatch-sub">Sarah Chen &middot; 3h ago &middot; 24 replies</div>
+
+                    </div>
+
+                    <span class="badge badge-blue" style="flex-shrink:0">Hot</span>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="width:32px;height:32px;border-radius:50%;background:var(--green-bg);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">MR</div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Japan's AI Basic Act: What should non-Japanese companies prepare for?</div>
+
+                        <div class="dispatch-sub">Marco Rossi &middot; 8h ago &middot; 11 replies</div>
+
+                    </div>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="width:32px;height:32px;border-radius:50%;background:var(--amber-bg);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">KP</div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Best practices for AI copyright compliance across APAC jurisdictions</div>
+
+                        <div class="dispatch-sub">Kim Park &middot; 1d ago &middot; 7 replies</div>
+
+                    </div>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="width:32px;height:32px;border-radius:50%;background:var(--red-bg);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">AL</div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Garante fine impact: What changes should financial institutions make now?</div>
+
+                        <div class="dispatch-sub">Anna Lindqvist &middot; 1d ago &middot; 18 replies</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <h2 class="mb-16">Upcoming Events</h2>
+
+            <div class="card">
+
+                <div class="dispatch-row">
+
+                    <div style="text-align:center;min-width:44px;flex-shrink:0">
+
+                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">APR</div>
+
+                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">18</div>
+
+                    </div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Webinar: EU AI Act Enforcement Readiness</div>
+
+                        <div class="dispatch-sub">15:00 CET &middot; Live &middot; 234 registered</div>
+
+                    </div>
+
+                    <button class="btn btn-teal btn-sm" style="flex-shrink:0">Register</button>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="text-align:center;min-width:44px;flex-shrink:0">
+
+                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">APR</div>
+
+                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">24</div>
+
+                    </div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Roundtable: AI Copyright Law in Practice</div>
+
+                        <div class="dispatch-sub">10:00 GMT &middot; Virtual &middot; 56 registered</div>
+
+                    </div>
+
+                    <button class="btn btn-outline btn-sm" style="flex-shrink:0">Register</button>
+
+                </div>
+
+                <div class="dispatch-row">
+
+                    <div style="text-align:center;min-width:44px;flex-shrink:0">
+
+                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">MAY</div>
+
+                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">7</div>
+
+                    </div>
+
+                    <div class="dispatch-body">
+
+                        <div class="dispatch-headline">Conference: Global AI Regulation Summit 2026</div>
+
+                        <div class="dispatch-sub">Brussels &middot; In-person &middot; 420 registered</div>
+
+                    </div>
+
+                    <button class="btn btn-outline btn-sm" style="flex-shrink:0">Register</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Sidebar: Active Members -->
+
+        <div>
+
+            <h2 class="mb-16">Active Members</h2>
+
+            <div style="display:flex;flex-direction:column;gap:10px">
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar">SC</div>
+
+                    <div><div class="cc-name">Dr. Sarah Chen</div><div class="cc-role">Head of AI Policy &middot; TechCorp</div></div>
+
+                </div>
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar" style="background:var(--blue-bg);color:var(--blue)">MR</div>
+
+                    <div><div class="cc-name">Marco Rossi</div><div class="cc-role">Senior Counsel &middot; Linklaters</div></div>
+
+                </div>
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar" style="background:var(--amber-bg);color:var(--amber)">KP</div>
+
+                    <div><div class="cc-name">Kim Park</div><div class="cc-role">Regulatory Affairs &middot; Samsung</div></div>
+
+                </div>
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar" style="background:var(--red-bg);color:var(--red)">AL</div>
+
+                    <div><div class="cc-name">Anna Lindqvist</div><div class="cc-role">DPO &middot; Nordea Bank</div></div>
+
+                </div>
+
+                <div class="community-card flex items-center gap-12">
+
+                    <div class="cc-avatar" style="background:var(--green-bg);color:var(--green)">JW</div>
+
+                    <div><div class="cc-name">James Wright</div><div class="cc-role">Policy Director &middot; Ada Lovelace Inst.</div></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================== ACCOUNT ==================== -->
+
+<div class="page-view" id="page-account">
+
+    <div class="flex items-center gap-16 mb-24">
+
+        <div class="user-avatar" style="width:56px;height:56px;font-size:1.2rem">D</div>
+
+        <div>
+
+            <h1 class="page-title">David Mitchell</h1>
+
+            <p class="text-sm text-secondary">Head of Regulatory Intelligence &middot; PrinciplesAI</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="grid-2" style="grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+
+        <div>
+
+            <div class="account-section">
+
+                <h3>Profile</h3>
+
+                <div class="account-field"><span class="af-label">Full Name</span><span class="af-value">David Mitchell</span></div>
+
+                <div class="account-field"><span class="af-label">Email</span><span class="af-value">d.mitchell@principlesai.com</span></div>
+
+                <div class="account-field"><span class="af-label">Organisation</span><span class="af-value">PrinciplesAI</span></div>
+
+                <div class="account-field"><span class="af-label">Role</span><span class="af-value">Head of Regulatory Intelligence</span></div>
+
+                <div class="account-field"><span class="af-label">Home Jurisdiction</span><span class="af-value">&#x1F1EC;&#x1F1E7; United Kingdom</span></div>
+
+                <div class="account-field"><span class="af-label">Timezone</span><span class="af-value">Europe/London (GMT+1)</span></div>
+
+            </div>
+
+
+
+            <div class="account-section">
+
+                <h3>Notification Preferences</h3>
+
+                <div class="account-field"><span class="af-label">Email Digest</span><span class="af-value" style="color:var(--green)">Daily at 08:00</span></div>
+
+                <div class="account-field"><span class="af-label">Critical Alerts</span><span class="af-value" style="color:var(--green)">Instant</span></div>
+
+                <div class="account-field"><span class="af-label">Weekly Summary</span><span class="af-value" style="color:var(--green)">Monday 09:00</span></div>
+
+                <div class="account-field"><span class="af-label">Community Replies</span><span class="af-value" style="color:var(--muted)">Off</span></div>
+
+            </div>
+
+        </div>
+
+
+
+        <div>
+
+            <div class="account-section">
+
+                <h3>Subscription</h3>
+
+                <div class="account-field"><span class="af-label">Plan</span><span class="af-value"><span class="badge badge-teal" style="height:18px;font-size:.72rem">Enterprise</span></span></div>
+
+                <div class="account-field"><span class="af-label">Seats</span><span class="af-value">12 / 20 used</span></div>
+
+                <div class="account-field"><span class="af-label">Renewal</span><span class="af-value">1 September 2026</span></div>
+
+                <div class="account-field"><span class="af-label">API Access</span><span class="af-value" style="color:var(--green)">Enabled</span></div>
+
+                <div class="account-field"><span class="af-label">API Calls (MTD)</span><span class="af-value">14,302 / 50,000</span></div>
+
+            </div>
+
+
+
+            <div class="account-section">
+
+                <h3>Tracked Jurisdictions</h3>
+
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+
+                    <span class="badge badge-neutral">&#x1F1EA;&#x1F1FA; EU</span>
+
+                    <span class="badge badge-neutral">&#x1F1EC;&#x1F1E7; UK</span>
+
+                    <span class="badge badge-neutral">&#x1F1FA;&#x1F1F8; US</span>
+
+                    <span class="badge badge-neutral">&#x1F1E8;&#x1F1F3; China</span>
+
+                    <span class="badge badge-neutral">&#x1F1EF;&#x1F1F5; Japan</span>
+
+                    <span class="badge badge-neutral">&#x1F1F0;&#x1F1F7; South Korea</span>
+
+                    <span class="badge badge-neutral">&#x1F1E8;&#x1F1E6; Canada</span>
+
+                    <span class="badge badge-neutral">&#x1F1E6;&#x1F1FA; Australia</span>
+
+                    <span class="badge badge-neutral">&#x1F1F8;&#x1F1EC; Singapore</span>
+
+                    <span class="badge badge-neutral">&#x1F1EE;&#x1F1F3; India</span>
+
+                    <span class="badge badge-neutral">&#x1F1E7;&#x1F1F7; Brazil</span>
+
+                    <span class="badge badge-neutral">&#x1F1E8;&#x1F1FF; Czech Republic</span>
+
+                </div>
+
+                <button class="btn btn-outline btn-sm" style="margin-top:12px">Manage Jurisdictions</button>
+
+            </div>
+
+
+
+            <div class="account-section">
+
+                <h3>Security</h3>
+
+                <div class="account-field"><span class="af-label">Two-Factor</span><span class="af-value" style="color:var(--green)">Enabled (TOTP)</span></div>
+
+                <div class="account-field"><span class="af-label">Last Login</span><span class="af-value">10 Apr 2026, 08:14</span></div>
+
+                <div class="account-field"><span class="af-label">Sessions</span><span class="af-value">2 active</span></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+</div><!-- end .main-content -->
+
+
+
+<script>
+
+/* ===== Jurisdiction Data ===== */
+
+var jurisdictionData = {
+
+    'Czech Republic': {
+
+        flag: '\u{1F1E8}\u{1F1FF}',
+
+        region: 'Europe',
+
+        population: '10.7m',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Partial',
+
+        techLawStatus: 'partial',
+
+        techLawNote: 'AI Act (via EU)',
+
+        leadAuthority: 'DPA (UOOU)',
+
+        consultations: 2,
+
+        bills: 3,
+
+        enforcement: 1,
+
+        enforcementYear: '2026',
+
+        bodyCount: 4,
+
+        authorities: [
+
+            { type: 'Data Protection Authority', badge: 'blue', name: 'Office for Personal Data Protection (UOOU)', link: 'uoou.gov.cz' },
+
+            { type: 'Cybersecurity Agency', badge: 'amber', name: 'National Cyber and Information Security Agency (NUKIB)', link: 'nukib.cz' },
+
+            { type: 'Innovation Office', badge: 'neutral', name: 'Czech AI Observatory (Ministry of Industry)', link: 'mpo.cz' },
+
+            { type: 'Market Surveillance', badge: 'green', name: 'Czech Trade Inspection Authority (COI)', link: 'coi.cz' }
+
+        ],
+
+        alerts: [
+
+            { date: '8 Apr', headline: 'NUKIB publishes cybersecurity requirements for AI systems in critical infrastructure', sub: 'New technical standards for AI deployment in energy and transport sectors', badge: 'blue', badgeLabel: 'Guidance' },
+
+            { date: '2 Apr', headline: 'UOOU opens consultation on automated decision-making under GDPR Art. 22', sub: 'Seeking public input on guidance for AI-powered profiling in financial services', badge: 'green', badgeLabel: 'Consultation' },
+
+            { date: '28 Mar', headline: 'Czech parliament introduces AI in Public Administration Bill', sub: 'Requirements for transparency and human oversight in government AI systems', badge: 'amber', badgeLabel: 'Bill' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [],
+
+            consultations: [],
+
+            enforcement: [],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'China': {
+
+        flag: '\u{1F1E8}\u{1F1F3}',
+
+        region: 'APAC',
+
+        population: '1.43B',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Yes',
+
+        techLawStatus: 'yes',
+
+        techLawNote: 'Multiple (GenAI Measures, Algorithm Provisions, Deep Synthesis)',
+
+        leadAuthority: 'CAC',
+
+        consultations: 2,
+
+        bills: 1,
+
+        enforcement: 8,
+
+        enforcementYear: '2026',
+
+        bodyCount: 5,
+
+        authorities: [
+
+            { type: 'AI Regulator', badge: 'blue', name: 'Cyberspace Administration of China (CAC)', link: 'cac.gov.cn' },
+
+            { type: 'Telecoms/Tech Regulator', badge: 'amber', name: 'Ministry of Industry and Information Technology (MIIT)', link: 'miit.gov.cn' },
+
+            { type: 'Market Regulator', badge: 'green', name: 'State Administration for Market Regulation (SAMR)', link: 'samr.gov.cn' },
+
+            { type: 'Standards Body', badge: 'neutral', name: 'National Information Security Standardization Technical Committee (TC260)', link: 'tc260.org.cn' },
+
+            { type: 'Data Protection', badge: 'blue', name: 'PIPL Enforcement Bureau', link: 'cac.gov.cn' }
+
+        ],
+
+        alerts: [
+
+            { date: '7 Apr', headline: 'CAC publishes updated guidance on generative AI service compliance inspections', sub: 'Expanded requirements for content moderation and algorithm filing', badge: 'blue', badgeLabel: 'Guidance' },
+
+            { date: '1 Apr', headline: 'TC260 releases draft standard on AI model security assessment', sub: 'New technical standard for evaluating safety of large language models', badge: 'green', badgeLabel: 'Consultation' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [
+
+                { title: 'Interim Measures for the Management of Generative AI Services', date: 'Aug 2023', summary: 'Comprehensive regulation of generative AI services including content moderation, algorithm filing, and user protection requirements.', status: 'In force', statusClass: 'green' },
+
+                { title: 'Provisions on the Management of Algorithmic Recommendations', date: 'Mar 2022', summary: 'Rules governing algorithmic recommendation systems including transparency, user control, and anti-manipulation provisions.', status: 'In force', statusClass: 'green' },
+
+                { title: 'Provisions on the Management of Deep Synthesis', date: 'Jan 2023', summary: 'Regulation of deepfakes and synthetic content including labelling requirements and content provenance tracking.', status: 'In force', statusClass: 'green' }
+
+            ],
+
+            decisions: [
+
+                { title: 'Beijing Internet Court \u2014 Li Yunkai v Liu Yuanchun', date: '2023', summary: 'Landmark ruling on whether AI-generated images qualify for copyright protection under Chinese law. Court held that sufficient human creative input in prompting can establish copyrightability.', status: 'Decided', statusClass: 'blue' }
+
+            ],
+
+            caseLaw: [],
+
+            guidance: [],
+
+            consultations: [],
+
+            enforcement: [],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'United Kingdom': {
+
+        flag: '\u{1F1EC}\u{1F1E7}',
+
+        region: 'Europe',
+
+        population: '67.7M',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Emerging',
+
+        techLawStatus: 'partial',
+
+        techLawNote: 'AI Bill expected May 2026',
+
+        leadAuthority: 'DSIT',
+
+        consultations: 3,
+
+        bills: 2,
+
+        enforcement: 14,
+
+        enforcementYear: '2026',
+
+        bodyCount: 6,
+
+        authorities: [
+
+            { type: 'Data Protection', badge: 'blue', name: 'Information Commissioner\u2019s Office (ICO)', link: 'ico.org.uk' },
+
+            { type: 'Government Agency', badge: 'neutral', name: 'Dept for Science, Innovation & Technology (DSIT)', link: 'gov.uk/dsit' },
+
+            { type: 'Telecoms Regulator', badge: 'amber', name: 'Office of Communications (Ofcom)', link: 'ofcom.org.uk' },
+
+            { type: 'Competition Authority', badge: 'red', name: 'Competition and Markets Authority (CMA)', link: 'gov.uk/cma' },
+
+            { type: 'Financial Regulator', badge: 'amber', name: 'Financial Conduct Authority (FCA)', link: 'fca.org.uk' },
+
+            { type: 'Cybersecurity Agency', badge: 'green', name: 'National Cyber Security Centre (NCSC)', link: 'ncsc.gov.uk' }
+
+        ],
+
+        alerts: [
+
+            { date: '9 Apr', headline: 'UK government confirms AI bill expected following King\u2019s Speech', sub: 'Comprehensive AI regulation framework to be introduced in Parliament', badge: 'amber', badgeLabel: 'Bill' },
+
+            { date: '5 Apr', headline: 'ICO orders NHS hospital trust to clear 95-request FoI backlog', sub: 'Enforcement notice issued under Freedom of Information Act 2000', badge: 'red', badgeLabel: 'Enforcement' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [
+
+                { title: 'Online Safety Act 2023', date: 'Oct 2023', summary: 'Comprehensive online safety framework imposing duties on platforms regarding illegal and harmful content, with implications for AI-powered content moderation systems.', status: 'In force', statusClass: 'green' },
+
+                { title: 'Data Protection and Digital Information Act', date: '2024', summary: 'Reform of the UK data protection framework post-Brexit, with provisions affecting automated decision-making and AI-related data processing.', status: 'In force', statusClass: 'green' },
+
+                { title: 'AI Bill', date: 'Expected May 2026', summary: 'Anticipated comprehensive AI regulation establishing risk-based framework, regulatory sandboxes, and cross-sector coordination requirements.', status: 'Expected', statusClass: 'amber' }
+
+            ],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [
+
+                { title: 'ICO AI and Data Protection guidance', date: 'Updated 2024', summary: 'Detailed guidance on lawful basis for AI training, fairness in automated decision-making, transparency obligations, and data protection impact assessments for AI systems.', status: 'Current', statusClass: 'green' }
+
+            ],
+
+            consultations: [],
+
+            enforcement: [
+
+                { title: 'ICO fines Clearview AI \u00a37.5m', date: 'May 2022', summary: 'The ICO imposed a \u00a37.5 million fine on Clearview AI for collecting facial recognition data from UK residents without consent, ordering deletion of all UK data.', status: 'Final', statusClass: 'red' },
+
+                { title: 'ICO orders NHS trust to process FoI backlog', date: 'Mar 2026', summary: 'Enforcement notice requiring an NHS hospital trust to clear a backlog of 95 unanswered Freedom of Information requests within 60 days.', status: 'Active', statusClass: 'red' }
+
+            ],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'Nigeria': {
+
+        flag: '\u{1F1F3}\u{1F1EC}',
+
+        region: 'Africa',
+
+        population: '230M',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Emerging',
+
+        techLawStatus: 'partial',
+
+        techLawNote: 'NDPA 2023 + AI strategy pending',
+
+        leadAuthority: 'NITDA',
+
+        consultations: 0,
+
+        bills: 1,
+
+        enforcement: 2,
+
+        enforcementYear: '2026',
+
+        bodyCount: 4,
+
+        authorities: [
+
+            { type: 'Government Agency', badge: 'blue', name: 'National Information Technology Development Agency (NITDA)', link: 'nitda.gov.ng' },
+
+            { type: 'Data Protection Commission', badge: 'blue', name: 'Nigeria Data Protection Commission (NDPC)', link: 'ndpc.gov.ng' },
+
+            { type: 'Telecoms Regulator', badge: 'amber', name: 'Nigerian Communications Commission (NCC)', link: 'ncc.gov.ng' },
+
+            { type: 'Financial Regulator', badge: 'amber', name: 'Central Bank of Nigeria (CBN)', link: 'cbn.gov.ng' }
+
+        ],
+
+        alerts: [
+
+            { date: '4 Apr', headline: 'NITDA releases National AI Strategy consultation draft', sub: 'Framework for responsible AI development and deployment in Nigeria', badge: 'green', badgeLabel: 'Consultation' },
+
+            { date: '22 Mar', headline: 'NDPC issues first enforcement notice under NDPA', sub: 'Data protection enforcement action against fintech company', badge: 'red', badgeLabel: 'Enforcement' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [
+
+                { title: 'Nigeria Data Protection Act 2023', date: 'Jun 2023', summary: 'Comprehensive data protection legislation establishing the Nigeria Data Protection Commission, data subject rights, and obligations for data controllers and processors.', status: 'In force', statusClass: 'green' }
+
+            ],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [
+
+                { title: 'NITDA National AI Strategy consultation draft', date: '2026', summary: 'Draft national strategy for responsible AI development covering ethical principles, capacity building, infrastructure requirements, and governance frameworks for the Nigerian context.', status: 'Draft', statusClass: 'amber' }
+
+            ],
+
+            consultations: [],
+
+            enforcement: [],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'United States': {
+
+        flag: '\u{1F1FA}\u{1F1F8}',
+
+        region: 'North America',
+
+        population: '334M',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Sector-specific',
+
+        techLawStatus: 'partial',
+
+        techLawNote: 'No comprehensive federal AI law',
+
+        leadAuthority: 'Multiple (no single lead)',
+
+        consultations: 5,
+
+        bills: 12,
+
+        enforcement: 31,
+
+        enforcementYear: '2026',
+
+        bodyCount: 6,
+
+        authorities: [
+
+            { type: 'Competition/Consumer Protection', badge: 'red', name: 'Federal Trade Commission (FTC)', link: 'ftc.gov' },
+
+            { type: 'Standards Body', badge: 'amber', name: 'National Institute of Standards and Technology (NIST)', link: 'nist.gov' },
+
+            { type: 'Financial Regulator', badge: 'amber', name: 'Securities and Exchange Commission (SEC)', link: 'sec.gov' },
+
+            { type: 'Health Regulator', badge: 'green', name: 'Food and Drug Administration (FDA)', link: 'fda.gov' },
+
+            { type: 'Transport', badge: 'neutral', name: 'National Highway Traffic Safety Administration (NHTSA)', link: 'nhtsa.dot.gov' },
+
+            { type: 'IP', badge: 'blue', name: 'U.S. Copyright Office', link: 'copyright.gov' }
+
+        ],
+
+        states: [
+
+            { name: 'California', desc: 'AI transparency bills, CCPA/CPRA enforcement', bills: 8 },
+
+            { name: 'New York', desc: 'NYC Local Law 144 (automated employment decisions)', bills: 3 },
+
+            { name: 'Colorado', desc: 'SB 24-205 (algorithmic discrimination)', bills: 4 },
+
+            { name: 'Texas', desc: 'AI Advisory Council established', bills: 5 },
+
+            { name: 'Illinois', desc: 'BIPA enforcement, AI Video Interview Act', bills: 3 },
+
+            { name: 'Florida', desc: 'AI in insurance regulation', bills: 2 }
+
+        ],
+
+        alerts: [
+
+            { date: '6 Apr', headline: 'Thomson Reuters v Ross Intelligence ruling', sub: 'Federal court issues landmark decision on AI training data and fair use', badge: 'red', badgeLabel: 'Case Law' },
+
+            { date: '1 Apr', headline: 'Colorado algorithmic discrimination law takes effect', sub: 'SB 24-205 imposes new obligations on developers and deployers of high-risk AI systems', badge: 'amber', badgeLabel: 'Legislation' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [
+
+                { title: 'Colorado SB 24-205 Algorithmic Discrimination', date: 'Apr 2025', summary: 'Comprehensive state law requiring developers and deployers of high-risk AI systems to conduct impact assessments and provide notice to consumers affected by algorithmic discrimination.', status: 'In force', statusClass: 'green' },
+
+                { title: 'NYC Local Law 144', date: 'Jul 2023', summary: 'Requires bias audits for automated employment decision tools used in New York City, with public disclosure of audit results and candidate notification requirements.', status: 'In force', statusClass: 'green' }
+
+            ],
+
+            decisions: [],
+
+            caseLaw: [
+
+                { title: 'Thomson Reuters v Ross Intelligence', date: '2025', summary: 'Federal court ruling on whether AI training on copyrighted legal databases constitutes fair use. Significant implications for the legality of using copyrighted material to train AI models.', status: 'Decided', statusClass: 'blue' },
+
+                { title: 'Thaler v Perlmutter', date: '2025', summary: 'Court upheld the U.S. Copyright Office\u2019s refusal to register a work generated entirely by AI, affirming the requirement for human authorship in copyright protection.', status: 'Decided', statusClass: 'blue' }
+
+            ],
+
+            guidance: [],
+
+            consultations: [],
+
+            enforcement: [
+
+                { title: 'FTC v Rite Aid \u2014 AI facial recognition ban', date: '2023', summary: 'FTC ordered Rite Aid to stop using AI facial recognition technology after the system disproportionately produced false-positive matches for women and people of colour, leading to wrongful accusations.', status: 'Final', statusClass: 'red' }
+
+            ],
+
+            cyberAdvisories: []
+
+        }
+
+    },
+
+    'Germany': {
+
+        flag: '\u{1F1E9}\u{1F1EA}',
+
+        region: 'Europe',
+
+        population: '84.5M',
+
+        populationNote: '2025 est.',
+
+        techLaw: 'Yes',
+
+        techLawStatus: 'yes',
+
+        techLawNote: 'EU AI Act (as EU member) + national implementation',
+
+        leadAuthority: 'BfDI',
+
+        consultations: 1,
+
+        bills: 2,
+
+        enforcement: 6,
+
+        enforcementYear: '2026',
+
+        bodyCount: 5,
+
+        authorities: [
+
+            { type: 'Data Protection', badge: 'blue', name: 'Federal Commissioner for Data Protection (BfDI)', link: 'bfdi.bund.de' },
+
+            { type: 'Cybersecurity Agency', badge: 'amber', name: 'Federal Office for Information Security (BSI)', link: 'bsi.bund.de' },
+
+            { type: 'Telecoms Regulator', badge: 'neutral', name: 'Federal Network Agency (BNetzA)', link: 'bundesnetzagentur.de' },
+
+            { type: 'Competition Authority', badge: 'red', name: 'Federal Cartel Office (BKartA)', link: 'bundeskartellamt.de' },
+
+            { type: 'IP Office', badge: 'green', name: 'German Patent and Trade Mark Office (DPMA)', link: 'dpma.de' }
+
+        ],
+
+        alerts: [
+
+            { date: '8 Apr', headline: 'LfDI Baden-W\u00fcrttemberg assumes chair of Data Protection Conference for 2026', sub: 'State-level DPA takes rotating leadership of federal-state coordination body', badge: 'blue', badgeLabel: 'Guidance' },
+
+            { date: '3 Apr', headline: 'BSI warns of AI-generated phishing campaign targeting federal agencies', sub: 'Advisory issued on generative AI-powered social engineering attacks', badge: 'red', badgeLabel: 'Alert' }
+
+        ],
+
+        contentTypes: {
+
+            legislation: [],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [
+
+                { title: 'BSI AI security guidelines for federal agencies', date: '2024', summary: 'Technical guidelines from the Federal Office for Information Security covering secure development, deployment, and operation of AI systems within federal government infrastructure.', status: 'Current', statusClass: 'green' }
+
+            ],
+
+            consultations: [],
+
+            enforcement: [
+
+                { title: 'LfDI Baden-W\u00fcrttemberg \u2014 \u20ac10.4M fine against social media platform', date: '2023', summary: 'State data protection authority imposed a \u20ac10.4 million fine on a social media platform for failures in data subject access request handling and insufficient technical and organisational measures.', status: 'Final', statusClass: 'red' }
+
+            ],
+
+            cyberAdvisories: []
+
+        }
+
+    }
+
+};
+
+
+
+/* ===== Content type configuration ===== */
+
+var contentTypeConfig = [
+
+    { key: 'legislation', label: 'Legislation', emptyMsg: function(c) { return "We're building comprehensive legislative coverage for " + c + ". As new AI, privacy, and cybersecurity statutes are enacted, they'll appear here with full text references and status tracking."; }},
+
+    { key: 'decisions', label: 'Decisions', emptyMsg: function(c) { return "Regulatory decisions for " + c + " are being catalogued. When authorities issue binding decisions on AI governance, data protection, or cybersecurity, you'll find the full record here."; }},
+
+    { key: 'caseLaw', label: 'Case Law', emptyMsg: function(c) { return "Court decisions involving AI, data protection, and technology law in " + c + " will be tracked here as cases are decided. Our analysts monitor key courts and tribunals."; }},
+
+    { key: 'guidance', label: 'Guidance', emptyMsg: function(c) { return "Supervisory guidance and regulatory interpretation from " + c + "'s authorities will appear here. We track official guidance documents, opinions, and advisory notices."; }},
+
+    { key: 'consultations', label: 'Consultations', emptyMsg: function(c) { return "Active and closed public consultations in " + c + " will be listed here with deadlines, submission links, and outcome tracking."; }},
+
+    { key: 'enforcement', label: 'Enforcement', emptyMsg: function(c) { return "Enforcement actions \u2014 fines, sanctions, and compliance orders \u2014 from " + c + "'s regulators will be recorded here with full detail and source links."; }},
+
+    { key: 'cyberAdvisories', label: 'Cyber Advisories', emptyMsg: function(c) { return "Cybersecurity advisories and incident notices relevant to " + c + " will appear here. We monitor national CERTs, cybersecurity agencies, and cross-border alerts."; }}
+
+];
+
+
+
+/* ===== Region SVG Outlines (small versions for sidebar) ===== */
+
+var regionSVGs = {
+
+    'Europe': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M62 18 L58 14 L52 16 L48 12 L44 14 L40 12 L38 16 L42 20 L40 24 L36 22 L32 24 L28 22 L24 26 L20 28 L18 34 L22 38 L20 42 L24 46 L22 50 L26 54 L30 52 L34 56 L38 58 L36 62 L40 66 L44 68 L48 72 L52 74 L56 72 L60 76 L64 78 L68 82 L72 80 L76 82 L80 78 L76 74 L72 70 L68 66 L72 62 L76 58 L80 54 L84 50 L88 46 L92 42 L96 38 L100 34 L104 30 L108 26 L112 22 L108 20 L104 22 L100 20 L96 22 L92 24 L88 22 L84 24 L80 22 L76 24 L72 22 L68 24 L64 22 L62 18Z M28 8 L24 12 L20 10 L16 14 L20 18 L24 16 L28 18 L32 14 L28 8Z M44 4 L40 8 L44 12 L48 8 L44 4Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'APAC': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 8 L56 12 L52 16 L48 20 L44 24 L40 28 L36 32 L32 36 L28 40 L32 44 L36 48 L40 52 L44 56 L48 60 L52 64 L56 60 L60 56 L64 52 L68 48 L72 44 L76 40 L80 36 L84 40 L88 44 L92 48 L96 52 L100 56 L104 60 L108 64 L112 60 L116 56 L120 52 L116 48 L112 44 L108 40 L104 36 L100 32 L96 28 L92 24 L88 20 L84 16 L80 12 L76 8 L72 12 L68 16 L64 12 L60 8Z M120 76 L116 80 L120 84 L124 88 L128 92 L132 96 L136 100 L140 104 L144 100 L148 96 L152 92 L156 88 L160 84 L156 80 L152 76 L148 80 L144 84 L140 80 L136 76 L132 80 L128 76 L124 80 L120 76Z M64 68 L60 72 L56 76 L60 80 L64 84 L68 80 L72 76 L76 72 L72 68 L68 72 L64 68Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'Africa': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M72 6 L66 8 L62 12 L58 10 L54 14 L50 18 L46 22 L42 26 L40 32 L42 38 L44 44 L46 50 L48 56 L50 62 L54 68 L58 74 L62 80 L66 86 L72 92 L78 98 L84 104 L90 108 L96 110 L100 106 L104 100 L106 94 L108 88 L110 82 L112 76 L114 70 L116 64 L118 58 L118 52 L116 46 L114 40 L112 34 L110 28 L108 22 L104 16 L100 12 L96 8 L90 6 L84 4 L78 4 L72 6Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'North America': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M60 4 L52 6 L46 10 L40 16 L34 22 L28 28 L24 34 L22 40 L24 46 L28 52 L32 56 L36 60 L40 64 L44 68 L48 72 L52 76 L56 80 L60 84 L64 88 L68 92 L72 96 L76 100 L80 104 L84 100 L88 96 L92 92 L96 88 L100 92 L104 96 L108 100 L112 96 L116 92 L120 88 L124 84 L128 80 L132 76 L136 72 L140 68 L142 62 L140 56 L136 50 L132 44 L128 38 L124 32 L120 26 L116 20 L110 14 L104 10 L98 6 L92 4 L86 2 L80 2 L74 2 L68 2 L60 4Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'Latin America': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M70 2 L64 4 L58 8 L54 12 L50 16 L48 22 L50 28 L54 32 L58 36 L62 40 L64 46 L66 52 L68 58 L72 64 L76 70 L78 76 L80 82 L84 88 L88 94 L92 100 L96 106 L100 110 L104 114 L108 116 L112 112 L114 106 L112 100 L110 94 L108 88 L106 82 L104 76 L102 70 L100 64 L98 58 L96 52 L94 46 L92 40 L90 34 L88 28 L86 22 L84 16 L80 10 L76 6 L70 2Z M56 4 L52 6 L50 10 L54 12 L58 8 L56 4Z M48 10 L44 12 L42 16 L46 18 L50 14 L48 10Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'Middle East': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M40 24 L36 28 L34 34 L38 40 L42 44 L46 48 L50 52 L54 56 L58 60 L62 64 L66 68 L70 72 L74 76 L78 80 L84 84 L90 86 L96 88 L102 86 L108 82 L112 78 L116 74 L120 70 L124 66 L128 62 L132 58 L136 52 L138 46 L136 40 L132 36 L128 32 L124 28 L120 24 L116 20 L110 18 L104 16 L98 18 L92 20 L86 22 L80 24 L74 26 L68 28 L62 26 L56 24 L50 22 L44 22 L40 24Z M100 60 L96 64 L92 68 L88 72 L92 76 L96 80 L100 84 L104 80 L108 76 L112 72 L108 68 L104 64 L100 60Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+
+    'Caribbean': '<svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 40 L26 44 L30 48 L36 50 L42 48 L46 44 L50 40 L54 36 L58 40 L62 44 L58 48 L54 44 L50 48 L46 52 L42 56 L38 52 L34 48 L30 44 Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M70 28 L66 32 L70 36 L76 38 L82 36 L86 32 L82 28 L76 26 L70 28Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M96 36 L92 40 L96 44 L102 46 L108 44 L112 40 L108 36 L102 34 L96 36Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M120 50 L116 54 L120 58 L126 60 L132 58 L136 54 L132 50 L126 48 L120 50Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M140 64 L136 68 L140 72 L146 74 L152 72 L156 68 L152 64 L146 62 L140 64Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><path d="M160 44 L156 48 L160 52 L166 54 L172 52 L176 48 L172 44 L166 42 L160 44Z" stroke="#c8ccd2" stroke-width="1.3" stroke-linejoin="round"/><ellipse cx="88" cy="62" rx="8" ry="5" stroke="#c8ccd2" stroke-width="1.3"/><ellipse cx="110" cy="74" rx="6" ry="4" stroke="#c8ccd2" stroke-width="1.3"/></svg>'
+
+};
+
+
+
+/* ===== Full Jurisdiction Lists Per Region (drill-in data) ===== */
+
+var drillData = {
+
+    'Europe': {
+
+        header: 'EUROPE',
+
+        federal: { label: 'EU Federal', key: null },
+
+        separator1: true,
+
+        members: [
+
+            'Austria', 'Belgium', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic',
+
+            'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Greece',
+
+            'Hungary', 'Ireland', 'Italy', 'Latvia', 'Lithuania', 'Luxembourg',
+
+            'Malta', 'Netherlands', 'Poland', 'Portugal', 'Romania', 'Slovakia',
+
+            'Slovenia', 'Spain', 'Sweden'
+
+        ],
+
+        separator2: true,
+
+        nonMembers: ['United Kingdom', 'Switzerland', 'Norway', 'Iceland']
+
+    },
+
+    'North America': {
+
+        header: 'NORTH AMERICA',
+
+        subRegions: {
+
+            'USA': {
+
+                headerLabel: 'NORTH AMERICA \u00b7 USA',
+
+                federal: { label: 'US Federal', key: 'United States' },
+
+                members: [
+
+                    'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
+
+                    'Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa',
+
+                    'Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan',
+
+                    'Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada',
+
+                    'New Hampshire','New Jersey','New Mexico','New York','North Carolina',
+
+                    'North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island',
+
+                    'South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont',
+
+                    'Virginia','Washington','West Virginia','Wisconsin','Wyoming'
+
+                ]
+
+            },
+
+            'Canada': {
+
+                headerLabel: 'NORTH AMERICA \u00b7 CANADA',
+
+                federal: { label: 'Federal', key: null },
+
+                members: [
+
+                    'Alberta','British Columbia','Manitoba','New Brunswick',
+
+                    'Newfoundland and Labrador','Northwest Territories','Nova Scotia',
+
+                    'Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'
+
+                ]
+
+            }
+
+        },
+
+        jurisdictions: ['United States', 'Canada']
+
+    },
+
+    'APAC': {
+
+        header: 'APAC',
+
+        jurisdictions: [
+
+            'Australia', 'Bangladesh', 'Brunei', 'Cambodia', 'China', 'Hong Kong',
+
+            'India', 'Indonesia', 'Japan', 'Laos', 'Macau', 'Malaysia', 'Mongolia',
+
+            'Myanmar', 'Nepal', 'New Zealand', 'Pakistan', 'Philippines', 'Singapore',
+
+            'South Korea', 'Sri Lanka', 'Taiwan', 'Thailand', 'Vietnam'
+
+        ],
+
+        subRegions: {
+
+            'Australia': {
+
+                headerLabel: 'APAC \u00b7 AUSTRALIA',
+
+                federal: { label: 'Federal', key: null },
+
+                members: [
+
+                    'Australian Capital Territory','New South Wales','Northern Territory',
+
+                    'Queensland','South Australia','Tasmania','Victoria','Western Australia'
+
+                ]
+
+            }
+
+        }
+
+    },
+
+    'Africa': {
+
+        header: 'AFRICA',
+
+        jurisdictions: [
+
+            'Algeria','Angola','Benin','Botswana','Burkina Faso','Cameroon','Chad','Congo',
+
+            'C\u00f4te d\'Ivoire','DRC','Egypt','Ethiopia','Gabon','Ghana','Guinea','Kenya',
+
+            'Libya','Madagascar','Malawi','Mali','Mauritius','Morocco','Mozambique','Namibia',
+
+            'Niger','Nigeria','Rwanda','Senegal','Sierra Leone','Somalia','South Africa',
+
+            'South Sudan','Sudan','Tanzania','Togo','Tunisia','Uganda','Zambia','Zimbabwe'
+
+        ]
+
+    },
+
+    'Latin America': {
+
+        header: 'LATIN AMERICA',
+
+        jurisdictions: [
+
+            'Argentina','Bolivia','Brazil','Chile','Colombia','Costa Rica','Cuba',
+
+            'Dominican Republic','Ecuador','El Salvador','Guatemala','Haiti','Honduras',
+
+            'Mexico','Nicaragua','Panama','Paraguay','Peru','Uruguay','Venezuela'
+
+        ]
+
+    },
+
+    'Middle East': {
+
+        header: 'MIDDLE EAST',
+
+        jurisdictions: [
+
+            'Bahrain','Iran','Iraq','Israel','Jordan','Kuwait','Lebanon','Oman',
+
+            'Palestine','Qatar','Saudi Arabia','Syria','Turkey','UAE','Yemen'
+
+        ]
+
+    },
+
+    'Caribbean': {
+
+        header: 'CARIBBEAN',
+
+        jurisdictions: [
+
+            'Antigua and Barbuda','Bahamas','Barbados','Belize','Dominica','Grenada',
+
+            'Guyana','Jamaica','Saint Kitts and Nevis','Saint Lucia','Saint Vincent',
+
+            'Suriname','Trinidad and Tobago'
+
+        ]
+
+    }
+
+};
+
+
+
+/* Germany sub-drill from Europe */
+
+var germanyDrill = {
+
+    headerLabel: 'GERMANY',
+
+    backLabel: 'Europe',
+
+    federal: { label: 'Federal', key: 'Germany' },
+
+    members: [
+
+        'Baden-W\u00fcrttemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg',
+
+        'Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia',
+
+        'Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt',
+
+        'Schleswig-Holstein','Thuringia'
+
+    ]
+
+};
+
+
+
+/* Items that have detail pages */
+
+var detailItems = {'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'Germany':1,'US Federal':1,'Czech Republic':1};
+
+/* Items that drill deeper (show chevron) */
+
+var drillableItems = {'Australia':1,'Canada':1,'Germany':1,'United States':1};
+
+
+
+var currentJurisdiction = null;
+
+var drillStack = []; // stack of views: [{type:'regions'}, {type:'region',name:'Europe'}, {type:'sub',name:'Germany'}]
+
+
+
+/* ===== Build Sidebar ===== */
+
+function buildSidebarRegions() {
+
+    var wrap = document.getElementById('sidebarRegionsWrap');
+
+    wrap.innerHTML = '<div class="drill-container" id="drillContainer"></div>';
+
+    drillStack = [{type:'regions'}];
+
+    renderDrillView();
+
+}
+
+
+
+function renderDrillView() {
+
+    var container = document.getElementById('drillContainer');
+
+    var current = drillStack[drillStack.length - 1];
+
+
+
+    if (current.type === 'regions') {
+
+        renderRegionCards(container);
+
+    } else if (current.type === 'region') {
+
+        renderRegionList(container, current.name);
+
+    } else if (current.type === 'sub') {
+
+        renderSubList(container, current.parentRegion, current.name);
+
+    }
+
+}
+
+
+
+function renderRegionCards(container) {
+
+    var regions = ['Europe', 'APAC', 'Africa', 'North America', 'Latin America', 'Middle East', 'Caribbean'];
+
+    var counts = {
+
+        'Europe': 31, 'APAC': 24, 'Africa': 39, 'North America': 48,
+
+        'Latin America': 20, 'Middle East': 15, 'Caribbean': 13
+
+    };
+
+    var html = '<div class="drill-cards-view" id="drillCardsView">';
+
+    for (var i = 0; i < regions.length; i++) {
+
+        var r = regions[i];
+
+        var rSafe = r.replace(/'/g, "\\'");
+
+        html += '<div class="sidebar-region-card" onclick="drillIntoRegion(\'' + rSafe + '\')">';
+
+        html += '<div class="src-svg">' + regionSVGs[r] + '</div>';
+
+        html += '<div class="src-info">';
+
+        html += '<div class="src-name">' + r + '</div>';
+
+        html += '<div class="src-count">' + counts[r] + ' jurisdictions</div>';
+
+        html += '</div>';
+
+        html += '</div>';
+
+    }
+
+    html += '</div>';
+
+    container.innerHTML = html;
+
+}
+
+
+
+function drillIntoRegion(regionName) {
+
+    drillStack.push({type:'region', name:regionName});
+
+    var container = document.getElementById('drillContainer');
+
+    // Crossfade: hide cards, show list
+
+    var cardsView = container.querySelector('.drill-cards-view');
+
+    if (cardsView) cardsView.classList.add('hidden');
+
+    setTimeout(function() {
+
+        renderRegionList(container, regionName);
+
+    }, 50);
+
+}
+
+
+
+function drillBack() {
+
+    if (drillStack.length <= 1) return;
+
+    drillStack.pop();
+
+    var container = document.getElementById('drillContainer');
+
+    var current = drillStack[drillStack.length - 1];
+
+    if (current.type === 'regions') {
+
+        renderRegionCards(container);
+
+    } else if (current.type === 'region') {
+
+        renderRegionList(container, current.name);
+
+    }
+
+}
+
+
+
+function renderRegionList(container, regionName) {
+
+    var data = drillData[regionName];
+
+    if (!data) return;
+
+    var html = '<div class="drill-list-view active" id="drillListView">';
+
+
+
+    // Back link
+
+    html += '<div class="drill-back" onclick="drillBack()">';
+
+    html += '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
+
+    html += 'Regions</div>';
+
+
+
+    // Region header
+
+    html += '<div class="drill-region-header">' + data.header + '</div>';
+
+
+
+    // Handle different structures
+
+    if (data.federal) {
+
+        // Europe-style: federal + members + separator + non-members
+
+        html += renderFederalItem(data.federal, 0);
+
+        html += '<hr class="drill-separator">';
+
+        for (var i = 0; i < data.members.length; i++) {
+
+            html += renderJurItem(data.members[i], i + 1, regionName);
+
+        }
+
+        if (data.separator2 && data.nonMembers) {
+
+            html += '<hr class="drill-separator">';
+
+            for (var j = 0; j < data.nonMembers.length; j++) {
+
+                html += renderJurItem(data.nonMembers[j], data.members.length + 1 + j, regionName);
+
+            }
+
+        }
+
+    } else if (data.subRegions && data.jurisdictions) {
+
+        // North America style: top-level items that drill into sub-regions
+
+        for (var k = 0; k < data.jurisdictions.length; k++) {
+
+            var jName = data.jurisdictions[k];
+
+            html += renderJurItem(jName, k, regionName);
+
+        }
+
+    } else if (data.jurisdictions) {
+
+        // Simple list
+
+        for (var m = 0; m < data.jurisdictions.length; m++) {
+
+            html += renderJurItem(data.jurisdictions[m], m, regionName);
+
+        }
+
+    }
+
+
+
+    html += '</div>';
+
+    container.innerHTML = html;
+
+}
+
+
+
+function renderSubList(container, parentRegion, subName) {
+
+    var data = drillData[parentRegion];
+
+    var subData;
+
+    var backLabel = parentRegion;
+
+
+
+    // Special case: Germany from Europe
+
+    if (subName === 'Germany' && parentRegion === 'Europe') {
+
+        subData = germanyDrill;
+
+        backLabel = 'Europe';
+
+    } else if (data && data.subRegions && data.subRegions[subName]) {
+
+        subData = data.subRegions[subName];
+
+        backLabel = parentRegion;
+
+    }
+
+    if (!subData) return;
+
+
+
+    var html = '<div class="drill-list-view active" id="drillListView">';
+
+
+
+    // Back link
+
+    html += '<div class="drill-back" onclick="drillBack()">';
+
+    html += '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
+
+    html += (subData.backLabel || backLabel) + '</div>';
+
+
+
+    // Header
+
+    html += '<div class="drill-region-header">' + (subData.headerLabel || subName.toUpperCase()) + '</div>';
+
+
+
+    // Federal item
+
+    if (subData.federal) {
+
+        html += renderFederalItem(subData.federal, 0);
+
+        html += '<hr class="drill-separator">';
+
+    }
+
+
+
+    // Members
+
+    for (var i = 0; i < subData.members.length; i++) {
+
+        html += renderJurItem(subData.members[i], i + 1, parentRegion);
+
+    }
+
+
+
+    html += '</div>';
+
+    container.innerHTML = html;
+
+}
+
+
+
+function renderFederalItem(fed, idx) {
+
+    var hasDetail = fed.key && detailItems[fed.key];
+
+    var cls = 'drill-jur-item federal-item';
+
+    if (hasDetail) cls += ' has-detail';
+
+    var onclick = '';
+
+    if (fed.key) {
+
+        var safe = fed.key.replace(/'/g, "\\'");
+
+        onclick = ' onclick="sidebarSelectJurisdiction(\'' + safe + '\', event)"';
+
+    }
+
+    return '<div class="' + cls + '" style="animation-delay:' + (idx * 20) + 'ms"' + onclick + '>' + fed.label + '</div>';
+
+}
+
+
+
+function renderJurItem(name, idx, parentRegion) {
+
+    var hasDetail = detailItems[name];
+
+    var isDrillable = drillableItems[name];
+
+    var cls = 'drill-jur-item';
+
+    if (hasDetail) cls += ' has-detail';
+
+    var delay = idx * 20;
+
+    var safeName = name.replace(/'/g, "\\'");
+
+
+
+    var onclick;
+
+    if (isDrillable) {
+
+        onclick = ' onclick="drillIntoSub(\'' + (parentRegion || '').replace(/'/g, "\\'") + '\',\'' + safeName + '\', event)"';
+
+    } else if (hasDetail) {
+
+        onclick = ' onclick="sidebarSelectJurisdiction(\'' + safeName + '\', event)"';
+
+    } else {
+
+        onclick = ' onclick="sidebarSelectJurisdiction(\'' + safeName + '\', event)"';
+
+    }
+
+
+
+    var html = '<div class="' + cls + '" style="animation-delay:' + delay + 'ms"' + onclick + '>';
+
+    html += name;
+
+    if (isDrillable) {
+
+        html += '<span class="drill-chevron">\u25b8</span>';
+
+    }
+
+    html += '</div>';
+
+    return html;
+
+}
+
+
+
+function drillIntoSub(parentRegion, subName, e) {
+
+    if (e) e.stopPropagation();
+
+
+
+    // If item also has detail, check if we should drill or show detail
+
+    // For drillable items, always drill
+
+    drillStack.push({type:'sub', parentRegion:parentRegion, name:subName});
+
+    var container = document.getElementById('drillContainer');
+
+    renderSubList(container, parentRegion, subName);
+
+}
+
+
+
+/* ===== Select Jurisdiction from Sidebar ===== */
+
+function sidebarSelectJurisdiction(name, e) {
+
+    if (e) e.stopPropagation();
+
+
+
+    // Clear active states on all sidebar jurisdiction items
+
+    document.querySelectorAll('.drill-jur-item').forEach(function(item) {
+
+        item.classList.remove('active');
+
+    });
+
+
+
+    // Set active on clicked item
+
+    if (e && e.currentTarget) e.currentTarget.classList.add('active');
+
+
+
+    // Map special names
+
+    var lookupName = name;
+
+    if (name === 'US Federal') lookupName = 'United States';
+
+
+
+    // Show jurisdiction detail if we have data
+
+    if (jurisdictionData[lookupName]) {
+
+        showJurisdictionDetail(lookupName);
+
+    } else {
+
+        // Navigate to jurisdictions page with empty state
+
+        showPage('jurisdictions');
+
+    }
+
+}
+
+
+
+/* ===== Render Content Type Sections ===== */
+
+function renderContentTypeSections(name) {
+
+    var d = jurisdictionData[name];
+
+    if (!d || !d.contentTypes) return '';
+
+    var html = '';
+
+
+
+    for (var i = 0; i < contentTypeConfig.length; i++) {
+
+        var cfg = contentTypeConfig[i];
+
+        var items = d.contentTypes[cfg.key] || [];
+
+
+
+        html += '<div class="content-type-section">';
+
+        html += '<div class="content-type-header">';
+
+        html += '<h3>' + cfg.label + '</h3>';
+
+        html += '<span class="ct-count">' + items.length + '</span>';
+
+        html += '</div>';
+
+
+
+        if (items.length > 0) {
+
+            html += '<div class="content-type-items">';
+
+            for (var j = 0; j < items.length; j++) {
+
+                var item = items[j];
+
+                html += '<div class="content-type-item">';
+
+                html += '<span class="ct-item-date">' + item.date + '</span>';
+
+                html += '<div class="ct-item-body">';
+
+                html += '<div class="ct-item-title">' + item.title + '</div>';
+
+                html += '<div class="ct-item-summary">' + item.summary + '</div>';
+
+                html += '</div>';
+
+                if (item.status) {
+
+                    html += '<span class="ct-item-status"><span class="status status-' + item.statusClass + '">' + item.status + '</span></span>';
+
+                }
+
+                html += '</div>';
+
+            }
+
+            html += '</div>';
+
+        } else {
+
+            html += '<div class="content-type-empty">';
+
+            html += '<p>' + cfg.emptyMsg(name) + '</p>';
+
+            html += '</div>';
+
+        }
+
+
+
+        html += '</div>';
+
+    }
+
+    return html;
+
+}
+
+
+
+/* ===== Render Jurisdiction Detail ===== */
+
+function renderJurisdictionDetail(name) {
+
+    var d = jurisdictionData[name];
+
+    if (!d) d = jurisdictionData['Czech Republic'];
+
+    if (!name || !jurisdictionData[name]) name = 'Czech Republic';
+
+
+
+    var html = '';
+
+
+
+    // Breadcrumb
+
+    html += '<div class="jur-breadcrumb mb-8"><span>JURISDICTIONS</span> &gt; <span>' + d.region.toUpperCase() + '</span> &gt; <span>' + name.toUpperCase() + '</span></div>';
+
+
+
+    // Export buttons
+
+    html += '<div class="flex items-center justify-between mb-16">';
+
+    html += '<div class="jur-export-btns">';
+
+    html += '<button class="btn btn-outline btn-sm">PDF</button>';
+
+    html += '<button class="btn btn-outline btn-sm">Word</button>';
+
+    html += '<button class="btn btn-outline btn-sm">Cite</button>';
+
+    html += '<span class="text-xs text-muted" style="margin-left:8px">Updated 2h ago</span>';
+
+    html += '</div></div>';
+
+
+
+    // Hero
+
+    html += '<div class="jur-hero">';
+
+    html += '<div class="jur-info">';
+
+    html += '<h1 class="jur-country-name">' + d.flag + ' ' + name + '</h1>';
+
+    html += '<p class="jur-body-count">' + d.bodyCount + ' official bodies monitored</p>';
+
+    html += '</div>';
+
+    html += '<div class="jur-silhouette"><svg viewBox="0 0 100 60"><path d="M15 45 L25 20 L40 15 L55 10 L70 15 L85 25 L80 40 L65 50 L50 48 L35 52 L20 50 Z"/></svg></div>';
+
+    html += '</div>';
+
+
+
+    // Stat cards
+
+    html += '<div class="stats-row" style="grid-template-columns:repeat(6,1fr)">';
+
+    html += '<div class="stat-card"><div class="stat-value" style="font-size:1.2rem">' + d.population + '</div><div class="stat-label">Population</div><div class="text-xs text-muted" style="margin-top:2px">' + d.populationNote + '</div></div>';
+
+    html += '<div class="stat-card"><div style="margin-bottom:4px"><span class="status status-' + d.techLawStatus + '">' + d.techLaw + '</span></div><div class="stat-label">Tech-Specific Law</div><div class="text-xs text-secondary" style="margin-top:4px">' + d.techLawNote + '</div></div>';
+
+    html += '<div class="stat-card"><div class="stat-value" style="font-size:1rem">' + d.leadAuthority + '</div><div class="stat-label">Lead Authority</div></div>';
+
+    html += '<div class="stat-card"><div class="stat-value">' + d.consultations + '</div><div class="stat-label">Open Consultations</div></div>';
+
+    html += '<div class="stat-card"><div class="stat-value">' + d.bills + '</div><div class="stat-label">Bills in Progress</div></div>';
+
+    html += '<div class="stat-card"><div class="stat-value">' + d.enforcement + '</div><div class="stat-label">Enforcement YTD</div><div class="text-xs text-muted" style="margin-top:2px">' + d.enforcementYear + '</div></div>';
+
+    html += '</div>';
+
+
+
+    // Authorities
+
+    var authLabel = (name === 'United States') ? 'Federal Authorities' : 'Relevant AI Authorities';
+
+    html += '<h2 class="mb-16">' + authLabel + '</h2>';
+
+    var authCols = d.authorities.length <= 4 ? 'repeat(4,1fr)' : 'repeat(' + Math.min(d.authorities.length, 4) + ',1fr)';
+
+    html += '<div class="grid-4 mb-24" style="grid-template-columns:' + authCols + '">';
+
+    for (var i = 0; i < d.authorities.length; i++) {
+
+        var a = d.authorities[i];
+
+        html += '<div class="auth-card">';
+
+        html += '<div class="ac-type"><span class="badge badge-' + a.badge + '" style="height:18px;font-size:.72rem">' + a.type + '</span></div>';
+
+        html += '<div class="ac-name">' + a.name + '</div>';
+
+        html += '<a href="#" class="ac-link">' + a.link + ' &rarr;</a>';
+
+        html += '</div>';
+
+    }
+
+    html += '</div>';
+
+
+
+    // USA States section
+
+    if (d.states) {
+
+        html += '<h2 class="mb-16">States &amp; Territories</h2>';
+
+        html += '<div class="states-grid mb-24">';
+
+        for (var s = 0; s < d.states.length; s++) {
+
+            var st = d.states[s];
+
+            html += '<div class="state-card">';
+
+            html += '<div class="state-card-header"><h4>' + st.name + '</h4><span class="badge badge-teal" style="height:18px;font-size:.72rem">' + st.bills + ' bills</span></div>';
+
+            html += '<p class="text-sm text-secondary" style="margin-top:6px;line-height:1.5">' + st.desc + '</p>';
+
+            html += '</div>';
+
+        }
+
+        html += '</div>';
+
+        html += '<div style="margin-bottom:24px"><a href="#" style="font-size:.82rem;font-weight:600;color:var(--teal)">+ 44 more states &amp; territories &rarr;</a></div>';
+
+    }
+
+
+
+    // Content Type Sections
+
+    html += renderContentTypeSections(name);
+
+
+
+    // Recent Activity
+
+    html += '<div class="content-type-section">';
+
+    html += '<div class="content-type-header">';
+
+    html += '<h3>Recent Activity</h3>';
+
+    html += '<span class="ct-count">' + d.alerts.length + '</span>';
+
+    html += '</div></div>';
+
+    html += '<div class="card">';
+
+    for (var r = 0; r < d.alerts.length; r++) {
+
+        var al = d.alerts[r];
+
+        html += '<div class="dispatch-row">';
+
+        html += '<span class="dispatch-date">' + al.date + '</span>';
+
+        html += '<div class="dispatch-body">';
+
+        html += '<div class="dispatch-headline">' + al.headline + '</div>';
+
+        html += '<div class="dispatch-sub">' + al.sub + '</div>';
+
+        html += '</div>';
+
+        html += '<span class="badge badge-' + al.badge + '">' + al.badgeLabel + '</span>';
+
+        html += '</div>';
+
+    }
+
+    html += '</div>';
+
+
+
+    return html;
+
+}
+
+
+
+/* ===== Render Empty State for Jurisdictions ===== */
+
+function renderJurisdictionEmpty() {
+
+    return '<div class="jur-empty-state">' +
+
+        '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>' +
+
+        '<h2>Select a jurisdiction</h2>' +
+
+        '<p>Browse regions in the sidebar and select a jurisdiction to view its regulatory intelligence profile.</p>' +
+
+        '</div>';
+
+}
+
+
+
+function showJurisdictionDetail(name) {
+
+    currentJurisdiction = name;
+
+    var detailView = document.getElementById('jur-detail-container');
+
+    if (detailView) {
+
+        detailView.innerHTML = renderJurisdictionDetail(name);
+
+    }
+
+    showPage('jurisdictions');
+
+
+
+    // Make sure the sidebar regions are open
+
+    var wrap = document.getElementById('sidebarRegionsWrap');
+
+    var chevron = document.getElementById('jurNavChevron');
+
+    if (!wrap.classList.contains('open')) {
+
+        wrap.classList.add('open');
+
+        if (chevron) chevron.classList.add('rotated');
+
+    }
+
+}
+
+
+
+function showPage(pageId) {
+
+    // Update page views
+
+    document.querySelectorAll('.page-view').forEach(function(p) { p.classList.remove('active'); });
+
+    var target = document.getElementById('page-' + pageId);
+
+    if (target) target.classList.add('active');
+
+
+
+    // Update page tabs
+
+    document.querySelectorAll('.page-tab').forEach(function(t) {
+
+        t.classList.toggle('active', t.dataset.page === pageId);
+
+    });
+
+
+
+    // Update sidebar nav items
+
+    document.querySelectorAll('.sidebar-nav-item').forEach(function(n) {
+
+        n.classList.toggle('active', n.dataset.page === pageId);
+
+    });
+
+
+
+    // If navigating to jurisdictions, show empty state or current detail
+
+    if (pageId === 'jurisdictions') {
+
+        var detailView = document.getElementById('jur-detail-container');
+
+        if (detailView && !detailView.innerHTML.trim()) {
+
+            detailView.innerHTML = renderJurisdictionEmpty();
+
+        }
+
+    }
+
+}
+
+
+
+/* ===== Toggle Jurisdiction Regions in Sidebar ===== */
+
+function toggleJurRegions(e) {
+
+    e.stopPropagation();
+
+    var sidebar = document.getElementById('iconSidebar');
+
+    var wrap = document.getElementById('sidebarRegionsWrap');
+
+    var chevron = document.getElementById('jurNavChevron');
+
+    var isCollapsed = sidebar.offsetWidth <= 60;
+
+
+
+    if (isCollapsed) {
+
+        sidebar.style.width = 'var(--sidebar-expanded)';
+
+        wrap.classList.add('open');
+
+        if (chevron) chevron.classList.add('rotated');
+
+        setTimeout(function() { sidebar.style.width = ''; }, 300);
+
+    } else {
+
+        wrap.classList.toggle('open');
+
+        if (chevron) chevron.classList.toggle('rotated', wrap.classList.contains('open'));
+
+    }
+
+
+
+    showPage('jurisdictions');
+
+
+
+    // Show empty state if no jurisdiction selected
+
+    var detailView = document.getElementById('jur-detail-container');
+
+    if (detailView && !currentJurisdiction) {
+
+        detailView.innerHTML = renderJurisdictionEmpty();
+
+    }
+
+}
+
+
+
+// Inner tab switching (non-functional but interactive)
+
+document.querySelectorAll('.inner-tab').forEach(function(tab) {
+
+    tab.addEventListener('click', function() {
+
+        this.parentElement.querySelectorAll('.inner-tab').forEach(function(t) { t.classList.remove('active'); });
+
+        this.classList.add('active');
+
+    });
+
+});
+
+
+
+// Filter button toggling
+
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+
+    btn.addEventListener('click', function() {
+
+        var siblings = this.parentElement.querySelectorAll('.filter-btn');
+
+        siblings.forEach(function(s) { s.classList.remove('active'); });
+
+        this.classList.add('active');
+
+    });
+
+});
+
+
+
+// Build sidebar regions on page load
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    buildSidebarRegions();
+
+});
+
+</script>
+
+</body>
+
+</html>
+
+ 
