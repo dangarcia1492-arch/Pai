@@ -67,19 +67,21 @@ body::before{
   font-style:italic;
   font-size:14px;
   color:rgba(255,255,255,.55);
-  min-height:20px;
+  height:20px;
+  line-height:20px;
   position:relative;
+  overflow:hidden;
 }
 .cv-item{
   position:absolute;top:0;left:0;
   white-space:nowrap;
   opacity:0;
-  transition:opacity .6s ease;
+  transition:opacity .5s ease;
   pointer-events:none;
+  line-height:20px;
 }
 .cv-item.visible{
   opacity:1;
-  position:relative;
 }
 
 /* Card */
@@ -187,40 +189,16 @@ body::before{
 <!-- Cycling text bottom-left -->
 <div class="cycling-wrap">
   <div class="cycling-group">
-    <span class="cycling-label">Authorities</span>
-    <span class="cycling-value" id="cyc-auth">
-      <span class="cv-item visible">EU AI Office</span>
-      <span class="cv-item">ICO (UK)</span>
-      <span class="cv-item">CNIL (France)</span>
-      <span class="cv-item">FTC (US)</span>
-      <span class="cv-item">PIPC (Korea)</span>
-      <span class="cv-item">Garante (Italy)</span>
-      <span class="cv-item">BfDI (Germany)</span>
-    </span>
+    <span class="cycling-label">Authority</span>
+    <span class="cycling-value"><span class="cv-item visible" id="cyc-auth">EU AI Office</span></span>
   </div>
   <div class="cycling-group">
-    <span class="cycling-label">Developments</span>
-    <span class="cycling-value" id="cyc-dev">
-      <span class="cv-item visible">Enforcement actions</span>
-      <span class="cv-item">Case law</span>
-      <span class="cv-item">AI Act implementation</span>
-      <span class="cv-item">Guidance &amp; opinions</span>
-      <span class="cv-item">Bills in progress</span>
-      <span class="cv-item">Consultations</span>
-    </span>
+    <span class="cycling-label">Development</span>
+    <span class="cycling-value"><span class="cv-item visible" id="cyc-dev">AI Act implementation</span></span>
   </div>
   <div class="cycling-group">
-    <span class="cycling-label">Jurisdictions</span>
-    <span class="cycling-value" id="cyc-jur">
-      <span class="cv-item visible">European Union</span>
-      <span class="cv-item">United Kingdom</span>
-      <span class="cv-item">United States</span>
-      <span class="cv-item">Japan</span>
-      <span class="cv-item">Canada</span>
-      <span class="cv-item">Australia</span>
-      <span class="cv-item">South Korea</span>
-      <span class="cv-item">China</span>
-    </span>
+    <span class="cycling-label">Jurisdiction</span>
+    <span class="cycling-value"><span class="cv-item visible" id="cyc-jur">European Union</span></span>
   </div>
 </div>
 
@@ -255,30 +233,36 @@ function handleSignIn(e) {
   setTimeout(function() { window.location.href = 'index.html'; }, 600);
 }
 
-function cycle(containerId, interval, offset) {
-  var container = document.getElementById(containerId);
-  if (!container) return;
-  var items = container.querySelectorAll('.cv-item');
-  var current = 0;
-  // find initial visible
-  for (var i = 0; i < items.length; i++) {
-    if (items[i].classList.contains('visible')) { current = i; break; }
-  }
-  setTimeout(function tick() {
-    var next = (current + 1) % items.length;
-    items[current].classList.remove('visible');
-    // brief pause then show next
-    setTimeout(function() {
-      items[next].classList.add('visible');
-      current = next;
-    }, 300);
-    setTimeout(tick, interval);
-  }, offset || interval);
+var triplets = [
+  ['EU AI Office',    'AI Act implementation', 'European Union'],
+  ['ICO (UK)',        'Enforcement actions',   'United Kingdom'],
+  ['CNIL (France)',   'Guidance & opinions',   'France'],
+  ['FTC (US)',        'Bills in progress',     'United States'],
+  ['Garante (Italy)', 'Case law',              'Italy'],
+  ['BfDI (Germany)',  'Consultations',         'Germany'],
+  ['PIPC (Korea)',    'Enforcement actions',   'South Korea'],
+  ['PDPC (Singapore)','AI governance',         'Singapore'],
+];
+var idx = 0;
+var auth = document.getElementById('cyc-auth');
+var dev  = document.getElementById('cyc-dev');
+var jur  = document.getElementById('cyc-jur');
+function cycleAll() {
+  auth.classList.remove('visible');
+  dev.classList.remove('visible');
+  jur.classList.remove('visible');
+  setTimeout(function() {
+    idx = (idx + 1) % triplets.length;
+    auth.textContent = triplets[idx][0];
+    dev.textContent  = triplets[idx][1];
+    jur.textContent  = triplets[idx][2];
+    auth.classList.add('visible');
+    dev.classList.add('visible');
+    jur.classList.add('visible');
+  }, 350);
+  setTimeout(cycleAll, 3000);
 }
-
-cycle('cyc-auth', 2800, 0);
-cycle('cyc-dev', 3200, 900);
-cycle('cyc-jur', 2600, 1600);
+setTimeout(cycleAll, 3000);
 </script>
 </body>
 </html>
