@@ -50,12 +50,14 @@ body::before{
   position:fixed;
   bottom:44px;left:52px;
   z-index:2;
-  display:flex;flex-direction:column;gap:16px;
+  display:grid;
+  grid-template-columns:max-content 1fr;
+  row-gap:16px;
+  column-gap:16px;
+  align-items:center;
 }
 @media(max-width:700px){.cycling-wrap{display:none}}
-.cycling-group{
-  display:flex;align-items:baseline;gap:10px;
-}
+.cycling-group{display:contents}
 .cycling-label{
   font-size:11px;font-weight:700;letter-spacing:.08em;
   color:rgba(255,255,255,.35);
@@ -78,13 +80,8 @@ body::before{
 .cv-item{
   position:absolute;top:0;left:0;
   white-space:nowrap;
-  opacity:0;
-  transition:opacity .5s ease;
   pointer-events:none;
   line-height:20px;
-}
-.cv-item.visible{
-  opacity:1;
 }
 
 /* Card */
@@ -237,35 +234,47 @@ function handleSignIn(e) {
 }
 
 var triplets = [
-  ['EU AI Office',    'AI Act implementation', 'European Union'],
-  ['ICO (UK)',        'Enforcement actions',   'United Kingdom'],
-  ['CNIL (France)',   'Guidance & opinions',   'France'],
-  ['FTC (US)',        'Bills in progress',     'United States'],
-  ['Garante (Italy)', 'Case law',              'Italy'],
-  ['BfDI (Germany)',  'Consultations',         'Germany'],
-  ['PIPC (Korea)',    'Enforcement actions',   'South Korea'],
-  ['PDPC (Singapore)','AI governance',         'Singapore'],
+  ['EU AI Office',     'AI Act implementation', 'European Union'],
+  ['ICO (UK)',         'Enforcement actions',   'United Kingdom'],
+  ['CNIL (France)',    'Guidance & opinions',   'France'],
+  ['FTC (US)',         'Bills in progress',     'United States'],
+  ['Garante (Italy)',  'Case law',              'Italy'],
+  ['BfDI (Germany)',   'Consultations',         'Germany'],
+  ['PIPC (Korea)',     'Enforcement actions',   'South Korea'],
+  ['PDPC (Singapore)', 'AI governance',         'Singapore'],
 ];
 var idx = 0;
-var auth = document.getElementById('cyc-auth');
-var dev  = document.getElementById('cyc-dev');
-var jur  = document.getElementById('cyc-jur');
-function cycleAll() {
-  auth.classList.remove('visible');
-  dev.classList.remove('visible');
-  jur.classList.remove('visible');
-  setTimeout(function() {
-    idx = (idx + 1) % triplets.length;
-    auth.textContent = triplets[idx][0];
-    dev.textContent  = triplets[idx][1];
-    jur.textContent  = triplets[idx][2];
-    auth.classList.add('visible');
-    dev.classList.add('visible');
-    jur.classList.add('visible');
-  }, 350);
-  setTimeout(cycleAll, 3000);
+var ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+function scramble(el, target) {
+  var frame = 0;
+  var settle = 5; // frames before a char locks in, staggered by position
+  var id = setInterval(function() {
+    var out = '';
+    var done = true;
+    for (var i = 0; i < target.length; i++) {
+      var lockAt = i * 1.4 + settle;
+      if (frame >= lockAt || !/[a-zA-Z]/.test(target[i])) {
+        out += target[i];
+      } else {
+        out += ALPHA[Math.floor(Math.random() * ALPHA.length)];
+        done = false;
+      }
+    }
+    el.textContent = out;
+    frame++;
+    if (done) { clearInterval(id); el.textContent = target; }
+  }, 32);
 }
-setTimeout(cycleAll, 3000);
+
+function cycleAll() {
+  idx = (idx + 1) % triplets.length;
+  scramble(document.getElementById('cyc-auth'), triplets[idx][0]);
+  scramble(document.getElementById('cyc-dev'),  triplets[idx][1]);
+  scramble(document.getElementById('cyc-jur'),  triplets[idx][2]);
+  setTimeout(cycleAll, 3400);
+}
+setTimeout(cycleAll, 2800);
 </script>
 </body>
 </html>
