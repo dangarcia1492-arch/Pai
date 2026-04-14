@@ -24,7 +24,7 @@
 
     --bg:#f4f5f7;--surface:#fff;--surface-2:#f9fafb;
 
-    --ink:#0f172a;--secondary:#475467;--muted:#6c7686;--ink-faint:#98a0ad;
+    --ink:#0f172a;--secondary:#3d4a5c;--muted:#56606f;--ink-faint:#8a93a0;
 
     --border:#e3e6ec;--border-soft:#eef0f4;
 
@@ -84,7 +84,7 @@ button{cursor:pointer}
 
 .sidebar-nav-item svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.6;fill:none;flex-shrink:0}
 
-.sidebar-nav-item .nav-label{font-size:.84rem;font-weight:500;opacity:0;transition:opacity .15s .05s}
+.sidebar-nav-item .nav-label{font-size:.88rem;font-weight:500;opacity:0;transition:opacity .15s .05s}
 
 .icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
 
@@ -130,27 +130,23 @@ button{cursor:pointer}
 
 /* Region cards - single column, full width */
 
-.sidebar-region-card{display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:3px;margin-bottom:6px;cursor:pointer;transition:border-color .15s,background .15s;min-height:56px;background:var(--surface)}
-
-.sidebar-region-card:hover{border-color:#999;background:var(--bg)}
-
-.sidebar-region-card:active{background:#eef0f3}
-
-.sidebar-region-card .src-svg{width:44px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-
+.drill-cards-view{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.sidebar-region-card{display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:10px 10px 9px;border:1px solid var(--border-soft);border-radius:4px;cursor:pointer;transition:border-color .2s,background .15s,box-shadow .15s;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.sidebar-region-card:hover{border-color:var(--teal);background:#fafffe;box-shadow:0 2px 8px rgba(14,138,125,.10)}
+.sidebar-region-card:active{background:var(--teal-light)}
+.sidebar-region-card .src-svg{width:32px;height:22px;display:flex;align-items:center;justify-content:center}
 .sidebar-region-card .src-svg svg{width:100%;height:100%}
 
 .sidebar-region-card .src-info{flex:1;min-width:0;overflow:hidden}
 
-.sidebar-region-card .src-name{font-size:.82rem;font-weight:580;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-.sidebar-region-card .src-count{font-size:.72rem;color:var(--muted);white-space:nowrap}
+.sidebar-region-card .src-name{font-size:.8rem;font-weight:600;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-region-card .src-count{font-size:.68rem;color:var(--muted);white-space:nowrap}
 
 
 
 /* Drill-in back link */
 
-.drill-back{display:flex;align-items:center;gap:4px;font-size:.75rem;font-weight:600;color:var(--teal);cursor:pointer;padding:4px 2px 8px;transition:color .12s}
+.drill-back{display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:var(--teal);cursor:pointer;padding:6px 2px 10px;transition:color .12s}
 
 .drill-back:hover{color:var(--teal-dark);text-decoration:none}
 
@@ -160,7 +156,7 @@ button{cursor:pointer}
 
 /* Drill-in region header */
 
-.drill-region-header{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:0 2px 6px;border-bottom:1px solid var(--border);margin-bottom:4px}
+.drill-region-header{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:0 2px 8px;border-bottom:1px solid var(--border);margin-bottom:6px}
 
 
 
@@ -172,7 +168,7 @@ button{cursor:pointer}
 
 /* Drill-in jurisdiction items */
 
-.drill-jur-item{display:flex;align-items:center;padding:5px 8px;font-size:.82rem;font-weight:480;color:var(--secondary);cursor:pointer;border-radius:3px;transition:color .12s,background .12s;position:relative;border-left:3px solid transparent;margin-left:0}
+.drill-jur-item{display:flex;align-items:center;padding:6px 8px;font-size:.86rem;font-weight:480;color:var(--secondary);cursor:pointer;border-radius:3px;transition:color .12s,background .12s;position:relative;border-left:3px solid transparent;margin-left:0}
 
 .drill-jur-item:hover{color:var(--ink);background:rgba(0,0,0,.03)}
 
@@ -900,7 +896,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 .content-tab.active .ct-n{background:var(--teal-light);color:var(--teal)}
 
-.content-tab-body{background:var(--surface);border:1px solid var(--border);border-top:none;padding:0}
+.content-tab-body{background:var(--surface);border:1px solid var(--border);border-top:none;padding:0;min-height:220px}
 
 .ct-empty{padding:28px 32px;border-left:3px solid var(--teal);margin:20px 0 4px;background:var(--teal-light)}
 
@@ -3405,7 +3401,7 @@ var drillData = {
 
         header: 'EUROPE',
 
-        federal: { label: 'EU Federal', key: null },
+        federal: { label: 'European Union', key: null },
 
         separator1: true,
 
@@ -3607,13 +3603,13 @@ var germanyDrill = {
 
     members: [
 
-        'Baden-W\u00fcrttemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg',
+        'Baden-W\u00fcrttemberg','Bayern','Berlin','Brandenburg','Bremen','Hamburg',
 
-        'Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia',
+        'Hessen','Niedersachsen','Mecklenburg-Vorpommern','Nordrhein-Westfalen',
 
-        'Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt',
+        'Rheinland-Pfalz','Saarland','Sachsen','Sachsen-Anhalt',
 
-        'Schleswig-Holstein','Thuringia'
+        'Schleswig-Holstein','Th\u00fcringen'
 
     ]
 
@@ -3779,19 +3775,11 @@ function renderRegionList(container, regionName) {
 
 
 
-    // Back link
-
+    // Back link (combined with region label — clicking takes you to regions)
     html += '<div class="drill-back" onclick="drillBack()">';
-
     html += '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
-
-    html += 'Regions</div>';
-
-
-
-    // Region header
-
-    html += '<div class="drill-region-header">' + data.header + '</div>';
+    html += data.header + '</div>';
+    html += '<div style="height:1px;background:var(--border);margin:0 2px 8px"></div>';
 
 
 
@@ -4192,7 +4180,8 @@ function renderJurisdictionDetail(name) {
     // Country name + population fact
     html += '<div class="mb-24">';
     html += '<h1 style="font-family:var(--serif);font-size:2.2rem;font-weight:400;letter-spacing:-.04em;margin-bottom:6px">' + d.flag + ' ' + name + '</h1>';
-    html += '<p style="font-size:.82rem;color:var(--muted)">Population ' + d.population + ' \u00b7 ' + d.populationNote + ' \u00b7 ' + d.bodyCount + ' official bodies monitored</p>';
+    html += '<p style="font-size:.82rem;color:var(--muted)">' + d.population + ' \u00b7 ' + d.populationNote + '</p>';
+    html += '<p style="font-size:.82rem;margin-top:6px"><a href="#" onclick="event.preventDefault();switchAuthTab(\'authTab_' + name.replace(/\s/g,'') + '\',\'all\')" style="font-weight:600;color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light)">' + d.bodyCount + ' official bodies monitored \u2192</a></p>';
     html += '</div>';
 
     // Stat cards (without population)
@@ -4270,6 +4259,7 @@ function renderJurisdictionDetail(name) {
     html += '<div class="content-tab-body" id="' + ctTabId + '_body">';
     tabs.forEach(function(t, i){
         html += '<div data-tabpanel="' + t.key + '" style="' + (i>0?'display:none':'') + '">';
+        html += '<div style="padding-top:20px"><h3 style="font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:16px">' + t.label + '</h3>';
         if (t.items.length === 0) {
             html += '<div class="ct-empty"><p>Our research team is actively building out ' + t.label.toLowerCase() + ' coverage for ' + name + '. As developments are verified and indexed, they will appear here.</p></div>';
         } else {
@@ -4288,7 +4278,7 @@ function renderJurisdictionDetail(name) {
                 html += '</div>';
             });
         }
-        html += '</div>';
+        html += '</div></div>';
     });
     html += '</div>';
 
