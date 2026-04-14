@@ -780,7 +780,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 .wire-list{background:var(--surface);border:1px solid var(--border);border-top:none}
 
-.wire-row{display:grid;grid-template-columns:86px 100px 1fr 100px;gap:16px;align-items:center;padding:11px 22px;border-bottom:1px solid var(--border-soft);cursor:pointer;transition:background .1s}
+.wire-row{display:grid;grid-template-columns:86px 100px 1fr 100px;gap:16px;align-items:center;padding:11px 22px 11px 38px;border-bottom:1px solid var(--border-soft);cursor:pointer;transition:background .1s;position:relative}
 
 .wire-row:last-child{border-bottom:none}
 
@@ -975,6 +975,76 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .cm-fc-tags{display:flex;flex-wrap:wrap;gap:5px}
 .cm-fc-tag{font-size:.63rem;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.32);background:rgba(255,255,255,.07);padding:2px 7px;border-radius:2px;text-transform:uppercase}
 
+/* ===== HOME JURISDICTION SELECTOR ===== */
+.home-jur-wrap{position:relative}
+.home-jur-btn{display:flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--border);border-radius:2px;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--secondary);background:var(--surface);transition:border-color .12s,background .12s;user-select:none;white-space:nowrap}
+.home-jur-btn:hover,.home-jur-wrap.open .home-jur-btn{border-color:var(--teal);background:var(--teal-light);color:var(--teal)}
+.home-jur-btn .hjb-flag{font-size:1rem;line-height:1}
+.home-jur-btn .hjb-label{max-width:120px;overflow:hidden;text-overflow:ellipsis}
+.home-jur-btn .hjb-caret{opacity:.45;transition:transform .15s;flex-shrink:0}
+.home-jur-wrap.open .hjb-caret{transform:rotate(180deg)}
+.home-jur-dropdown{position:absolute;top:calc(100% + 5px);right:0;min-width:230px;background:#fff;border:1px solid var(--border);border-radius:3px;box-shadow:0 10px 36px rgba(0,0,0,.13);z-index:400;display:none;padding:6px 0}
+.home-jur-wrap.open .home-jur-dropdown{display:block}
+.hjd-title{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:8px 14px 4px}
+.hjd-item{display:flex;align-items:center;gap:8px;padding:7px 14px;font-size:.8rem;color:var(--secondary);cursor:pointer;transition:background .1s}
+.hjd-item:hover{background:var(--bg)}
+.hjd-item.active{color:var(--teal);font-weight:600;background:var(--teal-light)}
+.hjd-sep{height:1px;background:var(--border-soft);margin:4px 0}
+
+/* ===== NEWS SELECTION ===== */
+.news-sel-cb{position:absolute;top:10px;left:10px;z-index:10;width:15px;height:15px;cursor:pointer;accent-color:var(--teal);opacity:0;transition:opacity .12s}
+.news-lead:hover .news-sel-cb,.news-second:hover .news-sel-cb,.news-rgn:hover .news-sel-cb,.news-sel-cb:checked{opacity:1}
+.news-lead{position:relative}.news-second{position:relative}.news-rgn{position:relative}
+.wire-row .news-sel-cb{top:50%;transform:translateY(-50%);left:11px}
+.wire-row:hover .news-sel-cb,.wire-row .news-sel-cb:checked{opacity:1}
+/* Selection bar */
+.news-sel-bar{position:fixed;bottom:-72px;left:0;right:0;height:62px;background:#0f172a;display:flex;align-items:center;padding:0 32px;gap:12px;z-index:500;transition:bottom .26s cubic-bezier(.4,0,.2,1);box-shadow:0 -3px 20px rgba(0,0,0,.22)}
+.news-sel-bar.visible{bottom:0}
+.nsb-count{font-size:.79rem;color:rgba(255,255,255,.5);flex-shrink:0}
+.nsb-count strong{color:#fff;font-weight:700}
+.nsb-spacer{flex:1}
+.nsb-btn{height:32px;padding:0 16px;border-radius:2px;font-size:.78rem;font-weight:600;cursor:pointer;border:none;font-family:var(--sans);transition:background .12s}
+.nsb-primary{background:var(--teal);color:#fff}.nsb-primary:hover{background:var(--teal-dark)}
+.nsb-secondary{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);margin-left:8px}.nsb-secondary:hover{background:rgba(255,255,255,.18)}
+.nsb-clear{background:none;color:rgba(255,255,255,.38);font-size:.74rem;font-weight:400;padding:0 6px;margin-right:4px}.nsb-clear:hover{color:rgba(255,255,255,.65)}
+/* Alert modal */
+.alert-overlay{position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .18s}
+.alert-overlay.visible{opacity:1;pointer-events:all}
+.alert-modal{background:#fff;width:548px;max-width:calc(100vw - 32px);max-height:90vh;overflow-y:auto;border-radius:3px;box-shadow:0 28px 80px rgba(0,0,0,.26);padding:34px 38px 30px}
+.am-head{margin-bottom:20px}
+.am-head h2{font-family:var(--serif);font-size:1.18rem;font-weight:600;color:var(--ink);margin:0 0 3px}
+.am-head p{font-size:.76rem;color:var(--muted)}
+.am-section-label{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.am-headlines-list{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:10px 13px;max-height:120px;overflow-y:auto;margin-bottom:18px}
+.am-hl-item{font-size:.77rem;color:var(--secondary);line-height:1.5;padding:3px 0;border-bottom:1px solid var(--border-soft)}
+.am-hl-item:last-child{border-bottom:none}
+.am-templates{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.am-tpl-btn{font-size:.71rem;color:var(--teal);background:var(--teal-light);border:none;padding:4px 9px;border-radius:2px;cursor:pointer;transition:background .1s;font-family:var(--sans)}
+.am-tpl-btn:hover{background:#cef0ea}
+.am-note{width:100%;min-height:84px;padding:9px 12px;border:1px solid var(--border);border-radius:2px;font-size:.81rem;color:var(--ink);resize:vertical;font-family:var(--sans);line-height:1.5;outline:none}
+.am-note:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,138,125,.1)}
+.am-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--border-soft)}
+.am-btn{height:34px;padding:0 18px;border-radius:2px;font-size:.79rem;font-weight:600;cursor:pointer;border:none;font-family:var(--sans);transition:background .12s}
+.am-cancel{background:none;color:var(--muted)}.am-cancel:hover{color:var(--secondary)}
+.am-dl{background:var(--bg);color:var(--secondary);border:1px solid var(--border)}.am-dl:hover{background:#eef0f4}
+.am-send{background:var(--teal);color:#fff}.am-send:hover{background:var(--teal-dark)}
+/* Implementation grid */
+.impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.impl-card{padding:15px 17px;background:var(--surface);border:1px solid var(--border);border-radius:3px}
+.impl-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px}
+.impl-law{font-size:.8rem;font-weight:700;color:var(--ink)}
+.impl-note{font-size:.77rem;color:var(--secondary);line-height:1.56}
+.impl-note a{color:var(--teal);font-weight:500;border-bottom:1px solid var(--teal-light);text-decoration:none}
+.impl-note a:hover{border-bottom-color:var(--teal)}
+/* Sidebar home tile */
+.sidebar-home-tile{display:flex;align-items:center;gap:9px;padding:9px 10px;background:var(--teal-light);border:1px solid rgba(14,138,125,.22);border-radius:4px;cursor:pointer;margin-bottom:10px;transition:background .15s}
+.sidebar-home-tile:hover{background:#cef0ea}
+.sht-flag{font-size:1.05rem;flex-shrink:0;line-height:1}
+.sht-info{flex:1;min-width:0}
+.sht-name{font-size:.79rem;font-weight:700;color:var(--teal);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sht-label{font-size:.64rem;color:var(--teal-dark);opacity:.65;text-transform:uppercase;letter-spacing:.04em}
+@media print{body>*:not(#alertPrintArea){display:none!important}#alertPrintArea{display:block!important}}
+
 </style>
 
 </head>
@@ -1114,7 +1184,25 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
     <div class="header-right">
 
-        <div class="flag-btn"><span class="flag">&#x1F1EC;&#x1F1E7;</span> UK</div>
+        <div class="home-jur-wrap" id="homeJurWrap">
+          <div class="home-jur-btn" id="homeJurBtn" onclick="toggleHomeJur()">
+            <span class="hjb-flag" id="homeJurFlag">&#x1F1EC;&#x1F1E7;</span>
+            <span class="hjb-label" id="homeJurLabel">United Kingdom</span>
+            <svg class="hjb-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="home-jur-dropdown" id="homeJurDropdown">
+            <div class="hjd-title">Your home jurisdiction</div>
+            <div class="hjd-item active" id="hjd-UK" onclick="setHomeJur('United Kingdom','&#x1F1EC;&#x1F1E7;','UK')">&#x1F1EC;&#x1F1E7; United Kingdom</div>
+            <div class="hjd-item" id="hjd-EU" onclick="setHomeJur('European Union','&#x1F1EA;&#x1F1FA;','EU')">&#x1F1EA;&#x1F1FA; European Union</div>
+            <div class="hjd-item" id="hjd-DE" onclick="setHomeJur('Germany','&#x1F1E9;&#x1F1EA;','DE')">&#x1F1E9;&#x1F1EA; Germany</div>
+            <div class="hjd-item" id="hjd-FR" onclick="setHomeJur('France','&#x1F1EB;&#x1F1F7;','FR')">&#x1F1EB;&#x1F1F7; France</div>
+            <div class="hjd-item" id="hjd-US" onclick="setHomeJur('United States','&#x1F1FA;&#x1F1F8;','US')">&#x1F1FA;&#x1F1F8; United States</div>
+            <div class="hjd-item" id="hjd-SG" onclick="setHomeJur('Singapore','&#x1F1F8;&#x1F1EC;','SG')">&#x1F1F8;&#x1F1EC; Singapore</div>
+            <div class="hjd-item" id="hjd-JP" onclick="setHomeJur('Japan','&#x1F1EF;&#x1F1F5;','JP')">&#x1F1EF;&#x1F1F5; Japan</div>
+            <div class="hjd-sep"></div>
+            <div class="hjd-item" style="font-size:.75rem;color:var(--muted);cursor:default">More jurisdictions coming soon</div>
+          </div>
+        </div>
 
         <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="badge-count">3</span></button>
 
@@ -2787,6 +2875,45 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 
 
+<!-- ===== NEWS SELECTION BAR ===== -->
+<div class="news-sel-bar" id="newsSelBar">
+    <span class="nsb-count"><strong id="nsbCount">0</strong> selected</span>
+    <button class="nsb-btn nsb-clear" onclick="clearNewsSelection()">Clear</button>
+    <span class="nsb-spacer"></span>
+    <button class="nsb-btn nsb-secondary" onclick="downloadAlertPDF()">&#x2193; Download PDF</button>
+    <button class="nsb-btn nsb-primary" onclick="openAlertModal()">Create alert &rarr;</button>
+</div>
+
+<!-- ===== ALERT MODAL ===== -->
+<div class="alert-overlay" id="alertOverlay" onclick="if(event.target===this)closeAlertModal()">
+    <div class="alert-modal">
+        <div class="am-head">
+            <h2>Create Regulatory Alert</h2>
+            <p id="amCount">0 stories selected</p>
+        </div>
+
+        <div class="am-section-label">Selected stories</div>
+        <div class="am-headlines-list" id="amHeadlines"></div>
+
+        <div class="am-section-label">Add a note</div>
+        <div class="am-templates">
+            <button class="am-tpl-btn" onclick="fillAlertTemplate(0)">Hi [name], thought you might want to see this &mdash;</button>
+            <button class="am-tpl-btn" onclick="fillAlertTemplate(1)">FYI &ndash; regulatory update worth noting:</button>
+            <button class="am-tpl-btn" onclick="fillAlertTemplate(2)">For your attention / action:</button>
+        </div>
+        <textarea class="am-note" id="amNote" placeholder="Add a personal note (optional)&hellip;"></textarea>
+
+        <div class="am-footer">
+            <button class="am-btn am-cancel" onclick="closeAlertModal()">Cancel</button>
+            <button class="am-btn am-dl" onclick="downloadAlertPDF()">&#x2193; Save as PDF</button>
+            <button class="am-btn am-send" onclick="sendAlert()">Send by email &rarr;</button>
+        </div>
+    </div>
+</div>
+
+<!-- Print area (hidden) -->
+<div id="alertPrintArea" style="display:none"></div>
+
 <script>
 
 /* ===== Jurisdiction Data ===== */
@@ -3289,6 +3416,25 @@ var jurisdictionData = {
 
             cyberAdvisories: []
 
+        },
+
+        implementation: {
+            aiAct: {
+                status: 'In progress',
+                statusClass: 'amber',
+                note: 'BMDV designated as lead national coordinator; market surveillance allocated to BNetzA (telecoms), BSI (cybersecurity) and BfDI (data processing) by sector. <a href="#">Designation memorandum, Jan 2026 →</a>'
+            },
+            gdpr: {
+                status: 'Active',
+                statusClass: 'green',
+                note: '17 independent Länder DPAs plus the federal BfDI enforce GDPR, coordinating through the Datenschutzkonferenz (DSK). <a href="#">DSK 2026 work programme →</a>'
+            },
+            nis2: {
+                status: 'Transposed',
+                statusClass: 'green',
+                note: 'NIS2 transposed via the BSIG-reform Act (NIS-2UmsuCG) in force since October 2024; BSI acts as lead national authority and single point of contact. <a href="#">NIS-2UmsuCG full text →</a>'
+            },
+            trackerLink: '#'
         }
 
     },
@@ -3687,7 +3833,15 @@ function renderRegionCards(container) {
 
     };
 
+    var homeFlag = window._homeJurFlag || '\u{1F1EC}\u{1F1E7}';
+    var homeName = window._homeJurName || 'United Kingdom';
     var html = '<div class="drill-cards-view" id="drillCardsView">';
+    // Home jurisdiction tile (spans both columns)
+    html += '<div class="sidebar-home-tile" style="grid-column:1/-1" onclick="showJurisdictionDetail(\'' + homeName.replace(/'/g,"\\'") + '\')">';
+    html += '<span class="sht-flag">' + homeFlag + '</span>';
+    html += '<div class="sht-info"><div class="sht-name">' + homeName + '</div><div class="sht-label">Home jurisdiction</div></div>';
+    html += '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>';
+    html += '</div>';
 
     for (var i = 0; i < regions.length; i++) {
 
@@ -4193,6 +4347,30 @@ function renderJurisdictionDetail(name) {
     html += '<div class="stat-card"><div class="stat-value">' + d.enforcement + '</div><div class="stat-label">Enforcement YTD</div><div class="text-xs text-muted" style="margin-top:2px">' + d.enforcementYear + '</div></div>';
     html += '</div>';
 
+    // Implementation status (EU member states)
+    if (d.implementation) {
+        var imp = d.implementation;
+        var laws = [
+            { key: 'aiAct', label: 'EU AI Act' },
+            { key: 'gdpr',  label: 'GDPR' },
+            { key: 'nis2',  label: 'NIS2 Directive' }
+        ];
+        html += '<h2 style="font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--ink);margin:0 0 12px;letter-spacing:-.01em">Implementation Status</h2>';
+        html += '<div class="impl-grid">';
+        laws.forEach(function(law) {
+            var v = imp[law.key];
+            if (!v) return;
+            html += '<div class="impl-card">';
+            html += '<div class="impl-header"><span class="impl-law">' + law.label + '</span><span class="status status-' + v.statusClass + '" style="font-size:.68rem">' + v.status + '</span></div>';
+            html += '<p class="impl-note">' + v.note + '</p>';
+            html += '</div>';
+        });
+        html += '</div>';
+        if (imp.trackerLink) {
+            html += '<div style="margin-bottom:28px;margin-top:-8px"><a href="' + imp.trackerLink + '" style="font-size:.78rem;font-weight:600;color:var(--teal);border-bottom:1px solid var(--teal-light);text-decoration:none">EU AI Act Implementation Tracker \u2192</a></div>';
+        }
+    }
+
     // USA States section
     if (d.states) {
         html += '<h2 class="mb-16">States &amp; Territories</h2>';
@@ -4513,8 +4691,157 @@ document.querySelectorAll('.filter-btn').forEach(function(btn) {
 document.addEventListener('DOMContentLoaded', function() {
 
     buildSidebarRegions();
+    initNewsSelection();
 
 });
+
+
+
+// ===== HOME JURISDICTION =====
+window._homeJurName = 'United Kingdom';
+window._homeJurFlag = '\u{1F1EC}\u{1F1E7}';
+
+function toggleHomeJur() {
+    document.getElementById('homeJurWrap').classList.toggle('open');
+}
+
+function setHomeJur(name, flag, code) {
+    window._homeJurName = name;
+    window._homeJurFlag = flag;
+    document.getElementById('homeJurFlag').innerHTML = flag;
+    document.getElementById('homeJurLabel').textContent = name;
+    // Update active state
+    document.querySelectorAll('.hjd-item').forEach(function(el) { el.classList.remove('active'); });
+    var active = document.getElementById('hjd-' + code);
+    if (active) active.classList.add('active');
+    document.getElementById('homeJurWrap').classList.remove('open');
+    // Re-render sidebar region cards to update home tile
+    if (drillStack.length > 0 && drillStack[drillStack.length - 1].type === 'regions') {
+        renderRegionCards(document.getElementById('drillContainer'));
+    }
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+    var wrap = document.getElementById('homeJurWrap');
+    if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
+});
+
+
+
+// ===== NEWS SELECTION =====
+var _newsSelected = {};
+var _newsIdCounter = 0;
+
+function initNewsSelection() {
+    document.querySelectorAll('.wire-row, .news-lead, .news-second, .news-rgn').forEach(function(el) {
+        var id = 'nsel-' + (_newsIdCounter++);
+        el.dataset.newsSelId = id;
+        // Find the best headline text
+        var headline = '';
+        var h = el.querySelector('h2, h3, h4');
+        if (h) headline = h.textContent.trim();
+        if (!headline) headline = el.textContent.trim().substring(0, 80);
+
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'news-sel-cb';
+        cb.addEventListener('change', function(e) {
+            e.stopPropagation();
+            if (cb.checked) {
+                _newsSelected[id] = headline;
+            } else {
+                delete _newsSelected[id];
+            }
+            _updateNewsBar();
+        });
+        cb.addEventListener('click', function(e) { e.stopPropagation(); });
+        el.insertBefore(cb, el.firstChild);
+    });
+}
+
+function _updateNewsBar() {
+    var keys = Object.keys(_newsSelected);
+    var bar = document.getElementById('newsSelBar');
+    document.getElementById('nsbCount').textContent = keys.length;
+    if (keys.length > 0) {
+        bar.classList.add('visible');
+    } else {
+        bar.classList.remove('visible');
+    }
+}
+
+function clearNewsSelection() {
+    _newsSelected = {};
+    document.querySelectorAll('.news-sel-cb').forEach(function(cb) { cb.checked = false; });
+    _updateNewsBar();
+}
+
+function openAlertModal() {
+    var keys = Object.keys(_newsSelected);
+    document.getElementById('amCount').textContent = keys.length + ' ' + (keys.length === 1 ? 'story' : 'stories') + ' selected';
+    var list = document.getElementById('amHeadlines');
+    list.innerHTML = keys.map(function(k) {
+        return '<div class="am-hl-item">' + (_newsSelected[k] || k) + '</div>';
+    }).join('');
+    document.getElementById('amNote').value = '';
+    document.getElementById('alertOverlay').classList.add('visible');
+}
+
+function closeAlertModal() {
+    document.getElementById('alertOverlay').classList.remove('visible');
+}
+
+var _alertTemplates = [
+    'Hi [name], thought you might want to see this \u2014\n\n',
+    'FYI \u2013 regulatory update worth noting:\n\n',
+    'For your attention / action:\n\n'
+];
+
+function fillAlertTemplate(idx) {
+    var ta = document.getElementById('amNote');
+    ta.value = _alertTemplates[idx];
+    ta.focus();
+    ta.setSelectionRange(ta.value.length, ta.value.length);
+}
+
+function sendAlert() {
+    var keys = Object.keys(_newsSelected);
+    var headlines = keys.map(function(k, i) { return (i + 1) + '. ' + (_newsSelected[k] || k); }).join('\n');
+    var note = document.getElementById('amNote').value.trim();
+    var body = '';
+    if (note) body += note + '\n\n';
+    body += '\u2014 Regulatory dispatches from PrinciplesAI \u2014\n\n' + headlines;
+    body += '\n\n\u2014\nSent via PrinciplesAI \u00b7 principlesai.com';
+    var subject = 'Regulatory Alert: ' + keys.length + ' update' + (keys.length !== 1 ? 's' : '') + ' from PrinciplesAI';
+    window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    closeAlertModal();
+}
+
+function downloadAlertPDF() {
+    var keys = Object.keys(_newsSelected);
+    var note = (document.getElementById('amNote') || {}).value || '';
+    note = note.trim();
+    var headlines = keys.map(function(k, i) {
+        return '<div style="padding:5px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#1a2333;line-height:1.5">' + (i + 1) + '. ' + (_newsSelected[k] || k) + '</div>';
+    }).join('');
+    var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    var content = '<div style="font-family:Georgia,serif;max-width:660px;margin:40px auto;padding:40px;border:1px solid #dce0e8">'
+        + '<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0e8a7d;margin-bottom:14px">PrinciplesAI Regulatory Alert</div>'
+        + '<h1 style="font-size:22px;font-weight:400;letter-spacing:-.03em;margin:0 0 6px;color:#0f172a">Regulatory Dispatch</h1>'
+        + '<p style="font-size:12px;color:#56606f;margin:0 0 24px">' + today + '</p>'
+        + (note ? '<p style="font-size:13px;color:#0f172a;margin-bottom:22px;line-height:1.65;border-left:3px solid #0e8a7d;padding-left:14px">' + note.replace(/\n/g, '<br>') + '</p>' : '')
+        + '<div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#56606f;margin-bottom:10px">Selected Updates</div>'
+        + '<div>' + headlines + '</div>'
+        + '<div style="margin-top:28px;padding-top:14px;border-top:1px solid #e3e6ec;font-size:10px;color:#8a93a0">PrinciplesAI \u00b7 principlesai.com \u00b7 Generated ' + today + '</div>'
+        + '</div>';
+    var area = document.getElementById('alertPrintArea');
+    area.innerHTML = content;
+    area.style.display = 'block';
+    window.print();
+    setTimeout(function() { area.style.display = 'none'; }, 500);
+    closeAlertModal();
+}
 
 </script>
 
