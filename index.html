@@ -22,11 +22,11 @@
 
     --teal:#0e8a7d;--teal-light:#e5f5f2;--teal-dark:#0a6b61;
 
-    --bg:#f8f9fa;--surface:#fff;
+    --bg:#f4f5f7;--surface:#fff;--surface-2:#f9fafb;
 
-    --ink:#0f172a;--secondary:#475467;--muted:#6c7686;
+    --ink:#0f172a;--secondary:#475467;--muted:#6c7686;--ink-faint:#98a0ad;
 
-    --border:#d5d8dd;
+    --border:#e3e6ec;--border-soft:#eef0f4;
 
     --green:#0e8a7d;--amber:#d97706;--red:#a02528;
 
@@ -46,7 +46,7 @@
 
 html{font-size:15px;-webkit-text-size-adjust:100%}
 
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
 
@@ -266,9 +266,9 @@ button{cursor:pointer}
 
 /* ===== MAIN CONTENT ===== */
 
-.main-content{margin-left:var(--sidebar-collapsed);padding-top:calc(var(--header-height) + 42px);min-height:100vh;transition:margin-left .25s cubic-bezier(.4,0,.2,1)}
+.main-content{margin-left:var(--sidebar-collapsed);padding-top:var(--header-height);min-height:100vh;transition:margin-left .25s cubic-bezier(.4,0,.2,1)}
 
-.page-view{display:none;padding:28px 32px 60px;max-width:1320px;margin:0 auto}
+.page-view{display:none;padding:32px 40px 80px;max-width:1360px;margin:0 auto}
 
 .page-view.active{display:block}
 
@@ -278,7 +278,7 @@ button{cursor:pointer}
 
 .serif{font-family:var(--serif)}
 
-h1.page-title{font-family:var(--serif);font-size:1.8rem;font-weight:700;line-height:1.2;letter-spacing:-0.01em;color:var(--ink)}
+h1.page-title{font-family:var(--serif);font-size:2rem;font-weight:400;line-height:1.1;letter-spacing:-0.03em;color:var(--ink)}
 
 h1.page-title em{font-style:italic;color:var(--teal)}
 
@@ -710,6 +710,216 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
+
+
+/* ===== NEWS PAGE ===== */
+
+.news-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+
+.news-new-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface);border:1px solid var(--border);font-size:.78rem;color:var(--secondary)}
+
+.news-new-badge .nbn{font-family:var(--serif);font-size:1.1rem;font-weight:400;color:var(--teal);margin-right:2px}
+
+.news-filter-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+
+.news-filter-pill{display:inline-flex;align-items:center;height:30px;padding:0 14px;font-size:.75rem;font-weight:600;color:var(--secondary);background:var(--surface);border:1px solid var(--border);cursor:pointer;transition:all .12s}
+
+.news-filter-pill:hover{border-color:var(--muted)}
+
+.news-filter-pill.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+.news-filter-sep{width:1px;height:20px;background:var(--border);margin:0 4px}
+
+.news-lead{background:var(--surface);border:1px solid var(--border);padding:36px 44px;margin-bottom:18px;cursor:pointer;transition:border-color .12s}
+
+.news-lead:hover{border-color:var(--ink)}
+
+.news-lead .nl-kick{font-size:.72rem;font-weight:700;color:var(--teal);letter-spacing:.06em;margin-bottom:14px;display:flex;align-items:center;gap:16px}
+
+.news-lead .nl-kick .nl-meta{color:var(--muted);font-weight:500;letter-spacing:0}
+
+.news-lead h2{font-family:var(--serif);font-size:2.2rem;font-weight:400;line-height:1.1;letter-spacing:-.04em;margin:0 0 14px;max-width:860px}
+
+.news-lead .nl-standfirst{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--secondary);line-height:1.55;max-width:760px;margin:0 0 18px}
+
+.news-lead .nl-footer{display:flex;gap:28px;font-size:.75rem;color:var(--muted);padding-top:16px;border-top:1px solid var(--border)}
+
+.news-lead .nl-footer strong{color:var(--ink);font-weight:600}
+
+.news-lead .nl-footer a{color:var(--teal);font-weight:600}
+
+.news-seconds{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+
+.news-second{background:var(--surface);border:1px solid var(--border);padding:24px 28px;cursor:pointer;transition:border-color .12s}
+
+.news-second:hover{border-color:var(--ink)}
+
+.news-second .ns-kick{font-size:.72rem;font-weight:700;color:var(--teal);letter-spacing:.06em;margin-bottom:10px}
+
+.news-second h3{font-family:var(--serif);font-size:1.2rem;font-weight:400;line-height:1.2;letter-spacing:-.02em;margin:0 0 8px}
+
+.news-second .ns-summary{font-size:.82rem;color:var(--secondary);line-height:1.55;margin:0 0 14px}
+
+.news-second .ns-meta{font-size:.72rem;color:var(--muted);padding-top:12px;border-top:1px solid var(--border)}
+
+.news-regions{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
+
+.news-rgn{background:var(--surface);border:1px solid var(--border);padding:18px 20px;cursor:pointer;transition:border-color .12s}
+
+.news-rgn:hover{border-color:var(--ink)}
+
+.news-rgn .nr-label{font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase}
+
+.news-rgn h4{font-family:var(--serif);font-size:.9rem;font-weight:400;line-height:1.3;margin:0 0 8px}
+
+.news-rgn .nr-meta{font-size:.72rem;color:var(--muted)}
+
+.wire-header{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:0}
+
+.wire-header h2{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin:0;letter-spacing:-.02em}
+
+.wire-header .wh-count{font-size:.72rem;color:var(--muted);font-weight:600}
+
+.wire-header .wh-count strong{color:var(--ink);font-family:var(--serif);font-size:.92rem;margin-right:2px}
+
+.wire-list{background:var(--surface);border:1px solid var(--border);border-top:none}
+
+.wire-row{display:grid;grid-template-columns:86px 100px 1fr 100px;gap:16px;align-items:center;padding:11px 22px;border-bottom:1px solid var(--border-soft);cursor:pointer;transition:background .1s}
+
+.wire-row:last-child{border-bottom:none}
+
+.wire-row:hover{background:var(--surface-2)}
+
+.wr-ts{font-size:.72rem;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums}
+
+.wr-ts .wr-date{display:block;color:var(--ink-faint);font-size:.68rem;margin-top:1px}
+
+.wr-jur{font-size:.75rem;color:var(--secondary);font-weight:600}
+
+.wr-info h4{font-family:var(--serif);font-size:.88rem;font-weight:400;color:var(--ink);margin:0 0 2px;letter-spacing:-.01em;line-height:1.35}
+
+.wr-info .wr-src{font-size:.72rem;color:var(--ink-faint)}
+
+.wr-info .wr-src strong{color:var(--muted)}
+
+.wr-tag{font-size:.68rem;font-weight:600;padding:3px 9px;border:1px solid var(--border);color:var(--secondary);background:var(--bg);text-align:center;white-space:nowrap}
+
+.wr-tag.enforcement{color:var(--amber);border-color:#e8d5c1;background:#fef6e5}
+
+.wr-tag.case-law{color:var(--teal);border-color:var(--teal-light);background:var(--teal-light)}
+
+.wr-tag.legislation{color:var(--blue);border-color:#d0e0fb;background:var(--blue-bg)}
+
+.wr-tag.alert{color:var(--red);border-color:#fad0d1;background:var(--red-bg)}
+
+.wr-tag.consultation{color:#6b7280;border-color:#e5e7eb;background:#f9fafb}
+
+.wire-foot{padding:13px 22px;font-size:.78rem;color:var(--muted);text-align:center;background:var(--surface-2);border-top:1px solid var(--border)}
+
+.wire-foot a{color:var(--teal);font-weight:600}
+
+
+
+/* ===== TOPICS MENU ===== */
+
+.topics-featured{background:var(--teal);color:#fff;padding:36px 44px;margin-bottom:18px;cursor:pointer}
+
+.topics-featured .tf-label{font-size:.72rem;font-weight:700;letter-spacing:.06em;opacity:.7;margin-bottom:10px}
+
+.topics-featured h2{font-family:var(--serif);font-size:1.8rem;font-weight:400;letter-spacing:-.03em;margin:0 0 10px;color:#fff}
+
+.topics-featured p{font-size:.88rem;opacity:.85;line-height:1.55;max-width:560px}
+
+.topics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+.topic-card{background:var(--surface);border:1px solid var(--border);padding:24px 26px;cursor:pointer;transition:border-color .12s}
+
+.topic-card:hover{border-color:var(--ink)}
+
+.topic-card h3{font-family:var(--serif);font-size:1rem;font-weight:400;letter-spacing:-.02em;margin:0 0 8px}
+
+.topic-card p{font-size:.82rem;color:var(--secondary);line-height:1.5;margin:0 0 14px}
+
+.topic-card .tc-link{font-size:.78rem;font-weight:600;color:var(--teal)}
+
+
+
+/* ===== AUTHORITY TABS ===== */
+
+.auth-tabs-strip{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:20px;overflow-x:auto}
+
+.auth-tab{padding:8px 16px;font-size:.78rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .12s}
+
+.auth-tab:hover{color:var(--secondary)}
+
+.auth-tab.active{color:var(--teal);font-weight:600;border-bottom-color:var(--teal)}
+
+.auth-tab .at-count{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:9px;background:#eef0f3;color:var(--secondary);font-size:.68rem;font-weight:700;margin-left:5px}
+
+.auth-tab.active .at-count{background:var(--teal-light);color:var(--teal)}
+
+.auth-card-new{background:var(--surface);border:1px solid var(--border);padding:18px 20px;transition:border-color .12s}
+
+.auth-card-new:hover{border-color:var(--muted)}
+
+.auth-card-new .acn-type{margin-bottom:6px}
+
+.auth-card-new .acn-name{font-family:var(--serif);font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:5px;line-height:1.3}
+
+.auth-card-new .acn-desc{font-size:.78rem;color:var(--secondary);line-height:1.5;margin-bottom:8px}
+
+.auth-card-new .acn-link{font-size:.75rem;color:var(--teal)}
+
+
+
+/* ===== EU COLUMNS ===== */
+
+.eu-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+
+.eu-col{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--teal);padding:18px 20px}
+
+.eu-col .ec-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px}
+
+.eu-col .ec-note{font-size:.8rem;color:var(--secondary);line-height:1.5;margin:8px 0}
+
+.eu-col .ec-date{font-size:.72rem;color:var(--ink-faint)}
+
+
+
+/* ===== CONTENT TABS ===== */
+
+.content-tabs-strip{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:0;overflow-x:auto}
+
+.content-tab{padding:8px 14px;font-size:.78rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .12s}
+
+.content-tab:hover{color:var(--secondary)}
+
+.content-tab.active{color:var(--teal);font-weight:600;border-bottom-color:var(--teal)}
+
+.content-tab .ct-n{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#eef0f3;color:var(--secondary);font-size:.68rem;font-weight:700;margin-left:5px}
+
+.content-tab.active .ct-n{background:var(--teal-light);color:var(--teal)}
+
+.content-tab-body{background:var(--surface);border:1px solid var(--border);border-top:none;padding:0}
+
+.ct-empty{padding:28px 32px;border-left:3px solid var(--teal);margin:20px 0 4px;background:var(--teal-light)}
+
+.ct-empty p{font-size:.85rem;color:var(--secondary);line-height:1.6;font-style:italic;max-width:600px}
+
+.ct-item-row{display:flex;align-items:flex-start;gap:18px;padding:14px 22px;border-bottom:1px solid var(--border-soft)}
+
+.ct-item-row:last-child{border-bottom:none}
+
+.ct-item-row .cir-date{font-size:.72rem;color:var(--muted);min-width:72px;flex-shrink:0;padding-top:2px;font-variant-numeric:tabular-nums}
+
+.ct-item-row .cir-body{flex:1;min-width:0}
+
+.ct-item-row .cir-title{font-size:.88rem;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:3px}
+
+.ct-item-row .cir-summary{font-size:.78rem;color:var(--secondary);line-height:1.45}
+
+.ct-item-row .cir-status{flex-shrink:0}
+
 </style>
 
 </head>
@@ -724,9 +934,9 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
     <div class="sidebar-brand">
 
-        <div class="brand-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg></div>
+        <div class="brand-icon" style="border-radius:4px"><span style="font-family:var(--serif);font-style:italic;font-weight:700;font-size:.88rem;color:#fff;letter-spacing:-.5px">P</span></div>
 
-        <span class="brand-text">PrinciplesAI</span>
+        <span class="brand-text" style="font-family:var(--serif);font-weight:600;letter-spacing:-.3px">PrinciplesAI</span>
 
     </div>
 
@@ -800,9 +1010,15 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
         <div class="sidebar-nav-item" data-page="account" onclick="showPage('account')">
 
-            <div class="user-avatar">D</div>
+            <div style="position:relative;flex-shrink:0">
+                <div class="user-avatar">D</div>
+                <span style="position:absolute;bottom:0;right:0;width:9px;height:9px;background:#22c55e;border-radius:50%;border:2px solid var(--surface)"></span>
+            </div>
 
-            <span class="nav-label">David</span>
+            <div class="nav-label" style="display:flex;flex-direction:column;line-height:1.3">
+                <span style="font-weight:600;font-size:.84rem">David Mitchell</span>
+                <span style="font-size:.72rem;color:var(--muted)">PrinciplesAI</span>
+            </div>
 
         </div>
 
@@ -850,27 +1066,6 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 
 
-<!-- ===== PAGE TABS ===== -->
-
-<div class="page-tabs">
-
-    <div class="page-tab active" data-page="home" onclick="showPage('home')">Home</div>
-
-    <div class="page-tab" data-page="news" onclick="showPage('news')">News</div>
-
-    <div class="page-tab" data-page="jurisdictions" onclick="showPage('jurisdictions')">Jurisdictions</div>
-
-    <div class="page-tab" data-page="topics" onclick="showPage('topics')">Topics</div>
-
-    <div class="page-tab" data-page="authorities" onclick="showPage('authorities')">Authorities</div>
-
-    <div class="page-tab" data-page="lists" onclick="showPage('lists')">Lists</div>
-
-    <div class="page-tab" data-page="community" onclick="showPage('community')">Community</div>
-
-    <div class="page-tab" data-page="account" onclick="showPage('account')">Account</div>
-
-</div>
 
 
 
@@ -1194,285 +1389,112 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 <div class="page-view" id="page-news">
 
-    <div class="mb-8" style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal)">PRINCIPLESAI</div>
-
-    <h1 class="page-title mb-8" style="font-size:2rem">Your <em>inbox</em></h1>
-
-    <div class="flex items-center gap-16 mb-24">
-
-        <span class="text-sm text-secondary">56 stories today &middot; 11 in your watchlist &middot; 42 unread</span>
-
-        <span class="text-sm" style="color:var(--green)"><span class="live-dot"></span>Live &middot; checker updated 4 min ago</span>
-
+    <!-- Header -->
+    <div class="news-top">
+        <div>
+            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:10px">PrinciplesAI</div>
+            <h1 class="page-title" style="margin-bottom:6px">Your <em>News</em></h1>
+            <div style="font-size:.82rem;color:var(--secondary)">Editorial wire of every regulatory development PAI has touched in the last 24 hours, ranked.</div>
+        </div>
+        <div class="news-new-badge">
+            <span class="nbn">12</span> new since you last logged in
+        </div>
     </div>
-
-
-
-    <!-- Lead story -->
-
-    <div class="lead-story">
-
-        <div class="ls-badge">TODAY'S LEAD</div>
-
-        <div class="ls-meta">10 April 2026 &middot; Italy &middot; Data Protection</div>
-
-        <h2>Italy: Garante fines Intesa Sanpaolo &euro;31.8m for failing to detect employee's unauthorised client data access</h2>
-
-        <div class="ls-standfirst">Italy's data protection authority has imposed its largest-ever fine on a financial institution after a bank employee accessed personal records of over 3,500 clients, including high-profile political figures, without authorisation over a period of more than two years. The decision raises critical questions about internal monitoring obligations and the adequacy of technical safeguards under GDPR Article 32.</div>
-
-        <a href="#" class="ls-link">Read full story &rarr;</a>
-
-    </div>
-
-
-
-    <!-- Ask the Desk -->
-
-    <div class="ask-desk">
-
-        <span class="ad-label">ASK THE DESK</span>
-
-        <input type="text" placeholder="A question for the analyst team?">
-
-        <button class="btn btn-teal btn-sm">Send</button>
-
-        <span class="ad-sla">2 day SLA</span>
-
-    </div>
-
-
 
     <!-- Filters -->
-
-    <div class="filter-bar">
-
-        <div class="filter-btn active">For you <strong style="margin-left:4px">11</strong></div>
-
-        <div class="filter-btn">VIEW All</div>
-
-        <div class="filter-btn">TYPE Any</div>
-
-        <div class="filter-btn">REGION All</div>
-
-        <div class="filter-btn">TOPIC All</div>
-
-        <div class="filter-btn">TIME Today</div>
-
+    <div class="news-filter-bar">
+        <div class="news-filter-pill active">All</div>
+        <div class="news-filter-pill">Enforcement</div>
+        <div class="news-filter-pill">Case Law</div>
+        <div class="news-filter-pill">Guidance</div>
+        <div class="news-filter-pill">Legislation</div>
+        <div class="news-filter-pill">Consultation</div>
+        <div class="news-filter-pill">Alert</div>
+        <div class="news-filter-sep"></div>
+        <div class="news-filter-pill">Region &#9662;</div>
+        <div class="news-filter-pill">Jurisdiction &#9662;</div>
     </div>
 
-
-
-    <!-- Dispatch list -->
-
-    <div class="grid-sidebar-layout">
-
-        <div class="card" style="overflow:hidden">
-
-            <div class="dispatch-row" style="background:var(--teal-light)">
-
-                <span class="dispatch-date">10 Apr</span>
-
-                <span class="dispatch-flag">&#x1F1EE;&#x1F1F9;</span>
-
-                <div class="dispatch-body">
-
-                    <div class="dispatch-headline">Italy: Garante fines Intesa Sanpaolo &euro;31.8m for unauthorised data access</div>
-
-                    <div class="dispatch-sub">Banking sector GDPR enforcement &middot; Internal monitoring obligations</div>
-
-                </div>
-
-                <div class="dispatch-badges">
-
-                    <span class="badge badge-red">Alert</span>
-
-                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-
-                    <span class="dispatch-editor">Editor's Lead</span>
-
-                </div>
-
-            </div>
-
-            <div class="dispatch-row">
-
-                <span class="dispatch-date">10 Apr</span>
-
-                <span class="dispatch-flag">&#x1F1FA;&#x1F1F8;</span>
-
-                <div class="dispatch-body">
-
-                    <div class="dispatch-headline">NIST releases updated AI Risk Management Framework v2.1</div>
-
-                    <div class="dispatch-sub">Foundation model evaluation &middot; Red-teaming guidance</div>
-
-                </div>
-
-                <div class="dispatch-badges">
-
-                    <span class="badge badge-blue">Lead</span>
-
-                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-
-                </div>
-
-            </div>
-
-            <div class="dispatch-row">
-
-                <span class="dispatch-date">10 Apr</span>
-
-                <span class="dispatch-flag">&#x1F1EC;&#x1F1E7;</span>
-
-                <div class="dispatch-body">
-
-                    <div class="dispatch-headline">UK: FCA issues guidance on AI use in financial services</div>
-
-                    <div class="dispatch-sub">Consumer protection &middot; Algorithmic trading safeguards</div>
-
-                </div>
-
-                <div class="dispatch-badges">
-
-                    <span class="badge badge-neutral">Guidance</span>
-
-                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-
-                </div>
-
-            </div>
-
-            <div class="dispatch-row">
-
-                <span class="dispatch-date">10 Apr</span>
-
-                <span class="dispatch-flag">&#x1F1EA;&#x1F1FA;</span>
-
-                <div class="dispatch-body">
-
-                    <div class="dispatch-headline">EU AI Office publishes first harmonised standards request</div>
-
-                    <div class="dispatch-sub">Technical standards &middot; Conformity assessment</div>
-
-                </div>
-
-                <div class="dispatch-badges">
-
-                    <span class="badge badge-blue">Lead</span>
-
-                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-
-                </div>
-
-            </div>
-
-            <div class="dispatch-row">
-
-                <span class="dispatch-date">9 Apr</span>
-
-                <span class="dispatch-flag">&#x1F1EF;&#x1F1F5;</span>
-
-                <div class="dispatch-body">
-
-                    <div class="dispatch-headline">Japan: Cabinet approves AI Basic Act draft</div>
-
-                    <div class="dispatch-sub">Comprehensive AI law &middot; Risk-based classification</div>
-
-                </div>
-
-                <div class="dispatch-badges">
-
-                    <span class="badge badge-amber">Bill</span>
-
-                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-
-                </div>
-
-            </div>
-
-            <div class="dispatch-row">
-
-                <span class="dispatch-date">9 Apr</span>
-
-                <span class="dispatch-flag">&#x1F1E6;&#x1F1FA;</span>
-
-                <div class="dispatch-body">
-
-                    <div class="dispatch-headline">Australia: ACCC launches inquiry into AI in digital platforms</div>
-
-                    <div class="dispatch-sub">Competition law &middot; Market power in AI</div>
-
-                </div>
-
-                <div class="dispatch-badges">
-
-                    <span class="badge badge-neutral">Inquiry</span>
-
-                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-
-                </div>
-
-            </div>
-
-            <div class="dispatch-row">
-
-                <span class="dispatch-date">9 Apr</span>
-
-                <span class="dispatch-flag">&#x1F1F0;&#x1F1F7;</span>
-
-                <div class="dispatch-body">
-
-                    <div class="dispatch-headline">South Korea: PIPC updates AI privacy guidelines</div>
-
-                    <div class="dispatch-sub">Personal data in AI training &middot; Consent mechanisms</div>
-
-                </div>
-
-                <div class="dispatch-badges">
-
-                    <span class="badge badge-neutral">Guidance</span>
-
-                    <span class="dispatch-stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-
-                </div>
-
-            </div>
-
+    <!-- Lead story -->
+    <div class="news-lead">
+        <div class="nl-kick">TODAY&#39;S LEAD <span class="nl-meta">&middot; Japan &middot; 8 April 2026 &middot; 5 min read</span></div>
+        <h2>Japan passes AI Promotion Act, charters AI Strategy Headquarters under the Cabinet Office</h2>
+        <p class="nl-standfirst">The Diet adopted Law No. 47/2025 on 28 May, creating the country&#39;s first horizontal AI framework and giving the new Strategy HQ direct oversight of high-risk deployments across financial services, healthcare and public-sector procurement.</p>
+        <div class="nl-footer">
+            <span><strong>Type</strong> Legislation</span>
+            <span><strong>Authority</strong> Personal Information Protection Commission</span>
+            <span><strong>Source</strong> <a href="#">ppc.go.jp &rarr;</a></span>
         </div>
-
-
-
-        <!-- Story detail panel -->
-
-        <div class="card">
-
-            <div class="card-body">
-
-                <h2 style="font-size:1.05rem;margin-bottom:12px">Italy: Garante fines Intesa Sanpaolo &euro;31.8m for failing to detect employee's unauthorised client data access</h2>
-
-                <p class="text-sm text-secondary" style="line-height:1.5;margin-bottom:16px">Italy's Garante per la protezione dei dati personali imposed a &euro;31.8 million fine on Intesa Sanpaolo after an employee accessed the personal records of over 3,500 clients without authorisation. The investigation revealed that the bank's monitoring systems failed to flag the repeated access over a period exceeding two years.</p>
-
-                <p class="text-sm text-secondary" style="line-height:1.5;margin-bottom:16px">The regulator found violations of GDPR Articles 5(1)(f), 25, and 32, concluding that the bank's technical and organisational measures were insufficient to ensure appropriate security of personal data processing.</p>
-
-                <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:14px">
-
-                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Type</span><span class="text-xs" style="font-weight:600">Enforcement Action</span></div>
-
-                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Jurisdiction</span><span class="text-xs" style="font-weight:600">Italy</span></div>
-
-                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Date</span><span class="text-xs" style="font-weight:600">10 April 2026</span></div>
-
-                    <div class="flex justify-between mb-8"><span class="text-xs text-muted">Authority</span><span class="text-xs" style="font-weight:600">Garante per la protezione dei dati personali</span></div>
-
-                    <div class="flex justify-between"><span class="text-xs text-muted">Source</span><a href="#" class="text-xs" style="font-weight:600;color:var(--teal)">Garante official decision</a></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
+
+    <!-- Two second leads -->
+    <div class="news-seconds">
+        <div class="news-second">
+            <div class="ns-kick">SECOND LEAD &middot; Italy &middot; 8 Apr</div>
+            <h3>Italy: Law 132/2025 designates ACN and AgID as national AI authorities</h3>
+            <p class="ns-summary">The Italian government has named the Cybersecurity Agency and the Agency for Digital Italy as the country&#39;s two national authorities under Article 70 of the EU AI Act, splitting market surveillance from conformity oversight.</p>
+            <div class="ns-meta">Legislation &middot; acn.gov.it</div>
+        </div>
+        <div class="news-second">
+            <div class="ns-kick">SECOND LEAD &middot; Belgium &middot; 8 Apr</div>
+            <h3>Belgium: SPF Economie publishes the official list of 21 designated AI Act authorities</h3>
+            <p class="ns-summary">Belgium has finalised its national AI Act architecture, naming 21 sectoral regulators across financial services, telecoms, transport, employment and public administration as competent authorities.</p>
+            <div class="ns-meta">Legislation &middot; economie.fgov.be</div>
+        </div>
+    </div>
+
+    <!-- 4-up regional strip -->
+    <div class="news-regions">
+        <div class="news-rgn">
+            <div class="nr-label">Europe &middot; 7 stories</div>
+            <h4>EDPB issues binding decision on TikTok cross-border processing</h4>
+            <div class="nr-meta">+6 more &middot; France, Germany, Spain, Italy, Netherlands</div>
+        </div>
+        <div class="news-rgn">
+            <div class="nr-label">APAC &middot; 4 stories</div>
+            <h4>Singapore PDPC publishes Model AI Governance Framework v3</h4>
+            <div class="nr-meta">+3 more &middot; Japan, Australia, South Korea</div>
+        </div>
+        <div class="news-rgn">
+            <div class="nr-label">Americas &middot; 3 stories</div>
+            <h4>FTC bans Rite Aid from facial recognition for five years</h4>
+            <div class="nr-meta">+2 more &middot; Kentucky, Brazil</div>
+        </div>
+        <div class="news-rgn">
+            <div class="nr-label">Pressure Points &middot; 3 stories</div>
+            <h4>Italy: Garante fines OpenAI &euro;15m + orders public awareness campaign</h4>
+            <div class="nr-meta">+2 more &middot; Netherlands AFM, EDPS Microsoft 365</div>
+        </div>
+    </div>
+
+    <!-- The wire -->
+    <div class="wire-header">
+        <h2>The wire</h2>
+        <div class="wh-count"><strong>27</strong> further dispatches in the last 24 hours</div>
+    </div>
+    <div class="wire-list">
+        <div class="wire-row"><div class="wr-ts">22:38<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EE;&#x1F1EA; Ireland</div><div class="wr-info"><h4>Ireland: DPC opens investigation into X over training-data practices</h4><div class="wr-src"><strong>Data Protection Commission</strong> &middot; <span>dataprotection.ie</span></div></div><div class="wr-tag enforcement">Enforcement</div></div>
+        <div class="wire-row"><div class="wr-ts">22:14<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EE;&#x1F1F9; Italy</div><div class="wr-info"><h4>Italy: Garante fines OpenAI &euro;15m and orders public awareness campaign</h4><div class="wr-src"><strong>Garante per la protezione dei dati personali</strong> &middot; <span>garanteprivacy.it</span></div></div><div class="wr-tag enforcement">Enforcement</div></div>
+        <div class="wire-row"><div class="wr-ts">21:42<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EB;&#x1F1F7; France</div><div class="wr-info"><h4>France: DGE publishes AI Act competent-authority allocation scheme</h4><div class="wr-src"><strong>Direction G&eacute;n&eacute;rale des Entreprises</strong> &middot; <span>entreprises.gouv.fr</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">21:30<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1F5;&#x1F1F9; Portugal</div><div class="wr-info"><h4>Portugal: Government designates ANACOM as national AI Act Market Surveillance Authority</h4><div class="wr-src"><strong>Council of Ministers</strong> &middot; <span>portugal.gov.pt</span></div></div><div class="wr-tag legislation">Legislation</div></div>
+        <div class="wire-row"><div class="wr-ts">21:18<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1F8;&#x1F1F0; Slovakia</div><div class="wr-info"><h4>Slovakia: MIRRI proposed as general AI Act Market Surveillance Authority and central single point of contact</h4><div class="wr-src"><strong>Ministry of Investments, Regional Development and Informatization</strong> &middot; <span>mirri.gov.sk</span></div></div><div class="wr-tag legislation">Legislation</div></div>
+        <div class="wire-row"><div class="wr-ts">21:02<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1F7;&#x1F1F4; Romania</div><div class="wr-info"><h4>Romania: Government Memorandum designates ANCOM as national AI Act Market Surveillance Authority</h4><div class="wr-src"><strong>Government of Romania</strong> &middot; <span>gov.ro</span></div></div><div class="wr-tag legislation">Legislation</div></div>
+        <div class="wire-row"><div class="wr-ts">20:48<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E6;&#x1F1FA; Australia</div><div class="wr-info"><h4>Australia: Dept of Industry publishes Guidance for AI Adoption replacing Voluntary AI Safety Standard</h4><div class="wr-src"><strong>Department of Industry, Science and Resources</strong> &middot; <span>industry.gov.au</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">20:31<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EA;&#x1F1FA; EU</div><div class="wr-info"><h4>EDPS follows up on European Commission Microsoft 365 compliance</h4><div class="wr-src"><strong>European Data Protection Supervisor</strong> &middot; <span>edps.europa.eu</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">19:55<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1F8;&#x1F1EC; Singapore</div><div class="wr-info"><h4>Singapore PDPC publishes Model AI Governance Framework v3</h4><div class="wr-src"><strong>Personal Data Protection Commission</strong> &middot; <span>pdpc.gov.sg</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">19:32<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EB;&#x1F1F7; France</div><div class="wr-info"><h4>France: CNIL fines Acme SAS &euro;380,000 for data security and cookie consent failures</h4><div class="wr-src"><strong>Commission nationale de l&#39;informatique et des libert&eacute;s</strong> &middot; <span>cnil.fr</span></div></div><div class="wr-tag enforcement">Enforcement</div></div>
+        <div class="wire-row"><div class="wr-ts">18:55<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EA;&#x1F1FA; EU</div><div class="wr-info"><h4>EDPB and EDPS adopt joint opinion on Cybersecurity Act 2 and NIS2 amendments</h4><div class="wr-src"><strong>European Data Protection Board</strong> &middot; <span>edpb.europa.eu</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">18:22<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E9;&#x1F1EA; Germany</div><div class="wr-info"><h4>Germany: BSI publishes updated C5:2026 Cloud Computing Compliance Criteria Catalogue</h4><div class="wr-src"><strong>Bundesamt f&uuml;r Sicherheit in der Informationstechnik</strong> &middot; <span>bsi.bund.de</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">17:48<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1F0;&#x1F1F7; South Korea</div><div class="wr-info"><h4>South Korea: PIPC fines Coupang KRW 100m for children&#39;s data violations</h4><div class="wr-src"><strong>Personal Information Protection Commission</strong> &middot; <span>pipc.go.kr</span></div></div><div class="wr-tag enforcement">Enforcement</div></div>
+        <div class="wire-row"><div class="wr-ts">17:14<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E7;&#x1F1F7; Brazil</div><div class="wr-info"><h4>Brazil: Superior Court of Justice rejects AI-generated report as evidence in criminal case</h4><div class="wr-src"><strong>Superior Court of Justice</strong> &middot; <span>stj.jus.br</span></div></div><div class="wr-tag case-law">Case Law</div></div>
+        <div class="wire-row"><div class="wr-ts">16:48<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EE;&#x1F1F9; Italy</div><div class="wr-info"><h4>Italy: ACN CSIRT-ITA issues alert for Django security updates</h4><div class="wr-src"><strong>Agenzia per la Cybersicurezza Nazionale</strong> &middot; <span>acn.gov.it</span></div></div><div class="wr-tag alert">Alert</div></div>
+        <div class="wire-row"><div class="wr-ts">16:22<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E8;&#x1F1FF; Czechia</div><div class="wr-info"><h4>Czechia: EDPB launches coordinated enforcement action on GDPR transparency</h4><div class="wr-src"><strong>European Data Protection Board</strong> &middot; <span>edpb.europa.eu</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">15:55<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1FA;&#x1F1F8; US</div><div class="wr-info"><h4>Kentucky: Legislature passes amendments to Consumer Data Protection Act</h4><div class="wr-src"><strong>Kentucky General Assembly</strong> &middot; <span>legislature.ky.gov</span></div></div><div class="wr-tag legislation">Legislation</div></div>
+        <div class="wire-row"><div class="wr-ts">15:30<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E7;&#x1F1EA; Belgium</div><div class="wr-info"><h4>Belgium: Data Protection Authority publishes Strategic Plan 2026&ndash;2028</h4><div class="wr-src"><strong>Autorit&eacute; de protection des donn&eacute;es</strong> &middot; <span>autoriteprotectiondonnees.be</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">14:48<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EA;&#x1F1FA; EU</div><div class="wr-info"><h4>EU: European Parliament publishes briefing on AI regulatory sandboxes</h4><div class="wr-src"><strong>European Parliamentary Research Service</strong> &middot; <span>europarl.europa.eu</span></div></div><div class="wr-tag">Guidance</div></div>
+        <div class="wire-row"><div class="wr-ts">13:22<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1FA;&#x1F1F8; US</div><div class="wr-info"><h4>US: FTC bans Rite Aid from facial recognition technology for five years</h4><div class="wr-src"><strong>Federal Trade Commission</strong> &middot; <span>ftc.gov</span></div></div><div class="wr-tag case-law">Case Law</div></div>
+    </div>
+    <div class="wire-foot"><a href="#">Load earlier dispatches &rarr;</a></div>
 
 </div>
 
@@ -1492,7 +1514,55 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 <div class="page-view" id="page-topics">
 
-    <div class="flex items-center justify-between mb-16">
+    <div class="flex items-center justify-between mb-24">
+        <div>
+            <h1 class="page-title mb-8">Topics</h1>
+            <p class="text-sm text-secondary">Cross-jurisdictional intelligence by subject area</p>
+        </div>
+    </div>
+
+    <!-- Featured topic -->
+    <div class="topics-featured mb-16">
+        <div class="tf-label">FEATURED</div>
+        <h2>AI Governance Notes</h2>
+        <p>The strategic lens on AI policy. How regulators are thinking, where frameworks are heading, and what practitioners need to know before it becomes law.</p>
+    </div>
+
+    <!-- Topic grid -->
+    <div class="topics-grid mb-40">
+        <div class="topic-card">
+            <h3>IP &amp; AI</h3>
+            <p>Copyright, training data, and ownership of AI-generated works across jurisdictions.</p>
+            <div class="tc-link">Explore &rarr;</div>
+        </div>
+        <div class="topic-card">
+            <h3>Trust &amp; Safety</h3>
+            <p>Content moderation, synthetic media, and platform accountability frameworks.</p>
+            <div class="tc-link">Explore &rarr;</div>
+        </div>
+        <div class="topic-card">
+            <h3>Cybersecurity &amp; IM</h3>
+            <p>Incident reporting obligations, NIS2 compliance, and AI in security operations.</p>
+            <div class="tc-link">Explore &rarr;</div>
+        </div>
+        <div class="topic-card">
+            <h3>Standards &amp; Conformity Assessments</h3>
+            <p>Harmonised standards, CE marking, and third-party audit requirements under the AI Act.</p>
+            <div class="tc-link">Explore &rarr;</div>
+        </div>
+        <div class="topic-card">
+            <h3>Vendor &amp; Procurement</h3>
+            <p>Due diligence, contractual obligations, and public sector AI procurement rules.</p>
+            <div class="tc-link">Explore &rarr;</div>
+        </div>
+        <div class="topic-card">
+            <h3>Incident Response</h3>
+            <p>Breach notification timelines, supervisory authority reporting, and crisis playbooks.</p>
+            <div class="tc-link">Explore &rarr;</div>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-between mb-16" style="display:none">
 
         <div>
 
@@ -2804,17 +2874,17 @@ var jurisdictionData = {
 
         authorities: [
 
-            { type: 'Data Protection', badge: 'blue', name: 'Information Commissioner\u2019s Office (ICO)', link: 'ico.org.uk' },
+            { type: 'Data Protection', tabCategory: 'data-protection', badge: 'blue', name: 'Information Commissioner\u2019s Office (ICO)', link: 'ico.org.uk', description: 'Regulates data protection and privacy. Extended AI mandate covering algorithmic decision-making and AI-powered data processing.' },
 
-            { type: 'Government Agency', badge: 'neutral', name: 'Dept for Science, Innovation & Technology (DSIT)', link: 'gov.uk/dsit' },
+            { type: 'AI Governance', tabCategory: 'ai-governance', badge: 'neutral', name: 'Dept for Science, Innovation & Technology (DSIT)', link: 'gov.uk/dsit', description: 'Government department leading UK\u2019s AI strategy, regulation policy and the AI Safety Institute.' },
 
-            { type: 'Telecoms Regulator', badge: 'amber', name: 'Office of Communications (Ofcom)', link: 'ofcom.org.uk' },
+            { type: 'Sectoral', tabCategory: 'sectoral', badge: 'amber', name: 'Office of Communications (Ofcom)', link: 'ofcom.org.uk', description: 'Regulates AI in broadcasting, telecoms and online safety under the Online Safety Act.' },
 
-            { type: 'Competition Authority', badge: 'red', name: 'Competition and Markets Authority (CMA)', link: 'gov.uk/cma' },
+            { type: 'Sectoral', tabCategory: 'sectoral', badge: 'red', name: 'Competition and Markets Authority (CMA)', link: 'gov.uk/cma', description: 'AI Foundation Models review. Monitors AI market concentration and consumer protection.' },
 
-            { type: 'Financial Regulator', badge: 'amber', name: 'Financial Conduct Authority (FCA)', link: 'fca.org.uk' },
+            { type: 'Sectoral', tabCategory: 'sectoral', badge: 'amber', name: 'Financial Conduct Authority (FCA)', link: 'fca.org.uk', description: 'AI in financial services: algorithmic trading, credit decisions and insurance products.' },
 
-            { type: 'Cybersecurity Agency', badge: 'green', name: 'National Cyber Security Centre (NCSC)', link: 'ncsc.gov.uk' }
+            { type: 'Cybersecurity', tabCategory: 'cybersecurity', badge: 'green', name: 'National Cyber Security Centre (NCSC)', link: 'ncsc.gov.uk', description: 'AI security guidelines for organisations. Part of GCHQ. Issues advisories on AI-specific cyber threats.' }
 
         ],
 
@@ -3120,6 +3190,58 @@ var jurisdictionData = {
 
         }
 
+    },
+
+    'Western Sahara': {
+
+        flag: '\u{1F1EA}\u{1F1ED}',
+
+        region: 'Africa',
+
+        population: '0.6M',
+
+        populationNote: 'est. (disputed territory)',
+
+        techLaw: 'None',
+
+        techLawStatus: 'no',
+
+        techLawNote: 'No AI or data protection legislation',
+
+        leadAuthority: 'None',
+
+        consultations: 0,
+
+        bills: 0,
+
+        enforcement: 0,
+
+        enforcementYear: '2026',
+
+        bodyCount: 0,
+
+        authorities: [],
+
+        alerts: [],
+
+        contentTypes: {
+
+            legislation: [],
+
+            decisions: [],
+
+            caseLaw: [],
+
+            guidance: [],
+
+            consultations: [],
+
+            enforcement: [],
+
+            cyberAdvisories: []
+
+        }
+
     }
 
 };
@@ -3312,7 +3434,7 @@ var drillData = {
 
             'Niger','Nigeria','Rwanda','Senegal','Sierra Leone','Somalia','South Africa',
 
-            'South Sudan','Sudan','Tanzania','Togo','Tunisia','Uganda','Zambia','Zimbabwe'
+            'South Sudan','Sudan','Tanzania','Togo','Tunisia','Uganda','Western Sahara','Zambia','Zimbabwe'
 
         ]
 
@@ -3396,7 +3518,7 @@ var germanyDrill = {
 
 /* Items that have detail pages */
 
-var detailItems = {'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'Germany':1,'US Federal':1,'Czech Republic':1};
+var detailItems = {'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'Germany':1,'US Federal':1,'Czech Republic':1,'Western Sahara':1};
 
 /* Items that drill deeper (show chevron) */
 
@@ -3952,182 +4074,151 @@ function renderJurisdictionDetail(name) {
 
     if (!name || !jurisdictionData[name]) name = 'Czech Republic';
 
-
-
     var html = '';
 
-
-
-    // Breadcrumb
-
-    html += '<div class="jur-breadcrumb mb-8"><span>JURISDICTIONS</span> &gt; <span>' + d.region.toUpperCase() + '</span> &gt; <span>' + name.toUpperCase() + '</span></div>';
-
-
-
-    // Export buttons
-
+    // Breadcrumb + export links
     html += '<div class="flex items-center justify-between mb-16">';
-
-    html += '<div class="jur-export-btns">';
-
-    html += '<button class="btn btn-outline btn-sm">PDF</button>';
-
-    html += '<button class="btn btn-outline btn-sm">Word</button>';
-
-    html += '<button class="btn btn-outline btn-sm">Cite</button>';
-
-    html += '<span class="text-xs text-muted" style="margin-left:8px">Updated 2h ago</span>';
-
+    html += '<div class="jur-breadcrumb" style="margin-bottom:0"><span>Jurisdictions</span> &rsaquo; <span>' + d.region + '</span> &rsaquo; <span style="color:var(--ink)">' + name + '</span></div>';
+    html += '<div style="display:flex;gap:12px;font-size:.75rem;color:var(--muted)">';
+    html += '<a href="#" style="color:var(--muted)">PDF</a><a href="#" style="color:var(--muted)">Word</a><a href="#" style="color:var(--muted)">Cite</a>';
+    html += '<span style="color:var(--border)">|</span><span>Updated 2h ago</span>';
     html += '</div></div>';
 
-
-
-    // Hero
-
-    html += '<div class="jur-hero">';
-
-    html += '<div class="jur-info">';
-
-    html += '<h1 class="jur-country-name">' + d.flag + ' ' + name + '</h1>';
-
-    html += '<p class="jur-body-count">' + d.bodyCount + ' official bodies monitored</p>';
-
+    // Country name + population fact
+    html += '<div class="mb-24">';
+    html += '<h1 style="font-family:var(--serif);font-size:2.2rem;font-weight:400;letter-spacing:-.04em;margin-bottom:6px">' + d.flag + ' ' + name + '</h1>';
+    html += '<p style="font-size:.82rem;color:var(--muted)">Population ' + d.population + ' \u00b7 ' + d.populationNote + ' \u00b7 ' + d.bodyCount + ' official bodies monitored</p>';
     html += '</div>';
 
-    html += '<div class="jur-silhouette"><svg viewBox="0 0 100 60"><path d="M15 45 L25 20 L40 15 L55 10 L70 15 L85 25 L80 40 L65 50 L50 48 L35 52 L20 50 Z"/></svg></div>';
-
-    html += '</div>';
-
-
-
-    // Stat cards
-
-    html += '<div class="stats-row" style="grid-template-columns:repeat(6,1fr)">';
-
-    html += '<div class="stat-card"><div class="stat-value" style="font-size:1.2rem">' + d.population + '</div><div class="stat-label">Population</div><div class="text-xs text-muted" style="margin-top:2px">' + d.populationNote + '</div></div>';
-
-    html += '<div class="stat-card"><div style="margin-bottom:4px"><span class="status status-' + d.techLawStatus + '">' + d.techLaw + '</span></div><div class="stat-label">Tech-Specific Law</div><div class="text-xs text-secondary" style="margin-top:4px">' + d.techLawNote + '</div></div>';
-
-    html += '<div class="stat-card"><div class="stat-value" style="font-size:1rem">' + d.leadAuthority + '</div><div class="stat-label">Lead Authority</div></div>';
-
+    // Stat cards (without population)
+    html += '<div class="stats-row mb-28" style="grid-template-columns:repeat(5,1fr)">';
+    html += '<div class="stat-card"><div style="margin-bottom:4px"><span class="status status-' + d.techLawStatus + '">' + d.techLaw + '</span></div><div class="stat-label">AI-Specific Law</div><div class="text-xs text-secondary" style="margin-top:4px;line-height:1.4">' + d.techLawNote + '</div></div>';
+    html += '<div class="stat-card"><div class="stat-value" style="font-size:.95rem;line-height:1.3">' + d.leadAuthority + '</div><div class="stat-label">Lead Authority</div></div>';
     html += '<div class="stat-card"><div class="stat-value">' + d.consultations + '</div><div class="stat-label">Open Consultations</div></div>';
-
     html += '<div class="stat-card"><div class="stat-value">' + d.bills + '</div><div class="stat-label">Bills in Progress</div></div>';
-
     html += '<div class="stat-card"><div class="stat-value">' + d.enforcement + '</div><div class="stat-label">Enforcement YTD</div><div class="text-xs text-muted" style="margin-top:2px">' + d.enforcementYear + '</div></div>';
-
     html += '</div>';
-
-
-
-    // Authorities
-
-    var authLabel = (name === 'United States') ? 'Federal Authorities' : 'Relevant AI Authorities';
-
-    html += '<h2 class="mb-16">' + authLabel + '</h2>';
-
-    var authCols = d.authorities.length <= 4 ? 'repeat(4,1fr)' : 'repeat(' + Math.min(d.authorities.length, 4) + ',1fr)';
-
-    html += '<div class="grid-4 mb-24" style="grid-template-columns:' + authCols + '">';
-
-    for (var i = 0; i < d.authorities.length; i++) {
-
-        var a = d.authorities[i];
-
-        html += '<div class="auth-card">';
-
-        html += '<div class="ac-type"><span class="badge badge-' + a.badge + '" style="height:18px;font-size:.72rem">' + a.type + '</span></div>';
-
-        html += '<div class="ac-name">' + a.name + '</div>';
-
-        html += '<a href="#" class="ac-link">' + a.link + ' &rarr;</a>';
-
-        html += '</div>';
-
-    }
-
-    html += '</div>';
-
-
 
     // USA States section
-
     if (d.states) {
-
         html += '<h2 class="mb-16">States &amp; Territories</h2>';
-
         html += '<div class="states-grid mb-24">';
-
         for (var s = 0; s < d.states.length; s++) {
-
             var st = d.states[s];
-
             html += '<div class="state-card">';
-
             html += '<div class="state-card-header"><h4>' + st.name + '</h4><span class="badge badge-teal" style="height:18px;font-size:.72rem">' + st.bills + ' bills</span></div>';
-
             html += '<p class="text-sm text-secondary" style="margin-top:6px;line-height:1.5">' + st.desc + '</p>';
-
             html += '</div>';
-
         }
-
         html += '</div>';
-
         html += '<div style="margin-bottom:24px"><a href="#" style="font-size:.82rem;font-weight:600;color:var(--teal)">+ 44 more states &amp; territories &rarr;</a></div>';
-
     }
 
+    // Authorities with tab view
+    var authLabel = (name === 'United States') ? 'Federal Authorities' : 'Authorities';
+    html += '<h2 class="mb-16">' + authLabel + ' <span style="font-family:var(--sans);font-size:.82rem;font-weight:400;color:var(--muted)">' + d.authorities.length + ' bodies</span></h2>';
 
-
-    // Content Type Sections
-
-    html += renderContentTypeSections(name);
-
-
-
-    // Recent Activity
-
-    html += '<div class="content-type-section">';
-
-    html += '<div class="content-type-header">';
-
-    html += '<h3>Recent Activity</h3>';
-
-    html += '<span class="ct-count">' + d.alerts.length + '</span>';
-
-    html += '</div></div>';
-
-    html += '<div class="card">';
-
-    for (var r = 0; r < d.alerts.length; r++) {
-
-        var al = d.alerts[r];
-
-        html += '<div class="dispatch-row">';
-
-        html += '<span class="dispatch-date">' + al.date + '</span>';
-
-        html += '<div class="dispatch-body">';
-
-        html += '<div class="dispatch-headline">' + al.headline + '</div>';
-
-        html += '<div class="dispatch-sub">' + al.sub + '</div>';
-
+    if (d.authorities.length === 0) {
+        html += '<div class="ct-empty mb-24"><p>Our research team is building out authority coverage for ' + name + '. Regulatory bodies will be listed here as they are identified and verified.</p></div>';
+    } else {
+        var cats = ['all','data-protection','ai-governance','cybersecurity','sectoral','standards'];
+        var catLabels = {'all':'All','data-protection':'Data Protection','ai-governance':'AI Governance','cybersecurity':'Cybersecurity','sectoral':'Sectoral','standards':'Standards'};
+        var catCounts = {};
+        cats.forEach(function(c){ catCounts[c] = c === 'all' ? d.authorities.length : d.authorities.filter(function(a){ return a.tabCategory === c; }).length; });
+        var authTabId = 'authTab_' + name.replace(/\s/g,'');
+        html += '<div class="auth-tabs-strip" id="' + authTabId + '">';
+        cats.forEach(function(c){
+            if (c === 'all' || catCounts[c] > 0) {
+                html += '<div class="auth-tab' + (c==='all'?' active':'') + '" onclick="switchAuthTab(\'' + authTabId + '\',\'' + c + '\')">' + catLabels[c] + '<span class="at-count">' + catCounts[c] + '</span></div>';
+            }
+        });
         html += '</div>';
-
-        html += '<span class="badge badge-' + al.badge + '">' + al.badgeLabel + '</span>';
-
+        html += '<div class="grid-4 mb-28" id="' + authTabId + '_cards" style="grid-template-columns:repeat(3,1fr);padding-top:16px">';
+        d.authorities.forEach(function(a){
+            html += '<div class="auth-card-new" data-cat="' + (a.tabCategory||'') + '">';
+            html += '<div class="acn-type"><span class="badge badge-' + a.badge + '" style="height:18px;font-size:.68rem">' + a.type + '</span></div>';
+            html += '<div class="acn-name">' + a.name + '</div>';
+            if (a.description) html += '<div class="acn-desc">' + a.description + '</div>';
+            html += '<a href="#" class="acn-link">' + a.link + ' &rarr;</a>';
+            html += '</div>';
+        });
         html += '</div>';
-
     }
 
+    // Content tabs
+    var tabs = [
+        { key: 'alerts', label: 'Recent Alerts', items: d.alerts || [] },
+        { key: 'legislation', label: 'Legislation', items: (d.contentTypes && d.contentTypes.legislation) || [] },
+        { key: 'guidance', label: 'Guidance', items: (d.contentTypes && d.contentTypes.guidance) || [] },
+        { key: 'enforcement', label: 'Enforcement', items: (d.contentTypes && d.contentTypes.enforcement) || [] },
+        { key: 'caseLaw', label: 'Case Law', items: (d.contentTypes && d.contentTypes.caseLaw) || [] },
+        { key: 'decisions', label: 'Decisions', items: (d.contentTypes && d.contentTypes.decisions) || [] },
+        { key: 'consultations', label: 'Consultations', items: (d.contentTypes && d.contentTypes.consultations) || [] },
+        { key: 'cyberAdvisories', label: 'Cyber Advisories', items: (d.contentTypes && d.contentTypes.cyberAdvisories) || [] }
+    ];
+    var ctTabId = 'ctTab_' + name.replace(/\s/g,'');
+    html += '<div class="content-tabs-strip" id="' + ctTabId + '">';
+    tabs.forEach(function(t, i){
+        html += '<div class="content-tab' + (i===0?' active':'') + '" onclick="switchContentTab(\'' + ctTabId + '\',\'' + t.key + '\')" data-tabkey="' + t.key + '">' + t.label + '<span class="ct-n">' + t.items.length + '</span></div>';
+    });
     html += '</div>';
-
-
+    html += '<div class="content-tab-body" id="' + ctTabId + '_body">';
+    tabs.forEach(function(t, i){
+        html += '<div data-tabpanel="' + t.key + '" style="' + (i>0?'display:none':'') + '">';
+        if (t.items.length === 0) {
+            html += '<div class="ct-empty"><p>Our research team is actively building out ' + t.label.toLowerCase() + ' coverage for ' + name + '. As developments are verified and indexed, they will appear here.</p></div>';
+        } else {
+            t.items.forEach(function(item){
+                html += '<div class="ct-item-row">';
+                var dateVal = item.date || '';
+                html += '<span class="cir-date">' + dateVal + '</span>';
+                html += '<div class="cir-body">';
+                var titleVal = item.headline || item.title || '';
+                var summaryVal = item.sub || item.summary || '';
+                html += '<div class="cir-title">' + titleVal + '</div>';
+                if (summaryVal) html += '<div class="cir-summary">' + summaryVal + '</div>';
+                html += '</div>';
+                var statusVal = item.badgeLabel || item.status || '';
+                if (statusVal) html += '<span class="cir-status"><span class="status status-' + (item.statusClass || item.badge || 'neutral') + '">' + statusVal + '</span></span>';
+                html += '</div>';
+            });
+        }
+        html += '</div>';
+    });
+    html += '</div>';
 
     return html;
 
+}
+
+
+
+/* ===== Tab switchers ===== */
+
+function switchAuthTab(stripId, cat) {
+    var strip = document.getElementById(stripId);
+    if (!strip) return;
+    strip.querySelectorAll('.auth-tab').forEach(function(t){ t.classList.remove('active'); });
+    var clicked = strip.querySelector('.auth-tab[onclick*="\'' + cat + '\'"]');
+    if (clicked) clicked.classList.add('active');
+    var cards = document.getElementById(stripId + '_cards');
+    if (!cards) return;
+    cards.querySelectorAll('.auth-card-new').forEach(function(c){
+        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+    });
+}
+
+function switchContentTab(stripId, key) {
+    var strip = document.getElementById(stripId);
+    if (!strip) return;
+    strip.querySelectorAll('.content-tab').forEach(function(t){ t.classList.remove('active'); });
+    var clicked = strip.querySelector('.content-tab[data-tabkey="' + key + '"]');
+    if (clicked) clicked.classList.add('active');
+    var body = document.getElementById(stripId + '_body');
+    if (!body) return;
+    body.querySelectorAll('[data-tabpanel]').forEach(function(p){
+        p.style.display = p.dataset.tabpanel === key ? '' : 'none';
+    });
 }
 
 
