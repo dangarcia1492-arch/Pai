@@ -232,20 +232,29 @@ body::before{
     <div class="logo-sub">Sign in to your workspace</div>
   </div>
 
-  <form onsubmit="return false">
+  <form onsubmit="handleSignIn(event)">
     <div class="field">
-      <input type="email" placeholder="Email address" autocomplete="email">
+      <input type="email" id="inp-email" placeholder="Email address" autocomplete="email">
     </div>
     <div class="field">
-      <input type="password" placeholder="Password" autocomplete="current-password">
+      <input type="password" id="inp-pass" placeholder="Password" autocomplete="current-password">
     </div>
-    <button class="btn-signin" type="submit">Sign In</button>
+    <button class="btn-signin" type="submit" id="btn-submit">Sign In</button>
   </form>
 
   <a class="forgot" href="#">Forgot password?</a>
+  <a class="forgot" href="index.html" style="margin-top:8px;font-size:.72rem;opacity:.45">View demo →</a>
 </div>
 
 <script>
+function handleSignIn(e) {
+  e.preventDefault();
+  var btn = document.getElementById('btn-submit');
+  btn.textContent = 'Signing in…';
+  btn.disabled = true;
+  setTimeout(function() { window.location.href = 'index.html'; }, 600);
+}
+
 function cycle(containerId, interval, offset) {
   var container = document.getElementById(containerId);
   if (!container) return;
