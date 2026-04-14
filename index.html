@@ -920,6 +920,65 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 .ct-item-row .cir-status{flex-shrink:0}
 
+/* ===== COMMUNITY / LEARNING SCREEN ===== */
+#page-community{padding:0;max-width:100%;background:#0c1118;min-height:calc(100vh - var(--header-height))}
+.cm-screen{color:#e8edf3}
+
+/* Hero */
+.cm-hero{display:flex;align-items:center;min-height:380px;padding:56px 56px 52px;background:linear-gradient(135deg,#0d2340 0%,#0a1825 40%,#061018 100%);border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+.cm-hero::before{content:'';position:absolute;top:0;right:0;bottom:0;width:55%;background:linear-gradient(135deg,transparent 20%,rgba(14,138,125,.12) 60%,rgba(14,138,125,.06) 100%);pointer-events:none}
+.cm-hero-inner{flex:1;max-width:560px;position:relative;z-index:2}
+.cm-hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cm-badge-series{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(14,138,125,.25);color:#3ecdc0;padding:3px 10px;border-radius:2px}
+.cm-hero-firm{font-size:.78rem;color:rgba(255,255,255,.4);font-weight:500;letter-spacing:.03em}
+.cm-hero-title{font-family:var(--serif);font-size:2.8rem;font-weight:700;line-height:1.1;color:#fff;letter-spacing:-.03em;margin-bottom:14px}
+.cm-hero-title em{font-style:italic;color:#3ecdc0}
+.cm-hero-desc{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7;max-width:460px;margin-bottom:20px}
+.cm-hero-pills{display:flex;align-items:center;gap:8px;font-size:.75rem;color:rgba(255,255,255,.35);margin-bottom:24px}
+.cm-hero-btns{display:flex;align-items:center;gap:12px}
+.cm-btn-primary{height:40px;padding:0 20px;background:#0e8a7d;color:#fff;border-radius:2px;font-size:.84rem;font-weight:700;cursor:pointer;transition:background .15s;border:none}
+.cm-btn-primary:hover{background:#0a6b61}
+.cm-btn-ghost{height:40px;padding:0 18px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.15);border-radius:2px;font-size:.84rem;font-weight:500;cursor:pointer;transition:background .15s}
+.cm-btn-ghost:hover{background:rgba(255,255,255,.14)}
+.cm-hero-aside{flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;padding-left:48px;position:relative;z-index:2}
+.cm-hero-faculty{display:flex;flex-direction:column;gap:12px}
+.cm-fac-mini{display:flex;align-items:center;gap:10px}
+.cm-fac-mini span{font-size:.78rem;color:rgba(255,255,255,.45);font-style:italic;font-family:var(--serif)}
+.cm-fac-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:rgba(255,255,255,.8);flex-shrink:0}
+
+/* Rows */
+.cm-row{padding:36px 56px 0}
+.cm-row:last-child{padding-bottom:64px}
+.cm-row-hd{display:flex;align-items:baseline;gap:8px;margin-bottom:18px}
+.cm-row-title{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:#e8edf3;letter-spacing:-.01em}
+.cm-row-firm{font-size:.82rem;color:rgba(255,255,255,.3);font-style:italic;font-family:var(--serif)}
+.cm-row-count{margin-left:auto;font-size:.72rem;color:rgba(255,255,255,.25);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+
+/* Scrollable lesson row */
+.cm-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none}
+.cm-scroll::-webkit-scrollbar{display:none}
+
+/* Lesson card */
+.lesson-card{flex-shrink:0;width:210px;cursor:pointer;border-radius:3px;overflow:hidden;transition:transform .2s cubic-bezier(.4,0,.2,1)}
+.lesson-card:hover{transform:scale(1.04)}
+.lesson-thumb{width:210px;height:118px;position:relative;display:flex;align-items:flex-end;padding:10px 12px}
+.lesson-thumb-num{position:absolute;top:10px;right:12px;font-family:var(--serif);font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.15);line-height:1}
+.lesson-thumb-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;border:1.5px solid rgba(255,255,255,.2);flex-shrink:0}
+.lesson-thumb-speaker{font-size:.7rem;color:rgba(255,255,255,.6);margin-left:8px;font-style:italic;font-family:var(--serif);line-height:1.3}
+.lesson-meta{padding:10px 0 2px}
+.lesson-title{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.85);line-height:1.3;margin-bottom:3px}
+.lesson-sub{font-size:.7rem;color:rgba(255,255,255,.3)}
+
+/* Faculty grid */
+.cm-faculty-grid{display:flex;gap:14px;flex-wrap:wrap}
+.cm-faculty-card{width:192px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:20px 18px;transition:background .15s,border-color .15s;cursor:pointer}
+.cm-faculty-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}
+.cm-fc-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;margin-bottom:12px}
+.cm-fc-name{font-size:.85rem;font-weight:600;color:#e8edf3;margin-bottom:2px;line-height:1.3}
+.cm-fc-role{font-size:.72rem;color:rgba(255,255,255,.35);margin-bottom:10px;font-style:italic;font-family:var(--serif)}
+.cm-fc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.cm-fc-tag{font-size:.63rem;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.32);background:rgba(255,255,255,.07);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+
 </style>
 
 </head>
@@ -2281,263 +2340,302 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 <!-- ==================== COMMUNITY ==================== -->
 
 <div class="page-view" id="page-community">
+<div class="cm-screen">
 
-    <div class="flex items-center justify-between mb-24">
-
-        <div>
-
-            <h1 class="page-title">The <em>Community</em></h1>
-
-            <p class="text-sm text-secondary" style="margin-top:4px">Connect with regulatory intelligence professionals worldwide</p>
-
-        </div>
-
+  <!-- ── Hero ── -->
+  <div class="cm-hero">
+    <div class="cm-hero-inner">
+      <div class="cm-hero-eyebrow">
+        <span class="cm-badge-series">Masterclass Series</span>
+        <span class="cm-hero-firm">Hogan Lovells</span>
+      </div>
+      <h1 class="cm-hero-title">EU AI Act<br><em>Masterclass</em></h1>
+      <p class="cm-hero-desc">Twelve sessions with leading practitioners on the law, obligations, and compliance strategies for the world's most significant AI regulation.</p>
+      <div class="cm-hero-pills">
+        <span>12 Lessons</span><span>·</span><span>5 Faculty</span><span>·</span><span>AI Governance</span><span>·</span><span>Privacy</span>
+      </div>
+      <div class="cm-hero-btns">
+        <button class="cm-btn-primary">▶&nbsp;&nbsp;Start with Lesson 1</button>
+        <button class="cm-btn-ghost">View all 12 lessons</button>
+      </div>
     </div>
-
-
-
-    <!-- Stats -->
-
-    <div class="stats-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:28px">
-
-        <div class="stat-card">
-
-            <div class="stat-value">2,847</div>
-
-            <div class="stat-label">Members</div>
-
-        </div>
-
-        <div class="stat-card">
-
-            <div class="stat-value">156</div>
-
-            <div class="stat-label">Organisations</div>
-
-        </div>
-
-        <div class="stat-card">
-
-            <div class="stat-value">34</div>
-
-            <div class="stat-label">Discussion threads</div>
-
-            <div class="stat-delta">+7 this week</div>
-
-        </div>
-
-        <div class="stat-card">
-
-            <div class="stat-value">12</div>
-
-            <div class="stat-label">Upcoming events</div>
-
-        </div>
-
+    <div class="cm-hero-aside">
+      <div class="cm-hero-faculty">
+        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#0f3d5c">EU</div><span>Eduardo Ustaran</span></div>
+        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#0d4a3a">ED</div><span>Etienne Drouard</span></div>
+        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#4a1535">NF</div><span>Nicola Fulford</span></div>
+        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#2a3d0d">DW</div><span>Dan Whitehead</span></div>
+        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#4a3d0d">JB</div><span>Joke Bodewits</span></div>
+      </div>
     </div>
+  </div>
 
 
 
-    <div class="grid-sidebar-layout">
-
-        <div>
-
-            <h2 class="mb-16">Recent Discussions</h2>
-
-            <div class="card mb-16">
-
-                <div class="dispatch-row">
-
-                    <div style="width:32px;height:32px;border-radius:50%;background:var(--blue-bg);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">SC</div>
-
-                    <div class="dispatch-body">
-
-                        <div class="dispatch-headline">How are organisations preparing for the EU AI Act prohibited systems deadline?</div>
-
-                        <div class="dispatch-sub">Sarah Chen &middot; 3h ago &middot; 24 replies</div>
-
-                    </div>
-
-                    <span class="badge badge-blue" style="flex-shrink:0">Hot</span>
-
-                </div>
-
-                <div class="dispatch-row">
-
-                    <div style="width:32px;height:32px;border-radius:50%;background:var(--green-bg);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">MR</div>
-
-                    <div class="dispatch-body">
-
-                        <div class="dispatch-headline">Japan's AI Basic Act: What should non-Japanese companies prepare for?</div>
-
-                        <div class="dispatch-sub">Marco Rossi &middot; 8h ago &middot; 11 replies</div>
-
-                    </div>
-
-                </div>
-
-                <div class="dispatch-row">
-
-                    <div style="width:32px;height:32px;border-radius:50%;background:var(--amber-bg);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">KP</div>
-
-                    <div class="dispatch-body">
-
-                        <div class="dispatch-headline">Best practices for AI copyright compliance across APAC jurisdictions</div>
-
-                        <div class="dispatch-sub">Kim Park &middot; 1d ago &middot; 7 replies</div>
-
-                    </div>
-
-                </div>
-
-                <div class="dispatch-row">
-
-                    <div style="width:32px;height:32px;border-radius:50%;background:var(--red-bg);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0">AL</div>
-
-                    <div class="dispatch-body">
-
-                        <div class="dispatch-headline">Garante fine impact: What changes should financial institutions make now?</div>
-
-                        <div class="dispatch-sub">Anna Lindqvist &middot; 1d ago &middot; 18 replies</div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <h2 class="mb-16">Upcoming Events</h2>
-
-            <div class="card">
-
-                <div class="dispatch-row">
-
-                    <div style="text-align:center;min-width:44px;flex-shrink:0">
-
-                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">APR</div>
-
-                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">18</div>
-
-                    </div>
-
-                    <div class="dispatch-body">
-
-                        <div class="dispatch-headline">Webinar: EU AI Act Enforcement Readiness</div>
-
-                        <div class="dispatch-sub">15:00 CET &middot; Live &middot; 234 registered</div>
-
-                    </div>
-
-                    <button class="btn btn-teal btn-sm" style="flex-shrink:0">Register</button>
-
-                </div>
-
-                <div class="dispatch-row">
-
-                    <div style="text-align:center;min-width:44px;flex-shrink:0">
-
-                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">APR</div>
-
-                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">24</div>
-
-                    </div>
-
-                    <div class="dispatch-body">
-
-                        <div class="dispatch-headline">Roundtable: AI Copyright Law in Practice</div>
-
-                        <div class="dispatch-sub">10:00 GMT &middot; Virtual &middot; 56 registered</div>
-
-                    </div>
-
-                    <button class="btn btn-outline btn-sm" style="flex-shrink:0">Register</button>
-
-                </div>
-
-                <div class="dispatch-row">
-
-                    <div style="text-align:center;min-width:44px;flex-shrink:0">
-
-                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--teal)">MAY</div>
-
-                        <div style="font-size:1.2rem;font-weight:700;color:var(--ink)">7</div>
-
-                    </div>
-
-                    <div class="dispatch-body">
-
-                        <div class="dispatch-headline">Conference: Global AI Regulation Summit 2026</div>
-
-                        <div class="dispatch-sub">Brussels &middot; In-person &middot; 420 registered</div>
-
-                    </div>
-
-                    <button class="btn btn-outline btn-sm" style="flex-shrink:0">Register</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- Sidebar: Active Members -->
-
-        <div>
-
-            <h2 class="mb-16">Active Members</h2>
-
-            <div style="display:flex;flex-direction:column;gap:10px">
-
-                <div class="community-card flex items-center gap-12">
-
-                    <div class="cc-avatar">SC</div>
-
-                    <div><div class="cc-name">Dr. Sarah Chen</div><div class="cc-role">Head of AI Policy &middot; TechCorp</div></div>
-
-                </div>
-
-                <div class="community-card flex items-center gap-12">
-
-                    <div class="cc-avatar" style="background:var(--blue-bg);color:var(--blue)">MR</div>
-
-                    <div><div class="cc-name">Marco Rossi</div><div class="cc-role">Senior Counsel &middot; Linklaters</div></div>
-
-                </div>
-
-                <div class="community-card flex items-center gap-12">
-
-                    <div class="cc-avatar" style="background:var(--amber-bg);color:var(--amber)">KP</div>
-
-                    <div><div class="cc-name">Kim Park</div><div class="cc-role">Regulatory Affairs &middot; Samsung</div></div>
-
-                </div>
-
-                <div class="community-card flex items-center gap-12">
-
-                    <div class="cc-avatar" style="background:var(--red-bg);color:var(--red)">AL</div>
-
-                    <div><div class="cc-name">Anna Lindqvist</div><div class="cc-role">DPO &middot; Nordea Bank</div></div>
-
-                </div>
-
-                <div class="community-card flex items-center gap-12">
-
-                    <div class="cc-avatar" style="background:var(--green-bg);color:var(--green)">JW</div>
-
-                    <div><div class="cc-name">James Wright</div><div class="cc-role">Policy Director &middot; Ada Lovelace Inst.</div></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+  <!-- ── Row: EU AI Act Masterclass ── -->
+  <div class="cm-row">
+    <div class="cm-row-hd">
+      <span class="cm-row-title">EU AI Act Masterclass</span>
+      <span class="cm-row-firm">· Hogan Lovells</span>
+      <span class="cm-row-count">12 lessons</span>
     </div>
+    <div class="cm-scroll">
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">01</span>
+          <div class="lesson-thumb-av" style="background:#0f3d5c">EU</div>
+          <span class="lesson-thumb-speaker">Eduardo Ustaran<br>London</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Framing the EU AI Act</div>
+          <div class="lesson-sub">Regulatory context &amp; policy objectives</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">02</span>
+          <div class="lesson-thumb-av" style="background:#0d4a3a">ED</div>
+          <span class="lesson-thumb-speaker">Etienne Drouard<br>Paris</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Essential Concepts</div>
+          <div class="lesson-sub">What and who is covered</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">03</span>
+          <div class="lesson-thumb-av" style="background:#4a1535">NF</div>
+          <span class="lesson-thumb-speaker">Nicola Fulford<br>London</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Scope of Application</div>
+          <div class="lesson-sub">When the AI Act applies</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">04</span>
+          <div class="lesson-thumb-av" style="background:#0f3d5c">EU</div>
+          <span class="lesson-thumb-speaker">Eduardo Ustaran<br>London</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">The Risk-Based Approach</div>
+          <div class="lesson-sub">Prohibited, high-risk &amp; transparency</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">05</span>
+          <div class="lesson-thumb-av" style="background:#4a1535">NF</div>
+          <span class="lesson-thumb-speaker">Nicola Fulford<br>London</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Implementation Timelines</div>
+          <div class="lesson-sub">Compliance deadlines &amp; readiness</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">06</span>
+          <div class="lesson-thumb-av" style="background:#2a3d0d">DW</div>
+          <span class="lesson-thumb-speaker">Dan Whitehead<br>London</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">General-Purpose AI Models</div>
+          <div class="lesson-sub">GPAI concept &amp; requirements</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">07</span>
+          <div class="lesson-thumb-av" style="background:#2a3d0d">DW</div>
+          <span class="lesson-thumb-speaker">Dan Whitehead<br>London</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Obligations of Providers</div>
+          <div class="lesson-sub">High-risk AI requirements &amp; steps</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">08</span>
+          <div class="lesson-thumb-av" style="background:#4a3d0d">JB</div>
+          <span class="lesson-thumb-speaker">Joke Bodewits<br>Amsterdam</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Obligations of Deployers</div>
+          <div class="lesson-sub">Human oversight &amp; impact assessments</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">09</span>
+          <div class="lesson-thumb-av" style="background:#4a3d0d">JB</div>
+          <span class="lesson-thumb-speaker">Joke Bodewits<br>Amsterdam</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Conformity Assessments</div>
+          <div class="lesson-sub">Requirements, notifications &amp; standards</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">10</span>
+          <div class="lesson-thumb-av" style="background:#0d4a3a">ED</div>
+          <span class="lesson-thumb-speaker">Etienne Drouard<br>Paris</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Regulatory Governance</div>
+          <div class="lesson-sub">AI Office, monitoring &amp; enforcement</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">11</span>
+          <div class="lesson-thumb-av" style="background:#2a3d0d">DW</div>
+          <span class="lesson-thumb-speaker">Dan Whitehead<br>London</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Global Alignment</div>
+          <div class="lesson-sub">EU Act vs. international frameworks</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
+          <span class="lesson-thumb-num">12</span>
+          <div class="lesson-thumb-av" style="background:#0f3d5c">EU</div>
+          <span class="lesson-thumb-speaker">Eduardo Ustaran<br>London</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Privacy Governance &amp; GDPR</div>
+          <div class="lesson-sub">Applying GDPR practices to the AI Act</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+
+
+  <!-- ── Row: Fieldfisher US ── -->
+  <div class="cm-row">
+    <div class="cm-row-hd">
+      <span class="cm-row-title">Automated Decision Making</span>
+      <span class="cm-row-firm">· Fieldfisher US</span>
+      <span class="cm-row-count">4 sessions</span>
+    </div>
+    <div class="cm-scroll">
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#2a1040 0%,#1a0928 100%)">
+          <span class="lesson-thumb-num">01</span>
+          <div class="lesson-thumb-av" style="background:#3d1540">FF</div>
+          <span class="lesson-thumb-speaker">Flick Fisher<br>US</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">ADM in Practice</div>
+          <div class="lesson-sub">Frameworks &amp; real-world application</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#2a1040 0%,#1a0928 100%)">
+          <span class="lesson-thumb-num">02</span>
+          <div class="lesson-thumb-av" style="background:#0d3a4a">AO</div>
+          <span class="lesson-thumb-speaker">Andrea Ortega<br>US</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">AI in the Software Dev Lifecycle</div>
+          <div class="lesson-sub">Governance from code to deployment</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#2a1040 0%,#1a0928 100%)">
+          <span class="lesson-thumb-num">03</span>
+          <div class="lesson-thumb-av" style="background:#3a2d0d">MW</div>
+          <span class="lesson-thumb-speaker">Megan Ward<br>US</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Governance for High-Growth Teams</div>
+          <div class="lesson-sub">Scaling compliance without friction</div>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-thumb" style="background:linear-gradient(135deg,#2a1040 0%,#1a0928 100%)">
+          <span class="lesson-thumb-num">04</span>
+          <div class="lesson-thumb-av" style="background:#0d3a1a">RL</div>
+          <span class="lesson-thumb-speaker">Richard Lawne<br>US</span>
+        </div>
+        <div class="lesson-meta">
+          <div class="lesson-title">Documenting AI Risk Decisions</div>
+          <div class="lesson-sub">Audit trails, accountability &amp; records</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Faculty ── -->
+  <div class="cm-row">
+    <div class="cm-row-hd">
+      <span class="cm-row-title">Faculty</span>
+    </div>
+    <div class="cm-faculty-grid">
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#0f3d5c;color:rgba(255,255,255,.8)">EU</div>
+        <div class="cm-fc-name">Eduardo Ustaran</div>
+        <div class="cm-fc-role">Partner, London · Hogan Lovells</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">AI Act</span><span class="cm-fc-tag">Privacy</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#0d4a3a;color:rgba(255,255,255,.8)">ED</div>
+        <div class="cm-fc-name">Etienne Drouard</div>
+        <div class="cm-fc-role">Partner, Paris · Hogan Lovells</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">GPAI</span><span class="cm-fc-tag">Governance</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#4a1535;color:rgba(255,255,255,.8)">NF</div>
+        <div class="cm-fc-name">Nicola Fulford</div>
+        <div class="cm-fc-role">Partner, London · Hogan Lovells</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">Scope</span><span class="cm-fc-tag">Timelines</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#2a3d0d;color:rgba(255,255,255,.8)">DW</div>
+        <div class="cm-fc-name">Dan Whitehead</div>
+        <div class="cm-fc-role">Associate, London · Hogan Lovells</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">GPAI</span><span class="cm-fc-tag">Providers</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#4a3d0d;color:rgba(255,255,255,.8)">JB</div>
+        <div class="cm-fc-name">Joke Bodewits</div>
+        <div class="cm-fc-role">Associate, Amsterdam · Hogan Lovells</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">Deployers</span><span class="cm-fc-tag">Conformity</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#3d1540;color:rgba(255,255,255,.8)">FF</div>
+        <div class="cm-fc-name">Flick Fisher</div>
+        <div class="cm-fc-role">Partner · Fieldfisher US</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">ADM</span><span class="cm-fc-tag">US Law</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#0d3a4a;color:rgba(255,255,255,.8)">AO</div>
+        <div class="cm-fc-name">Andrea Ortega</div>
+        <div class="cm-fc-role">Fieldfisher US</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">Dev Lifecycle</span><span class="cm-fc-tag">AI Risk</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#3a2d0d;color:rgba(255,255,255,.8)">MW</div>
+        <div class="cm-fc-name">Megan Ward</div>
+        <div class="cm-fc-role">Fieldfisher US</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">Governance</span><span class="cm-fc-tag">Scaling</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:#0d3a1a;color:rgba(255,255,255,.8)">RL</div>
+        <div class="cm-fc-name">Richard Lawne</div>
+        <div class="cm-fc-role">Fieldfisher US</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">Risk Docs</span><span class="cm-fc-tag">Audit</span></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end cm-screen -->
 </div>
 
 
