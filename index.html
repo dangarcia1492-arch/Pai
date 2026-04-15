@@ -344,6 +344,13 @@ button{cursor:pointer}
 
 
 
+/* Inline children expanded under a parent jurisdiction in the nav list */
+.drill-jur-children{margin:2px 0 6px 12px;border-left:2px solid var(--border-soft)}
+.drill-jur-child{padding-left:12px;font-size:.79rem;color:var(--secondary)}
+.drill-jur-child.active{color:var(--teal);border-left-color:transparent}
+.drill-jur-child-dpa{margin-left:auto;font-size:.65rem;color:var(--muted);font-weight:400;flex-shrink:0;white-space:nowrap;overflow:hidden;max-width:90px;text-overflow:ellipsis}
+.drill-jur-sep{height:1px;background:var(--border-soft);margin:5px 2px 4px}
+
 /* Stagger animation for list items */
 
 .drill-list-view.active .drill-jur-item{animation:drillItemIn .2s cubic-bezier(0.16,1,0.3,1) both}
@@ -4744,44 +4751,49 @@ function sidebarSelectJurisdiction(name, e) {
 
     if (e) e.stopPropagation();
 
+    var lookupName = name === 'US Federal' ? 'United States' : name;
 
-
-    // Clear active states on all sidebar jurisdiction items
-
+    // Clear active states and remove any previously expanded children
     document.querySelectorAll('.drill-jur-item').forEach(function(item) {
-
         item.classList.remove('active');
-
     });
-
-
+    document.querySelectorAll('.drill-jur-children').forEach(function(el) { el.remove(); });
 
     // Set active on clicked item
+    var clickedEl = e && e.currentTarget;
+    if (clickedEl) clickedEl.classList.add('active');
 
-    if (e && e.currentTarget) e.currentTarget.classList.add('active');
+    // If this jurisdiction has sub-jurisdictions, expand them inline below the parent
+    var d = jurisdictionData[lookupName];
+    if (d && d.subJurisdictions && d.subJurisdictions.length && clickedEl) {
+        var childHtml = '<div class="drill-jur-children">';
+        childHtml += '<div class="drill-jur-sep"></div>';
+        d.subJurisdictions.forEach(function(sj, idx) {
+            var safeName = sj.name.replace(/'/g, "\\'");
+            var hasPage = detailItems[sj.name];
+            var onclick = hasPage ? ' onclick="sidebarSelectJurisdiction(\'' + safeName + '\', event)"' : '';
+            childHtml += '<div class="drill-jur-item drill-jur-child" style="animation-delay:' + (idx * 15) + 'ms"' + onclick + '>';
+            childHtml += sj.name;
+            childHtml += '<span class="drill-jur-child-dpa">' + sj.dpa + '</span>';
+            childHtml += '</div>';
+        });
+        childHtml += '</div>';
+        clickedEl.insertAdjacentHTML('afterend', childHtml);
 
+        // Scroll the parent item to near-top of the regions wrap
+        setTimeout(function() {
+            var wrap = document.getElementById('sidebarRegionsWrap');
+            if (wrap && clickedEl) {
+                wrap.scrollTo({ top: Math.max(0, clickedEl.offsetTop - 8), behavior: 'smooth' });
+            }
+        }, 40);
+    }
 
-
-    // Map special names
-
-    var lookupName = name;
-
-    if (name === 'US Federal') lookupName = 'United States';
-
-
-
-    // Show jurisdiction detail if we have data
-
+    // Show jurisdiction detail
     if (jurisdictionData[lookupName]) {
-
         showJurisdictionDetail(lookupName);
-
     } else {
-
-        // Navigate to jurisdictions page with empty state
-
         showPage('jurisdictions');
-
     }
 
 }
@@ -5011,31 +5023,6 @@ function renderJurisdictionDetail(name) {
         }
         html += '</div>';
         html += '<div style="margin-bottom:24px"><a href="#" style="font-size:.82rem;font-weight:600;color:var(--teal)">+ 44 more states &amp; territories &rarr;</a></div>';
-    }
-
-    // Sub-jurisdictions section (Länder, free zones, provinces)
-    if (d.subJurisdictions && d.subJurisdictions.length > 0) {
-        var subjurTitle = d.parentJurisdiction ? 'Sub-Jurisdictions' :
-            (name === 'Germany' ? 'State Supervisory Authorities (Länder DPAs)' :
-             name === 'UAE'     ? 'Regulatory Free Zones' :
-             'Sub-Jurisdictions');
-        html += '<div class="subjur-section">';
-        html += '<div class="subjur-section-title">' + subjurTitle + '</div>';
-        html += '<div class="subjur-grid">';
-        d.subJurisdictions.forEach(function(sj) {
-            var safeName = sj.name.replace(/'/g, "\\'");
-            var hasPage = detailItems[sj.name];
-            var clickAttr = hasPage ? ' onclick="showJurisdictionDetail(\'' + safeName + '\')"' : '';
-            html += '<div class="subjur-card"' + clickAttr + '>';
-            html += '<div class="subjur-card-info">';
-            html += '<div class="subjur-card-name">' + sj.name + '</div>';
-            html += '<div class="subjur-card-dpa">' + sj.dpa + '</div>';
-            if (sj.note) html += '<div class="subjur-card-note">' + sj.note + '</div>';
-            html += '</div>';
-            if (hasPage) html += '<svg viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>';
-            html += '</div>';
-        });
-        html += '</div></div>';
     }
 
     // Authorities with tab view
