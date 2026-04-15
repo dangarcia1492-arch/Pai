@@ -1084,9 +1084,10 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .cm-btn-ghost:hover{background:rgba(255,255,255,.14)}
 .cm-hero-aside{flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;padding-left:48px;position:relative;z-index:2}
 .cm-hero-faculty{display:flex;flex-direction:column;gap:12px}
-.cm-fac-mini{display:flex;align-items:center;gap:10px}
-.cm-fac-mini span{font-size:.78rem;color:rgba(255,255,255,.45);font-style:italic;font-family:var(--serif)}
-.cm-fac-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:rgba(255,255,255,.8);flex-shrink:0}
+.cm-fac-mini{display:flex;align-items:center}
+.cm-fac-mini span{font-size:.75rem;color:rgba(255,255,255,.42);font-family:var(--sans);letter-spacing:.01em}
+.cm-fac-mini span::after{content:'\00a0·';margin-right:5px;opacity:.5}
+.cm-fac-mini:last-child span::after{content:''}
 
 /* Rows */
 .cm-row{padding:36px 56px 0}
@@ -1103,10 +1104,10 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 /* Lesson card — podcast style */
 .lesson-card{flex-shrink:0;width:198px;cursor:pointer;border-radius:4px;overflow:hidden;transition:transform .22s cubic-bezier(.4,0,.2,1),box-shadow .22s;background:#0d1420}
 .lesson-card:hover{transform:scale(1.055);box-shadow:0 12px 40px rgba(0,0,0,.5)}
-.lesson-thumb{width:198px;height:192px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding-top:28px}
-.lesson-ep{position:absolute;top:10px;left:11px;font-size:.62rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);z-index:3;font-family:var(--sans)}
-.lesson-face{width:74px;height:74px;border-radius:50%;position:relative;z-index:2;border:2px solid rgba(255,255,255,.16);box-shadow:0 6px 24px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:700;color:rgba(255,255,255,.8);flex-shrink:0;background-size:cover;background-position:center top;overflow:hidden;letter-spacing:-.5px}
-.lesson-statement{position:absolute;bottom:0;left:0;right:0;padding:44px 12px 11px;background:linear-gradient(to top,rgba(5,8,18,.98) 0%,rgba(5,8,18,.7) 55%,transparent 100%);z-index:3;font-family:var(--serif);font-style:italic;font-size:.67rem;color:rgba(255,255,255,.7);line-height:1.48}
+.lesson-thumb{width:198px;height:192px;position:relative;overflow:hidden}
+.lesson-ep{position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);font-size:3.2rem;font-weight:700;letter-spacing:-.04em;color:rgba(255,255,255,.12);z-index:2;font-family:var(--sans);line-height:1;user-select:none}
+.lesson-ep-label{position:absolute;top:11px;left:13px;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);z-index:3;font-family:var(--sans)}
+.lesson-statement{position:absolute;bottom:0;left:0;right:0;padding:52px 13px 13px;background:linear-gradient(to top,rgba(5,8,18,.98) 0%,rgba(5,8,18,.75) 55%,transparent 100%);z-index:3;font-family:var(--serif);font-style:italic;font-size:.68rem;color:rgba(255,255,255,.75);line-height:1.5}
 .lesson-meta{padding:8px 12px 12px;background:#0d1420}
 .lesson-spk{font-size:.68rem;color:rgba(255,255,255,.42);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lesson-spk strong{color:rgba(255,255,255,.6);font-weight:600}
@@ -2645,11 +2646,11 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
         <div class="cm-hero-qattr">Eduardo Ustaran &middot; Partner, London &middot; Hogan Lovells</div>
         <div class="cm-hero-qdivider"></div>
         <div class="cm-hero-faculty">
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div><span>Eduardo Ustaran</span></div>
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#9ab0c0 0%,#5a7890 45%,#1a3a50 100%)">ED</div><span>Etienne Drouard</span></div>
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#c8a8b8 0%,#906080 45%,#400828 100%)">NF</div><span>Nicola Fulford</span></div>
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div><span>Dan Whitehead</span></div>
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#c0b098 0%,#806848 45%,#302818 100%)">JB</div><span>Joke Bodewits</span></div>
+          <div class="cm-fac-mini"><span>Eduardo Ustaran</span></div>
+          <div class="cm-fac-mini"><span>Etienne Drouard</span></div>
+          <div class="cm-fac-mini"><span>Nicola Fulford</span></div>
+          <div class="cm-fac-mini"><span>Dan Whitehead</span></div>
+          <div class="cm-fac-mini"><span>Joke Bodewits</span></div>
         </div>
       </div>
     </div>
@@ -2668,8 +2669,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 01</span>
           <span class="lesson-ep">01</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div>
           <div class="lesson-statement">The AI Act is already in force. The question isn&rsquo;t whether it applies to you &mdash; it&rsquo;s how exposed you are.</div>
         </div>
         <div class="lesson-meta">
@@ -2681,8 +2682,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 02</span>
           <span class="lesson-ep">02</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#9ab0c0 0%,#5a7890 45%,#1a3a50 100%)">ED</div>
           <div class="lesson-statement">Understanding who and what is covered is the first compliance decision every organisation must make.</div>
         </div>
         <div class="lesson-meta">
@@ -2694,8 +2695,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 03</span>
           <span class="lesson-ep">03</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c8a8b8 0%,#906080 45%,#400828 100%)">NF</div>
           <div class="lesson-statement">The territorial scope is broader than most companies realise. If your AI touches EU individuals, you&rsquo;re in.</div>
         </div>
         <div class="lesson-meta">
@@ -2707,8 +2708,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 04</span>
           <span class="lesson-ep">04</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div>
           <div class="lesson-statement">Prohibited AI is a red line. Most organisations will fall into high-risk &mdash; and the obligations there are substantial.</div>
         </div>
         <div class="lesson-meta">
@@ -2720,8 +2721,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 05</span>
           <span class="lesson-ep">05</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c8a8b8 0%,#906080 45%,#400828 100%)">NF</div>
           <div class="lesson-statement">Enforcement starts in 2026. Build the roadmap now, not when the deadline is already behind you.</div>
         </div>
         <div class="lesson-meta">
@@ -2733,8 +2734,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 06</span>
           <span class="lesson-ep">06</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div>
           <div class="lesson-statement">GPAI models are the biggest open question in EU AI regulation. The rules are still being written in real time.</div>
         </div>
         <div class="lesson-meta">
@@ -2746,8 +2747,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 07</span>
           <span class="lesson-ep">07</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div>
           <div class="lesson-statement">High-risk AI means documented evidence, not just good intentions. You need to show your work.</div>
         </div>
         <div class="lesson-meta">
@@ -2759,8 +2760,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 08</span>
           <span class="lesson-ep">08</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c0b098 0%,#806848 45%,#302818 100%)">JB</div>
           <div class="lesson-statement">Human oversight isn&rsquo;t optional &mdash; it&rsquo;s the legal foundation of every high-risk deployment you make.</div>
         </div>
         <div class="lesson-meta">
@@ -2772,8 +2773,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 09</span>
           <span class="lesson-ep">09</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c0b098 0%,#806848 45%,#302818 100%)">JB</div>
           <div class="lesson-statement">Conformity assessment is not a checkbox exercise. It requires real technical and legal rigour before you go to market.</div>
         </div>
         <div class="lesson-meta">
@@ -2785,8 +2786,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 10</span>
           <span class="lesson-ep">10</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#9ab0c0 0%,#5a7890 45%,#1a3a50 100%)">ED</div>
           <div class="lesson-statement">The regulator doesn&rsquo;t need to fine you first. The AI Office can intervene at any stage, on any market.</div>
         </div>
         <div class="lesson-meta">
@@ -2798,8 +2799,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 11</span>
           <span class="lesson-ep">11</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div>
           <div class="lesson-statement">The EU AI Act is shaping every other jurisdiction&rsquo;s thinking. What you build for Europe sets your global baseline.</div>
         </div>
         <div class="lesson-meta">
@@ -2811,8 +2812,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep-label">EP 12</span>
           <span class="lesson-ep">12</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div>
           <div class="lesson-statement">GDPR and the AI Act are not two separate regimes. Your data protection programme is your AI compliance foundation.</div>
         </div>
         <div class="lesson-meta">
@@ -2852,11 +2853,11 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
         <div class="cm-hero-qattr">Flick Fisher &middot; Partner, Fieldfisher US &middot; ADM Practice</div>
         <div class="cm-hero-qdivider" style="background:rgba(255,255,255,.07)"></div>
         <div class="cm-hero-faculty">
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#d4a882 0%,#a07858 45%,#5a3825 100%)">FF</div><span>Flick Fisher</span></div>
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#c4a080 0%,#927060 45%,#4a3028 100%)">JM</div><span>James McKenzie</span></div>
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#c49060 0%,#8a6040 45%,#3a1808 100%)">AO</div><span>Andrea Ortega</span></div>
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#d8b088 0%,#a88060 45%,#5a3828 100%)">MW</div><span>Megan Ward</span></div>
-          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#d4b080 0%,#a88050 45%,#5a3020 100%)">RL</div><span>Richard Lawne</span></div>
+          <div class="cm-fac-mini"><span>Flick Fisher</span></div>
+          <div class="cm-fac-mini"><span>James McKenzie</span></div>
+          <div class="cm-fac-mini"><span>Andrea Ortega</span></div>
+          <div class="cm-fac-mini"><span>Megan Ward</span></div>
+          <div class="cm-fac-mini"><span>Richard Lawne</span></div>
         </div>
       </div>
     </div>
@@ -2873,8 +2874,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#180828 0%,#100520 100%)">
+          <span class="lesson-ep-label">EP 01</span>
           <span class="lesson-ep">01</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#d4a882 0%,#a07858 45%,#5a3825 100%)">FF</div>
           <div class="lesson-statement">AI decides. But your organisation is still the one that&rsquo;s responsible. That doesn&rsquo;t change.</div>
         </div>
         <div class="lesson-meta">
@@ -2886,8 +2887,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#180828 0%,#100520 100%)">
+          <span class="lesson-ep-label">EP 02</span>
           <span class="lesson-ep">02</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c49060 0%,#8a6040 45%,#3a1808 100%)">AO</div>
           <div class="lesson-statement">The software development lifecycle is now a compliance document. Governance starts at the first line of code.</div>
         </div>
         <div class="lesson-meta">
@@ -2899,8 +2900,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#180828 0%,#100520 100%)">
+          <span class="lesson-ep-label">EP 03</span>
           <span class="lesson-ep">03</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#d8b088 0%,#a88060 45%,#5a3828 100%)">MW</div>
           <div class="lesson-statement">Scaling fast doesn&rsquo;t mean scaling without governance. The fastest teams bake compliance in from day one.</div>
         </div>
         <div class="lesson-meta">
@@ -2912,8 +2913,8 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
       <div class="lesson-card">
         <div class="lesson-thumb" style="background:linear-gradient(160deg,#180828 0%,#100520 100%)">
+          <span class="lesson-ep-label">EP 04</span>
           <span class="lesson-ep">04</span>
-          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#d4b080 0%,#a88050 45%,#5a3020 100%)">RL</div>
           <div class="lesson-statement">If you can&rsquo;t explain a decision, a court might decide the explanation for you. Document everything.</div>
         </div>
         <div class="lesson-meta">
