@@ -234,9 +234,9 @@ button{cursor:pointer}
 .sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:8px 4px;overflow-y:auto;overflow-x:hidden}
 .sidebar-regions-zone{position:relative;flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden;min-height:0}
 
-.sidebar-nav-item{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:3px;cursor:pointer;position:relative;color:var(--muted);transition:color .15s,background .15s;white-space:nowrap;flex-shrink:0}
+.sidebar-nav-item{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:3px;cursor:pointer;position:relative;color:var(--secondary);transition:color .15s,background .15s;white-space:nowrap;flex-shrink:0}
 
-.sidebar-nav-item:hover{color:var(--secondary);background:#f4f5f7}
+.sidebar-nav-item:hover{color:var(--ink);background:#f4f5f7}
 
 .sidebar-nav-item.active{color:var(--teal)}
 
@@ -244,7 +244,7 @@ button{cursor:pointer}
 
 .sidebar-nav-item svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.6;fill:none;flex-shrink:0}
 
-.sidebar-nav-item .nav-label{font-size:.88rem;font-weight:500;opacity:0;transition:opacity .15s .05s}
+.sidebar-nav-item .nav-label{font-size:.94rem;font-weight:500;opacity:0;transition:opacity .15s .05s}
 
 .icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
 
@@ -299,8 +299,8 @@ button{cursor:pointer}
 
 .sidebar-region-card .src-info{flex:1;min-width:0;overflow:hidden}
 
-.sidebar-region-card .src-name{font-size:.8rem;font-weight:600;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sidebar-region-card .src-count{font-size:.68rem;color:var(--muted);white-space:nowrap}
+.sidebar-region-card .src-name{font-size:.9rem;font-weight:600;color:var(--ink);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-region-card .src-count{font-size:.76rem;color:var(--secondary);white-space:nowrap}
 
 
 
@@ -314,7 +314,7 @@ button{cursor:pointer}
 
 .drill-back-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:2.2;fill:none}
 
-.drill-list-title{font-size:.63rem;font-weight:700;letter-spacing:.09em;color:var(--muted);text-transform:uppercase;flex:1}
+.drill-list-title{font-size:.72rem;font-weight:700;letter-spacing:.09em;color:var(--secondary);text-transform:uppercase;flex:1}
 
 
 
@@ -330,7 +330,7 @@ button{cursor:pointer}
 
 /* Drill-in jurisdiction items */
 
-.drill-jur-item{display:flex;align-items:center;padding:5px 8px;font-size:.82rem;font-weight:480;color:var(--secondary);cursor:pointer;border-radius:3px;transition:color .12s,background .12s;position:relative;border-left:3px solid transparent;margin-left:0}
+.drill-jur-item{display:flex;align-items:center;padding:5px 8px;font-size:.88rem;font-weight:500;color:var(--secondary);cursor:pointer;border-radius:3px;transition:color .12s,background .12s;position:relative;border-left:3px solid transparent;margin-left:0}
 
 .drill-jur-item:hover{color:var(--ink);background:rgba(0,0,0,.03)}
 
@@ -346,7 +346,7 @@ button{cursor:pointer}
 
 /* Inline children expanded under a parent jurisdiction in the nav list */
 .drill-jur-children{margin:2px 0 6px 12px;border-left:2px solid var(--border-soft)}
-.drill-jur-child{padding-left:12px;font-size:.79rem;color:var(--secondary)}
+.drill-jur-child{padding-left:12px;font-size:.84rem;color:var(--secondary)}
 .drill-jur-child.active{color:var(--teal);border-left-color:transparent}
 .drill-jur-child-dpa{margin-left:auto;font-size:.65rem;color:var(--muted);font-weight:400;flex-shrink:0;white-space:nowrap;overflow:hidden;max-width:90px;text-overflow:ellipsis}
 .drill-jur-sep{height:1px;background:var(--border-soft);margin:5px 2px 4px}
@@ -1108,6 +1108,11 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .cm-hero-ff{background:#100925}
 .cm-hero-ff .cm-hero-photo{background:#1c0f40}
 .cm-hero-ff .cm-hero-photo::before{background:linear-gradient(to right,#100925,transparent)}
+.cm-hero-avatars{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1;padding-left:16px}
+.cm-av-solo{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:1.55rem;font-weight:800;color:rgba(255,255,255,.92);border:3px solid rgba(255,255,255,.18);letter-spacing:-.02em;flex-shrink:0}
+.cm-av-group{display:flex;align-items:center}
+.cm-av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:700;color:rgba(255,255,255,.9);border:2px solid rgba(0,0,0,.45);flex-shrink:0;width:52px;height:52px;font-size:.82rem;margin-left:-13px}
+.cm-av:first-child{margin-left:0;width:70px;height:70px;font-size:1.02rem;border-width:3px}
 /* Rows */
 .cm-row{padding:30px 52px 0}
 .cm-row:last-child{padding-bottom:60px}
@@ -2689,6 +2694,9 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
     </div>
     <div class="cm-hero-photo" style="background:#181e50">
       <div class="cm-hero-photo-bg" style="background-image:url('')"></div>
+      <div class="cm-hero-avatars">
+        <div class="cm-av-solo" style="background:#2c3f8e">PP</div>
+      </div>
     </div>
   </div>
 
@@ -2712,6 +2720,15 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
     </div>
     <div class="cm-hero-photo">
       <div class="cm-hero-photo-bg" style="background-image:url('')"></div>
+      <div class="cm-hero-avatars">
+        <div class="cm-av-group">
+          <div class="cm-av" style="background:#1e3a8a">EU</div>
+          <div class="cm-av" style="background:#1d4ed8">ED</div>
+          <div class="cm-av" style="background:#2563eb">NF</div>
+          <div class="cm-av" style="background:#1e40af">DW</div>
+          <div class="cm-av" style="background:#3b82f6">JB</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2759,7 +2776,15 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
       </div>
     </div>
     <div class="cm-hero-photo">
-      <div class="cm-hero-photo-bg" style="background-image:url(\'\')"></div>
+      <div class="cm-hero-photo-bg" style="background-image:url('')"></div>
+      <div class="cm-hero-avatars">
+        <div class="cm-av-group">
+          <div class="cm-av" style="background:#6d28d9">FF</div>
+          <div class="cm-av" style="background:#7c3aed">AO</div>
+          <div class="cm-av" style="background:#5b21b6">MW</div>
+          <div class="cm-av" style="background:#8b5cf6">RL</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -5157,6 +5182,10 @@ function showJurisdictionDetail(name) {
 
     currentJurisdiction = name;
 
+    // Persist jurisdiction in URL hash (replaceState happens inside showPage too,
+    // but we want the finer-grained jur- hash)
+    history.replaceState(null, '', '#jur-' + encodeURIComponent(name));
+
     var detailView = document.getElementById('jur-detail-container');
 
     if (detailView) {
@@ -5165,7 +5194,7 @@ function showJurisdictionDetail(name) {
 
     }
 
-    showPage('jurisdictions');
+    showPage('jurisdictions', true);
 
 
 
@@ -5187,7 +5216,10 @@ function showJurisdictionDetail(name) {
 
 
 
-function showPage(pageId) {
+function showPage(pageId, _skipHash) {
+
+    // Persist page in URL hash (skip if called from showJurisdictionDetail which sets its own finer hash)
+    if (!_skipHash) history.replaceState(null, '', '#' + pageId);
 
     // Close regions panel when navigating away from jurisdictions
     if (pageId !== 'jurisdictions') {
@@ -5340,6 +5372,21 @@ document.addEventListener('DOMContentLoaded', function() {
     buildSidebarRegions();
     initNewsSelection();
     loadTheme();
+
+    // Restore page from URL hash so refresh stays on same page/jurisdiction
+    var hash = window.location.hash.slice(1);
+    if (hash) {
+        if (hash.indexOf('jur-') === 0) {
+            var jurName = decodeURIComponent(hash.slice(4));
+            if (jurisdictionData[jurName]) {
+                showJurisdictionDetail(jurName);
+            } else {
+                showPage('jurisdictions');
+            }
+        } else if (document.getElementById('page-' + hash)) {
+            showPage(hash);
+        }
+    }
 
 });
 
