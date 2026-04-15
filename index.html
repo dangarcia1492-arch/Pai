@@ -290,19 +290,21 @@ button{cursor:pointer}
 
 
 
-/* Drill-in back link */
+/* Drill-in inline header: back arrow + title on same row */
 
-.drill-back{display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:var(--teal);cursor:pointer;padding:6px 2px 10px;transition:color .12s}
+.drill-list-header{display:flex;align-items:center;gap:3px;padding:4px 0 8px;border-bottom:1px solid var(--border-soft);margin-bottom:4px}
 
-.drill-back:hover{color:var(--teal-dark);text-decoration:none}
+.drill-back-btn{width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:3px;cursor:pointer;color:var(--muted);background:none;border:none;padding:0;transition:color .12s,background .12s;flex-shrink:0}
 
-.drill-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+.drill-back-btn:hover{color:var(--ink);background:var(--surface-2)}
+
+.drill-back-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:2.2;fill:none}
+
+.drill-list-title{font-size:.63rem;font-weight:700;letter-spacing:.09em;color:var(--muted);text-transform:uppercase;flex:1}
 
 
 
-/* Drill-in region header */
-
-.drill-region-header{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:0 2px 8px;border-bottom:1px solid var(--border);margin-bottom:6px}
+/* (drill-region-header replaced by .drill-list-header) */
 
 
 
@@ -3642,6 +3644,66 @@ var jurisdictionData = {
 
         }
 
+    },
+
+    'California': {
+        flag: '🏛️',
+        region: 'United States',
+        population: '39.5M',
+        populationNote: '2025 est.',
+        techLaw: 'Privacy active, AI pending',
+        techLawStatus: 'partial',
+        techLawNote: 'CCPA/CPRA active · No comprehensive AI law',
+        leadAuthority: 'California Privacy Protection Agency (CPPA)',
+        consultations: 3,
+        bills: 14,
+        enforcement: 5,
+        enforcementYear: '2026',
+        bodyCount: 3,
+        authorities: [
+            { type: 'Privacy Authority', badge: 'blue', name: 'California Privacy Protection Agency (CPPA)', link: 'cppa.ca.gov', tabCategory: 'data-protection', description: 'Sole enforcement authority for CCPA/CPRA. Issues regulations and investigates complaints.' },
+            { type: 'AI Oversight', badge: 'teal', name: 'California AI Safety Council (CASC)', link: 'gov.ca.gov', tabCategory: 'ai-governance', description: 'Governor\'s task force reviewing frontier AI safety and state procurement policy.' },
+            { type: 'Consumer Protection', badge: 'amber', name: 'CA Department of Consumer Affairs', link: 'dca.ca.gov', tabCategory: 'sectoral', description: 'Sector-level enforcement across professional licensing and consumer-facing AI tools.' }
+        ],
+        stateImpl: {
+            privacy: {
+                status: 'Active',
+                statusClass: 'green',
+                lawName: 'CCPA / CPRA',
+                since: '2020 · 2023',
+                note: 'The California Consumer Privacy Act (2020) and California Privacy Rights Act (2023) together create the most comprehensive state-level privacy regime in the US. The CPPA has sole enforcement authority and has issued binding regulations on sensitive data, opt-out rights and risk assessments.',
+                sourceUrl: '#',
+                sourceLabel: 'CPPA regulations →'
+            },
+            aiLaw: {
+                status: 'Pending',
+                statusClass: 'amber',
+                lawName: 'No comprehensive AI law',
+                since: null,
+                note: 'SB 1047 (frontier AI safety) was vetoed by Governor Newsom in Sept 2024. AB 2013 (AI training data transparency) signed into law. Multiple bills in 2025–26 session including SB 813 (automated decisions) and AB 1008 (AI in healthcare). No comprehensive framework passed.',
+                sourceUrl: '#',
+                sourceLabel: 'CA Legislature AI bills →'
+            },
+            federalActivity: {
+                status: 'Active',
+                statusClass: 'amber',
+                note: '2025 executive orders targeted state AI regulation via federal preemption clauses in spending bills. FTC continues enforcement of deceptive AI practices under existing authority. DOJ monitoring algorithmic discrimination under civil rights statutes. Federal preemption of CCPA remains a legislative risk.',
+                sourceUrl: '#',
+                sourceLabel: 'Federal preemption tracker →'
+            },
+            nonCompAI: {
+                count: 14,
+                note: 'Includes laws on AI-generated deepfakes (AB 602, AB 2655), AI in hiring disclosures, automated decision-making in insurance, AI in healthcare informed consent, and chatbot disclosure requirements. Most are sector-specific obligations rather than cross-cutting governance.',
+                sourceUrl: '#',
+                sourceLabel: 'CA AI law inventory →'
+            }
+        },
+        alerts: [
+            { date: '12 Apr 2026', title: 'CPPA opens formal inquiry into AI-driven automated decision-making systems', type: 'Enforcement' },
+            { date: '18 Mar 2026', title: 'SB 813 advances to Assembly — automated hiring decision disclosure', type: 'Legislation' },
+            { date: '3 Mar 2026', title: 'AB 1008 introduced: AI transparency requirements for healthcare providers', type: 'Legislation' }
+        ],
+        contentTypes: { legislation: [], guidance: [] }
     }
 
 };
@@ -3730,9 +3792,9 @@ var drillData = {
 
         subRegions: {
 
-            'USA': {
+            'United States': {
 
-                headerLabel: 'NORTH AMERICA \u00b7 USA',
+                titleLabel: 'United States',
 
                 federal: { label: 'US Federal', key: 'United States' },
 
@@ -3760,7 +3822,7 @@ var drillData = {
 
             'Canada': {
 
-                headerLabel: 'NORTH AMERICA \u00b7 CANADA',
+                titleLabel: 'Canada',
 
                 federal: { label: 'Federal', key: null },
 
@@ -3802,7 +3864,7 @@ var drillData = {
 
             'Australia': {
 
-                headerLabel: 'APAC \u00b7 AUSTRALIA',
+                titleLabel: 'Australia',
 
                 federal: { label: 'Federal', key: null },
 
@@ -3912,68 +3974,6 @@ var germanyDrill = {
 
     ]
 
-},
-
-    'California': {
-        flag: '🏛️',
-        region: 'United States',
-        population: '39.5M',
-        populationNote: '2025 est.',
-        techLaw: 'Privacy active, AI pending',
-        techLawStatus: 'partial',
-        techLawNote: 'CCPA/CPRA active · No comprehensive AI law',
-        leadAuthority: 'California Privacy Protection Agency (CPPA)',
-        consultations: 3,
-        bills: 14,
-        enforcement: 5,
-        enforcementYear: '2026',
-        bodyCount: 3,
-        authorities: [
-            { type: 'Privacy Authority', badge: 'blue', name: 'California Privacy Protection Agency (CPPA)', link: 'cppa.ca.gov', tabCategory: 'data-protection', description: 'Sole enforcement authority for CCPA/CPRA. Issues regulations and investigates complaints.' },
-            { type: 'AI Oversight', badge: 'teal', name: 'California AI Safety Council (CASC)', link: 'gov.ca.gov', tabCategory: 'ai-governance', description: 'Governor\'s task force reviewing frontier AI safety and state procurement policy.' },
-            { type: 'Consumer Protection', badge: 'amber', name: 'CA Department of Consumer Affairs', link: 'dca.ca.gov', tabCategory: 'sectoral', description: 'Sector-level enforcement across professional licensing and consumer-facing AI tools.' }
-        ],
-        stateImpl: {
-            privacy: {
-                status: 'Active',
-                statusClass: 'green',
-                lawName: 'CCPA / CPRA',
-                since: '2020 · 2023',
-                note: 'The California Consumer Privacy Act (2020) and California Privacy Rights Act (2023) together create the most comprehensive state-level privacy regime in the US. The CPPA has sole enforcement authority and has issued binding regulations on sensitive data, opt-out rights and risk assessments.',
-                sourceUrl: '#',
-                sourceLabel: 'CPPA regulations →'
-            },
-            aiLaw: {
-                status: 'Pending',
-                statusClass: 'amber',
-                lawName: 'No comprehensive AI law',
-                since: null,
-                note: 'SB 1047 (frontier AI safety) was vetoed by Governor Newsom in Sept 2024. AB 2013 (AI training data transparency) signed into law. Multiple bills in 2025–26 session including SB 813 (automated decisions) and AB 1008 (AI in healthcare). No comprehensive framework passed.',
-                sourceUrl: '#',
-                sourceLabel: 'CA Legislature AI bills →'
-            },
-            federalActivity: {
-                status: 'Active',
-                statusClass: 'amber',
-                note: '2025 executive orders targeted state AI regulation via federal preemption clauses in spending bills. FTC continues enforcement of deceptive AI practices under existing authority. DOJ monitoring algorithmic discrimination under civil rights statutes. Federal preemption of CCPA remains a legislative risk.',
-                sourceUrl: '#',
-                sourceLabel: 'Federal preemption tracker →'
-            },
-            nonCompAI: {
-                count: 14,
-                note: 'Includes laws on AI-generated deepfakes (AB 602, AB 2655), AI in hiring disclosures, automated decision-making in insurance, AI in healthcare informed consent, and chatbot disclosure requirements. Most are sector-specific obligations rather than cross-cutting governance.',
-                sourceUrl: '#',
-                sourceLabel: 'CA AI law inventory →'
-            }
-        },
-        alerts: [
-            { date: '12 Apr 2026', title: 'CPPA opens formal inquiry into AI-driven automated decision-making systems', type: 'Enforcement' },
-            { date: '18 Mar 2026', title: 'SB 813 advances to Assembly — automated hiring decision disclosure', type: 'Legislation' },
-            { date: '3 Mar 2026', title: 'AB 1008 introduced: AI transparency requirements for healthcare providers', type: 'Legislation' }
-        ],
-        contentTypes: { legislation: [], guidance: [] }
-    }
-
 };
 
 
@@ -3984,7 +3984,7 @@ var detailItems = {'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'G
 
 /* Items that drill deeper (show chevron) */
 
-var drillableItems = {'Australia':1,'Canada':1,'Germany':1,'United States':1,'California':1};
+var drillableItems = {'Australia':1,'Canada':1,'United States':1};
 
 
 
@@ -4144,11 +4144,11 @@ function renderRegionList(container, regionName) {
 
 
 
-    // Back link (combined with region label — clicking takes you to regions)
-    html += '<div class="drill-back" onclick="drillBack()">';
-    html += '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
-    html += data.header + '</div>';
-    html += '<div style="height:1px;background:var(--border);margin:0 2px 8px"></div>';
+    // Inline header: back arrow + region name on same row
+    html += '<div class="drill-list-header">';
+    html += '<button class="drill-back-btn" onclick="drillBack()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>';
+    html += '<span class="drill-list-title">' + data.header + '</span>';
+    html += '</div>';
 
 
 
@@ -4248,19 +4248,11 @@ function renderSubList(container, parentRegion, subName) {
 
 
 
-    // Back link
-
-    html += '<div class="drill-back" onclick="drillBack()">';
-
-    html += '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
-
-    html += (subData.backLabel || backLabel) + '</div>';
-
-
-
-    // Header
-
-    html += '<div class="drill-region-header">' + (subData.headerLabel || subName.toUpperCase()) + '</div>';
+    // Inline header: back arrow + title on same row
+    html += '<div class="drill-list-header">';
+    html += '<button class="drill-back-btn" onclick="drillBack()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>';
+    html += '<span class="drill-list-title">' + (subData.titleLabel || subName) + '</span>';
+    html += '</div>';
 
 
 
