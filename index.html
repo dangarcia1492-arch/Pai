@@ -1189,6 +1189,23 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .am-cancel{background:none;color:var(--muted)}.am-cancel:hover{color:var(--secondary)}
 .am-dl{background:var(--bg);color:var(--secondary);border:1px solid var(--border)}.am-dl:hover{background:#eef0f4}
 .am-send{background:var(--teal);color:#fff}.am-send:hover{background:var(--teal-dark)}
+/* Sub-jurisdiction grid (Länder, free zones, provinces shown on parent detail page) */
+.subjur-section{margin-bottom:28px}
+.subjur-section-title{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.subjur-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.subjur-card{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:border-color .15s,background .15s}
+.subjur-card:hover{border-color:var(--teal);background:var(--teal-light)}
+.subjur-card-info{flex:1;min-width:0}
+.subjur-card-name{font-size:.84rem;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.subjur-card-dpa{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.subjur-card-note{font-size:.68rem;color:var(--muted);margin-top:2px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.subjur-card svg{width:12px;height:12px;stroke:var(--muted);fill:none;flex-shrink:0;transition:stroke .15s}
+.subjur-card:hover svg{stroke:var(--teal)}
+/* Parent breadcrumb on sub-jurisdiction pages */
+.subjur-parent-crumb{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:var(--teal);cursor:pointer;margin-bottom:6px;padding:3px 0}
+.subjur-parent-crumb:hover{opacity:.8}
+.subjur-parent-crumb svg{width:12px;height:12px;stroke:currentColor;fill:none}
+
 /* Implementation grid */
 .impl-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
 .state-impl-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
@@ -3573,6 +3590,25 @@ var jurisdictionData = {
 
         },
 
+        subJurisdictions: [
+            { name: 'Baden-W\u00fcrttemberg', dpa: 'LfDI BW', dpaLink: 'lfdi.bwl.de' },
+            { name: 'Bayern', dpa: 'BayLDA / Bayerischer LfD', dpaLink: 'lda.bayern.de' },
+            { name: 'Berlin', dpa: 'BlnBDI', dpaLink: 'datenschutz-berlin.de' },
+            { name: 'Brandenburg', dpa: 'LDA Brandenburg', dpaLink: 'lda.brandenburg.de' },
+            { name: 'Bremen', dpa: 'LfDI Bremen', dpaLink: 'datenschutz.bremen.de' },
+            { name: 'Hamburg', dpa: 'HmbBfDI', dpaLink: 'datenschutz.hamburg.de' },
+            { name: 'Hessen', dpa: 'HBDI', dpaLink: 'datenschutz.hessen.de' },
+            { name: 'Mecklenburg-Vorpommern', dpa: 'LfDI MV', dpaLink: 'datenschutz-mv.de' },
+            { name: 'Niedersachsen', dpa: 'LfD Niedersachsen', dpaLink: 'lfd.niedersachsen.de' },
+            { name: 'Nordrhein-Westfalen', dpa: 'LDI NRW', dpaLink: 'ldi.nrw.de' },
+            { name: 'Rheinland-Pfalz', dpa: 'LfDI RLP', dpaLink: 'datenschutz.rlp.de' },
+            { name: 'Saarland', dpa: 'LfDI Saarland', dpaLink: 'datenschutz.saarland.de' },
+            { name: 'Sachsen', dpa: 'SLfDSB', dpaLink: 'datenschutz.sachsen.de' },
+            { name: 'Sachsen-Anhalt', dpa: 'LfDSB Sachsen-Anhalt', dpaLink: 'datenschutz.sachsen-anhalt.de' },
+            { name: 'Schleswig-Holstein', dpa: 'ULD', dpaLink: 'datenschutzzentrum.de' },
+            { name: 'Th\u00fcringen', dpa: 'TLfDI', dpaLink: 'datenschutz.thueringen.de' }
+        ],
+
         implementation: {
             aiAct: {
                 status: 'In progress',
@@ -3704,6 +3740,263 @@ var jurisdictionData = {
             { date: '3 Mar 2026', title: 'AB 1008 introduced: AI transparency requirements for healthcare providers', type: 'Legislation' }
         ],
         contentTypes: { legislation: [], guidance: [] }
+    },
+
+    /* ===== UAE + Free Zones ===== */
+
+    'UAE': {
+        flag: '\u{1F1E6}\u{1F1EA}', region: 'Middle East',
+        population: '10.0M', populationNote: '2025 est.',
+        techLaw: 'Yes', techLawStatus: 'yes',
+        techLawNote: 'Federal Law No. 45 of 2021 on Personal Data Protection. DIFC and ADGM operate entirely independent frameworks.',
+        leadAuthority: 'UAE Data Office',
+        consultations: 0, bills: 1, enforcement: 2, enforcementYear: '2026', bodyCount: 2,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'UAE Data Office (UDO)', link: 'uaedataoffice.gov.ae', tabCategory: 'data-protection', description: 'Federal regulator established under Law No. 45 of 2021. Issues implementing regulations and oversees national data protection compliance.' },
+            { type: 'AI Governance', badge: 'teal', name: 'UAE Artificial Intelligence Office', link: 'ai.gov.ae', tabCategory: 'ai-governance', description: 'Central body for UAE National AI Strategy 2031. Coordinates AI policy across government entities.' }
+        ],
+        subJurisdictions: [
+            { name: 'DIFC', dpa: 'Commissioner of Data Protection', dpaLink: 'difc.ae', note: 'DIFC Law No. 5 of 2020 — own independent regime' },
+            { name: 'ADGM', dpa: 'Registration Authority', dpaLink: 'adgm.com', note: 'ADGM Data Protection Regulations 2021 — independent framework' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'DIFC': {
+        flag: '\u{1F1E6}\u{1F1EA}', region: 'Middle East', parentJurisdiction: 'UAE',
+        population: 'N/A', populationNote: 'UAE \u00b7 Dubai International Financial Centre',
+        techLaw: 'DIFC DPL 2020', techLawStatus: 'yes',
+        techLawNote: 'DIFC Law No. 5 of 2020 — a GDPR-modelled regime, fully independent of UAE federal law. Own regulator, own enforcement.',
+        leadAuthority: 'Commissioner of Data Protection',
+        consultations: 0, bills: 0, enforcement: 2, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'DIFC Commissioner of Data Protection', link: 'difc.ae', tabCategory: 'data-protection', description: 'Independent data protection regulator for the Dubai International Financial Centre. Enforces DIFC DPL 2020, issues binding decisions and guidance. Operates separately from UAE federal data protection law.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'ADGM': {
+        flag: '\u{1F1E6}\u{1F1EA}', region: 'Middle East', parentJurisdiction: 'UAE',
+        population: 'N/A', populationNote: 'UAE \u00b7 Abu Dhabi Global Market',
+        techLaw: 'ADGM DPR 2021', techLawStatus: 'yes',
+        techLawNote: 'ADGM Data Protection Regulations 2021 — independent framework aligned with international standards, separate from UAE federal law.',
+        leadAuthority: 'ADGM Registration Authority',
+        consultations: 0, bills: 0, enforcement: 1, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'ADGM Registration Authority', link: 'adgm.com', tabCategory: 'data-protection', description: 'Regulates data protection in the Abu Dhabi Global Market under the ADGM Data Protection Regulations 2021. Independent of UAE federal law.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    /* ===== German Länder ===== */
+
+    'Baden-W\u00fcrttemberg': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '11.1M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 LDSG BW', techLawStatus: 'yes',
+        techLawNote: 'Federal GDPR + BDSG + State Data Protection Act (LDSG BW, 2018). LfDI BW chairs the Datenschutzkonferenz (DSK) in 2026.',
+        leadAuthority: 'LfDI Baden-W\u00fcrttemberg',
+        consultations: 0, bills: 0, enforcement: 2, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragter f\u00fcr den Datenschutz und die Informationsfreiheit Baden-W\u00fcrttemberg (LfDI BW)', link: 'lfdi.bwl.de', tabCategory: 'data-protection', description: 'State DPA for Baden-W\u00fcrttemberg. Enforces GDPR and LDSG BW for both public and private sector entities. Chair of the national DSK coordination body in 2026.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Bayern': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '13.4M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 BayDSG', techLawStatus: 'yes',
+        techLawNote: 'Uniquely, Bavaria has two separate DPAs: BayLDA for private sector, Bayerischer LfD for public bodies. Both apply GDPR + BayDSG.',
+        leadAuthority: 'BayLDA / Bayerischer LfD',
+        consultations: 0, bills: 0, enforcement: 4, enforcementYear: '2026', bodyCount: 2,
+        authorities: [
+            { type: 'Data Protection (Private)', badge: 'blue', name: 'Bayerisches Landesamt f\u00fcr Datenschutzaufsicht (BayLDA)', link: 'lda.bayern.de', tabCategory: 'data-protection', description: 'Supervises GDPR compliance for private-sector entities in Bavaria. One of Germany\'s most enforcement-active Länder DPAs.' },
+            { type: 'Data Protection (Public)', badge: 'blue', name: 'Bayerischer Landesbeauftragter f\u00fcr den Datenschutz (BayLfD)', link: 'datenschutz-bayern.de', tabCategory: 'data-protection', description: 'Supervises public bodies including state government and municipalities in Bavaria.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Berlin': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '3.7M', populationNote: 'Germany \u00b7 City-state',
+        techLaw: 'GDPR \u00b7 BlnDSG', techLawStatus: 'yes',
+        techLawNote: 'Berlin Data Protection Act (BlnDSG) supplements GDPR. BlnBDI is one of the largest Länder DPAs by headcount and is known for tech-forward regulatory guidance.',
+        leadAuthority: 'BlnBDI',
+        consultations: 0, bills: 0, enforcement: 3, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Berliner Beauftragte f\u00fcr Datenschutz und Informationsfreiheit (BlnBDI)', link: 'datenschutz-berlin.de', tabCategory: 'data-protection', description: 'State DPA for Berlin. Supervises public and private sector GDPR compliance. Proactive on emerging tech guidance, AI and biometrics.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Brandenburg': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '2.6M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 BbgDSG', techLawStatus: 'yes',
+        techLawNote: 'Brandenburg Data Protection Act (BbgDSG) supplements GDPR for state-level public bodies.',
+        leadAuthority: 'LDA Brandenburg',
+        consultations: 0, bills: 0, enforcement: 1, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragte f\u00fcr den Datenschutz und f\u00fcr das Recht auf Akteneinsicht Brandenburg (LDA)', link: 'lda.brandenburg.de', tabCategory: 'data-protection', description: 'State DPA and freedom of information commissioner for Brandenburg.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Bremen': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '0.7M', populationNote: 'Germany \u00b7 City-state',
+        techLaw: 'GDPR \u00b7 BremDSGVOAG', techLawStatus: 'yes',
+        techLawNote: 'Bremen GDPR Adaptation Act supplements the federal framework for state public bodies.',
+        leadAuthority: 'LfDI Bremen',
+        consultations: 0, bills: 0, enforcement: 1, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragter f\u00fcr Datenschutz und Informationsfreiheit Bremen (LfDI Bremen)', link: 'datenschutz.bremen.de', tabCategory: 'data-protection', description: 'State DPA for the Free Hanseatic City of Bremen.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Hamburg': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '1.9M', populationNote: 'Germany \u00b7 City-state',
+        techLaw: 'GDPR \u00b7 HmbDSG', techLawStatus: 'yes',
+        techLawNote: 'Hamburg Data Protection Act (HmbDSG). HmbBfDI is known for landmark enforcement including early action against Google Street View and Meta.',
+        leadAuthority: 'HmbBfDI',
+        consultations: 0, bills: 0, enforcement: 3, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Der Hamburgische Beauftragte f\u00fcr Datenschutz und Informationsfreiheit (HmbBfDI)', link: 'datenschutz.hamburg.de', tabCategory: 'data-protection', description: 'State DPA for Hamburg. Historically active against major tech platforms; coordinating DPA for multiple Meta GDPR proceedings.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Hessen': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '6.4M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 HDSIG', techLawStatus: 'yes',
+        techLawNote: 'Hessian Data Protection and Freedom of Information Act (HDSIG) supplements GDPR.',
+        leadAuthority: 'HBDI',
+        consultations: 0, bills: 0, enforcement: 1, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Hessischer Beauftragter f\u00fcr Datenschutz und Informationsfreiheit (HBDI)', link: 'datenschutz.hessen.de', tabCategory: 'data-protection', description: 'State DPA and freedom of information commissioner for Hesse.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Mecklenburg-Vorpommern': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '1.6M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 DSG MV', techLawStatus: 'yes',
+        techLawNote: 'Mecklenburg-Vorpommern Data Protection Act supplements GDPR for public-sector bodies.',
+        leadAuthority: 'LfDI MV',
+        consultations: 0, bills: 0, enforcement: 0, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragter f\u00fcr Datenschutz und Informationsfreiheit Mecklenburg-Vorpommern (LfDI MV)', link: 'datenschutz-mv.de', tabCategory: 'data-protection', description: 'State DPA and freedom of information commissioner for Mecklenburg-Vorpommern.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Niedersachsen': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '8.1M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 NDSG', techLawStatus: 'yes',
+        techLawNote: 'Lower Saxony Data Protection Act (NDSG, 2018) supplements GDPR for state public bodies.',
+        leadAuthority: 'LfD Niedersachsen',
+        consultations: 0, bills: 0, enforcement: 2, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragte f\u00fcr den Datenschutz Niedersachsen (LfD Niedersachsen)', link: 'lfd.niedersachsen.de', tabCategory: 'data-protection', description: 'State DPA for Lower Saxony. Active in enforcement and advisory guidance for local government digitisation.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Nordrhein-Westfalen': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '18.1M', populationNote: 'Germany \u00b7 Most populous state',
+        techLaw: 'GDPR \u00b7 DSG NRW', techLawStatus: 'yes',
+        techLawNote: 'NRW Data Protection Act (DSG NRW) supplements GDPR. Largest state; LDI NRW is one of Germany\'s busiest DPAs.',
+        leadAuthority: 'LDI NRW',
+        consultations: 0, bills: 0, enforcement: 5, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragte f\u00fcr Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW)', link: 'ldi.nrw.de', tabCategory: 'data-protection', description: 'State DPA for Germany\'s most populous state. Supervises public and private sector GDPR compliance across NRW.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Rheinland-Pfalz': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '4.2M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 LDSG RLP', techLawStatus: 'yes',
+        techLawNote: 'Rhineland-Palatinate State Data Protection Act (LDSG RLP) supplements GDPR.',
+        leadAuthority: 'LfDI RLP',
+        consultations: 0, bills: 0, enforcement: 1, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragter f\u00fcr den Datenschutz und die Informationsfreiheit Rheinland-Pfalz (LfDI RLP)', link: 'datenschutz.rlp.de', tabCategory: 'data-protection', description: 'State DPA and freedom of information commissioner for Rhineland-Palatinate.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Saarland': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '0.98M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 SDSG', techLawStatus: 'yes',
+        techLawNote: 'Saarland Data Protection Act (SDSG) supplements the federal framework.',
+        leadAuthority: 'LfDI Saarland',
+        consultations: 0, bills: 0, enforcement: 0, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragter f\u00fcr Datenschutz und Informationsfreiheit Saarland (LfDI Saarland)', link: 'datenschutz.saarland.de', tabCategory: 'data-protection', description: 'State DPA for Saarland.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Sachsen': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '4.1M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 S\u00e4chsDSG', techLawStatus: 'yes',
+        techLawNote: 'Saxon Data Protection Act (S\u00e4chsDSG) supplements GDPR for state public bodies.',
+        leadAuthority: 'SLfDSB',
+        consultations: 0, bills: 0, enforcement: 1, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'S\u00e4chsischer Datenschutzbeauftragter (SLfDSB)', link: 'datenschutz.sachsen.de', tabCategory: 'data-protection', description: 'State DPA for the Free State of Saxony.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Sachsen-Anhalt': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '2.2M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 DSG LSA', techLawStatus: 'yes',
+        techLawNote: 'Saxony-Anhalt Data Protection Act supplements GDPR for public bodies.',
+        leadAuthority: 'LfDSB Sachsen-Anhalt',
+        consultations: 0, bills: 0, enforcement: 0, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Landesbeauftragter f\u00fcr den Datenschutz Sachsen-Anhalt (LfDSB)', link: 'datenschutz.sachsen-anhalt.de', tabCategory: 'data-protection', description: 'State DPA and freedom of information commissioner for Saxony-Anhalt.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Schleswig-Holstein': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '2.9M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 LDSG SH', techLawStatus: 'yes',
+        techLawNote: 'ULD is known for its independent and proactive privacy stance — one of the first DPAs to challenge Facebook fan page tracking in the CJEU.',
+        leadAuthority: 'ULD',
+        consultations: 0, bills: 0, enforcement: 2, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Unabh\u00e4ngiges Landeszentrum f\u00fcr Datenschutz Schleswig-Holstein (ULD)', link: 'datenschutzzentrum.de', tabCategory: 'data-protection', description: 'State DPA for Schleswig-Holstein. Recognised for early and independent regulatory action, including leading the Facebook fan page case to the CJEU.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
+    },
+
+    'Th\u00fcringen': {
+        flag: '\u{1F1E9}\u{1F1EA}', region: 'Europe', parentJurisdiction: 'Germany',
+        population: '2.1M', populationNote: 'Germany \u00b7 State',
+        techLaw: 'GDPR \u00b7 Th\u00fcrDSG', techLawStatus: 'yes',
+        techLawNote: 'Thuringia Data Protection Act (Th\u00fcrDSG) supplements GDPR.',
+        leadAuthority: 'TLfDI',
+        consultations: 0, bills: 0, enforcement: 0, enforcementYear: '2026', bodyCount: 1,
+        authorities: [
+            { type: 'Data Protection', badge: 'blue', name: 'Th\u00fcringer Landesbeauftragter f\u00fcr den Datenschutz und die Informationsfreiheit (TLfDI)', link: 'datenschutz.thueringen.de', tabCategory: 'data-protection', description: 'State DPA and freedom of information commissioner for Thuringia.' }
+        ],
+        alerts: [], contentTypes: { legislation: [], enforcement: [], guidance: [] }
     }
 
 };
@@ -3998,11 +4291,21 @@ var germanyDrill = {
 
 /* Items that have detail pages */
 
-var detailItems = {'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'Germany':1,'US Federal':1,'Czech Republic':1,'Western Sahara':1,'California':1};
+var detailItems = {
+    'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'Germany':1,'US Federal':1,
+    'Czech Republic':1,'Western Sahara':1,'California':1,
+    // UAE + free zones
+    'UAE':1,'DIFC':1,'ADGM':1,
+    // German Länder
+    'Baden-W\u00fcrttemberg':1,'Bayern':1,'Berlin':1,'Brandenburg':1,'Bremen':1,'Hamburg':1,
+    'Hessen':1,'Mecklenburg-Vorpommern':1,'Niedersachsen':1,'Nordrhein-Westfalen':1,
+    'Rheinland-Pfalz':1,'Saarland':1,'Sachsen':1,'Sachsen-Anhalt':1,
+    'Schleswig-Holstein':1,'Th\u00fcringen':1
+};
 
 /* Items that drill deeper (show chevron) */
 
-var drillableItems = {'Australia':1,'Canada':1,'United States':1,'UAE':1};
+var drillableItems = {'Australia':1,'Canada':1,'United States':1};
 
 
 
@@ -4548,9 +4851,12 @@ function renderJurisdictionDetail(name) {
 
     var html = '';
 
-    // Breadcrumb + export links
+    // Breadcrumb + export links (extend with parent jurisdiction if sub-jurisdiction)
     html += '<div class="flex items-center justify-between mb-16">';
-    html += '<div class="jur-breadcrumb" style="margin-bottom:0"><span>Jurisdictions</span> &rsaquo; <span>' + d.region + '</span> &rsaquo; <span style="color:var(--ink)">' + name + '</span></div>';
+    var crumbMiddle = d.parentJurisdiction
+        ? '<span>' + d.region + '</span> &rsaquo; <span style="cursor:pointer;color:var(--teal)" onclick="showJurisdictionDetail(\'' + d.parentJurisdiction.replace(/'/g,"\\'") + '\')">' + d.parentJurisdiction + '</span>'
+        : '<span>' + d.region + '</span>';
+    html += '<div class="jur-breadcrumb" style="margin-bottom:0"><span>Jurisdictions</span> &rsaquo; ' + crumbMiddle + ' &rsaquo; <span style="color:var(--ink)">' + name + '</span></div>';
     html += '<div style="display:flex;gap:12px;font-size:.75rem;color:var(--muted)">';
     html += '<a href="#" style="color:var(--muted)">PDF</a><a href="#" style="color:var(--muted)">Word</a><a href="#" style="color:var(--muted)">Cite</a>';
     html += '<span style="color:var(--border)">|</span><span>Updated 2h ago</span>';
@@ -4670,6 +4976,31 @@ function renderJurisdictionDetail(name) {
         }
         html += '</div>';
         html += '<div style="margin-bottom:24px"><a href="#" style="font-size:.82rem;font-weight:600;color:var(--teal)">+ 44 more states &amp; territories &rarr;</a></div>';
+    }
+
+    // Sub-jurisdictions section (Länder, free zones, provinces)
+    if (d.subJurisdictions && d.subJurisdictions.length > 0) {
+        var subjurTitle = d.parentJurisdiction ? 'Sub-Jurisdictions' :
+            (name === 'Germany' ? 'State Supervisory Authorities (Länder DPAs)' :
+             name === 'UAE'     ? 'Regulatory Free Zones' :
+             'Sub-Jurisdictions');
+        html += '<div class="subjur-section">';
+        html += '<div class="subjur-section-title">' + subjurTitle + '</div>';
+        html += '<div class="subjur-grid">';
+        d.subJurisdictions.forEach(function(sj) {
+            var safeName = sj.name.replace(/'/g, "\\'");
+            var hasPage = detailItems[sj.name];
+            var clickAttr = hasPage ? ' onclick="showJurisdictionDetail(\'' + safeName + '\')"' : '';
+            html += '<div class="subjur-card"' + clickAttr + '>';
+            html += '<div class="subjur-card-info">';
+            html += '<div class="subjur-card-name">' + sj.name + '</div>';
+            html += '<div class="subjur-card-dpa">' + sj.dpa + '</div>';
+            if (sj.note) html += '<div class="subjur-card-note">' + sj.note + '</div>';
+            html += '</div>';
+            if (hasPage) html += '<svg viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>';
+            html += '</div>';
+        });
+        html += '</div></div>';
     }
 
     // Authorities with tab view
