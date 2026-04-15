@@ -954,14 +954,31 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .cm-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none}
 .cm-scroll::-webkit-scrollbar{display:none}
 
-/* Lesson card */
-.lesson-card{flex-shrink:0;width:210px;cursor:pointer;border-radius:3px;overflow:hidden;transition:transform .2s cubic-bezier(.4,0,.2,1)}
-.lesson-card:hover{transform:scale(1.04)}
-.lesson-thumb{width:210px;height:118px;position:relative;display:flex;align-items:flex-end;padding:10px 12px}
-.lesson-thumb-num{position:absolute;top:10px;right:12px;font-family:var(--serif);font-size:1.5rem;font-weight:700;color:rgba(255,255,255,.15);line-height:1}
-.lesson-thumb-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;border:1.5px solid rgba(255,255,255,.2);flex-shrink:0}
-.lesson-thumb-speaker{font-size:.7rem;color:rgba(255,255,255,.6);margin-left:8px;font-style:italic;font-family:var(--serif);line-height:1.3}
-.lesson-meta{padding:10px 0 2px}
+/* Lesson card — podcast style */
+.lesson-card{flex-shrink:0;width:198px;cursor:pointer;border-radius:4px;overflow:hidden;transition:transform .22s cubic-bezier(.4,0,.2,1),box-shadow .22s;background:#0d1420}
+.lesson-card:hover{transform:scale(1.055);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.lesson-thumb{width:198px;height:192px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding-top:28px}
+.lesson-ep{position:absolute;top:10px;left:11px;font-size:.62rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);z-index:3;font-family:var(--sans)}
+.lesson-face{width:74px;height:74px;border-radius:50%;position:relative;z-index:2;border:2px solid rgba(255,255,255,.16);box-shadow:0 6px 24px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:700;color:rgba(255,255,255,.8);flex-shrink:0;background-size:cover;background-position:center top;overflow:hidden;letter-spacing:-.5px}
+.lesson-statement{position:absolute;bottom:0;left:0;right:0;padding:44px 12px 11px;background:linear-gradient(to top,rgba(5,8,18,.98) 0%,rgba(5,8,18,.7) 55%,transparent 100%);z-index:3;font-family:var(--serif);font-style:italic;font-size:.67rem;color:rgba(255,255,255,.7);line-height:1.48}
+.lesson-meta{padding:8px 12px 12px;background:#0d1420}
+.lesson-spk{font-size:.68rem;color:rgba(255,255,255,.42);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lesson-spk strong{color:rgba(255,255,255,.6);font-weight:600}
+.lesson-title{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.88);line-height:1.3;margin-bottom:2px}
+.lesson-sub{font-size:.67rem;color:rgba(255,255,255,.28)}
+/* Hero quote panel */
+.cm-hero-quote{max-width:300px}
+.cm-hero-qtext{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:rgba(255,255,255,.78);line-height:1.6;margin-bottom:14px;letter-spacing:-.01em}
+.cm-hero-qtext::before{content:'\201C';font-size:1.4rem;line-height:0;vertical-align:-.3em;margin-right:2px;opacity:.5}
+.cm-hero-qattr{font-size:.75rem;color:rgba(255,255,255,.38);font-weight:500;letter-spacing:.02em}
+.cm-hero-qdivider{height:1px;background:rgba(255,255,255,.08);margin:18px 0}
+/* FF hero variant */
+.cm-hero-ff{background:linear-gradient(135deg,#150c2a 0%,#0f0820 40%,#080614 100%)}
+.cm-hero-ff::before{background:linear-gradient(135deg,transparent 20%,rgba(110,60,200,.12) 60%,rgba(80,30,160,.06) 100%)}
+.cm-badge-ff{background:rgba(130,80,220,.22);color:#b88af8}
+.cm-hero-ff .cm-hero-title em{color:#b88af8}
+.cm-hero-ff .cm-btn-primary{background:#6e3ccc}
+.cm-hero-ff .cm-btn-primary:hover{background:#5930a8}
 .lesson-title{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.85);line-height:1.3;margin-bottom:3px}
 .lesson-sub{font-size:.7rem;color:rgba(255,255,255,.3)}
 
@@ -1008,22 +1025,37 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .nsb-secondary{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);margin-left:8px}.nsb-secondary:hover{background:rgba(255,255,255,.18)}
 .nsb-clear{background:none;color:rgba(255,255,255,.38);font-size:.74rem;font-weight:400;padding:0 6px;margin-right:4px}.nsb-clear:hover{color:rgba(255,255,255,.65)}
 /* Alert modal */
-.alert-overlay{position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .18s}
+/* Alert overlay */
+.alert-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .18s}
 .alert-overlay.visible{opacity:1;pointer-events:all}
-.alert-modal{background:#fff;width:548px;max-width:calc(100vw - 32px);max-height:90vh;overflow-y:auto;border-radius:3px;box-shadow:0 28px 80px rgba(0,0,0,.26);padding:34px 38px 30px}
-.am-head{margin-bottom:20px}
-.am-head h2{font-family:var(--serif);font-size:1.18rem;font-weight:600;color:var(--ink);margin:0 0 3px}
-.am-head p{font-size:.76rem;color:var(--muted)}
-.am-section-label{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
-.am-headlines-list{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:10px 13px;max-height:120px;overflow-y:auto;margin-bottom:18px}
+/* Alert modal — daily alert style */
+.alert-modal{background:#fff;width:560px;max-width:calc(100vw - 32px);max-height:90vh;overflow-y:auto;border-radius:3px;box-shadow:0 28px 80px rgba(0,0,0,.28);display:flex;flex-direction:column}
+.am-brand-hd{background:#0f172a;padding:13px 18px 12px;display:flex;align-items:center;gap:10px;flex-shrink:0;border-radius:3px 3px 0 0}
+.am-brand-title{font-family:var(--serif);font-size:.88rem;font-weight:700;color:#fff;letter-spacing:-.02em;flex:1}
+.am-brand-date{font-size:.72rem;color:rgba(255,255,255,.38);flex-shrink:0}
+.am-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.38);display:flex;padding:2px;margin-left:8px;border-radius:2px;transition:color .12s}
+.am-close:hover{color:rgba(255,255,255,.7)}
+.am-body{padding:18px 22px 6px;flex:1}
+/* To row */
+.am-to-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:13px;border-bottom:1px solid var(--border-soft)}
+.am-to-lbl{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);flex-shrink:0;width:24px}
+.am-to-input{flex:1;height:28px;padding:0 10px;border:1px solid var(--border);border-radius:2px;font-size:.82rem;color:var(--ink);font-family:var(--sans);outline:none}
+.am-to-input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,138,125,.1)}
+/* Note area */
+.am-note-hd{display:flex;align-items:center;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+.am-note-lbl{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.am-tpl-btn{font-size:.7rem;color:var(--teal);background:var(--teal-light);border:none;padding:3px 9px;border-radius:2px;cursor:pointer;transition:background .1s;font-family:var(--sans)}
+.am-tpl-btn:hover{background:#cef0ea}
+.am-note{width:100%;min-height:74px;padding:9px 12px;border:1px solid var(--border);border-radius:2px;font-size:.81rem;color:var(--ink);resize:vertical;font-family:var(--sans);line-height:1.6;outline:none}
+.am-note:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,138,125,.1)}
+.am-signoff{font-size:.74rem;color:var(--muted);padding:7px 0 14px;font-style:italic;border-bottom:1px solid var(--border-soft);margin-bottom:14px}
+/* Headlines */
+.am-section-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.am-headlines-list{background:var(--bg);border:1px solid var(--border);border-radius:2px;padding:9px 13px;max-height:130px;overflow-y:auto;margin-bottom:6px}
 .am-hl-item{font-size:.77rem;color:var(--secondary);line-height:1.5;padding:3px 0;border-bottom:1px solid var(--border-soft)}
 .am-hl-item:last-child{border-bottom:none}
-.am-templates{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
-.am-tpl-btn{font-size:.71rem;color:var(--teal);background:var(--teal-light);border:none;padding:4px 9px;border-radius:2px;cursor:pointer;transition:background .1s;font-family:var(--sans)}
-.am-tpl-btn:hover{background:#cef0ea}
-.am-note{width:100%;min-height:84px;padding:9px 12px;border:1px solid var(--border);border-radius:2px;font-size:.81rem;color:var(--ink);resize:vertical;font-family:var(--sans);line-height:1.5;outline:none}
-.am-note:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,138,125,.1)}
-.am-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--border-soft)}
+/* Footer */
+.am-footer{display:flex;gap:8px;justify-content:flex-end;padding:14px 22px;border-top:1px solid var(--border-soft);flex-shrink:0}
 .am-btn{height:34px;padding:0 18px;border-radius:2px;font-size:.79rem;font-weight:600;cursor:pointer;border:none;font-family:var(--sans);transition:background .12s}
 .am-cancel{background:none;color:var(--muted)}.am-cancel:hover{color:var(--secondary)}
 .am-dl{background:var(--bg);color:var(--secondary);border:1px solid var(--border)}.am-dl:hover{background:#eef0f4}
@@ -2433,7 +2465,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 <div class="page-view" id="page-community">
 <div class="cm-screen">
 
-  <!-- ── Hero ── -->
+  <!-- ── Hero: Hogan Lovells EU AI Act Masterclass ── -->
   <div class="cm-hero">
     <div class="cm-hero-inner">
       <div class="cm-hero-eyebrow">
@@ -2446,17 +2478,22 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
         <span>12 Lessons</span><span>·</span><span>5 Faculty</span><span>·</span><span>AI Governance</span><span>·</span><span>Privacy</span>
       </div>
       <div class="cm-hero-btns">
-        <button class="cm-btn-primary">▶&nbsp;&nbsp;Start with Lesson 1</button>
+        <button class="cm-btn-primary">&#9654;&nbsp;&nbsp;Start with Lesson 1</button>
         <button class="cm-btn-ghost">View all 12 lessons</button>
       </div>
     </div>
     <div class="cm-hero-aside">
-      <div class="cm-hero-faculty">
-        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#0f3d5c">EU</div><span>Eduardo Ustaran</span></div>
-        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#0d4a3a">ED</div><span>Etienne Drouard</span></div>
-        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#4a1535">NF</div><span>Nicola Fulford</span></div>
-        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#2a3d0d">DW</div><span>Dan Whitehead</span></div>
-        <div class="cm-fac-mini"><div class="cm-fac-av" style="background:#4a3d0d">JB</div><span>Joke Bodewits</span></div>
+      <div class="cm-hero-quote">
+        <div class="cm-hero-qtext">The EU AI Act is the most significant legal development in technology since GDPR &mdash; and the compliance window is already closing.</div>
+        <div class="cm-hero-qattr">Eduardo Ustaran &middot; Partner, London &middot; Hogan Lovells</div>
+        <div class="cm-hero-qdivider"></div>
+        <div class="cm-hero-faculty">
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div><span>Eduardo Ustaran</span></div>
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#9ab0c0 0%,#5a7890 45%,#1a3a50 100%)">ED</div><span>Etienne Drouard</span></div>
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#c8a8b8 0%,#906080 45%,#400828 100%)">NF</div><span>Nicola Fulford</span></div>
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div><span>Dan Whitehead</span></div>
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#c0b098 0%,#806848 45%,#302818 100%)">JB</div><span>Joke Bodewits</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -2467,199 +2504,268 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   <div class="cm-row">
     <div class="cm-row-hd">
       <span class="cm-row-title">EU AI Act Masterclass</span>
-      <span class="cm-row-firm">· Hogan Lovells</span>
+      <span class="cm-row-firm">&middot; Hogan Lovells</span>
       <span class="cm-row-count">12 lessons</span>
     </div>
     <div class="cm-scroll">
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">01</span>
-          <div class="lesson-thumb-av" style="background:#0f3d5c">EU</div>
-          <span class="lesson-thumb-speaker">Eduardo Ustaran<br>London</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">01</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div>
+          <div class="lesson-statement">The AI Act is already in force. The question isn&rsquo;t whether it applies to you &mdash; it&rsquo;s how exposed you are.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Eduardo Ustaran</strong> &middot; London</div>
           <div class="lesson-title">Framing the EU AI Act</div>
           <div class="lesson-sub">Regulatory context &amp; policy objectives</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">02</span>
-          <div class="lesson-thumb-av" style="background:#0d4a3a">ED</div>
-          <span class="lesson-thumb-speaker">Etienne Drouard<br>Paris</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">02</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#9ab0c0 0%,#5a7890 45%,#1a3a50 100%)">ED</div>
+          <div class="lesson-statement">Understanding who and what is covered is the first compliance decision every organisation must make.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Etienne Drouard</strong> &middot; Paris</div>
           <div class="lesson-title">Essential Concepts</div>
           <div class="lesson-sub">What and who is covered</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">03</span>
-          <div class="lesson-thumb-av" style="background:#4a1535">NF</div>
-          <span class="lesson-thumb-speaker">Nicola Fulford<br>London</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">03</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c8a8b8 0%,#906080 45%,#400828 100%)">NF</div>
+          <div class="lesson-statement">The territorial scope is broader than most companies realise. If your AI touches EU individuals, you&rsquo;re in.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Nicola Fulford</strong> &middot; London</div>
           <div class="lesson-title">Scope of Application</div>
           <div class="lesson-sub">When the AI Act applies</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">04</span>
-          <div class="lesson-thumb-av" style="background:#0f3d5c">EU</div>
-          <span class="lesson-thumb-speaker">Eduardo Ustaran<br>London</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">04</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div>
+          <div class="lesson-statement">Prohibited AI is a red line. Most organisations will fall into high-risk &mdash; and the obligations there are substantial.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Eduardo Ustaran</strong> &middot; London</div>
           <div class="lesson-title">The Risk-Based Approach</div>
-          <div class="lesson-sub">Prohibited, high-risk &amp; transparency</div>
+          <div class="lesson-sub">Prohibited, high-risk &amp; transparency tiers</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">05</span>
-          <div class="lesson-thumb-av" style="background:#4a1535">NF</div>
-          <span class="lesson-thumb-speaker">Nicola Fulford<br>London</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">05</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c8a8b8 0%,#906080 45%,#400828 100%)">NF</div>
+          <div class="lesson-statement">Enforcement starts in 2026. Build the roadmap now, not when the deadline is already behind you.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Nicola Fulford</strong> &middot; London</div>
           <div class="lesson-title">Implementation Timelines</div>
           <div class="lesson-sub">Compliance deadlines &amp; readiness</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">06</span>
-          <div class="lesson-thumb-av" style="background:#2a3d0d">DW</div>
-          <span class="lesson-thumb-speaker">Dan Whitehead<br>London</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">06</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div>
+          <div class="lesson-statement">GPAI models are the biggest open question in EU AI regulation. The rules are still being written in real time.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Dan Whitehead</strong> &middot; London</div>
           <div class="lesson-title">General-Purpose AI Models</div>
           <div class="lesson-sub">GPAI concept &amp; requirements</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">07</span>
-          <div class="lesson-thumb-av" style="background:#2a3d0d">DW</div>
-          <span class="lesson-thumb-speaker">Dan Whitehead<br>London</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">07</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div>
+          <div class="lesson-statement">High-risk AI means documented evidence, not just good intentions. You need to show your work.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Dan Whitehead</strong> &middot; London</div>
           <div class="lesson-title">Obligations of Providers</div>
           <div class="lesson-sub">High-risk AI requirements &amp; steps</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">08</span>
-          <div class="lesson-thumb-av" style="background:#4a3d0d">JB</div>
-          <span class="lesson-thumb-speaker">Joke Bodewits<br>Amsterdam</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">08</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c0b098 0%,#806848 45%,#302818 100%)">JB</div>
+          <div class="lesson-statement">Human oversight isn&rsquo;t optional &mdash; it&rsquo;s the legal foundation of every high-risk deployment you make.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Joke Bodewits</strong> &middot; Amsterdam</div>
           <div class="lesson-title">Obligations of Deployers</div>
           <div class="lesson-sub">Human oversight &amp; impact assessments</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">09</span>
-          <div class="lesson-thumb-av" style="background:#4a3d0d">JB</div>
-          <span class="lesson-thumb-speaker">Joke Bodewits<br>Amsterdam</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">09</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c0b098 0%,#806848 45%,#302818 100%)">JB</div>
+          <div class="lesson-statement">Conformity assessment is not a checkbox exercise. It requires real technical and legal rigour before you go to market.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Joke Bodewits</strong> &middot; Amsterdam</div>
           <div class="lesson-title">Conformity Assessments</div>
           <div class="lesson-sub">Requirements, notifications &amp; standards</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">10</span>
-          <div class="lesson-thumb-av" style="background:#0d4a3a">ED</div>
-          <span class="lesson-thumb-speaker">Etienne Drouard<br>Paris</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">10</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#9ab0c0 0%,#5a7890 45%,#1a3a50 100%)">ED</div>
+          <div class="lesson-statement">The regulator doesn&rsquo;t need to fine you first. The AI Office can intervene at any stage, on any market.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Etienne Drouard</strong> &middot; Paris</div>
           <div class="lesson-title">Regulatory Governance</div>
           <div class="lesson-sub">AI Office, monitoring &amp; enforcement</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">11</span>
-          <div class="lesson-thumb-av" style="background:#2a3d0d">DW</div>
-          <span class="lesson-thumb-speaker">Dan Whitehead<br>London</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">11</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div>
+          <div class="lesson-statement">The EU AI Act is shaping every other jurisdiction&rsquo;s thinking. What you build for Europe sets your global baseline.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Dan Whitehead</strong> &middot; London</div>
           <div class="lesson-title">Global Alignment</div>
           <div class="lesson-sub">EU Act vs. international frameworks</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#0d2a4a 0%,#083d35 100%)">
-          <span class="lesson-thumb-num">12</span>
-          <div class="lesson-thumb-av" style="background:#0f3d5c">EU</div>
-          <span class="lesson-thumb-speaker">Eduardo Ustaran<br>London</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#0a1e38 0%,#062e26 100%)">
+          <span class="lesson-ep">12</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div>
+          <div class="lesson-statement">GDPR and the AI Act are not two separate regimes. Your data protection programme is your AI compliance foundation.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Eduardo Ustaran</strong> &middot; London</div>
           <div class="lesson-title">Privacy Governance &amp; GDPR</div>
           <div class="lesson-sub">Applying GDPR practices to the AI Act</div>
         </div>
       </div>
+
     </div>
   </div>
 
 
 
+
+
+  <!-- ── Hero: Fieldfisher US — Automated Decision-Making ── -->
+  <div class="cm-hero cm-hero-ff" style="margin-top:0;border-top:1px solid rgba(255,255,255,.05)">
+    <div class="cm-hero-inner">
+      <div class="cm-hero-eyebrow">
+        <span class="cm-badge-series cm-badge-ff">Series</span>
+        <span class="cm-hero-firm">Fieldfisher US</span>
+      </div>
+      <h1 class="cm-hero-title">Automated<br><em>Decision-Making</em></h1>
+      <p class="cm-hero-desc">Four sessions with Fieldfisher US practitioners on the legal and governance framework for AI-driven decisions &mdash; from software deployment to accountability and audit.</p>
+      <div class="cm-hero-pills">
+        <span>4 Sessions</span><span>·</span><span>5 Faculty</span><span>·</span><span>ADM</span><span>·</span><span>US Law</span>
+      </div>
+      <div class="cm-hero-btns">
+        <button class="cm-btn-primary" style="background:#6e3ccc">&#9654;&nbsp;&nbsp;Start with Session 1</button>
+        <button class="cm-btn-ghost">View all 4 sessions</button>
+      </div>
+    </div>
+    <div class="cm-hero-aside">
+      <div class="cm-hero-quote">
+        <div class="cm-hero-qtext" style="color:rgba(220,200,255,.82)">Every time an algorithm makes a decision that affects a person, there is a legal and ethical responsibility sitting behind it.</div>
+        <div class="cm-hero-qattr">Flick Fisher &middot; Partner, Fieldfisher US &middot; ADM Practice</div>
+        <div class="cm-hero-qdivider" style="background:rgba(255,255,255,.07)"></div>
+        <div class="cm-hero-faculty">
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#d4a882 0%,#a07858 45%,#5a3825 100%)">FF</div><span>Flick Fisher</span></div>
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#c4a080 0%,#927060 45%,#4a3028 100%)">JM</div><span>James McKenzie</span></div>
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#c49060 0%,#8a6040 45%,#3a1808 100%)">AO</div><span>Andrea Ortega</span></div>
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#d8b088 0%,#a88060 45%,#5a3828 100%)">MW</div><span>Megan Ward</span></div>
+          <div class="cm-fac-mini"><div class="cm-fac-av" style="background:radial-gradient(circle at 50% 35%,#d4b080 0%,#a88050 45%,#5a3020 100%)">RL</div><span>Richard Lawne</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Row: Fieldfisher US ── -->
   <div class="cm-row">
     <div class="cm-row-hd">
-      <span class="cm-row-title">Automated Decision Making</span>
-      <span class="cm-row-firm">· Fieldfisher US</span>
+      <span class="cm-row-title">Automated Decision-Making</span>
+      <span class="cm-row-firm">&middot; Fieldfisher US</span>
       <span class="cm-row-count">4 sessions</span>
     </div>
     <div class="cm-scroll">
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#2a1040 0%,#1a0928 100%)">
-          <span class="lesson-thumb-num">01</span>
-          <div class="lesson-thumb-av" style="background:#3d1540">FF</div>
-          <span class="lesson-thumb-speaker">Flick Fisher<br>US</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#180828 0%,#100520 100%)">
+          <span class="lesson-ep">01</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#d4a882 0%,#a07858 45%,#5a3825 100%)">FF</div>
+          <div class="lesson-statement">AI decides. But your organisation is still the one that&rsquo;s responsible. That doesn&rsquo;t change.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Flick Fisher</strong> &middot; Partner, Fieldfisher US</div>
           <div class="lesson-title">ADM in Practice</div>
           <div class="lesson-sub">Frameworks &amp; real-world application</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#2a1040 0%,#1a0928 100%)">
-          <span class="lesson-thumb-num">02</span>
-          <div class="lesson-thumb-av" style="background:#0d3a4a">AO</div>
-          <span class="lesson-thumb-speaker">Andrea Ortega<br>US</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#180828 0%,#100520 100%)">
+          <span class="lesson-ep">02</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#c49060 0%,#8a6040 45%,#3a1808 100%)">AO</div>
+          <div class="lesson-statement">The software development lifecycle is now a compliance document. Governance starts at the first line of code.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Andrea Ortega</strong> &middot; Fieldfisher US</div>
           <div class="lesson-title">AI in the Software Dev Lifecycle</div>
           <div class="lesson-sub">Governance from code to deployment</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#2a1040 0%,#1a0928 100%)">
-          <span class="lesson-thumb-num">03</span>
-          <div class="lesson-thumb-av" style="background:#3a2d0d">MW</div>
-          <span class="lesson-thumb-speaker">Megan Ward<br>US</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#180828 0%,#100520 100%)">
+          <span class="lesson-ep">03</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#d8b088 0%,#a88060 45%,#5a3828 100%)">MW</div>
+          <div class="lesson-statement">Scaling fast doesn&rsquo;t mean scaling without governance. The fastest teams bake compliance in from day one.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Megan Ward</strong> &middot; Fieldfisher US</div>
           <div class="lesson-title">Governance for High-Growth Teams</div>
           <div class="lesson-sub">Scaling compliance without friction</div>
         </div>
       </div>
+
       <div class="lesson-card">
-        <div class="lesson-thumb" style="background:linear-gradient(135deg,#2a1040 0%,#1a0928 100%)">
-          <span class="lesson-thumb-num">04</span>
-          <div class="lesson-thumb-av" style="background:#0d3a1a">RL</div>
-          <span class="lesson-thumb-speaker">Richard Lawne<br>US</span>
+        <div class="lesson-thumb" style="background:linear-gradient(160deg,#180828 0%,#100520 100%)">
+          <span class="lesson-ep">04</span>
+          <div class="lesson-face" style="background:radial-gradient(circle at 50% 35%,#d4b080 0%,#a88050 45%,#5a3020 100%)">RL</div>
+          <div class="lesson-statement">If you can&rsquo;t explain a decision, a court might decide the explanation for you. Document everything.</div>
         </div>
         <div class="lesson-meta">
+          <div class="lesson-spk"><strong>Richard Lawne</strong> &middot; Fieldfisher US</div>
           <div class="lesson-title">Documenting AI Risk Decisions</div>
           <div class="lesson-sub">Audit trails, accountability &amp; records</div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -2669,60 +2775,68 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
       <span class="cm-row-title">Faculty</span>
     </div>
     <div class="cm-faculty-grid">
+
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#0f3d5c;color:rgba(255,255,255,.8)">EU</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#a8b8d0 0%,#6a80a0 45%,#2a3d5a 100%)">EU</div>
         <div class="cm-fc-name">Eduardo Ustaran</div>
-        <div class="cm-fc-role">Partner, London · Hogan Lovells</div>
+        <div class="cm-fc-role">Partner, London &middot; Hogan Lovells</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">AI Act</span><span class="cm-fc-tag">Privacy</span></div>
       </div>
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#0d4a3a;color:rgba(255,255,255,.8)">ED</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#9ab0c0 0%,#5a7890 45%,#1a3a50 100%)">ED</div>
         <div class="cm-fc-name">Etienne Drouard</div>
-        <div class="cm-fc-role">Partner, Paris · Hogan Lovells</div>
+        <div class="cm-fc-role">Partner, Paris &middot; Hogan Lovells</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">GPAI</span><span class="cm-fc-tag">Governance</span></div>
       </div>
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#4a1535;color:rgba(255,255,255,.8)">NF</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#c8a8b8 0%,#906080 45%,#400828 100%)">NF</div>
         <div class="cm-fc-name">Nicola Fulford</div>
-        <div class="cm-fc-role">Partner, London · Hogan Lovells</div>
+        <div class="cm-fc-role">Partner, London &middot; Hogan Lovells</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">Scope</span><span class="cm-fc-tag">Timelines</span></div>
       </div>
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#2a3d0d;color:rgba(255,255,255,.8)">DW</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#a0b898 0%,#607858 45%,#203018 100%)">DW</div>
         <div class="cm-fc-name">Dan Whitehead</div>
-        <div class="cm-fc-role">Associate, London · Hogan Lovells</div>
+        <div class="cm-fc-role">Associate, London &middot; Hogan Lovells</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">GPAI</span><span class="cm-fc-tag">Providers</span></div>
       </div>
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#4a3d0d;color:rgba(255,255,255,.8)">JB</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#c0b098 0%,#806848 45%,#302818 100%)">JB</div>
         <div class="cm-fc-name">Joke Bodewits</div>
-        <div class="cm-fc-role">Associate, Amsterdam · Hogan Lovells</div>
+        <div class="cm-fc-role">Associate, Amsterdam &middot; Hogan Lovells</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">Deployers</span><span class="cm-fc-tag">Conformity</span></div>
       </div>
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#3d1540;color:rgba(255,255,255,.8)">FF</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#d4a882 0%,#a07858 45%,#5a3825 100%)">FF</div>
         <div class="cm-fc-name">Flick Fisher</div>
-        <div class="cm-fc-role">Partner · Fieldfisher US</div>
+        <div class="cm-fc-role">Partner &middot; Fieldfisher US &middot; ADM Practice</div>
+        <div class="cm-fc-tags"><span class="cm-fc-tag">ADM</span><span class="cm-fc-tag">AI Liability</span></div>
+      </div>
+      <div class="cm-faculty-card">
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#c4a080 0%,#927060 45%,#4a3028 100%)">JM</div>
+        <div class="cm-fc-name">James McKenzie</div>
+        <div class="cm-fc-role">Partner &middot; Fieldfisher US</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">ADM</span><span class="cm-fc-tag">US Law</span></div>
       </div>
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#0d3a4a;color:rgba(255,255,255,.8)">AO</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#c49060 0%,#8a6040 45%,#3a1808 100%)">AO</div>
         <div class="cm-fc-name">Andrea Ortega</div>
-        <div class="cm-fc-role">Fieldfisher US</div>
+        <div class="cm-fc-role">Senior Associate &middot; Fieldfisher US</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">Dev Lifecycle</span><span class="cm-fc-tag">AI Risk</span></div>
       </div>
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#3a2d0d;color:rgba(255,255,255,.8)">MW</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#d8b088 0%,#a88060 45%,#5a3828 100%)">MW</div>
         <div class="cm-fc-name">Megan Ward</div>
-        <div class="cm-fc-role">Fieldfisher US</div>
+        <div class="cm-fc-role">Associate &middot; Fieldfisher US</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">Governance</span><span class="cm-fc-tag">Scaling</span></div>
       </div>
       <div class="cm-faculty-card">
-        <div class="cm-fc-av" style="background:#0d3a1a;color:rgba(255,255,255,.8)">RL</div>
+        <div class="cm-fc-av" style="background:radial-gradient(circle at 50% 35%,#d4b080 0%,#a88050 45%,#5a3020 100%)">RL</div>
         <div class="cm-fc-name">Richard Lawne</div>
-        <div class="cm-fc-role">Fieldfisher US</div>
+        <div class="cm-fc-role">Associate &middot; Fieldfisher US</div>
         <div class="cm-fc-tags"><span class="cm-fc-tag">Risk Docs</span><span class="cm-fc-tag">Audit</span></div>
       </div>
+
     </div>
   </div>
 
@@ -2886,29 +3000,48 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 <!-- ===== ALERT MODAL ===== -->
 <div class="alert-overlay" id="alertOverlay" onclick="if(event.target===this)closeAlertModal()">
-    <div class="alert-modal">
-        <div class="am-head">
-            <h2>Create Regulatory Alert</h2>
-            <p id="amCount">0 stories selected</p>
-        </div>
+  <div class="alert-modal">
 
-        <div class="am-section-label">Selected stories</div>
-        <div class="am-headlines-list" id="amHeadlines"></div>
-
-        <div class="am-section-label">Add a note</div>
-        <div class="am-templates">
-            <button class="am-tpl-btn" onclick="fillAlertTemplate(0)">Hi [name], thought you might want to see this &mdash;</button>
-            <button class="am-tpl-btn" onclick="fillAlertTemplate(1)">FYI &ndash; regulatory update worth noting:</button>
-            <button class="am-tpl-btn" onclick="fillAlertTemplate(2)">For your attention / action:</button>
-        </div>
-        <textarea class="am-note" id="amNote" placeholder="Add a personal note (optional)&hellip;"></textarea>
-
-        <div class="am-footer">
-            <button class="am-btn am-cancel" onclick="closeAlertModal()">Cancel</button>
-            <button class="am-btn am-dl" onclick="downloadAlertPDF()">&#x2193; Save as PDF</button>
-            <button class="am-btn am-send" onclick="sendAlert()">Send by email &rarr;</button>
-        </div>
+    <!-- Branded header -->
+    <div class="am-brand-hd">
+      <div class="am-brand-title">PrinciplesAI &nbsp;&middot;&nbsp; Regulatory Alert</div>
+      <div class="am-brand-date" id="amDateStr"></div>
+      <button class="am-close" onclick="closeAlertModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
+
+    <div class="am-body">
+
+      <!-- To -->
+      <div class="am-to-row">
+        <span class="am-to-lbl">To</span>
+        <input class="am-to-input" id="amToField" value="The Team" placeholder="Recipient or team name">
+      </div>
+
+      <!-- Note (pre-filled, prominent) -->
+      <div class="am-note-hd">
+        <span class="am-note-lbl">Note</span>
+        <button class="am-tpl-btn" onclick="fillAlertTemplate(0)">Morning briefing</button>
+        <button class="am-tpl-btn" onclick="fillAlertTemplate(1)">FYI</button>
+        <button class="am-tpl-btn" onclick="fillAlertTemplate(2)">Action required</button>
+      </div>
+      <textarea class="am-note" id="amNote"></textarea>
+      <div class="am-signoff" id="amSignoff">&mdash; David Mitchell &nbsp;&middot;&nbsp; Head of Regulatory Intelligence &nbsp;&middot;&nbsp; PrinciplesAI</div>
+
+      <!-- Selected updates -->
+      <div class="am-section-label" id="amCount">0 updates selected</div>
+      <div class="am-headlines-list" id="amHeadlines"></div>
+
+    </div>
+
+    <div class="am-footer">
+      <button class="am-btn am-cancel" onclick="closeAlertModal()">Cancel</button>
+      <button class="am-btn am-dl" onclick="downloadAlertPDF()">&#x2193; Save as PDF</button>
+      <button class="am-btn am-send" onclick="sendAlert()">Send by email &rarr;</button>
+    </div>
+
+  </div>
 </div>
 
 <!-- Print area (hidden) -->
@@ -4777,26 +4910,30 @@ function clearNewsSelection() {
     _updateNewsBar();
 }
 
+var _alertTemplates = [
+    'Thought you\u2019d want to see these regulatory updates. Key developments across your tracked jurisdictions this morning.',
+    'FYI \u2014 a few regulatory updates worth keeping on your radar this week.',
+    'Please review the following regulatory developments. Some may require your attention or a response.'
+];
+
 function openAlertModal() {
     var keys = Object.keys(_newsSelected);
-    document.getElementById('amCount').textContent = keys.length + ' ' + (keys.length === 1 ? 'story' : 'stories') + ' selected';
+    var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    document.getElementById('amDateStr').textContent = today;
+    document.getElementById('amCount').textContent = keys.length + ' update' + (keys.length !== 1 ? 's' : '') + ' selected';
     var list = document.getElementById('amHeadlines');
     list.innerHTML = keys.map(function(k) {
         return '<div class="am-hl-item">' + (_newsSelected[k] || k) + '</div>';
     }).join('');
-    document.getElementById('amNote').value = '';
+    // Pre-fill note with default template
+    var ta = document.getElementById('amNote');
+    ta.value = _alertTemplates[0];
     document.getElementById('alertOverlay').classList.add('visible');
 }
 
 function closeAlertModal() {
     document.getElementById('alertOverlay').classList.remove('visible');
 }
-
-var _alertTemplates = [
-    'Hi [name], thought you might want to see this \u2014\n\n',
-    'FYI \u2013 regulatory update worth noting:\n\n',
-    'For your attention / action:\n\n'
-];
 
 function fillAlertTemplate(idx) {
     var ta = document.getElementById('amNote');
@@ -4808,12 +4945,15 @@ function fillAlertTemplate(idx) {
 function sendAlert() {
     var keys = Object.keys(_newsSelected);
     var headlines = keys.map(function(k, i) { return (i + 1) + '. ' + (_newsSelected[k] || k); }).join('\n');
-    var note = document.getElementById('amNote').value.trim();
-    var body = '';
+    var note = (document.getElementById('amNote').value || '').trim();
+    var toName = (document.getElementById('amToField').value || 'The Team').trim();
+    var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    var body = toName + ',\n\n';
     if (note) body += note + '\n\n';
-    body += '\u2014 Regulatory dispatches from PrinciplesAI \u2014\n\n' + headlines;
-    body += '\n\n\u2014\nSent via PrinciplesAI \u00b7 principlesai.com';
-    var subject = 'Regulatory Alert: ' + keys.length + ' update' + (keys.length !== 1 ? 's' : '') + ' from PrinciplesAI';
+    body += '\u2014 David Mitchell\nHead of Regulatory Intelligence \u00b7 PrinciplesAI\n';
+    body += '\n\u2500\u2500 Regulatory Updates \u00b7 ' + today + ' \u2500\u2500\n\n' + headlines;
+    body += '\n\n\u2014\nPrinciplesAI \u00b7 principlesai.com';
+    var subject = 'Regulatory Alert \u00b7 ' + keys.length + ' update' + (keys.length !== 1 ? 's' : '') + ' \u00b7 ' + today;
     window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     closeAlertModal();
 }
@@ -4822,15 +4962,19 @@ function downloadAlertPDF() {
     var keys = Object.keys(_newsSelected);
     var note = (document.getElementById('amNote') || {}).value || '';
     note = note.trim();
+    var toName = (document.getElementById('amToField') || {}).value || 'The Team';
     var headlines = keys.map(function(k, i) {
         return '<div style="padding:5px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#1a2333;line-height:1.5">' + (i + 1) + '. ' + (_newsSelected[k] || k) + '</div>';
     }).join('');
     var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     var content = '<div style="font-family:Georgia,serif;max-width:660px;margin:40px auto;padding:40px;border:1px solid #dce0e8">'
-        + '<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0e8a7d;margin-bottom:14px">PrinciplesAI Regulatory Alert</div>'
-        + '<h1 style="font-size:22px;font-weight:400;letter-spacing:-.03em;margin:0 0 6px;color:#0f172a">Regulatory Dispatch</h1>'
-        + '<p style="font-size:12px;color:#56606f;margin:0 0 24px">' + today + '</p>'
-        + (note ? '<p style="font-size:13px;color:#0f172a;margin-bottom:22px;line-height:1.65;border-left:3px solid #0e8a7d;padding-left:14px">' + note.replace(/\n/g, '<br>') + '</p>' : '')
+        + '<div style="background:#0f172a;padding:14px 20px;margin:-40px -40px 28px;display:flex;align-items:center;justify-content:space-between">'
+        + '<span style="font-size:13px;font-weight:700;color:#fff;letter-spacing:-.02em">PrinciplesAI</span>'
+        + '<span style="font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase">Regulatory Alert &nbsp;&middot;&nbsp; ' + today + '</span>'
+        + '</div>'
+        + '<div style="font-size:12px;color:#56606f;margin-bottom:18px">To: ' + toName + '</div>'
+        + (note ? '<p style="font-size:13px;color:#0f172a;margin-bottom:6px;line-height:1.7">' + note.replace(/\n/g, '<br>') + '</p>' : '')
+        + '<p style="font-size:12px;color:#56606f;font-style:italic;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #e3e6ec">\u2014 David Mitchell &nbsp;&middot;&nbsp; Head of Regulatory Intelligence &nbsp;&middot;&nbsp; PrinciplesAI</p>'
         + '<div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#56606f;margin-bottom:10px">Selected Updates</div>'
         + '<div>' + headlines + '</div>'
         + '<div style="margin-top:28px;padding-top:14px;border-top:1px solid #e3e6ec;font-size:10px;color:#8a93a0">PrinciplesAI \u00b7 principlesai.com \u00b7 Generated ' + today + '</div>'
