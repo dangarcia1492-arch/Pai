@@ -218,7 +218,7 @@ button{cursor:pointer}
 
 .icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
 
-.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:8px 4px;overflow-y:auto;overflow-x:hidden}
+.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:8px 4px;overflow-y:auto;overflow-x:hidden;position:relative}
 
 .sidebar-nav-item{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:3px;cursor:pointer;position:relative;color:var(--muted);transition:color .15s,background .15s;white-space:nowrap;flex-shrink:0}
 
@@ -238,13 +238,13 @@ button{cursor:pointer}
 
 /* ===== DRILL-IN SIDEBAR REGIONS ===== */
 
-.sidebar-regions-wrap{overflow:hidden;max-height:0;opacity:0;transition:max-height .35s cubic-bezier(0.16,1,0.3,1),opacity .3s cubic-bezier(0.16,1,0.3,1);overflow-y:auto;padding:0 6px}
+.sidebar-regions-wrap{overflow:hidden;max-height:0;opacity:0;transition:opacity .25s cubic-bezier(0.16,1,0.3,1);overflow-y:auto;padding:0 6px}
 
-.sidebar-regions-wrap.open{max-height:80vh;opacity:1}
+.sidebar-regions-wrap.open{position:absolute;top:0;left:0;right:0;bottom:0;max-height:none;height:100%;opacity:1;background:var(--surface);z-index:10;padding:6px;border-top:1px solid var(--border-soft);overflow-y:auto}
 
-.icon-sidebar:not(:hover) .sidebar-regions-wrap{max-height:0 !important;opacity:0 !important;padding:0}
+.icon-sidebar:not(:hover) .sidebar-regions-wrap{max-height:0 !important;opacity:0 !important;padding:0;position:relative}
 
-.icon-sidebar:hover .sidebar-regions-wrap.open{max-height:80vh;opacity:1}
+.icon-sidebar:hover .sidebar-regions-wrap.open{position:absolute;top:0;left:0;right:0;bottom:0;max-height:none;height:100%;opacity:1}
 
 .sidebar-regions-wrap::-webkit-scrollbar{width:4px}
 
@@ -314,7 +314,7 @@ button{cursor:pointer}
 
 /* Drill-in jurisdiction items */
 
-.drill-jur-item{display:flex;align-items:center;padding:6px 8px;font-size:.86rem;font-weight:480;color:var(--secondary);cursor:pointer;border-radius:3px;transition:color .12s,background .12s;position:relative;border-left:3px solid transparent;margin-left:0}
+.drill-jur-item{display:flex;align-items:center;padding:5px 8px;font-size:.82rem;font-weight:480;color:var(--secondary);cursor:pointer;border-radius:3px;transition:color .12s,background .12s;position:relative;border-left:3px solid transparent;margin-left:0}
 
 .drill-jur-item:hover{color:var(--ink);background:rgba(0,0,0,.03)}
 
@@ -1188,7 +1188,12 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .am-dl{background:var(--bg);color:var(--secondary);border:1px solid var(--border)}.am-dl:hover{background:#eef0f4}
 .am-send{background:var(--teal);color:#fff}.am-send:hover{background:var(--teal-dark)}
 /* Implementation grid */
-.impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.impl-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+.state-impl-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.impl-stat-banner{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:20px}
+.impl-stat-num{font-size:2rem;font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1;flex-shrink:0}
+.impl-stat-label{font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:3px}
+.impl-stat-note{font-size:.75rem;color:var(--secondary);line-height:1.5}
 .impl-card{padding:15px 17px;background:var(--surface);border:1px solid var(--border);border-radius:3px}
 .impl-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px}
 .impl-law{font-size:.8rem;font-weight:700;color:var(--ink)}
@@ -3907,17 +3912,79 @@ var germanyDrill = {
 
     ]
 
+},
+
+    'California': {
+        flag: '🏛️',
+        region: 'United States',
+        population: '39.5M',
+        populationNote: '2025 est.',
+        techLaw: 'Privacy active, AI pending',
+        techLawStatus: 'partial',
+        techLawNote: 'CCPA/CPRA active · No comprehensive AI law',
+        leadAuthority: 'California Privacy Protection Agency (CPPA)',
+        consultations: 3,
+        bills: 14,
+        enforcement: 5,
+        enforcementYear: '2026',
+        bodyCount: 3,
+        authorities: [
+            { type: 'Privacy Authority', badge: 'blue', name: 'California Privacy Protection Agency (CPPA)', link: 'cppa.ca.gov', tabCategory: 'data-protection', description: 'Sole enforcement authority for CCPA/CPRA. Issues regulations and investigates complaints.' },
+            { type: 'AI Oversight', badge: 'teal', name: 'California AI Safety Council (CASC)', link: 'gov.ca.gov', tabCategory: 'ai-governance', description: 'Governor\'s task force reviewing frontier AI safety and state procurement policy.' },
+            { type: 'Consumer Protection', badge: 'amber', name: 'CA Department of Consumer Affairs', link: 'dca.ca.gov', tabCategory: 'sectoral', description: 'Sector-level enforcement across professional licensing and consumer-facing AI tools.' }
+        ],
+        stateImpl: {
+            privacy: {
+                status: 'Active',
+                statusClass: 'green',
+                lawName: 'CCPA / CPRA',
+                since: '2020 · 2023',
+                note: 'The California Consumer Privacy Act (2020) and California Privacy Rights Act (2023) together create the most comprehensive state-level privacy regime in the US. The CPPA has sole enforcement authority and has issued binding regulations on sensitive data, opt-out rights and risk assessments.',
+                sourceUrl: '#',
+                sourceLabel: 'CPPA regulations →'
+            },
+            aiLaw: {
+                status: 'Pending',
+                statusClass: 'amber',
+                lawName: 'No comprehensive AI law',
+                since: null,
+                note: 'SB 1047 (frontier AI safety) was vetoed by Governor Newsom in Sept 2024. AB 2013 (AI training data transparency) signed into law. Multiple bills in 2025–26 session including SB 813 (automated decisions) and AB 1008 (AI in healthcare). No comprehensive framework passed.',
+                sourceUrl: '#',
+                sourceLabel: 'CA Legislature AI bills →'
+            },
+            federalActivity: {
+                status: 'Active',
+                statusClass: 'amber',
+                note: '2025 executive orders targeted state AI regulation via federal preemption clauses in spending bills. FTC continues enforcement of deceptive AI practices under existing authority. DOJ monitoring algorithmic discrimination under civil rights statutes. Federal preemption of CCPA remains a legislative risk.',
+                sourceUrl: '#',
+                sourceLabel: 'Federal preemption tracker →'
+            },
+            nonCompAI: {
+                count: 14,
+                note: 'Includes laws on AI-generated deepfakes (AB 602, AB 2655), AI in hiring disclosures, automated decision-making in insurance, AI in healthcare informed consent, and chatbot disclosure requirements. Most are sector-specific obligations rather than cross-cutting governance.',
+                sourceUrl: '#',
+                sourceLabel: 'CA AI law inventory →'
+            }
+        },
+        alerts: [
+            { date: '12 Apr 2026', title: 'CPPA opens formal inquiry into AI-driven automated decision-making systems', type: 'Enforcement' },
+            { date: '18 Mar 2026', title: 'SB 813 advances to Assembly — automated hiring decision disclosure', type: 'Legislation' },
+            { date: '3 Mar 2026', title: 'AB 1008 introduced: AI transparency requirements for healthcare providers', type: 'Legislation' }
+        ],
+        contentTypes: { legislation: [], guidance: [] }
+    }
+
 };
 
 
 
 /* Items that have detail pages */
 
-var detailItems = {'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'Germany':1,'US Federal':1,'Czech Republic':1,'Western Sahara':1};
+var detailItems = {'China':1,'United Kingdom':1,'Nigeria':1,'United States':1,'Germany':1,'US Federal':1,'Czech Republic':1,'Western Sahara':1,'California':1};
 
 /* Items that drill deeper (show chevron) */
 
-var drillableItems = {'Australia':1,'Canada':1,'Germany':1,'United States':1};
+var drillableItems = {'Australia':1,'Canada':1,'Germany':1,'United States':1,'California':1};
 
 
 
@@ -4495,28 +4562,88 @@ function renderJurisdictionDetail(name) {
     html += '<div class="stat-card"><div class="stat-value">' + d.enforcement + '</div><div class="stat-label">Enforcement YTD</div><div class="text-xs text-muted" style="margin-top:2px">' + d.enforcementYear + '</div></div>';
     html += '</div>';
 
-    // Implementation status (EU member states)
-    if (d.implementation) {
-        var imp = d.implementation;
+    // EU Implementation status — 3-column grid (GDPR · NIS2 · EU AI Act)
+    function renderEUImpl(imp) {
         var laws = [
-            { key: 'aiAct', label: 'EU AI Act' },
             { key: 'gdpr',  label: 'GDPR' },
-            { key: 'nis2',  label: 'NIS2 Directive' }
+            { key: 'nis2',  label: 'NIS2 Directive' },
+            { key: 'aiAct', label: 'EU AI Act' }
         ];
-        html += '<h2 style="font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--ink);margin:0 0 12px;letter-spacing:-.01em">Implementation Status</h2>';
-        html += '<div class="impl-grid">';
+        var h = '<h2 style="font-size:1rem;font-weight:700;color:var(--ink);margin:0 0 12px">Implementation Status</h2>';
+        h += '<div class="impl-grid">';
         laws.forEach(function(law) {
             var v = imp[law.key];
             if (!v) return;
-            html += '<div class="impl-card">';
-            html += '<div class="impl-header"><span class="impl-law">' + law.label + '</span><span class="status status-' + v.statusClass + '" style="font-size:.68rem">' + v.status + '</span></div>';
-            html += '<p class="impl-note">' + v.note + '</p>';
-            html += '</div>';
+            h += '<div class="impl-card">';
+            h += '<div class="impl-header"><span class="impl-law">' + law.label + '</span><span class="status status-' + v.statusClass + '" style="font-size:.68rem">' + v.status + '</span></div>';
+            h += '<p class="impl-note">' + v.note + '</p>';
+            if (v.sourceUrl && v.sourceLabel) h += '<div class="impl-note" style="margin-top:6px"><a href="' + v.sourceUrl + '" style="font-size:.75rem;font-weight:600;color:var(--teal);text-decoration:none">' + v.sourceLabel + '</a></div>';
+            h += '</div>';
         });
-        html += '</div>';
-        if (imp.trackerLink) {
-            html += '<div style="margin-bottom:28px;margin-top:-8px"><a href="' + imp.trackerLink + '" style="font-size:.78rem;font-weight:600;color:var(--teal);border-bottom:1px solid var(--teal-light);text-decoration:none">EU AI Act Implementation Tracker \u2192</a></div>';
-        }
+        h += '</div>';
+        if (imp.trackerLink) h += '<div style="margin-bottom:28px;margin-top:-8px"><a href="' + imp.trackerLink + '" style="font-size:.78rem;font-weight:600;color:var(--teal);border-bottom:1px solid var(--teal-light);text-decoration:none">EU AI Act Implementation Tracker \u2192</a></div>';
+        return h;
+    }
+
+    if (d.implementation) {
+        // Try Airtable first, fall back to hardcoded
+        var implKey = name.toLowerCase().replace(/\s+/g, '_');
+        fetchAirtable('euJurisdictions', function(recs) {
+            var rec = recs && recs.find(function(r) { return r.fields && r.fields.key === implKey; });
+            var imp = (rec && _atToImpl(rec)) || d.implementation;
+            var implEl = document.getElementById('jd-impl-' + implKey);
+            if (implEl) implEl.innerHTML = renderEUImpl(imp);
+        });
+        html += '<div id="jd-impl-' + implKey + '">' + renderEUImpl(d.implementation) + '</div>';
+    }
+
+    // US State implementation — Privacy · AI Law · Federal Activity
+    function renderStateImpl(si) {
+        var h = '<h2 style="font-size:1rem;font-weight:700;color:var(--ink);margin:0 0 12px">State Regulatory Profile</h2>';
+        h += '<div class="state-impl-grid">';
+        // Privacy law
+        var p = si.privacy;
+        h += '<div class="impl-card">';
+        h += '<div class="impl-header"><span class="impl-law">Privacy Law</span><span class="status status-' + p.statusClass + '" style="font-size:.68rem">' + p.status + '</span></div>';
+        if (p.lawName) h += '<div style="font-size:.78rem;font-weight:700;color:var(--ink);margin-bottom:5px">' + p.lawName + (p.since ? ' <span style="font-weight:400;color:var(--muted)">· ' + p.since + '</span>' : '') + '</div>';
+        h += '<p class="impl-note">' + p.note + '</p>';
+        if (p.sourceUrl && p.sourceLabel) h += '<div style="margin-top:6px"><a href="' + p.sourceUrl + '" style="font-size:.75rem;font-weight:600;color:var(--teal);text-decoration:none">' + p.sourceLabel + '</a></div>';
+        h += '</div>';
+        // AI Law
+        var a = si.aiLaw;
+        h += '<div class="impl-card">';
+        h += '<div class="impl-header"><span class="impl-law">AI Law</span><span class="status status-' + a.statusClass + '" style="font-size:.68rem">' + a.status + '</span></div>';
+        if (a.lawName) h += '<div style="font-size:.78rem;font-weight:700;color:var(--ink);margin-bottom:5px">' + a.lawName + (a.since ? ' <span style="font-weight:400;color:var(--muted)">· ' + a.since + '</span>' : '') + '</div>';
+        h += '<p class="impl-note">' + a.note + '</p>';
+        if (a.sourceUrl && a.sourceLabel) h += '<div style="margin-top:6px"><a href="' + a.sourceUrl + '" style="font-size:.75rem;font-weight:600;color:var(--teal);text-decoration:none">' + a.sourceLabel + '</a></div>';
+        h += '</div>';
+        // Federal activity
+        var f = si.federalActivity;
+        h += '<div class="impl-card">';
+        h += '<div class="impl-header"><span class="impl-law">Federal Activity</span><span class="status status-' + f.statusClass + '" style="font-size:.68rem">' + f.status + '</span></div>';
+        h += '<p class="impl-note">' + f.note + '</p>';
+        if (f.sourceUrl && f.sourceLabel) h += '<div style="margin-top:6px"><a href="' + f.sourceUrl + '" style="font-size:.75rem;font-weight:600;color:var(--teal);text-decoration:none">' + f.sourceLabel + '</a></div>';
+        h += '</div>';
+        h += '</div>';
+        // Non-comprehensive AI laws stat banner
+        var n = si.nonCompAI;
+        h += '<div class="impl-stat-banner">';
+        h += '<div class="impl-stat-num">' + (n.count || 0) + '</div>';
+        h += '<div><div class="impl-stat-label">Non-Comprehensive AI Laws</div><div class="impl-stat-note">' + n.note + '</div>';
+        if (n.sourceUrl && n.sourceLabel) h += '<div style="margin-top:5px"><a href="' + n.sourceUrl + '" style="font-size:.75rem;font-weight:600;color:var(--teal);text-decoration:none">' + n.sourceLabel + '</a></div>';
+        h += '</div></div>';
+        return h;
+    }
+
+    if (d.stateImpl) {
+        var stKey = name.toLowerCase().replace(/\s+/g, '_');
+        fetchAirtable('usStates', function(recs) {
+            var rec = recs && recs.find(function(r) { return r.fields && r.fields.key === stKey; });
+            var si = (rec && _atToStateImpl(rec)) || d.stateImpl;
+            var siEl = document.getElementById('jd-si-' + stKey);
+            if (siEl) siEl.innerHTML = renderStateImpl(si);
+        });
+        html += '<div id="jd-si-' + stKey + '">' + renderStateImpl(d.stateImpl) + '</div>';
     }
 
     // USA States section
@@ -4525,8 +4652,9 @@ function renderJurisdictionDetail(name) {
         html += '<div class="states-grid mb-24">';
         for (var s = 0; s < d.states.length; s++) {
             var st = d.states[s];
-            html += '<div class="state-card">';
-            html += '<div class="state-card-header"><h4>' + st.name + '</h4><span class="badge badge-teal" style="height:18px;font-size:.72rem">' + st.bills + ' bills</span></div>';
+            var isClickable = detailItems[st.name];
+            html += '<div class="state-card"' + (isClickable ? ' style="cursor:pointer" onclick="showJurisdictionDetail(\'' + st.name + '\')"' : '') + '>';
+            html += '<div class="state-card-header"><h4>' + st.name + (isClickable ? ' <span style="font-size:.68rem;color:var(--teal);font-weight:600">→</span>' : '') + '</h4><span class="badge badge-teal" style="height:18px;font-size:.72rem">' + st.bills + ' bills</span></div>';
             html += '<p class="text-sm text-secondary" style="margin-top:6px;line-height:1.5">' + st.desc + '</p>';
             html += '</div>';
         }
@@ -4845,6 +4973,82 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+// ===== AIRTABLE CONFIG =====
+// Set your Airtable base ID and personal access token below.
+// Tables: "EU Jurisdictions" and "US States"
+var _at = {
+    base: 'YOUR_BASE_ID',          // e.g. 'appABCDEF12345678'
+    key:  'YOUR_PERSONAL_ACCESS_TOKEN',
+    ttl:  2 * 60 * 60 * 1000,     // 2-hour cache
+    tables: {
+        euJurisdictions: 'EU%20Jurisdictions',
+        usStates:        'US%20States'
+    }
+};
+
+function _atKey(t)  { return 'pai-at-' + t; }
+function _atGet(t)  {
+    try {
+        var d = JSON.parse(localStorage.getItem(_atKey(t)));
+        if (d && d.ts && (Date.now() - d.ts) < _at.ttl) return d.v;
+    } catch(e) {}
+    return null;
+}
+function _atGetStale(t) {
+    try { var d = JSON.parse(localStorage.getItem(_atKey(t))); return d && d.v ? d.v : null; } catch(e) { return null; }
+}
+function _atSet(t, v) {
+    try { localStorage.setItem(_atKey(t), JSON.stringify({ ts: Date.now(), v: v })); } catch(e) {}
+}
+function _statusClass(s) {
+    if (!s) return 'neutral';
+    var sl = s.toLowerCase();
+    if (sl === 'active' || sl === 'transposed') return 'green';
+    if (sl === 'in progress' || sl === 'pending') return 'amber';
+    if (sl === 'at risk' || sl === 'reversing' || sl === 'none') return 'red';
+    return 'neutral';
+}
+
+function fetchAirtable(tableKey, cb) {
+    var fresh = _atGet(tableKey);
+    if (fresh) { cb(fresh); return; }
+    if (!_at.base || _at.base === 'YOUR_BASE_ID') { cb(null); return; }
+    fetch('https://api.airtable.com/v0/' + _at.base + '/' + _at.tables[tableKey], {
+        headers: { 'Authorization': 'Bearer ' + _at.key }
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        var recs = data.records || [];
+        _atSet(tableKey, recs);
+        cb(recs);
+    })
+    .catch(function() { cb(_atGetStale(tableKey)); });
+}
+
+// Map Airtable EU record → implementation object
+function _atToImpl(rec) {
+    if (!rec) return null;
+    var f = rec.fields;
+    return {
+        gdpr:  { status: f.gdpr_status,    statusClass: _statusClass(f.gdpr_status),    note: f.gdpr_notes,    sourceUrl: f.gdpr_source_url,    sourceLabel: f.gdpr_source_label },
+        nis2:  { status: f.nis2_status,     statusClass: _statusClass(f.nis2_status),    note: f.nis2_notes,    sourceUrl: f.nis2_source_url,    sourceLabel: f.nis2_source_label },
+        aiAct: { status: f.ai_act_status,   statusClass: _statusClass(f.ai_act_status),  note: f.ai_act_notes,  sourceUrl: f.ai_act_source_url,  sourceLabel: f.ai_act_source_label },
+        trackerLink: f.tracker_link
+    };
+}
+
+// Map Airtable US State record → stateImpl object
+function _atToStateImpl(rec) {
+    if (!rec) return null;
+    var f = rec.fields;
+    return {
+        privacy:         { status: f.privacy_status,  statusClass: _statusClass(f.privacy_status),  lawName: f.privacy_law_name,  since: f.privacy_since,   note: f.privacy_notes,   sourceUrl: f.privacy_source_url,   sourceLabel: f.privacy_source_label },
+        aiLaw:           { status: f.ai_law_status,   statusClass: _statusClass(f.ai_law_status),   lawName: f.ai_law_name,       since: f.ai_law_since,    note: f.ai_law_notes,    sourceUrl: f.ai_law_source_url,    sourceLabel: f.ai_law_source_label },
+        federalActivity: { status: f.federal_status,  statusClass: _statusClass(f.federal_status),  note: f.federal_notes,        sourceUrl: f.federal_source_url, sourceLabel: f.federal_source_label },
+        nonCompAI:       { count: f.non_comp_ai_count, note: f.non_comp_ai_notes, sourceUrl: f.non_comp_ai_source_url, sourceLabel: f.non_comp_ai_source_label }
+    };
+}
 
 // ===== THEME SYSTEM =====
 var _themes = [
