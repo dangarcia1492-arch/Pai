@@ -1148,14 +1148,58 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .lesson-card-ff .lesson-thumb{background:#1e0f3a}
 .lesson-card-ff .lesson-thumb::after{background:linear-gradient(to top,#130824,transparent)}
 .lesson-card-ff,.lesson-card-ff .lesson-meta{background:#130824}
+.cm-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.08);margin:0 -24px;padding:0 24px;position:sticky;top:0;background:#07080d;z-index:10}
+.cm-tab{padding:13px 20px;font-size:.88rem;font-weight:600;color:rgba(255,255,255,.38);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s;white-space:nowrap}
+.cm-tab:hover{color:rgba(255,255,255,.65)}
+.cm-tab.active{color:#fff;border-bottom-color:var(--teal)}
+.cm-section{display:none}
+.cm-section.active{display:block}
 /* Faculty grid */
-.cm-faculty-grid{display:flex;gap:12px;flex-wrap:wrap}
-.cm-faculty-card{width:196px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:3px;padding:16px 15px;transition:background .15s,border-color .15s;cursor:pointer}
-.cm-faculty-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.13)}
-.cm-fc-name{font-size:.84rem;font-weight:700;color:#e8edf3;margin-bottom:2px;line-height:1.3;font-family:var(--sans)}
-.cm-fc-role{font-size:.7rem;color:rgba(255,255,255,.32);margin-bottom:10px;font-family:var(--sans)}
-.cm-fc-tags{display:flex;flex-wrap:wrap;gap:5px}
-.cm-fc-tag{font-size:.62rem;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+.cm-faculty-grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;padding:20px 0}
+.cm-faculty-card-2{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:18px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:background .15s,border-color .15s}
+.cm-faculty-card-2:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}
+.cm-fc-photo{width:52px;height:52px;border-radius:50%;flex-shrink:0;background-size:cover;background-position:top center;background-color:rgba(255,255,255,.08)}
+.cm-fc-info{flex:1;min-width:0}
+.cm-fc-name-2{font-size:.88rem;font-weight:700;color:rgba(255,255,255,.9);margin-bottom:2px;font-family:var(--sans)}
+.cm-fc-firm{font-size:.72rem;font-weight:600;color:var(--teal);margin-bottom:1px;font-family:var(--sans)}
+.cm-fc-role-2{font-size:.73rem;color:rgba(255,255,255,.35);margin-bottom:9px;line-height:1.4;font-family:var(--sans)}
+.cm-fc-tags-2{display:flex;gap:4px;flex-wrap:wrap}
+.cm-fc-tag-2{font-size:.6rem;font-weight:700;padding:2px 6px;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.38);border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+/* Discuss */
+.cm-discuss{display:flex;height:calc(100vh - 220px);min-height:520px;border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden;margin:20px 0}
+.cm-discuss-sb{width:210px;flex-shrink:0;border-right:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.18);display:flex;flex-direction:column}
+.cm-discuss-ws-name{padding:14px 16px 10px;font-size:.82rem;font-weight:700;color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:6px}
+.cm-discuss-ws-name span{display:block;font-size:.68rem;font-weight:500;color:rgba(255,255,255,.28);margin-top:2px}
+.cm-ch-section{font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,.22);padding:10px 16px 4px}
+.cm-channel{display:flex;align-items:center;gap:7px;padding:4px 16px;cursor:pointer;font-size:.81rem;color:rgba(255,255,255,.38);transition:background .1s,color .1s}
+.cm-channel:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.7)}
+.cm-channel.active{background:rgba(255,255,255,.09);color:#fff}
+.cm-channel-hash{font-size:.8rem;color:rgba(255,255,255,.18);flex-shrink:0}
+.cm-ch-badge{margin-left:auto;background:var(--teal);color:#fff;font-size:.62rem;font-weight:700;padding:1px 6px;border-radius:8px;flex-shrink:0}
+.cm-discuss-main{flex:1;display:flex;flex-direction:column;min-width:0}
+.cm-discuss-hd{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;flex-shrink:0}
+.cm-discuss-ch-title{font-size:.9rem;font-weight:700;color:rgba(255,255,255,.9)}
+.cm-discuss-ch-desc{font-size:.74rem;color:rgba(255,255,255,.28);margin-left:14px;padding-left:14px;border-left:1px solid rgba(255,255,255,.08)}
+.cm-feed{flex:1;overflow-y:auto;padding:16px 20px 8px;display:flex;flex-direction:column;gap:2px}
+.cm-msg{display:flex;gap:12px;padding:5px 8px;border-radius:4px}
+.cm-msg:hover{background:rgba(255,255,255,.024)}
+.cm-msg-av{width:36px;height:36px;border-radius:50%;flex-shrink:0;background-size:cover;background-position:top center;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:rgba(255,255,255,.85);font-family:var(--sans)}
+.cm-msg-body{flex:1;min-width:0}
+.cm-msg-meta{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+.cm-msg-name{font-size:.84rem;font-weight:700;color:rgba(255,255,255,.88)}
+.cm-msg-ts{font-size:.69rem;color:rgba(255,255,255,.24)}
+.cm-msg-text{font-size:.82rem;color:rgba(255,255,255,.58);line-height:1.55}
+.cm-msg-text strong{color:rgba(255,255,255,.72);font-weight:600}
+.cm-msg-text a{color:var(--teal);text-decoration:none}
+.cm-reactions{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
+.cm-rxn{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:10px;font-size:.74rem;color:rgba(255,255,255,.48);cursor:pointer;user-select:none}
+.cm-rxn:hover{background:rgba(255,255,255,.09)}
+.cm-reply-ct{font-size:.73rem;color:var(--teal);cursor:pointer;margin-top:3px;display:inline-block}
+.cm-reply-ct:hover{text-decoration:underline}
+.cm-discuss-input-wrap{padding:10px 16px 14px;border-top:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.cm-discuss-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:10px 14px;color:rgba(255,255,255,.65);font-size:.82rem;font-family:var(--sans);resize:none;outline:none;box-sizing:border-box}
+.cm-discuss-input:focus{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08)}
+.cm-discuss-input::placeholder{color:rgba(255,255,255,.2)}
 
 /* ===== HOME JURISDICTION SELECTOR ===== */
 .home-jur-wrap{position:relative}
