@@ -1916,53 +1916,90 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 <div class="page-view" id="page-topics">
 
-    <div class="flex items-center justify-between mb-24">
-        <div>
-            <h1 class="page-title mb-8">Topics</h1>
-            <p class="text-sm text-secondary">Cross-jurisdictional intelligence by subject area</p>
-        </div>
+  <!-- Header -->
+  <div class="news-top">
+    <div>
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:10px">PrinciplesAI &middot; Topics</div>
+      <h1 class="page-title" style="margin-bottom:6px">Cross-Jurisdictional <em>Topics</em></h1>
+      <div style="font-size:.82rem;color:var(--secondary)">Regulatory intelligence organised by subject &mdash; across every jurisdiction PAI tracks.</div>
     </div>
+    <div class="auth-stats">
+      <div class="auth-stat"><span class="auth-stat-n">24</span><span class="auth-stat-l">topics</span></div>
+      <div class="auth-stat"><span class="auth-stat-n">847</span><span class="auth-stat-l">items this week</span></div>
+    </div>
+  </div>
 
-    <!-- Featured topic -->
-    <div class="topics-featured mb-16">
-        <div class="tf-label">FEATURED</div>
-        <h2>AI Governance Notes</h2>
-        <p>The strategic lens on AI policy. How regulators are thinking, where frameworks are heading, and what practitioners need to know before it becomes law.</p>
+  <!-- Featured topic -->
+  <div class="news-lead">
+    <div class="nl-kick">FEATURED TOPIC <span class="nl-meta">&middot; Updated 15 April 2026</span></div>
+    <h2>AI Governance Notes</h2>
+    <p class="nl-standfirst">The strategic lens on AI policy. How regulators are thinking, where frameworks are heading, and what practitioners need to know before it becomes law. Covering the EU AI Act implementation cycle, G7 and OECD positions, and emerging national AI strategies across 48 jurisdictions.</p>
+    <div class="nl-footer">
+      <span><strong>Items this month</strong> 34</span>
+      <span><strong>Jurisdictions</strong> 48</span>
+      <span><strong>Last update</strong> Today</span>
+      <span><strong>Key authorities</strong> EU AI Office, NIST, OECD, G7 DPCG</span>
     </div>
+  </div>
 
-    <!-- Topic grid -->
-    <div class="topics-grid mb-40">
-        <div class="topic-card">
-            <h3>IP &amp; AI</h3>
-            <p>Copyright, training data, and ownership of AI-generated works across jurisdictions.</p>
-            <div class="tc-link">Explore &rarr;</div>
-        </div>
-        <div class="topic-card">
-            <h3>Trust &amp; Safety</h3>
-            <p>Content moderation, synthetic media, and platform accountability frameworks.</p>
-            <div class="tc-link">Explore &rarr;</div>
-        </div>
-        <div class="topic-card">
-            <h3>Cybersecurity &amp; IM</h3>
-            <p>Incident reporting obligations, NIS2 compliance, and AI in security operations.</p>
-            <div class="tc-link">Explore &rarr;</div>
-        </div>
-        <div class="topic-card">
-            <h3>Standards &amp; Conformity Assessments</h3>
-            <p>Harmonised standards, CE marking, and third-party audit requirements under the AI Act.</p>
-            <div class="tc-link">Explore &rarr;</div>
-        </div>
-        <div class="topic-card">
-            <h3>Vendor &amp; Procurement</h3>
-            <p>Due diligence, contractual obligations, and public sector AI procurement rules.</p>
-            <div class="tc-link">Explore &rarr;</div>
-        </div>
-        <div class="topic-card">
-            <h3>Incident Response</h3>
-            <p>Breach notification timelines, supervisory authority reporting, and crisis playbooks.</p>
-            <div class="tc-link">Explore &rarr;</div>
-        </div>
+  <!-- Two key topics -->
+  <div class="news-seconds">
+    <div class="news-second">
+      <div class="ns-kick">PRIVACY &amp; DATA PROTECTION</div>
+      <h3>GDPR Enforcement &amp; the New Cooperation Mechanism</h3>
+      <p class="ns-summary">Cross-border enforcement, one-stop-shop reform, and the evolving relationship between national DPAs and the EDPB consistency procedure. Includes the post-Schrems II landscape and adequacy developments.</p>
+      <div class="ns-meta">214 items &middot; 47 jurisdictions &middot; Updated today</div>
     </div>
+    <div class="news-second">
+      <div class="ns-kick">AI ACT IMPLEMENTATION</div>
+      <h3>High-Risk AI: Classification, Compliance &amp; Conformity</h3>
+      <p class="ns-summary">Annex III categories, prohibited uses, GPAI model obligations, and the rolling compliance deadlines in force since August 2024. Conformity assessment procedures and notified body requirements.</p>
+      <div class="ns-meta">189 items &middot; 27 jurisdictions &middot; Updated today</div>
+    </div>
+  </div>
+
+  <!-- 4-up topic strip -->
+  <div class="news-regions">
+    <div class="news-rgn">
+      <div class="nr-label">IP &amp; AI</div>
+      <h4>Copyright, training data &amp; ownership of AI-generated works across jurisdictions</h4>
+      <div class="nr-meta">62 items &middot; 31 jurisdictions</div>
+    </div>
+    <div class="news-rgn">
+      <div class="nr-label">Trust &amp; Safety</div>
+      <h4>Synthetic media, deepfakes, content moderation &amp; platform accountability</h4>
+      <div class="nr-meta">48 items &middot; 22 jurisdictions</div>
+    </div>
+    <div class="news-rgn">
+      <div class="nr-label">Cybersecurity &amp; IM</div>
+      <h4>NIS2 compliance, incident reporting obligations &amp; AI in security operations</h4>
+      <div class="nr-meta">71 items &middot; 38 jurisdictions</div>
+    </div>
+    <div class="news-rgn">
+      <div class="nr-label">Agentic AI</div>
+      <h4>Autonomous systems, vendor risk &amp; legal accountability for AI agents</h4>
+      <div class="nr-meta">29 items &middot; 14 jurisdictions</div>
+    </div>
+  </div>
+
+  <!-- All topics wire -->
+  <div class="wire-header">
+    <h2>All topics</h2>
+    <div class="wh-count"><strong>24</strong> subject areas</div>
+  </div>
+  <div class="wire-list">
+    <div class="wire-row"><div class="wr-ts">Today<span class="wr-date">active</span></div><div class="wr-jur" style="color:var(--teal);font-weight:700">Governance</div><div class="wr-info"><h4>Standards &amp; Conformity Assessments</h4><div class="wr-src"><strong>Harmonised standards</strong> &middot; <span>CE marking, third-party audit requirements &amp; notified bodies under the EU AI Act</span></div></div><div class="wr-tag legislation">41 items</div></div>
+    <div class="wire-row"><div class="wr-ts">Today<span class="wr-date">active</span></div><div class="wr-jur" style="color:var(--teal);font-weight:700">Procurement</div><div class="wr-info"><h4>Vendor &amp; Procurement Risk</h4><div class="wr-src"><strong>Due diligence &amp; contracts</strong> &middot; <span>Contractual obligations, public sector AI procurement rules &amp; supply chain accountability</span></div></div><div class="wr-tag legislation">38 items</div></div>
+    <div class="wire-row"><div class="wr-ts">Today<span class="wr-date">active</span></div><div class="wr-jur" style="color:var(--amber);font-weight:700">Enforcement</div><div class="wr-info"><h4>Incident Response &amp; Breach Notification</h4><div class="wr-src"><strong>Supervisory reporting</strong> &middot; <span>Notification timelines, authority reporting obligations &amp; cross-border coordination</span></div></div><div class="wr-tag enforcement">27 items</div></div>
+    <div class="wire-row"><div class="wr-ts">Today<span class="wr-date">active</span></div><div class="wr-jur" style="color:var(--blue);font-weight:700">AI Law</div><div class="wr-info"><h4>Automated Decision-Making &amp; Profiling</h4><div class="wr-src"><strong>Article 22 GDPR &amp; equivalents</strong> &middot; <span>Right to explanation, human oversight requirements &amp; sectoral ADM restrictions</span></div></div><div class="wr-tag legislation">55 items</div></div>
+    <div class="wire-row"><div class="wr-ts">1d ago<span class="wr-date">recent</span></div><div class="wr-jur" style="color:var(--red);font-weight:700">Biometrics</div><div class="wr-info"><h4>Biometrics &amp; Facial Recognition</h4><div class="wr-src"><strong>Special category data</strong> &middot; <span>Prohibited uses under EU AI Act, US state bans &amp; international biometric frameworks</span></div></div><div class="wr-tag enforcement">33 items</div></div>
+    <div class="wire-row"><div class="wr-ts">1d ago<span class="wr-date">recent</span></div><div class="wr-jur" style="color:var(--teal);font-weight:700">Children</div><div class="wr-info"><h4>Children's Data &amp; AI</h4><div class="wr-src"><strong>Age-appropriate design</strong> &middot; <span>COPPA, UK Children's Code, DSA obligations &amp; AI restrictions for under-18s</span></div></div><div class="wr-tag consultation">22 items</div></div>
+    <div class="wire-row"><div class="wr-ts">2d ago<span class="wr-date">recent</span></div><div class="wr-jur" style="color:var(--blue);font-weight:700">Sector</div><div class="wr-info"><h4>Healthcare AI &amp; Medical Devices</h4><div class="wr-src"><strong>MDR &amp; AI Act intersection</strong> &middot; <span>High-risk classification of clinical AI, CE marking overlap &amp; EMA guidance</span></div></div><div class="wr-tag legislation">44 items</div></div>
+    <div class="wire-row"><div class="wr-ts">2d ago<span class="wr-date">recent</span></div><div class="wr-jur" style="color:var(--amber);font-weight:700">Sector</div><div class="wr-info"><h4>Financial Services &amp; AI</h4><div class="wr-src"><strong>EBA, ESA &amp; FCA guidance</strong> &middot; <span>Model risk management, credit scoring, algorithmic trading &amp; AML applications</span></div></div><div class="wr-tag legislation">58 items</div></div>
+  </div>
+  <div class="wire-foot"><a href="#">Load 16 more topics &rarr;</a></div>
+
+</div>
 
     <div class="flex items-center justify-between mb-16" style="display:none">
 
@@ -2285,253 +2322,52 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 <div class="page-view" id="page-lists">
 
-    <div class="flex items-center justify-between mb-24">
-
-        <div>
-
-            <h1 class="page-title">Your <em>Lists</em></h1>
-
-            <p class="text-sm text-secondary" style="margin-top:4px">Curated collections of jurisdictions, topics, and regulatory intelligence</p>
-
-        </div>
-
-        <button class="btn btn-teal btn-sm">+ New List</button>
-
+  <!-- Header -->
+  <div class="news-top">
+    <div>
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:10px">PrinciplesAI &middot; Your Lists</div>
+      <h1 class="page-title" style="margin-bottom:6px">Your <em>Lists</em></h1>
+      <div style="font-size:.82rem;color:var(--secondary)">Curated collections of jurisdictions, authorities, topics &amp; developments &mdash; your view of PAI.</div>
     </div>
+    <button class="btn btn-teal btn-sm">+ New List</button>
+  </div>
 
-
-
-    <div class="filter-bar">
-
-        <div class="filter-btn active">All Lists</div>
-
-        <div class="filter-btn">Jurisdictions</div>
-
-        <div class="filter-btn">Topics</div>
-
-        <div class="filter-btn">Authorities</div>
-
-        <div class="filter-btn">Shared with me</div>
-
+  <!-- Pinned / featured list -->
+  <div class="news-lead">
+    <div class="nl-kick">PINNED LIST <span class="nl-meta">&middot; 12 jurisdictions &middot; Updated 2h ago</span></div>
+    <h2>Priority Jurisdictions</h2>
+    <p class="nl-standfirst">Your core coverage set: EU, UK, USA, China, Singapore, Japan, Australia, Canada, Germany, France, Ireland, Italy. All regulatory outputs from these 12 jurisdictions are surfaced immediately across news, authorities and topics.</p>
+    <div class="nl-footer">
+      <span><strong>Type</strong> Jurisdictions</span>
+      <span><strong>Items</strong> 12</span>
+      <span><strong>New today</strong> 7 outputs</span>
+      <span><strong>Shared with</strong> Just you</span>
     </div>
-
-
-
-    <div class="grid-3 mb-24">
-
-        <div class="card" style="cursor:pointer">
-
-            <div class="card-body">
-
-                <div class="flex items-center gap-12 mb-12">
-
-                    <div style="width:36px;height:36px;border-radius:3px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center">
-
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-
-                    </div>
-
-                    <div>
-
-                        <h4>Priority Jurisdictions</h4>
-
-                        <span class="text-xs text-muted">12 jurisdictions &middot; Updated 2h ago</span>
-
-                    </div>
-
-                </div>
-
-                <div style="display:flex;flex-wrap:wrap;gap:4px">
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">EU</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">UK</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">US</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">China</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">+8</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="card" style="cursor:pointer">
-
-            <div class="card-body">
-
-                <div class="flex items-center gap-12 mb-12">
-
-                    <div style="width:36px;height:36px;border-radius:3px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center">
-
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
-
-                    </div>
-
-                    <div>
-
-                        <h4>AI Act Compliance</h4>
-
-                        <span class="text-xs text-muted">34 items &middot; Updated 1d ago</span>
-
-                    </div>
-
-                </div>
-
-                <div style="display:flex;flex-wrap:wrap;gap:4px">
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">High-Risk AI</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">GPAI</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Deadlines</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="card" style="cursor:pointer">
-
-            <div class="card-body">
-
-                <div class="flex items-center gap-12 mb-12">
-
-                    <div style="width:36px;height:36px;border-radius:3px;background:var(--red-bg);display:flex;align-items:center;justify-content:center">
-
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-
-                    </div>
-
-                    <div>
-
-                        <h4>Enforcement Watch</h4>
-
-                        <span class="text-xs text-muted">8 items &middot; Updated 4h ago</span>
-
-                    </div>
-
-                </div>
-
-                <div style="display:flex;flex-wrap:wrap;gap:4px">
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Fines</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Sanctions</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Orders</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="card" style="cursor:pointer">
-
-            <div class="card-body">
-
-                <div class="flex items-center gap-12 mb-12">
-
-                    <div style="width:36px;height:36px;border-radius:3px;background:var(--green-bg);display:flex;align-items:center;justify-content:center">
-
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-
-                    </div>
-
-                    <div>
-
-                        <h4>Copyright &amp; IP Tracker</h4>
-
-                        <span class="text-xs text-muted">19 items &middot; Updated 3d ago</span>
-
-                    </div>
-
-                </div>
-
-                <div style="display:flex;flex-wrap:wrap;gap:4px">
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">TDM</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Fair Use</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">AI Output</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="card" style="cursor:pointer">
-
-            <div class="card-body">
-
-                <div class="flex items-center gap-12 mb-12">
-
-                    <div style="width:36px;height:36px;border-radius:3px;background:var(--teal-light);display:flex;align-items:center;justify-content:center">
-
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-
-                    </div>
-
-                    <div>
-
-                        <h4>Team Shared: APAC Watch</h4>
-
-                        <span class="text-xs text-muted">26 items &middot; 3 collaborators</span>
-
-                    </div>
-
-                </div>
-
-                <div style="display:flex;flex-wrap:wrap;gap:4px">
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Japan</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Korea</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Singapore</span>
-
-                    <span style="font-size:.72rem;padding:2px 8px;background:var(--bg);border-radius:10px;color:var(--secondary)">Australia</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="card" style="cursor:pointer;border-style:dashed">
-
-            <div class="card-body" style="display:flex;align-items:center;justify-content:center;min-height:120px">
-
-                <div style="text-align:center;color:var(--muted)">
-
-                    <div style="font-size:1.5rem;margin-bottom:4px">+</div>
-
-                    <div class="text-sm">Create new list</div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="news-filter-bar">
+    <div class="news-filter-pill active">All Lists</div>
+    <div class="news-filter-pill">Jurisdictions</div>
+    <div class="news-filter-pill">Topics</div>
+    <div class="news-filter-pill">Authorities</div>
+    <div class="news-filter-pill">Shared with me</div>
+  </div>
+
+
+  <!-- Lists wire -->
+  <div class="wire-header">
+    <h2>Your lists</h2>
+    <div class="wh-count"><strong>5</strong> lists</div>
+  </div>
+  <div class="wire-list">
+    <div class="wire-row"><div class="wr-ts">2h ago<span class="wr-date">today</span></div><div class="wr-jur">&#x1F310; Jurisdictions</div><div class="wr-info"><h4>Priority Jurisdictions</h4><div class="wr-src"><strong>12 jurisdictions</strong> &middot; <span>EU, UK, USA, China, Singapore, Japan, Australia, Canada, Germany, France, Ireland, Italy</span></div></div><div class="wr-tag data-protection">Pinned</div></div>
+    <div class="wire-row"><div class="wr-ts">1d ago<span class="wr-date">recent</span></div><div class="wr-jur">&#x1F4CB; Topics</div><div class="wr-info"><h4>AI Act Compliance</h4><div class="wr-src"><strong>34 items</strong> &middot; <span>High-risk AI systems, GPAI obligations, prohibited uses &amp; rolling compliance deadlines</span></div></div><div class="wr-tag legislation">34 items</div></div>
+    <div class="wire-row"><div class="wr-ts">4h ago<span class="wr-date">today</span></div><div class="wr-jur">&#x26A0; Mixed</div><div class="wr-info"><h4>Enforcement Watch</h4><div class="wr-src"><strong>8 items</strong> &middot; <span>Active enforcement actions, fines, sanctions &amp; supervisory orders across PAI coverage</span></div></div><div class="wr-tag enforcement">8 items</div></div>
+    <div class="wire-row"><div class="wr-ts">3d ago<span class="wr-date">recent</span></div><div class="wr-jur">&#x1F4CB; Topics</div><div class="wr-info"><h4>Copyright &amp; IP Tracker</h4><div class="wr-src"><strong>19 items</strong> &middot; <span>TDM exceptions, fair use litigation, AI-generated works &amp; training data rights</span></div></div><div class="wr-tag consultation">19 items</div></div>
+    <div class="wire-row"><div class="wr-ts">6h ago<span class="wr-date">today</span></div><div class="wr-jur">&#x1F465; Shared</div><div class="wr-info"><h4>Team Shared: APAC Watch</h4><div class="wr-src"><strong>26 items &middot; 3 collaborators</strong> &middot; <span>Japan, South Korea, Singapore, Australia &mdash; shared with your team</span></div></div><div class="wr-tag case-law">Shared</div></div>
+  </div>
+  <div class="wire-foot"><a href="#">+ Create new list</a></div>
 
 </div>
 
