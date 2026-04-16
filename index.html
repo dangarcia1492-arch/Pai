@@ -982,6 +982,17 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .wire-foot{padding:13px 22px;font-size:.83rem;color:var(--secondary);text-align:center;background:var(--surface-2);border-top:1px solid var(--border)}
 
 .wire-foot a{color:var(--teal);font-weight:600}
+/* ===== AUTHORITIES PAGE ===== */
+.auth-stats{display:flex;gap:14px}
+.auth-stat{display:flex;flex-direction:column;align-items:center;padding:10px 20px;background:var(--surface);border:1px solid var(--border)}
+.auth-stat-n{font-family:var(--serif);font-size:1.5rem;font-weight:400;color:var(--teal);line-height:1}
+.auth-stat-l{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:3px}
+.wr-tag.ai-specific{color:var(--blue);border-color:#d0e0fb;background:var(--blue-bg)}
+.wr-tag.data-protection{color:var(--teal);border-color:var(--teal-light);background:var(--teal-light)}
+.wr-tag.standards{color:#7c3aed;border-color:#ddd6fe;background:#f5f3ff}
+.wr-tag.financial{color:var(--amber);border-color:#e8d5c1;background:#fef6e5}
+.wr-tag.competition-tag{color:var(--red);border-color:#fad0d1;background:var(--red-bg)}
+.wr-tag.consumer{color:#b45309;border-color:#fde68a;background:#fffbeb}
 
 
 
@@ -2173,241 +2184,98 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 <div class="page-view" id="page-authorities">
 
-    <div class="flex items-center justify-between mb-24">
-
-        <div>
-
-            <h1 class="page-title">Regulatory <em>Authorities</em></h1>
-
-            <p class="text-sm text-secondary" style="margin-top:4px">1,602 regulatory bodies across 337 jurisdictions</p>
-
-        </div>
-
-        <div class="flex items-center gap-8">
-
-            <button class="btn btn-outline btn-sm">Export</button>
-
-        </div>
-
+  <!-- Header -->
+  <div class="news-top">
+    <div>
+      <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:10px">PrinciplesAI &middot; Intelligence Engine</div>
+      <h1 class="page-title" style="margin-bottom:6px">Regulatory <em>Authorities</em></h1>
+      <div style="font-size:.82rem;color:var(--secondary)">1,602 official bodies across 337 jurisdictions &mdash; every output, every day, ranked for relevance.</div>
     </div>
-
-
-
-    <div class="filter-bar">
-
-        <div class="filter-btn active">All</div>
-
-        <div class="filter-btn">Data Protection</div>
-
-        <div class="filter-btn">AI-Specific</div>
-
-        <div class="filter-btn">Cybersecurity</div>
-
-        <div class="filter-btn">Financial</div>
-
-        <div class="filter-btn">Competition</div>
-
-        <div class="filter-btn">Sector Regulators</div>
-
+    <div class="auth-stats">
+      <div class="auth-stat"><span class="auth-stat-n">47</span><span class="auth-stat-l">active today</span></div>
+      <div class="auth-stat"><span class="auth-stat-n">38</span><span class="auth-stat-l">new outputs</span></div>
+      <div class="auth-stat"><span class="auth-stat-n">284</span><span class="auth-stat-l">active this week</span></div>
     </div>
-
-
-
-    <div class="card">
-
-        <div style="overflow-x:auto">
-
-            <table class="data-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>Authority</th>
-
-                        <th>Type</th>
-
-                        <th>Jurisdiction</th>
-
-                        <th>AI Mandate</th>
-
-                        <th>Status</th>
-
-                        <th>Last Activity</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    <tr>
-
-                        <td style="font-weight:600">European AI Office</td>
-
-                        <td><span class="badge badge-blue" style="height:18px;font-size:.72rem">AI-Specific</span></td>
-
-                        <td>&#x1F1EA;&#x1F1FA; European Union</td>
-
-                        <td>Primary</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>10 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">CNIL</td>
-
-                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
-
-                        <td>&#x1F1EB;&#x1F1F7; France</td>
-
-                        <td>Extended</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>9 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">ICO</td>
-
-                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
-
-                        <td>&#x1F1EC;&#x1F1E7; United Kingdom</td>
-
-                        <td>Extended</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>9 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">NIST</td>
-
-                        <td><span class="badge badge-amber" style="height:18px;font-size:.72rem">Standards Body</span></td>
-
-                        <td>&#x1F1FA;&#x1F1F8; United States</td>
-
-                        <td>Standards</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>10 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">FTC</td>
-
-                        <td><span class="badge badge-red" style="height:18px;font-size:.72rem">Consumer Protection</span></td>
-
-                        <td>&#x1F1FA;&#x1F1F8; United States</td>
-
-                        <td>Extended</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>7 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">Garante</td>
-
-                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
-
-                        <td>&#x1F1EE;&#x1F1F9; Italy</td>
-
-                        <td>Extended</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>10 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">CAC</td>
-
-                        <td><span class="badge badge-blue" style="height:18px;font-size:.72rem">AI-Specific</span></td>
-
-                        <td>&#x1F1E8;&#x1F1F3; China</td>
-
-                        <td>Primary</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>5 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">PIPC</td>
-
-                        <td><span class="badge badge-neutral" style="height:18px;font-size:.72rem">Data Protection</span></td>
-
-                        <td>&#x1F1F0;&#x1F1F7; South Korea</td>
-
-                        <td>Extended</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>9 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">BaFin</td>
-
-                        <td><span class="badge badge-amber" style="height:18px;font-size:.72rem">Financial Regulator</span></td>
-
-                        <td>&#x1F1E9;&#x1F1EA; Germany</td>
-
-                        <td>Sector</td>
-
-                        <td><span style="color:var(--amber);font-weight:600">&#9679;</span> Limited</td>
-
-                        <td>3 Apr 2026</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="font-weight:600">ACCC</td>
-
-                        <td><span class="badge badge-red" style="height:18px;font-size:.72rem">Competition</span></td>
-
-                        <td>&#x1F1E6;&#x1F1FA; Australia</td>
-
-                        <td>Inquiry</td>
-
-                        <td><span style="color:var(--green);font-weight:600">&#9679;</span> Active</td>
-
-                        <td>9 Apr 2026</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
+  </div>
+
+  <!-- Authority in focus -->
+  <div class="news-lead">
+    <div class="nl-kick">AUTHORITY IN FOCUS <span class="nl-meta">&middot; European Union &middot; 15 April 2026</span></div>
+    <h2>EU Artificial Intelligence Office</h2>
+    <p class="nl-standfirst">Established under Article 64 of the EU AI Act, the AI Office is the Union's primary enforcement authority for general-purpose AI models and systemic-risk providers. This month it has opened two formal investigations into frontier model providers, issued binding guidelines on GPAI model evaluation, and launched a public consultation on the first Code of Practice.</p>
+    <div class="nl-footer">
+      <span><strong>Type</strong> AI-Specific</span>
+      <span><strong>Mandate</strong> Primary Enforcer</span>
+      <span><strong>Jurisdiction</strong> European Union</span>
+      <span><strong>Outputs this month</strong> 7</span>
+      <span><strong>Source</strong> <a href="#">artificialintelligenceact.eu &rarr;</a></span>
     </div>
+  </div>
+
+  <!-- Regional breakdown -->
+  <div class="news-regions">
+    <div class="news-rgn">
+      <div class="nr-label">Europe &middot; 638 bodies</div>
+      <h4>EDPB, EU AI Office, national DPAs &amp; sectoral regulators</h4>
+      <div class="nr-meta"><span style="color:var(--green);font-weight:700">31 active today</span> &middot; 214 this week</div>
+    </div>
+    <div class="news-rgn">
+      <div class="nr-label">APAC &middot; 412 bodies</div>
+      <h4>PDPC Singapore, PIPC Korea, PPC Japan, OAIC Australia</h4>
+      <div class="nr-meta"><span style="color:var(--green);font-weight:700">9 active today</span> &middot; 88 this week</div>
+    </div>
+    <div class="news-rgn">
+      <div class="nr-label">Americas &middot; 384 bodies</div>
+      <h4>FTC, state AGs, ANPD Brazil, INAI Mexico, OPC Canada</h4>
+      <div class="nr-meta"><span style="color:var(--green);font-weight:700">6 active today</span> &middot; 62 this week</div>
+    </div>
+    <div class="news-rgn">
+      <div class="nr-label">International &middot; 168 bodies</div>
+      <h4>OECD, Council of Europe, G7 DPCG, ISO/IEC JTC 1</h4>
+      <div class="nr-meta"><span style="color:var(--green);font-weight:700">1 active today</span> &middot; 20 this week</div>
+    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="news-filter-bar">
+    <div class="news-filter-pill active">All</div>
+    <div class="news-filter-pill">Data Protection</div>
+    <div class="news-filter-pill">AI-Specific</div>
+    <div class="news-filter-pill">Cybersecurity</div>
+    <div class="news-filter-pill">Financial</div>
+    <div class="news-filter-pill">Competition</div>
+    <div class="news-filter-pill">Standards Bodies</div>
+    <div class="news-filter-sep"></div>
+    <div class="news-filter-pill">Region &#9662;</div>
+    <div class="news-filter-pill">Mandate &#9662;</div>
+  </div>
+
+  <!-- Directory wire -->
+  <div class="wire-header">
+    <h2>Authority directory</h2>
+    <div class="wh-count"><strong>1,602</strong> bodies tracked</div>
+  </div>
+  <div class="wire-list">
+    <div class="wire-row"><div class="wr-ts">10 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EA;&#x1F1FA; EU</div><div class="wr-info"><h4>EU Artificial Intelligence Office</h4><div class="wr-src"><strong>AI-Specific</strong> &middot; <span>Primary enforcer of the EU AI Act for GPAI models &amp; systemic-risk providers</span></div></div><div class="wr-tag ai-specific">Primary</div></div>
+    <div class="wire-row"><div class="wr-ts">10 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EA;&#x1F1FA; EU</div><div class="wr-info"><h4>EDPB &mdash; European Data Protection Board</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Consistency, cooperation &amp; cross-border enforcement under GDPR</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">9 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EB;&#x1F1F7; France</div><div class="wr-info"><h4>CNIL &mdash; Commission nationale de l'informatique et des libert&eacute;s</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>France's DPA; lead authority for major EU tech companies under GDPR</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">9 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EC;&#x1F1E7; UK</div><div class="wr-info"><h4>ICO &mdash; Information Commissioner's Office</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>UK GDPR, data protection and AI guidance; pro-innovation regulatory stance</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">10 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1FA;&#x1F1F8; USA</div><div class="wr-info"><h4>NIST &mdash; National Institute of Standards and Technology</h4><div class="wr-src"><strong>Standards Body</strong> &middot; <span>AI Risk Management Framework (RMF), cybersecurity standards &amp; AI safety benchmarks</span></div></div><div class="wr-tag standards">Standards</div></div>
+    <div class="wire-row"><div class="wr-ts">7 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1FA;&#x1F1F8; USA</div><div class="wr-info"><h4>FTC &mdash; Federal Trade Commission</h4><div class="wr-src"><strong>Consumer Protection</strong> &middot; <span>Section 5 authority over unfair AI practices, algorithmic harm &amp; deceptive AI products</span></div></div><div class="wr-tag consumer">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">10 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EE;&#x1F1F9; Italy</div><div class="wr-info"><h4>Garante &mdash; Autorit&agrave; Garante della Privacy</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Italy's DPA; issued landmark OpenAI fine of &euro;15m; active GPAI investigations</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">5 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E8;&#x1F1F3; China</div><div class="wr-info"><h4>CAC &mdash; Cyberspace Administration of China</h4><div class="wr-src"><strong>AI-Specific</strong> &middot; <span>Primary authority for generative AI regulation, algorithm governance &amp; platform compliance</span></div></div><div class="wr-tag ai-specific">Primary</div></div>
+    <div class="wire-row"><div class="wr-ts">9 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1F0;&#x1F1F7; S. Korea</div><div class="wr-info"><h4>PIPC &mdash; Personal Information Protection Commission</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Korea's DPA; data protection &amp; AI accountability authority under the PIPA framework</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">3 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E9;&#x1F1EA; Germany</div><div class="wr-info"><h4>BaFin &mdash; Federal Financial Supervisory Authority</h4><div class="wr-src"><strong>Financial Regulator</strong> &middot; <span>AI in financial services, model risk &amp; algorithmic trading oversight under the EU AI Act</span></div></div><div class="wr-tag financial">Sector</div></div>
+    <div class="wire-row"><div class="wr-ts">9 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E6;&#x1F1FA; Australia</div><div class="wr-info"><h4>ACCC &mdash; Australian Competition &amp; Consumer Commission</h4><div class="wr-src"><strong>Competition</strong> &middot; <span>Digital platform inquiries, AI transparency &amp; consumer harm investigations</span></div></div><div class="wr-tag competition-tag">Inquiry</div></div>
+    <div class="wire-row"><div class="wr-ts">8 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1F8;&#x1F1EC; Singapore</div><div class="wr-info"><h4>PDPC &mdash; Personal Data Protection Commission</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Model AI Governance Framework v3; PDPA enforcement &amp; AI assurance ecosystem</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">6 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E9;&#x1F1EA; Germany</div><div class="wr-info"><h4>DSK &mdash; Datenschutzkonferenz</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Joint conference of German federal &amp; state DPAs; coordinated AI &amp; GDPR positions</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">4 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EF;&#x1F1F5; Japan</div><div class="wr-info"><h4>PPC &mdash; Personal Information Protection Commission</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Japan's privacy authority; AI guidelines under the PIIA &amp; APPI amendment framework</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">7 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1E7;&#x1F1F7; Brazil</div><div class="wr-info"><h4>ANPD &mdash; Autoridade Nacional de Prote&ccedil;&atilde;o de Dados</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Brazil's data authority; LGPD enforcement &amp; national AI regulation roadmap</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">6 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EE;&#x1F1EA; Ireland</div><div class="wr-info"><h4>DPC &mdash; Data Protection Commission</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Lead supervisory authority for Meta, Google, Apple &amp; most major US tech under GDPR</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+    <div class="wire-row"><div class="wr-ts">5 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F310; International</div><div class="wr-info"><h4>OECD &mdash; Working Party on AI Governance</h4><div class="wr-src"><strong>Standards Body</strong> &middot; <span>OECD AI Principles, G7 Hiroshima Process &amp; international AI governance frameworks</span></div></div><div class="wr-tag standards">Standards</div></div>
+    <div class="wire-row"><div class="wr-ts">3 Apr<span class="wr-date">today</span></div><div class="wr-jur">&#x1F1EA;&#x1F1F8; Spain</div><div class="wr-info"><h4>AEPD &mdash; Agencia Espa&ntilde;ola de Protecci&oacute;n de Datos</h4><div class="wr-src"><strong>Data Protection</strong> &middot; <span>Spain's DPA; active AI sandbox regulator &amp; early mover on facial recognition enforcement</span></div></div><div class="wr-tag data-protection">Extended</div></div>
+  </div>
+  <div class="wire-foot"><a href="#">Load 1,584 more authorities &rarr;</a></div>
 
 </div>
 
