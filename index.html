@@ -1373,10 +1373,10 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .sp-secondary{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:none;color:var(--secondary);border:1px solid var(--border);cursor:pointer;font-weight:600;font-size:.8rem;border-radius:3px;transition:all .15s}
 .sp-secondary:hover{border-color:var(--teal);color:var(--teal)}
 
-.cm-section{margin-bottom:44px}
-.cm-section-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;padding:0 4px;gap:20px;flex-wrap:wrap}
-.cm-section-hd h2{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--ink)}
-.cm-section-count{font-size:.78rem;color:var(--muted)}
+.learn-section{margin-bottom:44px;display:block}
+.learn-section-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;padding:0 4px;gap:20px;flex-wrap:wrap}
+.learn-section-hd h2{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--ink)}
+.learn-section-count{font-size:.78rem;color:var(--muted)}
 
 .cm-series-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:0 4px}
 .cm-series-tile{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:4px;cursor:pointer;padding:26px 28px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;transition:transform .18s ease,box-shadow .18s ease}
@@ -1461,6 +1461,67 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .ri-body{flex:1}
 .ri-title{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:4px}
 .ri-meta{font-size:.72rem;color:var(--muted)}
+
+/* Faculty grid (was missing base layout) */
+.cm-faculty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;padding:0 4px}
+.cm-faculty-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:14px 16px;transition:border-color .15s,box-shadow .15s;cursor:pointer}
+.cm-faculty-card:hover{border-color:var(--teal);box-shadow:0 2px 8px rgba(15,23,42,.06)}
+.cm-fc-name{font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:3px;line-height:1.3}
+.cm-fc-role{font-size:.72rem;color:var(--secondary);line-height:1.4;margin-bottom:8px}
+.cm-fc-tags{display:flex;gap:4px;flex-wrap:wrap}
+.cm-fc-tag{font-size:.6rem;font-weight:700;padding:2px 6px;border:1px solid var(--border);color:var(--muted);border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
+
+/* Dark-theme overrides for welcome page — keep the light editorial feel on a dark canvas */
+[data-theme="legaltech-dark"] .welcome-main h1{color:#fff}
+[data-theme="legaltech-dark"] .welcome-main h1 em{color:var(--teal)}
+[data-theme="legaltech-dark"] .welcome-sub{color:rgba(255,255,255,.6)}
+[data-theme="legaltech-dark"] .welcome-strip{border-bottom-color:rgba(255,255,255,.08)}
+[data-theme="legaltech-dark"] .ws-num{color:#fff}
+[data-theme="legaltech-dark"] .ws-lbl{color:rgba(255,255,255,.45)}
+[data-theme="legaltech-dark"] .spotlight{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+[data-theme="legaltech-dark"] .spotlight:hover{box-shadow:0 10px 30px rgba(0,0,0,.45);border-color:rgba(255,255,255,.14)}
+[data-theme="legaltech-dark"] .sp-img-badge{background:rgba(255,255,255,.92);color:#0a0a0a}
+[data-theme="legaltech-dark"] .sp-body h2{color:#fff}
+[data-theme="legaltech-dark"] .sp-standfirst{color:rgba(255,255,255,.7)}
+[data-theme="legaltech-dark"] .sp-meta{color:rgba(255,255,255,.45)}
+[data-theme="legaltech-dark"] .sp-meta strong{color:#fff}
+[data-theme="legaltech-dark"] .sp-secondary{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.18)}
+[data-theme="legaltech-dark"] .sp-secondary:hover{border-color:var(--teal);color:var(--teal)}
+[data-theme="legaltech-dark"] .learn-section-hd h2{color:#fff}
+[data-theme="legaltech-dark"] .learn-section-count{color:rgba(255,255,255,.45)}
+[data-theme="legaltech-dark"] .cm-faculty-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+[data-theme="legaltech-dark"] .cm-faculty-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);box-shadow:none}
+[data-theme="legaltech-dark"] .cm-fc-name{color:rgba(255,255,255,.92)}
+[data-theme="legaltech-dark"] .cm-fc-role{color:rgba(255,255,255,.55)}
+[data-theme="legaltech-dark"] .cm-fc-tag{border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.45)}
+
+/* Series page dark-theme overrides */
+[data-theme="legaltech-dark"] .series-hero{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);box-shadow:none}
+[data-theme="legaltech-dark"] .series-hero h1{color:#fff}
+[data-theme="legaltech-dark"] .series-hero-standfirst{color:rgba(255,255,255,.7)}
+[data-theme="legaltech-dark"] .series-hero-meta{color:rgba(255,255,255,.5)}
+[data-theme="legaltech-dark"] .series-hero-meta strong{color:#fff}
+[data-theme="legaltech-dark"] .series-back{color:rgba(255,255,255,.55)}
+[data-theme="legaltech-dark"] .series-section-hd h2{color:#fff}
+[data-theme="legaltech-dark"] .series-section-hd .sh-count{color:rgba(255,255,255,.45)}
+[data-theme="legaltech-dark"] .series-lesson-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+[data-theme="legaltech-dark"] .series-lesson-card:hover{border-color:rgba(255,255,255,.2);box-shadow:0 6px 18px rgba(0,0,0,.4)}
+[data-theme="legaltech-dark"] .slc-title{color:rgba(255,255,255,.92)}
+[data-theme="legaltech-dark"] .slc-sub{color:rgba(255,255,255,.6)}
+[data-theme="legaltech-dark"] .slc-spk,[data-theme="legaltech-dark"] .slc-duration{color:rgba(255,255,255,.45)}
+
+/* Lesson page dark-theme overrides */
+[data-theme="legaltech-dark"] .lesson-info h1{color:#fff}
+[data-theme="legaltech-dark"] .lesson-info-standfirst,[data-theme="legaltech-dark"] .lesson-info-meta{color:rgba(255,255,255,.65)}
+[data-theme="legaltech-dark"] .lesson-info-meta strong{color:#fff}
+[data-theme="legaltech-dark"] .lesson-crumb{color:rgba(255,255,255,.55)}
+[data-theme="legaltech-dark"] .lesson-nav button{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
+[data-theme="legaltech-dark"] .lesson-tabs{border-bottom-color:rgba(255,255,255,.1)}
+[data-theme="legaltech-dark"] .lesson-tab{color:rgba(255,255,255,.55)}
+[data-theme="legaltech-dark"] .lesson-tab:hover{color:#fff}
+[data-theme="legaltech-dark"] .lesson-pane p{color:rgba(255,255,255,.55)}
+[data-theme="legaltech-dark"] .takeaway-doc{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+
 .cm-hero.clickable,.cm-row .lesson-card{cursor:pointer}
 .cm-hero.clickable{transition:transform .15s ease,box-shadow .15s ease}
 .cm-hero.clickable:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.18)}
@@ -2420,10 +2481,10 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── Masterclass series ── -->
-  <div class="cm-section">
-    <div class="cm-section-hd">
+  <div class="learn-section">
+    <div class="learn-section-hd">
       <h2>Masterclass series</h2>
-      <span class="cm-section-count">3 series &middot; 17 lessons in total</span>
+      <span class="learn-section-count">3 series &middot; 17 lessons in total</span>
     </div>
     <div class="cm-series-grid">
 
@@ -2463,10 +2524,10 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation ── -->
-  <div class="cm-section">
-    <div class="cm-section-hd">
+  <div class="learn-section">
+    <div class="learn-section-hd">
       <h2>In Conversation</h2>
-      <span class="cm-section-count">8 conversations with practitioners</span>
+      <span class="learn-section-count">8 conversations with practitioners</span>
     </div>
     <div class="cm-conv-grid">
 
