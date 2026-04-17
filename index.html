@@ -1311,6 +1311,100 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .sht-label{font-size:.64rem;color:var(--teal-dark);opacity:.65;text-transform:uppercase;letter-spacing:.04em}
 @media print{body>*:not(#alertPrintArea){display:none!important}#alertPrintArea{display:block!important}}
 
+/* ============ LEARNING: SERIES PAGE (Layer 2) ============ */
+.series-page-inner{padding:0 0 60px}
+.series-hero{position:relative;min-height:340px;padding:48px 60px;display:flex;align-items:flex-end;color:#fff;background:#0d1030;overflow:hidden;margin:-24px -24px 32px}
+.series-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 100%);pointer-events:none}
+.series-hero-art{position:absolute;top:0;right:0;bottom:0;width:60%;background-size:cover;background-position:center right;opacity:.5;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 40%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 40%,#000 100%)}
+.series-hero-body{position:relative;z-index:2;max-width:640px}
+.series-hero-kick{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin-bottom:12px;color:#fff}
+.series-hero h1{font-family:var(--serif);font-size:2.2rem;font-weight:700;line-height:1.15;margin-bottom:14px;color:#fff}
+.series-hero-standfirst{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:rgba(255,255,255,.82);line-height:1.55;margin-bottom:18px}
+.series-hero-meta{display:flex;gap:20px;font-size:.78rem;color:rgba(255,255,255,.75);margin-bottom:24px;flex-wrap:wrap}
+.series-hero-meta strong{color:#fff;font-weight:600}
+.series-hero-cta{display:inline-flex;align-items:center;gap:12px;padding:10px 20px;background:#fff;color:#0f172a;border:none;cursor:pointer;font-weight:600;font-size:.85rem;border-radius:3px}
+.series-hero-cta:hover{background:#f0f0f0}
+.series-back{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--secondary);background:none;border:none;cursor:pointer;margin:0 0 16px 24px;padding:4px 0}
+.series-back:hover{color:var(--teal)}
+.series-section-hd{display:flex;align-items:baseline;justify-content:space-between;margin:0 24px 14px}
+.series-section-hd h2{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink)}
+.series-section-hd .sh-count{font-size:.78rem;color:var(--muted)}
+.series-lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;padding:0 24px}
+.series-lesson-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;cursor:pointer;overflow:hidden;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.series-lesson-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,23,42,.08);border-color:var(--teal-light)}
+.slc-thumb{aspect-ratio:16/9;background:#1a1f3a;position:relative;color:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;font-weight:700;overflow:hidden}
+.slc-thumb-art{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.45}
+.slc-thumb .slc-ep{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.72);color:#fff;font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:2px;letter-spacing:.05em;z-index:2}
+.slc-thumb .slc-play-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.94);color:#0f172a;display:flex;align-items:center;justify-content:center;font-size:.95rem;opacity:0;transition:opacity .15s;z-index:2;padding-left:3px}
+.series-lesson-card:hover .slc-play-icon{opacity:1}
+.slc-meta{padding:12px 14px}
+.slc-spk{font-size:.72rem;color:var(--muted);margin-bottom:4px}
+.slc-title{font-family:var(--serif);font-size:.95rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:4px}
+.slc-sub{font-size:.76rem;color:var(--secondary);line-height:1.4}
+.slc-duration{font-size:.68rem;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
+
+/* ============ LEARNING: LESSON PLAYER (Layer 3) ============ */
+.lesson-page-inner{padding:0 0 60px;max-width:1100px;margin:0 auto}
+.lesson-crumb{font-size:.76rem;color:var(--secondary);margin-bottom:14px;padding:0 4px}
+.lesson-crumb a{color:var(--teal);text-decoration:none;cursor:pointer}
+.lesson-crumb a:hover{text-decoration:underline}
+.lesson-crumb .lc-sep{color:var(--muted);margin:0 8px}
+.cinema-frame{background:#000;border-radius:4px;padding:8px;margin-bottom:20px;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+.cinema-frame-inner{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;border-radius:2px}
+.cinema-frame-inner iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cinema-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.45);font-size:.82rem;gap:10px;text-align:center;padding:20px}
+.cinema-placeholder .cp-icon{font-size:2.4rem;opacity:.6}
+.cinema-placeholder .cp-id{font-family:monospace;font-size:.72rem;opacity:.5;margin-top:6px}
+.lesson-info{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:0 4px;margin-bottom:24px;flex-wrap:wrap}
+.lesson-info-main{flex:1;min-width:280px}
+.lesson-info-kick{font-size:.72rem;font-weight:700;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.lesson-info-kick a{color:var(--teal);text-decoration:none;cursor:pointer}
+.lesson-info-kick a:hover{text-decoration:underline}
+.lesson-info h1{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:10px}
+.lesson-info-meta{font-size:.82rem;color:var(--secondary);display:flex;gap:16px;flex-wrap:wrap}
+.lesson-info-meta strong{color:var(--ink);font-weight:600}
+.lesson-info-standfirst{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--secondary);line-height:1.55;margin-top:12px;max-width:760px}
+.lesson-nav{display:flex;gap:8px;flex-shrink:0}
+.lesson-nav button{background:var(--surface);border:1px solid var(--border);padding:6px 14px;font-size:.76rem;font-weight:600;color:var(--secondary);cursor:pointer;border-radius:3px}
+.lesson-nav button:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
+.lesson-nav button:disabled{opacity:.35;cursor:not-allowed}
+.lesson-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 4px;margin-bottom:20px}
+.lesson-tab{padding:10px 18px;font-size:.82rem;font-weight:600;color:var(--secondary);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
+.lesson-tab:hover{color:var(--ink)}
+.lesson-tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+.lesson-pane{display:none;padding:0 4px}
+.lesson-pane.active{display:block}
+.takeaways-list{list-style:none;padding:0;margin:0 0 20px;max-width:760px}
+.takeaways-list li{padding:14px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:flex-start}
+.takeaways-list li:last-child{border-bottom:none}
+.ta-num{font-family:var(--serif);font-weight:700;color:var(--teal);font-size:1.05rem;flex-shrink:0;width:24px}
+.ta-body{flex:1}
+.ta-title{font-weight:600;color:var(--ink);margin-bottom:4px;font-size:.9rem}
+.ta-desc{font-size:.85rem;color:var(--secondary);line-height:1.55}
+.takeaway-docs-hd{font-size:.72rem;font-weight:700;color:var(--secondary);letter-spacing:.06em;text-transform:uppercase;margin:8px 0 12px}
+.takeaway-docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.takeaway-doc{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:3px;text-decoration:none;color:var(--ink);cursor:pointer;transition:border-color .15s}
+.takeaway-doc:hover{border-color:var(--teal);color:var(--teal)}
+.td-icon{width:36px;height:36px;background:var(--teal-light);color:var(--teal);display:flex;align-items:center;justify-content:center;border-radius:3px;font-size:.7rem;font-weight:700;flex-shrink:0}
+.td-body{flex:1;min-width:0}
+.td-title{font-size:.82rem;font-weight:600;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.td-size{font-size:.7rem;color:var(--muted)}
+.transcript{font-size:.92rem;color:var(--ink);line-height:1.7;max-width:760px}
+.transcript p{margin-bottom:14px}
+.transcript-timestamp{display:inline-block;font-family:var(--sans);font-size:.72rem;color:var(--teal);font-weight:600;margin-right:8px;background:var(--teal-light);padding:2px 6px;border-radius:2px;vertical-align:middle}
+.related-list{display:grid;gap:10px;max-width:760px}
+.related-item{display:flex;gap:14px;padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:3px;text-decoration:none;color:var(--ink);cursor:pointer}
+.related-item:hover{border-color:var(--teal)}
+.ri-jur{font-size:.75rem;font-weight:600;color:var(--secondary);flex-shrink:0;min-width:120px}
+.ri-body{flex:1}
+.ri-title{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.ri-meta{font-size:.72rem;color:var(--muted)}
+.cm-hero.clickable,.cm-row .lesson-card{cursor:pointer}
+.cm-hero.clickable{transition:transform .15s ease,box-shadow .15s ease}
+.cm-hero.clickable:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.cm-row .lesson-card{transition:transform .15s ease}
+.cm-row .lesson-card:hover{transform:translateY(-2px)}
+
 </style>
 
 </head>
@@ -2233,7 +2327,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 <div class="cm-screen">
 
   <!-- ── Featured: PAI Briefing — Petruta Pirvan ── -->
-  <div class="cm-hero" style="background:#0d1030">
+  <div class="cm-hero clickable" style="background:#0d1030" onclick="openLesson('pai-petruta-mar2026')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">PAI Briefing</span>
@@ -2257,7 +2351,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── Hero: Hogan Lovells EU AI Act Masterclass ── -->
-  <div class="cm-hero">
+  <div class="cm-hero clickable" onclick="openSeries('eu-aiact')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">Masterclass Series</span>
@@ -2306,7 +2400,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── Hero: Fieldfisher US — Automated Decision-Making ── -->
-  <div class="cm-hero cm-hero-ff">
+  <div class="cm-hero cm-hero-ff clickable" onclick="openSeries('adm')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">Masterclass Series</span>
@@ -2345,7 +2439,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation: Etienne Drouard ── -->
-  <div class="cm-hero" style="background:#142255">
+  <div class="cm-hero clickable" style="background:#142255" onclick="openLesson('ic-etienne-drouard')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">In Conversation</span>
@@ -2368,7 +2462,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation: Joke Bodewits ── -->
-  <div class="cm-hero" style="background:#0e3025">
+  <div class="cm-hero clickable" style="background:#0e3025" onclick="openLesson('ic-joke-bodewits')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">In Conversation</span>
@@ -2391,7 +2485,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation: Olga Kurochkina ── -->
-  <div class="cm-hero" style="background:#1c1050">
+  <div class="cm-hero clickable" style="background:#1c1050" onclick="openLesson('ic-olga-kurochkina')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">In Conversation</span>
@@ -2414,7 +2508,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation: Dr. Marie Charlotte Roques-Bonnet ── -->
-  <div class="cm-hero" style="background:#2d0e50">
+  <div class="cm-hero clickable" style="background:#2d0e50" onclick="openLesson('ic-marie-charlotte')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">In Conversation</span>
@@ -2437,7 +2531,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation: David Forman ── -->
-  <div class="cm-hero" style="background:#0c2240">
+  <div class="cm-hero clickable" style="background:#0c2240" onclick="openLesson('ic-david-forman')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">In Conversation</span>
@@ -2460,7 +2554,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation: Philipp Raether ── -->
-  <div class="cm-hero" style="background:#1e0c30">
+  <div class="cm-hero clickable" style="background:#1e0c30" onclick="openLesson('ic-philipp-raether')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">In Conversation</span>
@@ -2483,7 +2577,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation: Eleni Chronopoulou ── -->
-  <div class="cm-hero" style="background:#0c1848">
+  <div class="cm-hero clickable" style="background:#0c1848" onclick="openLesson('ic-eleni-chronopoulou')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">In Conversation</span>
@@ -2506,7 +2600,7 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
   </div>
 
   <!-- ── In Conversation: Jose Belo ── -->
-  <div class="cm-hero" style="background:#201005">
+  <div class="cm-hero clickable" style="background:#201005" onclick="openLesson('ic-jose-belo')">
     <div class="cm-hero-body">
       <div class="cm-tags">
         <span class="cm-tag">In Conversation</span>
@@ -2633,6 +2727,21 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 </div><!-- end cm-screen -->
 </div>
 
+
+
+<!-- ==================== SERIES DETAIL (Layer 2) ==================== -->
+
+<div class="page-view" id="page-series">
+  <button class="series-back" onclick="showPage('community')">&larr; Back to Community</button>
+  <div class="series-page-inner" id="seriesPageInner"><!-- populated by JS --></div>
+</div>
+
+
+<!-- ==================== LESSON PLAYER (Layer 3) ==================== -->
+
+<div class="page-view" id="page-lesson">
+  <div class="lesson-page-inner" id="lessonPageInner"><!-- populated by JS --></div>
+</div>
 
 
 <!-- ==================== ACCOUNT ==================== -->
@@ -2909,6 +3018,178 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 <div id="alertPrintArea" style="display:none"></div>
 
 <script>
+
+/* ===== Learning: Series + Lesson data ===== */
+/* vimeoId: '' leaves the cinema placeholder on-screen. Drop a Vimeo Pro video ID (e.g. '123456789') to go live. */
+var LEARNING_SERIES = {
+  'eu-aiact': {
+    title:'EU AI Act Masterclass', firm:'Hogan Lovells', kick:'Masterclass Series',
+    standfirst:'A twelve-part survey of the EU AI Act from the Hogan Lovells global privacy team — scope, timelines, risk tiers, GPAI, provider and deployer obligations.',
+    artImg:'EU.png', bg:'#0d2a60',
+    lessons:['eu-aiact-ep01','eu-aiact-ep02','eu-aiact-ep03','eu-aiact-ep04','eu-aiact-ep05','eu-aiact-ep06','eu-aiact-ep07','eu-aiact-ep08','eu-aiact-ep09','eu-aiact-ep10','eu-aiact-ep11','eu-aiact-ep12']
+  },
+  'adm': {
+    title:'AI in Automated Decision-Making', firm:'Fieldfisher US', kick:'Masterclass Series',
+    standfirst:'A four-session US-law masterclass on AI in ADM — frameworks, software lifecycle governance, scaling compliance, and documenting risk decisions.',
+    artImg:'FF.png', bg:'#1c0a38',
+    lessons:['adm-ep01','adm-ep02','adm-ep03','adm-ep04']
+  },
+  'eu-omnibus': {
+    title:'EU AI Omnibus Briefings', firm:'Petruta Pirvan', kick:'PAI Briefing Series',
+    standfirst:'Bi-monthly briefings on the EU AI Omnibus — what changed, what it means for compliance teams, and what to watch next.',
+    artImg:'PP.png', bg:'#0d1030',
+    lessons:['pai-petruta-mar2026']
+  }
+};
+
+var LEARNING_LESSONS = {
+  // EU AI Act Masterclass — Hogan Lovells
+  'eu-aiact-ep01':{series:'eu-aiact',ep:'EP 01',title:'Framing the EU AI Act',speaker:'Eduardo Ustaran',speakerRole:'Partner, London · Hogan Lovells',sub:'Regulatory context & policy objectives',duration:'22 min',vimeoId:''},
+  'eu-aiact-ep02':{series:'eu-aiact',ep:'EP 02',title:'Essential Concepts',speaker:'Etienne Drouard',speakerRole:'Partner, Paris · Hogan Lovells',sub:'What and who is covered',duration:'18 min',vimeoId:''},
+  'eu-aiact-ep03':{series:'eu-aiact',ep:'EP 03',title:'Scope of Application',speaker:'Nicola Fulford',speakerRole:'Partner, London · Hogan Lovells',sub:'When the AI Act applies',duration:'20 min',vimeoId:''},
+  'eu-aiact-ep04':{series:'eu-aiact',ep:'EP 04',title:'The Risk-Based Approach',speaker:'Eduardo Ustaran',speakerRole:'Partner, London · Hogan Lovells',sub:'Prohibited, high-risk & transparency tiers',duration:'25 min',vimeoId:''},
+  'eu-aiact-ep05':{series:'eu-aiact',ep:'EP 05',title:'Implementation Timelines',speaker:'Nicola Fulford',speakerRole:'Partner, London · Hogan Lovells',sub:'Compliance deadlines & readiness',duration:'19 min',vimeoId:''},
+  'eu-aiact-ep06':{series:'eu-aiact',ep:'EP 06',title:'General-Purpose AI Models',speaker:'Dan Whitehead',speakerRole:'Associate, London · Hogan Lovells',sub:'GPAI concept & requirements',duration:'23 min',vimeoId:''},
+  'eu-aiact-ep07':{series:'eu-aiact',ep:'EP 07',title:'Obligations of Providers',speaker:'Dan Whitehead',speakerRole:'Associate, London · Hogan Lovells',sub:'High-risk AI requirements & steps',duration:'26 min',vimeoId:''},
+  'eu-aiact-ep08':{series:'eu-aiact',ep:'EP 08',title:'Obligations of Deployers',speaker:'Joke Bodewits',speakerRole:'Associate, Amsterdam · Hogan Lovells',sub:'Human oversight & impact assessments',duration:'21 min',vimeoId:''},
+  'eu-aiact-ep09':{series:'eu-aiact',ep:'EP 09',title:'Conformity Assessments',speaker:'Joke Bodewits',speakerRole:'Associate, Amsterdam · Hogan Lovells',sub:'Requirements, notifications & standards',duration:'24 min',vimeoId:''},
+  'eu-aiact-ep10':{series:'eu-aiact',ep:'EP 10',title:'Regulatory Governance',speaker:'Etienne Drouard',speakerRole:'Partner, Paris · Hogan Lovells',sub:'AI Office, monitoring & enforcement',duration:'22 min',vimeoId:''},
+  'eu-aiact-ep11':{series:'eu-aiact',ep:'EP 11',title:'Global Alignment',speaker:'Dan Whitehead',speakerRole:'Associate, London · Hogan Lovells',sub:'EU Act vs. international frameworks',duration:'20 min',vimeoId:''},
+  'eu-aiact-ep12':{series:'eu-aiact',ep:'EP 12',title:'Privacy Governance & GDPR',speaker:'Eduardo Ustaran',speakerRole:'Partner, London · Hogan Lovells',sub:'Applying GDPR practices to the AI Act',duration:'27 min',vimeoId:''},
+
+  // ADM Masterclass — Fieldfisher US
+  'adm-ep01':{series:'adm',ep:'EP 01',title:'ADM in Practice',speaker:'Flick Fisher',speakerRole:'Partner · Fieldfisher US',sub:'Frameworks & real-world application',duration:'28 min',vimeoId:''},
+  'adm-ep02':{series:'adm',ep:'EP 02',title:'AI in the Software Dev Lifecycle',speaker:'Andrea Ortega',speakerRole:'Senior Associate · Fieldfisher US',sub:'Governance from code to deployment',duration:'25 min',vimeoId:''},
+  'adm-ep03':{series:'adm',ep:'EP 03',title:'Governance for High-Growth Teams',speaker:'Megan Ward',speakerRole:'Associate · Fieldfisher US',sub:'Scaling compliance without friction',duration:'22 min',vimeoId:''},
+  'adm-ep04':{series:'adm',ep:'EP 04',title:'Documenting AI Risk Decisions',speaker:'Richard Lawne',speakerRole:'Associate · Fieldfisher US',sub:'Audit trails, accountability & records',duration:'24 min',vimeoId:''},
+
+  // PAI Briefings
+  'pai-petruta-mar2026':{series:'eu-omnibus',ep:'MAR 2026',title:'EU Omnibus: What Changed in March & What to Expect Next',speaker:'Petruta Pirvan',speakerRole:'PAI Briefing · Bi-Monthly',sub:'March 2026 briefing',duration:'18 min',vimeoId:'',standalone:false},
+
+  // In Conversation (standalone lessons)
+  'ic-etienne-drouard':{series:null,seriesLabel:'In Conversation · Hogan Lovells',title:'Cross-Border GDPR Enforcement & the French DPA',speaker:'Etienne Drouard',speakerRole:'Partner, Paris · Hogan Lovells',sub:'',duration:'34 min',vimeoId:'',artImg:'ED.png',bg:'#142255',standalone:true},
+  'ic-joke-bodewits':{series:null,seriesLabel:'In Conversation · Hogan Lovells',title:'AI Deployers & the EU AI Act: Practical Compliance',speaker:'Joke Bodewits',speakerRole:'Associate, Amsterdam · Hogan Lovells',sub:'',duration:'29 min',vimeoId:'',artImg:'Joke.png',bg:'#0e3025',standalone:true},
+  'ic-olga-kurochkina':{series:null,seriesLabel:'In Conversation · Hogan Lovells',title:'Data Protection Governance in the Age of AI',speaker:'Olga Kurochkina',speakerRole:'Hogan Lovells',sub:'',duration:'31 min',vimeoId:'',artImg:'OK.png',bg:'#1c1050',standalone:true},
+  'ic-marie-charlotte':{series:null,seriesLabel:'In Conversation',title:'Consent & AI: Rethinking User Permissions',speaker:'Dr. Marie Charlotte Roques-Bonnet',speakerRole:'AI & Data Protection',sub:'',duration:'36 min',vimeoId:'',artImg:'MCRB.png',bg:'#2d0e50',standalone:true},
+  'ic-david-forman':{series:null,seriesLabel:'In Conversation · Standards',title:'ISO AI Standards: What Practitioners Actually Need to Know',speaker:'David Forman',speakerRole:'AI Standards & Governance',sub:'',duration:'32 min',vimeoId:'',artImg:'DF.png',bg:'#0c2240',standalone:true},
+  'ic-philipp-raether':{series:null,seriesLabel:'In Conversation · Governance',title:'Building a Risk-Based AI Governance Program',speaker:'Philipp Raether',speakerRole:'AI Governance & Risk',sub:'',duration:'33 min',vimeoId:'',artImg:'PR.png',bg:'#1e0c30',standalone:true},
+  'ic-eleni-chronopoulou':{series:null,seriesLabel:'In Conversation · Enforcement',title:'Enforcement Across Domains: AI Act, GDPR & DSA',speaker:'Eleni Chronopoulou',speakerRole:'AI & Digital Regulation',sub:'',duration:'30 min',vimeoId:'',artImg:'EC.png',bg:'#0c1848',standalone:true},
+  'ic-jose-belo':{series:null,seriesLabel:'In Conversation · Agentic AI',title:'Agentic AI & Vendor Risk: The New Due Diligence',speaker:'Jose Belo',speakerRole:'Agentic AI & Vendor Risk',sub:'',duration:'28 min',vimeoId:'',artImg:'JB.png',bg:'#201005',standalone:true}
+};
+
+function _esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+function openSeries(slug){
+  var s = LEARNING_SERIES[slug]; if(!s){return}
+  var inner = document.getElementById('seriesPageInner'); if(!inner){return}
+  var lessonsHtml = s.lessons.map(function(lslug){
+    var L = LEARNING_LESSONS[lslug]; if(!L){return ''}
+    var art = L.artImg || s.artImg;
+    return '<div class="series-lesson-card" onclick="openLesson(\''+lslug+'\')">'+
+      '<div class="slc-thumb">'+
+        (art?'<div class="slc-thumb-art" style="background-image:url(\''+art+'\')"></div>':'')+
+        '<span class="slc-ep">'+_esc(L.ep)+'</span>'+
+        '<span class="slc-play-icon">&#9654;</span>'+
+      '</div>'+
+      '<div class="slc-meta">'+
+        '<div class="slc-spk"><strong>'+_esc(L.speaker)+'</strong></div>'+
+        '<div class="slc-title">'+_esc(L.title)+'</div>'+
+        (L.sub?'<div class="slc-sub">'+_esc(L.sub)+'</div>':'')+
+        '<div class="slc-duration">'+_esc(L.duration)+'</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  inner.innerHTML =
+    '<div class="series-hero" style="background:'+s.bg+'">'+
+      (s.artImg?'<div class="series-hero-art" style="background-image:url(\''+s.artImg+'\')"></div>':'')+
+      '<div class="series-hero-body">'+
+        '<div class="series-hero-kick">'+_esc(s.kick)+(s.firm?' &middot; '+_esc(s.firm):'')+'</div>'+
+        '<h1>'+_esc(s.title)+'</h1>'+
+        '<div class="series-hero-standfirst">'+_esc(s.standfirst)+'</div>'+
+        '<div class="series-hero-meta"><span><strong>'+s.lessons.length+'</strong> lessons</span></div>'+
+        '<button class="series-hero-cta" onclick="openLesson(\''+s.lessons[0]+'\')"><span>&#9654;</span> Start with '+(LEARNING_LESSONS[s.lessons[0]]?LEARNING_LESSONS[s.lessons[0]].ep:'Lesson 1')+'</button>'+
+      '</div>'+
+    '</div>'+
+    '<div class="series-section-hd"><h2>All lessons</h2><div class="sh-count">'+s.lessons.length+' lessons</div></div>'+
+    '<div class="series-lesson-grid">'+lessonsHtml+'</div>';
+  window._currentSeries = slug;
+  showPage('series', true);
+  history.replaceState(null, '', '#series-' + slug);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function openLesson(slug){
+  var L = LEARNING_LESSONS[slug]; if(!L){return}
+  var inner = document.getElementById('lessonPageInner'); if(!inner){return}
+  var crumbHtml, prevNextHtml = '', seriesKick;
+  if(L.series){
+    var s = LEARNING_SERIES[L.series];
+    crumbHtml = '<a onclick="showPage(\'community\')">Community</a><span class="lc-sep">&rsaquo;</span><a onclick="openSeries(\''+L.series+'\')">'+_esc(s.title)+'</a><span class="lc-sep">&rsaquo;</span>'+_esc(L.ep);
+    seriesKick = '<a onclick="openSeries(\''+L.series+'\')">'+_esc(s.title)+'</a> &middot; '+_esc(L.ep);
+    var idx = s.lessons.indexOf(slug);
+    var prev = idx>0 ? s.lessons[idx-1] : null;
+    var next = idx<s.lessons.length-1 ? s.lessons[idx+1] : null;
+    prevNextHtml = '<div class="lesson-nav">'+
+      '<button'+(prev?' onclick="openLesson(\''+prev+'\')"':' disabled')+'>&larr; Previous</button>'+
+      '<button'+(next?' onclick="openLesson(\''+next+'\')"':' disabled')+'>Next &rarr;</button>'+
+    '</div>';
+  } else {
+    crumbHtml = '<a onclick="showPage(\'community\')">Community</a><span class="lc-sep">&rsaquo;</span>'+_esc(L.seriesLabel||'In Conversation');
+    seriesKick = _esc(L.seriesLabel||'In Conversation');
+  }
+  var playerHtml;
+  if(L.vimeoId){
+    playerHtml = '<iframe src="https://player.vimeo.com/video/'+encodeURIComponent(L.vimeoId)+'?title=0&byline=0&portrait=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+  } else {
+    playerHtml = '<div class="cinema-placeholder">'+
+      '<div class="cp-icon">&#9654;</div>'+
+      '<div>Vimeo Pro video will load here</div>'+
+      '<div class="cp-id">'+_esc(slug)+'</div>'+
+    '</div>';
+  }
+  inner.innerHTML =
+    '<div class="lesson-crumb">'+crumbHtml+'</div>'+
+    '<div class="cinema-frame"><div class="cinema-frame-inner">'+playerHtml+'</div></div>'+
+    '<div class="lesson-info">'+
+      '<div class="lesson-info-main">'+
+        '<div class="lesson-info-kick">'+seriesKick+'</div>'+
+        '<h1>'+_esc(L.title)+'</h1>'+
+        '<div class="lesson-info-meta">'+
+          '<span><strong>'+_esc(L.speaker)+'</strong></span>'+
+          (L.speakerRole?'<span>'+_esc(L.speakerRole)+'</span>':'')+
+          '<span>'+_esc(L.duration)+'</span>'+
+        '</div>'+
+        (L.sub?'<div class="lesson-info-standfirst">'+_esc(L.sub)+'</div>':'')+
+      '</div>'+
+      prevNextHtml+
+    '</div>'+
+    '<div class="lesson-tabs">'+
+      '<button class="lesson-tab active" data-pane="takeaways" onclick="_lessonTab(event,\'takeaways\')">Takeaways</button>'+
+      '<button class="lesson-tab" data-pane="transcript" onclick="_lessonTab(event,\'transcript\')">Transcript</button>'+
+      '<button class="lesson-tab" data-pane="related" onclick="_lessonTab(event,\'related\')">Related articles</button>'+
+    '</div>'+
+    '<div class="lesson-pane active" data-pane="takeaways">'+
+      '<p style="font-size:.85rem;color:var(--muted);max-width:760px">Key takeaways and downloadable materials will appear here when the lesson is published.</p>'+
+      '<div class="takeaway-docs-hd" style="margin-top:24px">Downloads</div>'+
+      '<p style="font-size:.82rem;color:var(--muted)">No downloads available yet.</p>'+
+    '</div>'+
+    '<div class="lesson-pane" data-pane="transcript">'+
+      '<p style="font-size:.85rem;color:var(--muted);max-width:760px">Transcript will appear here when the lesson is published.</p>'+
+    '</div>'+
+    '<div class="lesson-pane" data-pane="related">'+
+      '<p style="font-size:.85rem;color:var(--muted);max-width:760px">Related articles from the news wire will surface here when this lesson is tagged.</p>'+
+    '</div>';
+  window._currentLesson = slug;
+  showPage('lesson', true);
+  history.replaceState(null, '', '#lesson-' + slug);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function _lessonTab(e,pane){
+  document.querySelectorAll('#page-lesson .lesson-tab').forEach(function(t){t.classList.toggle('active', t.dataset.pane===pane)});
+  document.querySelectorAll('#page-lesson .lesson-pane').forEach(function(p){p.classList.toggle('active', p.dataset.pane===pane)});
+}
+
 
 /* ===== Jurisdiction Data ===== */
 
@@ -5122,11 +5403,34 @@ document.querySelectorAll('.filter-btn').forEach(function(btn) {
 
 // Build sidebar regions on page load
 
+function wireLearningCards() {
+    // Map lesson-cards in community-page rows to their lesson slugs by row/position
+    var rows = document.querySelectorAll('#page-community .cm-row');
+    rows.forEach(function(row){
+        var firmEl = row.querySelector('.cm-row-firm');
+        var firmText = firmEl ? firmEl.textContent : '';
+        var seriesSlug = null;
+        if (firmText.indexOf('Hogan Lovells') !== -1) seriesSlug = 'eu-aiact';
+        else if (firmText.indexOf('Fieldfisher') !== -1) seriesSlug = 'adm';
+        else if (firmText.indexOf('Petruta') !== -1) seriesSlug = 'eu-omnibus';
+        if (!seriesSlug || !LEARNING_SERIES[seriesSlug]) return;
+        var lessonSlugs = LEARNING_SERIES[seriesSlug].lessons;
+        var cards = row.querySelectorAll('.lesson-card');
+        cards.forEach(function(card, i){
+            var slug = lessonSlugs[i];
+            if (!slug) return;
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function(){ openLesson(slug); });
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
     buildSidebarRegions();
     initNewsSelection();
     loadTheme();
+    wireLearningCards();
 
     // Restore page from URL hash so refresh stays on same page/jurisdiction
     var hash = window.location.hash.slice(1);
@@ -5138,6 +5442,10 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 showPage('jurisdictions');
             }
+        } else if (hash.indexOf('series-') === 0 && LEARNING_SERIES[hash.slice(7)]) {
+            openSeries(hash.slice(7));
+        } else if (hash.indexOf('lesson-') === 0 && LEARNING_LESSONS[hash.slice(7)]) {
+            openLesson(hash.slice(7));
         } else if (document.getElementById('page-' + hash)) {
             showPage(hash);
         }
