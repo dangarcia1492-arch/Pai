@@ -45,79 +45,41 @@ body::before{
   letter-spacing:-20px;
 }
 
-/* Subtle cycling text — bottom left */
-.cycling-wrap{
-  position:fixed;
-  bottom:44px;left:52px;
-  z-index:2;
-  display:grid;
-  grid-template-columns:max-content 1fr;
-  row-gap:16px;
-  column-gap:16px;
-  align-items:center;
-}
-@media(max-width:700px){.cycling-wrap{display:none}}
-.cycling-group{display:contents}
-.cycling-label{
-  font-size:11px;font-weight:700;letter-spacing:.08em;
-  color:rgba(255,255,255,.35);
-  text-transform:uppercase;
-  flex-shrink:0;
-  min-width:90px;
-}
-.cycling-value{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:14px;
-  color:rgba(255,255,255,.55);
-  display:inline-block;
-  min-width:180px;
-  height:20px;
-  line-height:20px;
-  position:relative;
-  overflow:hidden;
-}
-.cv-item{
-  position:absolute;top:0;left:0;
-  white-space:nowrap;
-  pointer-events:none;
-  line-height:20px;
-}
-
 /* Card */
 .card{
   position:relative;z-index:3;
   background:#fff;
-  width:360px;
-  padding:48px 44px 40px;
-  border-radius:2px;
-  box-shadow:0 24px 80px rgba(0,0,0,.28),0 4px 16px rgba(0,0,0,.12);
+  width:420px;
+  max-width:calc(100vw - 40px);
+  padding:56px 52px 44px;
+  border-radius:3px;
+  box-shadow:0 28px 90px rgba(0,0,0,.30),0 6px 20px rgba(0,0,0,.12);
 }
 
 /* Logo */
 .logo{
   display:flex;flex-direction:column;align-items:center;
-  margin-bottom:28px;
+  margin-bottom:36px;
 }
 .logo-mark{
-  width:56px;height:56px;
+  width:64px;height:64px;
   background:#0e8a7d;
-  border-radius:8px;
+  border-radius:10px;
   display:flex;align-items:center;justify-content:center;
-  margin-bottom:16px;
-  box-shadow:0 4px 16px rgba(14,138,125,.35);
+  margin-bottom:18px;
+  box-shadow:0 6px 20px rgba(14,138,125,.35);
 }
 .logo-mark span{
   font-family:'Source Serif 4',serif;
   font-style:italic;
   font-weight:700;
-  font-size:26px;
+  font-size:30px;
   color:#fff;
   letter-spacing:-1px;
 }
 .logo-name{
   font-family:'Source Serif 4',serif;
-  font-size:22px;
+  font-size:26px;
   font-weight:400;
   color:#0f172a;
   letter-spacing:-.5px;
@@ -128,43 +90,43 @@ body::before{
   font-weight:600;
 }
 .logo-sub{
-  font-size:13px;
+  font-size:14px;
   color:#6c7686;
-  margin-top:4px;
+  margin-top:6px;
 }
 
 /* Form */
 .field{
-  margin-bottom:14px;
+  margin-bottom:16px;
 }
 .field input{
   width:100%;
-  height:44px;
-  padding:0 14px;
+  height:48px;
+  padding:0 16px;
   border:1px solid #d5d8dd;
-  border-radius:2px;
+  border-radius:3px;
   font-family:inherit;
-  font-size:14px;
+  font-size:15px;
   color:#0f172a;
   background:#fff;
   outline:none;
-  transition:border-color .15s;
+  transition:border-color .15s, box-shadow .15s;
 }
 .field input::placeholder{color:#98a0ad}
-.field input:focus{border-color:#0e8a7d;box-shadow:0 0 0 3px rgba(14,138,125,.1)}
+.field input:focus{border-color:#0e8a7d;box-shadow:0 0 0 3px rgba(14,138,125,.12)}
 
 .btn-signin{
-  width:100%;height:44px;
+  width:100%;height:48px;
   background:#0e8a7d;
   color:#fff;
   border:none;
-  border-radius:2px;
+  border-radius:3px;
   font-family:inherit;
-  font-size:14px;
+  font-size:15px;
   font-weight:700;
   cursor:pointer;
   letter-spacing:.01em;
-  margin-top:8px;
+  margin-top:12px;
   transition:background .15s;
 }
 .btn-signin:hover{background:#0a6b61}
@@ -172,7 +134,7 @@ body::before{
 .forgot{
   display:block;
   text-align:center;
-  margin-top:20px;
+  margin-top:24px;
   font-size:13px;
   color:#6c7686;
   text-decoration:none;
@@ -180,27 +142,16 @@ body::before{
   transition:color .15s;
 }
 .forgot:hover{color:#0e8a7d}
+.demo-link{
+  display:block;text-align:center;margin-top:10px;
+  font-size:12px;color:#98a0ad;text-decoration:none;opacity:.7;
+}
+.demo-link:hover{color:#0e8a7d;opacity:1}
 </style>
 </head>
 <body>
 
 <div class="watermark">P</div>
-
-<!-- Cycling text bottom-left -->
-<div class="cycling-wrap">
-  <div class="cycling-group">
-    <span class="cycling-label">Authority</span>
-    <span class="cycling-value"><span class="cv-item visible" id="cyc-auth">EU AI Office</span></span>
-  </div>
-  <div class="cycling-group">
-    <span class="cycling-label">Development</span>
-    <span class="cycling-value"><span class="cv-item visible" id="cyc-dev">AI Act implementation</span></span>
-  </div>
-  <div class="cycling-group">
-    <span class="cycling-label">Jurisdiction</span>
-    <span class="cycling-value"><span class="cv-item visible" id="cyc-jur">European Union</span></span>
-  </div>
-</div>
 
 <!-- Login card -->
 <div class="card">
@@ -221,7 +172,7 @@ body::before{
   </form>
 
   <a class="forgot" href="#">Forgot password?</a>
-  <a class="forgot" href="index.html" style="margin-top:8px;font-size:.72rem;opacity:.45">View demo →</a>
+  <a class="demo-link" href="index.html">View demo &rarr;</a>
 </div>
 
 <script>
@@ -232,49 +183,6 @@ function handleSignIn(e) {
   btn.disabled = true;
   setTimeout(function() { window.location.href = 'index.html'; }, 600);
 }
-
-var triplets = [
-  ['EU AI Office',     'AI Act implementation', 'European Union'],
-  ['ICO (UK)',         'Enforcement actions',   'United Kingdom'],
-  ['CNIL (France)',    'Guidance & opinions',   'France'],
-  ['FTC (US)',         'Bills in progress',     'United States'],
-  ['Garante (Italy)',  'Case law',              'Italy'],
-  ['BfDI (Germany)',   'Consultations',         'Germany'],
-  ['PIPC (Korea)',     'Enforcement actions',   'South Korea'],
-  ['PDPC (Singapore)', 'AI governance',         'Singapore'],
-];
-var idx = 0;
-var ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-function scramble(el, target) {
-  var frame = 0;
-  var settle = 5; // frames before a char locks in, staggered by position
-  var id = setInterval(function() {
-    var out = '';
-    var done = true;
-    for (var i = 0; i < target.length; i++) {
-      var lockAt = i * 1.4 + settle;
-      if (frame >= lockAt || !/[a-zA-Z]/.test(target[i])) {
-        out += target[i];
-      } else {
-        out += ALPHA[Math.floor(Math.random() * ALPHA.length)];
-        done = false;
-      }
-    }
-    el.textContent = out;
-    frame++;
-    if (done) { clearInterval(id); el.textContent = target; }
-  }, 32);
-}
-
-function cycleAll() {
-  idx = (idx + 1) % triplets.length;
-  scramble(document.getElementById('cyc-auth'), triplets[idx][0]);
-  scramble(document.getElementById('cyc-dev'),  triplets[idx][1]);
-  scramble(document.getElementById('cyc-jur'),  triplets[idx][2]);
-  setTimeout(cycleAll, 3400);
-}
-setTimeout(cycleAll, 2800);
 </script>
 </body>
 </html>
