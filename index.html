@@ -1313,18 +1313,18 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 
 /* ============ LEARNING: SERIES PAGE (Layer 2) ============ */
 .series-page-inner{padding:0 0 60px}
-.series-hero{position:relative;min-height:300px;padding:44px 56px 44px 60px;display:flex;align-items:center;color:var(--ink);background:var(--surface);overflow:hidden;margin:0 24px 36px;border:1px solid var(--border);border-radius:4px;box-shadow:0 1px 3px rgba(15,23,42,.04)}
-.series-hero::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent,var(--teal))}
-.series-hero-art{position:absolute;top:0;right:0;bottom:0;width:42%;background-size:cover;background-position:center right;opacity:.9;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%)}
-.series-hero-body{position:relative;z-index:2;max-width:62%}
-.series-hero-kick{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent,var(--teal));margin-bottom:12px}
-.series-hero h1{font-family:var(--serif);font-size:2rem;font-weight:700;line-height:1.15;margin-bottom:12px;color:var(--ink)}
-.series-hero-standfirst{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--secondary);line-height:1.55;margin-bottom:18px}
-.series-hero-meta{display:flex;gap:20px;font-size:.78rem;color:var(--muted);margin-bottom:22px;flex-wrap:wrap}
-.series-hero-meta strong{color:var(--ink);font-weight:600}
-.series-hero-cta{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;background:var(--teal);color:#fff;border:none;cursor:pointer;font-weight:600;font-size:.85rem;border-radius:3px;transition:background .15s}
-.series-hero-cta:hover{background:var(--teal-dark)}
-.series-back{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--secondary);background:none;border:none;cursor:pointer;margin:8px 0 24px 24px;padding:6px 2px}
+.series-hero{position:relative;min-height:340px;padding:48px 60px;display:flex;align-items:flex-end;color:#fff;background:#0d1030;overflow:hidden;margin:-24px -24px 32px}
+.series-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 100%);pointer-events:none}
+.series-hero-art{position:absolute;top:0;right:0;bottom:0;width:60%;background-size:cover;background-position:center right;opacity:.5;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 40%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 40%,#000 100%)}
+.series-hero-body{position:relative;z-index:2;max-width:640px}
+.series-hero-kick{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin-bottom:12px;color:#fff}
+.series-hero h1{font-family:var(--serif);font-size:2.2rem;font-weight:700;line-height:1.15;margin-bottom:14px;color:#fff}
+.series-hero-standfirst{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:rgba(255,255,255,.82);line-height:1.55;margin-bottom:18px}
+.series-hero-meta{display:flex;gap:20px;font-size:.78rem;color:rgba(255,255,255,.75);margin-bottom:24px;flex-wrap:wrap}
+.series-hero-meta strong{color:#fff;font-weight:600}
+.series-hero-cta{display:inline-flex;align-items:center;gap:12px;padding:10px 20px;background:#fff;color:#0f172a;border:none;cursor:pointer;font-weight:600;font-size:.85rem;border-radius:3px}
+.series-hero-cta:hover{background:#f0f0f0}
+.series-back{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--secondary);background:none;border:none;cursor:pointer;margin:0 0 16px 24px;padding:4px 0}
 .series-back:hover{color:var(--teal)}
 .series-section-hd{display:flex;align-items:baseline;justify-content:space-between;margin:0 24px 14px}
 .series-section-hd h2{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink)}
@@ -1342,68 +1342,6 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .slc-title{font-family:var(--serif);font-size:.95rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:4px}
 .slc-sub{font-size:.76rem;color:var(--secondary);line-height:1.4}
 .slc-duration{font-size:.68rem;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
-
-/* ============ LEARNING: WELCOME / COMMUNITY TOP ============ */
-.welcome-strip{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;padding:12px 4px 24px;margin-bottom:28px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-.welcome-main{flex:1;min-width:280px}
-.welcome-main h1{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.2}
-.welcome-main h1 em{font-style:italic;color:var(--teal);font-weight:700}
-.welcome-sub{font-size:.88rem;color:var(--secondary);max-width:640px;line-height:1.5}
-.welcome-stats{display:flex;gap:28px;flex-shrink:0}
-.ws-stat{text-align:right;line-height:1.1}
-.ws-num{display:block;font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--ink)}
-.ws-lbl{display:block;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;font-weight:600}
-
-.spotlight{display:grid;grid-template-columns:minmax(320px,1fr) 1.3fr;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:40px;cursor:pointer;transition:box-shadow .2s,transform .2s;min-height:280px}
-.spotlight:hover{box-shadow:0 10px 30px rgba(15,23,42,.08);transform:translateY(-2px)}
-.sp-img{position:relative;background:#0d1030;background-size:cover;background-position:center;min-height:280px}
-.sp-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,16,48,.15) 0%,rgba(13,16,48,.55) 100%)}
-.sp-img-badge{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.95);color:var(--ink);padding:5px 12px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:2px;z-index:2}
-.sp-body{padding:36px 40px;display:flex;flex-direction:column;justify-content:center}
-.sp-kick{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
-.sp-kick .sp-kick-new{background:var(--teal);color:#fff;padding:2px 8px;border-radius:2px;margin-left:8px}
-.sp-body h2{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:12px}
-.sp-standfirst{font-family:var(--serif);font-style:italic;font-size:.98rem;color:var(--secondary);line-height:1.55;margin-bottom:16px}
-.sp-meta{font-size:.78rem;color:var(--muted);margin-bottom:20px}
-.sp-meta strong{color:var(--ink);font-weight:600}
-.sp-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.sp-play-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 22px;background:var(--teal);color:#fff;border:none;cursor:pointer;font-weight:600;font-size:.85rem;border-radius:3px;transition:background .15s}
-.sp-play-btn:hover{background:var(--teal-dark)}
-.sp-play-btn span{font-size:.78rem}
-.sp-secondary{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:none;color:var(--secondary);border:1px solid var(--border);cursor:pointer;font-weight:600;font-size:.8rem;border-radius:3px;transition:all .15s}
-.sp-secondary:hover{border-color:var(--teal);color:var(--teal)}
-
-.learn-section{margin-bottom:44px;display:block}
-.learn-section-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;padding:0 4px;gap:20px;flex-wrap:wrap}
-.learn-section-hd h2{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--ink)}
-.learn-section-count{font-size:.78rem;color:var(--muted)}
-
-.cm-series-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:0 4px}
-.cm-series-tile{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:4px;cursor:pointer;padding:26px 28px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;transition:transform .18s ease,box-shadow .18s ease}
-.cm-series-tile:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.22)}
-.cm-series-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.55) 85%);z-index:1}
-.cm-series-tile-art{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.55;z-index:0}
-.cm-series-tile-kick{position:absolute;top:18px;left:20px;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;opacity:.92;z-index:2;background:rgba(0,0,0,.32);padding:4px 10px;border-radius:2px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.cm-series-tile-new{position:absolute;top:18px;right:20px;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0d1030;background:#fff;padding:4px 10px;border-radius:2px;z-index:2}
-.cm-series-tile-body{position:relative;z-index:2}
-.cm-series-tile-firm{font-size:.72rem;font-weight:600;opacity:.82;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
-.cm-series-tile-title{font-family:var(--serif);font-size:1.35rem;font-weight:700;line-height:1.18;margin-bottom:8px;color:#fff}
-.cm-series-tile-meta{font-size:.76rem;opacity:.85;display:flex;gap:12px;align-items:center}
-.cm-series-tile-meta .cm-series-tile-count::before{content:'·';margin-right:10px;opacity:.6}
-
-.cm-conv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;padding:0 4px}
-.cm-conv-tile{position:relative;aspect-ratio:5/6;overflow:hidden;border-radius:4px;cursor:pointer;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;transition:transform .18s ease,box-shadow .18s ease}
-.cm-conv-tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.22)}
-.cm-conv-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.7) 85%);z-index:1}
-.cm-conv-tile-art{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.6;z-index:0}
-.cm-conv-tile-kick{position:absolute;top:16px;left:18px;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;opacity:.92;z-index:2;background:rgba(0,0,0,.32);padding:4px 9px;border-radius:2px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.cm-conv-tile-new{position:absolute;top:16px;right:18px;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0d1030;background:#fff;padding:3px 9px;border-radius:2px;z-index:2}
-.cm-conv-tile-body{position:relative;z-index:2}
-.cm-conv-tile-title{font-family:var(--serif);font-size:1.02rem;font-weight:700;line-height:1.25;margin-bottom:8px;color:#fff}
-.cm-conv-tile-speaker{font-size:.78rem;font-weight:600;opacity:.95;margin-bottom:2px}
-.cm-conv-tile-role{font-size:.7rem;opacity:.72}
-.cm-conv-play{position:absolute;bottom:18px;right:18px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.94);color:#0f172a;display:flex;align-items:center;justify-content:center;font-size:.78rem;z-index:2;padding-left:3px;opacity:0;transition:opacity .18s}
-.cm-conv-tile:hover .cm-conv-play{opacity:1}
 
 /* ============ LEARNING: LESSON PLAYER (Layer 3) ============ */
 .lesson-page-inner{padding:0 0 60px;max-width:1100px;margin:0 auto}
@@ -1461,76 +1399,6 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .ri-body{flex:1}
 .ri-title{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:4px}
 .ri-meta{font-size:.72rem;color:var(--muted)}
-
-/* Faculty grid (was missing base layout) */
-.cm-faculty-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;padding:0 4px}
-.cm-faculty-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:14px 16px;transition:border-color .15s,box-shadow .15s;cursor:pointer}
-.cm-faculty-card:hover{border-color:var(--teal);box-shadow:0 2px 8px rgba(15,23,42,.06)}
-.cm-fc-name{font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:3px;line-height:1.3}
-.cm-fc-role{font-size:.72rem;color:var(--secondary);line-height:1.4;margin-bottom:8px}
-.cm-fc-tags{display:flex;gap:4px;flex-wrap:wrap}
-.cm-fc-tag{font-size:.6rem;font-weight:700;padding:2px 6px;border:1px solid var(--border);color:var(--muted);border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
-
-/* Scoped color tokens for the community/welcome page — decoupled from global theme so text is ALWAYS readable */
-#page-community{--cm-text:#0f172a;--cm-text-2:#475467;--cm-text-3:#6c7686;--cm-surface:#fff;--cm-border:#d5d8dd;--cm-accent:#0e8a7d;--cm-accent-dark:#0a6b61}
-[data-theme="legaltech-dark"] #page-community{--cm-text:#f5f5f5;--cm-text-2:rgba(255,255,255,.7);--cm-text-3:rgba(255,255,255,.5);--cm-surface:rgba(255,255,255,.04);--cm-border:rgba(255,255,255,.1);--cm-accent:#d0d0d0;--cm-accent-dark:#fff}
-[data-theme="legaltech-light"] #page-community{--cm-text:#1a1a2e;--cm-text-2:#3d3d5c;--cm-text-3:#6b6b8a;--cm-surface:#faf9f5;--cm-border:#dedad0;--cm-accent:#1a3a8c;--cm-accent-dark:#0f2666}
-
-#page-community .welcome-main h1{color:var(--cm-text)!important}
-#page-community .welcome-main h1 em{color:var(--cm-accent)!important}
-#page-community .welcome-sub{color:var(--cm-text-2)!important}
-#page-community .welcome-strip{border-bottom-color:var(--cm-border)!important}
-#page-community .ws-num{color:var(--cm-text)!important}
-#page-community .ws-lbl{color:var(--cm-text-3)!important}
-#page-community .spotlight{background:var(--cm-surface)!important;border-color:var(--cm-border)!important}
-#page-community .sp-body h2{color:var(--cm-text)!important}
-#page-community .sp-standfirst{color:var(--cm-text-2)!important}
-#page-community .sp-meta{color:var(--cm-text-3)!important}
-#page-community .sp-meta strong{color:var(--cm-text)!important}
-#page-community .sp-kick{color:var(--cm-accent)!important}
-#page-community .sp-play-btn{background:var(--cm-accent)!important;color:#fff!important}
-#page-community .sp-play-btn:hover{background:var(--cm-accent-dark)!important}
-#page-community .sp-secondary{background:transparent!important;color:var(--cm-text-2)!important;border-color:var(--cm-border)!important}
-#page-community .sp-secondary:hover{border-color:var(--cm-accent)!important;color:var(--cm-accent)!important}
-#page-community .learn-section-hd h2{color:var(--cm-text)!important}
-#page-community .learn-section-count{color:var(--cm-text-3)!important}
-#page-community .cm-faculty-card{background:var(--cm-surface)!important;border-color:var(--cm-border)!important}
-#page-community .cm-fc-name{color:var(--cm-text)!important}
-#page-community .cm-fc-role{color:var(--cm-text-2)!important}
-#page-community .cm-fc-tag{border-color:var(--cm-border)!important;color:var(--cm-text-3)!important}
-[data-theme="legaltech-dark"] .cm-faculty-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-[data-theme="legaltech-dark"] .cm-faculty-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);box-shadow:none}
-[data-theme="legaltech-dark"] .cm-fc-name{color:rgba(255,255,255,.92)}
-[data-theme="legaltech-dark"] .cm-fc-role{color:rgba(255,255,255,.55)}
-[data-theme="legaltech-dark"] .cm-fc-tag{border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.45)}
-
-/* Series page dark-theme overrides */
-[data-theme="legaltech-dark"] .series-hero{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);box-shadow:none}
-[data-theme="legaltech-dark"] .series-hero h1{color:#fff}
-[data-theme="legaltech-dark"] .series-hero-standfirst{color:rgba(255,255,255,.7)}
-[data-theme="legaltech-dark"] .series-hero-meta{color:rgba(255,255,255,.5)}
-[data-theme="legaltech-dark"] .series-hero-meta strong{color:#fff}
-[data-theme="legaltech-dark"] .series-back{color:rgba(255,255,255,.55)}
-[data-theme="legaltech-dark"] .series-section-hd h2{color:#fff}
-[data-theme="legaltech-dark"] .series-section-hd .sh-count{color:rgba(255,255,255,.45)}
-[data-theme="legaltech-dark"] .series-lesson-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-[data-theme="legaltech-dark"] .series-lesson-card:hover{border-color:rgba(255,255,255,.2);box-shadow:0 6px 18px rgba(0,0,0,.4)}
-[data-theme="legaltech-dark"] .slc-title{color:rgba(255,255,255,.92)}
-[data-theme="legaltech-dark"] .slc-sub{color:rgba(255,255,255,.6)}
-[data-theme="legaltech-dark"] .slc-spk,[data-theme="legaltech-dark"] .slc-duration{color:rgba(255,255,255,.45)}
-
-/* Lesson page dark-theme overrides */
-[data-theme="legaltech-dark"] .lesson-info h1{color:#fff}
-[data-theme="legaltech-dark"] .lesson-info-standfirst,[data-theme="legaltech-dark"] .lesson-info-meta{color:rgba(255,255,255,.65)}
-[data-theme="legaltech-dark"] .lesson-info-meta strong{color:#fff}
-[data-theme="legaltech-dark"] .lesson-crumb{color:rgba(255,255,255,.55)}
-[data-theme="legaltech-dark"] .lesson-nav button{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.7)}
-[data-theme="legaltech-dark"] .lesson-tabs{border-bottom-color:rgba(255,255,255,.1)}
-[data-theme="legaltech-dark"] .lesson-tab{color:rgba(255,255,255,.55)}
-[data-theme="legaltech-dark"] .lesson-tab:hover{color:#fff}
-[data-theme="legaltech-dark"] .lesson-pane p{color:rgba(255,255,255,.55)}
-[data-theme="legaltech-dark"] .takeaway-doc{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
-
 .cm-hero.clickable,.cm-row .lesson-card{cursor:pointer}
 .cm-hero.clickable{transition:transform .15s ease,box-shadow .15s ease}
 .cm-hero.clickable:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.18)}
@@ -2458,177 +2326,311 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 <div class="page-view" id="page-community">
 <div class="cm-screen">
 
-  <!-- ── Welcome strip ── -->
-  <div class="welcome-strip">
-    <div class="welcome-main">
-      <h1>Welcome back, <em>David</em></h1>
-      <div class="welcome-sub">Your AI governance curriculum — masterclass series, practitioner conversations and bi-monthly briefings from the PAI faculty.</div>
-    </div>
-    <div class="welcome-stats">
-      <div class="ws-stat"><span class="ws-num">17</span><span class="ws-lbl">Lessons</span></div>
-      <div class="ws-stat"><span class="ws-num">3</span><span class="ws-lbl">Series</span></div>
-      <div class="ws-stat"><span class="ws-num">8</span><span class="ws-lbl">Conversations</span></div>
-      <div class="ws-stat"><span class="ws-num">16</span><span class="ws-lbl">Faculty</span></div>
-    </div>
-  </div>
-
-  <!-- ── Spotlight: Today's feature ── -->
-  <div class="spotlight" onclick="openLesson('pai-petruta-mar2026')">
-    <div class="sp-img" style="background-image:url('PP.png')">
-      <div class="sp-img-badge">Today&#39;s feature</div>
-    </div>
-    <div class="sp-body">
-      <div class="sp-kick">PAI Briefing <span class="sp-kick-new">NEW</span></div>
-      <h2>EU Omnibus: What Changed in March &amp; What to Expect Next</h2>
-      <div class="sp-standfirst">Petruta Pirvan's bi-monthly briefing on the EU AI Omnibus — what moved in March and what to watch next as the Commission finalises implementing acts.</div>
-      <div class="sp-meta"><strong>Petruta Pirvan</strong> &middot; 28 Mar 2026 &middot; 18 min read</div>
-      <div class="sp-cta">
-        <button class="sp-play-btn" onclick="event.stopPropagation();openLesson('pai-petruta-mar2026')"><span>&#9654;</span> Watch now</button>
-        <button class="sp-secondary" onclick="event.stopPropagation();openSeries('eu-omnibus')">View series &rarr;</button>
+  <!-- ── Featured: PAI Briefing — Petruta Pirvan ── -->
+  <div class="cm-hero clickable" style="background:#0d1030" onclick="openLesson('pai-petruta-mar2026')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">PAI Briefing</span>
+        <span class="cm-tag">Bi-Monthly</span>
+        <span class="cm-tag cm-tag-new">New</span>
       </div>
+      <h1 class="cm-hero-title">EU Omnibus: What Changed in March &amp; What to Expect Next</h1>
+      <div class="cm-hero-meta">Petruta Pirvan &nbsp;&middot;&nbsp; 28 Mar 2026 &nbsp;&middot;&nbsp; 18 min</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch Now</div>
+          <div class="cm-play-sub">Next episode: May 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#1c2660">
+      <div class="cm-hero-photo-bg" style="background-image:url('PP.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(180,200,255,.07)">PP</div>
     </div>
   </div>
 
-  <!-- ── Masterclass series ── -->
-  <div class="learn-section">
-    <div class="learn-section-hd">
-      <h2>Masterclass series</h2>
-      <span class="learn-section-count">3 series &middot; 17 lessons in total</span>
+  <!-- ── Hero: Hogan Lovells EU AI Act Masterclass ── -->
+  <div class="cm-hero clickable" onclick="openSeries('eu-aiact')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">Masterclass Series</span>
+        <span class="cm-tag">Hogan Lovells</span>
+        <span class="cm-tag">12 Lessons</span>
+      </div>
+      <h1 class="cm-hero-title">EU AI Act Masterclass</h1>
+      <div class="cm-hero-meta">Eduardo Ustaran, Etienne Drouard, Nicola Fulford, Dan Whitehead, Joke Bodewits &nbsp;&middot;&nbsp; AI Governance &nbsp;&middot;&nbsp; Privacy</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Start with Lesson 1</div>
+          <div class="cm-play-sub">12 lessons available</div>
+        </div>
+      </div>
     </div>
-    <div class="cm-series-grid">
-
-      <div class="cm-series-tile" onclick="openSeries('eu-aiact')" style="background:#0d2a60">
-        <div class="cm-series-tile-art" style="background-image:url('EU.png')"></div>
-        <div class="cm-series-tile-kick">Masterclass</div>
-        <div class="cm-series-tile-body">
-          <div class="cm-series-tile-firm">Hogan Lovells</div>
-          <div class="cm-series-tile-title">EU AI Act Masterclass</div>
-          <div class="cm-series-tile-meta"><span>Eduardo Ustaran &middot; +4 faculty</span><span class="cm-series-tile-count">12 lessons</span></div>
-        </div>
-      </div>
-
-      <div class="cm-series-tile" onclick="openSeries('adm')" style="background:#1c0a38">
-        <div class="cm-series-tile-art" style="background-image:url('FF.png')"></div>
-        <div class="cm-series-tile-kick">Masterclass</div>
-        <div class="cm-series-tile-new">New</div>
-        <div class="cm-series-tile-body">
-          <div class="cm-series-tile-firm">Fieldfisher US</div>
-          <div class="cm-series-tile-title">AI in Automated Decision-Making</div>
-          <div class="cm-series-tile-meta"><span>Flick Fisher &middot; +3 faculty</span><span class="cm-series-tile-count">4 sessions</span></div>
-        </div>
-      </div>
-
-      <div class="cm-series-tile" onclick="openSeries('eu-omnibus')" style="background:#0d1030">
-        <div class="cm-series-tile-art" style="background-image:url('PP.png')"></div>
-        <div class="cm-series-tile-kick">PAI Briefing Series</div>
-        <div class="cm-series-tile-new">New</div>
-        <div class="cm-series-tile-body">
-          <div class="cm-series-tile-firm">Petruta Pirvan</div>
-          <div class="cm-series-tile-title">EU AI Omnibus Briefings</div>
-          <div class="cm-series-tile-meta"><span>Bi-monthly</span><span class="cm-series-tile-count">1 briefing</span></div>
-        </div>
-      </div>
-
+    <div class="cm-hero-photo" style="background:#1a3060">
+      <div class="cm-hero-photo-bg" style="background-image:url('EU.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(180,200,255,.07)">EU</div>
     </div>
   </div>
 
-  <!-- ── In Conversation ── -->
-  <div class="learn-section">
-    <div class="learn-section-hd">
-      <h2>In Conversation</h2>
-      <span class="learn-section-count">8 conversations with practitioners</span>
+
+
+  <!-- ── Row: EU AI Act Masterclass ── -->
+  <div class="cm-row">
+    <div class="cm-row-hd">
+      <span class="cm-row-title">EU AI Act Masterclass</span>
+      <span class="cm-row-firm">&middot; Hogan Lovells</span>
+      <span class="cm-row-count">12 lessons</span>
     </div>
-    <div class="cm-conv-grid">
+    <div class="cm-scroll">
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 01</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Eduardo Ustaran</strong> &middot; London</div><div class="lesson-title">Framing the EU AI Act</div><div class="lesson-sub">Regulatory context &amp; policy objectives</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 02</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Etienne Drouard</strong> &middot; Paris</div><div class="lesson-title">Essential Concepts</div><div class="lesson-sub">What and who is covered</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 03</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Nicola Fulford</strong> &middot; London</div><div class="lesson-title">Scope of Application</div><div class="lesson-sub">When the AI Act applies</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 04</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Eduardo Ustaran</strong> &middot; London</div><div class="lesson-title">The Risk-Based Approach</div><div class="lesson-sub">Prohibited, high-risk &amp; transparency tiers</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 05</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Nicola Fulford</strong> &middot; London</div><div class="lesson-title">Implementation Timelines</div><div class="lesson-sub">Compliance deadlines &amp; readiness</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 06</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Dan Whitehead</strong> &middot; London</div><div class="lesson-title">General-Purpose AI Models</div><div class="lesson-sub">GPAI concept &amp; requirements</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 07</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Dan Whitehead</strong> &middot; London</div><div class="lesson-title">Obligations of Providers</div><div class="lesson-sub">High-risk AI requirements &amp; steps</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 08</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Joke Bodewits</strong> &middot; Amsterdam</div><div class="lesson-title">Obligations of Deployers</div><div class="lesson-sub">Human oversight &amp; impact assessments</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 09</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Joke Bodewits</strong> &middot; Amsterdam</div><div class="lesson-title">Conformity Assessments</div><div class="lesson-sub">Requirements, notifications &amp; standards</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 10</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Etienne Drouard</strong> &middot; Paris</div><div class="lesson-title">Regulatory Governance</div><div class="lesson-sub">AI Office, monitoring &amp; enforcement</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 11</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Dan Whitehead</strong> &middot; London</div><div class="lesson-title">Global Alignment</div><div class="lesson-sub">EU Act vs. international frameworks</div></div></div>
+      <div class="lesson-card"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 12</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Eduardo Ustaran</strong> &middot; London</div><div class="lesson-title">Privacy Governance &amp; GDPR</div><div class="lesson-sub">Applying GDPR practices to the AI Act</div></div></div>
+    </div>
+  </div>
 
-      <div class="cm-conv-tile" onclick="openLesson('ic-etienne-drouard')" style="background:#142255">
-        <div class="cm-conv-tile-art" style="background-image:url('ED.png')"></div>
-        <div class="cm-conv-tile-kick">In Conversation</div>
-        <div class="cm-conv-tile-body">
-          <div class="cm-conv-tile-title">Cross-Border GDPR Enforcement &amp; the French DPA</div>
-          <div class="cm-conv-tile-speaker">Etienne Drouard</div>
-          <div class="cm-conv-tile-role">Partner, Paris &middot; Hogan Lovells</div>
-        </div>
-        <div class="cm-conv-play">&#9654;</div>
+  <!-- ── Hero: Fieldfisher US — Automated Decision-Making ── -->
+  <div class="cm-hero cm-hero-ff clickable" onclick="openSeries('adm')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">Masterclass Series</span>
+        <span class="cm-tag">Fieldfisher US</span>
+        <span class="cm-tag cm-tag-new">New</span>
       </div>
-
-      <div class="cm-conv-tile" onclick="openLesson('ic-joke-bodewits')" style="background:#0e3025">
-        <div class="cm-conv-tile-art" style="background-image:url('Joke.png')"></div>
-        <div class="cm-conv-tile-kick">In Conversation</div>
-        <div class="cm-conv-tile-body">
-          <div class="cm-conv-tile-title">AI Deployers &amp; the EU AI Act: Practical Compliance</div>
-          <div class="cm-conv-tile-speaker">Joke Bodewits</div>
-          <div class="cm-conv-tile-role">Associate, Amsterdam &middot; Hogan Lovells</div>
+      <h1 class="cm-hero-title">AI in Automated Decision-Making</h1>
+      <div class="cm-hero-meta">Flick Fisher, Andrea Ortega, Megan Ward, Richard Lawne &nbsp;&middot;&nbsp; ADM &nbsp;&middot;&nbsp; US Law &nbsp;&middot;&nbsp; 4 sessions</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Start with Session 1</div>
+          <div class="cm-play-sub">4 sessions available</div>
         </div>
-        <div class="cm-conv-play">&#9654;</div>
       </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#1c0a38">
+      <div class="cm-hero-photo-bg" style="background-image:url('FF.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(210,170,255,.07)">FF</div>
+    </div>
+  </div>
 
-      <div class="cm-conv-tile" onclick="openLesson('ic-olga-kurochkina')" style="background:#1c1050">
-        <div class="cm-conv-tile-art" style="background-image:url('OK.png')"></div>
-        <div class="cm-conv-tile-kick">In Conversation</div>
-        <div class="cm-conv-tile-body">
-          <div class="cm-conv-tile-title">Data Protection Governance in the Age of AI</div>
-          <div class="cm-conv-tile-speaker">Olga Kurochkina</div>
-          <div class="cm-conv-tile-role">Hogan Lovells</div>
+  <!-- ── Row: Fieldfisher US ── -->
+  <div class="cm-row">
+    <div class="cm-row-hd">
+      <span class="cm-row-title">AI in Automated Decision-Making</span>
+      <span class="cm-row-firm">&middot; Fieldfisher US</span>
+      <span class="cm-row-count">4 sessions</span>
+    </div>
+    <div class="cm-scroll">
+      <div class="lesson-card lesson-card-ff"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 01</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Flick Fisher</strong> &middot; Partner, Fieldfisher US</div><div class="lesson-title">ADM in Practice</div><div class="lesson-sub">Frameworks &amp; real-world application</div></div></div>
+      <div class="lesson-card lesson-card-ff"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 02</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Andrea Ortega</strong> &middot; Fieldfisher US</div><div class="lesson-title">AI in the Software Dev Lifecycle</div><div class="lesson-sub">Governance from code to deployment</div></div></div>
+      <div class="lesson-card lesson-card-ff"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 03</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Megan Ward</strong> &middot; Fieldfisher US</div><div class="lesson-title">Governance for High-Growth Teams</div><div class="lesson-sub">Scaling compliance without friction</div></div></div>
+      <div class="lesson-card lesson-card-ff"><div class="lesson-thumb"><span class="lesson-ep-badge">EP 04</span></div><div class="lesson-meta"><div class="lesson-spk"><strong>Richard Lawne</strong> &middot; Fieldfisher US</div><div class="lesson-title">Documenting AI Risk Decisions</div><div class="lesson-sub">Audit trails, accountability &amp; records</div></div></div>
+    </div>
+  </div>
+
+  <!-- ── In Conversation: Etienne Drouard ── -->
+  <div class="cm-hero clickable" style="background:#142255" onclick="openLesson('ic-etienne-drouard')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">In Conversation</span>
+        <span class="cm-tag">Hogan Lovells</span>
+      </div>
+      <h1 class="cm-hero-title">Cross-Border GDPR Enforcement &amp; the French DPA</h1>
+      <div class="cm-hero-meta">Etienne Drouard &nbsp;&middot;&nbsp; Partner, Paris &nbsp;&middot;&nbsp; Hogan Lovells</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch</div>
+          <div class="cm-play-sub">Full conversation</div>
         </div>
-        <div class="cm-conv-play">&#9654;</div>
       </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#1e3370">
+      <div class="cm-hero-photo-bg" style="background-image:url('ED.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(180,200,255,.07)">ED</div>
+    </div>
+  </div>
 
-      <div class="cm-conv-tile" onclick="openLesson('ic-marie-charlotte')" style="background:#2d0e50">
-        <div class="cm-conv-tile-art" style="background-image:url('MCRB.png')"></div>
-        <div class="cm-conv-tile-kick">In Conversation</div>
-        <div class="cm-conv-tile-new">New</div>
-        <div class="cm-conv-tile-body">
-          <div class="cm-conv-tile-title">Consent &amp; AI: Rethinking User Permissions</div>
-          <div class="cm-conv-tile-speaker">Dr. Marie Charlotte Roques-Bonnet</div>
-          <div class="cm-conv-tile-role">AI &amp; Data Protection</div>
+  <!-- ── In Conversation: Joke Bodewits ── -->
+  <div class="cm-hero clickable" style="background:#0e3025" onclick="openLesson('ic-joke-bodewits')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">In Conversation</span>
+        <span class="cm-tag">Hogan Lovells</span>
+      </div>
+      <h1 class="cm-hero-title">AI Deployers &amp; the EU AI Act: Practical Compliance</h1>
+      <div class="cm-hero-meta">Joke Bodewits &nbsp;&middot;&nbsp; Associate, Amsterdam &nbsp;&middot;&nbsp; Hogan Lovells</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch</div>
+          <div class="cm-play-sub">Full conversation</div>
         </div>
-        <div class="cm-conv-play">&#9654;</div>
       </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#164838">
+      <div class="cm-hero-photo-bg" style="background-image:url('Joke.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(150,255,200,.07)">JB</div>
+    </div>
+  </div>
 
-      <div class="cm-conv-tile" onclick="openLesson('ic-david-forman')" style="background:#0c2240">
-        <div class="cm-conv-tile-art" style="background-image:url('DF.png')"></div>
-        <div class="cm-conv-tile-kick">In Conversation &middot; Standards</div>
-        <div class="cm-conv-tile-body">
-          <div class="cm-conv-tile-title">ISO AI Standards: What Practitioners Actually Need to Know</div>
-          <div class="cm-conv-tile-speaker">David Forman</div>
-          <div class="cm-conv-tile-role">AI Standards &amp; Governance</div>
+  <!-- ── In Conversation: Olga Kurochkina ── -->
+  <div class="cm-hero clickable" style="background:#1c1050" onclick="openLesson('ic-olga-kurochkina')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">In Conversation</span>
+        <span class="cm-tag">Hogan Lovells</span>
+      </div>
+      <h1 class="cm-hero-title">Data Protection Governance in the Age of AI</h1>
+      <div class="cm-hero-meta">Olga Kurochkina &nbsp;&middot;&nbsp; Hogan Lovells</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch</div>
+          <div class="cm-play-sub">Full conversation</div>
         </div>
-        <div class="cm-conv-play">&#9654;</div>
       </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#281468">
+      <div class="cm-hero-photo-bg" style="background-image:url('OK.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(210,180,255,.07)">OK</div>
+    </div>
+  </div>
 
-      <div class="cm-conv-tile" onclick="openLesson('ic-philipp-raether')" style="background:#1e0c30">
-        <div class="cm-conv-tile-art" style="background-image:url('PR.png')"></div>
-        <div class="cm-conv-tile-kick">In Conversation</div>
-        <div class="cm-conv-tile-body">
-          <div class="cm-conv-tile-title">Building a Risk-Based AI Governance Program</div>
-          <div class="cm-conv-tile-speaker">Philipp Raether</div>
-          <div class="cm-conv-tile-role">AI Governance &amp; Risk</div>
+  <!-- ── In Conversation: Dr. Marie Charlotte Roques-Bonnet ── -->
+  <div class="cm-hero clickable" style="background:#2d0e50" onclick="openLesson('ic-marie-charlotte')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">In Conversation</span>
+        <span class="cm-tag cm-tag-new">New</span>
+      </div>
+      <h1 class="cm-hero-title">Consent &amp; AI: Rethinking User Permissions</h1>
+      <div class="cm-hero-meta">Dr. Marie Charlotte Roques-Bonnet &nbsp;&middot;&nbsp; AI &amp; Data Protection</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch</div>
+          <div class="cm-play-sub">Full conversation</div>
         </div>
-        <div class="cm-conv-play">&#9654;</div>
       </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#401565">
+      <div class="cm-hero-photo-bg" style="background-image:url('MCRB.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(230,180,255,.07)">MR</div>
+    </div>
+  </div>
 
-      <div class="cm-conv-tile" onclick="openLesson('ic-eleni-chronopoulou')" style="background:#0c1848">
-        <div class="cm-conv-tile-art" style="background-image:url('EC.png')"></div>
-        <div class="cm-conv-tile-kick">In Conversation</div>
-        <div class="cm-conv-tile-body">
-          <div class="cm-conv-tile-title">Enforcement Across Domains: AI Act, GDPR &amp; DSA</div>
-          <div class="cm-conv-tile-speaker">Eleni Chronopoulou</div>
-          <div class="cm-conv-tile-role">AI &amp; Digital Regulation</div>
+  <!-- ── In Conversation: David Forman ── -->
+  <div class="cm-hero clickable" style="background:#0c2240" onclick="openLesson('ic-david-forman')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">In Conversation</span>
+        <span class="cm-tag">Standards</span>
+      </div>
+      <h1 class="cm-hero-title">ISO AI Standards: What Practitioners Actually Need to Know</h1>
+      <div class="cm-hero-meta">David Forman &nbsp;&middot;&nbsp; AI Standards &amp; Governance</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch</div>
+          <div class="cm-play-sub">Full conversation</div>
         </div>
-        <div class="cm-conv-play">&#9654;</div>
       </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#143355">
+      <div class="cm-hero-photo-bg" style="background-image:url('DF.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(160,210,255,.07)">DF</div>
+    </div>
+  </div>
 
-      <div class="cm-conv-tile" onclick="openLesson('ic-jose-belo')" style="background:#201005">
-        <div class="cm-conv-tile-art" style="background-image:url('JB.png');background-position:right top"></div>
-        <div class="cm-conv-tile-kick">In Conversation</div>
-        <div class="cm-conv-tile-body">
-          <div class="cm-conv-tile-title">Agentic AI &amp; Vendor Risk: The New Due Diligence</div>
-          <div class="cm-conv-tile-speaker">Jose Belo</div>
-          <div class="cm-conv-tile-role">Agentic AI &amp; Vendor Risk</div>
+  <!-- ── In Conversation: Philipp Raether ── -->
+  <div class="cm-hero clickable" style="background:#1e0c30" onclick="openLesson('ic-philipp-raether')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">In Conversation</span>
+        <span class="cm-tag">Governance</span>
+      </div>
+      <h1 class="cm-hero-title">Building a Risk-Based AI Governance Program</h1>
+      <div class="cm-hero-meta">Philipp Raether &nbsp;&middot;&nbsp; AI Governance &amp; Risk</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch</div>
+          <div class="cm-play-sub">Full conversation</div>
         </div>
-        <div class="cm-conv-play">&#9654;</div>
       </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#2c1040">
+      <div class="cm-hero-photo-bg" style="background-image:url('PR.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(255,170,220,.07)">PR</div>
+    </div>
+  </div>
 
+  <!-- ── In Conversation: Eleni Chronopoulou ── -->
+  <div class="cm-hero clickable" style="background:#0c1848" onclick="openLesson('ic-eleni-chronopoulou')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">In Conversation</span>
+        <span class="cm-tag">Enforcement</span>
+      </div>
+      <h1 class="cm-hero-title">Enforcement Across Domains: AI Act, GDPR &amp; DSA</h1>
+      <div class="cm-hero-meta">Eleni Chronopoulou &nbsp;&middot;&nbsp; AI &amp; Digital Regulation</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch</div>
+          <div class="cm-play-sub">Full conversation</div>
+        </div>
+      </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#142565">
+      <div class="cm-hero-photo-bg" style="background-image:url('EC.png')"></div>
+      <div class="cm-photo-mono" style="color:rgba(170,200,255,.07)">EC</div>
+    </div>
+  </div>
+
+  <!-- ── In Conversation: Jose Belo ── -->
+  <div class="cm-hero clickable" style="background:#201005" onclick="openLesson('ic-jose-belo')">
+    <div class="cm-hero-body">
+      <div class="cm-tags">
+        <span class="cm-tag">In Conversation</span>
+        <span class="cm-tag">Agentic AI</span>
+      </div>
+      <h1 class="cm-hero-title">Agentic AI &amp; Vendor Risk: The New Due Diligence</h1>
+      <div class="cm-hero-meta">Jose Belo &nbsp;&middot;&nbsp; Agentic AI &amp; Vendor Risk</div>
+      <div class="cm-hero-cta">
+        <button class="cm-play-btn">&#9654;</button>
+        <div class="cm-play-info">
+          <div class="cm-play-label">Watch</div>
+          <div class="cm-play-sub">Full conversation</div>
+        </div>
+      </div>
+    </div>
+    <div class="cm-hero-photo" style="background:#2e1810">
+      <div class="cm-hero-photo-bg" style="background-image:url('JB.png');background-size:auto 100%;background-position:right top"></div>
+      <div class="cm-photo-mono" style="color:rgba(255,200,140,.07)">JB</div>
+    </div>
+  </div>
+
+  <!-- ── Row: PAI Briefings ── -->
+  <div class="cm-row">
+    <div class="cm-row-hd">
+      <span class="cm-row-title">PAI Briefings</span>
+      <span class="cm-row-firm">&middot; Petruta Pirvan</span>
+      <span class="cm-row-count">Bi-monthly</span>
+    </div>
+    <div class="cm-scroll">
+      <div class="lesson-card" style="background:#0d1030"><div class="lesson-thumb" style="background:#181e50"><span class="lesson-ep-badge">New</span></div><div class="lesson-meta" style="background:#0d1030"><div class="lesson-spk"><strong>Petruta Pirvan</strong> &middot; 28 Mar 2026 &middot; 18 min</div><div class="lesson-title">EU Omnibus: What Changed in March &amp; What to Expect Next</div><div class="lesson-sub">PAI Briefing &middot; Bi-Monthly</div></div></div>
     </div>
   </div>
 
@@ -3023,19 +3025,19 @@ var LEARNING_SERIES = {
   'eu-aiact': {
     title:'EU AI Act Masterclass', firm:'Hogan Lovells', kick:'Masterclass Series',
     standfirst:'A twelve-part survey of the EU AI Act from the Hogan Lovells global privacy team — scope, timelines, risk tiers, GPAI, provider and deployer obligations.',
-    artImg:'EU.png', bg:'#0d2a60', accent:'#1a6bea',
+    artImg:'EU.png', bg:'#0d2a60',
     lessons:['eu-aiact-ep01','eu-aiact-ep02','eu-aiact-ep03','eu-aiact-ep04','eu-aiact-ep05','eu-aiact-ep06','eu-aiact-ep07','eu-aiact-ep08','eu-aiact-ep09','eu-aiact-ep10','eu-aiact-ep11','eu-aiact-ep12']
   },
   'adm': {
     title:'AI in Automated Decision-Making', firm:'Fieldfisher US', kick:'Masterclass Series',
     standfirst:'A four-session US-law masterclass on AI in ADM — frameworks, software lifecycle governance, scaling compliance, and documenting risk decisions.',
-    artImg:'FF.png', bg:'#1c0a38', accent:'#7c3aed',
+    artImg:'FF.png', bg:'#1c0a38',
     lessons:['adm-ep01','adm-ep02','adm-ep03','adm-ep04']
   },
   'eu-omnibus': {
     title:'EU AI Omnibus Briefings', firm:'Petruta Pirvan', kick:'PAI Briefing Series',
     standfirst:'Bi-monthly briefings on the EU AI Omnibus — what changed, what it means for compliance teams, and what to watch next.',
-    artImg:'PP.png', bg:'#0d1030', accent:'#0e8a7d', isNew:true,
+    artImg:'PP.png', bg:'#0d1030',
     lessons:['pai-petruta-mar2026']
   }
 };
@@ -3077,7 +3079,7 @@ var LEARNING_LESSONS = {
 
 function _esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 
-function openSeries(slug, _skipHash){
+function openSeries(slug){
   var s = LEARNING_SERIES[slug]; if(!s){return}
   var inner = document.getElementById('seriesPageInner'); if(!inner){return}
   var lessonsHtml = s.lessons.map(function(lslug){
@@ -3098,7 +3100,7 @@ function openSeries(slug, _skipHash){
     '</div>';
   }).join('');
   inner.innerHTML =
-    '<div class="series-hero" style="--accent:'+(s.accent||'#0e8a7d')+'">'+
+    '<div class="series-hero" style="background:'+s.bg+'">'+
       (s.artImg?'<div class="series-hero-art" style="background-image:url(\''+s.artImg+'\')"></div>':'')+
       '<div class="series-hero-body">'+
         '<div class="series-hero-kick">'+_esc(s.kick)+(s.firm?' &middot; '+_esc(s.firm):'')+'</div>'+
@@ -3112,12 +3114,11 @@ function openSeries(slug, _skipHash){
     '<div class="series-lesson-grid">'+lessonsHtml+'</div>';
   window._currentSeries = slug;
   showPage('series', true);
-  var _h='#series-'+slug;
-  if (!_skipHash && window.location.hash!==_h) history.pushState({v:'series',s:slug},'',_h);
+  history.replaceState(null, '', '#series-' + slug);
   window.scrollTo({top:0,behavior:'instant'});
 }
 
-function openLesson(slug, _skipHash){
+function openLesson(slug){
   var L = LEARNING_LESSONS[slug]; if(!L){return}
   var inner = document.getElementById('lessonPageInner'); if(!inner){return}
   var crumbHtml, prevNextHtml = '', seriesKick;
@@ -3180,8 +3181,7 @@ function openLesson(slug, _skipHash){
     '</div>';
   window._currentLesson = slug;
   showPage('lesson', true);
-  var _h='#lesson-'+slug;
-  if (!_skipHash && window.location.hash!==_h) history.pushState({v:'lesson',s:slug},'',_h);
+  history.replaceState(null, '', '#lesson-' + slug);
   window.scrollTo({top:0,behavior:'instant'});
 }
 
@@ -5403,22 +5403,6 @@ document.querySelectorAll('.filter-btn').forEach(function(btn) {
 
 // Build sidebar regions on page load
 
-function _routeFromHash(_skip) {
-    var hash = window.location.hash.slice(1);
-    if (!hash) { showPage('home', true); return; }
-    if (hash.indexOf('jur-') === 0) {
-        var jurName = decodeURIComponent(hash.slice(4));
-        if (jurisdictionData[jurName]) { showJurisdictionDetail(jurName); }
-        else { showPage('jurisdictions', true); }
-        return;
-    }
-    if (hash.indexOf('series-') === 0 && LEARNING_SERIES[hash.slice(7)]) { openSeries(hash.slice(7), true); return; }
-    if (hash.indexOf('lesson-') === 0 && LEARNING_LESSONS[hash.slice(7)]) { openLesson(hash.slice(7), true); return; }
-    if (document.getElementById('page-' + hash)) { showPage(hash, true); return; }
-}
-
-window.addEventListener('popstate', function() { _routeFromHash(true); });
-
 function wireLearningCards() {
     // Map lesson-cards in community-page rows to their lesson slugs by row/position
     var rows = document.querySelectorAll('#page-community .cm-row');
@@ -5449,7 +5433,23 @@ document.addEventListener('DOMContentLoaded', function() {
     wireLearningCards();
 
     // Restore page from URL hash so refresh stays on same page/jurisdiction
-    _routeFromHash(true);
+    var hash = window.location.hash.slice(1);
+    if (hash) {
+        if (hash.indexOf('jur-') === 0) {
+            var jurName = decodeURIComponent(hash.slice(4));
+            if (jurisdictionData[jurName]) {
+                showJurisdictionDetail(jurName);
+            } else {
+                showPage('jurisdictions');
+            }
+        } else if (hash.indexOf('series-') === 0 && LEARNING_SERIES[hash.slice(7)]) {
+            openSeries(hash.slice(7));
+        } else if (hash.indexOf('lesson-') === 0 && LEARNING_LESSONS[hash.slice(7)]) {
+            openLesson(hash.slice(7));
+        } else if (document.getElementById('page-' + hash)) {
+            showPage(hash);
+        }
+    }
 
 });
 
