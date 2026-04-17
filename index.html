@@ -1471,24 +1471,33 @@ table.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
 .cm-fc-tags{display:flex;gap:4px;flex-wrap:wrap}
 .cm-fc-tag{font-size:.6rem;font-weight:700;padding:2px 6px;border:1px solid var(--border);color:var(--muted);border-radius:2px;text-transform:uppercase;letter-spacing:.06em}
 
-/* Dark-theme overrides for welcome page — keep the light editorial feel on a dark canvas */
-[data-theme="legaltech-dark"] .welcome-main h1{color:#fff}
-[data-theme="legaltech-dark"] .welcome-main h1 em{color:var(--teal)}
-[data-theme="legaltech-dark"] .welcome-sub{color:rgba(255,255,255,.6)}
-[data-theme="legaltech-dark"] .welcome-strip{border-bottom-color:rgba(255,255,255,.08)}
-[data-theme="legaltech-dark"] .ws-num{color:#fff}
-[data-theme="legaltech-dark"] .ws-lbl{color:rgba(255,255,255,.45)}
-[data-theme="legaltech-dark"] .spotlight{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-[data-theme="legaltech-dark"] .spotlight:hover{box-shadow:0 10px 30px rgba(0,0,0,.45);border-color:rgba(255,255,255,.14)}
-[data-theme="legaltech-dark"] .sp-img-badge{background:rgba(255,255,255,.92);color:#0a0a0a}
-[data-theme="legaltech-dark"] .sp-body h2{color:#fff}
-[data-theme="legaltech-dark"] .sp-standfirst{color:rgba(255,255,255,.7)}
-[data-theme="legaltech-dark"] .sp-meta{color:rgba(255,255,255,.45)}
-[data-theme="legaltech-dark"] .sp-meta strong{color:#fff}
-[data-theme="legaltech-dark"] .sp-secondary{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.18)}
-[data-theme="legaltech-dark"] .sp-secondary:hover{border-color:var(--teal);color:var(--teal)}
-[data-theme="legaltech-dark"] .learn-section-hd h2{color:#fff}
-[data-theme="legaltech-dark"] .learn-section-count{color:rgba(255,255,255,.45)}
+/* Scoped color tokens for the community/welcome page — decoupled from global theme so text is ALWAYS readable */
+#page-community{--cm-text:#0f172a;--cm-text-2:#475467;--cm-text-3:#6c7686;--cm-surface:#fff;--cm-border:#d5d8dd;--cm-accent:#0e8a7d;--cm-accent-dark:#0a6b61}
+[data-theme="legaltech-dark"] #page-community{--cm-text:#f5f5f5;--cm-text-2:rgba(255,255,255,.7);--cm-text-3:rgba(255,255,255,.5);--cm-surface:rgba(255,255,255,.04);--cm-border:rgba(255,255,255,.1);--cm-accent:#d0d0d0;--cm-accent-dark:#fff}
+[data-theme="legaltech-light"] #page-community{--cm-text:#1a1a2e;--cm-text-2:#3d3d5c;--cm-text-3:#6b6b8a;--cm-surface:#faf9f5;--cm-border:#dedad0;--cm-accent:#1a3a8c;--cm-accent-dark:#0f2666}
+
+#page-community .welcome-main h1{color:var(--cm-text)!important}
+#page-community .welcome-main h1 em{color:var(--cm-accent)!important}
+#page-community .welcome-sub{color:var(--cm-text-2)!important}
+#page-community .welcome-strip{border-bottom-color:var(--cm-border)!important}
+#page-community .ws-num{color:var(--cm-text)!important}
+#page-community .ws-lbl{color:var(--cm-text-3)!important}
+#page-community .spotlight{background:var(--cm-surface)!important;border-color:var(--cm-border)!important}
+#page-community .sp-body h2{color:var(--cm-text)!important}
+#page-community .sp-standfirst{color:var(--cm-text-2)!important}
+#page-community .sp-meta{color:var(--cm-text-3)!important}
+#page-community .sp-meta strong{color:var(--cm-text)!important}
+#page-community .sp-kick{color:var(--cm-accent)!important}
+#page-community .sp-play-btn{background:var(--cm-accent)!important;color:#fff!important}
+#page-community .sp-play-btn:hover{background:var(--cm-accent-dark)!important}
+#page-community .sp-secondary{background:transparent!important;color:var(--cm-text-2)!important;border-color:var(--cm-border)!important}
+#page-community .sp-secondary:hover{border-color:var(--cm-accent)!important;color:var(--cm-accent)!important}
+#page-community .learn-section-hd h2{color:var(--cm-text)!important}
+#page-community .learn-section-count{color:var(--cm-text-3)!important}
+#page-community .cm-faculty-card{background:var(--cm-surface)!important;border-color:var(--cm-border)!important}
+#page-community .cm-fc-name{color:var(--cm-text)!important}
+#page-community .cm-fc-role{color:var(--cm-text-2)!important}
+#page-community .cm-fc-tag{border-color:var(--cm-border)!important;color:var(--cm-text-3)!important}
 [data-theme="legaltech-dark"] .cm-faculty-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
 [data-theme="legaltech-dark"] .cm-faculty-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);box-shadow:none}
 [data-theme="legaltech-dark"] .cm-fc-name{color:rgba(255,255,255,.92)}
