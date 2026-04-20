@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trust · PrinciplesAI</title>
+<meta name="description" content="Trust, in plain words. How PrinciplesAI handles your data, which sub-processors touch it, and what we don't do." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f7f9fc; --surface-3: #eef2f7;
+  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878; --ink-faint: #8a93a3;
+  --border: #dbe1ea; --border-soft: #ebeff5;
+  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc; --accent-soft-2: #cfe1f6;
+  --green-fill: #2e844a; --green-bg: #e6f4ec;
+  --amber-fill: #ca8501; --amber-bg: #fef6e8;
+  --red-fill: #ba0517;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px;
+  --radius: 8px;
+  --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
+  --shadow-2: 0 2px 6px rgba(10,23,41,0.07), 0 8px 20px rgba(10,23,41,0.05);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 14.5px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 16px; z-index: 200; box-shadow: var(--shadow-1); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.header-search { max-width: 240px; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px; background: var(--surface-3); border-radius: 5px; border: 1px solid transparent; }
+.header-search svg { width: 14px; height: 14px; stroke: var(--muted); stroke-width: 2; fill: none; }
+.header-search input { flex: 1; font-size: 13px; background: transparent; border: none; outline: none; font-family: inherit; }
+.header-search kbd { font-family: var(--mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; background: var(--surface); }
+.header-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); transition: background .12s, border-color .12s, color .12s; }
+.btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 1px 2px rgba(1,118,211,0.22); }
+.btn-primary:hover { background: var(--accent-2); color: #fff; }
+@media (max-width: 1100px) { .mkt-nav a:nth-child(n+5) { display: none; } .header-search { display: none; } }
+@media (max-width: 720px) { .mkt-nav { display: none; } }
+
+.main-content { padding-top: var(--header-height); }
+
+/* Two-col layout: TOC left (sticky), body right */
+.tr-shell { max-width: 1100px; margin: 0 auto; padding: 40px 32px 72px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; align-items: start; }
+
+/* Breadcrumb */
+.tr-crumb { font-size: 13px; color: var(--muted); margin-bottom: 8px; grid-column: 1 / -1; }
+.tr-crumb a { color: var(--secondary); font-weight: 500; }
+.tr-crumb a:hover { color: var(--accent-2); }
+.tr-crumb .cur { color: var(--ink); font-weight: 600; }
+.tr-crumb .sep { color: var(--ink-faint); margin: 0 8px; }
+
+/* TOC */
+.tr-toc { position: sticky; top: calc(var(--header-height) + 22px); max-height: calc(100vh - var(--header-height) - 44px); overflow-y: auto; padding: 4px 0 12px; font-size: 13px; }
+.tr-toc-head { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 10px; }
+.tr-toc ol { list-style: none; counter-reset: toc; }
+.tr-toc li { counter-increment: toc; }
+.tr-toc li a {
+  display: flex; gap: 8px;
+  padding: 6px 4px 6px 0;
+  color: var(--secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-soft);
+  line-height: 1.35;
+  transition: color .12s, padding-left .12s;
+}
+.tr-toc li:last-child a { border-bottom: none; }
+.tr-toc li a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--mono); font-size: 10px;
+  color: var(--ink-faint);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.tr-toc li a:hover { color: var(--ink); padding-left: 4px; }
+.tr-toc .tr-updated { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--muted); }
+.tr-toc .tr-updated b { color: var(--ink); font-weight: 600; }
+
+/* Body column */
+.tr-body { min-width: 0; }
+
+/* Hero */
+.tr-hero { padding-bottom: 30px; margin-bottom: 36px; border-bottom: 1px solid var(--border); }
+.tr-hero .eyebrow { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 12px; }
+.tr-hero h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.022em; line-height: 1.06; color: var(--ink-strong); margin-bottom: 18px; }
+.tr-hero .deck { font-size: 17px; color: var(--secondary); line-height: 1.6; max-width: 720px; }
+.tr-hero .deck b { color: var(--ink); font-weight: 600; }
+
+/* Read-in-1-minute block */
+.tr-onemin {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 22px 26px 24px;
+  margin-bottom: 36px;
+}
+.tr-onemin .om-head {
+  display: flex; align-items: baseline; gap: 14px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-soft);
+  flex-wrap: wrap;
+}
+.tr-onemin .om-eye {
+  font-family: var(--mono);
+  font-size: 10.5px; font-weight: 600;
+  color: var(--accent-2);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.tr-onemin .om-title {
+  font-size: 15px; font-weight: 600;
+  color: var(--ink-strong);
+  letter-spacing: -0.005em;
+}
+.tr-onemin .om-read {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.tr-onemin ol {
+  list-style: none;
+  counter-reset: om;
+  display: grid;
+  gap: 9px;
+  padding: 0;
+  margin: 0;
+}
+.tr-onemin li {
+  counter-increment: om;
+  position: relative;
+  padding-left: 28px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--secondary);
+}
+.tr-onemin li::before {
+  content: counter(om, decimal-leading-zero);
+  position: absolute; left: 0; top: 2px;
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 600;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+.tr-onemin li b { color: var(--ink); font-weight: 600; }
+
+/* Two-domain architecture diagram */
+.tr-arch { margin: 18px 0 22px; max-width: 760px; }
+.tr-arch-domains {
+  display: grid;
+  grid-template-columns: 1fr 104px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.dom {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px 20px;
+}
+.dom.prod { border-left: 3px solid var(--accent); }
+.dom.sbx { border-left: 3px solid var(--amber-fill); }
+.dom-badge {
+  font-family: var(--mono);
+  font-size: 9.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.dom-title {
+  font-size: 14.5px; font-weight: 700;
+  color: var(--ink-strong);
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+.dom-loc {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.dom-holds {
+  list-style: none; padding: 0; margin: 0;
+  font-size: 12.5px;
+  color: var(--secondary);
+  line-height: 1.6;
+}
+.dom-holds li {
+  padding-left: 14px; position: relative;
+}
+.dom-holds li::before {
+  content: ""; position: absolute; left: 0; top: 9px;
+  width: 7px; height: 1px; background: var(--ink-faint);
+}
+.dom-link {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px;
+  padding: 8px 0;
+}
+.dom-arr {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 5px;
+}
+.dom-arr svg { width: 72px; height: 10px; fill: none; stroke-width: 1.5; }
+.dom-arr.out svg { stroke: var(--accent); }
+.dom-arr.in svg { stroke: var(--ink-faint); stroke-dasharray: 3 3; }
+.dom-arr .lbl {
+  font-family: var(--mono);
+  font-size: 9.5px; font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* 8-stage pipeline strip */
+.tr-pipe {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  margin: 18px 0 22px;
+  max-width: 760px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tr-pipe .stg {
+  padding: 14px 6px 14px;
+  text-align: center;
+  border-right: 1px solid var(--border-soft);
+  position: relative;
+}
+.tr-pipe .stg:last-child { border-right: none; }
+.tr-pipe .stg.boundary { border-right: 2px solid var(--ink-faint); }
+.tr-pipe .num {
+  font-family: var(--mono);
+  font-size: 9.5px; font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 4px;
+}
+.tr-pipe .nm {
+  font-size: 11.5px; font-weight: 600;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+.tr-pipe .tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  line-height: 1.3;
+}
+.tr-pipe .stg.noai .tag { background: var(--green-bg); color: var(--green-fill); }
+.tr-pipe .stg.human .tag { background: var(--amber-bg); color: var(--amber-fill); }
+.tr-pipe .stg.sbx .tag { background: var(--accent-soft); color: var(--accent-2); }
+.tr-pipe-legend {
+  display: flex; gap: 18px; flex-wrap: wrap;
+  margin-top: -10px; margin-bottom: 18px;
+  font-size: 11.5px; color: var(--muted);
+  max-width: 760px;
+}
+.tr-pipe-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.tr-pipe-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.tr-pipe-legend i.noai { background: var(--green-bg); border: 1px solid var(--green-fill); }
+.tr-pipe-legend i.human { background: var(--amber-bg); border: 1px solid var(--amber-fill); }
+.tr-pipe-legend i.sbx { background: var(--accent-soft); border: 1px solid var(--accent-2); }
+
+@media (max-width: 720px) {
+  .tr-arch-domains { grid-template-columns: 1fr; gap: 10px; }
+  .dom-link { flex-direction: row; gap: 20px; padding: 4px 0; }
+  .dom-arr svg { transform: rotate(90deg); }
+  .tr-pipe { grid-template-columns: repeat(4, 1fr); }
+  .tr-pipe .stg:nth-child(4) { border-right: 1px solid var(--border-soft); }
+}
+
+/* Signal grid (6 cards near top) */
+.tr-signals { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 52px; }
+.tr-signal { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 18px 20px; }
+.tr-signal h3 { font-size: 14px; font-weight: 700; color: var(--ink-strong); margin-bottom: 6px; line-height: 1.35; letter-spacing: -0.005em; }
+.tr-signal p { font-size: 13px; color: var(--secondary); line-height: 1.55; margin: 0; }
+.tr-signal p b { color: var(--ink); font-weight: 600; }
+
+/* Numbered sections */
+.tr-section { padding-top: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); scroll-margin-top: calc(var(--header-height) + 20px); }
+.tr-section:last-of-type { border-bottom: none; }
+.tr-section-h {
+  font-family: var(--sans);
+  font-size: 26px; font-weight: 700;
+  letter-spacing: -0.018em;
+  color: var(--ink-strong);
+  line-height: 1.22;
+  margin-bottom: 8px;
+  display: flex; align-items: baseline; gap: 14px;
+}
+.tr-section-h .num {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-2);
+  letter-spacing: 0.04em;
+  padding-top: 4px;
+}
+.tr-section .kicker {
+  font-size: 14px; color: var(--muted);
+  font-style: italic;
+  margin-bottom: 18px;
+  max-width: 620px;
+  line-height: 1.55;
+}
+.tr-section p { font-size: 14.5px; color: var(--secondary); line-height: 1.7; margin-bottom: 14px; max-width: 720px; }
+.tr-section p:last-child { margin-bottom: 0; }
+.tr-section strong { color: var(--ink); font-weight: 600; }
+.tr-section ul { margin: 12px 0 14px 6px; padding-left: 18px; color: var(--secondary); font-size: 14.5px; line-height: 1.7; max-width: 720px; }
+.tr-section ul li { margin-bottom: 6px; padding-left: 4px; }
+.tr-section ul li strong { color: var(--ink); }
+
+/* Inline fact strip */
+.tr-fstrip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 18px 0 20px;
+  max-width: 720px;
+}
+.tr-fstrip div {
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-left: 2px solid var(--accent);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.tr-fstrip .lbl {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted);
+  display: block; margin-bottom: 2px;
+}
+
+/* Sub-processor table */
+.tr-sp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 10px 0 20px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.tr-sp-table thead th {
+  font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted);
+  background: var(--surface-2);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.tr-sp-table tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border-soft); color: var(--secondary); vertical-align: top; }
+.tr-sp-table tbody tr:last-child td { border-bottom: none; }
+.tr-sp-table .name { font-weight: 600; color: var(--ink); }
+.tr-sp-table .loc { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+
+/* Consent-state pills */
+.tr-pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
+.tr-pill.in { background: var(--accent-soft); color: var(--accent-2); }
+.tr-pill.out { background: var(--amber-bg); color: var(--amber-fill); }
+.tr-pill.on { background: var(--green-bg); color: var(--green-fill); }
+
+@media (max-width: 900px) {
+  .tr-shell { grid-template-columns: 1fr; gap: 24px; }
+  .tr-toc { position: static; max-height: none; order: 2; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 18px; }
+  .tr-body { order: 1; }
+  .tr-signals { grid-template-columns: 1fr; }
+  .tr-hero h1 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header-bar">
+  <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html">Legislation</a>
+    <a href="pai-home-public.html#jobs">Jobs</a>
+    <a href="pai-glossary.html">Glossary</a>
+    <a href="pai-home-public.html#pricing">Pricing</a>
+    <a href="pai-trust.html" class="on">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="pai-home-public.html#pricing" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="tr-shell">
+
+  <nav class="tr-crumb">
+    <a href="pai-home-public.html">Home</a>
+    <span class="sep">›</span>
+    <span class="cur">Trust</span>
+  </nav>
+
+  <!-- TOC -->
+  <aside class="tr-toc">
+    <div class="tr-toc-head">On this page</div>
+    <ol>
+      <li><a href="#s1">Two trust domains</a></li>
+      <li><a href="#s2">Production intake is AI-free</a></li>
+      <li><a href="#s3">The sandbox VPS</a></li>
+      <li><a href="#s4">The three judges</a></li>
+      <li><a href="#s5">The deterministic validator</a></li>
+      <li><a href="#s6">Six properties of the sandbox</a></li>
+      <li><a href="#s7">The publish chain</a></li>
+      <li><a href="#s8">Hard rules, no exceptions</a></li>
+      <li><a href="#s9">Known gaps</a></li>
+      <li><a href="#s10">Where your account data lives</a></li>
+      <li><a href="#s11">Sub-processors</a></li>
+      <li><a href="#s12">How AI sits under the Act</a></li>
+      <li><a href="#s13">Member rights</a></li>
+      <li><a href="#s14">Security &amp; incidents</a></li>
+      <li><a href="#s15">Contact &amp; changes</a></li>
+    </ol>
+    <div class="tr-updated">
+      <div><b>Last updated</b></div>
+      19 April 2026
+    </div>
+  </aside>
+
+  <!-- BODY -->
+  <div class="tr-body">
+
+    <!-- Hero -->
+    <header class="tr-hero">
+      <div class="eyebrow">Trust</div>
+      <h1>Trust, in plain words.</h1>
+      <p class="deck">PrinciplesAI is built for in-house counsel, private-practice lawyers and advisors, DPOs and AI governance leads. <b>The same people who would, on any other day, be auditing a vendor like us.</b> So this page covers both sides of the trust question — how the content is made, and how your account data is handled — the way we'd want a vendor to write it: direct, specific, with no marketing softening.</p>
+    </header>
+
+    <!-- Read-in-1-minute block -->
+    <section class="tr-onemin" aria-label="One-minute summary">
+      <div class="om-head">
+        <span class="om-eye">Read in 60 seconds</span>
+        <span class="om-title">The whole page in eight lines.</span>
+        <span class="om-read">~75s read</span>
+      </div>
+      <ol>
+        <li><b>Production intake is AI-free.</b> Stages 1–5 carry zero LLM SDK imports, enforced by a pre-commit hook, a CI gate and a weekly drift scan.</li>
+        <li><b>LLMs run in a sealed sandbox.</b> A Hetzner VPS in Nuremberg, Germany (EU) holds only vendor API keys — no Airtable token, no GitHub credential, no path back to production.</li>
+        <li><b>Three independent judges.</b> Gemini extracts claims; Sonnet checks domain accuracy; Sonar checks external corroboration. Fabrication rarely survives all three.</li>
+        <li><b>Every claim carries verbatim evidence.</b> A deterministic validator on the production side rejects anything whose evidence snippet isn't a verbatim source substring.</li>
+        <li><b>A human research team is the final word.</b> Our editors and regional specialists read every claim at Stage 5 Select and again at post-Stage-7 editorial review. The machine pipeline is a quality filter, not a substitute for their judgment.</li>
+        <li><b>No AI can publish.</b> The member-facing site auto-deploys from a separate GitHub account the AI assistant holds no credential for — the last step is the controller's hands on his own keyboard.</li>
+        <li><b>Member content is never sent to any model.</b> The sandbox only sees public regulatory source text. Your saved items, lists, searches and correspondence stay in the account-data layer.</li>
+        <li><b>Account data in Amsterdam, sub-processors disclosed in full.</b> DigitalOcean AMS + Airtable (SCC). 30-day notice on any change. Direct line to the controller at <a href="mailto:privacy@principlesai.org">privacy@principlesai.org</a>.</li>
+      </ol>
+    </section>
+
+    <!-- Signal cards (the 6 top highlights) -->
+    <section class="tr-signals">
+      <div class="tr-signal">
+        <h3>Production intake is verifiably AI-free</h3>
+        <p>Stages 1–5 — Health, Map, Detect, Triage, Select — run with <b>zero LLM SDK imports</b>. Enforced by three layers: pre-commit hook, CI gate, and a weekly drift scan. No model touches raw intake.</p>
+      </div>
+      <div class="tr-signal">
+        <h3>LLMs live in a sealed sandbox</h3>
+        <p>Every model call runs inside a <b>dedicated Hetzner VPS in Nuremberg, Germany (EU)</b> that holds vendor API keys and nothing else. No Airtable token. No GitHub credential. No SSH path to any production machine.</p>
+      </div>
+      <div class="tr-signal">
+        <h3>Three independent judges, decorrelated errors</h3>
+        <p>Every claim is extracted by <b>Gemini</b>, then independently voted by <b>Sonnet</b> (domain accuracy) and <b>Sonar</b> (external corroboration). Three model families means fabrication rarely survives all three.</p>
+      </div>
+      <div class="tr-signal">
+        <h3>Every LLM claim is verified against verbatim source</h3>
+        <p>A deterministic validator on the production side rejects any claim whose <b>evidence_snippet isn't a verbatim substring</b> of the source text. Model output is treated as untrusted input until that gate clears.</p>
+      </div>
+      <div class="tr-signal">
+        <h3>A human research team reads every claim</h3>
+        <p>Our <b>editors and regional specialists</b> run the two editorial gates — Stage 5 Select and post-Stage-7 review — so every published item is read twice by a person. <b>No AI can push to the member-facing site.</b></p>
+      </div>
+      <div class="tr-signal">
+        <h3>Member data sits in Amsterdam, sub-processors disclosed in full</h3>
+        <p>The application runs on <b>DigitalOcean in Amsterdam (EEA)</b>. Content data layer is <b>Airtable</b>, bound by Standard Contractual Clauses. Full sub-processor register below, with 30-day change notice.</p>
+      </div>
+    </section>
+
+    <!-- 01 Two trust domains -->
+    <section class="tr-section" id="s1">
+      <h2 class="tr-section-h"><span class="num">01</span>Two trust domains</h2>
+      <p class="kicker">The platform is split into two machines with different rules. The split is the whole point.</p>
+      <p>PrinciplesAI runs across <strong>two trust domains</strong> that are physically and network-wise separate.</p>
+
+      <div class="tr-arch" role="img" aria-label="Two trust domains diagram">
+        <div class="tr-arch-domains">
+          <div class="dom prod">
+            <div class="dom-badge">Domain A · Production</div>
+            <div class="dom-title">Intake &amp; delivery</div>
+            <div class="dom-loc">DigitalOcean · Amsterdam, NL</div>
+            <ul class="dom-holds">
+              <li>Stages 1–5 (deterministic)</li>
+              <li>Airtable credentials</li>
+              <li>No LLM SDK imports</li>
+            </ul>
+          </div>
+          <div class="dom-link">
+            <div class="dom-arr out">
+              <svg viewBox="0 0 72 10"><line x1="0" y1="5" x2="66" y2="5"/><polyline points="58,1 66,5 58,9"/></svg>
+              <span class="lbl">POST · jobs</span>
+            </div>
+            <div class="dom-arr in">
+              <svg viewBox="0 0 72 10"><line x1="6" y1="5" x2="72" y2="5"/><polyline points="14,1 6,5 14,9"/></svg>
+              <span class="lbl">Pull · results</span>
+            </div>
+          </div>
+          <div class="dom sbx">
+            <div class="dom-badge">Domain B · Sandbox</div>
+            <div class="dom-title">Model calls only</div>
+            <div class="dom-loc">Hetzner · Nuremberg, Germany (EU)</div>
+            <ul class="dom-holds">
+              <li>Stage 6+ (AI)</li>
+              <li>Vendor API keys only</li>
+              <li>No prod credentials</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tr-fstrip">
+        <div><span class="lbl">Transport</span>Production initiates every call. Sandbox cannot push back.</div>
+        <div><span class="lbl">Publish</span>Cloudflare site, deployed from <code>DaveLong38/pai</code>. Claude has zero credentials.</div>
+      </div>
+      <p>The production intake box carries no large-language-model SDK imports at all. The sandbox VPS carries vendor API keys and nothing else — no Airtable token, no GitHub credential, no Cloudflare credential, no SSH key to any other machine.</p>
+      <p>Communication is one-way at the network layer: production HTTPS-POSTs jobs to the sandbox drop service and HTTPS-GETs results back. <strong>The sandbox has no IP, hostname, or credential for any production machine.</strong> If the sandbox is compromised, the blast radius stops at three rotatable vendor API keys.</p>
+    </section>
+
+    <!-- 02 Production intake is AI-free -->
+    <section class="tr-section" id="s2">
+      <h2 class="tr-section-h"><span class="num">02</span>Production intake is AI-free</h2>
+      <p class="kicker">Stages 1–5 — Health, Map, Detect, Triage, Select — are deterministic code. No models are called. Enforced three ways.</p>
+      <p>The intake pipeline runs five stages against <strong>2,389 tracked bodies across 329 jurisdictions</strong>, and every stage is plain code, not inference. No LLM SDK is installed on the production box. No model key exists on the production box. Every sift, dedupe and ranking decision is made by rules a developer can read.</p>
+
+      <div class="tr-pipe" role="img" aria-label="The 8-stage pipeline, showing where AI is and isn't">
+        <div class="stg noai"><span class="num">01</span><span class="nm">Health</span><span class="tag">No AI</span></div>
+        <div class="stg noai"><span class="num">02</span><span class="nm">Map</span><span class="tag">No AI</span></div>
+        <div class="stg noai"><span class="num">03</span><span class="nm">Detect</span><span class="tag">No AI</span></div>
+        <div class="stg noai"><span class="num">04</span><span class="nm">Triage</span><span class="tag">No AI</span></div>
+        <div class="stg human boundary"><span class="num">05</span><span class="nm">Select</span><span class="tag">Human</span></div>
+        <div class="stg sbx"><span class="num">06</span><span class="nm">Claims</span><span class="tag">Sandbox</span></div>
+        <div class="stg sbx"><span class="num">07</span><span class="nm">Publish</span><span class="tag">Sandbox</span></div>
+        <div class="stg sbx"><span class="num">08</span><span class="nm">Alert</span><span class="tag">Sandbox</span></div>
+      </div>
+      <div class="tr-pipe-legend">
+        <span><i class="noai"></i>Deterministic code — no model calls</span>
+        <span><i class="human"></i>Research team decides what advances</span>
+        <span><i class="sbx"></i>Runs only inside the sealed VPS</span>
+      </div>
+
+      <p>The "no LLM keys on production intake" rule is enforced by <strong>three independent layers</strong> so the prohibition survives human error:</p>
+      <ul>
+        <li><strong>Pre-commit hook</strong> — developer machine. Blocks any commit that adds an LLM SDK import to the intake stages.</li>
+        <li><strong>CI gate</strong> — every push to the production repository. Fails the build if any Stage 1–5 module imports <code>anthropic</code>, <code>google.generativeai</code>, or any sibling.</li>
+        <li><strong>Weekly launchd scan</strong> — drift catcher. Greps the deployed tree on a schedule and alerts on any appearance, so even a hand-edit after deploy is caught.</li>
+      </ul>
+      <p>This three-layer enforcement is why we can tell an in-house counsel, without hedging: <strong>the pipeline that selects which stories you see runs no AI.</strong></p>
+    </section>
+
+    <!-- 03 The sandbox VPS -->
+    <section class="tr-section" id="s3">
+      <h2 class="tr-section-h"><span class="num">03</span>The sandbox VPS</h2>
+      <p class="kicker">Where models are allowed to run. Hetzner CX23 in Nuremberg, surrounded by walls.</p>
+      <p>Everything that requires a language model — Stage 6 claim extraction, the two judges, draft alert composition — runs only inside a single dedicated virtual server.</p>
+      <div class="tr-fstrip">
+        <div><span class="lbl">Host</span>Hetzner CX23 · Nuremberg, DE (EU)</div>
+        <div><span class="lbl">Keys held</span>Gemini · Anthropic · Perplexity (only)</div>
+        <div><span class="lbl">Egress</span>nftables default-deny</div>
+        <div><span class="lbl">Allowlist</span>3 vendor APIs + Let's Encrypt</div>
+      </div>
+      <p>Vendor keys sit in <code>/etc/pai-sandbox/vendors.env</code> at mode 600. The VPS holds a bearer token for its own HTTPS drop endpoint and nothing else outbound-facing. There is no Airtable token on the box. There is no GitHub, Cloudflare, or AWS credential. There is no SSH key configured for any other machine.</p>
+      <p><strong>nftables</strong> enforces a default-deny egress policy. Outbound HTTPS is permitted only to the three vendor API hostnames plus Let's Encrypt's ACME endpoint for cert renewal. DNS is pinned to <code>1.1.1.1</code>. Everything else times out at the kernel — a compromised process cannot reach an exfil destination that isn't one of four whitelisted hosts.</p>
+    </section>
+
+    <!-- 04 The three judges -->
+    <section class="tr-section" id="s4">
+      <h2 class="tr-section-h"><span class="num">04</span>The three judges</h2>
+      <p class="kicker">Three independent model families. Decorrelated errors. All reason from bundled documents, never from training recall.</p>
+      <p>Stage 6 is structured as one extractor plus two independent judges — three different model families, so a fabrication that slips past one is unlikely to slip past the other two.</p>
+
+      <table class="tr-sp-table">
+        <thead>
+          <tr><th>Role</th><th>Model</th><th>Method</th><th>Catches</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Extractor</td>
+            <td>Gemini</td>
+            <td>Pulls atomic claims from source text. Each claim carries an <code>evidence_snippet</code> that must be a verbatim substring. Pure JSON response, plain completion, no tools.</td>
+            <td>N/A — this is the producer. Output is handed to the deterministic validator and then to both judges.</td>
+          </tr>
+          <tr>
+            <td class="name">Judge A</td>
+            <td>Sonnet</td>
+            <td>Domain accuracy. For each claim: is it logically supported by the snippet? Is the legal/regulatory terminology correct? Votes approve / reject / weak.</td>
+            <td>Wrong court hierarchy, mis-applied regulatory status, claims the snippet doesn't actually entail.</td>
+          </tr>
+          <tr>
+            <td class="name">Judge B</td>
+            <td>Sonar</td>
+            <td>External corroboration. Searches the public web for independent confirmation of named entities, dates and figures. Votes approve / reject / weak.</td>
+            <td>Fabricated names, wrong dates, phantom case citations, non-existent regulations.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Judges reason from documents, not training recall.</strong> Sonnet and Sonar are prompted to reason only from the source documents bundled into each job. They must not rely on their training-data memory of the regulation, authority or prior cases. A claim requiring context that isn't in the bundled sources returns <em>"weak — insufficient context"</em> rather than a speculative verdict.</p>
+    </section>
+
+    <!-- 05 The deterministic validator -->
+    <section class="tr-section" id="s5">
+      <h2 class="tr-section-h"><span class="num">05</span>The deterministic validator</h2>
+      <p class="kicker">The gate that makes the model's output safe to trust. Written in code, not in a prompt.</p>
+      <p>Whatever the three models return is treated as <strong>untrusted input</strong> until it passes a validator running on the production side. The validator is code, deterministic, and auditable.</p>
+      <ul>
+        <li><strong>Verbatim evidence.</strong> Every claim's <code>evidence_snippet</code> is checked against the source bytes held on production. If it isn't a verbatim substring, the claim is rejected outright.</li>
+        <li><strong>Source integrity.</strong> Source bytes are re-hashed after the round-trip and compared to the hash dispatched with the job. Any drift fails the claim.</li>
+        <li><strong>Verdict allowlist.</strong> Judge verdicts must come from a known judge-ID allowlist. Unknown signers are discarded.</li>
+        <li><strong>Shape and bounds.</strong> JSON shape, character bounds and field types are checked before any downstream use.</li>
+      </ul>
+      <p>Only claims that clear this validator reach Airtable. <strong>Nothing the sandbox returns is trusted to be safe HTML, safe JSON, or even truthful.</strong> Source: <code>src/stage6_validator.py</code>, 23 tests.</p>
+    </section>
+
+    <!-- 06 Six properties of the sandbox -->
+    <section class="tr-section" id="s6">
+      <h2 class="tr-section-h"><span class="num">06</span>Six properties of the sandbox</h2>
+      <p class="kicker">The sandbox contract. Six rules the VPS must keep, in addition to the hard rules in §08.</p>
+      <ul>
+        <li><strong>Plain completions only.</strong> No function calling, no tools, no code execution, no web browsing, no file_search, no computer-use. Each model call is text in, JSON text out. Vendor SDK calls are audited to confirm <code>tools</code> is empty.</li>
+        <li><strong>No production credentials inside the sandbox.</strong> The VPS holds only vendor API keys and its own drop-token. No Airtable token, no GitHub credential, no Cloudflare credential, no SSH key, no AWS key.</li>
+        <li><strong>One process per call.</strong> Each invocation is a fresh Python subprocess: read one input file, make one API call, write one output file, exit. No long-lived agent, no daemon holding state, no shared interpreter.</li>
+        <li><strong>nftables egress allowlist.</strong> Outbound traffic is dropped by default. Allowed: HTTPS to the three vendor API hosts plus Let's Encrypt's ACME endpoint.</li>
+        <li><strong>Production pulls; sandbox cannot push.</strong> Communication is one-way at the network layer: production HTTPS-POSTs jobs and HTTPS-GETs results. The sandbox has no path back in.</li>
+        <li><strong>Output is treated as untrusted input.</strong> The deterministic validator on the production side is the gate. Nothing the sandbox returns is trusted on face value.</li>
+      </ul>
+    </section>
+
+    <!-- 07 The publish chain -->
+    <section class="tr-section" id="s7">
+      <h2 class="tr-section-h"><span class="num">07</span>The publish chain</h2>
+      <p class="kicker">Two-account GitHub separation. The AI assistant that helps build the platform has no credential for the path that publishes it.</p>
+      <p>The member-facing site hosts on Cloudflare and auto-deploys from a single repository: <code>DaveLong38/pai</code>. This repo is owned by the controller's personal GitHub account. <strong>The AI coding assistant used to build PrinciplesAI was removed as a collaborator on 2026-04-17 and now holds no credential for that repo</strong> — no SSH key, no personal access token, no OAuth app, no third-party GitHub App install.</p>
+      <p>The development GitHub account (used by the assistant during build) sits on separate repositories. Pushes from development to the publish-serving repository require the controller's hands on his own keyboard. This is <strong>structurally enforced, not policy-enforced</strong>: there is no chain of credentials from the AI's working environment into the path that publishes to members.</p>
+      <p>The result: <em>no AI can publish</em>. Every item that reaches the member site has been staged for review by a human, approved twice (Stage 5 Select and post-Stage-7 editorial review), and pushed by the controller.</p>
+    </section>
+
+    <!-- 08 Hard rules -->
+    <section class="tr-section" id="s8">
+      <h2 class="tr-section-h"><span class="num">08</span>Hard rules, no exceptions</h2>
+      <p class="kicker">The specific commitments we can't loosen without rebuilding the architecture. Listed so they can be audited.</p>
+      <ul>
+        <li><strong>No LLM keys on the production intake box.</strong> Stages 1–5 run with zero LLM SDK imports. Verified by grep at deploy.</li>
+        <li><strong>No production credentials inside the sandbox VPS.</strong> The sandbox holds vendor API keys only. No Airtable token, no SSH key, no GitHub credential, no Cloudflare credential.</li>
+        <li><strong>No tools, no function calling, no web browsing, no code exec in any LLM call.</strong> Plain text completions only, audited at deploy. Perplexity Sonar's built-in web search is the single declared exception, scoped to Judge B only.</li>
+        <li><strong>Judges reason from documents, not training data.</strong> Sonnet and Sonar are prompted to reason only from the source documents bundled into each job.</li>
+        <li><strong>One process per call.</strong> Each LLM invocation is a fresh Python process: read one file, call one API, write one file, exit.</li>
+        <li><strong>Default-deny egress on the sandbox.</strong> nftables allowlist of three vendor hosts plus Let's Encrypt only.</li>
+        <li><strong>Sandbox cannot push to production.</strong> Communication is one-way: production-initiated only.</li>
+        <li><strong>Deterministic validator on every LLM output.</strong> Claims must carry a verbatim evidence snippet; verdicts must come from the judge-ID allowlist; source bytes are re-hashed after return.</li>
+        <li><strong>Two human gates.</strong> Stage 5 Select and post-Stage-7 editorial review. Every published item is approved twice.</li>
+        <li><strong>No AI can publish.</strong> The publish path is a separate GitHub account that the AI assistant holds no credential for.</li>
+      </ul>
+    </section>
+
+    <!-- 09 Known gaps -->
+    <section class="tr-section" id="s9">
+      <h2 class="tr-section-h"><span class="num">09</span>Known gaps</h2>
+      <p class="kicker">Honest about what the architecture doesn't yet cover.</p>
+      <p>The two-domain design is operational end-to-end. A real Gemini + Sonnet + Sonar round-trip was demonstrated on <strong>2026-04-17</strong> with the fabrication-catching behaviour working as designed. Two gaps remain in scope for the next phase:</p>
+      <ul>
+        <li><strong>Single-operator break-glass risk.</strong> Vendor API keys are held by a single key-holder (the controller). There is no break-glass operator today. A documented key-rotation and sandbox-flush playbook is queued.</li>
+        <li><strong>No external penetration test of the sandbox VPS.</strong> Commissioned once the sandbox has processed ~100 real stories, so the pentest target reflects production behaviour.</li>
+      </ul>
+      <p>Residual risks we accept and monitor:</p>
+      <ul>
+        <li>Vendor API breach — data sent in prompts could leak. No PII is ever sent; only published-source text.</li>
+        <li>Model fabrication that happens to match a verbatim source substring (rare; the second judge catches).</li>
+        <li>VPS provider compromise — limited blast radius: vendor keys rotatable, no production access.</li>
+        <li>Subtle factual errors that pass extractor + both judges + controller review. Corrections are issued on the alert itself, any briefing it appeared in, and the permanent claims ledger.</li>
+      </ul>
+    </section>
+
+    <!-- 10 Where your account data lives -->
+    <section class="tr-section" id="s10">
+      <h2 class="tr-section-h"><span class="num">10</span>Where your account data lives</h2>
+      <p class="kicker">Your account data is on a different machine from the one that runs the models. EU residency by default.</p>
+      <div class="tr-fstrip">
+        <div><span class="lbl">Application</span>DigitalOcean · Amsterdam (EEA)</div>
+        <div><span class="lbl">Data layer</span>Airtable · United States (SCC)</div>
+        <div><span class="lbl">Backups</span>Encrypted snapshots, separate region</div>
+        <div><span class="lbl">Enterprise</span>EU-only single-tenant available</div>
+      </div>
+      <p>The PrinciplesAI application is hosted on <strong>DigitalOcean in Amsterdam</strong> (Netherlands, inside the EEA). The Airtable data layer — the editorial Content base, Lists, member preferences and the Claims Ledger — is hosted by Airtable in the United States. The Airtable transfer is governed by <strong>Standard Contractual Clauses</strong>.</p>
+      <p>Member content is <strong>never</strong> sent to the sandbox VPS. The sandbox only sees public regulatory source text: DPA press releases, court judgments, gazette notices. Your saved items, lists, annotations, searches and support correspondence stay in the account-data layer and are never part of an LLM prompt.</p>
+      <p>Backups are taken as on-demand snapshots before major changes, encrypted at rest under the hosting provider's default block-storage encryption, and held in a separate region from production. Access is restricted to the controller's authenticated session.</p>
+      <p>For organisations whose internal policy requires <strong>no US sub-processors in the data path</strong>, a single-tenant European deployment is available on request as part of an enterprise engagement, with a 6–8 week provisioning lead time.</p>
+    </section>
+
+    <!-- 11 Sub-processors -->
+    <section class="tr-section" id="s11">
+      <h2 class="tr-section-h"><span class="num">11</span>Sub-processors</h2>
+      <p class="kicker">Every sub-processor, what they do, where they sit, and what they touch. 30-day notice on any change.</p>
+      <p>The table below is the complete sub-processor register across both <code>principlesai.org</code> (public site) and <code>app.principlesai.org</code> (platform). Material changes are notified to active members <strong>at least 30 days in advance</strong>, with the opportunity to object.</p>
+
+      <table class="tr-sp-table">
+        <thead>
+          <tr><th>Sub-processor</th><th>What they do</th><th>Where</th><th>What they touch</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">DigitalOcean</td><td>Application hosting</td><td class="loc">Amsterdam, NL</td><td>App server, session state</td></tr>
+          <tr><td class="name">Airtable</td><td>Content &amp; preferences data layer</td><td class="loc">United States (SCC)</td><td>Content base, Lists, Preferences, Claims Ledger</td></tr>
+          <tr><td class="name">Clerk</td><td>Authentication</td><td class="loc">United States (SCC)</td><td>Email, name, organisation, auth state</td></tr>
+          <tr><td class="name">Stripe</td><td>Payment processing</td><td class="loc">Ireland &amp; US (SCC)</td><td>Billing email, card (tokenised), invoices</td></tr>
+          <tr><td class="name">Postmark</td><td>Transactional email</td><td class="loc">United States (SCC)</td><td>Email address, delivery status</td></tr>
+          <tr><td class="name">Hetzner</td><td>Sandbox VPS hosting</td><td class="loc">Nuremberg, Germany (EU)</td><td>Public regulatory source text only. No member data.</td></tr>
+          <tr><td class="name">Anthropic (Claude)</td><td>Judge A — domain accuracy</td><td class="loc">United States (SCC)</td><td>Public regulatory source text only. No member data.</td></tr>
+          <tr><td class="name">Google (Gemini)</td><td>Claim extraction</td><td class="loc">United States (SCC)</td><td>Public regulatory source text only. No member data.</td></tr>
+          <tr><td class="name">Perplexity (Sonar)</td><td>Judge B — external corroboration</td><td class="loc">United States (SCC)</td><td>Public regulatory source text only. No member data.</td></tr>
+          <tr><td class="name">Cloudflare</td><td>Hosting for the published member-facing site</td><td class="loc">Global edge</td><td>Public site traffic, no member-identified data</td></tr>
+          <tr><td class="name">GoatCounter (self-hosted)</td><td>Cookieless analytics</td><td class="loc">DigitalOcean AMS</td><td>Aggregate page-view counts, no personal data leaves our infra</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 12 How AI sits under the Act -->
+    <section class="tr-section" id="s12">
+      <h2 class="tr-section-h"><span class="num">12</span>How AI sits under the Act</h2>
+      <p class="kicker">Our posture under the EU AI Act and under Article 35 of the GDPR.</p>
+      <p>PrinciplesAI is a <strong>deployer of third-party general-purpose AI systems</strong>, not a provider of AI models. The GPAI provider obligations in Articles 51–55 of the EU AI Act sit with the model providers, not with us.</p>
+      <p>Our use of AI falls into two tiers under the Act:</p>
+      <ul>
+        <li><strong>Limited risk</strong> — source distillation, which generates synthetic text for published alerts. This triggers Article 50 transparency. AI-drafted alerts will carry an <em>"AI-drafted"</em> badge from <strong>2 August 2026</strong>, when the Article 50 obligation takes effect. We rely on the editorial-control exception in Art. 50(2) because every alert is produced inside a controller-authored editorial framework and approved twice before publication.</li>
+        <li><strong>Minimal risk</strong> — pipeline scoring, tag classification, structured-field extraction, the three-judge claims checker (internal quality gate, not user-facing), and tip-source detection. No Act obligations beyond voluntary codes.</li>
+      </ul>
+      <p>PrinciplesAI does not operate any AI system in the Annex III high-risk categories and does not operate any prohibited use under Article 5.</p>
+      <p>Under the GDPR, we have assessed whether an Article 35 DPIA is required and concluded it is not. We do not process special-category personal data, we do not engage in systematic monitoring of natural persons, and we do not perform large-scale evaluation of natural persons including profiling. The assessment is documented internally and available to a supervisory authority on request.</p>
+      <p>All three model providers retain API inputs and outputs for a limited window (typically up to 30 days) for abuse detection and then delete them. None are contractually permitted to use API content to train their models. <strong>Member personal data is never sent through any of these APIs.</strong></p>
+    </section>
+
+    <!-- 13 Member rights -->
+    <section class="tr-section" id="s13">
+      <h2 class="tr-section-h"><span class="num">13</span>Member rights</h2>
+      <p class="kicker">All of them, not just the ones we like.</p>
+      <p>You have the full set of rights under Articles 15–22 of the GDPR:</p>
+      <ul>
+        <li><strong>Access</strong> (Art. 15) — a copy of the personal data we hold on you.</li>
+        <li><strong>Rectification</strong> (Art. 16) — correction of inaccurate data.</li>
+        <li><strong>Erasure</strong> (Art. 17) — deletion of your data, subject to narrowly scoped legal retention obligations.</li>
+        <li><strong>Restriction</strong> (Art. 18) — stop processing while a question is being resolved.</li>
+        <li><strong>Portability</strong> (Art. 20) — a machine-readable export of your data.</li>
+        <li><strong>Objection</strong> (Art. 21) — object to any processing based on legitimate interest.</li>
+        <li><strong>Not subject to automated decision-making</strong> (Art. 22) — no decision producing legal effects is made about you by automated means without human review.</li>
+      </ul>
+      <p>Exercise any of these by writing to <a href="mailto:privacy@principlesai.org">privacy@principlesai.org</a>. We commit to the GDPR statutory maximum of <strong>one month</strong>, and aim to respond faster in practice.</p>
+      <p>Retention at a glance:</p>
+      <div class="tr-fstrip">
+        <div><span class="lbl">Account data</span>While subscribed + 90 days</div>
+        <div><span class="lbl">Telemetry logs</span>30 days</div>
+        <div><span class="lbl">Email delivery logs</span>30 days (Postmark)</div>
+        <div><span class="lbl">Billing records</span>6 years (tax obligation)</div>
+        <div><span class="lbl">Audit logs (admin)</span>12 months</div>
+        <div><span class="lbl">Deleted account</span>Removed from Airtable within 30 days</div>
+      </div>
+    </section>
+
+    <!-- 14 Security & incidents -->
+    <section class="tr-section" id="s14">
+      <h2 class="tr-section-h"><span class="num">14</span>Security &amp; incidents</h2>
+      <p class="kicker">Specifics, not certifications. Honest about what a sole-trader operation can and cannot promise today.</p>
+      <p><strong>Encryption.</strong> TLS 1.3 in transit. DigitalOcean block storage is encrypted at rest by default. Airtable encrypts member data at rest under its own data-protection commitments.</p>
+      <p><strong>Access control.</strong> PrinciplesAI is operated by a single founder — the controller holds the only production credential. No shared password. All administrative actions on the hosting platform are logged through the provider's audit log.</p>
+      <p><strong>Incident response.</strong> Confirmed personal-data incidents are reported to affected members and to the <strong>Agencia Española de Protección de Datos (AEPD)</strong> within the 72-hour window required by Article 33 GDPR. As a sole-trader operation, the controller is the incident responder.</p>
+      <p><strong>Correction notices.</strong> When a factual error reaches publication, a correction is issued on the alert itself, on any briefing the alert appeared in, and on the permanent claims ledger. We do not silently edit.</p>
+      <p><strong>Honest gaps.</strong> PrinciplesAI does not currently hold a SOC 2 or ISO 27001 certification. No annual external penetration test on the account-data side. No 24/7 SOC. Two-factor authentication is not yet a member option. These sit on the roadmap before the first enterprise-tier engagement and will be named on this page only when they exist.</p>
+    </section>
+
+    <!-- 15 Contact & changes -->
+    <section class="tr-section" id="s15">
+      <h2 class="tr-section-h"><span class="num">15</span>Contact &amp; changes</h2>
+      <p class="kicker">Direct line to the controller. 30-day notice on any material change to this page.</p>
+      <p><strong>Controller.</strong> PrinciplesAI is operated by <strong>David Longford</strong>, established as a sole trader (autónomo) at 18 Avenida Oceano Atlántico, Albolote, Spain. Privacy, trust and data-protection questions go to <a href="mailto:privacy@principlesai.org">privacy@principlesai.org</a>. No ticket queue, no support bot — the mailbox is monitored personally.</p>
+      <p><strong>DPO.</strong> PrinciplesAI is below the Article 37 GDPR threshold that mandates a DPO, so none is appointed. If that changes, this page will be updated and the DPO registered with the AEPD.</p>
+      <p><strong>Supervisory authority.</strong> The lead authority is the <strong>Agencia Española de Protección de Datos (AEPD)</strong>. Every member retains the right to lodge a complaint with their own national data-protection authority instead. <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.</p>
+      <p><strong>Changes to this page.</strong> Material changes — anything that affects how member data is processed, who can access it, where it is stored, or what rights members have — will be notified to <strong>active members by email at least 30 days in advance</strong>.</p>
+    </section>
+
+  </div>
+</div>
+</div>
+
+</body>
+</html>

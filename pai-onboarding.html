@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrinciplesAI — Welcome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f7f9fc; --surface-3: #eef2f7;
+  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878; --ink-faint: #8a93a3;
+  --border: #dbe1ea; --border-soft: #ebeff5;
+  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc; --accent-soft-2: #cfe1f6;
+  --green-fill: #2e844a;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius: 8px;
+  --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
+  --shadow-2: 0 2px 6px rgba(10,23,41,0.07), 0 8px 20px rgba(10,23,41,0.05);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.55; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+/* Minimal top bar */
+.ob-top {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ob-brand { font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--ink); }
+.ob-brand em { font-style: italic; color: var(--accent-2); }
+.ob-skip { font-size: 12.5px; color: var(--muted); }
+.ob-skip a { color: var(--secondary); font-weight: 500; }
+
+.ob-wrap {
+  max-width: 720px; margin: 0 auto;
+  padding: 40px 32px 80px;
+}
+
+/* Progress dots */
+.ob-steps {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.ob-step-dot {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.ob-step-dot .num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--surface-3); color: var(--muted);
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.ob-step-dot.done .num { background: var(--green-fill); color: #fff; }
+.ob-step-dot.done .num::after { content: ''; }
+.ob-step-dot.active .num { background: var(--accent); color: #fff; }
+.ob-step-dot.active { color: var(--ink); font-weight: 600; }
+.ob-step-sep { width: 22px; height: 1px; background: var(--border); }
+
+/* Card */
+.ob-card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-2);
+  padding: 40px 44px 36px;
+  margin-bottom: 52px;
+}
+.ob-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 10px; }
+.ob-title { font-size: 28px; font-weight: 700; letter-spacing: -0.022em; color: var(--ink-strong); line-height: 1.15; margin-bottom: 10px; }
+.ob-title em { font-style: normal; color: var(--accent-2); }
+.ob-sub { font-size: 15px; color: var(--secondary); line-height: 1.55; margin-bottom: 24px; max-width: 560px; }
+.ob-sub b { color: var(--ink); font-weight: 600; }
+
+/* Pickable grid */
+.ob-pick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.ob-pick {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 13.5px; font-weight: 500;
+  color: var(--ink);
+  transition: border-color .12s, background .12s;
+}
+.ob-pick:hover { border-color: var(--accent-soft-2); background: var(--surface-2); }
+.ob-pick.on {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  font-weight: 600;
+}
+.ob-pick .ob-iso {
+  width: 28px; height: 28px; border-radius: 4px;
+  background: var(--surface-3); border: 1px solid var(--border-soft);
+  font-family: var(--mono); font-size: 10.5px; font-weight: 700;
+  color: var(--secondary);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ob-pick.on .ob-iso { background: var(--accent); color: #fff; border-color: var(--accent); }
+.ob-pick .ob-check {
+  margin-left: auto;
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ob-pick.on .ob-check { background: var(--accent); border-color: var(--accent); }
+.ob-pick.on .ob-check::after {
+  content: '';
+  width: 10px; height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translate(1px,-1px);
+}
+
+.ob-count {
+  font-size: 12.5px;
+  color: var(--muted);
+  text-align: right;
+  margin-bottom: 18px;
+}
+.ob-count b { color: var(--ink); font-weight: 700; }
+
+.ob-ctas { display: flex; gap: 10px; align-items: center; padding-top: 18px; border-top: 1px solid var(--border-soft); }
+.ob-ctas .grow { flex: 1; }
+.ob-cta { height: 42px; padding: 0 20px; border-radius: 6px; font-size: 13.5px; font-weight: 600; display: inline-flex; align-items: center; cursor: pointer; border: none; font-family: inherit; }
+.ob-cta.primary { background: var(--accent); color: #fff; box-shadow: 0 1px 3px rgba(1,118,211,0.3); }
+.ob-cta.primary:hover { background: var(--accent-2); }
+.ob-cta.ghost { background: var(--surface); color: var(--secondary); border: 1px solid var(--border); }
+.ob-cta.ghost:hover { background: var(--surface-2); }
+.ob-skip-link { font-size: 12.5px; color: var(--muted); font-weight: 500; text-decoration: none; }
+.ob-skip-link:hover { color: var(--ink); }
+
+/* Preview card (screen 3) */
+.ob-preview {
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+.ob-preview-head { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 6px; }
+.ob-preview-title { font-size: 18px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; margin-bottom: 12px; }
+.ob-prev-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 13px;
+}
+.ob-prev-item:last-child { border-bottom: none; }
+.ob-prev-item .ts { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 8px; }
+.ob-prev-item b { color: var(--ink); font-weight: 700; }
+
+/* Timeline (what happens next) */
+.ob-timeline {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 28px 32px 24px;
+  margin-bottom: 36px;
+}
+.ob-tl-head { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 18px; }
+.ob-tl-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-soft);
+  align-items: start;
+}
+.ob-tl-item:last-child { border-bottom: none; }
+.ob-tl-when { font-family: var(--mono); font-size: 11.5px; font-weight: 600; color: var(--accent-2); padding-top: 1px; }
+.ob-tl-what { font-size: 13.5px; color: var(--ink); line-height: 1.5; }
+.ob-tl-what b { color: var(--ink-strong); font-weight: 700; }
+.ob-tl-what .sub { display: block; color: var(--secondary); font-size: 12.5px; margin-top: 2px; }
+
+/* Section divider between screens */
+.ob-divider {
+  text-align: center;
+  margin: 0 0 32px;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  position: relative;
+}
+.ob-divider::before, .ob-divider::after {
+  content: '';
+  position: absolute; top: 50%;
+  width: 120px; height: 1px;
+  background: var(--border);
+}
+.ob-divider::before { left: 50%; transform: translateX(-180px); }
+.ob-divider::after { right: 50%; transform: translateX(180px); }
+
+@media (max-width: 720px) {
+  .ob-wrap { padding: 24px 16px 48px; }
+  .ob-card { padding: 28px 22px 24px; }
+  .ob-title { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<div class="ob-top">
+  <div class="ob-brand">Principles<em>AI</em></div>
+  <div class="ob-skip"><a href="pai-home-private.html">Skip setup →</a></div>
+</div>
+
+<div class="ob-wrap">
+
+<!-- ============ STEP 1: Jurisdictions ============ -->
+<div class="ob-steps">
+  <div class="ob-step-dot active"><span class="num">1</span><span>Jurisdictions</span></div>
+  <div class="ob-step-sep"></div>
+  <div class="ob-step-dot"><span class="num">2</span><span>Watchlist</span></div>
+  <div class="ob-step-sep"></div>
+  <div class="ob-step-dot"><span class="num">3</span><span>Saturday brief</span></div>
+</div>
+
+<section class="ob-card">
+  <div class="ob-eyebrow">Step 1 of 3 · Jurisdictions</div>
+  <h1 class="ob-title">Which <em>three</em> should we watch for you?</h1>
+  <p class="ob-sub">Pick the jurisdictions where your work lands. Your home dashboard, Saturday briefing, and watchlist alerts will be filtered to these first. You can change them anytime.</p>
+
+  <div class="ob-pick-grid">
+    <div class="ob-pick on" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">EU</span><span>European Union</span><span class="ob-check"></span></div>
+    <div class="ob-pick on" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">GB</span><span>United Kingdom</span><span class="ob-check"></span></div>
+    <div class="ob-pick on" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">IE</span><span>Ireland</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">FR</span><span>France</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">DE</span><span>Germany</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">ES</span><span>Spain</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">IT</span><span>Italy</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">NL</span><span>Netherlands</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">US</span><span>United States</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">CA</span><span>California (US)</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">JP</span><span>Japan</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">SG</span><span>Singapore</span><span class="ob-check"></span></div>
+  </div>
+  <div class="ob-count"><b id="jurisCount">3</b> selected · recommended 3–5 · <a href="#" style="color:var(--accent-2);">See all 329</a></div>
+
+  <div class="ob-ctas">
+    <a href="#" class="ob-skip-link">Skip · I'll set up later</a>
+    <div class="grow"></div>
+    <button class="ob-cta primary">Continue →</button>
+  </div>
+</section>
+
+<div class="ob-divider">Step 2</div>
+
+<!-- ============ STEP 2: Watchlist bodies ============ -->
+<div class="ob-steps">
+  <div class="ob-step-dot done"><span class="num">✓</span><span>Jurisdictions</span></div>
+  <div class="ob-step-sep"></div>
+  <div class="ob-step-dot active"><span class="num">2</span><span>Watchlist</span></div>
+  <div class="ob-step-sep"></div>
+  <div class="ob-step-dot"><span class="num">3</span><span>Saturday brief</span></div>
+</div>
+
+<section class="ob-card">
+  <div class="ob-eyebrow">Step 2 of 3 · Watchlist</div>
+  <h1 class="ob-title">Which bodies do you care about <em>the most</em>?</h1>
+  <p class="ob-sub">These are the bodies you want alerts on the minute PAI indexes something new. We pre-selected the high-activity ones in your jurisdictions — edit as you like. You can add many more later from the Authorities page.</p>
+
+  <div class="ob-pick-grid">
+    <div class="ob-pick on" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">IE</span><span>DPC</span><span class="ob-check"></span></div>
+    <div class="ob-pick on" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">GB</span><span>ICO</span><span class="ob-check"></span></div>
+    <div class="ob-pick on" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">EU</span><span>EDPB</span><span class="ob-check"></span></div>
+    <div class="ob-pick on" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">EU</span><span>CJEU</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">GB</span><span>FCA</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">GB</span><span>NCSC</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">EU</span><span>ECHR</span><span class="ob-check"></span></div>
+    <div class="ob-pick" onclick="this.classList.toggle('on');updateCounts();"><span class="ob-iso">EU</span><span>EU AI Office</span><span class="ob-check"></span></div>
+  </div>
+  <div class="ob-count"><b id="bodyCount">4</b> watchlisted · <a href="#" style="color:var(--accent-2);">Browse 2,389 bodies →</a></div>
+
+  <div class="ob-ctas">
+    <a href="#" class="ob-skip-link">← Back</a>
+    <div class="grow"></div>
+    <button class="ob-cta ghost">Skip · I'll add later</button>
+    <button class="ob-cta primary">Continue →</button>
+  </div>
+</section>
+
+<div class="ob-divider">Step 3</div>
+
+<!-- ============ STEP 3: Briefing preview + timeline ============ -->
+<div class="ob-steps">
+  <div class="ob-step-dot done"><span class="num">✓</span><span>Jurisdictions</span></div>
+  <div class="ob-step-sep"></div>
+  <div class="ob-step-dot done"><span class="num">✓</span><span>Watchlist</span></div>
+  <div class="ob-step-sep"></div>
+  <div class="ob-step-dot active"><span class="num">3</span><span>Saturday brief</span></div>
+</div>
+
+<section class="ob-card">
+  <div class="ob-eyebrow">Step 3 of 3 · Your first briefing</div>
+  <h1 class="ob-title">Here's what your <em>Saturday</em> will look like.</h1>
+  <p class="ob-sub">Based on your 3 jurisdictions and 4 watchlist bodies, here's what this week's briefing would have sent. It lands in your inbox Saturday at 07:00 your local time — unless you change that.</p>
+
+  <!-- Preview card -->
+  <div class="ob-preview">
+    <div class="ob-preview-head">Saturday briefing · Week 16 preview</div>
+    <div class="ob-preview-title">Three things on your watch this week.</div>
+    <div class="ob-prev-item">
+      <span class="ts">09:32</span><b>Ireland · DPC</b> — Meta Platforms fined €310m in cross-border ad-targeting decision. Article 60 procedure concluded.
+    </div>
+    <div class="ob-prev-item">
+      <span class="ts">08:15</span><b>France · CNIL</b> — Recommendations on AI model training with public data (watchlist match · AI).
+    </div>
+    <div class="ob-prev-item">
+      <span class="ts">yesterday</span><b>EU · CJEU</b> — <em style="font-family:var(--display); font-style:italic;">Schrems IV v Commission</em> judgment delivered (C-446/24).
+    </div>
+  </div>
+
+  <!-- Timeline of what happens next -->
+  <div class="ob-timeline">
+    <div class="ob-tl-head">What happens from here</div>
+    <div class="ob-tl-item">
+      <div class="ob-tl-when">Now</div>
+      <div class="ob-tl-what"><b>Your dashboard is ready.</b><span class="sub">Today feed, coverage map, and watchlist alerts filtered to your three jurisdictions and four bodies.</span></div>
+    </div>
+    <div class="ob-tl-item">
+      <div class="ob-tl-when">Saturday</div>
+      <div class="ob-tl-what"><b>First weekly brief.</b><span class="sub">Six stories, ranked, with local-expert take on two of them.</span></div>
+    </div>
+    <div class="ob-tl-item">
+      <div class="ob-tl-when">Day 7</div>
+      <div class="ob-tl-what"><b>First-week summary.</b><span class="sub">What you saw, what matched your watchlist, what you missed before PAI.</span></div>
+    </div>
+    <div class="ob-tl-item">
+      <div class="ob-tl-when">Day 25</div>
+      <div class="ob-tl-what"><b>Your month on PAI.</b><span class="sub">A value summary before your first renewal window — if PAI didn't deliver, you've got 5 days left on the 30-day money-back.</span></div>
+    </div>
+  </div>
+
+  <div class="ob-ctas">
+    <a href="#" class="ob-skip-link">← Back</a>
+    <div class="grow"></div>
+    <a href="pai-home-private.html" class="ob-cta primary" style="text-decoration:none;">Take me to my dashboard →</a>
+  </div>
+</section>
+
+</div>
+
+<script>
+function updateCounts() {
+  const groups = document.querySelectorAll('.ob-card');
+  if (groups[0]) {
+    const n = groups[0].querySelectorAll('.ob-pick.on').length;
+    const el = document.getElementById('jurisCount');
+    if (el) el.textContent = n;
+  }
+  if (groups[1]) {
+    const n = groups[1].querySelectorAll('.ob-pick.on').length;
+    const el = document.getElementById('bodyCount');
+    if (el) el.textContent = n;
+  }
+}
+</script>
+
+</body>
+</html>

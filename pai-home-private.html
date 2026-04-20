@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PrinciplesAI — We do the research. You do the work.</title>
+<title>PrinciplesAI — Home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -83,7 +83,7 @@ button { cursor: pointer; }
 .user-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
 
 /* ============ HEADER BAR ============ */
-.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
+.header-bar { position: fixed; top: 0; left: var(--sidebar-collapsed); right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
 .header-nav-arrows { display: flex; gap: 4px; }
 .header-nav-arrows button { width: 30px; height: 30px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
 .header-nav-arrows button:hover { background: var(--surface-3); color: var(--ink); }
@@ -104,16 +104,16 @@ button { cursor: pointer; }
 .header-icon-btn .badge-count { position: absolute; top: 4px; right: 3px; min-width: 17px; height: 17px; padding: 0 5px; background: var(--red-fill); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 600; border-radius: 9px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--surface); box-sizing: content-box; }
 
 /* ============ MAIN CONTENT ============ */
-.main-content { margin-left: 0; padding-top: var(--header-height); min-height: 100vh; }
+.main-content { margin-left: var(--sidebar-collapsed); padding-top: var(--header-height); min-height: 100vh; }
 .page-view { padding: 40px 48px 52px; max-width: 1480px; margin: 0 auto; }
 
-/* ============ HERO (public landing — extra breathing room) ============ */
+/* ============ HERO GREETING (logged-in state) ============ */
 .page-statusbar {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 20px;
-  padding: 20px 0 44px;
-  margin-bottom: 48px;
+  padding: 0 0 22px;
+  margin-bottom: 24px;
   border-bottom: 1px solid var(--border);
   align-items: start;
 }
@@ -140,721 +140,6 @@ button { cursor: pointer; }
   margin-top: 2px;
 }
 
-/* ============ HEADLINE STRIP (fixed, under header — static, no rolling) ============ */
-.live-ticker {
-  position: fixed;
-  top: var(--header-height);
-  left: 0;
-  right: 0;
-  height: 38px;
-  background: var(--ink-strong);
-  color: #d8e0ec;
-  display: flex;
-  align-items: center;
-  z-index: 150;
-  border-bottom: 1px solid #1a253c;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  padding: 0 0 0 20px;
-  overflow: hidden;
-}
-.lt-items {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  overflow: hidden;
-  min-width: 0;
-}
-.lt-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 20px 0 0;
-  font-size: 12.5px;
-  color: #d8e0ec;
-  white-space: nowrap;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.lt-item .lt-ts {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: #8a96ae;
-  letter-spacing: 0.04em;
-  flex-shrink: 0;
-}
-.lt-item .lt-body {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-}
-.lt-item b { color: #fff; font-weight: 600; }
-.lt-item + .lt-item { border-left: 1px solid #1a253c; padding-left: 20px; }
-.lt-stamp {
-  flex-shrink: 0;
-  padding: 0 16px;
-  height: 100%;
-  display: flex; align-items: center;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: #8a96ae;
-  background: var(--ink-strong);
-  border-left: 1px solid #1a253c;
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-}
-
-/* Push main content down by strip height */
-.main-content { padding-top: calc(var(--header-height) + 38px); }
-
-@media (max-width: 1100px) {
-  .lt-item:nth-child(n+3) { display: none; }
-}
-@media (max-width: 720px) {
-  .lt-item:nth-child(n+2) { display: none; }
-}
-
-/* ============ SOCIAL PROOF ROW ============ */
-.social-proof {
-  padding: 18px 0 24px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--border-soft);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.sp-label {
-  font-size: 10.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-}
-.sp-logos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 28px 36px;
-  align-items: center;
-}
-.sp-firm {
-  font-family: var(--display);
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: -0.005em;
-  opacity: 0.82;
-  transition: opacity .15s;
-}
-.sp-firm:hover { opacity: 1; }
-
-/* ============ EDITORS STRIP ============ */
-.editors-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-  margin-bottom: 36px;
-}
-.editor-card {
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  display: flex; align-items: center; gap: 12px;
-  transition: border-color .15s, box-shadow .15s;
-  cursor: pointer;
-}
-.editor-card:hover {
-  border-color: var(--accent-soft-2);
-  box-shadow: var(--shadow-2);
-}
-.editor-avatar {
-  width: 42px; height: 42px;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 14px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  letter-spacing: 0.02em;
-}
-.editor-info { min-width: 0; flex: 1; }
-.editor-name {
-  font-size: 13.5px; font-weight: 600;
-  color: var(--ink-strong);
-  line-height: 1.2;
-  margin-bottom: 3px;
-}
-.editor-specialism {
-  font-size: 11.5px;
-  color: var(--muted);
-  line-height: 1.35;
-}
-
-/* ============ PRICING ROW ============ */
-.pricing-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 36px;
-}
-.price-card {
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  padding: 24px 24px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-  transition: border-color .15s, box-shadow .15s, transform .15s;
-}
-.price-card:hover {
-  border-color: var(--accent-soft-2);
-  box-shadow: var(--shadow-2);
-}
-.price-card.featured {
-  border: 2px solid var(--accent);
-  background: linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 40%);
-  box-shadow: var(--shadow-2);
-}
-.pc-ribbon {
-  position: absolute;
-  top: -11px; left: 20px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 10.5px; font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 3px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.pc-tier {
-  font-size: 12px; font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--muted);
-}
-.price-card.featured .pc-tier { color: var(--accent-2); }
-.pc-amount {
-  font-size: 34px; font-weight: 700;
-  color: var(--ink-strong);
-  letter-spacing: -0.025em;
-  line-height: 1;
-  margin-top: 4px;
-}
-.pc-amount .pc-period {
-  font-size: 14px; font-weight: 500;
-  color: var(--muted);
-  letter-spacing: 0;
-}
-.pc-desc {
-  font-size: 13px;
-  color: var(--secondary);
-  line-height: 1.5;
-  margin-bottom: auto;
-}
-.pc-cta {
-  height: 40px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  font-size: 13px; font-weight: 600;
-  color: var(--ink);
-  cursor: pointer;
-  transition: background .12s, border-color .12s;
-  margin-top: 12px;
-}
-.pc-cta:hover { background: var(--surface-2); border-color: var(--ink-faint); }
-.pc-cta.primary {
-  background: var(--accent); color: #fff; border-color: var(--accent);
-  box-shadow: 0 1px 3px rgba(1,118,211,0.3);
-}
-.pc-cta.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
-
-@media (max-width: 1180px) {
-  .pricing-row { grid-template-columns: 1fr; }
-  .editors-strip { grid-template-columns: 1fr 1fr; }
-}
-
-/* ============ MARKETING NAV (in header on public pages) ============ */
-.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
-.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
-.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
-.mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
-.btn-primary {
-  background: var(--accent); color: #fff; border: 1px solid var(--accent) !important;
-  box-shadow: 0 1px 2px rgba(1,118,211,0.22);
-}
-.btn-primary:hover { background: var(--accent-2) !important; border-color: var(--accent-2) !important; color: #fff !important; }
-@media (max-width: 1100px) {
-  .mkt-nav a:nth-child(n+5) { display: none; }
-  .header-search { display: none; }
-}
-@media (max-width: 720px) {
-  .mkt-nav { display: none; }
-}
-
-/* ============ STICKY NAV (appears on scroll) ============ */
-.sticky-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 44px;
-  background: rgba(252, 252, 252, 0.92);
-  backdrop-filter: saturate(140%) blur(6px);
-  -webkit-backdrop-filter: saturate(140%) blur(6px);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-  gap: 28px;
-  z-index: 180;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-8px);
-  transition: opacity .22s, transform .22s;
-  box-shadow: 0 1px 6px rgba(10, 23, 41, 0.04);
-}
-.sticky-nav.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-.sticky-nav a {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--secondary);
-  text-decoration: none;
-  padding: 4px 2px;
-  border-bottom: 1px solid transparent;
-  transition: color .12s, border-color .12s;
-}
-.sticky-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
-.sticky-nav .sn-brand {
-  font-family: var(--display);
-  font-weight: 600;
-  color: var(--ink);
-  font-size: 15px;
-  margin-right: 6px;
-}
-.sticky-nav .sn-brand em { font-style: italic; font-weight: 500; color: var(--accent-2); }
-.sticky-nav .sn-cta-wrap { margin-left: auto; display: flex; gap: 8px; }
-.sticky-nav .sn-cta {
-  height: 30px;
-  padding: 0 14px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 5px;
-  font-size: 12.5px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-}
-.sticky-nav .sn-cta:hover { background: var(--accent-2); color: #fff; border-bottom-color: transparent; }
-.sticky-nav .sn-cta.ghost {
-  background: transparent;
-  color: var(--secondary);
-  border: 1px solid var(--border);
-}
-.sticky-nav .sn-cta.ghost:hover { color: var(--ink); border-color: var(--ink-faint); }
-/* Sticky nav sits just below ticker + header + scarcity */
-body.scarcity-on .sticky-nav { top: calc(var(--header-height) + 38px + 32px); }
-body:not(.scarcity-on) .sticky-nav { top: calc(var(--header-height) + 38px); }
-
-@media (max-width: 820px) {
-  .sticky-nav a:not(.sn-cta):not(.sn-brand) { display: none; }
-}
-
-/* ============ SCARCITY BAND (top of page) ============ */
-.scarcity-band {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 32px;
-  background: #2a1d08;
-  color: #f2c876;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  z-index: 220;
-  border-bottom: 1px solid #3a2a10;
-}
-.scarcity-band b { color: #fff; font-weight: 700; }
-.scarcity-band a { color: #f2c876; font-weight: 600; text-decoration: underline; }
-.scarcity-band .sb-close {
-  position: absolute;
-  right: 14px;
-  background: none; border: none;
-  color: #f2c876;
-  font-size: 16px;
-  cursor: pointer;
-  opacity: 0.6;
-}
-.scarcity-band .sb-close:hover { opacity: 1; }
-.scarcity-band.hidden { display: none; }
-
-/* Push header + ticker down when scarcity is visible */
-body.scarcity-on .header-bar { top: 32px; }
-body.scarcity-on .live-ticker { top: calc(var(--header-height) + 32px); }
-body.scarcity-on .main-content { padding-top: calc(var(--header-height) + 38px + 32px); }
-body.scarcity-on .icon-sidebar { top: 32px; }
-body.scarcity-on .scarcity-band { display: flex; }
-body:not(.scarcity-on) .scarcity-band { display: none; }
-
-/* ============ FOUNDER BLOCK ============ */
-.founder-block {
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  padding: 36px 40px 32px;
-  display: grid;
-  grid-template-columns: 140px minmax(0, 1fr);
-  gap: 32px;
-  margin-bottom: 36px;
-  align-items: start;
-}
-.founder-photo {
-  width: 140px; height: 140px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
-  color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--display);
-  font-size: 56px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  flex-shrink: 0;
-}
-.founder-body { min-width: 0; }
-.founder-eyebrow {
-  font-size: 11px; font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--accent-2);
-  margin-bottom: 10px;
-}
-.founder-title {
-  font-family: var(--display);
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink-strong);
-  line-height: 1.25;
-  margin-bottom: 16px;
-  font-style: italic;
-}
-.founder-prose {
-  font-size: 15px;
-  color: var(--secondary);
-  line-height: 1.65;
-}
-.founder-prose p { margin-bottom: 14px; }
-.founder-prose p:last-child { margin-bottom: 0; }
-.founder-prose em { font-style: normal; color: var(--ink); font-weight: 600; }
-.founder-sig {
-  margin-top: 18px;
-  font-size: 13px;
-  color: var(--muted);
-}
-.founder-sig b { color: var(--ink); font-weight: 600; }
-
-/* ============ EXIT-INTENT MODAL ============ */
-.exit-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 23, 41, 0.55);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 500;
-  backdrop-filter: blur(2px);
-}
-.exit-modal.on { display: flex; }
-.exit-card {
-  background: var(--surface);
-  border-radius: var(--radius);
-  width: min(520px, 92vw);
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.15);
-  animation: exitPop .35s cubic-bezier(0.16,1,0.3,1);
-}
-@keyframes exitPop {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-.exit-head {
-  padding: 28px 32px 14px;
-  position: relative;
-}
-.exit-close {
-  position: absolute;
-  top: 14px; right: 16px;
-  width: 28px; height: 28px;
-  background: none; border: none;
-  color: var(--muted);
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-.exit-close:hover { background: var(--surface-3); color: var(--ink); }
-.exit-eyebrow {
-  font-size: 11px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--accent-2);
-  margin-bottom: 8px;
-}
-.exit-title {
-  font-size: 22px; font-weight: 700;
-  color: var(--ink-strong);
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-}
-.exit-body {
-  padding: 6px 32px 28px;
-}
-.exit-deck {
-  font-size: 14px;
-  color: var(--secondary);
-  line-height: 1.55;
-  margin-bottom: 18px;
-}
-.exit-deck b { color: var(--ink); font-weight: 600; }
-.exit-form { display: flex; gap: 8px; margin-bottom: 10px; }
-.exit-input {
-  flex: 1;
-  height: 42px;
-  padding: 0 14px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  font-size: 14px;
-  font-family: inherit;
-  color: var(--ink);
-  background: var(--surface-2);
-}
-.exit-input:focus { background: var(--surface); border-color: var(--accent-soft-2); outline: none; }
-.exit-submit {
-  height: 42px;
-  padding: 0 18px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 13.5px; font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.exit-submit:hover { background: var(--accent-2); }
-.exit-fine {
-  font-size: 11.5px;
-  color: var(--muted);
-  margin-top: 8px;
-}
-
-/* ============ TESTIMONIALS ============ */
-.testimonials-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-bottom: 36px;
-}
-.tmo {
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  padding: 22px 24px 20px;
-  display: flex; flex-direction: column; gap: 14px;
-}
-.tmo-quote {
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--ink-strong);
-  font-weight: 500;
-  padding-left: 14px;
-  border-left: 3px solid var(--accent);
-}
-.tmo-attr {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 12px;
-  color: var(--muted);
-  padding-top: 10px;
-  border-top: 1px solid var(--border-soft);
-}
-.tmo-avatar {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: var(--surface-3);
-  color: var(--ink-faint);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10.5px; font-weight: 700;
-  flex-shrink: 0;
-}
-.tmo-role { font-weight: 600; color: var(--ink); }
-
-/* ============ EMAIL SIGNUP ============ */
-.email-signup {
-  background: var(--ink-strong);
-  border-radius: var(--radius);
-  padding: 36px 40px;
-  color: #fff;
-  margin-bottom: 32px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(340px, 1fr);
-  gap: 36px;
-  align-items: center;
-}
-.es-title {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  line-height: 1.2;
-  margin-bottom: 10px;
-  color: #fff;
-}
-.es-deck {
-  font-size: 14.5px;
-  color: #b0c2db;
-  line-height: 1.55;
-  margin: 0;
-}
-.es-form-block { display: flex; flex-direction: column; }
-.es-form {
-  display: flex;
-  gap: 8px;
-}
-.es-input {
-  flex: 1;
-  height: 44px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 5px;
-  padding: 0 14px;
-  color: #fff;
-  font-size: 14px;
-  font-family: inherit;
-}
-.es-input::placeholder { color: #6b7794; }
-.es-input:focus {
-  border-color: var(--accent);
-  background: rgba(255,255,255,0.12);
-  outline: none;
-}
-.es-submit {
-  height: 44px;
-  padding: 0 20px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.es-submit:hover { background: #4ba2e0; }
-.es-note {
-  font-size: 11.5px;
-  color: #6b7794;
-  margin-top: 10px;
-}
-
-/* ============ FAQ ============ */
-.faq-list {
-  display: flex; flex-direction: column;
-  margin-bottom: 36px;
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-}
-.faq-item { border-bottom: 1px solid var(--border-soft); }
-.faq-item:last-child { border-bottom: none; }
-.faq-q {
-  padding: 18px 24px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ink-strong);
-  cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
-  background: transparent;
-  border: none;
-  width: 100%;
-  text-align: left;
-  font-family: inherit;
-  letter-spacing: -0.005em;
-}
-.faq-q:hover { background: var(--surface-2); }
-.faq-toggle {
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--muted);
-  flex-shrink: 0;
-  margin-left: 16px;
-  transition: transform .2s, color .2s;
-}
-.faq-item.open .faq-toggle { transform: rotate(45deg); color: var(--accent-2); }
-.faq-a {
-  padding: 0 24px 22px;
-  font-size: 14px;
-  color: var(--secondary);
-  line-height: 1.6;
-  display: none;
-  max-width: 820px;
-}
-.faq-item.open .faq-a { display: block; }
-.faq-a em {
-  font-style: normal;
-  color: var(--ink);
-  font-weight: 600;
-}
-
-@media (max-width: 1180px) {
-  .testimonials-row { grid-template-columns: 1fr; }
-  .email-signup { grid-template-columns: 1fr; padding: 28px; }
-}
-
-/* ============ DAILY EDITORIAL STRIP (public, not personalised) ============ */
-.daily-strip {
-  background: var(--surface);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-1);
-  padding: 14px 22px;
-  margin-bottom: 28px;
-  display: flex; align-items: center; gap: 18px;
-  flex-wrap: wrap;
-}
-.ds-kick {
-  font-size: 10.5px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--accent-2);
-  padding-right: 16px;
-  border-right: 1px solid var(--border);
-  white-space: nowrap;
-}
-.ds-body {
-  flex: 1;
-  display: flex; align-items: center; gap: 10px;
-  flex-wrap: wrap;
-  font-size: 13px;
-  color: var(--secondary);
-  line-height: 1.5;
-}
-.ds-body b { color: var(--ink); font-weight: 600; }
-.ds-sep { color: var(--ink-faint); }
-.ds-live {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--muted);
-  margin-left: auto;
-  white-space: nowrap;
-}
-
 /* ============ LOGGED-OUT STATIC HERO (understated) ============ */
 .hero-eyebrow {
   font-size: 11.5px; font-weight: 700;
@@ -863,32 +148,15 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
   margin-bottom: 12px;
 }
 .static-hero {
-  font-size: 36px; font-weight: 700;
-  letter-spacing: -0.018em; color: var(--ink-strong);
-  line-height: 1.15;
+  font-size: 42px; font-weight: 700;
+  letter-spacing: -0.025em; color: var(--ink-strong);
+  line-height: 1.06;
   margin-bottom: 14px;
 }
 .static-hero .sh-sub {
   color: var(--muted);
   font-weight: 600;
-  letter-spacing: -0.015em;
 }
-/* Single supporting line — no bullets, no stacked verbs */
-.hero-deck-simple {
-  font-size: 16px; color: var(--secondary);
-  line-height: 1.55;
-  max-width: 640px;
-  margin: 18px 0 0;
-}
-.hero-deck-simple b { color: var(--ink); font-weight: 600; }
-
-.money-back {
-  font-size: 13px;
-  color: var(--muted);
-  font-weight: 500;
-  margin-top: 14px;
-}
-.money-back b { color: var(--ink); font-weight: 600; }
 /* legacy (unused now) */
 .cycle-hero {
   font-size: 40px; font-weight: 700;
@@ -1097,7 +365,6 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
 .marker-dot.cyber { fill: var(--amber-fill); }
 .map-legend {
   position: absolute; bottom: 10px; left: 10px;
-  z-index: 2;
   background: rgba(255,255,255,0.96);
   border: 1px solid var(--border-soft);
   border-radius: 5px;
@@ -1427,412 +694,210 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
   .header-search { max-width: none; }
   .header-user-name { display: none; }
 }
-
-/* Definition of the day card — hero right side */
-.def-card {
-  width: 340px;
-  max-width: 100%;
-  padding: 18px 20px 16px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 1px 2px rgba(10,23,41,0.03);
-  align-self: start;
-}
-.def-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-soft);
-}
-.def-eye {
-  font-family: var(--mono);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--accent-2);
-}
-.def-date {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-}
-.def-term {
-  font-family: var(--display);
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--ink-strong);
-  letter-spacing: -0.012em;
-  line-height: 1.15;
-  margin: 0;
-}
-.def-meta {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.def-pill {
-  font-family: var(--mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 2px 7px;
-  border-radius: 3px;
-  background: var(--accent-soft);
-  color: var(--accent-2);
-  white-space: nowrap;
-}
-.def-art {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--secondary);
-  font-weight: 500;
-}
-.def-juris {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--muted);
-}
-.def-body {
-  font-size: 13px;
-  color: var(--secondary);
-  line-height: 1.5;
-  margin: 0;
-}
-.def-quote {
-  font-family: var(--sans);
-  font-style: normal;
-  font-size: 12.5px;
-  color: var(--secondary);
-  line-height: 1.5;
-  padding: 10px 12px;
-  background: var(--surface-2);
-  border-radius: 4px;
-}
-.def-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 6px;
-  border-top: 1px dashed var(--border-soft);
-}
-.def-link {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent-2);
-  text-decoration: none;
-}
-.def-link:hover { text-decoration: underline; }
-.def-cid {
-  font-family: var(--mono);
-  font-size: 9.5px;
-  color: var(--ink-faint);
-  letter-spacing: 0.04em;
-}
-@media (max-width: 900px) {
-  .page-statusbar { grid-template-columns: 1fr; }
-  .def-card { width: 100%; max-width: 520px; }
-}
-
-/* Jobs board */
-.jobs-row { margin-bottom: 28px; }
-.jobs-table td.role { font-weight: 600; color: var(--ink); padding-right: 14px; }
-.jobs-table td.role .sub { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); margin-top: 2px; font-style: italic; }
-.jobs-table td.loc { font-family: var(--mono); font-size: 11.5px; color: var(--secondary); }
-.jobs-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px 22px 18px;
-  border-top: 1px solid var(--border-soft);
-  background: var(--surface-2);
-}
-.jobs-foot-note { font-size: 12.5px; color: var(--muted); line-height: 1.5; flex: 1; }
-.jobs-unlock {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  height: 36px;
-  padding: 0 16px;
-  font-size: 12.5px;
-  font-weight: 600;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: inherit;
-  white-space: nowrap;
-}
-.jobs-unlock:hover { background: var(--accent-2); }
-@media (max-width: 620px) {
-  .jobs-foot { flex-direction: column; align-items: stretch; }
-  .jobs-unlock { width: 100%; }
-}
-
-/* Sliding country panel */
-#paiMapPanel {
-  position: fixed;
-  top: 0; right: 0;
-  width: 440px;
-  max-width: 92vw;
-  height: 100vh;
-  background: #fff;
-  box-shadow: -12px 0 40px rgba(10,23,41,0.12);
-  transform: translateX(102%);
-  transition: transform .28s cubic-bezier(.4,0,.2,1);
-  z-index: 400;
-  overflow-y: auto;
-}
-#paiMapPanel.open { transform: translateX(0); }
-.pmp-inner { padding: 28px 32px 40px; }
-.pmp-close {
-  position: absolute; top: 14px; right: 16px;
-  background: none; border: none;
-  font-size: 28px; color: var(--muted);
-  cursor: pointer; padding: 4px 10px;
-  line-height: 1;
-}
-.pmp-close:hover { color: var(--ink); }
-.pmp-label {
-  font-family: var(--mono);
-  font-size: 10.5px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--accent-2);
-}
-.pmp-country {
-  font-family: var(--display);
-  font-size: 30px; font-weight: 600;
-  color: var(--ink-strong);
-  margin: 6px 0 22px;
-  letter-spacing: -0.015em;
-  line-height: 1.1;
-}
-.pmp-law {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-soft);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10px;
-  align-items: start;
-}
-.pmp-law:last-of-type { border-bottom: none; }
-.pmp-law-name { font-size: 13px; color: var(--ink); font-weight: 500; line-height: 1.4; grid-column: 1 / -1; }
-.pmp-pill {
-  font-family: var(--mono);
-  font-size: 9.5px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.06em;
-  padding: 3px 8px; border-radius: 3px;
-  display: inline-block;
-}
-.pmp-pill.s-enacted { background: #e4f1ee; color: #1a7a6d; }
-.pmp-pill.s-proposed { background: #e6eef5; color: #4a8db7; }
-.pmp-pill.s-lapsed { background: #eceef1; color: #6b7585; }
-.pmp-type {
-  font-family: var(--mono);
-  font-size: 9.5px; color: var(--muted);
-  padding: 3px 0 3px 8px;
-}
-.pmp-laws-btn {
-  display: inline-block;
-  margin-top: 18px;
-  font-size: 12.5px; font-weight: 600;
-  color: var(--accent-2);
-  text-decoration: none;
-}
-.pmp-laws-btn:hover { text-decoration: underline; }
-.pmp-cta {
-  margin-top: 26px;
-  padding: 18px 20px;
-  background: var(--surface-2);
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-}
-.pmp-cta p { font-size: 13px; color: var(--secondary); line-height: 1.55; margin-bottom: 12px; }
-.pmp-cta a { font-size: 13px; font-weight: 600; color: var(--accent-2); text-decoration: none; }
-.pmp-contribute {
-  margin-top: 22px;
-  padding: 18px 20px;
-  background: #fafcfe;
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-}
-.pmp-contrib-header { display: flex; align-items: center; gap: 8px; color: var(--ink); }
-.pmp-contrib-title { font-size: 13px; font-weight: 600; }
-.pmp-contrib-sub { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin: 8px 0 12px; }
-.pmp-contrib-toggle {
-  background: none; border: none;
-  color: var(--accent-2);
-  font-size: 12.5px; font-weight: 600;
-  cursor: pointer;
-  padding: 0;
-  font-family: inherit;
-}
-.pmp-contrib-form { display: none; margin-top: 10px; }
-.pmp-contrib-form textarea {
-  width: 100%; min-height: 80px;
-  font-family: inherit;
-  font-size: 13px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  resize: vertical;
-}
-.pmp-contrib-form input {
-  width: 100%;
-  margin-top: 8px;
-  height: 36px;
-  padding: 0 12px;
-  font-family: inherit;
-  font-size: 13px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-}
-.pmp-contrib-opt { font-size: 11px; color: var(--muted); margin: 4px 0 10px; font-style: italic; }
-.pmp-contrib-send {
-  background: var(--accent); color: #fff;
-  border: none;
-  height: 36px; padding: 0 16px;
-  font-size: 12.5px; font-weight: 600;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: inherit;
-}
-.pmp-contrib-send:hover { background: var(--accent-2); }
-.pmp-contrib-thanks { text-align: center; padding: 20px 10px; }
-.pmp-contrib-thanks p { font-size: 13.5px; color: var(--ink); line-height: 1.5; margin-top: 10px; }
-
 </style>
 </head>
 <body>
 
+<!-- ICON SIDEBAR -->
+<nav class="icon-sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon">P</div>
+    <span class="brand-text">Principles<span class="ai">AI</span></span>
+  </div>
+  <div class="sidebar-nav-items">
+    <div class="sidebar-nav-item active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></div>
+    <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span><span class="jur-nav-chevron">&#9656;</span></div>
+    <div class="sidebar-regions-zone">
+      <a href="pai-authorities.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
+      <a href="pai-news.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="nav-label">News</span></a>
+      <a href="pai-legislation.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <a href="pai-glossary.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
+      <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></div>
+      <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span class="nav-label">Reports</span></div>
+      <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></div>
+    </div>
+  </div>
+  <div class="sb-invite">
+    <svg class="sb-invite-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+    <div class="sb-invite-body">
+      <div class="sb-invite-label">Know a colleague who tracks this space?</div>
+      <div class="sb-invite-sub">Invite them — first 30 days on us</div>
+      <div class="sb-invite-btn">Send an invite ›</div>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-nav-item">
+      <div style="position:relative;flex-shrink:0"><div class="user-avatar">D</div></div>
+      <div class="nav-label" style="display:flex;flex-direction:column;line-height:1.3;flex:1;min-width:0">
+        <span style="font-weight:600;font-size:13px;color:var(--ink)">David Longford</span>
+        <span style="font-size:11px;color:var(--muted)">PrinciplesAI</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <!-- HEADER BAR -->
 <header class="header-bar">
-  <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); letter-spacing:-0.005em; text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
-  <nav class="mkt-nav">
-    <a href="pai-home-public.html" class="on">Home</a>
-    <a href="pai-authorities.html">Authorities</a>
-    <a href="pai-news.html">News</a>
-    <a href="pai-legislation.html">Legislation</a>
-    <a href="#jobs">Jobs</a>
-    <a href="pai-glossary.html">Glossary</a>
-    <a href="#pricing">Pricing</a>
-    <a href="pai-trust.html">Trust</a>
-  </nav>
+  <div class="header-nav-arrows">
+    <button><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <span class="header-user-name">David · PrinciplesAI</span>
+  <div class="header-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search jurisdictions, enforcement, case law…">
+    <kbd>⌘K</kbd>
+  </div>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
-    <a href="#pricing" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
+    <div class="home-jur-btn"><span class="hjb-flag">&#x1F1EC;&#x1F1E7;</span><span>United Kingdom</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="badge-count">3</span></button>
+    <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="badge-count">5</span></button>
+    <button class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
   </div>
 </header>
-
-
-<!-- HEADLINE STRIP (static · three most recent) -->
-<div class="live-ticker">
-  <div class="lt-items">
-    <div class="lt-item">
-      <span class="lt-ts">09:32</span>
-      <span class="lt-body"><b>France · CNIL</b> recommendations on AI model training with public data</span>
-    </div>
-    <div class="lt-item">
-      <span class="lt-ts">08:15</span>
-      <span class="lt-body"><b>Ireland · DPC</b> Meta Platforms fined €310m · Article 60 decision</span>
-    </div>
-    <div class="lt-item">
-      <span class="lt-ts">07:48</span>
-      <span class="lt-body"><b>Japan · PPC</b> updated cross-border breach notification guidance</span>
-    </div>
-  </div>
-  <div class="lt-stamp">Updated 10:34 UTC</div>
-</div>
 
 <!-- MAIN CONTENT -->
 <div class="main-content">
 <div class="page-view">
 
-  <!-- HERO (logged-out) — intriguing, two CTAs, breathing room -->
+  <!-- HERO (logged-in) — greeting + quiet positioning -->
   <div class="page-statusbar">
     <div class="hero-greeting">
-      <h1 class="static-hero">AI Governance. Privacy. Cybersecurity.<br/><span class="sh-sub">For the desks that cover all three.</span></h1>
-      <p class="hero-deck-simple">Regulatory and industry intelligence across <b>2,389 bodies</b> and <b>329 jurisdictions</b> — captured, ranked and interpreted by our pipeline, editors and local experts.</p>
-      <div class="cycle-cta-row" style="margin-top:28px;">
-        <button class="cycle-cta">Get full access <span style="font-family:var(--mono); font-weight:400;">→</span></button>
-        <button class="cycle-cta ghost">Sign in</button>
-      </div>
-      <p class="money-back">Monthly — rolling access.<br/>Annual — <b>30-day money-back guarantee</b>.</p>
+      <h1 class="static-hero" id="greetLine">Good morning, David.</h1>
+      <p class="cycle-sub"><b style="color:var(--ink);">3 items</b> need your attention this week · <b style="color:var(--ink);">4 consultations</b> closing · <b style="color:var(--ink);">€315m</b> in enforcement captured.</p>
+      <p style="font-size:13px; color:var(--muted); margin-top:10px; font-weight:500;">AI Governance. Privacy. Cybersecurity. Three domains. One Research Platform. · We do the research. You do the work.</p>
     </div>
-
-    <!-- DEFINITION OF THE DAY — compact, rotates daily from the glossary -->
-    <aside class="def-card" id="defCard">
-      <div class="def-head">
-        <span class="def-eye">Today's definition</span>
-        <span class="def-date" id="defDate">20 April 2026</span>
-      </div>
-      <h3 class="def-term" id="defTerm">Automated decision-making</h3>
-      <div class="def-meta">
-        <span class="def-pill" id="defPill">GDPR</span>
-        <span class="def-art" id="defArt">Art. 22</span>
-        <span class="def-juris" id="defJuris">EU · UK</span>
-      </div>
-      <p class="def-body" id="defBody">A decision based solely on automated processing — including profiling — that produces legal effects or similarly significantly affects the data subject.</p>
-      <blockquote class="def-quote" id="defQuote">"…the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects…"</blockquote>
-      <div class="def-foot">
-        <a href="pai-glossary.html" class="def-link">See the full entry →</a>
-      </div>
-    </aside>
+    <div class="page-actions">
+      <button class="btn">Share</button>
+      <button class="btn btn-primary">+ New alert</button>
+    </div>
   </div>
 
-  <!-- EDITORIAL PARTNERS -->
-  <section class="social-proof">
-    <div class="sp-label">Content and commentary from practitioners at</div>
-    <div class="sp-logos">
-      <span class="sp-firm">Hogan Lovells</span>
-      <span class="sp-firm">Fieldfisher</span>
-      <span class="sp-firm">DLA Piper</span>
-      <span class="sp-firm">Clifford Chance</span>
-      <span class="sp-firm">Linklaters</span>
-      <span class="sp-firm">Bird &amp; Bird</span>
-      <span class="sp-firm">Slaughter and May</span>
-      <span class="sp-firm">Baker McKenzie</span>
-      <span class="sp-firm">Freshfields</span>
-    </div>
-  </section>
+  <script>
+    (function() {
+      const h = new Date().getHours();
+      const g = h < 12 ? 'Good morning' : (h < 18 ? 'Good afternoon' : 'Good evening');
+      const el = document.getElementById('greetLine');
+      if (el) el.textContent = g + ', David.';
+    })();
+  </script>
 
-  <!-- EDITORIAL DAILY STRIP (public — not personalised) -->
-  <section class="daily-strip">
-    <div class="ds-kick">TODAY · 20 April 2026</div>
-    <div class="ds-body">
-      <span><b>18</b> items captured from <b>12 regulators</b></span>
-      <span class="ds-sep">·</span>
-      <span>Most active: <b>Ireland DPC · France CNIL · Italy Garante</b></span>
-      <span class="ds-sep">·</span>
-      <span><b>4</b> consultations closing in the next 7 days</span>
-      <span class="ds-sep">·</span>
-      <span class="ds-live">Updated 10:34 UTC</span>
+  <!-- THIS WEEK STRIP (quiet, iconic, not a KPI shout) -->
+  <section class="thisweek">
+    <div class="tw-cell">
+      <div class="tw-icon red">
+        <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+      </div>
+      <div class="tw-body">
+        <div class="tw-label">Watchlist</div>
+        <div class="tw-value">3 alerts</div>
+        <div class="tw-sub"><span class="up">+2</span> since your last visit</div>
+      </div>
+      <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
+        <polyline points="0,22 9,21 18,16 27,18 36,13 45,15 54,9 63,5 72,3" fill="none" stroke="var(--red-fill)" stroke-width="1.6"/>
+        <circle cx="72" cy="3" r="2.2" fill="var(--red-fill)"/>
+      </svg>
+    </div>
+    <div class="tw-cell">
+      <div class="tw-icon amber">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="tw-body">
+        <div class="tw-label">Closing ≤ 7 days</div>
+        <div class="tw-value">4 consultations</div>
+        <div class="tw-sub">Next: ICO · 23 Apr</div>
+      </div>
+      <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
+        <polyline points="0,15 9,17 18,14 27,16 36,12 45,14 54,10 63,12 72,8" fill="none" stroke="var(--amber-fill)" stroke-width="1.6"/>
+        <circle cx="72" cy="8" r="2.2" fill="var(--amber-fill)"/>
+      </svg>
+    </div>
+    <div class="tw-cell">
+      <div class="tw-icon blue">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="tw-body">
+        <div class="tw-label">Enforcement · 7d</div>
+        <div class="tw-value money">€315.5m</div>
+        <div class="tw-sub"><span class="up">+23%</span> vs prior · 9 actions</div>
+      </div>
+      <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
+        <polyline points="0,20 9,18 18,21 27,15 36,12 45,14 54,8 63,6 72,3" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+        <circle cx="72" cy="3" r="2.2" fill="var(--accent)"/>
+      </svg>
+    </div>
+    <div class="tw-cell">
+      <div class="tw-icon green">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="tw-body">
+        <div class="tw-label">Decisions flagged</div>
+        <div class="tw-value">4 decisions</div>
+        <div class="tw-sub">Curated from 47 published</div>
+      </div>
+      <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
+        <polyline points="0,15 9,13 18,15 27,9 36,12 45,8 54,10 63,6 72,4" fill="none" stroke="var(--green-fill)" stroke-width="1.6"/>
+        <circle cx="72" cy="4" r="2.2" fill="var(--green-fill)"/>
+      </svg>
     </div>
   </section>
 
   <!-- HERO: MAP + TODAY -->
-  <section class="hero" id="coverage">
+  <section class="hero">
 
     <!-- MAP (hero) -->
     <div class="panel">
       <div class="panel-head">
         <div class="panel-title">Coverage <span class="count">last 7 days · 147 read · 47 kept · 3 flagged in your scope</span></div>
-        <a href="pai-news.html" class="panel-link">Open coverage</a>
+        <span class="panel-link">Open coverage</span>
       </div>
       <div class="map-wrap">
-        <div class="map-frame map-hero">
+        <div class="map-frame">
+          <svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
+            <g class="graticule"><line x1="0" y1="120" x2="1000" y2="120"/><line x1="0" y1="240" x2="1000" y2="240"/><line x1="0" y1="360" x2="1000" y2="360"/><line x1="167" y1="0" x2="167" y2="480"/><line x1="333" y1="0" x2="333" y2="480"/><line x1="500" y1="0" x2="500" y2="480"/><line x1="667" y1="0" x2="667" y2="480"/><line x1="833" y1="0" x2="833" y2="480"/></g>
+            <g>
+              <path class="continent" d="M 140,105 L 180,91 L 230,82 L 290,88 L 320,111 L 315,140 L 290,158 L 260,163 L 240,173 L 230,197 L 210,202 L 195,187 L 175,168 L 155,155 L 140,140 Z"/>
+              <path class="continent" d="M 210,202 L 230,207 L 240,216 L 245,230 L 240,240 L 230,245 L 225,236 L 220,226 L 215,216 Z"/>
+              <path class="continent" d="M 280,254 L 305,250 L 325,258 L 345,282 L 360,316 L 362,346 L 355,370 L 340,380 L 325,370 L 310,346 L 298,321 L 290,297 L 285,273 Z"/>
+              <path class="continent" d="M 475,91 L 505,84 L 540,88 L 565,101 L 555,120 L 535,130 L 510,135 L 490,127 L 478,110 Z"/>
+              <path class="continent" d="M 495,158 L 540,149 L 580,158 L 610,178 L 620,211 L 615,250 L 600,283 L 580,307 L 560,317 L 540,312 L 520,293 L 505,259 L 495,226 L 490,193 Z"/>
+              <path class="continent" d="M 610,149 L 645,144 L 670,154 L 675,173 L 665,187 L 640,192 L 620,178 L 612,163 Z"/>
+              <path class="continent" d="M 570,91 L 640,82 L 720,82 L 790,91 L 850,101 L 890,115 L 900,134 L 885,154 L 860,158 L 825,154 L 780,154 L 740,158 L 710,163 L 685,154 L 665,139 L 640,130 L 610,120 L 580,111 Z"/>
+              <path class="continent" d="M 695,158 L 720,154 L 740,163 L 735,192 L 720,207 L 705,197 L 698,178 Z"/>
+              <path class="continent" d="M 770,187 L 800,182 L 815,197 L 810,216 L 790,226 L 775,221 L 768,207 Z"/>
+              <path class="continent" d="M 880,134 L 895,130 L 900,144 L 895,158 L 885,161 L 878,149 Z"/>
+              <path class="continent" d="M 830,307 L 880,298 L 920,302 L 935,321 L 925,346 L 895,356 L 855,353 L 830,341 L 822,326 Z"/>
+              <path class="continent" d="M 945,360 L 960,357 L 962,374 L 952,379 L 945,373 Z"/>
+              <path class="continent" d="M 478,91 L 490,88 L 493,104 L 485,110 L 478,104 Z"/>
+              <path class="continent" d="M 515,72 L 540,67 L 545,86 L 535,96 L 520,91 Z"/>
+            </g>
+            <circle class="marker-dot ai" cx="510" cy="110" r="3.8"/>
+            <circle class="marker-dot privacy" cx="485" cy="102" r="3.8"/>
+            <circle class="marker-dot privacy" cx="520" cy="106" r="3.8"/>
+            <circle class="marker-dot ai" cx="535" cy="129" r="3.8"/>
+            <circle class="marker-dot privacy" cx="490" cy="131" r="3.8"/>
+            <circle class="marker-dot ai" cx="483" cy="98" r="3.8"/>
+            <circle class="marker-dot cyber" cx="514" cy="100" r="3.8"/>
+            <circle class="marker-dot ai" cx="172" cy="150" r="3.8"/>
+            <circle class="marker-dot privacy" cx="286" cy="136" r="3.8"/>
+            <circle class="marker-dot privacy" cx="290" cy="119" r="3.8"/>
+            <circle class="marker-dot ai" cx="340" cy="298" r="3.8"/>
+            <circle class="marker-dot privacy" cx="225" cy="192" r="3.8"/>
+            <circle class="marker-dot cyber" cx="888" cy="144" r="3.8"/>
+            <circle class="marker-dot privacy" cx="855" cy="139" r="3.8"/>
+            <circle class="marker-dot ai" cx="788" cy="211" r="3.8"/>
+            <circle class="marker-dot privacy" cx="905" cy="331" r="3.8"/>
+            <circle class="marker-dot ai" cx="715" cy="177" r="3.8"/>
+            <circle class="marker-dot privacy" cx="650" cy="173" r="3.8"/>
+            <circle class="marker-dot privacy" cx="568" cy="307" r="3.8"/>
+            <circle class="marker-dot privacy" cx="605" cy="245" r="3.8"/>
+            <circle class="marker-dot ai" cx="530" cy="216" r="3.8"/>
+            <circle class="marker-dot privacy" cx="515" cy="142" r="3.8"/>
+          </svg>
           <div class="map-legend">
-            <div class="legend-item"><span class="legend-dot" style="background:#1a7a6d"></span>Enacted</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#4a8db7"></span>Proposed</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#c8ced6"></span>Lapsed</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span>AI</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--ink)"></span>Privacy</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--amber-fill)"></span>Cyber</div>
           </div>
         </div>
       </div>
@@ -2021,100 +1086,6 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
 
   </section>
 
-  <!-- NAMED EDITORS STRIP -->
-  <div class="section-eyebrow" id="editors">
-    <span class="lbl">Our editors</span>
-    <span class="meta">Named practitioners. Local jurisdictions. You can talk to them.</span>
-  </div>
-  <section class="editors-strip">
-    <div class="editor-card">
-      <div class="editor-avatar" style="background:#7c3aed">EC</div>
-      <div class="editor-info">
-        <div class="editor-name">Edson Castro</div>
-        <div class="editor-specialism">Philippines · APAC AI &amp; sectoral guidance</div>
-      </div>
-    </div>
-    <div class="editor-card">
-      <div class="editor-avatar" style="background:#c0392b">FF</div>
-      <div class="editor-info">
-        <div class="editor-name">Flick Fisher</div>
-        <div class="editor-specialism">UK · AI Act &amp; automated decision-making</div>
-      </div>
-    </div>
-    <div class="editor-card">
-      <div class="editor-avatar" style="background:#0176d3">MK</div>
-      <div class="editor-info">
-        <div class="editor-name">Marcus Klein</div>
-        <div class="editor-specialism">Germany · BfDI &amp; Länder DPAs</div>
-      </div>
-    </div>
-    <div class="editor-card">
-      <div class="editor-avatar" style="background:#2e844a">AM</div>
-      <div class="editor-info">
-        <div class="editor-name">Ana Martinez</div>
-        <div class="editor-specialism">Spain &amp; Latam · AEPD &amp; cross-border enforcement</div>
-      </div>
-    </div>
-    <div class="editor-card">
-      <div class="editor-avatar" style="background:#ca8501">RO</div>
-      <div class="editor-info">
-        <div class="editor-name">Rebecca O'Connor</div>
-        <div class="editor-specialism">Ireland · DPC &amp; Article 60 procedure</div>
-      </div>
-    </div>
-    <div class="editor-card">
-      <div class="editor-avatar" style="background:#014486">LW</div>
-      <div class="editor-info">
-        <div class="editor-name">Li Wei</div>
-        <div class="editor-specialism">China · PIPL &amp; cross-border data rules</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOUNDER BLOCK -->
-  <section class="founder-block">
-    <div class="founder-photo">D</div>
-    <div class="founder-body">
-      <div class="founder-eyebrow">From the founder</div>
-      <h3 class="founder-title">I built PrinciplesAI because I couldn't find it.</h3>
-      <div class="founder-prose">
-        <p>When I started tracking regulatory change seriously, I kept hitting the same problem: three siloed sources — one for privacy, one for AI, one for cyber — and none of them spoke to each other. Yet practitioners' work had quietly collapsed into one role covering all three.</p>
-        <p>So I built what I wanted to read. A live record of every serious body that matters across these three domains. <em>Ranked</em> by what moves the needle for practitioners, not by chronology. <em>Interpreted</em> by local experts who've practiced in those rooms — not aggregated from anonymous wire feeds.</p>
-        <p>If you're covering all three on one desk, this is for you. If you're not yet, you will be.</p>
-      </div>
-      <div class="founder-sig"><b>David Longford</b> · Founder, PrinciplesAI</div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS (illustrative — replace with real quotes pre-launch) -->
-  <div class="section-eyebrow">
-    <span class="lbl">What practitioners say</span>
-    <span class="meta">Illustrative · real quotes being collected from preview customers</span>
-  </div>
-  <section class="testimonials-row">
-    <div class="tmo">
-      <div class="tmo-quote">"PAI had the Meta DPC decision summarised before Bloomberg ran it. I briefed our board on Monday — by Tuesday we'd reviewed ad-targeting exposure across six markets."</div>
-      <div class="tmo-attr">
-        <div class="tmo-avatar">HP</div>
-        <div><span class="tmo-role">Head of Privacy</span> · UK retail bank</div>
-      </div>
-    </div>
-    <div class="tmo">
-      <div class="tmo-quote">"My reading list grew threefold in 18 months. PAI is the first thing that covers AI, privacy and cyber in one place without feeling like a shallow aggregator."</div>
-      <div class="tmo-attr">
-        <div class="tmo-avatar">SA</div>
-        <div><span class="tmo-role">Senior Associate, Data &amp; Tech</span> · magic-circle firm</div>
-      </div>
-    </div>
-    <div class="tmo">
-      <div class="tmo-quote">"The local-expert interpretation is the bit that matters. A CNIL statement means one thing in Paris and another in practice — PAI tells me which one to act on."</div>
-      <div class="tmo-attr">
-        <div class="tmo-avatar">PO</div>
-        <div><span class="tmo-role">Policy Officer</span> · EU institution</div>
-      </div>
-    </div>
-  </section>
-
   <!-- DEVELOPMENTS -->
   <div class="section-eyebrow">
     <span class="lbl">Developments · this week</span>
@@ -2250,161 +1221,6 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
     </div>
   </section>
 
-  <!-- JOBS BOARD -->
-  <div class="section-eyebrow" id="jobs">
-    <span class="lbl">Jobs · weekly digest</span>
-    <span class="meta">AI governance, privacy &amp; cyber roles · in-house and private practice</span>
-  </div>
-  <section class="jobs-row">
-    <div class="panel">
-      <div class="panel-head">
-        <div class="panel-title">This week's roles <span class="count">8 of 47 in the archive</span></div>
-        <span class="panel-link" onclick="document.getElementById('exitModal').classList.add('on')" style="cursor:pointer;">Unlock full archive →</span>
-      </div>
-      <table class="data-table jobs-table">
-        <thead>
-          <tr><th>Role</th><th>Employer</th><th>Location</th><th class="right">Posted</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="role">Head of AI Governance<span class="sub">Group · new function</span></td><td class="target">HSBC</td><td class="loc">London</td><td class="when">2d</td></tr>
-          <tr><td class="role">Senior DPO<span class="sub">EU lead · Art. 37</span></td><td class="target">Allianz</td><td class="loc">Munich</td><td class="when">3d</td></tr>
-          <tr><td class="role">Privacy Counsel · Product<span class="sub">AI features review</span></td><td class="target">Stripe</td><td class="loc">Dublin</td><td class="when">5d</td></tr>
-          <tr><td class="role">AI Risk Director<span class="sub">2nd line · model risk</span></td><td class="target">JPMorgan Chase</td><td class="loc">New York</td><td class="when">2d</td></tr>
-          <tr><td class="role">Data Protection Lead<span class="sub">Clinical data &amp; AI</span></td><td class="target">NHS England</td><td class="loc">London</td><td class="when">4d</td></tr>
-          <tr><td class="role">Privacy Partner<span class="sub">Lateral · EU/UK</span></td><td class="target">Hogan Lovells</td><td class="loc">London / Brussels</td><td class="when">1w</td></tr>
-          <tr><td class="role">Cyber &amp; Resilience Counsel<span class="sub">DORA implementation</span></td><td class="target">Deutsche Bank</td><td class="loc">Frankfurt</td><td class="when">6d</td></tr>
-          <tr><td class="role">Head of AI Policy<span class="sub">EU institutional</span></td><td class="target">Meta Platforms</td><td class="loc">Brussels</td><td class="when">1w</td></tr>
-        </tbody>
-      </table>
-      <div class="jobs-foot">
-        <span class="jobs-foot-note">Full archive, filters by jurisdiction/seniority, and a weekly Friday digest — members only.</span>
-        <button class="jobs-unlock" onclick="document.getElementById('exitModal').classList.add('on')">Unlock archive →</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <div class="section-eyebrow" id="pricing">
-    <span class="lbl">Pricing</span>
-    <span class="meta">Transparent · no minimum commitment · money-back on annual</span>
-  </div>
-  <section class="pricing-row">
-    <div class="price-card">
-      <div class="pc-tier">Monthly</div>
-      <div class="pc-amount">£95<span class="pc-period"> / month</span></div>
-      <div class="pc-desc">Individual seat. Rolling access — no further billing if you stop.</div>
-      <button class="pc-cta">Start monthly →</button>
-    </div>
-    <div class="price-card featured">
-      <div class="pc-ribbon">Most popular · save 2 months</div>
-      <div class="pc-tier">Annual</div>
-      <div class="pc-amount">£950<span class="pc-period"> / year</span></div>
-      <div class="pc-desc">Individual seat. <b>30-day money-back</b>, no questions.</div>
-      <button class="pc-cta primary">Start annual →</button>
-    </div>
-    <div class="price-card">
-      <div class="pc-tier">Team</div>
-      <div class="pc-amount">From £3,500<span class="pc-period"> / year</span></div>
-      <div class="pc-desc">5+ seats. Team watchlists, briefing export, shared alerts. Talk to us.</div>
-      <button class="pc-cta">Talk to us →</button>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <div class="section-eyebrow" id="faq">
-    <span class="lbl">Frequently asked</span>
-    <span class="meta">What practitioners ask on first contact</span>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>What exactly does PAI cover?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        <em>Three domains</em>: AI regulation, privacy/data protection, and cybersecurity. <em>Three source types</em>: regulatory bodies (2,389 of them across 329 jurisdictions), courts (from the CJEU and ECHR through to national supreme courts), and industry — enforcement announcements, standards body output, and regulated-entity responses. We <em>capture daily</em>, <em>rank editorially</em>, and add <em>local-expert interpretation</em> for each significant item.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>How is this different from DataGuidance or OneTrust?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        <em>Scope</em>: DataGuidance focuses on privacy; OneTrust is a compliance platform with content attached. PAI treats AI, privacy and cyber as first-class lenses, not add-ons. <em>Freshness</em>: we capture live from source; competitors mostly rebuild from aggregated feeds. <em>Interpretation</em>: we pair significant items with a named local expert's take — you won't find that consistently anywhere else.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Do you cover my jurisdiction?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        Almost certainly. PAI tracks <em>329 jurisdictions live</em> — every EU member, UK, every US state, most Commonwealth countries, and major APAC, Africa and Latin America markets. The Authorities page lists each one with its last-indexed date. If there's a specific body you need and don't see, tell us — new bodies go live in days.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>How often is it updated?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        The pipeline runs continuously. New items are captured within minutes of publication, ranked and tagged within hours, and annotated by editors within 24-48 hours where the item warrants commentary. Your dashboard refreshes live.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Can I cancel?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        <em>Monthly</em>: rolling access, no further billing after the current month ends if you stop. <em>Annual</em>: 30-day money-back guarantee — if PAI isn't what you expected within the first month, email us for a full refund, no questions asked.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Team and enterprise pricing?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        Team plans start at <em>£3,500/year for 5 seats</em> with per-seat pricing scaling down from there. Enterprise (20+ seats, SSO, custom jurisdictions, API access, DPA, SLA) is bespoke — send your scope and we'll quote within 48 hours.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Can I see a sample before subscribing?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        Yes — the <em>free Saturday briefing email</em> is the same weekly briefing paid subscribers get, just with the full analysis on three items paywalled. Sign up below. No credit card required.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Data handling and security?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        PAI stores no personal data on subscribers beyond what's needed to authenticate your account and deliver your briefing. We don't share, sell, or reuse subscriber data for any other purpose. Source content is captured from public regulatory publications. Enterprise customers receive a standard DPA on request; SOC 2 in progress.
-      </div>
-    </div>
-  </div>
-
-  <!-- WEEKLY EMAIL SIGNUP (last-chance capture before footer) -->
-  <section class="email-signup">
-    <div>
-      <div class="es-title">The Saturday briefing.<br/>Six stories. Ranked. Free.</div>
-      <p class="es-deck">Every Saturday, our editors pick the six things that moved this week across AI, privacy and cyber — with context and a local-expert take. No credit card. Unsubscribe in one click.</p>
-    </div>
-    <div class="es-form-block">
-      <form class="es-form" onsubmit="event.preventDefault(); this.querySelector('.es-submit').textContent='Subscribed ✓'; this.querySelector('.es-input').value='';">
-        <input class="es-input" type="email" placeholder="your@email.com" required />
-        <button class="es-submit" type="submit">Subscribe free →</button>
-      </form>
-      <p class="es-note">One email per week. Zero spam. Same briefing paid subscribers get, with 3 items paywalled.</p>
-    </div>
-  </section>
-
   <!-- CONSULTATIONS -->
   <section class="consultations">
     <div class="panel-head">
@@ -2473,83 +1289,6 @@ function setHotView(view, btn) {
     view === 'active' ? 'Most active this week' : 'Coverage by region';
 }
 </script>
-
-<!-- EXIT-INTENT MODAL -->
-<div class="exit-modal" id="exitModal">
-  <div class="exit-card">
-    <div class="exit-head">
-      <button class="exit-close" onclick="closeExit()" aria-label="Close">×</button>
-      <div class="exit-eyebrow">Before you go</div>
-      <div class="exit-title">Get Saturday's briefing — free.</div>
-    </div>
-    <div class="exit-body">
-      <p class="exit-deck">Six stories, ranked, with a local-expert take. The <b>same briefing paid subscribers get</b>, with three items paywalled. No card. Unsubscribe in one click.</p>
-      <form class="exit-form" onsubmit="event.preventDefault(); this.querySelector('.exit-submit').textContent='Subscribed ✓'; setTimeout(closeExit, 900);">
-        <input class="exit-input" type="email" placeholder="your@email.com" required />
-        <button class="exit-submit" type="submit">Send me Saturday →</button>
-      </form>
-      <p class="exit-fine">One email per week. No credit card. No spam.</p>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Exit-intent trigger: fires once per session when mouse leaves via top edge
-  (function() {
-    let fired = false;
-    const storage = sessionStorage.getItem('pai_exit_shown');
-    if (storage) return;
-    document.addEventListener('mouseout', function(e) {
-      if (fired) return;
-      // e.relatedTarget is null when leaving document bounds
-      if (!e.relatedTarget && e.clientY <= 0) {
-        fired = true;
-        sessionStorage.setItem('pai_exit_shown', '1');
-        document.getElementById('exitModal').classList.add('on');
-      }
-    });
-  })();
-
-  function closeExit() {
-    document.getElementById('exitModal').classList.remove('on');
-  }
-  // Close on backdrop click
-  document.getElementById('exitModal').addEventListener('click', function(e) {
-    if (e.target === this) closeExit();
-  });
-</script>
-
-<!-- WORLD MAP slide-out panel -->
-<div id="paiMapPanel">
-  <div class="pmp-inner">
-    <button class="pmp-close" onclick="document.getElementById('paiMapPanel').classList.remove('open')">&times;</button>
-    <span class="pmp-label">AI Governance</span>
-    <div class="pmp-country" id="pmpCountry"></div>
-    <div id="pmpLaws"></div>
-    <a href="pai-legislation.html" class="pmp-laws-btn">View all AI laws →</a>
-    <div class="pmp-cta">
-      <p>PrinciplesAI tracks AI governance across 40+ jurisdictions daily, built for legal, privacy and compliance practitioners who need to stay ahead.</p>
-      <a href="#pricing">Explore membership →</a>
-    </div>
-    <div class="pmp-contribute" id="pmpContribute">
-      <div class="pmp-contrib-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span class="pmp-contrib-title">Work in this jurisdiction?</span>
-      </div>
-      <p class="pmp-contrib-sub">We're building this with practitioners worldwide. Your insight makes this resource sharper for everyone.</p>
-      <button class="pmp-contrib-toggle" onclick="document.getElementById('pmpContribForm').style.display='block';this.style.display='none'">Share what you know →</button>
-      <div class="pmp-contrib-form" id="pmpContribForm">
-        <textarea id="pmpContribMsg" placeholder="e.g. The regulator just started informal consultations on AI procurement."></textarea>
-        <input type="email" id="pmpContribEmail" placeholder="you@firm.com">
-        <div class="pmp-contrib-opt">Optional. Only if you would like us to follow up or credit you.</div>
-        <button class="pmp-contrib-send" onclick="pmpSubmitContrib()">Send to the research team</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Live d3 world map script (loads d3 + topojson-client, fetches world-atlas, paints countries) -->
-<script src="https://gistcdn.githack.com/davidlongford/38bf87bee575b5e881adac29c529daf5/raw/pai-map.js" defer></script>
 
 </body>
 </html>

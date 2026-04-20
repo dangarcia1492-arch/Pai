@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrinciplesAI — product surface</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #06101e;
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .compare-bar {
+    height: 56px;
+    background: linear-gradient(180deg, #0a1729 0%, #06101e 100%);
+    border-bottom: 1px solid #1a253c;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 28px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 10;
+  }
+  .brand-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    background: #0176d3;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.005em;
+  }
+  .brand-name em { font-style: italic; font-weight: 500; color: #b0c2db; }
+  .brand-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    color: #6b7585;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    line-height: 1;
+  }
+
+  .tab-group {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 7px;
+    padding: 3px;
+  }
+  .tab {
+    background: transparent;
+    border: none;
+    color: #8a93a3;
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 7px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    transition: background .12s, color .12s;
+  }
+  .tab:hover { background: rgba(255,255,255,0.06); color: #fff; }
+  .tab.active {
+    background: #0176d3;
+    color: #fff;
+    box-shadow: 0 1px 4px rgba(1, 118, 211, 0.45);
+  }
+  .tab .lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .tab .sub {
+    font-size: 11.5px;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .tab.active .sub { font-weight: 600; }
+
+  .meta-right {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 11.5px; color: #6b7585;
+    margin-left: 10px;
+  }
+  .meta-right .key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 3px;
+    padding: 2px 6px;
+    color: #b0c2db;
+  }
+
+  .frame-wrap {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background: #f3f5f9;
+  }
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  @media (max-width: 760px) {
+    .compare-bar { padding: 0 12px; gap: 12px; }
+    .brand-text .brand-sub { display: none; }
+    .meta-right { display: none; }
+    .tab .sub { display: none; }
+    .tab { padding: 7px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="compare-bar">
+
+  <div class="brand-block">
+    <div class="brand-mark">P</div>
+    <div class="brand-text">
+      <span class="brand-name">Principles<em>AI</em></span>
+      <span class="brand-sub">Product surface · navigate the set</span>
+    </div>
+  </div>
+
+  <div class="tab-group" role="tablist">
+    <button class="tab active" data-src="pai-home-public.html" aria-selected="true">
+      <span class="lbl">Home · public</span>
+      <span class="sub">Logged-out landing</span>
+    </button>
+    <button class="tab" data-src="pai-home-private.html">
+      <span class="lbl">Home · private</span>
+      <span class="sub">Logged-in landing</span>
+    </button>
+    <button class="tab" data-src="pai-dashboard-v10.html">
+      <span class="lbl">Dashboard</span>
+      <span class="sub">v10 — the app home</span>
+    </button>
+    <button class="tab" data-src="pai-news.html">
+      <span class="lbl">News</span>
+      <span class="sub">Live Airtable feed · briefings</span>
+    </button>
+    <button class="tab" data-src="pai-authorities.html">
+      <span class="lbl">Authorities</span>
+      <span class="sub">Real-data directory</span>
+    </button>
+    <button class="tab" data-src="pai-legislation.html">
+      <span class="lbl">Legislation</span>
+      <span class="sub">Acts, bills, register</span>
+    </button>
+    <button class="tab" data-src="pai-glossary.html">
+      <span class="lbl">Glossary</span>
+      <span class="sub">Claims-backed · paywalled</span>
+    </button>
+    <button class="tab" data-src="pai-juris-uk.html">
+      <span class="lbl">UK</span>
+      <span class="sub">Jurisdiction page</span>
+    </button>
+    <button class="tab" data-src="pai-juris-california.html">
+      <span class="lbl">CA</span>
+      <span class="sub">Jurisdiction page</span>
+    </button>
+    <button class="tab" data-src="pai-juris-germany.html">
+      <span class="lbl">DE</span>
+      <span class="sub">Jurisdiction page</span>
+    </button>
+    <button class="tab" data-src="pai-item-meta-dpc.html">
+      <span class="lbl">News item</span>
+      <span class="sub">Paywalled article</span>
+    </button>
+    <button class="tab" data-src="pai-onboarding.html">
+      <span class="lbl">Onboarding</span>
+      <span class="sub">Post-signup flow</span>
+    </button>
+  </div>
+
+  <div class="meta-right">
+    <span>Hover sidebar to expand · press <span class="key">1–9</span> to tab</span>
+  </div>
+
+</header>
+
+<div class="frame-wrap">
+  <iframe id="frame" src="pai-home-public.html" title="PrinciplesAI product surface"></iframe>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const frame = document.getElementById('frame');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); });
+      t.classList.add('active');
+      t.setAttribute('aria-selected', 'true');
+      frame.src = t.dataset.src;
+    });
+  });
+  // Keyboard: number keys 1-4 to switch
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const idx = parseInt(e.key) - 1;
+    if (idx >= 0 && idx < tabs.length) tabs[idx].click();
+  });
+</script>
+
+</body>
+</html>

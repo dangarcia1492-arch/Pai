@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Legislation · PrinciplesAI</title>
+<meta name="description" content="Every AI, privacy and cybersecurity law PAI is tracking — bills in progress, acts in force, consultation drafts — across 329 jurisdictions." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f7f9fc; --surface-3: #eef2f7;
+  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878; --ink-faint: #8a93a3;
+  --border: #dbe1ea; --border-soft: #ebeff5;
+  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc; --accent-soft-2: #cfe1f6;
+  --green-fill: #2e844a; --green-bg: #e6f4ec;
+  --amber-fill: #ca8501; --amber-bg: #fef6e8;
+  --red-fill: #ba0517; --red-bg: #feded8;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px;
+  --radius: 8px;
+  --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
+  --shadow-2: 0 2px 6px rgba(10,23,41,0.07), 0 8px 20px rgba(10,23,41,0.05);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+
+/* Header */
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 16px; z-index: 200; box-shadow: var(--shadow-1); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.header-search { flex: 1; max-width: 280px; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px; background: var(--surface-3); border-radius: 5px; border: 1px solid transparent; }
+.header-search svg { width: 14px; height: 14px; stroke: var(--muted); stroke-width: 2; fill: none; }
+.header-search input { flex: 1; font-size: 13px; background: transparent; border: none; outline: none; }
+.header-search kbd { font-family: var(--mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; background: var(--surface); }
+.header-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); transition: background .12s, border-color .12s, color .12s; }
+.btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 1px 2px rgba(1,118,211,0.22); }
+.btn-primary:hover { background: var(--accent-2); color: #fff; }
+@media (max-width: 1100px) { .mkt-nav a:nth-child(n+5) { display: none; } .header-search { display: none; } }
+@media (max-width: 720px) { .mkt-nav { display: none; } }
+
+/* Main */
+.main-content { padding-top: var(--header-height); margin-left: 0; }
+.page-view { padding: 36px 44px 56px; max-width: 1320px; margin: 0 auto; }
+
+/* Breadcrumb */
+.lg-crumb { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+.lg-crumb a { color: var(--secondary); font-weight: 500; }
+.lg-crumb a:hover { color: var(--accent-2); }
+.lg-crumb .cur { color: var(--ink); font-weight: 600; }
+.lg-crumb .sep { color: var(--ink-faint); margin: 0 8px; }
+
+/* Hero */
+.lg-hero { padding-bottom: 28px; margin-bottom: 30px; border-bottom: 1px solid var(--border); }
+.lg-hero h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.022em; line-height: 1.08; color: var(--ink-strong); margin-bottom: 12px; }
+.lg-hero .sub { font-size: 16px; color: var(--secondary); line-height: 1.55; max-width: 680px; }
+.lg-hero .sub b { color: var(--ink); font-weight: 600; }
+
+/* Filter bar */
+.lg-filters {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: 10px 14px;
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 12px; margin-bottom: 26px;
+}
+.lg-fg { display: flex; align-items: center; gap: 6px; }
+.lg-lab { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-right: 4px; }
+.lg-chip { height: 26px; padding: 0 11px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; font-size: 12.5px; font-weight: 600; color: var(--secondary); cursor: pointer; }
+.lg-chip:hover { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent-2); }
+.lg-chip.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.lg-fd { width: 1px; height: 22px; background: var(--border); }
+
+/* Stats strip (same skin as juris pages) */
+.lg-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-soft); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); margin-bottom: 36px; overflow: hidden; }
+.lg-stat { background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 4px; }
+.lg-stat .lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.lg-stat .val { font-size: 26px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.02em; line-height: 1.05; }
+.lg-stat .sub { font-size: 12px; color: var(--secondary); }
+
+/* Section eyebrow */
+.lg-eye { display: flex; align-items: baseline; gap: 14px; margin: 4px 4px 18px; }
+.lg-eye .lbl { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-strong); }
+.lg-eye .meta { font-size: 13px; color: var(--muted); }
+.lg-eye .meta::before { content: ''; display: inline-block; width: 22px; height: 1px; background: var(--border); vertical-align: middle; margin-right: 12px; margin-bottom: 3px; }
+
+/* Featured major bills */
+.lg-major {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px; margin-bottom: 40px;
+}
+.lg-act-card {
+  background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1);
+  padding: 20px 22px 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+  cursor: pointer;
+}
+.lg-act-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); border-color: var(--accent-soft-2); }
+.lg-act-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 11.5px; color: var(--secondary); }
+.lg-act-iso {
+  width: 32px; height: 24px; border-radius: 3px; background: var(--surface-3); border: 1px solid var(--border-soft);
+  font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--secondary);
+  display: inline-flex; align-items: center; justify-content: center;
+  letter-spacing: 0.06em;
+}
+.lg-status {
+  display: inline-flex; align-items: center;
+  height: 22px; padding: 0 10px; border-radius: 11px;
+  font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: #fff;
+}
+.lg-status.in-force { background: var(--green-fill); }
+.lg-status.enacted { background: var(--green-fill); }
+.lg-status.in-progress { background: var(--amber-fill); }
+.lg-status.proposed { background: var(--accent); }
+.lg-status.consultation { background: var(--accent); }
+.lg-status.lapsed { background: var(--muted); }
+.lg-act-title { font-size: 17px; font-weight: 700; color: var(--ink-strong); line-height: 1.3; letter-spacing: -0.012em; }
+.lg-act-sub { font-size: 12.5px; color: var(--secondary); line-height: 1.5; }
+
+/* Progress timeline */
+.lg-progress {
+  display: flex; align-items: center; gap: 0;
+  margin-top: 4px; padding-top: 12px;
+  border-top: 1px solid var(--border-soft);
+  font-size: 10.5px;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.lg-progress .step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative; }
+.lg-progress .step:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: -50%; top: 4px;
+  width: 100%; height: 2px;
+  background: var(--border);
+}
+.lg-progress .step.done:not(:first-child)::before { background: var(--green-fill); }
+.lg-progress .step .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--surface-3); border: 2px solid var(--border); position: relative; z-index: 1; }
+.lg-progress .step.done .dot { background: var(--green-fill); border-color: var(--green-fill); }
+.lg-progress .step.current .dot { background: var(--amber-fill); border-color: var(--amber-fill); box-shadow: 0 0 0 3px var(--amber-bg); }
+.lg-progress .step.current { color: var(--amber); font-weight: 700; }
+.lg-progress .step .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+
+.lg-act-foot { display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: var(--muted); padding-top: 8px; }
+.lg-act-foot .when { font-family: var(--mono); }
+.lg-act-foot a { color: var(--accent-2); font-weight: 600; }
+
+/* Recent list */
+.lg-list {
+  background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius);
+  box-shadow: var(--shadow-1); margin-bottom: 40px;
+  list-style: none; overflow: hidden;
+}
+.lg-row {
+  display: grid; grid-template-columns: 80px 120px 1fr auto; gap: 18px;
+  padding: 14px 22px; border-bottom: 1px solid var(--border-soft);
+  align-items: center;
+}
+.lg-row:last-child { border-bottom: none; }
+.lg-row:hover { background: var(--surface-2); }
+.lg-row .date { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 500; }
+.lg-row .jurisbox { display: flex; align-items: center; gap: 8px; font-size: 11.5px; }
+.lg-row .jurisbox b { color: var(--ink); font-weight: 700; }
+.lg-row .title { font-size: 14px; font-weight: 500; color: var(--ink-strong); line-height: 1.4; }
+.lg-row .title a { color: inherit; border-bottom: 1px solid transparent; }
+.lg-row .title a:hover { border-bottom-color: var(--accent); }
+.lg-row .title em { font-family: var(--display); font-style: italic; font-size: 15px; font-weight: 600; }
+
+/* Paywall */
+.lg-paywall {
+  background: linear-gradient(180deg, rgba(227,239,252,0) 0%, rgba(227,239,252,0.5) 100%), var(--surface);
+  border: 1px solid var(--accent-soft-2); border-radius: var(--radius);
+  padding: 28px 32px; margin-bottom: 28px; text-align: center;
+}
+.lg-paywall h3 { font-size: 20px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; margin-bottom: 8px; }
+.lg-paywall p { font-size: 13.5px; color: var(--secondary); margin-bottom: 16px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.lg-paywall b { color: var(--ink); font-weight: 600; }
+.lg-paywall .ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.lg-paywall .cta { height: 40px; padding: 0 18px; border-radius: 5px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; }
+.lg-paywall .cta.primary { background: var(--accent); color: #fff; box-shadow: 0 2px 6px rgba(1,118,211,0.28); }
+.lg-paywall .cta.primary:hover { background: var(--accent-2); }
+.lg-paywall .cta.ghost { background: var(--surface); color: var(--accent-2); border: 1px solid var(--accent-soft-2); }
+.lg-paywall .cta.ghost:hover { background: var(--accent-soft); }
+
+.lg-footer { border-top: 1px solid var(--border); padding: 20px 0 0; margin-top: 20px; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; }
+
+@media (max-width: 820px) {
+  .lg-stats { grid-template-columns: repeat(2, 1fr); }
+  .page-view { padding: 24px 16px 40px; }
+  .lg-row { grid-template-columns: 1fr; gap: 6px; padding: 14px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!--
+==================================================================
+PAGE: Legislation
+Airtable schema expected per Law/Bill record (table: "Legislation"):
+  name           · text   · "EU Artificial Intelligence Act"
+  short_title    · text   · "EU AI Act"
+  jurisdiction   · link   · → Jurisdictions
+  iso            · text   · "EU"
+  status         · select · Proposed | Consultation | In progress | Enacted | In force | Lapsed
+  domain         · multi  · AI | Privacy | Cyber
+  summary        · long   · one-paragraph description
+  date_introduced · date
+  date_enacted    · date
+  date_in_force   · date
+  source_url      · url
+  stage           · text   · current procedural stage (for In progress)
+  tracked_since   · date
+Render each <article class="lg-act-card"> from one row.
+==================================================================
+-->
+
+<header class="header-bar">
+  <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); letter-spacing:-0.005em; text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html" class="on">Legislation</a>
+    <a href="pai-home-public.html#jobs">Jobs</a>
+    <a href="pai-glossary.html">Glossary</a>
+    <a href="pai-home-public.html#pricing">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="pai-home-public.html#pricing" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view">
+
+  <nav class="lg-crumb">
+    <a href="pai-home-public.html">Home</a>
+    <span class="sep">›</span>
+    <span class="cur">Legislation</span>
+  </nav>
+
+  <!-- HERO -->
+  <header class="lg-hero">
+    <h1>Legislation.</h1>
+    <p class="sub">Every <b>AI, privacy and cybersecurity law</b> PAI is tracking — bills in progress, acts in force, consultation drafts. <b>187 instruments live</b> across <b>42 jurisdictions</b>. Updated as legislatures act.</p>
+  </header>
+
+  <!-- FILTERS -->
+  <div class="lg-filters">
+    <div class="lg-fg">
+      <span class="lg-lab">Region</span>
+      <button class="lg-chip on">All</button>
+      <button class="lg-chip">EU / EEA</button>
+      <button class="lg-chip">UK &amp; Common-law</button>
+      <button class="lg-chip">APAC</button>
+      <button class="lg-chip">Americas</button>
+    </div>
+    <div class="lg-fd"></div>
+    <div class="lg-fg">
+      <span class="lg-lab">Status</span>
+      <button class="lg-chip on">All</button>
+      <button class="lg-chip">In force</button>
+      <button class="lg-chip">In progress</button>
+      <button class="lg-chip">Consultation</button>
+      <button class="lg-chip">Proposed</button>
+    </div>
+    <div class="lg-fd"></div>
+    <div class="lg-fg">
+      <span class="lg-lab">Domain</span>
+      <button class="lg-chip on">All</button>
+      <button class="lg-chip">AI</button>
+      <button class="lg-chip">Privacy</button>
+      <button class="lg-chip">Cyber</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="lg-stats">
+    <div class="lg-stat"><span class="lbl">Instruments tracked</span><span class="val">187</span><span class="sub">Across 42 jurisdictions</span></div>
+    <div class="lg-stat"><span class="lbl">In force</span><span class="val">109</span><span class="sub">58% of tracked</span></div>
+    <div class="lg-stat"><span class="lbl">In progress</span><span class="val">58</span><span class="sub">Through legislatures right now</span></div>
+    <div class="lg-stat"><span class="lbl">Enacted · 30 days</span><span class="val">6</span><span class="sub">Newly in force this month</span></div>
+  </section>
+
+  <!-- MAJOR / FEATURED -->
+  <div class="lg-eye"><span class="lbl">Major instruments</span><span class="meta">The ones that shape every practitioner's week</span></div>
+  <section class="lg-major">
+
+    <article class="lg-act-card">
+      <div class="lg-act-meta">
+        <span class="lg-act-iso">EU</span>
+        <span class="lg-status in-force">In force</span>
+        <span>·</span>
+        <span>AI</span>
+      </div>
+      <h3 class="lg-act-title">EU Artificial Intelligence Act</h3>
+      <p class="lg-act-sub">Horizontal AI framework with a four-tier risk classification. Prohibited practices in force; high-risk obligations phasing in through 2026-27.</p>
+      <div class="lg-progress">
+        <div class="step done"><span class="dot"></span><span class="label">Proposed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">Passed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">In force</span></div>
+        <div class="step current"><span class="dot"></span><span class="label">Phasing</span></div>
+      </div>
+      <div class="lg-act-foot">
+        <span class="when">Regulation (EU) 2024/1689</span>
+        <a href="#">Tracked rulings →</a>
+      </div>
+    </article>
+
+    <article class="lg-act-card">
+      <div class="lg-act-meta">
+        <span class="lg-act-iso">IN</span>
+        <span class="lg-status in-progress">Rules drafting</span>
+        <span>·</span>
+        <span>Privacy</span>
+      </div>
+      <h3 class="lg-act-title">Digital Personal Data Protection Act (DPDPA)</h3>
+      <p class="lg-act-sub">India's first comprehensive privacy statute. Act enacted August 2023; implementation rules in second public consultation — close 16 May 2026.</p>
+      <div class="lg-progress">
+        <div class="step done"><span class="dot"></span><span class="label">Proposed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">Enacted</span></div>
+        <div class="step current"><span class="dot"></span><span class="label">Rules</span></div>
+        <div class="step"><span class="dot"></span><span class="label">In force</span></div>
+      </div>
+      <div class="lg-act-foot">
+        <span class="when">Act 22/2023</span>
+        <a href="#">Tracked rulings →</a>
+      </div>
+    </article>
+
+    <article class="lg-act-card">
+      <div class="lg-act-meta">
+        <span class="lg-act-iso">GB</span>
+        <span class="lg-status in-force">In force</span>
+        <span>·</span>
+        <span>Privacy</span>
+      </div>
+      <h3 class="lg-act-title">Data Protection and Digital Information Act</h3>
+      <p class="lg-act-sub">The UK's post-Brexit divergence of GDPR. Royal Assent 2024; key provisions on automated decision-making and lawful basis already affecting enforcement.</p>
+      <div class="lg-progress">
+        <div class="step done"><span class="dot"></span><span class="label">Proposed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">Passed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">In force</span></div>
+        <div class="step current"><span class="dot"></span><span class="label">Applied</span></div>
+      </div>
+      <div class="lg-act-foot">
+        <span class="when">DPDI Act 2024</span>
+        <a href="#">Tracked rulings →</a>
+      </div>
+    </article>
+
+    <article class="lg-act-card">
+      <div class="lg-act-meta">
+        <span class="lg-act-iso">KR</span>
+        <span class="lg-status in-force">In force</span>
+        <span>·</span>
+        <span>AI</span>
+      </div>
+      <h3 class="lg-act-title">Korea AI Basic Act</h3>
+      <p class="lg-act-sub">South Korea's first horizontal AI law — three-tier risk classification; five enforcement guidelines published by MSIT this month.</p>
+      <div class="lg-progress">
+        <div class="step done"><span class="dot"></span><span class="label">Proposed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">Passed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">In force</span></div>
+        <div class="step current"><span class="dot"></span><span class="label">Enforcement</span></div>
+      </div>
+      <div class="lg-act-foot">
+        <span class="when">Act 19752</span>
+        <a href="#">Tracked rulings →</a>
+      </div>
+    </article>
+
+    <article class="lg-act-card">
+      <div class="lg-act-meta">
+        <span class="lg-act-iso">US</span>
+        <span class="lg-status in-progress">In progress</span>
+        <span>·</span>
+        <span>Privacy</span>
+      </div>
+      <h3 class="lg-act-title">American Privacy Rights Act (APRA)</h3>
+      <p class="lg-act-sub">Federal privacy bill — bipartisan House/Senate drafts; stalled in committee but still under active mark-up. Preemption question unresolved.</p>
+      <div class="lg-progress">
+        <div class="step done"><span class="dot"></span><span class="label">Proposed</span></div>
+        <div class="step current"><span class="dot"></span><span class="label">Committee</span></div>
+        <div class="step"><span class="dot"></span><span class="label">Passed</span></div>
+        <div class="step"><span class="dot"></span><span class="label">In force</span></div>
+      </div>
+      <div class="lg-act-foot">
+        <span class="when">H.R. 8818 · 118th Congress</span>
+        <a href="#">Tracked rulings →</a>
+      </div>
+    </article>
+
+    <article class="lg-act-card">
+      <div class="lg-act-meta">
+        <span class="lg-act-iso">EU</span>
+        <span class="lg-status in-force">In force</span>
+        <span>·</span>
+        <span>Cyber</span>
+      </div>
+      <h3 class="lg-act-title">NIS 2 Directive</h3>
+      <p class="lg-act-sub">Cybersecurity baseline across essential and important entities. Member state transposition complete; incident-reporting thresholds under active enforcement.</p>
+      <div class="lg-progress">
+        <div class="step done"><span class="dot"></span><span class="label">Proposed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">Passed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">Transposed</span></div>
+        <div class="step current"><span class="dot"></span><span class="label">Applied</span></div>
+      </div>
+      <div class="lg-act-foot">
+        <span class="when">Directive (EU) 2022/2555</span>
+        <a href="#">Tracked rulings →</a>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- RECENT MOVEMENT LIST -->
+  <div class="lg-eye"><span class="lbl">Recent movement</span><span class="meta">Bills and instruments that advanced this month</span></div>
+  <ul class="lg-list">
+    <li class="lg-row">
+      <span class="date">17 Apr</span>
+      <span class="jurisbox"><b>South Korea</b> · AI Basic Act</span>
+      <span class="title"><a href="#">MSIT publishes five enforcement guidelines for the AI Basic Act</a></span>
+      <span class="lg-status in-force">In force</span>
+    </li>
+    <li class="lg-row">
+      <span class="date">16 Apr</span>
+      <span class="jurisbox"><b>India</b> · DPDPA</span>
+      <span class="title"><a href="#">MeitY opens second public consultation on DPDPA implementation rules</a></span>
+      <span class="lg-status consultation">Consultation</span>
+    </li>
+    <li class="lg-row">
+      <span class="date">15 Apr</span>
+      <span class="jurisbox"><b>Italy</b> · Law 132/2025</span>
+      <span class="title"><a href="#">Italy designates ACN and AgID as national AI Act authorities under Article 70</a></span>
+      <span class="lg-status in-force">In force</span>
+    </li>
+    <li class="lg-row">
+      <span class="date">15 Apr</span>
+      <span class="jurisbox"><b>Belgium</b></span>
+      <span class="title"><a href="#">SPF Economie publishes list of 21 designated AI Act competent authorities</a></span>
+      <span class="lg-status in-force">In force</span>
+    </li>
+    <li class="lg-row">
+      <span class="date">12 Apr</span>
+      <span class="jurisbox"><b>Japan</b></span>
+      <span class="title"><a href="#">Diet adopts Law No. 47/2025 — AI Promotion Act, creates Strategy HQ</a></span>
+      <span class="lg-status enacted">Enacted</span>
+    </li>
+    <li class="lg-row">
+      <span class="date">10 Apr</span>
+      <span class="jurisbox"><b>USA</b> · Kentucky</span>
+      <span class="title"><a href="#">Kentucky Legislature passes amendments to Consumer Data Protection Act</a></span>
+      <span class="lg-status enacted">Enacted</span>
+    </li>
+    <li class="lg-row">
+      <span class="date">09 Apr</span>
+      <span class="jurisbox"><b>Portugal</b></span>
+      <span class="title"><a href="#">Government designates ANACOM as national AI Act Market Surveillance Authority</a></span>
+      <span class="lg-status in-force">In force</span>
+    </li>
+    <li class="lg-row">
+      <span class="date">08 Apr</span>
+      <span class="jurisbox"><b>Turkey</b> · KVKK</span>
+      <span class="title"><a href="#">KVKK publishes guidance on AI and personal data protection</a></span>
+      <span class="lg-status in-force">In force</span>
+    </li>
+  </ul>
+
+  <!-- PAYWALL -->
+  <section class="lg-paywall">
+    <h3>See every act, every bill, every jurisdiction</h3>
+    <p>Get the full register — 187 instruments across 42 jurisdictions, with commentary from local experts, progress alerts as bills move, and editorial analysis of the instruments that shape your week. <b>30-day money-back on annual.</b></p>
+    <div class="ctas">
+      <a href="pai-home-public.html#pricing" class="cta primary">Get full access →</a>
+      <a href="pai-home-public.html" class="cta ghost">Free Saturday briefing</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lg-footer">
+    <div>PrinciplesAI · Legislation register</div>
+    <div><a href="pai-home-public.html" style="color:var(--accent-2);">← Back to home</a></div>
+  </footer>
+
+</div>
+</div>
+
+</body>
+</html>
