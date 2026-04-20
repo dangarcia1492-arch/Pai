@@ -32,6 +32,7 @@ a { color: var(--accent); text-decoration: none; }
 .mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
 .mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 .mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.mkt-nav .mkt-sep { display: inline-block; width: 1px; height: 18px; background: var(--border); margin: 0 6px; }
 .header-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); cursor: pointer; }
 .btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
@@ -52,9 +53,17 @@ a { color: var(--accent); text-decoration: none; }
 /* Hero */
 .p-hero { padding-bottom: 32px; margin-bottom: 32px; border-bottom: 1px solid var(--border); text-align: center; }
 .p-hero .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 14px; }
-.p-hero h1 { font-family: var(--display); font-size: 54px; font-weight: 600; letter-spacing: -0.022em; line-height: 1.04; color: var(--ink-strong); margin-bottom: 14px; }
+.p-hero h1 { font-family: var(--sans); font-size: 44px; font-weight: 700; letter-spacing: -0.022em; line-height: 1.05; color: var(--ink-strong); margin-bottom: 14px; }
 .p-hero .deck { font-size: 16px; color: var(--secondary); line-height: 1.55; max-width: 580px; margin: 0 auto; }
 .p-hero .deck b { color: var(--ink); font-weight: 600; }
+
+/* Currency toggle */
+.cx-toggle { display: inline-flex; margin: 18px auto 0; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 3px; box-shadow: 0 1px 2px rgba(10,23,41,0.04); }
+.cx-btn { font-family: var(--sans); font-size: 11.5px; font-weight: 600; color: var(--muted); background: transparent; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; letter-spacing: 0.02em; transition: background .12s, color .12s; }
+.cx-btn:hover { color: var(--ink); }
+.cx-btn.on { background: var(--ink); color: #fff; }
+.cx-btn .cx-sym { font-family: var(--mono); font-size: 12.5px; font-weight: 700; }
+.cx-note { font-family: var(--sans); font-size: 11.5px; color: var(--ink-faint); margin-top: 8px; font-weight: 400; letter-spacing: 0; text-transform: none; }
 
 /* Pricing cards */
 .pricing-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 56px; }
@@ -62,7 +71,7 @@ a { color: var(--accent); text-decoration: none; }
 .price-card.featured { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(1,118,211,0.08), 0 6px 24px rgba(10,23,41,0.08); }
 .pc-ribbon { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
 .pc-tier { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 12px; }
-.pc-amount { font-family: var(--display); font-size: 44px; font-weight: 600; color: var(--ink-strong); line-height: 1; letter-spacing: -0.02em; margin-bottom: 4px; }
+.pc-amount { font-family: var(--sans); font-size: 36px; font-weight: 700; color: var(--ink-strong); line-height: 1; letter-spacing: -0.025em; margin-bottom: 4px; }
 .pc-amount .pc-period { font-size: 14px; color: var(--muted); font-weight: 400; letter-spacing: 0; }
 .pc-desc { font-size: 13px; color: var(--secondary); line-height: 1.5; margin: 14px 0 24px; flex: 1; }
 .pc-desc b { color: var(--ink); font-weight: 600; }
@@ -128,16 +137,17 @@ a { color: var(--accent); text-decoration: none; }
 <header class="header-bar">
   <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
   <nav class="mkt-nav">
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-trust.html">Trust</a>
+    <span class="mkt-sep" aria-hidden="true"></span>
     <a href="pai-home-public.html">Home</a>
     <a href="pai-authorities.html">Authorities</a>
     <a href="pai-news.html">News</a>
     <a href="pai-legislation.html">Legislation</a>
-    <a href="pai-jobs.html">Jobs</a>
     <a href="pai-pricing.html" class="on">Pricing</a>
-    <a href="pai-trust.html">Trust</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="#" class="btn" style="text-decoration:none;">Log out</a>
     <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
   </div>
 </header>
@@ -153,16 +163,22 @@ a { color: var(--accent); text-decoration: none; }
 
   <!-- HERO -->
   <header class="p-hero">
-    <div class="eyebrow">Pricing · no surprises</div>
-    <h1>Plain pricing.</h1>
-    <p class="deck">Monthly, annual, or team. Rolling access. <b>30-day money-back guarantee</b> on annual. No hidden fees, no discount code games, no per-export charges.</p>
+    <div class="eyebrow">Pricing</div>
+    <h1>A fraction of what the incumbents charge.</h1>
+    <p class="deck"><b>$119/month</b> or <b>$1,190/year</b>.<br/><br/>Comparable enterprise research platforms in AI governance, privacy and cyber run from <b>$5,000</b> to over <b>$40,000</b> a year.<br/><br/>PAI is priced to be <em>used</em> — by the people doing the work, not just the ones with a procurement budget.</p>
+    <div class="cx-toggle" role="tablist" aria-label="Currency">
+      <button type="button" class="cx-btn on" data-cx="USD" role="tab" aria-selected="true"><span class="cx-sym">$</span>USD</button>
+      <button type="button" class="cx-btn" data-cx="GBP" role="tab" aria-selected="false"><span class="cx-sym">£</span>GBP</button>
+      <button type="button" class="cx-btn" data-cx="EUR" role="tab" aria-selected="false"><span class="cx-sym">€</span>EUR</button>
+    </div>
+    <div class="cx-note">30-day money-back on annual · rolling access · prices exclude local VAT/tax</div>
   </header>
 
   <!-- PRICING CARDS -->
   <section class="pricing-row">
     <div class="price-card">
       <div class="pc-tier">Monthly</div>
-      <div class="pc-amount">£95<span class="pc-period"> / month</span></div>
+      <div class="pc-amount"><span class="cx-price" data-gbp="£95" data-usd="$119" data-eur="€115">$119</span><span class="pc-period"> / month</span></div>
       <div class="pc-desc">Individual seat. Rolling access — no further billing if you stop.</div>
       <ul class="pc-feats">
         <li>Full dashboard, all jurisdictions</li>
@@ -176,7 +192,7 @@ a { color: var(--accent); text-decoration: none; }
     <div class="price-card featured">
       <div class="pc-ribbon">Most popular · save 2 months</div>
       <div class="pc-tier">Annual</div>
-      <div class="pc-amount">£950<span class="pc-period"> / year</span></div>
+      <div class="pc-amount"><span class="cx-price" data-gbp="£950" data-usd="$1,190" data-eur="€1,150">$1,190</span><span class="pc-period"> / year</span></div>
       <div class="pc-desc">Individual seat. <b>30-day money-back</b>, no questions.</div>
       <ul class="pc-feats">
         <li>Everything in Monthly</li>
@@ -189,7 +205,7 @@ a { color: var(--accent); text-decoration: none; }
     </div>
     <div class="price-card">
       <div class="pc-tier">Team</div>
-      <div class="pc-amount">From £3,500<span class="pc-period"> / year</span></div>
+      <div class="pc-amount">From <span class="cx-price" data-gbp="£3,500" data-usd="$4,400" data-eur="€4,200">$4,400</span><span class="pc-period"> / year</span></div>
       <div class="pc-desc">5+ seats. Team watchlists, briefing export, shared alerts.</div>
       <ul class="pc-feats">
         <li>Everything in Annual, per seat</li>
@@ -205,14 +221,14 @@ a { color: var(--accent); text-decoration: none; }
   <!-- Money-back strip -->
   <div class="p-guarantee">
     <div class="ico">✓</div>
-    <div class="txt"><b>30-day money-back guarantee on annual.</b> If PAI isn't what you expected in the first month, email us for a full refund — no questions, no retention calls, no friction.</div>
+    <div class="txt"><b>30-day money-back guarantee on annual.</b><br/><br/>If PAI isn't what you expected in the first month, email us for a full refund — no questions, no retention calls, no friction.</div>
   </div>
 
   <!-- Enterprise callout -->
   <section class="p-enterprise">
     <div>
       <h3>Enterprise &amp; custom</h3>
-      <p>20+ seats, SSO (SAML / OIDC), custom jurisdictions, API access, standard DPA, SLA, optional <b>single-tenant EU-only deployment</b> (6–8 week lead time). Send your scope and we'll quote within 48 hours.</p>
+      <p>20+ seats, SSO (SAML / OIDC), custom topics, API access, standard DPA, SLA, optional <b>single-tenant EU-only deployment</b> (6–8 week lead time).<br/><br/>Send your scope and we'll quote within <b>24 hours</b>.</p>
     </div>
     <a href="mailto:sales@principlesai.org" class="p-enterprise-cta">Contact sales →</a>
   </section>
@@ -234,11 +250,11 @@ a { color: var(--accent); text-decoration: none; }
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>How is this different from DataGuidance or OneTrust?</span>
+        <span>How is this different from the incumbents?</span>
         <span class="faq-toggle">+</span>
       </button>
       <div class="faq-a">
-        <em>Scope</em>: DataGuidance focuses on privacy; OneTrust is a compliance platform with content attached. PAI treats AI, privacy and cyber as first-class lenses, not add-ons. <em>Freshness</em>: we capture live from source; competitors mostly rebuild from aggregated feeds. <em>Interpretation</em>: we pair significant items with a named local expert's take — you won't find that consistently anywhere else.
+        <em>Scope</em>: existing research platforms treat AI, privacy and cyber as separate silos — usually with one as the primary focus and the others bolted on. PAI treats all three as first-class lenses for practitioners whose work spans all of them. <em>Freshness</em>: we capture live from the source — regulators, courts, gazettes — the incumbents mostly rebuild from aggregated feeds, which adds hours or days of lag. <em>Interpretation</em>: we pair significant items with a named local expert's take — you won't find that consistently anywhere else. <em>Price</em>: a fraction of what the established platforms charge.
       </div>
     </div>
     <div class="faq-item">
@@ -256,12 +272,12 @@ a { color: var(--accent); text-decoration: none; }
         <span class="faq-toggle">+</span>
       </button>
       <div class="faq-a">
-        The pipeline runs continuously. New items are captured within minutes of publication, ranked and tagged within hours, and annotated by editors within 24-48 hours where the item warrants commentary. Your dashboard refreshes live.
+        Three layers running continuously. <em>Our technology</em> captures new items within minutes of publication. <em>Our team of editors</em> ranks and tags them within hours. <em>Our global network of local experts</em> adds interpretation within 24–48 hours where the item warrants commentary. Your dashboard refreshes live.
       </div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Can I cancel?</span>
+        <span>How does billing work?</span>
         <span class="faq-toggle">+</span>
       </button>
       <div class="faq-a">
@@ -274,7 +290,7 @@ a { color: var(--accent); text-decoration: none; }
         <span class="faq-toggle">+</span>
       </button>
       <div class="faq-a">
-        Team plans start at <em>£3,500/year for 5 seats</em> with per-seat pricing scaling down from there. Enterprise (20+ seats, SSO, custom jurisdictions, API access, DPA, SLA) is bespoke — send your scope and we'll quote within 48 hours.
+        Team plans start at <em><span class="cx-price" data-gbp="£3,500" data-usd="$4,400" data-eur="€4,200">$4,400</span>/year for 5 seats</em> with per-seat pricing scaling down from there. Enterprise (20+ seats, SSO, custom jurisdictions, API access, DPA, SLA) is bespoke — send your scope and we'll quote within 48 hours.
       </div>
     </div>
     <div class="faq-item">
@@ -314,6 +330,36 @@ a { color: var(--accent); text-decoration: none; }
 
 </div>
 </div>
+
+<script>
+(function(){
+  var KEY = 'pai_cx';
+  var VALID = { GBP:1, USD:1, EUR:1 };
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e) {}
+  if (!saved || !VALID[saved]) saved = 'USD';
+
+  function apply(cx) {
+    var attr = 'data-' + cx.toLowerCase();
+    document.querySelectorAll('.cx-price').forEach(function(el){
+      var v = el.getAttribute(attr);
+      if (v) el.textContent = v;
+    });
+    document.querySelectorAll('.cx-btn').forEach(function(b){
+      var on = b.getAttribute('data-cx') === cx;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    try { localStorage.setItem(KEY, cx); } catch(e) {}
+  }
+
+  document.querySelectorAll('.cx-btn').forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-cx')); });
+  });
+
+  apply(saved);
+})();
+</script>
 
 </body>
 </html>

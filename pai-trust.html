@@ -35,6 +35,7 @@ a { color: var(--accent); text-decoration: none; }
 .mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
 .mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 .mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.mkt-nav .mkt-sep { display: inline-block; width: 1px; height: 18px; background: var(--border); margin: 0 6px; }
 .header-search { max-width: 240px; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px; background: var(--surface-3); border-radius: 5px; border: 1px solid transparent; }
 .header-search svg { width: 14px; height: 14px; stroke: var(--muted); stroke-width: 2; fill: none; }
 .header-search input { flex: 1; font-size: 13px; background: transparent; border: none; outline: none; font-family: inherit; }
@@ -405,16 +406,17 @@ a { color: var(--accent); text-decoration: none; }
 <header class="header-bar">
   <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
   <nav class="mkt-nav">
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-trust.html" class="on">Trust</a>
+    <span class="mkt-sep" aria-hidden="true"></span>
     <a href="pai-home-public.html">Home</a>
     <a href="pai-authorities.html">Authorities</a>
     <a href="pai-news.html">News</a>
     <a href="pai-legislation.html">Legislation</a>
-    <a href="pai-jobs.html">Jobs</a>
     <a href="pai-pricing.html">Pricing</a>
-    <a href="pai-trust.html" class="on">Trust</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="#" class="btn" style="text-decoration:none;">Log out</a>
     <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
   </div>
 </header>

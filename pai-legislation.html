@@ -38,6 +38,7 @@ button { cursor: pointer; }
 .mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
 .mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 .mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.mkt-nav .mkt-sep { display: inline-block; width: 1px; height: 18px; background: var(--border); margin: 0 6px; }
 .header-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .btn { display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 18px; font-size: 13px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); transition: background .12s, border-color .12s, color .12s; }
 .btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
@@ -262,16 +263,17 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
 <header class="header-bar">
   <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); letter-spacing:-0.005em; text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
   <nav class="mkt-nav">
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-trust.html">Trust</a>
+    <span class="mkt-sep" aria-hidden="true"></span>
     <a href="pai-home-public.html">Home</a>
     <a href="pai-authorities.html">Authorities</a>
     <a href="pai-news.html">News</a>
     <a href="pai-legislation.html" class="on">Legislation</a>
-    <a href="pai-jobs.html">Jobs</a>
     <a href="pai-pricing.html">Pricing</a>
-    <a href="pai-trust.html">Trust</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
+    <a href="#" class="btn" style="text-decoration:none; height:36px;">Log out</a>
     <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
   </div>
 </header>

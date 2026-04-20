@@ -112,8 +112,8 @@ button { cursor: pointer; }
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 20px;
-  padding: 20px 0 44px;
-  margin-bottom: 48px;
+  padding: 14px 0 24px;
+  margin-bottom: 24px;
   border-bottom: 1px solid var(--border);
   align-items: start;
 }
@@ -205,8 +205,7 @@ button { cursor: pointer; }
   white-space: nowrap;
 }
 
-/* Push main content down by strip height */
-.main-content { padding-top: calc(var(--header-height) + 38px); }
+.main-content { padding-top: var(--header-height); }
 
 @media (max-width: 1100px) {
   .lt-item:nth-child(n+3) { display: none; }
@@ -381,6 +380,7 @@ button { cursor: pointer; }
 .mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
 .mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
 .mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.mkt-nav .mkt-sep { display: inline-block; width: 1px; height: 18px; background: var(--border); margin: 0 6px; }
 .btn-primary {
   background: var(--accent); color: #fff; border: 1px solid var(--accent) !important;
   box-shadow: 0 1px 2px rgba(1,118,211,0.22);
@@ -1542,15 +1542,18 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
   .def-card { width: 100%; max-width: 520px; }
 }
 
-/* Post-activity CTA strip (home) — links out to Jobs + Pricing pages */
-.home-cta-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0 40px; }
-.home-cta-item { display: flex; flex-direction: column; gap: 8px; padding: 22px 26px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: inherit; transition: border-color .12s, box-shadow .12s, transform .12s; }
+/* Explore strip (home) — 4 proof cards into dedicated pages */
+.home-cta-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0 32px; }
+.home-cta-strip.quad { grid-template-columns: repeat(4, 1fr); }
+.home-cta-item { display: flex; flex-direction: column; gap: 8px; padding: 22px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: inherit; transition: border-color .12s, box-shadow .12s, transform .12s; }
 .home-cta-item:hover { border-color: var(--ink-faint); box-shadow: 0 2px 8px rgba(10,23,41,0.06); transform: translateY(-1px); }
 .home-cta-item .hcta-eye { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); }
-.home-cta-item .hcta-body { font-size: 14px; color: var(--secondary); line-height: 1.5; }
+.home-cta-item .hcta-headline { font-family: var(--display); font-size: 20px; font-weight: 600; color: var(--ink-strong); line-height: 1.2; letter-spacing: -0.012em; }
+.home-cta-item .hcta-body { font-size: 13px; color: var(--secondary); line-height: 1.5; flex: 1; }
 .home-cta-item .hcta-body b { color: var(--ink); font-weight: 600; }
-.home-cta-item .hcta-link { font-size: 13px; font-weight: 600; color: var(--accent-2); margin-top: 4px; }
-@media (max-width: 720px) { .home-cta-strip { grid-template-columns: 1fr; } }
+.home-cta-item .hcta-link { font-size: 12.5px; font-weight: 600; color: var(--accent-2); margin-top: 4px; }
+@media (max-width: 1000px) { .home-cta-strip.quad { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 720px) { .home-cta-strip, .home-cta-strip.quad { grid-template-columns: 1fr; } }
 
 /* Jobs board */
 .jobs-row { margin-bottom: 28px; }
@@ -1726,39 +1729,22 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
 <header class="header-bar">
   <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); letter-spacing:-0.005em; text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
   <nav class="mkt-nav">
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-trust.html">Trust</a>
+    <span class="mkt-sep" aria-hidden="true"></span>
     <a href="pai-home-public.html" class="on">Home</a>
     <a href="pai-authorities.html">Authorities</a>
     <a href="pai-news.html">News</a>
     <a href="pai-legislation.html">Legislation</a>
-    <a href="pai-jobs.html">Jobs</a>
     <a href="pai-pricing.html">Pricing</a>
-    <a href="pai-trust.html">Trust</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
+    <a href="#" class="btn" style="text-decoration:none; height:36px;">Log out</a>
     <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
   </div>
 </header>
 
 
-<!-- HEADLINE STRIP (static · three most recent) -->
-<div class="live-ticker">
-  <div class="lt-items">
-    <div class="lt-item">
-      <span class="lt-ts">09:32</span>
-      <span class="lt-body"><b>France · CNIL</b> recommendations on AI model training with public data</span>
-    </div>
-    <div class="lt-item">
-      <span class="lt-ts">08:15</span>
-      <span class="lt-body"><b>Ireland · DPC</b> Meta Platforms fined €310m · Article 60 decision</span>
-    </div>
-    <div class="lt-item">
-      <span class="lt-ts">07:48</span>
-      <span class="lt-body"><b>Japan · PPC</b> updated cross-border breach notification guidance</span>
-    </div>
-  </div>
-  <div class="lt-stamp">Updated 10:34 UTC</div>
-</div>
 
 <!-- MAIN CONTENT -->
 <div class="main-content">
@@ -1768,7 +1754,7 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
   <div class="page-statusbar">
     <div class="hero-greeting">
       <h1 class="static-hero">AI Governance. Privacy. Cybersecurity.<br/><span class="sh-sub">For the desks that cover all three.</span></h1>
-      <p class="hero-deck-simple">Regulatory and industry intelligence across <b>2,389 bodies</b> and <b>329 jurisdictions</b> — captured, ranked and interpreted by our pipeline, editors and local experts.</p>
+      <p class="hero-deck-simple">Regulatory and industry intelligence across <b>2,389 bodies</b> and <b>329 jurisdictions</b> — captured, ranked and interpreted by our coverage engine, editors and local experts.</p>
       <div class="cycle-cta-row" style="margin-top:28px;">
         <button class="cycle-cta">Get full access <span style="font-family:var(--mono); font-weight:400;">→</span></button>
         <button class="cycle-cta ghost">Sign in</button>
@@ -1796,37 +1782,7 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
     </aside>
   </div>
 
-  <!-- EDITORIAL PARTNERS -->
-  <section class="social-proof">
-    <div class="sp-label">Content and commentary from practitioners at</div>
-    <div class="sp-logos">
-      <span class="sp-firm">Hogan Lovells</span>
-      <span class="sp-firm">Fieldfisher</span>
-      <span class="sp-firm">DLA Piper</span>
-      <span class="sp-firm">Clifford Chance</span>
-      <span class="sp-firm">Linklaters</span>
-      <span class="sp-firm">Bird &amp; Bird</span>
-      <span class="sp-firm">Slaughter and May</span>
-      <span class="sp-firm">Baker McKenzie</span>
-      <span class="sp-firm">Freshfields</span>
-    </div>
-  </section>
-
-  <!-- EDITORIAL DAILY STRIP (public — not personalised) -->
-  <section class="daily-strip">
-    <div class="ds-kick">TODAY · 20 April 2026</div>
-    <div class="ds-body">
-      <span><b>18</b> items captured from <b>12 regulators</b></span>
-      <span class="ds-sep">·</span>
-      <span>Most active: <b>Ireland DPC · France CNIL · Italy Garante</b></span>
-      <span class="ds-sep">·</span>
-      <span><b>4</b> consultations closing in the next 7 days</span>
-      <span class="ds-sep">·</span>
-      <span class="ds-live">Updated 10:34 UTC</span>
-    </div>
-  </section>
-
-  <!-- HERO: MAP + TODAY -->
+  <!-- HERO: MAP + TODAY (moved above-the-fold — map is the lead visual) -->
   <section class="hero" id="coverage">
 
     <!-- MAP (hero) -->
@@ -1923,6 +1879,36 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
         </li>
       </ul>
     </aside>
+  </section>
+
+  <!-- EDITORIAL PARTNERS -->
+  <section class="social-proof">
+    <div class="sp-label">Content and commentary from practitioners at</div>
+    <div class="sp-logos">
+      <span class="sp-firm">Hogan Lovells</span>
+      <span class="sp-firm">Fieldfisher</span>
+      <span class="sp-firm">DLA Piper</span>
+      <span class="sp-firm">Clifford Chance</span>
+      <span class="sp-firm">Linklaters</span>
+      <span class="sp-firm">Bird &amp; Bird</span>
+      <span class="sp-firm">Slaughter and May</span>
+      <span class="sp-firm">Baker McKenzie</span>
+      <span class="sp-firm">Freshfields</span>
+    </div>
+  </section>
+
+  <!-- EDITORIAL DAILY STRIP (public — not personalised) -->
+  <section class="daily-strip">
+    <div class="ds-kick">TODAY · 20 April 2026</div>
+    <div class="ds-body">
+      <span><b>18</b> items captured from <b>12 regulators</b></span>
+      <span class="ds-sep">·</span>
+      <span>Most active: <b>Ireland DPC · France CNIL · Italy Garante</b></span>
+      <span class="ds-sep">·</span>
+      <span><b>4</b> consultations closing in the next 7 days</span>
+      <span class="ds-sep">·</span>
+      <span class="ds-live">Updated 10:34 UTC</span>
+    </div>
   </section>
 
   <!-- FEATURED TRIO -->
@@ -2076,21 +2062,6 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
         <div class="editor-name">Li Wei</div>
         <div class="editor-specialism">China · PIPL &amp; cross-border data rules</div>
       </div>
-    </div>
-  </section>
-
-  <!-- FOUNDER BLOCK -->
-  <section class="founder-block">
-    <div class="founder-photo">D</div>
-    <div class="founder-body">
-      <div class="founder-eyebrow">From the founder</div>
-      <h3 class="founder-title">I built PrinciplesAI because I couldn't find it.</h3>
-      <div class="founder-prose">
-        <p>When I started tracking regulatory change seriously, I kept hitting the same problem: three siloed sources — one for privacy, one for AI, one for cyber — and none of them spoke to each other. Yet practitioners' work had quietly collapsed into one role covering all three.</p>
-        <p>So I built what I wanted to read. A live record of every serious body that matters across these three domains. <em>Ranked</em> by what moves the needle for practitioners, not by chronology. <em>Interpreted</em> by local experts who've practiced in those rooms — not aggregated from anonymous wire feeds.</p>
-        <p>If you're covering all three on one desk, this is for you. If you're not yet, you will be.</p>
-      </div>
-      <div class="founder-sig"><b>David Longford</b> · Founder, PrinciplesAI</div>
     </div>
   </section>
 
@@ -2258,20 +2229,53 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
     </div>
   </section>
 
-  <!-- POST-ACTIVITY CTA STRIP (replaces embedded Jobs + Pricing sections — now dedicated pages) -->
-  <section class="home-cta-strip">
+  <!-- EXPLORE STRIP — four dedicated pages, proof density -->
+  <div class="section-eyebrow">
+    <span class="lbl">Explore the platform</span>
+    <span class="meta">Four dedicated surfaces — each sourced, each filterable</span>
+  </div>
+  <section class="home-cta-strip quad">
+    <a class="home-cta-item" href="pai-glossary.html">
+      <div class="hcta-eye">Glossary</div>
+      <div class="hcta-headline">214 sourced definitions.</div>
+      <div class="hcta-body">Every term grounded in a verbatim quote from the regulation itself — GDPR, EU AI Act, DPDPA, DORA, NIS 2.</div>
+      <div class="hcta-link">Browse the glossary →</div>
+    </a>
     <a class="home-cta-item" href="pai-jobs.html">
-      <div class="hcta-eye">Jobs · weekly digest</div>
-      <div class="hcta-body"><b>47 AI governance, privacy and cyber roles</b> across in-house and private practice, tracked weekly.</div>
+      <div class="hcta-eye">Jobs</div>
+      <div class="hcta-headline">47 open roles this week.</div>
+      <div class="hcta-body">AI governance, privacy and cyber across in-house and private practice. Weekly Friday digest for members.</div>
       <div class="hcta-link">See the jobs board →</div>
     </a>
     <a class="home-cta-item" href="pai-pricing.html">
-      <div class="hcta-eye">Pricing · plain</div>
+      <div class="hcta-eye">Pricing</div>
+      <div class="hcta-headline">Plain. No games.</div>
       <div class="hcta-body">Monthly <b>£95</b> · Annual <b>£950</b> · Team from <b>£3,500</b>. Rolling access. 30-day money-back on annual.</div>
       <div class="hcta-link">See pricing →</div>
     </a>
+    <a class="home-cta-item" href="pai-trust.html">
+      <div class="hcta-eye">Trust</div>
+      <div class="hcta-headline">How the content is made.</div>
+      <div class="hcta-body">Production intake is AI-free. LLMs live in a sealed Hetzner VPS. Every claim is source-verified before publication.</div>
+      <div class="hcta-link">Read the trust page →</div>
+    </a>
   </section>
 
+
+  <!-- FOUNDER BLOCK — quiet closing note before the email capture -->
+  <section class="founder-block">
+    <div class="founder-photo">D</div>
+    <div class="founder-body">
+      <div class="founder-eyebrow">From the founder</div>
+      <h3 class="founder-title">I built PrinciplesAI because I couldn't find it.</h3>
+      <div class="founder-prose">
+        <p>When I started tracking regulatory change seriously, I kept hitting the same problem: three siloed sources — one for privacy, one for AI, one for cyber — and none of them spoke to each other. Yet practitioners' work had quietly collapsed into one role covering all three.</p>
+        <p>So I built what I wanted to read. A live record of every serious body that matters across these three domains. <em>Ranked</em> by what moves the needle for practitioners, not by chronology. <em>Interpreted</em> by local experts who've practiced in those rooms — not aggregated from anonymous wire feeds.</p>
+        <p>If you're covering all three on one desk, this is for you. If you're not yet, you will be.</p>
+      </div>
+      <div class="founder-sig"><b>David Longford</b> · Founder, PrinciplesAI</div>
+    </div>
+  </section>
 
   <!-- WEEKLY EMAIL SIGNUP (last-chance capture before footer) -->
   <section class="email-signup">
