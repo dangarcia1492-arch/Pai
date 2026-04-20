@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing · PrinciplesAI</title>
+<meta name="description" content="Plain pricing — monthly, annual, and team. Rolling access. 30-day money-back on annual. No hidden fees." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f7f9fc; --surface-3: #eef2f7;
+  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878; --ink-faint: #8a93a3;
+  --border: #dbe1ea; --border-soft: #ebeff5;
+  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc; --accent-soft-2: #cfe1f6;
+  --green-fill: #2e844a; --green-bg: #e6f4ec;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px;
+  --radius: 8px;
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+
+/* Header */
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 16px; z-index: 200; box-shadow: 0 1px 2px rgba(10,23,41,0.04); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.header-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); cursor: pointer; }
+.btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-2); color: #fff; }
+@media (max-width: 720px) { .mkt-nav { display: none; } }
+
+.main-content { padding-top: var(--header-height); }
+.page-view { max-width: 1100px; margin: 0 auto; padding: 40px 32px 72px; }
+
+/* Breadcrumb */
+.p-crumb { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+.p-crumb a { color: var(--secondary); font-weight: 500; }
+.p-crumb a:hover { color: var(--accent-2); }
+.p-crumb .sep { color: var(--ink-faint); margin: 0 8px; }
+.p-crumb .cur { color: var(--ink); font-weight: 600; }
+
+/* Hero */
+.p-hero { padding-bottom: 32px; margin-bottom: 32px; border-bottom: 1px solid var(--border); text-align: center; }
+.p-hero .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 14px; }
+.p-hero h1 { font-family: var(--display); font-size: 54px; font-weight: 600; letter-spacing: -0.022em; line-height: 1.04; color: var(--ink-strong); margin-bottom: 14px; }
+.p-hero .deck { font-size: 16px; color: var(--secondary); line-height: 1.55; max-width: 580px; margin: 0 auto; }
+.p-hero .deck b { color: var(--ink); font-weight: 600; }
+
+/* Pricing cards */
+.pricing-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 56px; }
+.price-card { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px 26px 30px; display: flex; flex-direction: column; }
+.price-card.featured { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(1,118,211,0.08), 0 6px 24px rgba(10,23,41,0.08); }
+.pc-ribbon { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+.pc-tier { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 12px; }
+.pc-amount { font-family: var(--display); font-size: 44px; font-weight: 600; color: var(--ink-strong); line-height: 1; letter-spacing: -0.02em; margin-bottom: 4px; }
+.pc-amount .pc-period { font-size: 14px; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.pc-desc { font-size: 13px; color: var(--secondary); line-height: 1.5; margin: 14px 0 24px; flex: 1; }
+.pc-desc b { color: var(--ink); font-weight: 600; }
+.pc-feats { list-style: none; padding: 0; margin: 0 0 24px; font-size: 12.5px; color: var(--secondary); line-height: 1.5; display: grid; gap: 8px; }
+.pc-feats li { padding-left: 20px; position: relative; }
+.pc-feats li::before { content: ""; position: absolute; left: 0; top: 6px; width: 10px; height: 5px; border-left: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent); transform: rotate(-45deg); }
+.pc-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 42px; padding: 0 18px; font-size: 13px; font-weight: 600; background: var(--surface); color: var(--ink); border: 1px solid var(--border); border-radius: 6px; font-family: inherit; cursor: pointer; }
+.pc-cta:hover { background: var(--surface-2); border-color: var(--ink-faint); }
+.pc-cta.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.pc-cta.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+
+/* Money-back strip */
+.p-guarantee { margin: -36px 0 56px; padding: 16px 22px; background: var(--green-bg); border: 1px solid var(--green-fill); border-radius: var(--radius); display: flex; align-items: center; gap: 14px; }
+.p-guarantee .ico { width: 28px; height: 28px; border-radius: 50%; background: var(--green-fill); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; font-weight: 700; }
+.p-guarantee .txt { font-size: 13px; color: var(--ink); line-height: 1.5; }
+.p-guarantee .txt b { color: var(--ink); font-weight: 600; }
+
+/* Enterprise row */
+.p-enterprise { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; margin-bottom: 56px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+.p-enterprise h3 { font-family: var(--display); font-size: 26px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.012em; margin-bottom: 8px; }
+.p-enterprise p { font-size: 13.5px; color: var(--secondary); line-height: 1.55; max-width: 640px; }
+.p-enterprise p b { color: var(--ink); font-weight: 600; }
+.p-enterprise-cta { display: inline-flex; align-items: center; gap: 7px; height: 42px; padding: 0 22px; font-size: 13px; font-weight: 600; background: var(--ink); color: #fff; border-radius: 6px; white-space: nowrap; }
+.p-enterprise-cta:hover { background: var(--ink-strong); }
+
+/* FAQ */
+.p-faq-head { padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
+.p-faq-head .lbl { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 6px; display: block; }
+.p-faq-head h2 { font-family: var(--display); font-size: 32px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.018em; line-height: 1.1; }
+.faq-list { display: grid; gap: 8px; margin-bottom: 48px; }
+.faq-item { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); }
+.faq-item.open { border-color: var(--border); }
+.faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: transparent; border: none; font-family: inherit; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer; text-align: left; }
+.faq-q:hover { color: var(--accent-2); }
+.faq-toggle { color: var(--muted); font-size: 18px; font-weight: 300; transition: transform .15s; }
+.faq-item.open .faq-toggle { transform: rotate(45deg); color: var(--accent-2); }
+.faq-a { display: none; padding: 0 20px 18px; font-size: 13.5px; color: var(--secondary); line-height: 1.6; }
+.faq-item.open .faq-a { display: block; }
+.faq-a em { color: var(--ink); font-weight: 600; font-style: normal; }
+
+/* Email-signup CTA */
+.p-email { background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%); border: 1px solid var(--border); border-radius: 12px; padding: 32px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; box-shadow: 0 1px 2px rgba(10,23,41,0.04); }
+.p-email h3 { font-family: var(--display); font-size: 28px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.015em; line-height: 1.1; margin-bottom: 8px; }
+.p-email p { font-size: 13.5px; color: var(--secondary); line-height: 1.55; }
+.p-email form { display: flex; gap: 8px; }
+.p-email input { flex: 1; height: 42px; padding: 0 16px; font-family: inherit; font-size: 14px; border: 1px solid var(--border); border-radius: 6px; color: var(--ink); background: var(--surface); }
+.p-email input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.p-email button { background: var(--accent); color: #fff; border: none; height: 42px; padding: 0 22px; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.p-email button:hover { background: var(--accent-2); }
+.p-email-note { font-size: 11.5px; color: var(--muted); margin-top: 8px; font-family: var(--mono); }
+
+@media (max-width: 900px) {
+  .pricing-row { grid-template-columns: 1fr; }
+  .p-guarantee { margin-top: 0; }
+  .p-enterprise { grid-template-columns: 1fr; }
+  .p-hero h1 { font-size: 40px; }
+  .p-email { grid-template-columns: 1fr; gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header-bar">
+  <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html">Legislation</a>
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-pricing.html" class="on">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view">
+
+  <nav class="p-crumb">
+    <a href="pai-home-public.html">Home</a>
+    <span class="sep">›</span>
+    <span class="cur">Pricing</span>
+  </nav>
+
+  <!-- HERO -->
+  <header class="p-hero">
+    <div class="eyebrow">Pricing · no surprises</div>
+    <h1>Plain pricing.</h1>
+    <p class="deck">Monthly, annual, or team. Rolling access. <b>30-day money-back guarantee</b> on annual. No hidden fees, no discount code games, no per-export charges.</p>
+  </header>
+
+  <!-- PRICING CARDS -->
+  <section class="pricing-row">
+    <div class="price-card">
+      <div class="pc-tier">Monthly</div>
+      <div class="pc-amount">£95<span class="pc-period"> / month</span></div>
+      <div class="pc-desc">Individual seat. Rolling access — no further billing if you stop.</div>
+      <ul class="pc-feats">
+        <li>Full dashboard, all jurisdictions</li>
+        <li>Saturday briefing + daily alerts</li>
+        <li>Full glossary (214 definitions)</li>
+        <li>Full jobs archive + weekly digest</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <button class="pc-cta">Start monthly →</button>
+    </div>
+    <div class="price-card featured">
+      <div class="pc-ribbon">Most popular · save 2 months</div>
+      <div class="pc-tier">Annual</div>
+      <div class="pc-amount">£950<span class="pc-period"> / year</span></div>
+      <div class="pc-desc">Individual seat. <b>30-day money-back</b>, no questions.</div>
+      <ul class="pc-feats">
+        <li>Everything in Monthly</li>
+        <li>Saves 2 months vs. monthly</li>
+        <li>30-day money-back guarantee</li>
+        <li>Priority support</li>
+        <li>Annual invoice (procurement-friendly)</li>
+      </ul>
+      <button class="pc-cta primary">Start annual →</button>
+    </div>
+    <div class="price-card">
+      <div class="pc-tier">Team</div>
+      <div class="pc-amount">From £3,500<span class="pc-period"> / year</span></div>
+      <div class="pc-desc">5+ seats. Team watchlists, briefing export, shared alerts.</div>
+      <ul class="pc-feats">
+        <li>Everything in Annual, per seat</li>
+        <li>Shared team watchlists</li>
+        <li>Briefing export (PDF / email)</li>
+        <li>Invoice / PO billing</li>
+        <li>Onboarding call included</li>
+      </ul>
+      <button class="pc-cta">Talk to us →</button>
+    </div>
+  </section>
+
+  <!-- Money-back strip -->
+  <div class="p-guarantee">
+    <div class="ico">✓</div>
+    <div class="txt"><b>30-day money-back guarantee on annual.</b> If PAI isn't what you expected in the first month, email us for a full refund — no questions, no retention calls, no friction.</div>
+  </div>
+
+  <!-- Enterprise callout -->
+  <section class="p-enterprise">
+    <div>
+      <h3>Enterprise &amp; custom</h3>
+      <p>20+ seats, SSO (SAML / OIDC), custom jurisdictions, API access, standard DPA, SLA, optional <b>single-tenant EU-only deployment</b> (6–8 week lead time). Send your scope and we'll quote within 48 hours.</p>
+    </div>
+    <a href="mailto:sales@principlesai.org" class="p-enterprise-cta">Contact sales →</a>
+  </section>
+
+  <!-- FAQ -->
+  <div class="p-faq-head">
+    <span class="lbl">Frequently asked</span>
+    <h2>What practitioners ask on first contact.</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>What exactly does PAI cover?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">
+        <em>Three domains</em>: AI regulation, privacy/data protection, and cybersecurity. <em>Three source types</em>: regulatory bodies (2,389 of them across 329 jurisdictions), courts (from the CJEU and ECHR through to national supreme courts), and industry — enforcement announcements, standards body output, and regulated-entity responses. We <em>capture daily</em>, <em>rank editorially</em>, and add <em>local-expert interpretation</em> for each significant item.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>How is this different from DataGuidance or OneTrust?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">
+        <em>Scope</em>: DataGuidance focuses on privacy; OneTrust is a compliance platform with content attached. PAI treats AI, privacy and cyber as first-class lenses, not add-ons. <em>Freshness</em>: we capture live from source; competitors mostly rebuild from aggregated feeds. <em>Interpretation</em>: we pair significant items with a named local expert's take — you won't find that consistently anywhere else.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Do you cover my jurisdiction?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">
+        Almost certainly. PAI tracks <em>329 jurisdictions live</em> — every EU member, UK, every US state, most Commonwealth countries, and major APAC, Africa and Latin America markets. The Authorities page lists each one with its last-indexed date. If there's a specific body you need and don't see, tell us — new bodies go live in days.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>How often is it updated?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">
+        The pipeline runs continuously. New items are captured within minutes of publication, ranked and tagged within hours, and annotated by editors within 24-48 hours where the item warrants commentary. Your dashboard refreshes live.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Can I cancel?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">
+        <em>Monthly</em>: rolling access, no further billing after the current month ends if you stop. <em>Annual</em>: 30-day money-back guarantee — if PAI isn't what you expected within the first month, email us for a full refund, no questions asked.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Team and enterprise pricing?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">
+        Team plans start at <em>£3,500/year for 5 seats</em> with per-seat pricing scaling down from there. Enterprise (20+ seats, SSO, custom jurisdictions, API access, DPA, SLA) is bespoke — send your scope and we'll quote within 48 hours.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Can I see a sample before subscribing?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">
+        Yes — the <em>free Saturday briefing email</em> is the same weekly briefing paid subscribers get, just with the full analysis on three items paywalled. Sign up below. No credit card required.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Data handling and security?</span>
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-a">
+        See our <a href="pai-trust.html" style="font-weight:600;">Trust page</a> for the full picture — where data lives (DigitalOcean Amsterdam + Airtable SCC), which sub-processors touch it, and how the AI sandbox is isolated. The short version: your member data is never sent to any AI model.
+      </div>
+    </div>
+  </div>
+
+  <!-- Free email signup -->
+  <section class="p-email">
+    <div>
+      <h3>The Saturday briefing.<br/>Six stories. Ranked. Free.</h3>
+      <p>Every Saturday, our research team picks the six things that moved this week across AI, privacy and cyber — with context and a local-expert take. No credit card. Unsubscribe in one click.</p>
+    </div>
+    <div>
+      <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓'; this.querySelector('input').value='';">
+        <input type="email" placeholder="your@email.com" required />
+        <button type="submit">Subscribe free →</button>
+      </form>
+      <p class="p-email-note">One email per week. Zero spam.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+</body>
+</html>

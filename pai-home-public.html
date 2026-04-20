@@ -387,7 +387,6 @@ button { cursor: pointer; }
 }
 .btn-primary:hover { background: var(--accent-2) !important; border-color: var(--accent-2) !important; color: #fff !important; }
 @media (max-width: 1100px) {
-  .mkt-nav a:nth-child(n+5) { display: none; }
   .header-search { display: none; }
 }
 @media (max-width: 720px) {
@@ -1543,6 +1542,16 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
   .def-card { width: 100%; max-width: 520px; }
 }
 
+/* Post-activity CTA strip (home) — links out to Jobs + Pricing pages */
+.home-cta-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0 40px; }
+.home-cta-item { display: flex; flex-direction: column; gap: 8px; padding: 22px 26px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: inherit; transition: border-color .12s, box-shadow .12s, transform .12s; }
+.home-cta-item:hover { border-color: var(--ink-faint); box-shadow: 0 2px 8px rgba(10,23,41,0.06); transform: translateY(-1px); }
+.home-cta-item .hcta-eye { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); }
+.home-cta-item .hcta-body { font-size: 14px; color: var(--secondary); line-height: 1.5; }
+.home-cta-item .hcta-body b { color: var(--ink); font-weight: 600; }
+.home-cta-item .hcta-link { font-size: 13px; font-weight: 600; color: var(--accent-2); margin-top: 4px; }
+@media (max-width: 720px) { .home-cta-strip { grid-template-columns: 1fr; } }
+
 /* Jobs board */
 .jobs-row { margin-bottom: 28px; }
 .jobs-table td.role { font-weight: 600; color: var(--ink); padding-right: 14px; }
@@ -1721,14 +1730,13 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
     <a href="pai-authorities.html">Authorities</a>
     <a href="pai-news.html">News</a>
     <a href="pai-legislation.html">Legislation</a>
-    <a href="#jobs">Jobs</a>
-    <a href="pai-glossary.html">Glossary</a>
-    <a href="#pricing">Pricing</a>
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-pricing.html">Pricing</a>
     <a href="pai-trust.html">Trust</a>
   </nav>
   <div class="header-right">
     <a href="#" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
-    <a href="#pricing" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
+    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
   </div>
 </header>
 
@@ -2250,145 +2258,20 @@ body:not(.scarcity-on) .scarcity-band { display: none; }
     </div>
   </section>
 
-  <!-- JOBS BOARD -->
-  <div class="section-eyebrow" id="jobs">
-    <span class="lbl">Jobs · weekly digest</span>
-    <span class="meta">AI governance, privacy &amp; cyber roles · in-house and private practice</span>
-  </div>
-  <section class="jobs-row">
-    <div class="panel">
-      <div class="panel-head">
-        <div class="panel-title">This week's roles <span class="count">8 of 47 in the archive</span></div>
-        <span class="panel-link" onclick="document.getElementById('exitModal').classList.add('on')" style="cursor:pointer;">Unlock full archive →</span>
-      </div>
-      <table class="data-table jobs-table">
-        <thead>
-          <tr><th>Role</th><th>Employer</th><th>Location</th><th class="right">Posted</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="role">Head of AI Governance<span class="sub">Group · new function</span></td><td class="target">HSBC</td><td class="loc">London</td><td class="when">2d</td></tr>
-          <tr><td class="role">Senior DPO<span class="sub">EU lead · Art. 37</span></td><td class="target">Allianz</td><td class="loc">Munich</td><td class="when">3d</td></tr>
-          <tr><td class="role">Privacy Counsel · Product<span class="sub">AI features review</span></td><td class="target">Stripe</td><td class="loc">Dublin</td><td class="when">5d</td></tr>
-          <tr><td class="role">AI Risk Director<span class="sub">2nd line · model risk</span></td><td class="target">JPMorgan Chase</td><td class="loc">New York</td><td class="when">2d</td></tr>
-          <tr><td class="role">Data Protection Lead<span class="sub">Clinical data &amp; AI</span></td><td class="target">NHS England</td><td class="loc">London</td><td class="when">4d</td></tr>
-          <tr><td class="role">Privacy Partner<span class="sub">Lateral · EU/UK</span></td><td class="target">Hogan Lovells</td><td class="loc">London / Brussels</td><td class="when">1w</td></tr>
-          <tr><td class="role">Cyber &amp; Resilience Counsel<span class="sub">DORA implementation</span></td><td class="target">Deutsche Bank</td><td class="loc">Frankfurt</td><td class="when">6d</td></tr>
-          <tr><td class="role">Head of AI Policy<span class="sub">EU institutional</span></td><td class="target">Meta Platforms</td><td class="loc">Brussels</td><td class="when">1w</td></tr>
-        </tbody>
-      </table>
-      <div class="jobs-foot">
-        <span class="jobs-foot-note">Full archive, filters by jurisdiction/seniority, and a weekly Friday digest — members only.</span>
-        <button class="jobs-unlock" onclick="document.getElementById('exitModal').classList.add('on')">Unlock archive →</button>
-      </div>
-    </div>
+  <!-- POST-ACTIVITY CTA STRIP (replaces embedded Jobs + Pricing sections — now dedicated pages) -->
+  <section class="home-cta-strip">
+    <a class="home-cta-item" href="pai-jobs.html">
+      <div class="hcta-eye">Jobs · weekly digest</div>
+      <div class="hcta-body"><b>47 AI governance, privacy and cyber roles</b> across in-house and private practice, tracked weekly.</div>
+      <div class="hcta-link">See the jobs board →</div>
+    </a>
+    <a class="home-cta-item" href="pai-pricing.html">
+      <div class="hcta-eye">Pricing · plain</div>
+      <div class="hcta-body">Monthly <b>£95</b> · Annual <b>£950</b> · Team from <b>£3,500</b>. Rolling access. 30-day money-back on annual.</div>
+      <div class="hcta-link">See pricing →</div>
+    </a>
   </section>
 
-  <!-- PRICING -->
-  <div class="section-eyebrow" id="pricing">
-    <span class="lbl">Pricing</span>
-    <span class="meta">Transparent · no minimum commitment · money-back on annual</span>
-  </div>
-  <section class="pricing-row">
-    <div class="price-card">
-      <div class="pc-tier">Monthly</div>
-      <div class="pc-amount">£95<span class="pc-period"> / month</span></div>
-      <div class="pc-desc">Individual seat. Rolling access — no further billing if you stop.</div>
-      <button class="pc-cta">Start monthly →</button>
-    </div>
-    <div class="price-card featured">
-      <div class="pc-ribbon">Most popular · save 2 months</div>
-      <div class="pc-tier">Annual</div>
-      <div class="pc-amount">£950<span class="pc-period"> / year</span></div>
-      <div class="pc-desc">Individual seat. <b>30-day money-back</b>, no questions.</div>
-      <button class="pc-cta primary">Start annual →</button>
-    </div>
-    <div class="price-card">
-      <div class="pc-tier">Team</div>
-      <div class="pc-amount">From £3,500<span class="pc-period"> / year</span></div>
-      <div class="pc-desc">5+ seats. Team watchlists, briefing export, shared alerts. Talk to us.</div>
-      <button class="pc-cta">Talk to us →</button>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <div class="section-eyebrow" id="faq">
-    <span class="lbl">Frequently asked</span>
-    <span class="meta">What practitioners ask on first contact</span>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>What exactly does PAI cover?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        <em>Three domains</em>: AI regulation, privacy/data protection, and cybersecurity. <em>Three source types</em>: regulatory bodies (2,389 of them across 329 jurisdictions), courts (from the CJEU and ECHR through to national supreme courts), and industry — enforcement announcements, standards body output, and regulated-entity responses. We <em>capture daily</em>, <em>rank editorially</em>, and add <em>local-expert interpretation</em> for each significant item.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>How is this different from DataGuidance or OneTrust?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        <em>Scope</em>: DataGuidance focuses on privacy; OneTrust is a compliance platform with content attached. PAI treats AI, privacy and cyber as first-class lenses, not add-ons. <em>Freshness</em>: we capture live from source; competitors mostly rebuild from aggregated feeds. <em>Interpretation</em>: we pair significant items with a named local expert's take — you won't find that consistently anywhere else.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Do you cover my jurisdiction?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        Almost certainly. PAI tracks <em>329 jurisdictions live</em> — every EU member, UK, every US state, most Commonwealth countries, and major APAC, Africa and Latin America markets. The Authorities page lists each one with its last-indexed date. If there's a specific body you need and don't see, tell us — new bodies go live in days.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>How often is it updated?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        The pipeline runs continuously. New items are captured within minutes of publication, ranked and tagged within hours, and annotated by editors within 24-48 hours where the item warrants commentary. Your dashboard refreshes live.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Can I cancel?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        <em>Monthly</em>: rolling access, no further billing after the current month ends if you stop. <em>Annual</em>: 30-day money-back guarantee — if PAI isn't what you expected within the first month, email us for a full refund, no questions asked.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Team and enterprise pricing?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        Team plans start at <em>£3,500/year for 5 seats</em> with per-seat pricing scaling down from there. Enterprise (20+ seats, SSO, custom jurisdictions, API access, DPA, SLA) is bespoke — send your scope and we'll quote within 48 hours.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Can I see a sample before subscribing?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        Yes — the <em>free Saturday briefing email</em> is the same weekly briefing paid subscribers get, just with the full analysis on three items paywalled. Sign up below. No credit card required.
-      </div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        <span>Data handling and security?</span>
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-a">
-        PAI stores no personal data on subscribers beyond what's needed to authenticate your account and deliver your briefing. We don't share, sell, or reuse subscriber data for any other purpose. Source content is captured from public regulatory publications. Enterprise customers receive a standard DPA on request; SOC 2 in progress.
-      </div>
-    </div>
-  </div>
 
   <!-- WEEKLY EMAIL SIGNUP (last-chance capture before footer) -->
   <section class="email-signup">
@@ -2529,7 +2412,7 @@ function setHotView(view, btn) {
     <a href="pai-legislation.html" class="pmp-laws-btn">View all AI laws →</a>
     <div class="pmp-cta">
       <p>PrinciplesAI tracks AI governance across 40+ jurisdictions daily, built for legal, privacy and compliance practitioners who need to stay ahead.</p>
-      <a href="#pricing">Explore membership →</a>
+      <a href="pai-pricing.html">Explore membership →</a>
     </div>
     <div class="pmp-contribute" id="pmpContribute">
       <div class="pmp-contrib-header">

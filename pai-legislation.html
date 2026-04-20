@@ -43,7 +43,6 @@ button { cursor: pointer; }
 .btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
 .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 1px 2px rgba(1,118,211,0.22); }
 .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
-@media (max-width: 1100px) { .mkt-nav a:nth-child(n+5) { display: none; } }
 @media (max-width: 720px) { .mkt-nav { display: none; } }
 
 /* Main */
@@ -181,6 +180,55 @@ button { cursor: pointer; }
   .page-view { padding: 24px 14px 32px; }
   .page-title { font-size: 28px; }
 }
+
+/* Record drawer (click a row to open) */
+.record-overlay { position: fixed; inset: 0; background: rgba(6,16,30,0.38); opacity: 0; pointer-events: none; transition: opacity .18s; z-index: 400; }
+.record-overlay.on { opacity: 1; pointer-events: auto; }
+.record-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 560px; max-width: 92vw; background: var(--surface); border-left: 1px solid var(--border); box-shadow: -8px 0 24px rgba(10,23,41,0.08); transform: translateX(100%); transition: transform .22s cubic-bezier(.4,0,.2,1); z-index: 410; display: flex; flex-direction: column; overflow: hidden; }
+.record-drawer.on { transform: translateX(0); }
+.rd-head { padding: 20px 22px 16px; border-bottom: 1px solid var(--border-soft); display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+.rd-top { display: flex; align-items: center; gap: 10px; }
+.rd-iso { width: 34px; height: 24px; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: 3px; font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--secondary); letter-spacing: 0.04em; display: inline-flex; align-items: center; justify-content: center; }
+.rd-country { font-size: 12.5px; color: var(--secondary); font-weight: 500; }
+.rd-close { margin-left: auto; width: 32px; height: 32px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; color: var(--muted); cursor: pointer; background: none; border: none; }
+.rd-close:hover { background: var(--surface-3); color: var(--ink); }
+.rd-close svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; }
+.rd-title { font-family: var(--display); font-size: 24px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.01em; line-height: 1.2; }
+.rd-ref { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 500; letter-spacing: 0.02em; }
+.rd-meta-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.rd-body { flex: 1; overflow-y: auto; padding: 22px; }
+.rd-section { margin-bottom: 24px; }
+.rd-section:last-child { margin-bottom: 0; }
+.rd-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; }
+.rd-summary { font-size: 13.5px; line-height: 1.6; color: var(--secondary); }
+.rd-summary b { color: var(--ink); font-weight: 600; }
+.rd-progress { display: flex; align-items: flex-start; gap: 0; padding: 14px 4px 4px; font-size: 10.5px; color: var(--muted); font-weight: 500; letter-spacing: 0.04em; }
+.rd-progress .step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; }
+.rd-progress .step:not(:first-child)::before { content: ''; position: absolute; left: -50%; top: 5px; width: 100%; height: 2px; background: var(--border); }
+.rd-progress .step.done:not(:first-child)::before { background: var(--green-fill); }
+.rd-progress .step.current:not(:first-child)::before { background: var(--green-fill); }
+.rd-progress .step .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--surface-3); border: 2px solid var(--border); position: relative; z-index: 1; }
+.rd-progress .step.done .dot { background: var(--green-fill); border-color: var(--green-fill); }
+.rd-progress .step.current .dot { background: var(--amber-fill); border-color: var(--amber-fill); box-shadow: 0 0 0 3px var(--amber-bg); }
+.rd-progress .step.current { color: var(--amber); font-weight: 700; }
+.rd-progress .step .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+.rd-dates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.rd-date { padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: 6px; }
+.rd-date .k { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; }
+.rd-date .v { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--ink-strong); }
+.rd-date .v.pending { color: var(--ink-faint); font-weight: 400; }
+.rd-moves { list-style: none; padding: 0; }
+.rd-move { padding: 10px 0; border-bottom: 1px solid var(--border-soft); display: grid; grid-template-columns: 70px 1fr; gap: 12px; align-items: start; font-size: 12.5px; }
+.rd-move:last-child { border-bottom: none; }
+.rd-move .when { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.rd-move .what { color: var(--secondary); line-height: 1.5; }
+.rd-move .what b { color: var(--ink); font-weight: 600; }
+.rd-foot { padding: 16px 22px; border-top: 1px solid var(--border-soft); background: var(--surface-2); display: flex; gap: 10px; flex-shrink: 0; }
+.rd-foot .btn { flex: 1; justify-content: center; }
+@media (max-width: 620px) {
+  .record-drawer { width: 100%; }
+  .rd-dates { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -218,14 +266,13 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
     <a href="pai-authorities.html">Authorities</a>
     <a href="pai-news.html">News</a>
     <a href="pai-legislation.html" class="on">Legislation</a>
-    <a href="pai-home-public.html#jobs">Jobs</a>
-    <a href="pai-glossary.html">Glossary</a>
-    <a href="pai-home-public.html#pricing">Pricing</a>
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-pricing.html">Pricing</a>
     <a href="pai-trust.html">Trust</a>
   </nav>
   <div class="header-right">
     <a href="#" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
-    <a href="pai-home-public.html#pricing" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
+    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
   </div>
 </header>
 
@@ -611,6 +658,58 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
 </div>
 </div>
 
+<!-- RECORD DRAWER (opens when a row is clicked) -->
+<div class="record-overlay" id="recordOverlay" onclick="rdClose()"></div>
+<aside class="record-drawer" id="recordDrawer" role="dialog" aria-modal="true" aria-labelledby="rdTitle">
+  <div class="rd-head">
+    <div class="rd-top">
+      <span class="rd-iso" id="rdIso">EU</span>
+      <span class="rd-country" id="rdCountry">European Union</span>
+      <button class="rd-close" onclick="rdClose()" aria-label="Close">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <h2 class="rd-title" id="rdTitle">Instrument title</h2>
+    <div class="rd-ref" id="rdRef">Reference</div>
+    <div class="rd-meta-row">
+      <span id="rdStatus" class="dg-status-pill in-force">In force</span>
+      <span id="rdDomains" class="dg-domain"></span>
+    </div>
+  </div>
+  <div class="rd-body">
+    <div class="rd-section">
+      <div class="rd-label">Summary</div>
+      <p class="rd-summary" id="rdSummary">—</p>
+    </div>
+    <div class="rd-section">
+      <div class="rd-label">Progress</div>
+      <div class="rd-progress" id="rdProgress">
+        <div class="step done"><span class="dot"></span><span class="label">Proposed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">Passed</span></div>
+        <div class="step done"><span class="dot"></span><span class="label">In force</span></div>
+        <div class="step current"><span class="dot"></span><span class="label">Applied</span></div>
+      </div>
+    </div>
+    <div class="rd-section">
+      <div class="rd-label">Key dates</div>
+      <div class="rd-dates">
+        <div class="rd-date"><div class="k">Introduced</div><div class="v pending" id="rdDateIntro">—</div></div>
+        <div class="rd-date"><div class="k">Enacted</div><div class="v pending" id="rdDateEnacted">—</div></div>
+        <div class="rd-date"><div class="k">In force</div><div class="v pending" id="rdDateForce">—</div></div>
+      </div>
+    </div>
+    <div class="rd-section">
+      <div class="rd-label">Recent moves</div>
+      <ul class="rd-moves" id="rdMoves"></ul>
+    </div>
+  </div>
+  <div class="rd-foot">
+    <a href="#" class="btn" id="rdSource" target="_blank" rel="noopener" style="text-decoration:none;">Open source ↗</a>
+    <a href="#" class="btn" style="text-decoration:none;">Tracked rulings</a>
+    <button class="btn btn-primary" id="rdStar" onclick="rdToggleStar()">+ Watchlist</button>
+  </div>
+</aside>
+
 <script>
 function fpToggle(el) {
   el.classList.toggle('on');
@@ -699,7 +798,7 @@ function fpRemoveChip(group, value) {
   fpApply();
 }
 
-// Star (watchlist) toggle
+// Star (watchlist) toggle — isolated from row click
 document.querySelectorAll('.dg-star').forEach(btn => {
   btn.addEventListener('click', function(e) {
     e.stopPropagation();
@@ -707,6 +806,125 @@ document.querySelectorAll('.dg-star').forEach(btn => {
     this.title = this.classList.contains('on') ? 'Watchlisted' : 'Add to watchlist';
     fpApply();
   });
+});
+
+/* ============ RECORD DRAWER ============ */
+// Progress-step map by status — visual stepper in the drawer
+const PROGRESS_BY_STATUS = {
+  'proposed':     [['current','Proposed'],['','Committee'],['','Passed'],['','In force']],
+  'in-progress':  [['done','Proposed'],['current','Committee'],['','Passed'],['','In force']],
+  'consultation': [['done','Drafted'],['current','Consultation'],['','Passed'],['','In force']],
+  'enacted':      [['done','Proposed'],['done','Passed'],['current','Enacted'],['','In force']],
+  'in-force':     [['done','Proposed'],['done','Passed'],['done','In force'],['current','Applied']],
+  'lapsed':       [['done','Proposed'],['done','Committee'],['current','Lapsed'],['','']]
+};
+const STATUS_LABEL = {
+  'proposed':'Proposed', 'in-progress':'In progress', 'consultation':'Consultation',
+  'enacted':'Enacted', 'in-force':'In force', 'lapsed':'Lapsed'
+};
+let rdActiveRow = null;
+
+function rdOpen(row) {
+  rdActiveRow = row;
+  const iso = row.querySelector('.dg-iso').textContent;
+  const nameEl = row.querySelector('.dg-name');
+  const title = nameEl.querySelector('.full').textContent;
+  const ref = nameEl.querySelector('.ref') ? nameEl.querySelector('.ref').textContent : '';
+  const country = row.querySelector('.dg-country').textContent;
+  const status = row.dataset.status || 'in-force';
+  const statusPill = row.querySelector('.dg-status-pill');
+  const statusLabel = statusPill ? statusPill.textContent : STATUS_LABEL[status];
+  const statusCls = statusPill ? statusPill.className : ('dg-status-pill ' + status);
+  const domainHtml = row.querySelector('.dg-domain').innerHTML;
+  const inForceDate = row.querySelectorAll('.dg-when')[0] ? row.querySelectorAll('.dg-when')[0].textContent.trim() : '—';
+  const lastMoveEl = row.querySelector('.dg-last');
+  const lastMove = lastMoveEl ? lastMoveEl.textContent.trim() : '';
+  const starOn = row.querySelector('.dg-star.on') !== null;
+
+  document.getElementById('rdIso').textContent = iso;
+  document.getElementById('rdCountry').textContent = country;
+  document.getElementById('rdTitle').textContent = title;
+  document.getElementById('rdRef').textContent = ref || '—';
+  const rdStatus = document.getElementById('rdStatus');
+  rdStatus.className = statusCls;
+  rdStatus.textContent = statusLabel;
+  document.getElementById('rdDomains').innerHTML = domainHtml;
+
+  // Summary — placeholder until Airtable summary field is populated
+  const domainText = [...row.querySelectorAll('.dg-domain-chip')].map(c => c.textContent).join(' / ');
+  document.getElementById('rdSummary').innerHTML =
+    '<b>' + country + '</b> — ' + (domainText || 'policy') + ' instrument, status <b>' + statusLabel.toLowerCase() + '</b>. ' +
+    'Full editorial summary, text anchors and enforcement commentary available to subscribers.';
+
+  // Progress stepper
+  const steps = PROGRESS_BY_STATUS[status] || PROGRESS_BY_STATUS['in-force'];
+  document.getElementById('rdProgress').innerHTML = steps.filter(s => s[1]).map(s =>
+    '<div class="step ' + s[0] + '"><span class="dot"></span><span class="label">' + s[1] + '</span></div>'
+  ).join('');
+
+  // Dates — in-force from row; others placeholder
+  const forceEl = document.getElementById('rdDateForce');
+  if (inForceDate && inForceDate !== '—' && !inForceDate.startsWith('Q')) {
+    forceEl.textContent = inForceDate; forceEl.classList.remove('pending');
+  } else {
+    forceEl.textContent = inForceDate || '—'; forceEl.classList.add('pending');
+  }
+  document.getElementById('rdDateIntro').textContent = '—';
+  document.getElementById('rdDateIntro').classList.add('pending');
+  document.getElementById('rdDateEnacted').textContent = (status === 'enacted' || status === 'in-force') ? inForceDate : '—';
+  document.getElementById('rdDateEnacted').classList.toggle('pending', !(status === 'enacted' || status === 'in-force'));
+
+  // Recent moves — single entry from row's last-move
+  const movesEl = document.getElementById('rdMoves');
+  if (lastMove) {
+    movesEl.innerHTML =
+      '<li class="rd-move"><span class="when">' + lastMove + '</span>' +
+      '<span class="what"><b>' + statusLabel + '</b> — captured by pipeline from ' + country + ' publisher feed.</span></li>' +
+      '<li class="rd-move"><span class="when">earlier</span><span class="what">Full procedural history available on the record page.</span></li>';
+  } else {
+    movesEl.innerHTML = '<li class="rd-move"><span class="when">—</span><span class="what">No recent procedural activity captured.</span></li>';
+  }
+
+  // Star sync
+  const starBtn = document.getElementById('rdStar');
+  starBtn.textContent = starOn ? '★ Watchlisted' : '+ Watchlist';
+  starBtn.dataset.on = starOn ? '1' : '';
+
+  document.getElementById('recordOverlay').classList.add('on');
+  document.getElementById('recordDrawer').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function rdClose() {
+  document.getElementById('recordOverlay').classList.remove('on');
+  document.getElementById('recordDrawer').classList.remove('on');
+  document.body.style.overflow = '';
+  rdActiveRow = null;
+}
+
+function rdToggleStar() {
+  if (!rdActiveRow) return;
+  const rowStar = rdActiveRow.querySelector('.dg-star');
+  rowStar.classList.toggle('on');
+  const on = rowStar.classList.contains('on');
+  rowStar.title = on ? 'Watchlisted' : 'Add to watchlist';
+  const btn = document.getElementById('rdStar');
+  btn.textContent = on ? '★ Watchlisted' : '+ Watchlist';
+  btn.dataset.on = on ? '1' : '';
+  fpApply();
+}
+
+// Row click → open drawer
+document.querySelectorAll('.dg-row').forEach(row => {
+  row.addEventListener('click', function(e) {
+    if (e.target.closest('.dg-star')) return;
+    rdOpen(this);
+  });
+});
+
+// Esc to close
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('recordDrawer').classList.contains('on')) rdClose();
 });
 
 // Column-header sort toggle (visual — real sort hooks into data layer)

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jobs · PrinciplesAI</title>
+<meta name="description" content="AI governance, privacy and cybersecurity roles — in-house and private practice, tracked weekly by our research team." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f7f9fc; --surface-3: #eef2f7;
+  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878; --ink-faint: #8a93a3;
+  --border: #dbe1ea; --border-soft: #ebeff5;
+  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc; --accent-soft-2: #cfe1f6;
+  --amber-fill: #ca8501; --amber-bg: #fef6e8;
+  --green-fill: #2e844a; --green-bg: #e6f4ec;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px;
+  --radius: 8px;
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+
+/* Header */
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 16px; z-index: 200; box-shadow: 0 1px 2px rgba(10,23,41,0.04); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.header-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); transition: background .12s, border-color .12s, color .12s; cursor: pointer; }
+.btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-2); color: #fff; }
+@media (max-width: 720px) { .mkt-nav { display: none; } }
+
+.main-content { padding-top: var(--header-height); }
+.page-view { max-width: 1240px; margin: 0 auto; padding: 32px 32px 72px; }
+
+/* Breadcrumb */
+.j-crumb { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+.j-crumb a { color: var(--secondary); font-weight: 500; }
+.j-crumb a:hover { color: var(--accent-2); }
+.j-crumb .sep { color: var(--ink-faint); margin: 0 8px; }
+.j-crumb .cur { color: var(--ink); font-weight: 600; }
+
+/* Hero */
+.j-hero { padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; }
+.j-hero .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 10px; }
+.j-hero h1 { font-family: var(--display); font-size: 44px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.06; color: var(--ink-strong); margin-bottom: 12px; }
+.j-hero .deck { font-size: 15px; color: var(--secondary); line-height: 1.55; max-width: 640px; }
+.j-hero .deck b { color: var(--ink); font-weight: 600; }
+.j-hero-stats { display: flex; gap: 28px; padding-bottom: 6px; }
+.j-hero-stats .stat { display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
+.j-hero-stats .n { font-family: var(--display); font-size: 28px; font-weight: 600; color: var(--ink-strong); line-height: 1; letter-spacing: -0.01em; }
+.j-hero-stats .l { font-family: var(--mono); font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+
+/* Filter bar */
+.j-filter { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; margin-bottom: 18px; }
+.j-filter .search { flex: 1; min-width: 220px; display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; background: var(--surface-3); border-radius: 5px; }
+.j-filter .search svg { width: 14px; height: 14px; stroke: var(--muted); stroke-width: 2; fill: none; }
+.j-filter .search input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 13px; color: var(--ink); }
+.j-filter select { height: 34px; padding: 0 28px 0 12px; font-family: inherit; font-size: 12.5px; color: var(--ink); background: var(--surface-2) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none' stroke='%235e6878' stroke-width='1.5'><path d='M1 1l4 4 4-4'/></svg>") no-repeat right 10px center; border: 1px solid var(--border); border-radius: 5px; appearance: none; cursor: pointer; }
+.j-filter select:hover { border-color: var(--ink-faint); }
+
+/* Meter chip */
+.j-meter-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+.j-meter { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--amber-bg); border: 1px solid var(--amber-fill); border-radius: 20px; font-size: 11.5px; font-weight: 600; color: var(--amber-fill); }
+.j-meter .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber-fill); }
+
+/* Panel + table */
+.j-panel { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; }
+.j-panel-head { padding: 14px 22px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-soft); }
+.j-panel-title { font-size: 14px; font-weight: 600; color: var(--ink); letter-spacing: -0.005em; }
+.j-panel-title .count { font-weight: 400; color: var(--muted); font-size: 12.5px; margin-left: 8px; }
+.j-panel-link { font-size: 12.5px; color: var(--accent-2); font-weight: 600; cursor: pointer; }
+.j-panel-link:hover { text-decoration: underline; }
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table thead th { text-align: left; padding: 10px 14px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); background: var(--surface-2); border-bottom: 1px solid var(--border); }
+.data-table thead th.right { text-align: right; }
+.data-table tbody td { padding: 11px 14px; border-bottom: 1px solid var(--border-soft); color: var(--secondary); vertical-align: top; }
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover { background: var(--surface-2); }
+.data-table td.role { font-weight: 600; color: var(--ink); padding-right: 14px; }
+.data-table td.role .sub { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); margin-top: 2px; font-style: italic; }
+.data-table td.target { color: var(--ink); font-weight: 500; }
+.data-table td.loc { font-family: var(--mono); font-size: 11.5px; color: var(--secondary); }
+.data-table td.when { text-align: right; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+/* Paywalled block */
+.j-paywalled {
+  position: relative;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 20%, rgba(0,0,0,0.5) 50%, transparent 80%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 20%, rgba(0,0,0,0.5) 50%, transparent 80%);
+  pointer-events: none;
+  padding-bottom: 220px;
+}
+
+/* Gate */
+.j-gate-wrap { position: relative; margin-top: -260px; z-index: 5; margin-bottom: 48px; }
+.j-gate { background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%); border: 1px solid var(--border); border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(10,23,41,0.08), 0 16px 48px rgba(10,23,41,0.06); max-width: 760px; margin: 0 auto; }
+.j-gate-eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 10px; }
+.j-gate h2 { font-family: var(--display); font-size: 30px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.018em; line-height: 1.1; margin-bottom: 14px; }
+.j-gate p { font-size: 14px; color: var(--secondary); line-height: 1.55; margin-bottom: 18px; max-width: 560px; }
+.j-gate p b { color: var(--ink); font-weight: 600; }
+.j-gate-ctas { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.j-gate-ctas .cta-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); height: 40px; padding: 0 18px; font-size: 13px; font-weight: 600; border-radius: 5px; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 7px; }
+.j-gate-ctas .cta-primary:hover { background: var(--accent-2); }
+.j-gate-ctas .cta-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border); height: 40px; padding: 0 18px; font-size: 13px; font-weight: 600; border-radius: 5px; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 7px; }
+.j-gate-ctas .cta-ghost:hover { background: var(--surface-2); border-color: var(--ink-faint); }
+
+/* Why PAI tracks jobs explainer */
+.j-note { margin-top: 48px; padding: 22px 26px; background: var(--surface-2); border: 1px solid var(--border-soft); border-left: 3px solid var(--accent); border-radius: var(--radius); }
+.j-note h3 { font-size: 14px; font-weight: 700; color: var(--ink-strong); margin-bottom: 8px; letter-spacing: -0.005em; }
+.j-note p { font-size: 13.5px; color: var(--secondary); line-height: 1.55; max-width: 760px; }
+
+@media (max-width: 900px) {
+  .j-hero { grid-template-columns: 1fr; gap: 16px; align-items: start; }
+  .j-hero h1 { font-size: 32px; }
+  .j-hero-stats { justify-content: flex-start; }
+  .j-hero-stats .stat { align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<header class="header-bar">
+  <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html">Legislation</a>
+    <a href="pai-jobs.html" class="on">Jobs</a>
+    <a href="pai-pricing.html">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view">
+
+  <nav class="j-crumb">
+    <a href="pai-home-public.html">Home</a>
+    <span class="sep">›</span>
+    <span class="cur">Jobs</span>
+  </nav>
+
+  <!-- HERO -->
+  <header class="j-hero">
+    <div>
+      <div class="eyebrow">Jobs · weekly digest</div>
+      <h1>Roles in AI governance,<br/>privacy and cyber.</h1>
+      <p class="deck">Every role our research team has seen this week — across <b>in-house</b> and <b>private practice</b>, at the seniority where regulatory exposure actually lands. The full archive and a weekly Friday digest are members-only.</p>
+    </div>
+    <div class="j-hero-stats">
+      <div class="stat"><span class="n">47</span><span class="l">Open roles</span></div>
+      <div class="stat"><span class="n">34</span><span class="l">Employers</span></div>
+      <div class="stat"><span class="n">18</span><span class="l">Jurisdictions</span></div>
+    </div>
+  </header>
+
+  <!-- METER -->
+  <div class="j-meter-row">
+    <span class="j-meter"><span class="dot"></span>Free preview · <b>8 roles</b> shown · rest is members-only</span>
+    <span style="font-size:12px; color:var(--muted);">Members see all 47 + weekly Friday digest. <a href="pai-pricing.html" style="font-weight:600;">Unlock →</a></span>
+  </div>
+
+  <!-- FILTER -->
+  <div class="j-filter">
+    <div class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input placeholder="Search roles, employers, locations…" />
+    </div>
+    <select>
+      <option>All domains</option>
+      <option>AI governance</option>
+      <option>Privacy / DPO</option>
+      <option>Cyber / DORA</option>
+      <option>Policy / public affairs</option>
+    </select>
+    <select>
+      <option>All seniority</option>
+      <option>Head of / Director</option>
+      <option>Counsel / Senior</option>
+      <option>Partner</option>
+      <option>Manager / Lead</option>
+    </select>
+    <select>
+      <option>All locations</option>
+      <option>UK</option>
+      <option>EU</option>
+      <option>US</option>
+      <option>APAC</option>
+    </select>
+    <select>
+      <option>Sort · Most recent</option>
+      <option>Sort · Employer A–Z</option>
+      <option>Sort · Location</option>
+    </select>
+  </div>
+
+  <!-- FREE PREVIEW (8 roles) -->
+  <div class="j-panel">
+    <div class="j-panel-head">
+      <div class="j-panel-title">This week's roles <span class="count">8 of 47</span></div>
+      <a href="pai-pricing.html" class="j-panel-link">Unlock full archive →</a>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr><th>Role</th><th>Employer</th><th>Location</th><th class="right">Posted</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="role">Head of AI Governance<span class="sub">Group · new function</span></td><td class="target">HSBC</td><td class="loc">London</td><td class="when">2d</td></tr>
+        <tr><td class="role">Senior DPO<span class="sub">EU lead · Art. 37</span></td><td class="target">Allianz</td><td class="loc">Munich</td><td class="when">3d</td></tr>
+        <tr><td class="role">Privacy Counsel · Product<span class="sub">AI features review</span></td><td class="target">Stripe</td><td class="loc">Dublin</td><td class="when">5d</td></tr>
+        <tr><td class="role">AI Risk Director<span class="sub">2nd line · model risk</span></td><td class="target">JPMorgan Chase</td><td class="loc">New York</td><td class="when">2d</td></tr>
+        <tr><td class="role">Data Protection Lead<span class="sub">Clinical data &amp; AI</span></td><td class="target">NHS England</td><td class="loc">London</td><td class="when">4d</td></tr>
+        <tr><td class="role">Privacy Partner<span class="sub">Lateral · EU/UK</span></td><td class="target">Hogan Lovells</td><td class="loc">London / Brussels</td><td class="when">1w</td></tr>
+        <tr><td class="role">Cyber &amp; Resilience Counsel<span class="sub">DORA implementation</span></td><td class="target">Deutsche Bank</td><td class="loc">Frankfurt</td><td class="when">6d</td></tr>
+        <tr><td class="role">Head of AI Policy<span class="sub">EU institutional</span></td><td class="target">Meta Platforms</td><td class="loc">Brussels</td><td class="when">1w</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAYWALLED (rest behind fade) -->
+  <div class="j-paywalled" aria-hidden="true">
+    <div class="j-panel">
+      <div class="j-panel-head">
+        <div class="j-panel-title">Rest of the archive <span class="count">39 more</span></div>
+      </div>
+      <table class="data-table">
+        <tbody>
+          <tr><td class="role">AI Ethics &amp; Governance Manager<span class="sub">Second line</span></td><td class="target">BNP Paribas</td><td class="loc">Paris</td><td class="when">3d</td></tr>
+          <tr><td class="role">Privacy Engineer<span class="sub">Privacy-enhancing tech</span></td><td class="target">ARM</td><td class="loc">Cambridge</td><td class="when">5d</td></tr>
+          <tr><td class="role">Senior Associate · Privacy &amp; AI<span class="sub">Lateral</span></td><td class="target">Linklaters</td><td class="loc">London</td><td class="when">1w</td></tr>
+          <tr><td class="role">CISO<span class="sub">Financial services</span></td><td class="target">Banco Santander</td><td class="loc">Madrid</td><td class="when">1w</td></tr>
+          <tr><td class="role">Head of Responsible AI<span class="sub">Central function</span></td><td class="target">Lloyds Banking Group</td><td class="loc">London</td><td class="when">4d</td></tr>
+          <tr><td class="role">DPO (Data Protection Officer)<span class="sub">Group-wide</span></td><td class="target">Carrefour</td><td class="loc">Paris</td><td class="when">2d</td></tr>
+          <tr><td class="role">Cybersecurity Counsel<span class="sub">Incident response</span></td><td class="target">Airbus</td><td class="loc">Toulouse</td><td class="when">6d</td></tr>
+          <tr><td class="role">Privacy Program Manager<span class="sub">APAC lead</span></td><td class="target">Grab</td><td class="loc">Singapore</td><td class="when">1w</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- GATE -->
+  <div class="j-gate-wrap">
+    <div class="j-gate">
+      <div class="j-gate-eyebrow">Members only · the full jobs archive</div>
+      <h2>47 open roles, filterable — and the weekly Friday digest.</h2>
+      <p>The rest of the roles our research team is tracking this week, with filters by domain, seniority and jurisdiction. Plus <b>one email every Friday</b> with the most significant openings — the same one paid members receive.</p>
+      <div class="j-gate-ctas">
+        <a href="pai-pricing.html" class="cta-primary">See pricing <span style="font-family:var(--mono);">→</span></a>
+        <a href="pai-pricing.html" class="cta-ghost">£95/mo · £950/yr</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why PAI tracks jobs -->
+  <div class="j-note">
+    <h3>Why a regulatory platform tracks jobs</h3>
+    <p>Because where roles open is where regulatory pressure lands. The Head of AI Governance roles opening at HSBC, Lloyds and BNP tell you what the AI Act is doing to bank governance. The sudden spike in DPO roles across healthcare tells you what DPDPA phase-in looks like in India. Tracking jobs is tracking the labour-market signal of regulation catching up with industry — and it's one of the earliest signals we see.</p>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
