@@ -94,27 +94,17 @@ a { color: var(--accent); text-decoration: none; }
 .data-table td.loc { font-family: var(--mono); font-size: 11.5px; color: var(--secondary); }
 .data-table td.when { text-align: right; font-family: var(--mono); font-size: 11px; color: var(--muted); }
 
-/* Paywalled block */
-.j-paywalled {
-  position: relative;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 20%, rgba(0,0,0,0.5) 50%, transparent 80%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 20%, rgba(0,0,0,0.5) 50%, transparent 80%);
-  pointer-events: none;
-  padding-bottom: 220px;
-}
-
-/* Gate */
-.j-gate-wrap { position: relative; margin-top: -260px; z-index: 5; margin-bottom: 48px; }
-.j-gate { background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%); border: 1px solid var(--border); border-radius: 12px; padding: 32px 36px; box-shadow: 0 4px 16px rgba(10,23,41,0.08), 0 16px 48px rgba(10,23,41,0.06); max-width: 760px; margin: 0 auto; }
-.j-gate-eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 10px; }
-.j-gate h2 { font-family: var(--display); font-size: 30px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.018em; line-height: 1.1; margin-bottom: 14px; }
-.j-gate p { font-size: 14px; color: var(--secondary); line-height: 1.55; margin-bottom: 18px; max-width: 560px; }
-.j-gate p b { color: var(--ink); font-weight: 600; }
-.j-gate-ctas { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.j-gate-ctas .cta-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); height: 40px; padding: 0 18px; font-size: 13px; font-weight: 600; border-radius: 5px; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 7px; }
-.j-gate-ctas .cta-primary:hover { background: var(--accent-2); }
-.j-gate-ctas .cta-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border); height: 40px; padding: 0 18px; font-size: 13px; font-weight: 600; border-radius: 5px; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 7px; }
-.j-gate-ctas .cta-ghost:hover { background: var(--surface-2); border-color: var(--ink-faint); }
+/* Cards grid — 2 columns */
+.j-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 36px; }
+.j-card { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 18px 22px; transition: border-color .12s, box-shadow .12s; cursor: pointer; }
+.j-card:hover { border-color: var(--ink-faint); box-shadow: 0 2px 8px rgba(10,23,41,0.04); }
+.j-card .role { font-size: 15px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.005em; margin-bottom: 3px; line-height: 1.3; }
+.j-card .sub { font-size: 12px; font-style: italic; color: var(--muted); margin-bottom: 12px; }
+.j-card .meta { display: flex; align-items: center; gap: 14px; font-size: 12.5px; color: var(--secondary); flex-wrap: wrap; }
+.j-card .target { font-weight: 600; color: var(--ink); }
+.j-card .loc { font-family: var(--mono); font-size: 11.5px; color: var(--secondary); }
+.j-card .when { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-left: auto; }
+@media (max-width: 780px) { .j-cards { grid-template-columns: 1fr; } }
 
 /* Why PAI tracks jobs explainer */
 .j-note { margin-top: 48px; padding: 22px 26px; background: var(--surface-2); border: 1px solid var(--border-soft); border-left: 3px solid var(--accent); border-radius: var(--radius); }
@@ -162,19 +152,19 @@ a { color: var(--accent); text-decoration: none; }
     <div>
       <div class="eyebrow">Jobs · weekly digest</div>
       <h1>Roles in AI governance,<br/>privacy and cyber.</h1>
-      <p class="deck">Every role our research team has seen this week — across <b>in-house</b> and <b>private practice</b>, at the seniority where regulatory exposure actually lands. The full archive and a weekly Friday digest are members-only.</p>
+      <p class="deck">Every role our research team has seen this week — across <b>in-house</b> and <b>private practice</b>, at the seniority where regulatory exposure actually lands. Free to read, weekly Friday digest by email.</p>
     </div>
     <div class="j-hero-stats">
-      <div class="stat"><span class="n">47</span><span class="l">Open roles</span></div>
-      <div class="stat"><span class="n">34</span><span class="l">Employers</span></div>
-      <div class="stat"><span class="n">18</span><span class="l">Jurisdictions</span></div>
+      <div class="stat"><span class="n">16</span><span class="l">Open roles</span></div>
+      <div class="stat"><span class="n">15</span><span class="l">Employers</span></div>
+      <div class="stat"><span class="n">10</span><span class="l">Jurisdictions</span></div>
     </div>
   </header>
 
   <!-- METER -->
   <div class="j-meter-row">
-    <span class="j-meter"><span class="dot"></span>Free preview · <b>8 roles</b> shown · rest is members-only</span>
-    <span style="font-size:12px; color:var(--muted);">Members see all 47 + weekly Friday digest. <a href="pai-pricing.html" style="font-weight:600;">Unlock →</a></span>
+    <span class="j-meter"><span class="dot"></span>Updated weekly · <b>16 live roles</b></span>
+    <span style="font-size:12px; color:var(--muted);">Want them in your inbox? <a href="#digest" style="font-weight:600;">Subscribe to the Friday digest →</a></span>
   </div>
 
   <!-- FILTER -->
@@ -211,61 +201,24 @@ a { color: var(--accent); text-decoration: none; }
     </select>
   </div>
 
-  <!-- FREE PREVIEW (8 roles) -->
-  <div class="j-panel">
-    <div class="j-panel-head">
-      <div class="j-panel-title">This week's roles <span class="count">8 of 47</span></div>
-      <a href="pai-pricing.html" class="j-panel-link">Unlock full archive →</a>
-    </div>
-    <table class="data-table">
-      <thead>
-        <tr><th>Role</th><th>Employer</th><th>Location</th><th class="right">Posted</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="role">Head of AI Governance<span class="sub">Group · new function</span></td><td class="target">HSBC</td><td class="loc">London</td><td class="when">2d</td></tr>
-        <tr><td class="role">Senior DPO<span class="sub">EU lead · Art. 37</span></td><td class="target">Allianz</td><td class="loc">Munich</td><td class="when">3d</td></tr>
-        <tr><td class="role">Privacy Counsel · Product<span class="sub">AI features review</span></td><td class="target">Stripe</td><td class="loc">Dublin</td><td class="when">5d</td></tr>
-        <tr><td class="role">AI Risk Director<span class="sub">2nd line · model risk</span></td><td class="target">JPMorgan Chase</td><td class="loc">New York</td><td class="when">2d</td></tr>
-        <tr><td class="role">Data Protection Lead<span class="sub">Clinical data &amp; AI</span></td><td class="target">NHS England</td><td class="loc">London</td><td class="when">4d</td></tr>
-        <tr><td class="role">Privacy Partner<span class="sub">Lateral · EU/UK</span></td><td class="target">Hogan Lovells</td><td class="loc">London / Brussels</td><td class="when">1w</td></tr>
-        <tr><td class="role">Cyber &amp; Resilience Counsel<span class="sub">DORA implementation</span></td><td class="target">Deutsche Bank</td><td class="loc">Frankfurt</td><td class="when">6d</td></tr>
-        <tr><td class="role">Head of AI Policy<span class="sub">EU institutional</span></td><td class="target">Meta Platforms</td><td class="loc">Brussels</td><td class="when">1w</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- PAYWALLED (rest behind fade) -->
-  <div class="j-paywalled" aria-hidden="true">
-    <div class="j-panel">
-      <div class="j-panel-head">
-        <div class="j-panel-title">Rest of the archive <span class="count">39 more</span></div>
-      </div>
-      <table class="data-table">
-        <tbody>
-          <tr><td class="role">AI Ethics &amp; Governance Manager<span class="sub">Second line</span></td><td class="target">BNP Paribas</td><td class="loc">Paris</td><td class="when">3d</td></tr>
-          <tr><td class="role">Privacy Engineer<span class="sub">Privacy-enhancing tech</span></td><td class="target">ARM</td><td class="loc">Cambridge</td><td class="when">5d</td></tr>
-          <tr><td class="role">Senior Associate · Privacy &amp; AI<span class="sub">Lateral</span></td><td class="target">Linklaters</td><td class="loc">London</td><td class="when">1w</td></tr>
-          <tr><td class="role">CISO<span class="sub">Financial services</span></td><td class="target">Banco Santander</td><td class="loc">Madrid</td><td class="when">1w</td></tr>
-          <tr><td class="role">Head of Responsible AI<span class="sub">Central function</span></td><td class="target">Lloyds Banking Group</td><td class="loc">London</td><td class="when">4d</td></tr>
-          <tr><td class="role">DPO (Data Protection Officer)<span class="sub">Group-wide</span></td><td class="target">Carrefour</td><td class="loc">Paris</td><td class="when">2d</td></tr>
-          <tr><td class="role">Cybersecurity Counsel<span class="sub">Incident response</span></td><td class="target">Airbus</td><td class="loc">Toulouse</td><td class="when">6d</td></tr>
-          <tr><td class="role">Privacy Program Manager<span class="sub">APAC lead</span></td><td class="target">Grab</td><td class="loc">Singapore</td><td class="when">1w</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- GATE -->
-  <div class="j-gate-wrap">
-    <div class="j-gate">
-      <div class="j-gate-eyebrow">Members only · the full jobs archive</div>
-      <h2>47 open roles, filterable — and the weekly Friday digest.</h2>
-      <p>The rest of the roles our research team is tracking this week, with filters by domain, seniority and jurisdiction. Plus <b>one email every Friday</b> with the most significant openings — the same one paid members receive.</p>
-      <div class="j-gate-ctas">
-        <a href="pai-pricing.html" class="cta-primary">See pricing <span style="font-family:var(--mono);">→</span></a>
-        <a href="pai-pricing.html" class="cta-ghost">£95/mo · £950/yr</a>
-      </div>
-    </div>
+  <!-- ALL ROLES — 2 col cards -->
+  <div class="j-cards">
+    <div class="j-card"><div class="role">Head of AI Governance</div><div class="sub">Group · new function</div><div class="meta"><span class="target">HSBC</span><span class="loc">London</span><span class="when">2d</span></div></div>
+    <div class="j-card"><div class="role">Senior DPO</div><div class="sub">EU lead · Art. 37</div><div class="meta"><span class="target">Allianz</span><span class="loc">Munich</span><span class="when">3d</span></div></div>
+    <div class="j-card"><div class="role">Privacy Counsel · Product</div><div class="sub">AI features review</div><div class="meta"><span class="target">Stripe</span><span class="loc">Dublin</span><span class="when">5d</span></div></div>
+    <div class="j-card"><div class="role">AI Risk Director</div><div class="sub">2nd line · model risk</div><div class="meta"><span class="target">JPMorgan Chase</span><span class="loc">New York</span><span class="when">2d</span></div></div>
+    <div class="j-card"><div class="role">Data Protection Lead</div><div class="sub">Clinical data &amp; AI</div><div class="meta"><span class="target">NHS England</span><span class="loc">London</span><span class="when">4d</span></div></div>
+    <div class="j-card"><div class="role">Privacy Partner</div><div class="sub">Lateral · EU/UK</div><div class="meta"><span class="target">Hogan Lovells</span><span class="loc">London / Brussels</span><span class="when">1w</span></div></div>
+    <div class="j-card"><div class="role">Cyber &amp; Resilience Counsel</div><div class="sub">DORA implementation</div><div class="meta"><span class="target">Deutsche Bank</span><span class="loc">Frankfurt</span><span class="when">6d</span></div></div>
+    <div class="j-card"><div class="role">Head of AI Policy</div><div class="sub">EU institutional</div><div class="meta"><span class="target">Meta Platforms</span><span class="loc">Brussels</span><span class="when">1w</span></div></div>
+    <div class="j-card"><div class="role">AI Ethics &amp; Governance Manager</div><div class="sub">Second line</div><div class="meta"><span class="target">BNP Paribas</span><span class="loc">Paris</span><span class="when">3d</span></div></div>
+    <div class="j-card"><div class="role">Privacy Engineer</div><div class="sub">Privacy-enhancing tech</div><div class="meta"><span class="target">ARM</span><span class="loc">Cambridge</span><span class="when">5d</span></div></div>
+    <div class="j-card"><div class="role">Senior Associate · Privacy &amp; AI</div><div class="sub">Lateral</div><div class="meta"><span class="target">Linklaters</span><span class="loc">London</span><span class="when">1w</span></div></div>
+    <div class="j-card"><div class="role">CISO</div><div class="sub">Financial services</div><div class="meta"><span class="target">Banco Santander</span><span class="loc">Madrid</span><span class="when">1w</span></div></div>
+    <div class="j-card"><div class="role">Head of Responsible AI</div><div class="sub">Central function</div><div class="meta"><span class="target">Lloyds Banking Group</span><span class="loc">London</span><span class="when">4d</span></div></div>
+    <div class="j-card"><div class="role">DPO (Data Protection Officer)</div><div class="sub">Group-wide</div><div class="meta"><span class="target">Carrefour</span><span class="loc">Paris</span><span class="when">2d</span></div></div>
+    <div class="j-card"><div class="role">Cybersecurity Counsel</div><div class="sub">Incident response</div><div class="meta"><span class="target">Airbus</span><span class="loc">Toulouse</span><span class="when">6d</span></div></div>
+    <div class="j-card"><div class="role">Privacy Program Manager</div><div class="sub">APAC lead</div><div class="meta"><span class="target">Grab</span><span class="loc">Singapore</span><span class="when">1w</span></div></div>
   </div>
 
   <!-- Why PAI tracks jobs -->
