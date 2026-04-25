@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PrinciplesAI — Authorities</title>
@@ -890,6 +891,193 @@ button { cursor: pointer; }
   .header-search { max-width: none; }
   .header-user-name { display: none; }
 }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<script id="pai-clerk-sdk" async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ" src="https://clerk.principlesai.org/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript" onload="window.__paiClerkLoaded=true;window.dispatchEvent(new Event('pai:clerk-loaded'))"></script>
+<script id="pai-clerk-v1">
+(function(){
+  if(window.__paiClerkV1) return;
+  window.__paiClerkV1 = true;
+
+  function setHeaderName(user){
+    var el = document.querySelector('.header-user-name');
+    if(!el) return;
+    if(user && user.firstName){
+      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+    }
+    // if no user, leave hardcoded — pai-app-* is public by design
+  }
+
+  function boot(){
+    if(!window.Clerk || typeof window.Clerk.load !== 'function') return;
+    window.Clerk.load().then(function(){
+      setHeaderName(window.Clerk.user);
+      // react to sign-in / sign-out events
+      if(typeof window.Clerk.addListener === 'function'){
+        window.Clerk.addListener(function(state){ setHeaderName(state && state.user); });
+      }
+    }).catch(function(){ /* no-op, keep hardcoded fallback */ });
+  }
+
+  if(window.__paiClerkLoaded){ boot(); }
+  else { window.addEventListener('pai:clerk-loaded', boot); }
+})();
+</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
+</style>
+<style id="pai-map-v47">
+/* v47 map polish — lighter sea, solid land (overrides the 0.85 inline opacity
+   that produces the coast ghost), no enacted/proposed/lapsed legend. */
+.map-frame { background: #f3f5f8 !important; }
+.map-frame svg path { opacity: 1 !important; }
+.map-legend { display: none !important; }
 </style>
 </head>
 <body>
@@ -908,8 +1096,8 @@ button { cursor: pointer; }
     <a href="pai-pricing.html">Pricing</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none; height:36px;">Log out</a>
-    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
+    <a href="/pai-signin.html" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
   </div>
 </header>
 
@@ -968,7 +1156,6 @@ button { cursor: pointer; }
       <span class="ps-ok">Pipeline operational</span>
     </div>
     <div class="page-actions">
-      <button class="btn">Export list</button>
       <button class="btn btn-primary">+ Watchlist</button>
     </div>
   </div>
@@ -976,7 +1163,7 @@ button { cursor: pointer; }
     <!-- Page header -->
   <div class="auth-page-head">
     <h1 class="page-title">Authorities</h1>
-    <p class="page-sub">PAI tracks <b>2,389 bodies</b> across <b>329 jurisdictions</b>. <b>1,116 active in the last 7 days</b>, spanning courts, regulators, agencies, legislatures and standards bodies.</p>
+    <p class="page-sub">PAI tracks <b id="ssBodies">—</b> across <b id="ssJuris">—</b>, spanning courts, regulators, agencies, legislatures and standards bodies.</p>
     <p class="page-sub" style="font-size:12.5px; color:var(--ink-faint); margin-top:6px;">All activity counts are <b style="color:var(--muted)">live from each body's tracking start date</b> — no backfill from publisher archives. Each row shows <b style="color:var(--muted)">tracking since</b> on hover.</p>
   </div>
 
@@ -992,12 +1179,14 @@ button { cursor: pointer; }
 
       <div class="facet-group">
         <div class="facet-group-head"><span>Region</span><span class="facet-group-clear" onclick="fpClearGroup('region')">Clear</span></div>
-        <div class="facet-opt" data-facet="region" data-value="europe" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">EU / EEA</span><span class="count">1,117</span></div>
-        <div class="facet-opt" data-facet="region" data-value="uk-cl" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">UK &amp; Common-law</span><span class="count">246</span></div>
-        <div class="facet-opt" data-facet="region" data-value="apac" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">APAC</span><span class="count">413</span></div>
-        <div class="facet-opt" data-facet="region" data-value="americas" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Americas</span><span class="count">354</span></div>
-        <div class="facet-opt" data-facet="region" data-value="africa" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Africa</span><span class="count">139</span></div>
-        <div class="facet-opt" data-facet="region" data-value="mena" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">MENA</span><span class="count">120</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Europe" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Europe</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="North America" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">North America</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Latin America" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Latin America</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Caribbean" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Caribbean</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Africa" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Africa</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Middle East" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Middle East</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Asia Pacific" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Asia Pacific</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Global" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Global</span><span class="count">—</span></div>
       </div>
 
       <div class="facet-group">
@@ -1031,7 +1220,7 @@ button { cursor: pointer; }
     <main class="research-main">
 
       <div class="research-toolbar">
-        <div class="rt-count"><b id="resultCount">18 of 2,389</b> authorities shown</div>
+        <div class="rt-count"><b id="resultCount">—</b> authorities shown</div>
         <div class="rt-right">
           <button class="rt-sort" type="button">Sort: Most active · 7d <span style="font-family:var(--mono);font-weight:400;font-size:10px;">▾</span></button>
           <div class="rt-views" role="tablist">
@@ -1062,207 +1251,11 @@ button { cursor: pointer; }
           <div></div>
         </div>
 
-        <div class="dg-row" data-region="europe" data-type="dpa">
-          <div class="dg-iso">FR</div>
-          <div class="dg-name">Commission Nationale de l'Informatique et des Libertés<span class="acr">CNIL</span></div>
-          <div class="dg-country">France</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">131</div>
-          <div class="dg-num">940</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star on" title="Watchlisted"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="uk-cl" data-type="financial">
-          <div class="dg-iso">GB</div>
-          <div class="dg-name">Financial Conduct Authority<span class="acr">FCA</span></div>
-          <div class="dg-country">United Kingdom</div>
-          <div><span class="dg-type-pill financial">Financial</span></div>
-          <div class="dg-num">52</div>
-          <div class="dg-num">231</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-type="court">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name">Court of Justice of the European Union<span class="acr">CJEU</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-type-pill court">Court</span></div>
-          <div class="dg-num">45</div>
-          <div class="dg-num">1,415</div>
-          <div class="dg-last recent">yesterday</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="americas" data-type="competition">
-          <div class="dg-iso">US</div>
-          <div class="dg-name">Federal Trade Commission<span class="acr">FTC</span></div>
-          <div class="dg-country">United States</div>
-          <div><span class="dg-type-pill competition">Competition</span></div>
-          <div class="dg-num">20</div>
-          <div class="dg-num">316</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-type="court">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name">European Court of Human Rights<span class="acr">ECHR</span></div>
-          <div class="dg-country">Council of Europe</div>
-          <div><span class="dg-type-pill court">Court</span></div>
-          <div class="dg-num">18</div>
-          <div class="dg-num">2,236</div>
-          <div class="dg-last">16 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="americas" data-type="standards">
-          <div class="dg-iso">US</div>
-          <div class="dg-name">National Institute of Standards and Technology<span class="acr">NIST</span></div>
-          <div class="dg-country">United States</div>
-          <div><span class="dg-type-pill standards">Standards</span></div>
-          <div class="dg-num">15</div>
-          <div class="dg-num">92</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-type="dpa">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name">European Data Protection Board<span class="acr">EDPB</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">7</div>
-          <div class="dg-num">27</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="uk-cl" data-type="dpa">
-          <div class="dg-iso">GB</div>
-          <div class="dg-name">Information Commissioner's Office<span class="acr">ICO</span></div>
-          <div class="dg-country">United Kingdom</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">5</div>
-          <div class="dg-num">105</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star on" title="Watchlisted"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-type="dpa">
-          <div class="dg-iso">DE</div>
-          <div class="dg-name">Bundesbeauftragte für den Datenschutz<span class="acr">BfDI</span></div>
-          <div class="dg-country">Germany</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">4</div>
-          <div class="dg-num">132</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-type="dpa">
-          <div class="dg-iso">IT</div>
-          <div class="dg-name">Garante per la Protezione dei Dati Personali<span class="acr">Garante</span></div>
-          <div class="dg-country">Italy</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">3</div>
-          <div class="dg-num">74</div>
-          <div class="dg-last">17 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-type="dpa">
-          <div class="dg-iso">ES</div>
-          <div class="dg-name">Agencia Española de Protección de Datos<span class="acr">AEPD</span></div>
-          <div class="dg-country">Spain</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">3</div>
-          <div class="dg-num">51</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star on" title="Watchlisted"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-type="dpa">
-          <div class="dg-iso">IE</div>
-          <div class="dg-name">Data Protection Commission<span class="acr">DPC</span></div>
-          <div class="dg-country">Ireland</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">2</div>
-          <div class="dg-num">12</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star on" title="Watchlisted"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="africa" data-type="dpa">
-          <div class="dg-iso">KE</div>
-          <div class="dg-name">Office of the Data Protection Commissioner<span class="acr">ODPC</span></div>
-          <div class="dg-country">Kenya</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">2</div>
-          <div class="dg-num">41</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-type="dpa">
-          <div class="dg-iso">JP</div>
-          <div class="dg-name">Personal Information Protection Commission<span class="acr">PPC</span></div>
-          <div class="dg-country">Japan</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">2</div>
-          <div class="dg-num">4</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-type="cyber">
-          <div class="dg-iso">DE</div>
-          <div class="dg-name">Bundesamt für Sicherheit in der Informationstechnik<span class="acr">BSI</span></div>
-          <div class="dg-country">Germany</div>
-          <div><span class="dg-type-pill cyber">Cyber</span></div>
-          <div class="dg-num">1</div>
-          <div class="dg-num">8</div>
-          <div class="dg-last">17 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-type="dpa">
-          <div class="dg-iso">AU</div>
-          <div class="dg-name">Office of the Australian Information Commissioner<span class="acr">OAIC</span></div>
-          <div class="dg-country">Australia</div>
-          <div><span class="dg-type-pill dpa">Data protection</span></div>
-          <div class="dg-num">1</div>
-          <div class="dg-num">15</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-type="agency">
-          <div class="dg-iso">IN</div>
-          <div class="dg-name">Ministry of Electronics and Information Technology<span class="acr">MeitY</span></div>
-          <div class="dg-country">India</div>
-          <div><span class="dg-type-pill agency">Government agency</span></div>
-          <div class="dg-num">1</div>
-          <div class="dg-num">0</div>
-          <div class="dg-last">yesterday</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="americas" data-type="court">
-          <div class="dg-iso">US</div>
-          <div class="dg-name">Supreme Court of the United States<span class="acr">SCOTUS</span></div>
-          <div class="dg-country">United States</div>
-          <div><span class="dg-type-pill court">Court</span></div>
-          <div class="dg-num">0</div>
-          <div class="dg-num">1</div>
-          <div class="dg-last">2mo ago</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
+        <!-- Rows rendered by loadAuthorities() from authorities.json -->
+        <div id="dgRows"></div>
 
         <div class="dg-pager">
-          <span>Showing 18 of 2,389 · tracked live since 1 Jan 2025</span>
-          <a href="#">Next page →</a>
+          <span id="pagerCount">Loading authorities…</span>
         </div>
       </div>
 
@@ -1278,7 +1271,7 @@ button { cursor: pointer; }
     <div class="left">
       <span>PrinciplesAI · Authorities</span>
       <span><span class="ok"></span>Pipeline operational</span>
-      <span>2,389 bodies · 329 jurisdictions tracked</span>
+      <span id="footStat">— bodies · — jurisdictions tracked</span>
     </div>
     <div>v0.9</div>
   </footer>
@@ -1380,13 +1373,204 @@ function fpApply() {
     if (ok) shown++;
   });
   const rc = document.getElementById('resultCount');
-  if (rc) rc.textContent = shown + ' of 2,389';
+  const total = (window.AUTH_TOTAL != null) ? window.AUTH_TOTAL : 0;
+  if (rc) rc.textContent = shown.toLocaleString() + ' of ' + total.toLocaleString();
+  const pc = document.getElementById('pagerCount');
+  if (pc) pc.textContent = 'Showing ' + shown.toLocaleString() + ' of ' + total.toLocaleString() + ' · tracked live since 1 Jan 2025';
 }
 function fpRemoveChip(group, value) {
   const el = document.querySelector('.facet-opt[data-facet="' + group + '"][data-value="' + value + '"]');
   if (el) el.classList.remove('on');
   fpApply();
 }
+
+/* ============ LIVE AUTHORITIES DATA ============ */
+const TYPE_TO_FACET = {
+  // AT2 canonical Type values (post-schema-expansion)
+  'DPA': 'dpa',
+  'Court': 'court',
+  'Cyber agency': 'cyber',
+  'AI regulator': 'agency',
+  'Competition authority': 'competition',
+  'Ministry': 'agency',
+  'Standards body': 'standards',
+  'Legislature': 'legislature',
+  'Government agency': 'agency',
+  'Financial regulator': 'financial',
+  'Telecoms regulator': 'telecoms',
+  'Sector regulator': 'sectoral',
+  'Attorney General': 'ag',
+  'International body': 'agency',
+  ' EU body': 'eu',
+  'EU body': 'eu',
+  'Other': 'agency',
+};
+const FACET_TO_PILL_LABEL = {
+  court: 'Court', legislature: 'Legislature', agency: 'Agency',
+  financial: 'Financial regulator', dpa: 'DPA', telecoms: 'Telecoms regulator',
+  cyber: 'Cyber agency', competition: 'Competition authority', standards: 'Standards body',
+  sectoral: 'Sector regulator', ag: 'Attorney General', eu: 'EU body',
+};
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+function renderAuthorityRow(r) {
+  const facet = TYPE_TO_FACET[r.type] || 'agency';
+  const pillLabel = FACET_TO_PILL_LABEL[facet] || escHtml(r.type);
+  const iso = r.iso || '';
+  return (
+    '<div class="dg-row" data-region="' + escHtml(r.region) + '" data-type="' + facet + '"' +
+    ' data-website="' + escHtml(r.website) + '">' +
+      '<div class="dg-iso">' + escHtml(iso) + '</div>' +
+      '<div class="dg-name">' + escHtml(r.name) + '</div>' +
+      '<div class="dg-country">' + escHtml(r.jurisdiction_name) + '</div>' +
+      '<div><span class="dg-type-pill ' + facet + '">' + pillLabel + '</span></div>' +
+      '<div class="dg-num">—</div>' +
+      '<div class="dg-num">—</div>' +
+      '<div class="dg-last">—</div>' +
+      '<button class="dg-star" title="Add to watchlist" onclick="event.stopPropagation();this.classList.toggle(\'on\');"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>' +
+    '</div>'
+  );
+}
+function updateFacetCounts(facets) {
+  // Region + type counts
+  document.querySelectorAll('.facet-opt').forEach(el => {
+    const group = el.dataset.facet;
+    const value = el.dataset.value;
+    const countEl = el.querySelector('.count');
+    if (!countEl || !facets[group]) return;
+    // For type facet, counts come from Airtable Body Type values; we need to sum all
+    // Airtable types that map to this facet code
+    let n = 0;
+    if (group === 'type') {
+      for (const [airType, count] of Object.entries(facets.type || {})) {
+        if ((TYPE_TO_FACET[airType] || 'agency') === value) n += count;
+      }
+    } else {
+      n = facets[group][value] || 0;
+    }
+    countEl.textContent = n.toLocaleString();
+    el.style.opacity = n === 0 ? '0.4' : '';
+  });
+}
+async function loadAuthorities() {
+  const container = document.getElementById('dgRows');
+  try {
+    const r = await fetch('./authorities.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+    window.AUTH_TOTAL = data.total;
+    if (!data.rows.length) {
+      container.innerHTML = '<div style="padding:40px 18px;text-align:center;color:var(--muted);font-size:13px;">No authorities to show.</div>';
+    } else {
+      // Render the first page in one shot; filtering is client-side over all rows.
+      container.innerHTML = data.rows.map(renderAuthorityRow).join('');
+    }
+    updateFacetCounts(data.facets || {});
+    const juris = new Set(data.rows.map(x => x.jurisdiction_name).filter(Boolean)).size;
+    const setTx = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+    setTx('ssBodies', data.total.toLocaleString() + ' bodies');
+    setTx('ssJuris', juris + ' jurisdictions');
+    setTx('footStat', data.total.toLocaleString() + ' bodies · ' + juris + ' jurisdictions tracked');
+    fpApply();
+  } catch (err) {
+    container.innerHTML = '<div style="padding:40px 18px;text-align:center;color:var(--red);font-size:13px;">Could not load authorities (' + escHtml(err.message) + ').</div>';
+  }
+}
+loadAuthorities();
+</script>
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+<div class="nav-scrim" aria-hidden="true"></div>
+
+<script>
+/* Client-side CSV export — dumps visible .dg-row rows from the grid */
+(function(){
+  function csvEscape(s){ return '"'+String(s==null?'':s).replace(/"/g,'""')+'"'; }
+  function triggerDownload(filename, csv){
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=url; a.download=filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},500);
+  }
+  window.paiExportCSV=function(){
+    var headRow=document.querySelector('.dg-head-row');
+    var headers=[];
+    if(headRow){ headRow.querySelectorAll('.dg-sort-btn,[role="columnheader"]').forEach(function(el){
+      var t=(el.textContent||'').replace(/\s+/g,' ').trim();
+      if(t) headers.push(t);
+    }); }
+    if(!headers.length) headers=['Name','Country','Type','Status','Date','URL'];
+    var rows=[];
+    document.querySelectorAll('.dg-row').forEach(function(r){
+      if(r.style.display==='none') return;
+      var cells=[];
+      r.querySelectorAll('.dg-iso,.dg-name,.dg-country,.dg-type-pill,.dg-status-pill,.dg-domain,.dg-when,.dg-last,.dg-num').forEach(function(c){
+        cells.push((c.textContent||'').replace(/\s+/g,' ').trim());
+      });
+      var website=r.dataset.website||r.dataset.source||'';
+      if(website) cells.push(website);
+      rows.push(cells.map(csvEscape).join(','));
+    });
+    var csv=headers.map(csvEscape).join(',')+'\n'+rows.join('\n');
+    var stamp=new Date().toISOString().slice(0,10);
+    var filename=(location.pathname.split('/').pop().replace('.html','')||'pai-export')+'_'+stamp+'.csv';
+    triggerDownload(filename,csv);
+  };
+  function bindExport(){
+    document.querySelectorAll('button.btn, .rt-export-btn, button.rt-export-btn').forEach(function(btn){
+      var txt=(btn.textContent||'').toLowerCase();
+      if(!(txt.indexOf('export')>=0 || txt.indexOf('csv')>=0)) return;
+      if(btn.dataset.paiWired) return;
+      btn.dataset.paiWired='1';
+      btn.addEventListener('click',function(e){ e.preventDefault(); window.paiExportCSV(); });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindExport);
+  else bindExport();
+})();
+</script>
+
+<script>
+/* localStorage watchlist — persists starred rows by data-website key */
+(function(){
+  var KEY='paiWatchlist-v1';
+  function getSet(){
+    try{ var v=JSON.parse(localStorage.getItem(KEY)||'[]'); return new Set(Array.isArray(v)?v:[]); }
+    catch(_){ return new Set(); }
+  }
+  function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(Array.from(s))); }catch(_){} }
+  function rowKey(row){ var el=row.querySelector('.dg-name'); return row.dataset.website||row.dataset.source||(el?el.textContent.trim():''); }
+  window.paiWatchRestore=function(){
+    var s=getSet();
+    document.querySelectorAll('.dg-row').forEach(function(r){
+      var k=rowKey(r); if(k && s.has(k)){
+        r.classList.add('watched'); r.dataset.watchlist='on';
+        var btn=r.querySelector('.dg-star'); if(btn) btn.classList.add('on');
+      }
+    });
+  };
+  var orig=window.dgStar;
+  window.dgStar=function(e,btn){
+    if(typeof orig==='function') orig(e,btn);
+    var row=btn.closest('.dg-row'); if(!row) return;
+    var k=rowKey(row); if(!k) return;
+    var s=getSet();
+    if(btn.classList.contains('on')) s.add(k); else s.delete(k);
+    save(s);
+  };
+  var container=document.getElementById('dgRows');
+  if(container){
+    var obs=new MutationObserver(function(){ window.paiWatchRestore(); });
+    obs.observe(container,{childList:true});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',window.paiWatchRestore);
+  else setTimeout(window.paiWatchRestore, 500);
+})();
 </script>
 </body>
 </html>

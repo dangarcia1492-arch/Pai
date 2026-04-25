@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PrinciplesAI — News</title>
@@ -1086,6 +1087,193 @@ button { cursor: pointer; }
   .header-search { max-width: none; }
   .header-user-name { display: none; }
 }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<script id="pai-clerk-sdk" async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ" src="https://clerk.principlesai.org/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript" onload="window.__paiClerkLoaded=true;window.dispatchEvent(new Event('pai:clerk-loaded'))"></script>
+<script id="pai-clerk-v1">
+(function(){
+  if(window.__paiClerkV1) return;
+  window.__paiClerkV1 = true;
+
+  function setHeaderName(user){
+    var el = document.querySelector('.header-user-name');
+    if(!el) return;
+    if(user && user.firstName){
+      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+    }
+    // if no user, leave hardcoded — pai-app-* is public by design
+  }
+
+  function boot(){
+    if(!window.Clerk || typeof window.Clerk.load !== 'function') return;
+    window.Clerk.load().then(function(){
+      setHeaderName(window.Clerk.user);
+      // react to sign-in / sign-out events
+      if(typeof window.Clerk.addListener === 'function'){
+        window.Clerk.addListener(function(state){ setHeaderName(state && state.user); });
+      }
+    }).catch(function(){ /* no-op, keep hardcoded fallback */ });
+  }
+
+  if(window.__paiClerkLoaded){ boot(); }
+  else { window.addEventListener('pai:clerk-loaded', boot); }
+})();
+</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
+</style>
+<style id="pai-map-v47">
+/* v47 map polish — lighter sea, solid land (overrides the 0.85 inline opacity
+   that produces the coast ghost), no enacted/proposed/lapsed legend. */
+.map-frame { background: #f3f5f8 !important; }
+.map-frame svg path { opacity: 1 !important; }
+.map-legend { display: none !important; }
 </style>
 </head>
 <body>
@@ -1104,8 +1292,8 @@ button { cursor: pointer; }
     <a href="pai-pricing.html">Pricing</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none; height:36px;">Log out</a>
-    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
+    <a href="/pai-signin.html" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
   </div>
 </header>
 
@@ -1145,14 +1333,13 @@ button { cursor: pointer; }
     </div>
     <div class="page-actions">
       <button class="btn">Email digest</button>
-      <button class="btn btn-primary">+ New alert</button>
     </div>
   </div>
 
   <!-- Page header -->
   <div class="news-page-head">
     <h1 class="page-title">News</h1>
-    <p class="page-sub">Every substantive item PAI captured this week from <b>tier-1 regulators, courts and agencies</b>, classified and ranked. <b>142 items</b> in last 7 days across your filters.</p>
+    <p class="page-sub">Every substantive item PAI captured this week from <b>tier-1 regulators, courts and agencies</b>, classified and ranked. <b id="newsTotal">—</b> items in last 7 days across your filters.</p>
   </div>
 
   <!-- Filter pills -->
@@ -1197,172 +1384,22 @@ button { cursor: pointer; }
     <span class="nf-applied-label">No filters active</span>
   </div>
 
-  <div class="news-lead">
-  <div class="nl-kick">TODAY'S LEAD · France · 2026-04-14 · <span class="status-pill-sm enf">Enforcement</span></div>
-  <h2><a href="https://cnil.fr/en/transfer-data-social-network-advertising-purposes-cnil-imposed-fine-eu35-million" target="_blank" rel="noopener">Transfer of data to a social network for advertising purposes: the CNIL imposed a fine of €3.5 million</a></h2>
-  <p class="nl-standfirst">Full standfirst appears here once editorial is attached — the Airtable Content record currently carries title, publication date, source URL, workflow status, and official-body link only. PAI's editorial pipeline will layer the analytical summary before publishing.</p>
-  <div class="nl-footer">
-    <span><strong>Type</strong> Enforcement</span>
-    <span><strong>Authority</strong> Commission Nationale de l&#x27;Informatique et des Libertes</span>
-    <span><strong>Source</strong> <a href="https://cnil.fr/en/transfer-data-social-network-advertising-purposes-cnil-imposed-fine-eu35-million" target="_blank" rel="noopener">cnil.fr ↗</a></span>
+  <!-- Lead + wire populated by loadNews() from news.json -->
+  <div id="newsLead" class="news-lead" style="display:none;"></div>
+  <div id="newsSeconds" class="news-seconds" style="display:none;"></div>
+  <div class="wire-header">
+    <h2>The wire</h2>
+    <div class="wh-count"><strong id="wireCount">—</strong> dispatches · live from Airtable</div>
   </div>
-</div>
-<div class="news-seconds">
-  <div class="news-second">
-    <div class="ns-kick">SECOND LEAD · USA · 3d ago</div>
-    <h3><a href="https://ftc.gov/news-events/news/press-releases/2026/04/ftc-doj-extend-deadline-public-comment-guidance-business-collaborations" target="_blank" rel="noopener">FTC and DOJ Extend Deadline for Public Comment on Guidance on Business Collaborations</a></h3>
-    <div class="ns-meta"><span class="status-pill-sm cons">Consultation</span> · Federal Trade Commission</div>
+  <div class="wire-list" id="wireList">
+    <p style="padding:40px 18px; text-align:center; color:var(--muted); font-size:13px;">Loading dispatches…</p>
   </div>
-  <div class="news-second">
-    <div class="ns-kick">SECOND LEAD · Council of Europe · 4d ago</div>
-    <h3><a href="https://hudoc.echr.coe.int/eng?i=001-249583" target="_blank" rel="noopener">CASE OF SINKO AND OTHERS v. UKRAINE — 1516/21;17167/21;44287/21</a></h3>
-    <div class="ns-meta"><span class="status-pill-sm case">Case law</span> · European Court of Human Rights</div>
-  </div>
-</div>
-<div class="wire-header"><h2>The wire</h2><div class="wh-count"><strong>15</strong> dispatches · real-time from Airtable</div></div>
-<div class="wire-list">
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62024CJ0753" target="_blank" rel="noopener">Judgment of the Court (Ninth Chamber) of 16 April 2026. — Powszechna Kasa Oszczędności Bank Polski S.A. v MS et MS. — Request for a preliminary ruling from the Sąd Okręgowy w Warszawie. — Reference for a preliminary ruling – Consumer protection – Dir</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62024CJ0752" target="_blank" rel="noopener">Judgment of the Court (Ninth Chamber) of 16 April 2026. — mBank S.A. v KŁ and JŁ. — Request for a preliminary ruling from the Sąd Okręgowy w Warszawie. — Reference for a preliminary ruling – Consumer protection – Directive 93/13/EEC – Unfair terms in</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">GB</div>
-    <div class="wr-info">
-      <h4><a href="https://fca.org.uk/publications/policy-statements/ps26-5-changes-uk-short-selling-regime" target="_blank" rel="noopener">PS26/5: Changes to the UK Short Selling Regime</a></h4>
-      <div class="wr-src"><strong>Financial Conduct Authority</strong> · <span>fca.org.uk</span></div>
-    </div>
-    <div class="wr-tag guid">Guidance</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62024CJ0642" target="_blank" rel="noopener">Judgment of the Court (Sixth Chamber) of 16 April 2026. — European Commission v Federal Republic of Germany. — Case C-642/24.</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62024CJ0519" target="_blank" rel="noopener">Judgment of the Court (Second Chamber) of 16 April 2026. — Nitrogénművek Vegyipari Zrt. v Nemzeti Adó- és Vámhivatal Fellebbviteli Igazgatósága. — Request for a preliminary ruling from the Veszprémi Törvényszék. — Reference for a preliminary ruling –</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62023CJ0549" target="_blank" rel="noopener">Judgment of the Court (Second Chamber) of 16 April 2026. — American Express Europe SA and Others v International Card Services BV. — Request for a preliminary ruling from the College van Beroep voor het bedrijfsleven. — Reference for a preliminary ru</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">GB</div>
-    <div class="wr-info">
-      <h4><a href="https://www.fca.org.uk/markets/short-selling/notification-disclosure-net-short-positions" target="_blank" rel="noopener">Notification and disclosure of net short positions</a></h4>
-      <div class="wr-src"><strong>Financial Conduct Authority</strong> · <span>www.fca.org.uk</span></div>
-    </div>
-    <div class="wr-tag guid">Guidance</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62024CJ0899" target="_blank" rel="noopener">Judgment of the Court (Seventh Chamber) of 16 April 2026. — HG v European Commission. — Case C-899/24 P.</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">COE</div>
-    <div class="wr-info">
-      <h4><a href="https://hudoc.echr.coe.int/eng?i=001-249581" target="_blank" rel="noopener">CASE OF SELIMYAN AND OTHERS v. ARMENIA — 2991/16;5234/16;5294/16</a></h4>
-      <div class="wr-src"><strong>European Court of Human Rights</strong> · <span>hudoc.echr.coe.int</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62024CJ0901" target="_blank" rel="noopener">Judgment of the Court (Ninth Chamber) of 16 April 2026. — mBank S.A. v TK and DJ et JJ. — Request for a preliminary ruling from the Sąd Okręgowy w Warszawie. — Reference for a preliminary ruling – Consumer protection – Directive 93/13/EEC – Article 7</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62023CJ0343" target="_blank" rel="noopener">Judgment of the Court (Second Chamber) of 16 April 2026. — Jean-Marc Colombani v European External Action Service. — Appeal – Civil Service – Officials – Staff Regulations of Officials of the European Union – Article 24 – Request for assistance – Art</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62024CJ0058" target="_blank" rel="noopener">Judgment of the Court (Fifth Chamber) of 16 April 2026. — NE and Others v An Coimisiún Pleanála, anciennement An Bord Pleanála and Others. — Request for a preliminary ruling from the High Court (Irlande). — Reference for a preliminary ruling – Enviro</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">EU</div>
-    <div class="wr-info">
-      <h4><a href="https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:62024CJ0050" target="_blank" rel="noopener">Judgment of the Court (Fifth Chamber) of 16 April 2026. — X and Others v Commissaire général aux réfugiés et aux apatrides. — Requests for a preliminary ruling from the Conseil du Contentieux des Étrangers. — References for a preliminary ruling – Bor</a></h4>
-      <div class="wr-src"><strong>Court of Justice of the European Union</strong> · <span>eur-lex.europa.eu</span></div>
-    </div>
-    <div class="wr-tag case">Case law</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">GB</div>
-    <div class="wr-info">
-      <h4><a href="https://fca.org.uk/news/blogs/year-2-consumer-duty-board-reports-progress-and-what-comes-next" target="_blank" rel="noopener">Year 2 Consumer Duty Board Reports: progress and what comes next</a></h4>
-      <div class="wr-src"><strong>Financial Conduct Authority</strong> · <span>fca.org.uk</span></div>
-    </div>
-    <div class="wr-tag guid">Guidance</div>
-  </div>
-  <div class="wire-row">
-    <div class="wr-ts">4d ago</div>
-    <div class="wr-jur">MT</div>
-    <div class="wr-info">
-      <h4><a href="https://idpc.org.mt/news-latest/enhancing-compliance-and-consistency-edpb-adopts-dpia-template/" target="_blank" rel="noopener">Enhancing compliance and consistency: EDPB adopts DPIA template - IDPC</a></h4>
-      <div class="wr-src"><strong>Information and Data Protection Commissioner</strong> · <span>idpc.org.mt</span></div>
-    </div>
-    <div class="wr-tag guid">Guidance</div>
-  </div>
-</div>
 
   <footer class="footer">
     <div class="left">
       <span>PrinciplesAI · News</span>
       <span><span class="ok"></span>Pipeline operational</span>
-      <span>Real-time from Airtable · 2,389 bodies watched</span>
+      <span>Real-time from Airtable · <b id="bodiesTotal">—</b> bodies watched</span>
     </div>
     <div>v0.9</div>
   </footer>
@@ -1401,6 +1438,110 @@ function updateAppliedChips() {
     return `<span class="app-chip"><span style="opacity:0.72">${lbl}</span> ${val}<button class="x" onclick="(function(e){e.stopPropagation(); Array.from(document.querySelectorAll('.nf-btn.on')).find(btn=>btn.querySelector('.lbl').textContent==='${lbl}').classList.remove('on'); updateAppliedChips();})(event)">×</button></span>`;
   }).join('');
 }
+
+/* ============ LIVE NEWS DATA ============ */
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+// Tag = enforcement/guidance/consultation/caselaw/legislation/alert.
+// Inferred from body name + title keywords since Topic is not populated.
+function inferTag(r) {
+  const body = (r.body_name || '').toLowerCase();
+  const title = (r.title || '').toLowerCase();
+  if (/court|tribunal|judgment|case of|judgement/.test(body + ' ' + title)) return { cls: 'case', label: 'Case law' };
+  if (/parliament|legislature|bill|act\b|assembly|congress|bundestag|stortinget/.test(body + ' ' + title)) return { cls: 'legi', label: 'Legislation' };
+  if (/consultation|public comment|draft for comment/.test(body + ' ' + title)) return { cls: 'cons', label: 'Consultation' };
+  if (/fine|penalty|enforcement|sanction|imposed|violation|breach/.test(title)) return { cls: 'enf', label: 'Enforcement' };
+  if (/advisory|warning|alert|incident/.test(title)) return { cls: 'alert', label: 'Alert' };
+  return { cls: 'guid', label: 'Guidance' };
+}
+function hostOf(url) {
+  try { return new URL(url).hostname.replace(/^www\./,''); } catch { return ''; }
+}
+function isoFlag(iso) {
+  // Map ISO-2 to a rough 2-letter flag representation for the wire's country col
+  return (iso || '').slice(0, 3).toUpperCase();
+}
+function renderLead(r) {
+  const tag = inferTag(r);
+  const host = hostOf(r.source_url);
+  return (
+    '<div class="nl-kick">TODAY\'S LEAD · ' + escHtml(r.jurisdiction_name || '—') + ' · ' + escHtml(r.date_published || '—') +
+      ' · <span class="status-pill-sm ' + tag.cls + '">' + tag.label + '</span></div>' +
+    '<h2><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.title) + '</a></h2>' +
+    (r.summary ? '<p class="nl-standfirst">' + escHtml(r.summary) + '</p>' : '') +
+    '<div class="nl-footer">' +
+      '<span><strong>Type</strong> ' + tag.label + '</span>' +
+      (r.body_name ? '<span><strong>Authority</strong> ' + escHtml(r.body_name) + '</span>' : '') +
+      (host ? '<span><strong>Source</strong> <a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + host + ' ↗</a></span>' : '') +
+    '</div>'
+  );
+}
+function renderSecond(r) {
+  const tag = inferTag(r);
+  return (
+    '<div class="news-second">' +
+      '<div class="ns-kick">SECOND LEAD · ' + escHtml(r.jurisdiction_name || '—') + ' · ' + escHtml(r.date_display || '—') + '</div>' +
+      '<h3><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.title) + '</a></h3>' +
+      '<div class="ns-meta"><span class="status-pill-sm ' + tag.cls + '">' + tag.label + '</span>' +
+        (r.body_name ? ' · ' + escHtml(r.body_name) : '') + '</div>' +
+    '</div>'
+  );
+}
+function renderWire(r) {
+  const tag = inferTag(r);
+  const host = hostOf(r.source_url);
+  return (
+    '<div class="wire-row">' +
+      '<div class="wr-ts">' + escHtml(r.date_display || '—') + '</div>' +
+      '<div class="wr-jur">' + escHtml((r.jurisdiction_name || '').slice(0, 3).toUpperCase()) + '</div>' +
+      '<div class="wr-info">' +
+        '<h4><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.title) + '</a></h4>' +
+        '<div class="wr-src">' + (r.body_name ? '<strong>' + escHtml(r.body_name) + '</strong>' : '') +
+          (host ? (r.body_name ? ' · ' : '') + '<span>' + host + '</span>' : '') + '</div>' +
+      '</div>' +
+      '<div class="wr-tag ' + tag.cls + '">' + tag.label + '</div>' +
+    '</div>'
+  );
+}
+async function loadNews() {
+  const leadEl = document.getElementById('newsLead');
+  const secondsEl = document.getElementById('newsSeconds');
+  const wireEl = document.getElementById('wireList');
+  const wireCount = document.getElementById('wireCount');
+  try {
+    const r = await fetch('./news.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+    const rows = data.rows || [];
+    if (!rows.length) {
+      wireEl.innerHTML = '<p style="padding:40px 18px;text-align:center;color:var(--muted);font-size:13px;">No dispatches yet. The feed populates as the pipeline captures items.</p>';
+      if (wireCount) wireCount.textContent = '0';
+      return;
+    }
+    // Lead = first row; seconds = next two; wire = rest
+    leadEl.innerHTML = renderLead(rows[0]);
+    leadEl.style.display = '';
+    if (rows.length >= 3) {
+      secondsEl.innerHTML = renderSecond(rows[1]) + renderSecond(rows[2]);
+      secondsEl.style.display = 'grid';
+    }
+    const wireRows = rows.slice(3);
+    wireEl.innerHTML = wireRows.map(renderWire).join('');
+    if (wireCount) wireCount.textContent = wireRows.length.toLocaleString();
+  } catch (err) {
+    wireEl.innerHTML = '<p style="padding:40px 18px;text-align:center;color:var(--red);font-size:13px;">Could not load dispatches (' + escHtml(err.message) + ').</p>';
+    if (wireCount) wireCount.textContent = '—';
+  }
+}
+loadNews();
 </script>
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+<div class="nav-scrim" aria-hidden="true"></div>
+
 </body>
 </html>
