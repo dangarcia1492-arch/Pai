@@ -750,7 +750,7 @@ button { cursor: pointer; }
 #jur-overlay .jo-empty { padding: 24px 18px; color: #8a93a3; font-size: 13px; text-align: center; }
 @media (max-width: 640px) { #jur-overlay { width: 100vw; left: 0; } #jur-overlay-backdrop { display: none; } }
 
-body.jur-overlay-open .icon-sidebar { width: var(--sidebar-collapsed, 56px) !important; pointer-events: none !important; }
+body.jur-overlay-open .icon-sidebar { width: var(--sidebar-collapsed, 56px) !important; }
 body.jur-overlay-open .icon-sidebar:hover { width: var(--sidebar-collapsed, 56px) !important; }
 body.jur-overlay-open .icon-sidebar .nav-label,
 body.jur-overlay-open .icon-sidebar .brand-text { opacity: 0 !important; }
@@ -1770,7 +1770,7 @@ function setHotView(view, btn) {
         toggleExpand(wrap, row, function(){ fillFederalChildren(wrap, name, children); });
         return;
       }
-      location.href = 'pai-app-juris-' + slugify(dataKey) + '.html';
+      location.href = 'pai-app-juris-' + slugify(dataKey);
     }});
     wrap.appendChild(row);
     var cont = document.createElement('div'); cont.className='jo-children';
@@ -1831,7 +1831,7 @@ function setHotView(view, btn) {
   function goJurisdiction(name){
     closeJurisdictions();
     var slug = slugify(name);
-    location.href = 'pai-app-juris-' + slug + '.html';
+    location.href = 'pai-app-juris-' + slug;
   }
   window.goJurisdiction = goJurisdiction;
 
@@ -2042,142 +2042,194 @@ function setHotView(view, btn) {
   .pai-onb-root { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 
   /* ============================================================
-     v2 Stepper — full-screen dark takeover
+     v3 Stepper — card-in-page on tinted background (Digibeetle-pattern)
      ============================================================ */
   .pai-step-takeover {
-    position: fixed; inset: 0; background: #ffffff; color: #07202e;
-    z-index: 9500; /* above jur-overlay (9000) since this owns the screen on first login */
-    display: none; flex-direction: column;
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(1100px 600px at 8% -10%, #fff8e6 0%, rgba(255,248,230,0) 55%),
+      radial-gradient(1000px 700px at 100% 110%, #fbeef2 0%, rgba(251,238,242,0) 55%),
+      linear-gradient(180deg, #fdfbf4 0%, #fbf8ef 50%, #fcf2f3 100%);
+    color: #07202e;
+    z-index: 9500;
+    display: none; align-items: center; justify-content: center;
+    padding: 32px;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    overflow: hidden;
+    overflow-y: auto;
   }
   .pai-step-takeover.open { display: flex; }
   .pai-step-takeover.closing { animation: pstFadeOut .32s cubic-bezier(.4,0,.2,1) forwards; }
   @keyframes pstFadeOut { from { opacity: 1; } to { opacity: 0; } }
 
-  /* Topbar */
-  .pst-topbar { display: flex; align-items: center; justify-content: space-between; padding: 22px 32px; flex-shrink: 0; }
+  /* Card */
+  .pst-card {
+    width: 100%; max-width: 1180px; min-height: min(720px, calc(100vh - 64px));
+    background: #ffffff; border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(10,23,41,0.04), 0 24px 48px -12px rgba(10,23,41,0.10);
+    display: grid; grid-template-columns: 280px 1fr;
+    overflow: hidden;
+  }
+
+  /* Left rail */
+  .pst-rail { padding: 32px 28px; border-right: 1px solid #f0f2f6; display: flex; flex-direction: column; gap: 36px; }
   .pst-brand { display: flex; align-items: center; gap: 10px; }
   .pst-brand-mark { width: 22px; height: 22px; background: #014486; color: #ffffff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: 'Inter'; font-style: italic; font-weight: 700; font-size: 14px; letter-spacing: -0.5px; }
-  .pst-brand-name { font-size: 13.5px; font-weight: 600; color: #07202e; letter-spacing: -0.005em; }
-  .pst-brand-name em { font-style: italic; font-weight: 500; color: #4a556b; }
-  .pst-exit { background: transparent; border: none; color: #6b7a8f; font-size: 12px; font-weight: 500; cursor: pointer; letter-spacing: 0.01em; }
-  .pst-exit:hover { color: #4a556b; }
+  .pst-brand-name { font-size: 15px; font-weight: 700; color: #07202e; letter-spacing: -0.01em; }
+  .pst-brand-name em { font-style: italic; font-weight: 600; color: #4a556b; }
 
-  /* Breadcrumb dots */
-  .pst-crumbs { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 4px 0 0; flex-shrink: 0; }
-  .pst-crumbs .pst-crumb-dot { width: 22px; height: 3px; background: #ebeff5; border-radius: 2px; transition: background .25s, width .25s; }
-  .pst-crumbs .pst-crumb-dot.done { background: rgba(1,118,211,0.45); }
-  .pst-crumbs .pst-crumb-dot.current { background: #014486; width: 44px; }
+  .pst-stages { display: flex; flex-direction: column; gap: 16px; }
+  .pst-stage-row { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #8a93a3; transition: color .15s; }
+  .pst-stage-row.current { color: #07202e; font-weight: 600; }
+  .pst-stage-row.done { color: #4a556b; }
+  .pst-stage-dot { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #d6dae3; background: #ffffff; flex-shrink: 0; position: relative; }
+  .pst-stage-row.current .pst-stage-dot { border-color: #014486; }
+  .pst-stage-row.current .pst-stage-dot::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: #014486; }
+  .pst-stage-row.done .pst-stage-dot { background: #014486; border-color: #014486; }
+  .pst-stage-row.done .pst-stage-dot::after { content: ''; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 9px; font-weight: 800; }
 
-  /* Stage */
-  .pst-stage { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 32px; overflow-y: auto; min-height: 0; }
-  .pst-screen { width: 100%; max-width: 720px; opacity: 0; transform: translateY(8px); transition: opacity .35s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.4,0,.2,1); }
+  /* Body */
+  .pst-body { display: flex; flex-direction: column; padding: 40px 48px 28px; min-width: 0; }
+  .pst-stage { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .pst-screen { width: 100%; opacity: 0; transform: translateY(8px); transition: opacity .35s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.4,0,.2,1); }
   .pst-screen.in { opacity: 1; transform: translateY(0); }
   .pst-screen.out { opacity: 0; transform: translateY(-8px); transition: opacity .2s, transform .2s; }
 
-  .pst-eyebrow { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #6b7a8f; margin: 0 0 16px; }
-  .pst-eyebrow .pst-eyebrow-accent { color: #014486; }
-  .pst-title { font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.018em; color: #07202e; margin: 0 0 12px; }
+  .pst-title { font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -0.018em; color: #07202e; margin: 0 0 14px; }
   .pst-title em { font-style: normal; color: #014486; }
-  .pst-sub { font-size: 16px; font-weight: 400; line-height: 1.55; color: #8a93a3; margin: 0 0 32px; max-width: 580px; }
-  .pst-hint { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4a556b; letter-spacing: 0.06em; margin-top: 14px; }
-  .pst-hint kbd { font-family: inherit; background: #f6f8fa; border: 1px solid #dbe1ea; border-radius: 3px; padding: 1px 6px; font-size: 10.5px; color: #4a556b; margin: 0 2px; }
+  .pst-sub { font-size: 15px; font-weight: 400; line-height: 1.6; color: #4a556b; margin: 0 0 28px; max-width: 720px; }
 
-  /* Role buttons (vertical list with numeric shortcut) */
-  .pst-role-list { display: flex; flex-direction: column; gap: 8px; }
-  .pst-role-btn { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 16px 20px; background: #fafbfc; border: 1px solid #ebeff5; border-radius: 10px; cursor: pointer; transition: background .15s, border-color .15s, transform .15s; color: #07202e; }
-  .pst-role-btn:hover { background: #f0f6fc; border-color: #a8c3e8; }
-  .pst-role-btn.on { background: #e3effc; border-color: #014486; }
-  .pst-role-btn.focus { border-color: rgba(1,118,211,0.55); background: #e8f1fa; }
-  .pst-role-shortcut { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b7a8f; background: #f6f8fa; border: 1px solid #dbe1ea; border-radius: 4px; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .pst-role-btn.on .pst-role-shortcut { color: #014486; border-color: rgba(1,118,211,0.4); background: #e8f1fa; }
-  .pst-role-label { font-size: 15px; font-weight: 500; color: #07202e; flex: 1; }
-  .pst-role-tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b7a8f; letter-spacing: 0.04em; }
+  /* ---------- Welcome: 3 product preview cards ---------- */
+  .pst-product-eyebrow { text-align: center; font-size: 14px; color: #6b7a8f; margin: 18px 0 18px; font-weight: 500; }
+  .pst-product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pst-product-card { padding: 22px 20px 0; background: #ffffff; border: 1px solid #e8ecf2; border-radius: 12px; display: flex; flex-direction: column; min-height: 280px; overflow: hidden; }
+  .pst-product-card h3 { font-size: 15.5px; font-weight: 600; color: #07202e; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .pst-product-card p { font-size: 13px; color: #4a556b; line-height: 1.55; margin: 0 0 18px; }
+  .pst-skeleton { display: flex; flex-direction: column; gap: 8px; padding: 12px 0 0; margin-top: auto; }
+  .pst-sk-row { display: flex; gap: 6px; align-items: center; }
+  .pst-sk-bar { height: 10px; border-radius: 4px; background: #f0f2f6; }
+  .pst-sk-bar.alerts-a { background: #cfe2f3; width: 60%; }
+  .pst-sk-bar.alerts-b { background: #f0f2f6; width: 90%; }
+  .pst-sk-bar.alerts-c { background: #d4ead0; width: 70%; }
+  .pst-sk-bar.alerts-d { background: #f0f2f6; width: 80%; }
+  .pst-sk-bar.dash-a { background: #d8d4eb; width: 30%; }
+  .pst-sk-bar.dash-b { background: #d4ead0; width: 30%; }
+  .pst-sk-bar.dash-c { background: #f6e7b8; width: 30%; }
+  .pst-sk-bar.dash-d { background: #f5d3d3; width: 30%; }
+  .pst-sk-bar.search-a { background: #f0f2f6; }
+  .pst-sk-search { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: #fafbfc; border: 1px solid #e8ecf2; border-radius: 6px; margin-bottom: 10px; }
+  .pst-sk-search-line { flex: 1; height: 6px; background: #f0f2f6; border-radius: 3px; }
+  .pst-sk-search svg { width: 12px; height: 12px; stroke: #8a93a3; fill: none; stroke-width: 2; }
+  .pst-sk-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-  /* Chip clouds (jurisdictions, topics) */
+  /* ---------- Topics: big category cards ---------- */
+  .pst-cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .pst-cat-card { text-align: left; padding: 22px 22px 18px; background: #ffffff; border: 1.5px solid #e8ecf2; border-radius: 12px; cursor: pointer; transition: border-color .15s, box-shadow .15s, background .15s; display: flex; flex-direction: column; }
+  .pst-cat-card:hover { border-color: #a8c3e8; box-shadow: 0 4px 14px -4px rgba(1,68,134,0.12); }
+  .pst-cat-card.on { border-color: #014486; background: #f7fbff; box-shadow: 0 0 0 1px #014486 inset; }
+  .pst-cat-card h3 { font-size: 15px; font-weight: 600; color: #07202e; margin: 0 0 10px; line-height: 1.3; }
+  .pst-cat-card p { font-size: 13px; color: #4a556b; line-height: 1.55; margin: 0 0 14px; }
+  .pst-cat-acros { font-size: 11.5px; color: #6b7a8f; line-height: 1.7; letter-spacing: 0.01em; margin-top: auto; padding-top: 12px; border-top: 1px solid #f0f2f6; }
+  .pst-cat-acros span { display: inline-block; margin-right: 10px; }
+
+  .pst-cat-all { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 22px; font-size: 13.5px; color: #4a556b; }
+  .pst-cat-all input { appearance: none; width: 16px; height: 16px; border: 1.5px solid #d6dae3; border-radius: 50%; cursor: pointer; position: relative; margin: 0; }
+  .pst-cat-all input:checked { border-color: #014486; }
+  .pst-cat-all input:checked::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: #014486; }
+  .pst-cat-all label { cursor: pointer; }
+
+  /* ---------- Role (About you): vertical card list ---------- */
+  .pst-role-list { display: flex; flex-direction: column; gap: 10px; }
+  .pst-role-btn { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 16px 20px; background: #ffffff; border: 1.5px solid #e8ecf2; border-radius: 10px; cursor: pointer; transition: border-color .15s, background .15s; color: #07202e; }
+  .pst-role-btn:hover { border-color: #a8c3e8; background: #f7fbff; }
+  .pst-role-btn.on { border-color: #014486; background: #f7fbff; box-shadow: 0 0 0 1px #014486 inset; }
+  .pst-role-btn.focus { border-color: #014486; }
+  .pst-role-label { font-size: 14.5px; font-weight: 500; color: #07202e; flex: 1; }
+  .pst-role-tag { font-size: 11px; color: #6b7a8f; letter-spacing: 0.06em; font-weight: 500; }
+
+  .pst-name-field { margin-bottom: 22px; }
+  .pst-name-field label { display: block; font-size: 12.5px; color: #6b7a8f; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.01em; }
+  .pst-name-field input { width: 100%; max-width: 360px; padding: 11px 14px; background: #ffffff; border: 1.5px solid #e8ecf2; border-radius: 8px; font-family: inherit; font-size: 14.5px; color: #07202e; outline: none; transition: border-color .15s; }
+  .pst-name-field input:focus { border-color: #014486; }
+
+  /* ---------- Jurisdictions: chips + search ---------- */
+  .pst-section-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .pst-count { font-size: 12.5px; color: #014486; font-weight: 600; }
+  .pst-micro { font-size: 12.5px; color: #6b7a8f; }
   .pst-chip-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
-  .pst-chip { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; background: #fafbfc; border: 1px solid #ebeff5; border-radius: 999px; font-size: 13.5px; color: #07202e; cursor: pointer; transition: background .12s, border-color .12s; font-weight: 500; }
-  .pst-chip:hover { background: #e8f1fa; border-color: #a8c3e8; }
+  .pst-chip { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; background: #ffffff; border: 1.5px solid #e8ecf2; border-radius: 999px; font-size: 13px; color: #07202e; cursor: pointer; transition: border-color .12s, background .12s; font-weight: 500; }
+  .pst-chip:hover { border-color: #a8c3e8; background: #f7fbff; }
   .pst-chip.on { background: #014486; border-color: #014486; color: #ffffff; }
-  .pst-chip.on::before { content: '✓'; font-size: 11px; color: #014486; }
-  .pst-chip.focus { outline: 2px solid rgba(1,118,211,0.32); outline-offset: 2px; }
+  .pst-chip.on::before { content: '✓'; font-size: 11px; color: #ffffff; }
+  .pst-chip.focus { outline: 2px solid rgba(1,68,134,0.32); outline-offset: 2px; }
 
-  .pst-jur-search { margin-top: 14px; position: relative; max-width: 460px; }
-  .pst-jur-search input { width: 100%; padding: 10px 12px 10px 36px; background: #f6f8fa; border: 1px solid #dbe1ea; border-radius: 6px; font-family: inherit; font-size: 13.5px; color: #07202e; outline: none; }
-  .pst-jur-search input::placeholder { color: #6b7a8f; }
-  .pst-jur-search input:focus { border-color: #014486; background: #f0f6fc; }
-  .pst-jur-search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: #6b7a8f; fill: none; stroke-width: 2; }
-  .pst-jur-results { margin-top: 6px; max-height: 180px; overflow-y: auto; background: #f6f8fa; border: 1px solid #dbe1ea; border-radius: 6px; display: none; }
+  .pst-jur-search { margin-top: 16px; position: relative; max-width: 460px; }
+  .pst-jur-search input { width: 100%; padding: 11px 14px 11px 38px; background: #ffffff; border: 1.5px solid #e8ecf2; border-radius: 8px; font-family: inherit; font-size: 13.5px; color: #07202e; outline: none; transition: border-color .15s; }
+  .pst-jur-search input::placeholder { color: #8a93a3; }
+  .pst-jur-search input:focus { border-color: #014486; }
+  .pst-jur-search svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: #6b7a8f; fill: none; stroke-width: 2; }
+  .pst-jur-results { margin-top: 6px; max-height: 200px; overflow-y: auto; background: #ffffff; border: 1.5px solid #e8ecf2; border-radius: 8px; display: none; max-width: 460px; }
   .pst-jur-results.show { display: block; }
-  .pst-jur-row { padding: 8px 14px; font-size: 13px; color: #4a556b; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
-  .pst-jur-row:hover { background: #e8f1fa; color: #fff; }
-  .pst-jur-row-region { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #6b7a8f; }
+  .pst-jur-row { padding: 9px 14px; font-size: 13px; color: #4a556b; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+  .pst-jur-row:hover { background: #f7fbff; color: #014486; }
+  .pst-jur-row-region { font-size: 11px; color: #8a93a3; }
 
-  .pst-section-meta { display: flex; align-items: center; justify-content: space-between; margin: -8px 0 18px; }
-  .pst-count { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #014486; font-weight: 600; letter-spacing: 0.04em; }
-  .pst-micro { font-size: 12px; color: #6b7a8f; }
-
-  /* Cadence options */
-  .pst-cadence-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .pst-cadence-btn { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 18px; background: #fafbfc; border: 1px solid #ebeff5; border-radius: 10px; cursor: pointer; transition: background .15s, border-color .15s; text-align: left; color: #07202e; }
-  .pst-cadence-btn:hover { background: #f0f6fc; border-color: #a8c3e8; }
-  .pst-cadence-btn.on { background: #e3effc; border-color: #014486; }
-  .pst-cadence-btn.focus { border-color: rgba(1,118,211,0.55); }
-  .pst-cadence-head { display: flex; align-items: center; gap: 8px; width: 100%; }
-  .pst-cadence-time { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: #07202e; letter-spacing: -0.01em; }
+  /* ---------- Cadence: time cards ---------- */
+  .pst-cadence-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .pst-cadence-btn { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: #ffffff; border: 1.5px solid #e8ecf2; border-radius: 10px; cursor: pointer; transition: border-color .15s, background .15s; text-align: left; color: #07202e; }
+  .pst-cadence-btn:hover { border-color: #a8c3e8; background: #f7fbff; }
+  .pst-cadence-btn.on { border-color: #014486; background: #f7fbff; box-shadow: 0 0 0 1px #014486 inset; }
+  .pst-cadence-btn.focus { border-color: #014486; }
+  .pst-cadence-time { font-size: 16px; font-weight: 600; color: #07202e; letter-spacing: -0.01em; }
   .pst-cadence-btn.on .pst-cadence-time { color: #014486; }
-  .pst-cadence-shortcut { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #6b7a8f; border: 1px solid #dbe1ea; border-radius: 3px; padding: 1px 5px; }
-  .pst-cadence-desc { font-size: 12.5px; color: #8a93a3; line-height: 1.45; }
+  .pst-cadence-desc { font-size: 13px; color: #4a556b; line-height: 1.45; }
 
-  /* Foot */
-  .pst-foot { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px 26px; flex-shrink: 0; gap: 16px; min-height: 86px; }
-  .pst-back { background: transparent; border: none; color: #6b7a8f; font-size: 13px; font-weight: 500; cursor: pointer; padding: 8px 14px; border-radius: 6px; }
-  .pst-back:hover { color: #4a556b; background: #f6f8fa; }
-  .pst-back[disabled] { opacity: 0; pointer-events: none; }
-  .pst-next { display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: #014486; color: #ffffff; border: none; border-radius: 7px; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background .15s, transform .15s; letter-spacing: -0.005em; }
+  /* ---------- Setting-up interlude ---------- */
+  .pst-setup { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 60px 20px; text-align: center; min-height: 360px; }
+  .pst-setup-hello { font-size: 24px; font-weight: 600; color: #07202e; letter-spacing: -0.012em; margin: 0; }
+  .pst-setup-hello em { font-style: normal; color: #014486; }
+  .pst-setup-sub { font-size: 14.5px; color: #4a556b; margin: 0 0 8px; }
+  .pst-setup-dots { display: flex; gap: 10px; }
+  .pst-setup-dot { width: 10px; height: 10px; border-radius: 50%; animation: pstSetupBounce 1.2s ease-in-out infinite; }
+  .pst-setup-dot:nth-child(1) { background: #6db77b; animation-delay: 0s; }
+  .pst-setup-dot:nth-child(2) { background: #6e8be0; animation-delay: 0.18s; }
+  .pst-setup-dot:nth-child(3) { background: #e88a8a; animation-delay: 0.36s; }
+  @keyframes pstSetupBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
+    30% { transform: translateY(-7px); opacity: 1; }
+  }
+
+  /* ---------- Foot ---------- */
+  .pst-foot { display: flex; align-items: center; justify-content: flex-end; padding-top: 22px; margin-top: 24px; border-top: 1px solid #f0f2f6; gap: 16px; flex-shrink: 0; }
+  .pst-back { background: transparent; border: none; color: #6b7a8f; font-size: 13.5px; font-weight: 500; cursor: pointer; padding: 8px 14px; border-radius: 6px; margin-right: auto; }
+  .pst-back:hover { color: #07202e; }
+  .pst-back[disabled], .pst-back[hidden] { display: none; }
+  .pst-skip { background: transparent; border: none; color: #6b7a8f; font-size: 13.5px; font-weight: 500; cursor: pointer; padding: 8px 14px; }
+  .pst-skip:hover { color: #07202e; }
+  .pst-next {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    background: #014486; color: #ffffff;
+    border: none; border-radius: 8px;
+    font-size: 13.5px; font-weight: 600; cursor: pointer;
+    transition: background .15s; letter-spacing: -0.005em;
+  }
   .pst-next:hover { background: #0176d3; }
-  .pst-next[disabled] { background: #dbe1ea; color: #6b7a8f; cursor: not-allowed; }
-  .pst-next kbd { font-family: 'IBM Plex Mono', monospace; background: rgba(255,255,255,0.22); color: #ffffff; border: 1px solid rgba(255,255,255,0.16); border-radius: 3px; font-size: 11px; padding: 0px 5px; font-weight: 600; }
-  .pst-next[disabled] kbd { background: #f6f8fa; color: #6b7a8f; border-color: #ebeff5; }
+  .pst-next[disabled] { background: #e8ecf2; color: #a8b0bd; cursor: not-allowed; }
+  .pst-next svg { width: 14px; height: 14px; }
 
-  /* Running "Your brief" card — bottom-left, builds as they answer */
-  .pst-brief-card { display: flex; align-items: center; gap: 10px; flex: 1; justify-content: center; font-size: 12.5px; color: #6b7a8f; font-weight: 500; opacity: 0; transition: opacity .25s; }
-  .pst-brief-card.show { opacity: 1; }
-  .pst-brief-label { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #4a556b; letter-spacing: 0.12em; text-transform: uppercase; }
-  .pst-brief-pill { display: inline-flex; align-items: center; padding: 3px 10px; background: #f6f8fa; border: 1px solid #ebeff5; border-radius: 999px; color: #4a556b; font-weight: 500; font-size: 11.5px; }
-
-  /* Welcome screen (flourish) */
-  .pst-welcome { text-align: left; }
-  .pst-welcome .pst-title { font-size: 54px; letter-spacing: -0.025em; }
-  .pst-welcome .pst-sub { font-size: 17px; margin-bottom: 10px; }
-  .pst-welcome-meta { margin-top: 28px; display: flex; gap: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b7a8f; letter-spacing: 0.06em; }
-  .pst-welcome-meta span b { color: #4a556b; font-weight: 600; }
-
-  /* Streaming briefing screen */
-  .pst-briefing { text-align: left; max-width: 720px; }
-  .pst-briefing .pst-eyebrow { margin-bottom: 14px; }
-  .pst-briefing-hello { font-size: 22px; font-weight: 600; letter-spacing: -0.012em; color: #07202e; line-height: 1.3; margin: 0 0 22px; }
-  .pst-briefing-hello em { font-style: normal; color: #014486; }
-  .pst-briefing-lines { display: flex; flex-direction: column; gap: 14px; }
-  .pst-briefing-line { display: flex; gap: 14px; padding: 12px 16px; background: #fafbfc; border-left: 2px solid #a8c3e8; border-radius: 0 6px 6px 0; opacity: 0; transform: translateX(-6px); transition: opacity .35s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.4,0,.2,1); }
-  .pst-briefing-line.in { opacity: 1; transform: translateX(0); }
-  .pst-briefing-line-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4a556b; font-weight: 600; letter-spacing: 0.06em; padding-top: 3px; flex-shrink: 0; min-width: 24px; }
-  .pst-briefing-line-body { font-size: 14.5px; color: #4a556b; line-height: 1.55; }
-  .pst-briefing-line-body b { color: #07202e; font-weight: 600; }
-  .pst-briefing-line-body .pst-brief-caret { display: inline-block; width: 6px; height: 14px; background: #014486; margin-left: 2px; vertical-align: text-bottom; animation: pstCaret 1s steps(2) infinite; }
-  .pst-briefing-line.typing .pst-brief-caret { display: inline-block; }
-  @keyframes pstCaret { 50% { opacity: 0; } }
-
-  @media (max-width: 640px) {
-    .pst-title { font-size: 30px; }
-    .pst-welcome .pst-title { font-size: 36px; }
+  @media (max-width: 980px) {
+    .pst-card { grid-template-columns: 1fr; min-height: 0; }
+    .pst-rail { border-right: none; border-bottom: 1px solid #f0f2f6; padding: 22px 24px; flex-direction: row; gap: 24px; align-items: center; }
+    .pst-stages { flex-direction: row; gap: 18px; flex-wrap: wrap; }
+    .pst-body { padding: 28px 24px 22px; }
+    .pst-product-grid { grid-template-columns: 1fr; }
+    .pst-cat-grid { grid-template-columns: 1fr; }
     .pst-cadence-list { grid-template-columns: 1fr; }
-    .pst-stage { padding: 16px; }
-    .pst-topbar { padding: 16px; }
-    .pst-foot { padding: 14px 16px 18px; }
-    .pst-brief-card { display: none; }
-    .pst-briefing-hello { font-size: 22px; }
+  }
+  @media (max-width: 640px) {
+    .pai-step-takeover { padding: 0; }
+    .pst-card { border-radius: 0; min-height: 100vh; }
+    .pst-title { font-size: 22px; }
   }
 
   /* ============================================================
@@ -2233,21 +2285,26 @@ function setHotView(view, btn) {
 </style>
 
 <div class="pai-onb-root">
-  <!-- v2 Stepper (takes over the screen on first login / re-edit) -->
+  <!-- v3 Stepper — card-in-page on tinted background -->
   <div class="pai-step-takeover" id="paiStepTakeover" role="dialog" aria-modal="true" aria-labelledby="paiStepTitle">
-    <div class="pst-topbar">
-      <div class="pst-brand">
-        <span class="pst-brand-mark">P</span>
-        <span class="pst-brand-name">Principles<em>AI</em></span>
+    <div class="pst-card">
+      <aside class="pst-rail">
+        <div class="pst-brand">
+          <span class="pst-brand-mark">P</span>
+          <span class="pst-brand-name">Principles<em>AI</em></span>
+        </div>
+        <div class="pst-stages" id="paiStepRail"></div>
+      </aside>
+      <div class="pst-body">
+        <div class="pst-stage" id="paiStepStage"></div>
+        <div class="pst-foot">
+          <button class="pst-back" id="paiStepBack" type="button" hidden>Back</button>
+          <button class="pst-skip" id="paiStepExit" type="button">Skip</button>
+          <button class="pst-next" id="paiStepNext" type="button">Continue
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
       </div>
-      <button class="pst-exit" id="paiStepExit" type="button">Skip</button>
-    </div>
-    <div class="pst-crumbs" id="paiStepCrumbs"></div>
-    <div class="pst-stage" id="paiStepStage"></div>
-    <div class="pst-foot">
-      <button class="pst-back" id="paiStepBack" type="button">← Back</button>
-      <div class="pst-brief-card" id="paiStepBriefCard"></div>
-      <button class="pst-next" id="paiStepNext" type="button">Continue <kbd>↵</kbd></button>
     </div>
   </div>
 
@@ -2298,6 +2355,38 @@ function setHotView(view, btn) {
     }
   }
 
+  // 4 macro topic categories shown as cards; each rolls up sub-topics that get saved into picks.topics.
+  var TOPIC_CATEGORIES = [
+    {
+      k: 'privacy',
+      title: 'Privacy & Data Protection',
+      desc: 'For DPOs, privacy counsel, and consultants tracking authorities, enforcement, and statute change.',
+      acros: ['ICO','CNIL','EDPB','EDPS','FTC','AEPD','Garante','APD','OAIC','PIPC','LGPD','GDPR'],
+      topics: ['Privacy']
+    },
+    {
+      k: 'ai',
+      title: 'AI Governance',
+      desc: 'For AI-governance leads and AI counsel tracking AI offices, foundation-model rules, and safety regimes.',
+      acros: ['EU AI Act','AI Office','AISI','AISIC','NIST AI RMF','FTC','OSTP','KAIO','TC 260','OECD'],
+      topics: ['AI']
+    },
+    {
+      k: 'cyber',
+      title: 'Cybersecurity & Resilience',
+      desc: 'For CISOs and cyber-resilience teams tracking NIS2, DORA, CRA, and national cyber agencies.',
+      acros: ['ENISA','CISA','NCSC','NIS2','DORA','CRA','NCA','BSI','ANSSI','CERT-FR','JPCERT'],
+      topics: ['Cybersecurity','Incident Response']
+    },
+    {
+      k: 'tech',
+      title: 'Tech & Platform Regulation',
+      desc: 'For platform counsel and policy teams tracking digital-services rules, IP, standards, and procurement.',
+      acros: ['DMA','DSA','OSA','BEREC','EBoR','EBDS','WIPO','EPO','ISO/IEC','CEN','CENELEC'],
+      topics: ['IP','Trust & Safety','Standards','Vendor & Procurement']
+    }
+  ];
+  // flat TOPICS still drives the running picks list (used by personalisation + future surfaces)
   var TOPICS = ['AI', 'Privacy', 'Cybersecurity', 'IP', 'Trust & Safety', 'Standards', 'Vendor & Procurement', 'Incident Response'];
   var ROLES = [
     { k: 'counsel',    l: 'In-house counsel',           tag: 'LEGAL'   },
@@ -2318,9 +2407,21 @@ function setHotView(view, btn) {
     { k: 'none',   time: 'No daily',  desc: 'Alerts only, as events move.' }
   ];
 
-  var STEPS = ['welcome','role','jurisdictions','topics','cadence','briefing'];
-  // breadcrumbs show 4 dots for the 4 content steps (role, jurisdictions, topics, cadence)
-  var BREADCRUMB_STEPS = ['role','jurisdictions','topics','cadence'];
+  var STEPS = ['welcome','topics','jurisdictions','cadence','role','settingUp'];
+  // 3 macro stages shown in left rail (Digibeetle-pattern)
+  var MACRO_STAGES = [
+    { k: 'alerts', l: 'Set up alerts' },
+    { k: 'about',  l: 'About you' },
+    { k: 'start',  l: 'Start using PAI' }
+  ];
+  var STAGE_FOR_STEP = {
+    welcome: null,
+    topics: 'alerts',
+    jurisdictions: 'alerts',
+    cadence: 'alerts',
+    role: 'about',
+    settingUp: 'start'
+  };
 
   var TOUR_STOPS = [
     { key:'jurisdictions', selector:'.home-jur-btn',
@@ -2368,9 +2469,9 @@ function setHotView(view, btn) {
   }
 
   // ================== Stepper state ==================
-  var takeover = null, stage = null, crumbs = null, backBtn = null, nextBtn = null, exitBtn = null, briefCard = null;
+  var takeover = null, stage = null, railEl = null, backBtn = null, nextBtn = null, exitBtn = null;
   var stepIdx = 0; // index into STEPS
-  var picks = { role:null, jurisdictions:[], topics:[], cadence:null, name:'' };
+  var picks = { role:null, jurisdictions:[], topics:[], categories:[], cadence:null, name:'' };
   var stepperOpen = false;
   var focusIdx = 0; // index of currently focused option within a step
 
@@ -2380,6 +2481,7 @@ function setHotView(view, btn) {
       role: existing && existing.role || null,
       jurisdictions: (existing && existing.jurisdictions) ? existing.jurisdictions.slice() : [],
       topics: (existing && existing.topics) ? existing.topics.slice() : [],
+      categories: (existing && existing.categories) ? existing.categories.slice() : [],
       cadence: existing && existing.cadence || null,
       name: existing && existing.name || ''
     };
@@ -2400,31 +2502,18 @@ function setHotView(view, btn) {
     }, 320);
   }
 
-  function renderCrumbs(){
-    if (!crumbs) return;
-    var currentStepName = STEPS[stepIdx];
-    var currentCrumbIdx = BREADCRUMB_STEPS.indexOf(currentStepName);
-    // hide crumbs on welcome + briefing
-    if (currentCrumbIdx === -1) { crumbs.innerHTML = ''; return; }
-    crumbs.innerHTML = BREADCRUMB_STEPS.map(function(_, i){
-      var cls = 'pst-crumb-dot';
-      if (i < currentCrumbIdx) cls += ' done';
-      else if (i === currentCrumbIdx) cls += ' current';
-      return '<span class="'+cls+'"></span>';
+  function renderRail(){
+    if (!railEl) return;
+    var currentStage = STAGE_FOR_STEP[STEPS[stepIdx]];
+    var currentStageIdx = MACRO_STAGES.findIndex(function(s){ return s.k === currentStage; });
+    railEl.innerHTML = MACRO_STAGES.map(function(s, i){
+      var cls = 'pst-stage-row';
+      if (currentStageIdx === -1) {
+        // welcome — nothing highlighted
+      } else if (i < currentStageIdx) cls += ' done';
+      else if (i === currentStageIdx) cls += ' current';
+      return '<div class="'+cls+'"><span class="pst-stage-dot"></span><span>'+escapeHTML(s.l)+'</span></div>';
     }).join('');
-  }
-
-  function renderBriefCard(){
-    if (!briefCard) return;
-    var parts = [];
-    if (picks.role) { var r = ROLES.filter(function(x){return x.k===picks.role;})[0]; if (r) parts.push({label:'ROLE', v:r.l}); }
-    if (picks.jurisdictions.length) parts.push({label:'JURIS', v: summariseJurs(picks.jurisdictions)});
-    if (picks.topics.length) parts.push({label:'TOPICS', v: picks.topics.slice(0,3).join(', ') + (picks.topics.length>3 ? ' +'+(picks.topics.length-3) : '')});
-    if (picks.cadence) { var c = CADENCE.filter(function(x){return x.k===picks.cadence;})[0]; if (c) parts.push({label:'DELIVERY', v:c.time}); }
-    if (!parts.length) { briefCard.classList.remove('show'); briefCard.innerHTML=''; return; }
-    briefCard.classList.add('show');
-    briefCard.innerHTML = '<span class="pst-brief-label">Your update</span>' +
-      parts.map(function(p){ return '<span class="pst-brief-pill">'+escapeHTML(p.v)+'</span>'; }).join('');
   }
 
   function summariseJurs(list){
@@ -2439,14 +2528,13 @@ function setHotView(view, btn) {
   // ================== Screen renderers ==================
   function renderStep(){
     var name = STEPS[stepIdx];
-    renderCrumbs();
-    renderBriefCard();
+    renderRail();
     if (name === 'welcome')       renderWelcome();
-    else if (name === 'role')     renderRole();
-    else if (name === 'jurisdictions') renderJurisdictions();
     else if (name === 'topics')   renderTopics();
+    else if (name === 'jurisdictions') renderJurisdictions();
     else if (name === 'cadence')  renderCadence();
-    else if (name === 'briefing') renderBriefing();
+    else if (name === 'role')     renderRole();
+    else if (name === 'settingUp') renderSettingUp();
     updateFoot();
   }
 
@@ -2473,37 +2561,71 @@ function setHotView(view, btn) {
   function renderWelcome(){
     focusIdx = 0;
     mountScreen(
-      '<div class="pst-screen pst-welcome">' +
-        '<p class="pst-eyebrow">Welcome to <span class="pst-eyebrow-accent">PAI</span></p>' +
-        '<h1 class="pst-title" id="paiStepTitle">Support for keeping up with every regulator.</h1>' +
-        '<p class="pst-sub">We track privacy, AI, and cybersecurity developments across authorities worldwide. Four short questions — role, jurisdictions, topics, and when you\'d like a daily alert. We use your answers only to scope your dashboard, and daily alert. Change any of it later.</p>' +
-        '<div class="pst-welcome-meta">' +
-          '<span><b>4</b> questions</span>' +
-          '<span>Press <b>Enter</b> to begin</span>' +
-          '<span><b>Esc</b> to skip</span>' +
+      '<div class="pst-screen">' +
+        '<h1 class="pst-title" id="paiStepTitle">Welcome to PrinciplesAI</h1>' +
+        '<p class="pst-sub">Let\'s make sure you never miss what matters in your jurisdictions. Set up your alerts and tell us a bit about your role — we\'ll scope the dashboard and daily update to you. Change any of it later.</p>' +
+        '<p class="pst-product-eyebrow">Three ways PAI supports your work day-to-day.</p>' +
+        '<div class="pst-product-grid">' +
+          '<div class="pst-product-card">' +
+            '<h3>Alerts</h3>' +
+            '<p>Pick your jurisdictions and topics. We do the watching. When something changes, you\'ll know the same day.</p>' +
+            '<div class="pst-skeleton">' +
+              '<div class="pst-sk-row"><div class="pst-sk-bar alerts-a"></div></div>' +
+              '<div class="pst-sk-row"><div class="pst-sk-bar alerts-b"></div></div>' +
+              '<div class="pst-sk-row"><div class="pst-sk-bar alerts-c"></div></div>' +
+              '<div class="pst-sk-row"><div class="pst-sk-bar alerts-d"></div></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pst-product-card">' +
+            '<h3>Dashboard</h3>' +
+            '<p>The latest legislation, enforcement, and consultation activity. At a glance. Always current.</p>' +
+            '<div class="pst-skeleton">' +
+              '<div class="pst-sk-grid-2">' +
+                '<div class="pst-sk-bar dash-a" style="width:100%;"></div>' +
+                '<div class="pst-sk-bar dash-b" style="width:100%;"></div>' +
+                '<div class="pst-sk-bar dash-c" style="width:100%;"></div>' +
+                '<div class="pst-sk-bar dash-d" style="width:100%;"></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pst-product-card">' +
+            '<h3>Search</h3>' +
+            '<p>Every law, ruling, authority, and consultation. Cross-referenced. Filterable. Ready for export.</p>' +
+            '<div class="pst-skeleton">' +
+              '<div class="pst-sk-search"><div class="pst-sk-search-line"></div><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>' +
+              '<div class="pst-sk-row"><div class="pst-sk-bar search-a" style="width:80%;"></div></div>' +
+              '<div class="pst-sk-row"><div class="pst-sk-bar search-a" style="width:90%;"></div></div>' +
+              '<div class="pst-sk-row"><div class="pst-sk-bar search-a" style="width:70%;"></div></div>' +
+            '</div>' +
+          '</div>' +
         '</div>' +
       '</div>'
     );
   }
 
-  function renderRole(){
-    focusIdx = Math.max(0, ROLES.findIndex(function(r){ return r.k === picks.role; }));
-    if (focusIdx === -1) focusIdx = 0;
+  function renderTopics(){
+    focusIdx = 0;
+    var allOn = TOPIC_CATEGORIES.every(function(c){ return picks.categories.indexOf(c.k) !== -1; });
     var html =
       '<div class="pst-screen">' +
-        '<p class="pst-eyebrow">Question 01 / 04</p>' +
-        '<h2 class="pst-title">What best describes your role?</h2>' +
-        '<p class="pst-sub">So we pitch detail to your role — privacy, security, and AI-governance leads read this differently.</p>' +
-        '<div class="pst-role-list" id="paiRoleList">' +
-          ROLES.map(function(r, i){
-            return '<button type="button" class="pst-role-btn'+(picks.role===r.k?' on':'')+(i===focusIdx?' focus':'')+'" data-role="'+r.k+'" data-idx="'+i+'">'+
-              '<span class="pst-role-shortcut">'+(i+1)+'</span>'+
-              '<span class="pst-role-label">'+escapeHTML(r.l)+'</span>'+
-              (r.tag ? '<span class="pst-role-tag">'+r.tag+'</span>' : '') +
+        '<h2 class="pst-title">Which fields are in your remit?</h2>' +
+        '<p class="pst-sub">Pick any that match your work. We\'ll watch the authorities and source material that shape each one — turn off later, or fine-tune which sources and topics you subscribe to.</p>' +
+        '<div class="pst-cat-grid" id="paiCatGrid">' +
+          TOPIC_CATEGORIES.map(function(c){
+            var on = picks.categories.indexOf(c.k) !== -1;
+            return '<button type="button" class="pst-cat-card'+(on?' on':'')+'" data-cat="'+c.k+'">'+
+              '<h3>'+escapeHTML(c.title)+'</h3>'+
+              '<p>'+escapeHTML(c.desc)+'</p>'+
+              '<div class="pst-cat-acros">'+
+                c.acros.map(function(a){ return '<span>'+escapeHTML(a)+'</span>'; }).join('') +
+              '</div>'+
             '</button>';
           }).join('') +
         '</div>' +
-        '<div class="pst-hint"><kbd>1</kbd>–<kbd>6</kbd> to pick · <kbd>↵</kbd> continue</div>' +
+        '<div class="pst-cat-all">' +
+          '<input type="checkbox" id="paiCatAll"'+(allOn?' checked':'')+' />' +
+          '<label for="paiCatAll">subscribe to all fields at once</label>' +
+        '</div>' +
       '</div>';
     mountScreen(html);
   }
@@ -2512,9 +2634,8 @@ function setHotView(view, btn) {
     focusIdx = 0;
     var html =
       '<div class="pst-screen">' +
-        '<p class="pst-eyebrow">Question 02 / 04</p>' +
         '<h2 class="pst-title">Which jurisdictions are in your remit?</h2>' +
-        '<p class="pst-sub">Select any that apply. Globally-material items still surface; these lead your dashboard.</p>' +
+        '<p class="pst-sub">Pick any that apply. Globally-material items still surface — these lead your dashboard.</p>' +
         '<div class="pst-section-meta">' +
           '<span class="pst-count" id="paiJurCount">'+picks.jurisdictions.length+' selected</span>' +
           '<span class="pst-micro">Most practitioners pick 3–8</span>' +
@@ -2525,7 +2646,6 @@ function setHotView(view, btn) {
           '<input type="text" id="paiJurSearch" placeholder="Search 270+ jurisdictions — US states, EU blocs, provinces…" autocomplete="off" />' +
         '</div>' +
         '<div class="pst-jur-results" id="paiJurResults"></div>' +
-        '<div class="pst-hint"><kbd>↵</kbd> continue · <kbd>Tab</kbd> jump to search</div>' +
       '</div>';
     mountScreen(html);
   }
@@ -2542,151 +2662,86 @@ function setHotView(view, btn) {
     var c = document.getElementById('paiJurCount'); if (c) c.textContent = picks.jurisdictions.length + ' selected';
   }
 
-  function renderTopics(){
-    focusIdx = 0;
-    var html =
-      '<div class="pst-screen">' +
-        '<p class="pst-eyebrow">Question 03 / 04</p>' +
-        '<h2 class="pst-title">Which of these fall under your remit?</h2>' +
-        '<p class="pst-sub">Select any that apply. Privacy, AI, and cybersecurity are the core; add adjacent areas if they\'re part of your work.</p>' +
-        '<div class="pst-section-meta">' +
-          '<span class="pst-count" id="paiTopCount">'+picks.topics.length+' selected</span>' +
-          '<span class="pst-micro">No wrong number</span>' +
-        '</div>' +
-        '<div class="pst-chip-cloud" id="paiTopChips">' +
-          TOPICS.map(function(t){
-            var on = picks.topics.indexOf(t) !== -1;
-            return '<button type="button" class="pst-chip'+(on?' on':'')+'" data-top="'+escapeHTML(t)+'">'+escapeHTML(t)+'</button>';
-          }).join('') +
-        '</div>' +
-        '<div class="pst-hint"><kbd>↵</kbd> continue</div>' +
-      '</div>';
-    mountScreen(html);
-  }
-
   function renderCadence(){
     focusIdx = Math.max(0, CADENCE.findIndex(function(c){ return c.k === picks.cadence; }));
     if (focusIdx === -1) focusIdx = 0;
     var html =
       '<div class="pst-screen">' +
-        '<p class="pst-eyebrow">Question 04 / 04 · one more to go</p>' +
-        '<h2 class="pst-title">When should we send your daily alert?</h2>' +
-        '<p class="pst-sub">A single daily alert summarising what moved in your jurisdictions overnight. You can change this any time.</p>' +
+        '<h2 class="pst-title">When should we send your daily update?</h2>' +
+        '<p class="pst-sub">A single daily email covering what moved in your jurisdictions overnight. Change any time.</p>' +
         '<div class="pst-cadence-list" id="paiCadenceList">' +
           CADENCE.map(function(c, i){
             return '<button type="button" class="pst-cadence-btn'+(picks.cadence===c.k?' on':'')+(i===focusIdx?' focus':'')+'" data-cad="'+c.k+'" data-idx="'+i+'">'+
-              '<div class="pst-cadence-head">'+
-                '<span class="pst-cadence-time">'+escapeHTML(c.time)+'</span>'+
-                '<span class="pst-cadence-shortcut">'+(i+1)+'</span>'+
-              '</div>'+
+              '<div class="pst-cadence-time">'+escapeHTML(c.time)+'</div>'+
               '<div class="pst-cadence-desc">'+escapeHTML(c.desc)+'</div>'+
             '</button>';
           }).join('') +
         '</div>' +
-        '<div class="pst-hint"><kbd>1</kbd>–<kbd>4</kbd> to pick · <kbd>↵</kbd> preview your update</div>' +
       '</div>';
     mountScreen(html);
   }
 
-  function renderBriefing(){
+  function renderRole(){
+    focusIdx = Math.max(0, ROLES.findIndex(function(r){ return r.k === picks.role; }));
+    if (focusIdx === -1) focusIdx = 0;
+    var html =
+      '<div class="pst-screen">' +
+        '<h2 class="pst-title">A bit about you</h2>' +
+        '<p class="pst-sub">So we can pitch detail to your role — privacy, security, and AI-governance leads read this differently.</p>' +
+        '<div class="pst-name-field">' +
+          '<label for="paiNameInput">Your name</label>' +
+          '<input type="text" id="paiNameInput" placeholder="First name" autocomplete="given-name" value="'+escapeHTML(picks.name||'')+'" />' +
+        '</div>' +
+        '<div class="pst-role-list" id="paiRoleList">' +
+          ROLES.map(function(r, i){
+            return '<button type="button" class="pst-role-btn'+(picks.role===r.k?' on':'')+(i===focusIdx?' focus':'')+'" data-role="'+r.k+'" data-idx="'+i+'">'+
+              '<span class="pst-role-label">'+escapeHTML(r.l)+'</span>'+
+              (r.tag ? '<span class="pst-role-tag">'+r.tag+'</span>' : '') +
+            '</button>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+    mountScreen(html);
+  }
+
+  function renderSettingUp(){
     // Save picks now so the dashboard picks them up when stepper closes
     var payload = {
-      v: 2,
+      v: 3,
       completedAt: new Date().toISOString(),
       skipped: false,
       role: picks.role,
       jurisdictions: picks.jurisdictions,
       topics: picks.topics,
+      categories: picks.categories,
       cadence: picks.cadence,
       name: picks.name
       // TODO:server — POST /api/user/brief with this shape
     };
     setOnb(payload);
 
-    var lines = composeBriefing(payload);
+    var name = picks.name ? ' ' + escapeHTML(picks.name) : '';
     var html =
-      '<div class="pst-screen pst-briefing">' +
-        '<p class="pst-eyebrow">Your first update · <span class="pst-eyebrow-accent">preview</span></p>' +
-        '<h2 class="pst-briefing-hello" id="paiBriefHello">'+greeting()+'</h2>' +
-        '<div class="pst-briefing-lines" id="paiBriefLines">' +
-          lines.map(function(l, i){
-            return '<div class="pst-briefing-line" data-i="'+i+'"><span class="pst-briefing-line-num">'+String(i+1).padStart(2,'0')+'</span><span class="pst-briefing-line-body">'+l+'</span></div>';
-          }).join('') +
+      '<div class="pst-screen">' +
+        '<div class="pst-setup">' +
+          '<h2 class="pst-setup-hello">Welcome'+name+',</h2>' +
+          '<p class="pst-setup-sub">setting up your dashboard…</p>' +
+          '<div class="pst-setup-dots">' +
+            '<span class="pst-setup-dot"></span>' +
+            '<span class="pst-setup-dot"></span>' +
+            '<span class="pst-setup-dot"></span>' +
+          '</div>' +
         '</div>' +
       '</div>';
     mountScreen(html);
-    // stream lines in one-by-one
-    streamBriefingLines();
-  }
-
-  function streamBriefingLines(){
-    var lines = document.querySelectorAll('#paiBriefLines .pst-briefing-line');
-    var stagger = 520;
-    lines.forEach(function(line, i){
-      setTimeout(function(){ line.classList.add('in'); }, 150 + i * stagger);
-    });
-    // enable the "Enter dashboard" button after lines finish
+    // auto-advance after a beat
     setTimeout(function(){
-      if (nextBtn) { nextBtn.disabled = false; nextBtn.classList.add('pst-next-ready'); }
-    }, 150 + lines.length * stagger + 200);
-  }
-
-  function greeting(){
-    var h = new Date().getHours();
-    var part = h < 12 ? 'Good morning' : (h < 18 ? 'Good afternoon' : 'Good evening');
-    var name = picks.name || '';
-    return part + (name ? ', <em>' + escapeHTML(name) + '</em>' : '') + '. Here\'s what moved in your jurisdictions.';
-  }
-
-  function composeBriefing(p){
-    // Templated mock-credible lines keyed off picks + jurData.
-    // TODO:server — replace this whole function with a server-rendered briefing.
-    var jurs = p.jurisdictions.slice(0, 3);
-    var topics = p.topics.map(function(t){ return t.toLowerCase(); });
-    var lines = [];
-    var primaryJur = jurs[0] || 'your jurisdictions';
-    var primaryJurShort = summariseJurs([primaryJur]);
-
-    // scope line
-    lines.push('Scoped to <b>' + escapeHTML(summariseJurs(jurs) || 'your picks') + '</b> &middot; ' + escapeHTML(topics.slice(0,3).join(', ') || 'all topics') + '.');
-
-    // jurData-driven lines when available
-    if (typeof jurData !== 'undefined') {
-      var picked = jurs.filter(function(j){ return jurData[j]; });
-      picked.forEach(function(j){
-        var d = jurData[j];
-        if (d.alerts && d.alerts.length) {
-          var a = d.alerts[0];
-          lines.push('<b>' + escapeHTML(j) + '</b> &middot; ' + escapeHTML(a.h) + ' <span style="color:#4a556b;">— ' + escapeHTML(a.d) + '</span>');
-        }
-        if (d.enforcement && d.enforcement.length && lines.length < 6) {
-          var e = d.enforcement[0];
-          lines.push('<b>Enforcement · ' + escapeHTML(j) + '</b> &middot; ' + escapeHTML(e.h));
-        }
-      });
-    }
-
-    // topic-flavoured line
-    if (topics.indexOf('privacy') !== -1 && lines.length < 6) {
-      lines.push('<b>Privacy</b> &middot; EDPB adopted fresh guidance on automated decision-making — six pages, one new test.');
-    }
-    if (topics.indexOf('ai') !== -1 && lines.length < 6) {
-      lines.push('<b>AI</b> &middot; Two consultations open in ' + escapeHTML(primaryJurShort) + ' — Frontier Safety and foundation-model transparency. Both close within 14 days.');
-    }
-    if (topics.indexOf('cyber') !== -1 && lines.length < 6) {
-      lines.push('<b>Cybersecurity</b> &middot; NIS2 transposition deadline missed by three member states. Notifications expected this week.');
-    }
-
-    // close with a personal nudge
-    var cadenceLabel = p.cadence ? ((CADENCE.filter(function(c){return c.k===p.cadence;})[0] || {}).time || '') : '';
-    if (cadenceLabel && cadenceLabel !== 'No daily') {
-      lines.push('You\'ll get this as an email tomorrow at <b>' + escapeHTML(cadenceLabel) + '</b>. Change any time in Settings.');
-    } else if (cadenceLabel === 'No daily') {
-      lines.push('No daily email — we\'ll only nudge you when a Watchlist item moves.');
-    }
-
-    // cap at 7
-    return lines.slice(0, 7);
+      if (STEPS[stepIdx] === 'settingUp' && stepperOpen) {
+        closeStepper();
+        applyPersonalisation();
+        setTimeout(refreshHelperCard, 400);
+      }
+    }, 1900);
   }
 
   // ================== Screen bindings ==================
@@ -2702,12 +2757,15 @@ function setHotView(view, btn) {
     document.querySelectorAll('#paiRoleList .pst-role-btn').forEach(function(btn){
       btn.addEventListener('click', function(){
         picks.role = btn.getAttribute('data-role');
-        renderBriefCard();
         document.querySelectorAll('#paiRoleList .pst-role-btn').forEach(function(b){ b.classList.remove('on'); });
         btn.classList.add('on');
         updateFoot();
       });
     });
+    var nameInput = document.getElementById('paiNameInput');
+    if (nameInput) {
+      nameInput.addEventListener('input', function(){ picks.name = nameInput.value || ''; });
+    }
   }
 
   function bindJurisdictions(){
@@ -2719,7 +2777,7 @@ function setHotView(view, btn) {
       var j = b.getAttribute('data-jur');
       var idx = picks.jurisdictions.indexOf(j);
       if (idx === -1) picks.jurisdictions.push(j); else picks.jurisdictions.splice(idx,1);
-      renderJurChips(); renderBriefCard(); updateFoot();
+      renderJurChips(); updateFoot();
     });
     var input = document.getElementById('paiJurSearch');
     var results = document.getElementById('paiJurResults');
@@ -2745,21 +2803,52 @@ function setHotView(view, btn) {
         var name = row.getAttribute('data-name');
         if (picks.jurisdictions.indexOf(name) === -1) picks.jurisdictions.push(name);
         input.value = ''; results.classList.remove('show'); results.innerHTML='';
-        renderJurChips(); renderBriefCard(); updateFoot();
+        renderJurChips(); updateFoot();
       });
     }
   }
 
+  function syncTopicsFromCategories(){
+    // expand selected categories → flat picks.topics list
+    var set = {};
+    picks.categories.forEach(function(catK){
+      var cat = TOPIC_CATEGORIES.filter(function(c){return c.k===catK;})[0];
+      if (cat) cat.topics.forEach(function(t){ set[t] = 1; });
+    });
+    picks.topics = Object.keys(set);
+  }
+
   function bindTopics(){
-    document.querySelectorAll('#paiTopChips .pst-chip').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var t = btn.getAttribute('data-top');
-        var idx = picks.topics.indexOf(t);
-        if (idx === -1) picks.topics.push(t); else picks.topics.splice(idx, 1);
-        btn.classList.toggle('on');
-        var c = document.getElementById('paiTopCount'); if (c) c.textContent = picks.topics.length + ' selected';
-        renderBriefCard(); updateFoot();
+    var grid = document.getElementById('paiCatGrid');
+    var allBox = document.getElementById('paiCatAll');
+    function refreshAllBox(){
+      if (!allBox) return;
+      allBox.checked = TOPIC_CATEGORIES.every(function(c){ return picks.categories.indexOf(c.k) !== -1; });
+    }
+    if (grid) grid.addEventListener('click', function(e){
+      var card = e.target.closest('.pst-cat-card');
+      if (!card) return;
+      var k = card.getAttribute('data-cat');
+      var idx = picks.categories.indexOf(k);
+      if (idx === -1) { picks.categories.push(k); card.classList.add('on'); }
+      else { picks.categories.splice(idx,1); card.classList.remove('on'); }
+      syncTopicsFromCategories();
+      refreshAllBox();
+      updateFoot();
+    });
+    if (allBox) allBox.addEventListener('change', function(){
+      if (allBox.checked) {
+        picks.categories = TOPIC_CATEGORIES.map(function(c){ return c.k; });
+      } else {
+        picks.categories = [];
+      }
+      syncTopicsFromCategories();
+      // reflect into card UI
+      document.querySelectorAll('#paiCatGrid .pst-cat-card').forEach(function(card){
+        var k = card.getAttribute('data-cat');
+        card.classList.toggle('on', picks.categories.indexOf(k) !== -1);
       });
+      updateFoot();
     });
   }
 
@@ -2769,7 +2858,7 @@ function setHotView(view, btn) {
         picks.cadence = btn.getAttribute('data-cad');
         document.querySelectorAll('#paiCadenceList .pst-cadence-btn').forEach(function(b){ b.classList.remove('on'); });
         btn.classList.add('on');
-        renderBriefCard(); updateFoot();
+        updateFoot();
       });
     });
   }
@@ -2778,43 +2867,40 @@ function setHotView(view, btn) {
   function canAdvance(){
     var name = STEPS[stepIdx];
     if (name === 'welcome') return true;
-    if (name === 'role') return !!picks.role;
+    if (name === 'topics') return picks.categories.length > 0;
     if (name === 'jurisdictions') return picks.jurisdictions.length > 0;
-    if (name === 'topics') return picks.topics.length > 0;
     if (name === 'cadence') return !!picks.cadence;
-    if (name === 'briefing') return true; // enabled by streamBriefingLines when done
+    if (name === 'role') return !!picks.role;
+    if (name === 'settingUp') return false; // auto-advances
     return false;
   }
   function updateFoot(){
     if (!nextBtn || !backBtn) return;
     var name = STEPS[stepIdx];
-    backBtn.disabled = (stepIdx === 0);
-    backBtn.style.visibility = (stepIdx === 0) ? 'hidden' : 'visible';
+    if (stepIdx === 0) backBtn.setAttribute('hidden',''); else backBtn.removeAttribute('hidden');
     if (name === 'welcome') {
-      nextBtn.innerHTML = 'Begin <kbd>↵</kbd>';
+      nextBtn.innerHTML = 'Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
       nextBtn.disabled = false;
-    } else if (name === 'briefing') {
-      nextBtn.innerHTML = 'Enter your dashboard <kbd>↵</kbd>';
-      nextBtn.disabled = true; // becomes enabled after streaming completes
-    } else if (name === 'cadence') {
-      nextBtn.innerHTML = 'Preview my update <kbd>↵</kbd>';
+      if (exitBtn) exitBtn.style.display = 'none';
+    } else if (name === 'settingUp') {
+      nextBtn.style.display = 'none';
+      if (exitBtn) exitBtn.style.display = 'none';
+      backBtn.setAttribute('hidden','');
+    } else if (name === 'role') {
+      nextBtn.style.display = '';
+      nextBtn.innerHTML = 'Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
       nextBtn.disabled = !canAdvance();
+      if (exitBtn) exitBtn.style.display = '';
     } else {
-      nextBtn.innerHTML = 'Continue <kbd>↵</kbd>';
+      nextBtn.style.display = '';
+      nextBtn.innerHTML = 'Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
       nextBtn.disabled = !canAdvance();
+      if (exitBtn) exitBtn.style.display = '';
     }
   }
 
   function advance(){
     if (!canAdvance()) return;
-    if (stepIdx === STEPS.length - 1) {
-      // finishing briefing → close stepper, land on dashboard
-      closeStepper();
-      applyPersonalisation();
-      // offer tour as the next nudge
-      setTimeout(refreshHelperCard, 400);
-      return;
-    }
     stepIdx += 1;
     renderStep();
   }
@@ -3009,12 +3095,12 @@ function setHotView(view, btn) {
     var name = STEPS[stepIdx];
 
     if (e.key === 'Escape') {
-      if (name === 'briefing') { advance(); return; } // Esc on briefing = enter dashboard
+      if (name === 'settingUp') return; // can't escape during the setup interlude
       skipOnboarding();
       return;
     }
-    if (e.key === 'Enter' && !inInput) { e.preventDefault(); advance(); return; }
-    if (e.key === 'Backspace' && !inInput && stepIdx > 0 && name !== 'briefing') { e.preventDefault(); retreat(); return; }
+    if (e.key === 'Enter' && !inInput && name !== 'settingUp') { e.preventDefault(); advance(); return; }
+    if (e.key === 'Backspace' && !inInput && stepIdx > 0 && name !== 'settingUp') { e.preventDefault(); retreat(); return; }
 
     // Numeric shortcuts
     if (!inInput) {
@@ -3035,13 +3121,15 @@ function setHotView(view, btn) {
 
   function skipOnboarding(){
     var cur = getOnb() || {};
-    cur.v = 2;
+    cur.v = 3;
     cur.skipped = true;
     cur.skippedAt = new Date().toISOString();
     cur.role = picks.role || cur.role || null;
     cur.jurisdictions = picks.jurisdictions.length ? picks.jurisdictions : (cur.jurisdictions || []);
     cur.topics = picks.topics.length ? picks.topics : (cur.topics || []);
+    cur.categories = picks.categories.length ? picks.categories : (cur.categories || []);
     cur.cadence = picks.cadence || cur.cadence || null;
+    cur.name = picks.name || cur.name || '';
     setOnb(cur);
     closeStepper();
     applyPersonalisation();
@@ -3052,11 +3140,10 @@ function setHotView(view, btn) {
   function boot(){
     takeover = document.getElementById('paiStepTakeover');
     stage = document.getElementById('paiStepStage');
-    crumbs = document.getElementById('paiStepCrumbs');
+    railEl = document.getElementById('paiStepRail');
     backBtn = document.getElementById('paiStepBack');
     nextBtn = document.getElementById('paiStepNext');
     exitBtn = document.getElementById('paiStepExit');
-    briefCard = document.getElementById('paiStepBriefCard');
 
     if (nextBtn) nextBtn.addEventListener('click', advance);
     if (backBtn) backBtn.addEventListener('click', retreat);
@@ -3079,7 +3166,7 @@ function setHotView(view, btn) {
     // Global edit-brief click delegation
     document.addEventListener('click', function(e){
       var t = e.target.closest('[data-pai-edit-brief]');
-      if (t) { e.preventDefault(); openStepper(getOnb(), STEPS.indexOf('role')); }
+      if (t) { e.preventDefault(); openStepper(getOnb(), STEPS.indexOf('topics')); }
     });
 
     document.addEventListener('keydown', function(e){
@@ -3107,7 +3194,7 @@ function setHotView(view, btn) {
     // Deep-link: /#edit-brief (re-open stepper at role screen)
     if (isHome && location.hash === '#edit-brief') {
       history.replaceState(null, '', location.pathname + location.search);
-      setTimeout(function(){ openStepper(getOnb(), STEPS.indexOf('role')); }, 200);
+      setTimeout(function(){ openStepper(getOnb(), STEPS.indexOf('topics')); }, 200);
     }
 
     refreshHelperCard();
@@ -3117,7 +3204,7 @@ function setHotView(view, btn) {
   else boot();
 
   // Settings-page hooks
-  window.paiOpenBrief = function(){ openStepper(getOnb(), STEPS.indexOf('role')); };
+  window.paiOpenBrief = function(){ openStepper(getOnb(), STEPS.indexOf('topics')); };
   window.paiStartTour = function(){ var t = getTour(); t.dismissed = false; t.completed = false; t.step = 0; setTour(t); startTour(); };
 })();
 </script>
@@ -3230,117 +3317,5 @@ function setHotView(view, btn) {
 </script>
 <div class="nav-scrim" aria-hidden="true"></div>
 
-<script>
-/* News multi-select tickboxes + 'Create report' floating bar (top-left checkbox) */
-(function(){
-  var BAR_ID='paiNewsActionBar';
-  function getRow(cb){ return cb.closest('.wire-row,.news-lead,.news-second,.today-item,.today-row,.news-item'); }
-  function getSource(row){ var a=row.querySelector('a[href]'); return (row.dataset.source||'')||(a?a.href:''); }
-  function getTitle(row){ var h=row.querySelector('h2,h3,h4,.nl-title,.ns-title,.wr-info h4,.wr-title,.today-headline'); return h?h.textContent.trim():(row.textContent||'').trim().slice(0,80); }
-  function getBody(row){ var a=row.querySelector('.wr-src strong,.nl-footer strong,.ns-meta'); return a?a.textContent.trim():''; }
-
-  function ensureCheckbox(row){
-    if(row.querySelector('.pai-news-tick')) return;
-    var label=document.createElement('label');
-    label.className='pai-news-tick';
-    label.style.cssText='position:absolute;top:8px;left:8px;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid rgba(1,118,211,0.45);border-radius:4px;cursor:pointer;z-index:9999;box-shadow:0 1px 3px rgba(10,23,41,0.08);';
-    var cb=document.createElement('input');
-    cb.type='checkbox'; cb.style.cssText='margin:0;cursor:pointer;width:14px;height:14px;accent-color:#0176d3;';
-    cb.addEventListener('click',function(e){ e.stopPropagation(); });
-    cb.addEventListener('change',updateBar);
-    label.appendChild(cb);
-    if(getComputedStyle(row).position==='static') row.style.position='relative';
-    /* Shift any existing left content to make room (nudge padding-left) */
-    if(!row.dataset.paiTickNudge){ row.style.paddingLeft='42px'; row.dataset.paiTickNudge='1'; }
-    row.appendChild(label);
-  }
-
-  function collectSelected(){
-    var out=[];
-    document.querySelectorAll('.pai-news-tick input:checked').forEach(function(cb){
-      var row=getRow(cb); if(!row) return;
-      out.push({ title:getTitle(row), body:getBody(row), url:getSource(row) });
-    });
-    return out;
-  }
-
-  function updateBar(){
-    var items=collectSelected();
-    var bar=document.getElementById(BAR_ID);
-    if(!items.length){ if(bar) bar.remove(); return; }
-    if(!bar){
-      bar=document.createElement('div');
-      bar.id=BAR_ID;
-      bar.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#07202e;color:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 8px 28px rgba(10,23,41,0.3);display:flex;gap:12px;align-items:center;z-index:1000;font-size:13px;font-family:inherit;max-width:calc(100% - 40px)';
-      bar.innerHTML=''
-        +'<span id="paiNewsCount" style="font-weight:500"></span>'
-        +'<span style="opacity:0.35">·</span>'
-        +'<button id="paiNewsPdfBtn" style="padding:7px 14px;border:0;border-radius:6px;background:#0176d3;color:#fff;font-weight:600;cursor:pointer;font-size:12.5px;">Create PDF report</button>'
-        +'<button id="paiNewsEmailBtn" style="padding:7px 14px;border:1px solid rgba(255,255,255,0.25);border-radius:6px;background:transparent;color:#fff;cursor:pointer;font-size:12.5px;">Email report</button>'
-        +'<button id="paiNewsClearBtn" style="padding:6px 10px;border:0;border-radius:6px;background:transparent;color:#fff;cursor:pointer;opacity:0.6;font-size:12.5px;" title="Clear selection">✕</button>';
-      document.body.appendChild(bar);
-      bar.querySelector('#paiNewsPdfBtn').addEventListener('click',createPdf);
-      bar.querySelector('#paiNewsEmailBtn').addEventListener('click',createEmail);
-      bar.querySelector('#paiNewsClearBtn').addEventListener('click',function(){
-        document.querySelectorAll('.pai-news-tick input:checked').forEach(function(i){ i.checked=false; });
-        updateBar();
-      });
-    }
-    bar.querySelector('#paiNewsCount').textContent=items.length+' selected';
-  }
-
-  function createPdf(){
-    var items=collectSelected();
-    if(!items.length) return;
-    var w=window.open('','_blank');
-    if(!w) return;
-    var rows=items.map(function(it,i){
-      return '<article style="margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #dbe1ea">'
-        +'<div style="font-family:monospace;font-size:10.5px;color:#5e6878;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Story '+(i+1)+' · PrinciplesAI report</div>'
-        +'<h2 style="margin:0 0 8px 0;font-size:18px;color:#07202e;letter-spacing:-0.01em">'+(it.title||'—')+'</h2>'
-        +(it.body?'<div style="font-size:12.5px;color:#5e6878;margin-bottom:6px">'+it.body+'</div>':'')
-        +(it.url?'<div style="font-size:12px"><a href="'+it.url+'" style="color:#0176d3">'+it.url+'</a></div>':'')
-        +'</article>';
-    }).join('');
-    var stamp=new Date().toISOString().slice(0,10);
-    w.document.write('<!doctype html><html><head><title>PrinciplesAI report '+stamp+'</title>'
-      +'<style>body{font-family:Inter,system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 24px;color:#0d2e42;line-height:1.5}h1{font-size:22px;margin:0 0 4px 0;color:#07202e}.report-meta{font-size:12px;color:#5e6878;margin-bottom:28px;font-family:monospace}@media print{@page{margin:18mm}}</style></head>'
-      +'<body>'
-      +'<h1>News report — '+items.length+' selected</h1>'
-      +'<div class="report-meta">PrinciplesAI · generated '+new Date().toLocaleString()+'</div>'
-      +rows
-      +'<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script>'
-      +'</body></html>');
-    w.document.close();
-  }
-
-  function createEmail(){
-    var items=collectSelected();
-    if(!items.length) return;
-    var NL = String.fromCharCode(10);
-    var subject='PrinciplesAI news report ('+items.length+' stories)';
-    var body='Here is a selection of stories from PrinciplesAI:'+NL+NL;
-    items.forEach(function(it,i){
-      body += (i+1)+'. '+(it.title||'—')+NL;
-      if(it.body) body += '   '+it.body+NL;
-      if(it.url)  body += '   '+it.url+NL;
-      body += NL;
-    });
-    body += '—'+NL+'Generated via PrinciplesAI';
-    var href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-    if(href.length>1800) href=href.slice(0,1800);
-    window.location.href=href;
-  }
-
-  function scan(){
-    document.querySelectorAll('.wire-row,.news-lead,.news-second,.today-item,.today-row,.news-item').forEach(ensureCheckbox);
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',scan);
-  else scan();
-  var wireEl=document.getElementById('wireList')||document.querySelector('.wire-list');
-  if(wireEl){ new MutationObserver(scan).observe(wireEl,{childList:true,subtree:false}); }
-  setInterval(scan,2000);
-})();
-</script>
 </body>
 </html>
