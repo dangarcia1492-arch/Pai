@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrinciplesAI — United Kingdom · Variant D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIANT D — 3-line facts on the right, no silhouette map
+   ============================================================ */
+:root {
+  --bg: #fcfcfc;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #eff2f7;
+  --ink: #0a1729;
+  --ink-strong: #06101e;
+  --secondary: #2a3548;
+  --muted: #5e6878;
+  --faint: #8a93a3;
+  --border: #dbe1ea;
+  --border-soft: #ebeff5;
+  --accent: #0176d3;
+  --accent-2: #014486;
+  --accent-soft: #e3effc;
+  --green: #2e844a;
+  --green-bg: #e5f3e9;
+  --amber: #905200;
+  --amber-bg: #fbeecd;
+  --red: #ba0517;
+  --red-bg: #feded8;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px;
+  --radius: 6px;
+  --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+button, input { font-family: inherit; font-size: inherit; color: inherit; border: none; background: none; outline: none; }
+button { cursor: pointer; }
+
+/* HEADER */
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
+.header-bar .brand { font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.005em; }
+.header-bar .brand em { font-style: italic; color: var(--accent-2); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); padding: 4px 0; border-bottom: 1px solid transparent; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; font-size: 13px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); cursor: pointer; }
+.btn:hover { background: var(--surface-2); border-color: var(--faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
+@media (max-width: 860px) { .mkt-nav { display: none; } }
+
+/* LAYOUT FRAME */
+.main-content { padding-top: var(--header-height); }
+.page { max-width: 1360px; margin: 0 auto; padding: 36px 40px 72px; }
+
+/* Breadcrumb */
+.crumb { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 32px; }
+.crumb a { color: var(--muted); }
+.crumb a:hover { color: var(--accent-2); }
+.crumb .sep { color: var(--faint); margin: 0 8px; }
+.crumb .current { color: var(--ink); }
+
+/* ===== ZONE 1 · HERO (Variant D — content left, 3 thin-rule facts right) ===== */
+.hero { display: grid; grid-template-columns: minmax(0,1fr) 360px; gap: 72px; padding-bottom: 40px; margin-bottom: 44px; border-bottom: 1px solid var(--border); align-items: start; }
+.hero-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--faint); margin-bottom: 20px; }
+.hero-title { font-size: 64px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.035em; line-height: 1; margin-bottom: 28px; }
+.hero-body { font-size: 16px; color: var(--secondary); line-height: 1.65; max-width: 620px; }
+.hero-body b { color: var(--ink-strong); font-weight: 600; }
+
+/* 3-line facts column on the right — thin horizontal rules, no card background */
+.hero-facts { display: flex; flex-direction: column; border-top: 1px solid var(--border); padding-top: 0; }
+.hero-facts .fact { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; border-bottom: 1px solid var(--border); gap: 24px; }
+.hero-facts .fact:last-child { border-bottom: none; }
+.hero-facts .fact-k { font-family: var(--mono); font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.hero-facts .fact-v { font-size: 30px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+
+/* ===== SECTION SHELL ===== */
+.section { margin-bottom: 56px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-title { font-size: 20px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; }
+.section-title .count { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 10px; letter-spacing: 0.02em; }
+.section-aside { font-family: var(--mono); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); }
+
+/* ===== IN FORCE (flat list) ===== */
+.inforce-list { display: flex; flex-direction: column; }
+.inforce-row { display: grid; grid-template-columns: 180px 1fr 80px; gap: 28px; padding: 18px 0; border-bottom: 1px solid var(--border-soft); align-items: start; }
+.inforce-row:last-child { border-bottom: none; }
+.inforce-cat { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding-top: 2px; }
+.inforce-main .n { font-size: 17px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.01em; margin-bottom: 4px; }
+.inforce-main .d { font-size: 13.5px; color: var(--secondary); line-height: 1.55; max-width: 640px; }
+.inforce-main .d b { color: var(--ink-strong); font-weight: 600; }
+.inforce-status { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--green); text-align: right; padding-top: 4px; }
+
+/* ===== ZONE 3 · AUTHORITIES BY TYPE (reused from base) ===== */
+.auth-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+.auth-group { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px 12px; display: flex; flex-direction: column; gap: 8px; }
+.auth-group-head { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid var(--border-soft); }
+.auth-type { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--secondary); }
+.auth-count { font-family: var(--mono); font-size: 10.5px; font-weight: 600; color: var(--faint); }
+.auth-list { display: flex; flex-direction: column; gap: 0; }
+.auth-item { padding: 6px 0; border-bottom: 1px solid var(--border-soft); }
+.auth-item:last-child { border-bottom: none; }
+.auth-name { font-size: 13px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.005em; line-height: 1.35; }
+.auth-role { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.auth-acr { font-family: var(--mono); font-size: 10.5px; color: var(--faint); margin-left: 6px; font-weight: 500; }
+
+/* ===== ZONE 4 · ALERTS · TAGGED LANES ===== */
+.alerts-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+.alert-lane { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px 8px; display: flex; flex-direction: column; }
+.lane-head { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 10px; margin-bottom: 4px; border-bottom: 1px solid var(--border-soft); }
+.lane-type { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.lane-type.enf { color: var(--red); }
+.lane-type.cons { color: var(--amber); }
+.lane-type.case { color: var(--accent-2); }
+.lane-type.guid { color: var(--secondary); }
+.lane-count { font-family: var(--mono); font-size: 10.5px; font-weight: 600; color: var(--faint); }
+.alert-item { padding: 10px 0; border-bottom: 1px solid var(--border-soft); }
+.alert-item:last-child { border-bottom: none; }
+.alert-meta { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.02em; text-transform: uppercase; }
+.alert-meta b { color: var(--ink-strong); font-weight: 600; }
+.alert-head { font-size: 13px; font-weight: 500; color: var(--ink-strong); line-height: 1.4; }
+.lane-more { margin-top: auto; padding-top: 10px; font-family: var(--mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-2); }
+.lane-more:hover { color: var(--accent); }
+
+/* ===== ZONE 5 · PAYWALL ===== */
+.paywall { margin-top: 24px; padding: 40px 48px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+.pw-head { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-2); margin-bottom: 10px; }
+.pw-title { font-size: 22px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; margin-bottom: 10px; }
+.pw-copy { font-size: 14px; color: var(--secondary); line-height: 1.55; max-width: 620px; }
+.pw-ctas { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+.pw-cta { height: 42px; padding: 0 22px; border-radius: 6px; font-size: 13.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; cursor: pointer; }
+.pw-cta.primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+.pw-cta.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.pw-cta.ghost { background: var(--surface); color: var(--secondary); border: 1px solid var(--border); }
+.pw-cta.ghost:hover { background: var(--surface-2); color: var(--ink); border-color: var(--faint); }
+
+/* FOOTER */
+.footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer a { color: var(--muted); }
+.footer a:hover { color: var(--accent-2); }
+
+.variant-badge{position:fixed;bottom:16px;right:16px;background:#06101e;color:#fff;font-family:var(--mono);font-size:10.5px;font-weight:700;padding:7px 12px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase;z-index:400;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .alerts-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 1000px) {
+  .auth-grid { grid-template-columns: repeat(2, 1fr); }
+  .inforce-row { grid-template-columns: 120px 1fr 70px; gap: 18px; }
+}
+@media (max-width: 800px) {
+  .page { padding: 28px 22px 48px; }
+  .hero { grid-template-columns: 1fr; gap: 32px; }
+  .hero-title { font-size: 44px; }
+  .hero-facts { border-top: 0; }
+  .auth-grid { grid-template-columns: 1fr; }
+  .alerts-grid { grid-template-columns: 1fr; }
+  .paywall { grid-template-columns: 1fr; padding: 28px 24px; }
+  .pw-ctas { flex-direction: row; }
+  .inforce-row { grid-template-columns: 1fr; gap: 6px; }
+  .inforce-status { text-align: left; }
+}
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header-bar">
+  <a href="pai-home-public.html" class="brand">Principles<em>AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html">Legislation</a>
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-pricing.html">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary">Get access →</a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="main-content">
+<div class="page">
+
+  <!-- Breadcrumb -->
+  <div class="crumb">
+    <a href="pai-home-public.html">Home</a>
+    <span class="sep">/</span>
+    <a href="pai-home-public.html#coverage">Jurisdictions</a>
+    <span class="sep">/</span>
+    <span class="current">United Kingdom</span>
+  </div>
+
+  <!-- ===== HERO (Variant D) ===== -->
+  <section class="hero">
+    <div>
+      <div class="hero-eyebrow">Jurisdiction · GB</div>
+      <h1 class="hero-title">United&nbsp;Kingdom</h1>
+      <p class="hero-body">No dedicated AI Act. The UK governs artificial intelligence through <b>existing sectoral law</b> &mdash; data protection, financial conduct, cybersecurity &mdash; coordinated by regulators who publish their own guidance rather than a unified statute.</p>
+    </div>
+    <div class="hero-facts">
+      <div class="fact">
+        <div class="fact-k">In force</div>
+        <div class="fact-v">3</div>
+      </div>
+      <div class="fact">
+        <div class="fact-k">Open consultations</div>
+        <div class="fact-v">1</div>
+      </div>
+      <div class="fact">
+        <div class="fact-k">Public bodies tracked</div>
+        <div class="fact-v">41</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IN FORCE (flat list replacing the old fact-card row) ===== -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">In force<span class="count">What applies today</span></h2>
+      <span class="section-aside">What applies today</span>
+    </div>
+    <div class="inforce-list">
+      <div class="inforce-row">
+        <div class="inforce-cat">Data protection</div>
+        <div class="inforce-main">
+          <div class="n">UK GDPR &amp; Data Protection Act</div>
+          <div class="d">Covers automated decision-making, profiling, and transparency obligations for AI systems handling personal data. <b>DPDI amendments</b> rolling out this spring add explicit rules for AI training data and subject-access rights over model outputs.</div>
+        </div>
+        <div class="inforce-status">Live</div>
+      </div>
+      <div class="inforce-row">
+        <div class="inforce-cat">Financial services</div>
+        <div class="inforce-main">
+          <div class="n">FCA &amp; PRA supervisory expectations</div>
+          <div class="d">Consumer Duty and SS1/23 model-risk expectations apply to AI systems in scope of financial regulation. Sector-specific but enforced with teeth &mdash; algorithmic lending, trading, and advice are already under supervisory notice activity.</div>
+        </div>
+        <div class="inforce-status">Live</div>
+      </div>
+      <div class="inforce-row">
+        <div class="inforce-cat">Online content</div>
+        <div class="inforce-main">
+          <div class="n">Online Safety Act 2023</div>
+          <div class="d">Ofcom-enforced duties on user-to-user and search services, with direct relevance to generative-AI products that produce or host third-party content.</div>
+        </div>
+        <div class="inforce-status">Live</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AUTHORITIES ===== -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Authorities<span class="count">16 monitored across 9 types</span></h2>
+      <span class="section-aside">See all →</span>
+    </div>
+    <div class="auth-grid">
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Data Protection Authority</span><span class="auth-count">1</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">Information Commissioner's Office<span class="auth-acr">ICO</span></div>
+            <div class="auth-role">Data-protection, AI transparency, ADM guidance</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Cyber Agency</span><span class="auth-count">1</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">National Cyber Security Centre<span class="auth-acr">NCSC</span></div>
+            <div class="auth-role">Frontier-AI cyber, supplier vetting, resilience</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Financial Regulator</span><span class="auth-count">3</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">Financial Conduct Authority<span class="auth-acr">FCA</span></div>
+            <div class="auth-role">Consumer Duty · algorithmic fairness</div>
+          </div>
+          <div class="auth-item">
+            <div class="auth-name">Prudential Regulation Authority<span class="auth-acr">PRA</span></div>
+            <div class="auth-role">Model validation · SS1/23</div>
+          </div>
+          <div class="auth-item">
+            <div class="auth-name">Bank of England<span class="auth-acr">BoE</span></div>
+            <div class="auth-role">Systemic AI, financial stability</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Competition Authority</span><span class="auth-count">1</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">Competition &amp; Markets Authority<span class="auth-acr">CMA</span></div>
+            <div class="auth-role">Foundation-model competition, SMS regime</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Telecoms Regulator</span><span class="auth-count">1</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">Office of Communications<span class="auth-acr">OFCOM</span></div>
+            <div class="auth-role">Online Safety Act enforcement</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Government Agency</span><span class="auth-count">2</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">Dept. for Science, Innovation &amp; Technology<span class="auth-acr">DSIT</span></div>
+            <div class="auth-role">AI policy lead</div>
+          </div>
+          <div class="auth-item">
+            <div class="auth-name">AI Safety Institute<span class="auth-acr">AISI</span></div>
+            <div class="auth-role">Frontier-model evaluations</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Courts</span><span class="auth-count">3</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">Investigatory Powers Tribunal<span class="auth-acr">IPT</span></div>
+            <div class="auth-role">Surveillance, intelligence powers</div>
+          </div>
+          <div class="auth-item">
+            <div class="auth-name">Court of Appeal (Civil Division)<span class="auth-acr">CA Civ</span></div>
+            <div class="auth-role">Appellate review of ADM cases</div>
+          </div>
+          <div class="auth-item">
+            <div class="auth-name">UK Supreme Court<span class="auth-acr">UKSC</span></div>
+            <div class="auth-role">Final appellate authority</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Civil Society</span><span class="auth-count">2</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">Ada Lovelace Institute<span class="auth-acr">ALI</span></div>
+            <div class="auth-role">AI ethics, policy research</div>
+          </div>
+          <div class="auth-item">
+            <div class="auth-name">Big Brother Watch<span class="auth-acr">BBW</span></div>
+            <div class="auth-role">Civil-liberties watchdog</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-group">
+        <div class="auth-group-head"><span class="auth-type">Legislature</span><span class="auth-count">2</span></div>
+        <div class="auth-list">
+          <div class="auth-item">
+            <div class="auth-name">Commons Science &amp; Technology Cmte<span class="auth-acr">HoC S&amp;T</span></div>
+            <div class="auth-role">Lower-chamber oversight</div>
+          </div>
+          <div class="auth-item">
+            <div class="auth-name">Lords Communications &amp; Digital Cmte<span class="auth-acr">HoL Comms</span></div>
+            <div class="auth-role">Upper-chamber oversight</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== RECENT ACTIVITY ===== -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Recent activity<span class="count">12 signals · last 30 days</span></h2>
+      <span class="section-aside">See full wire →</span>
+    </div>
+    <div class="alerts-grid">
+
+      <div class="alert-lane">
+        <div class="lane-head"><span class="lane-type enf">Enforcement</span><span class="lane-count">3</span></div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>ICO</b><span>·</span>25 Mar</div>
+          <div class="alert-head">ICO fines NHS Trust £750K over patient-data disclosure</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>ICO</b><span>·</span>18 Mar</div>
+          <div class="alert-head">ICO reprimand issued over AI CV-screening</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>FCA</b><span>·</span>11 Mar</div>
+          <div class="alert-head">FCA supervisory notice on algorithmic lending</div>
+        </div>
+        <a href="#" class="lane-more">All enforcement →</a>
+      </div>
+
+      <div class="alert-lane">
+        <div class="lane-head"><span class="lane-type cons">Consultations</span><span class="lane-count">3</span></div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>DSIT</b><span>·</span>closes 12 May</div>
+          <div class="alert-head">AI Cyber Code of Practice — public consultation</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>AISI</b><span>·</span>rolling</div>
+          <div class="alert-head">Third-party evaluations framework — RfC</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>PRA</b><span>·</span>closes 04 Jun</div>
+          <div class="alert-head">Operational resilience consultation continues</div>
+        </div>
+        <a href="#" class="lane-more">All consultations →</a>
+      </div>
+
+      <div class="alert-lane">
+        <div class="lane-head"><span class="lane-type case">Case Law</span><span class="lane-count">3</span></div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>CA Civ</b><span>·</span>22 Mar</div>
+          <div class="alert-head">Appeal dismissed: ADM credit-scoring challenge</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>IPT</b><span>·</span>08 Mar</div>
+          <div class="alert-head">Bulk-data ruling narrows Schedule 7 powers</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>UKSC</b><span>·</span>pending</div>
+          <div class="alert-head">Leave granted: data-subject rights in AI training</div>
+        </div>
+        <a href="#" class="lane-more">All case law →</a>
+      </div>
+
+      <div class="alert-lane">
+        <div class="lane-head"><span class="lane-type guid">Guidance</span><span class="lane-count">3</span></div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>ICO</b><span>·</span>31 Mar</div>
+          <div class="alert-head">Updated ADM guidance with LLM provisions</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>CMA</b><span>·</span>29 Mar</div>
+          <div class="alert-head">Foundation-models interim report published</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-meta"><b>NCSC</b><span>·</span>20 Mar</div>
+          <div class="alert-head">Frontier-AI cyber advisory — secure deployment</div>
+        </div>
+        <a href="#" class="lane-more">All guidance →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== PAYWALL ===== -->
+  <section class="paywall">
+    <div>
+      <div class="pw-head">Member access</div>
+      <div class="pw-title">The full UK picture</div>
+      <p class="pw-copy">All 41 public bodies, live alerts on every material move in the jurisdiction, and our analysts' notes on what's coming next and how it affects your work.</p>
+    </div>
+    <div class="pw-ctas">
+      <a href="pai-pricing.html" class="pw-cta primary">Get full UK access →</a>
+      <a href="pai-pricing.html" class="pw-cta ghost">Try 7 days free</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>PrinciplesAI · UK coverage · updated hourly</span>
+    <a href="pai-home-public.html">← Back to home</a>
+  </div>
+
+</div>
+</div>
+<div class="variant-badge">Variant D · 3-line facts right</div>
+</body>
+</html>

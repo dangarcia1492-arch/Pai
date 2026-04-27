@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — UK juris mockups (A · B · C · D · D3)</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,'Segoe UI',Inter,sans-serif;background:#fcfcfc;color:#0a1729}
+body{display:flex;flex-direction:column}
+
+.tabs-bar{flex-shrink:0;background:#fff;border-bottom:1px solid #dbe1ea;padding:10px 24px 0;box-shadow:0 1px 2px rgba(10,23,41,.04);z-index:10}
+.tabs-bar .tab-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.tabs-bar h1{font-size:13.5px;font-weight:700;color:#06101e}
+.tabs-bar .sub{font-size:12px;color:#5e6878}
+.tabs-bar .src{margin-left:auto;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;color:#8a93a3;letter-spacing:.04em}
+.tabs{display:flex;gap:0;margin-bottom:-1px}
+.tab{font-size:13px;font-weight:600;color:#5e6878;padding:10px 18px;border-bottom:2px solid transparent;background:none;border-left:0;border-right:0;border-top:0;cursor:pointer;transition:color .12s,border-color .12s;display:flex;align-items:center;gap:10px}
+.tab:hover{color:#0a1729}
+.tab.active{color:#014486;border-bottom-color:#0176d3}
+.tab .code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;color:#8a93a3;padding:2px 7px;background:#f6f7f9;border-radius:3px}
+.tab.active .code{background:#e3effc;color:#014486}
+.tab .label{font-weight:500;color:inherit}
+.tab.active .label{font-weight:600}
+
+.stage{flex:1;position:relative;background:#eff2f7}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fcfcfc;display:none}
+.stage iframe.active{display:block}
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+</head>
+<body>
+
+<div class="tabs-bar">
+  <div class="tab-head">
+    <h1>UK jurisdiction &mdash; mockup comparison</h1>
+    <span class="sub">Same content, five hero treatments. Tab through to compare.</span>
+    <span class="src" id="srcLabel">pai-juris-uk.html</span>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-src="pai-juris-uk.html" data-label="Variant A &middot; stacked briefing"><span class="code">A</span><span class="label">Stacked briefing</span></button>
+    <button class="tab" data-src="pai-juris-uk-B.html" data-label="Variant B &middot; split canvas"><span class="code">B</span><span class="label">Split canvas</span></button>
+    <button class="tab" data-src="pai-juris-uk-C.html" data-label="Variant C &middot; compact + rail"><span class="code">C</span><span class="label">Compact + rail</span></button>
+    <button class="tab" data-src="pai-juris-uk-D.html" data-label="Variant D &middot; 3-line facts right"><span class="code">D</span><span class="label">3-line facts right</span></button>
+    <button class="tab" data-src="pai-juris-uk-D3.html" data-label="Variant D3 &middot; tri-domain bands"><span class="code">D3</span><span class="label">Tri-domain bands</span></button>
+  </div>
+</div>
+
+<div class="stage">
+  <iframe class="active" data-src="pai-juris-uk.html" src="pai-juris-uk.html" title="Variant A"></iframe>
+  <iframe data-src="pai-juris-uk-B.html" title="Variant B"></iframe>
+  <iframe data-src="pai-juris-uk-C.html" title="Variant C"></iframe>
+  <iframe data-src="pai-juris-uk-D.html" title="Variant D"></iframe>
+  <iframe data-src="pai-juris-uk-D3.html" title="Variant D3"></iframe>
+</div>
+
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.tab');
+  var frames = document.querySelectorAll('.stage iframe');
+  var label = document.getElementById('srcLabel');
+
+  function show(src) {
+    tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.src === src); });
+    frames.forEach(function (f) {
+      var match = f.dataset.src === src;
+      if (match && !f.src) { f.src = src; } /* lazy-load on first activation */
+      f.classList.toggle('active', match);
+    });
+    label.textContent = src;
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () { show(this.dataset.src); });
+  });
+
+  /* Also respond to the #A / #B / #C / #D URL hash so the tab state is linkable */
+  function hashTab() {
+    var h = (location.hash || '').slice(1).toUpperCase();
+    var map = { A: 'pai-juris-uk.html', B: 'pai-juris-uk-B.html', C: 'pai-juris-uk-C.html', D: 'pai-juris-uk-D.html', D3: 'pai-juris-uk-D3.html' };
+    if (map[h]) show(map[h]);
+  }
+  window.addEventListener('hashchange', hashTab);
+  hashTab();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — Settings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
+  --ink:#0d2e42;--ink-strong:#07202e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#014486;--accent-3:#032e61;--accent-soft:#e3effc;--accent-soft-2:#cfe1f6;
+  --green:#2e844a;--green-bg:#d6f1dc;--green-fill:#2e844a;
+  --amber:#905200;--amber-bg:#fef0c7;--amber-fill:#ca8501;
+  --red:#ba0517;--red-bg:#feded8;--red-fill:#ba0517;
+  --display:'Inter',-apple-system,sans-serif;--sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --sidebar-collapsed:56px;--sidebar-expanded:280px;--header-height:52px;
+  --shadow-1:0 1px 2px rgba(10,23,41,.04);--shadow-2:0 2px 6px rgba(10,23,41,.07),0 8px 20px rgba(10,23,41,.05);
+  --radius:10px;--radius-chip:4px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:15px;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;min-width:1280px}
+a{color:var(--accent);text-decoration:none}
+button,input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
+button{cursor:pointer}
+
+.icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden;box-shadow:var(--shadow-1)}
+.icon-sidebar:hover{width:var(--sidebar-expanded);box-shadow:var(--shadow-2)}
+.sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;gap:12px;flex-shrink:0;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+.sidebar-brand .brand-icon{width:28px;height:28px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--display);font-style:italic;font-weight:700;font-size:18px;color:#fff;letter-spacing:-.5px}
+.sidebar-brand .brand-text{font-family:var(--display);font-weight:600;font-size:18px;color:var(--ink);opacity:0;transition:opacity .15s .05s}
+.sidebar-brand .brand-text .ai{font-style:italic;font-weight:500}
+.icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
+.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:12px 8px;overflow-y:auto;overflow-x:hidden}
+.sidebar-nav-item{display:flex;align-items:center;gap:14px;height:40px;padding:0 12px;border-radius:4px;cursor:pointer;position:relative;color:var(--secondary);transition:color .15s,background .15s;white-space:nowrap;flex-shrink:0;text-decoration:none}
+.sidebar-nav-item:hover{color:var(--ink);background:var(--surface-3)}
+.sidebar-nav-item.active{color:var(--accent-2);background:var(--accent-soft);font-weight:600}
+.sidebar-nav-item.active::before{content:'';position:absolute;left:-8px;top:8px;bottom:8px;width:3px;background:var(--accent);border-radius:0 3px 3px 0}
+.sidebar-nav-item svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none;flex-shrink:0}
+.sidebar-nav-item .nav-label{font-size:13.5px;font-weight:500;opacity:0;transition:opacity .15s .05s}
+.sidebar-nav-item.active .nav-label{font-weight:600}
+.icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
+.sidebar-user{border-top:1px solid var(--border);padding:8px;flex-shrink:0;display:flex;align-items:center}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+
+.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:18px;z-index:200;box-shadow:var(--shadow-1)}
+.header-nav-arrows{display:flex;gap:4px}
+.header-nav-arrows button{width:30px;height:30px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.header-nav-arrows button:hover{background:var(--surface-3);color:var(--ink)}
+.header-nav-arrows button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+.header-user-name{font-size:13px;font-weight:500;color:var(--secondary);white-space:nowrap}
+.header-search{flex:1;max-width:460px;display:flex;align-items:center;gap:10px;height:36px;padding:0 14px;background:var(--surface-3);border-radius:5px;border:1px solid transparent}
+.header-search:focus-within{background:var(--surface);border-color:var(--accent-soft-2)}
+.header-search svg{width:15px;height:15px;stroke:var(--muted);stroke-width:2;fill:none}
+.header-search input{flex:1;font-size:13px;background:transparent}
+.header-search input::placeholder{color:var(--muted)}
+.header-search kbd{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--border);border-radius:3px;padding:1px 6px;background:var(--surface)}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.home-jur-btn{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--secondary);cursor:pointer;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:var(--surface);font-weight:500}
+.hjb-flag{font-size:17px;line-height:1}
+.header-icon-btn{width:36px;height:36px;border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--muted);position:relative}
+.header-icon-btn:hover{background:var(--surface-3);color:var(--ink)}
+.header-icon-btn svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.7;fill:none}
+.header-icon-btn .badge-count{position:absolute;top:4px;right:3px;min-width:17px;height:17px;padding:0 5px;background:var(--red-fill);color:#fff;font-family:var(--mono);font-size:10px;font-weight:600;border-radius:9px;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface);box-sizing:content-box}
+.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:var(--secondary);background:transparent;border:1px solid var(--border);border-radius:5px;text-decoration:none;transition:background .12s,color .12s,border-color .12s}
+.header-logout:hover{background:var(--surface-2);color:var(--ink);border-color:var(--ink-faint)}
+.header-logout svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+.main-content{margin-left:var(--sidebar-collapsed);padding-top:var(--header-height);min-height:100vh}
+.page-view{padding:26px 40px 40px;max-width:1600px;margin:0}
+
+.page-statusbar{display:grid;grid-template-columns:1fr auto;gap:20px;padding:0 0 18px;margin-bottom:22px;border-bottom:1px solid var(--border);align-items:start;min-height:55px;margin-bottom:22px}
+.hero-greeting h1{font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong);line-height:1.15;margin-bottom:6px}
+.hero-sub{font-size:13.5px;color:var(--secondary);font-weight:500;line-height:1.5}
+.btn{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 18px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--secondary);transition:background .12s,border-color .12s,color .12s,box-shadow .12s}
+.btn:hover{background:var(--surface-2);border-color:var(--ink-faint);color:var(--ink)}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 1px 2px rgba(1,118,211,.22)}
+.btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2);color:#fff;box-shadow:0 2px 6px rgba(1,118,211,.3)}
+.btn-danger{background:var(--surface);color:var(--red);border-color:#f0c4bc}
+.btn-danger:hover{background:var(--red);border-color:var(--red);color:#fff}
+.btn.sm{height:32px;padding:0 12px;font-size:12.5px}
+
+/* Body */
+.set-body{display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:start}
+.inner-nav{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);padding:12px 0;position:sticky;top:calc(var(--header-height) + 22px)}
+.inner-nav h4{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:6px 20px 10px}
+.in-item{display:flex;align-items:center;gap:12px;padding:9px 20px;font-size:13px;color:var(--secondary);cursor:pointer;border-left:3px solid transparent;transition:background .12s,color .12s;font-weight:500}
+.in-item:hover{background:var(--surface-2);color:var(--ink)}
+.in-item.active{background:var(--accent-soft);color:var(--accent-2);border-left-color:var(--accent);font-weight:600}
+.in-item .num{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);width:18px;font-weight:600}
+.in-item.active .num{color:var(--accent-2)}
+
+.form-area{min-width:0;display:flex;flex-direction:column;gap:18px}
+.section{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);padding:26px 30px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border-soft);gap:14px}
+.section-head h2{font-size:17px;font-weight:700;color:var(--ink-strong);letter-spacing:-.01em;margin-bottom:3px}
+.section-head .sub{font-size:12.5px;color:var(--muted);font-weight:500}
+.saved{font-family:var(--mono);font-size:11px;color:var(--green);font-weight:700;display:flex;align-items:center;gap:7px;white-space:nowrap;padding-top:3px}
+.saved::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green-fill)}
+.saved.unsaved{color:var(--amber)}
+.saved.unsaved::before{background:var(--amber-fill)}
+
+.field{margin-bottom:18px}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;display:block;margin-bottom:7px}
+.field input[type=text],.field input[type=email],.field textarea,.field select{width:100%;border:1px solid var(--border);border-radius:6px;padding:10px 12px;font:inherit;font-size:13.5px;background:var(--surface);color:var(--ink);transition:border-color .12s,box-shadow .12s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent-soft-2);box-shadow:0 0 0 3px var(--accent-soft)}
+.field textarea{resize:vertical;min-height:82px;line-height:1.55}
+.field .help{font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.5;font-weight:500}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:4px 10px;background:var(--surface-3);border-radius:4px;font-size:12px;color:var(--ink);font-weight:500}
+.tag button{color:var(--ink-faint);margin-left:2px;font-size:13px;line-height:1}
+.tag button:hover{color:var(--red)}
+.tag-add{display:inline-flex;align-items:center;padding:4px 10px;border:1px dashed var(--border);background:transparent;border-radius:4px;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:600;cursor:pointer;transition:border-color .12s,color .12s}
+.tag-add:hover{border-color:var(--accent-soft-2);color:var(--accent-2)}
+
+.avatar-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.avatar-row .av-lg{width:60px;height:60px;border-radius:50%;background:#1e3a8a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700}
+
+.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border-soft)}
+
+.members{display:flex;flex-direction:column}
+.member{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border-soft)}
+.member:last-child{border:0}
+.member .av{width:36px;height:36px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.av.c1{background:#1e3a8a}.av.c2{background:#5b21b6}.av.c3{background:#7c2d12}.av.c4{background:#0f766e}
+.member .m-body{flex:1;min-width:0}
+.member .m-name{font-size:13.5px;font-weight:600;color:var(--ink-strong)}
+.member .m-email{font-family:var(--mono);font-size:11.5px;color:var(--muted);font-weight:500}
+.role-select{border:1px solid var(--border);border-radius:5px;padding:6px 28px 6px 12px;font-family:var(--mono);font-size:11.5px;font-weight:600;background:var(--surface);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%235e6878' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;color:var(--secondary);letter-spacing:.04em;text-transform:uppercase}
+
+.seat-bar{background:var(--surface-2);border:1px solid var(--border-soft);border-radius:6px;padding:12px 16px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.seat-bar .seat-text{font-size:12.5px;color:var(--secondary);font-weight:500}
+.seat-bar .seat-text b{color:var(--ink-strong);font-weight:700;font-family:var(--mono)}
+
+.invite-row{display:flex;gap:8px;align-items:stretch}
+.invite-row input{flex:1}
+
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border-soft);gap:18px}
+.toggle-row:last-child{border:0}
+.toggle-row .tr-body{flex:1}
+.toggle-row .tr-name{font-size:13.5px;font-weight:600;color:var(--ink-strong);margin-bottom:3px}
+.toggle-row .tr-help{font-size:12px;color:var(--muted);line-height:1.5;font-weight:500}
+.toggle{width:38px;height:22px;border-radius:11px;background:var(--surface-3);border:1px solid var(--border);position:relative;cursor:pointer;flex-shrink:0;transition:background .15s,border-color .15s}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.15);transition:left .15s}
+.toggle.on{background:var(--accent);border-color:var(--accent)}
+.toggle.on::after{left:18px}
+
+.pill-group{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;width:fit-content;background:var(--surface)}
+.pill-group button{padding:8px 16px;font-size:12.5px;font-weight:600;color:var(--secondary);border-right:1px solid var(--border);transition:background .12s,color .12s}
+.pill-group button:last-child{border-right:0}
+.pill-group button.active{background:var(--accent);color:#fff}
+.pill-group button:hover:not(.active){background:var(--surface-2);color:var(--ink)}
+
+.subsection-head{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:20px 0 10px}
+
+.integration{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--border-soft)}
+.integration:last-child{border:0}
+.integration .i-icon{width:40px;height:40px;border-radius:8px;background:var(--surface-3);color:var(--ink-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700;font-size:13px;font-family:var(--mono)}
+.integration.c-slack .i-icon{background:#4a154b;color:#fff}
+.integration.c-teams .i-icon{background:#4b53bc;color:#fff}
+.integration.c-email .i-icon{background:var(--accent);color:#fff}
+.integration.c-webhook .i-icon{background:#065f46;color:#fff}
+.integration.c-api .i-icon{background:var(--surface-3)}
+.integration .i-body{flex:1}
+.integration .i-name{font-size:13.5px;font-weight:600;color:var(--ink-strong);display:flex;align-items:center;gap:10px;margin-bottom:3px}
+.integration .i-help{font-size:12px;color:var(--muted);line-height:1.5;font-weight:500}
+.flag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--surface-3);color:var(--muted);font-weight:700}
+.flag.connected{background:var(--green-bg);color:var(--green)}
+.flag.coming{background:var(--amber-bg);color:var(--amber)}
+
+.session{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border-soft)}
+.session:last-child{border:0}
+.session .s-icon{width:38px;height:38px;border-radius:6px;background:var(--surface-3);color:var(--secondary);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.session .s-icon svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none}
+.session .s-body{flex:1}
+.session .s-name{font-size:13.5px;font-weight:600;color:var(--ink-strong);display:flex;align-items:center;gap:8px}
+.session .s-meta{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;margin-top:2px}
+.session .current{font-family:var(--mono);font-size:10px;color:var(--accent-2);background:var(--accent-soft);padding:2px 7px;border-radius:3px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+
+.identity-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:6px}
+.identity-row .g-icon{width:38px;height:38px;border-radius:6px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#4285f4;flex-shrink:0}
+.identity-row .ident-body{flex:1}
+.identity-row .ident-name{font-size:13px;font-weight:600;color:var(--ink-strong)}
+.identity-row .ident-meta{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500;margin-top:2px}
+
+.mfa-block{background:var(--surface-2);border:1px solid var(--border-soft);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.mfa-block .mfa-body{flex:1}
+.mfa-block .mfa-name{font-size:13px;font-weight:600;color:var(--ink-strong)}
+.mfa-block .mfa-sub{font-size:11.5px;color:var(--muted);font-weight:500;margin-top:2px;line-height:1.5}
+.mfa-tag{font-family:var(--mono);font-size:10px;color:var(--green);background:var(--green-bg);padding:3px 8px;border-radius:3px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+
+.billing-card{background:linear-gradient(180deg,var(--surface-2) 0%,var(--surface) 100%);border:1px dashed var(--accent-soft-2);border-radius:10px;padding:26px 28px}
+.billing-card .b-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);font-weight:700;margin-bottom:10px}
+.billing-card h3{font-size:18px;font-weight:700;color:var(--ink-strong);letter-spacing:-.01em;margin-bottom:6px}
+.billing-card .b-desc{font-size:13px;color:var(--secondary);line-height:1.6;margin-bottom:14px;max-width:580px}
+.billing-card .b-link{font-size:13px;color:var(--accent-2);font-weight:600}
+.billing-card .b-link::after{content:' →';font-family:var(--mono);font-weight:400}
+
+.about-row{display:flex;padding:10px 0;font-size:13px;border-bottom:1px solid var(--border-soft)}
+.about-row:last-child{border:0}
+.about-row .lbl{width:180px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;padding-top:2px}
+.about-row .val{color:var(--ink-strong);font-weight:500;flex:1}
+.about-row .val a{font-weight:600;color:var(--accent-2)}
+
+.destructive-card{background:var(--red-bg);border:1px solid #f0c4bc;border-radius:8px;padding:18px 22px}
+.destructive-card h4{font-size:14px;font-weight:700;color:var(--red);margin-bottom:4px;letter-spacing:-.005em}
+.destructive-card .d-help{font-size:12.5px;color:var(--secondary);margin-bottom:14px;line-height:1.55;font-weight:500}
+
+.modal-backdrop{position:fixed;inset:0;background:rgba(10,23,41,.45);display:none;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(3px)}
+.modal-backdrop.open{display:flex}
+.modal{background:var(--surface);border-radius:10px;width:480px;padding:26px 28px;border:1px solid var(--border);box-shadow:0 24px 48px rgba(10,23,41,.2)}
+.modal h3{font-size:16px;font-weight:700;color:var(--ink-strong);margin-bottom:8px;letter-spacing:-.005em}
+.modal p{font-size:13px;color:var(--secondary);line-height:1.6;margin-bottom:16px;font-weight:500}
+.modal input{width:100%;border:1px solid var(--border);border-radius:6px;padding:10px 12px;font:inherit;font-size:13px;margin-bottom:16px}
+.modal input:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-bg)}
+
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#d0d7e0;border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#b6bfcc}
+
+
+
+
+
+
+
+
+
+.sidebar-nav-divider { height: 1px; background: #c8d0dc; margin: 12px 16px; flex-shrink: 0; }
+/* ==BEGIN_JUR_OVERLAY== Jurisdictions slide-in overlay (DG pattern) */
+#jur-overlay { position: fixed !important; top: 0 !important; left: var(--sidebar-collapsed, 56px); bottom: 0; width: 340px; background: #fff; border-right: 1px solid #dbe1ea; z-index: 9000; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform .32s cubic-bezier(.4,0,.2,1); box-shadow: 0 12px 40px rgba(10,23,41,0.10); visibility: hidden; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+#jur-overlay.open { transform: translateX(0) !important; visibility: visible !important; display: flex !important; pointer-events: auto !important; }
+#jur-overlay-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: calc(var(--sidebar-collapsed, 56px) + 340px); background: rgba(10,23,41,0.30); z-index: 540; opacity: 0; transition: opacity .25s; pointer-events: none; }
+#jur-overlay-backdrop.open { opacity: 1; pointer-events: auto; }
+#jur-overlay .jo-header { padding: 16px 14px 10px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+#jur-overlay .jo-title { font-size: 17px; font-weight: 600; color: #0d2e42; letter-spacing: -0.01em; margin: 0; }
+#jur-overlay .jo-close { background: #eff2f7; border: none; cursor: pointer; color: #2a3548; padding: 5px; border-radius: 999px; display: flex; width: 26px; height: 26px; align-items: center; justify-content: center; }
+#jur-overlay .jo-close:hover { background: #dbe1ea; }
+#jur-overlay .jo-search { margin: 0 14px 8px; position: relative; }
+#jur-overlay .jo-search input { width: 100%; padding: 8px 12px 8px 34px; border: 1px solid #dbe1ea; border-radius: 6px; font-family: inherit; font-size: 13.5px; color: #0d2e42; outline: none; background: #fff; }
+#jur-overlay .jo-search input:focus { border-color: #0176d3; box-shadow: 0 0 0 3px rgba(1,118,211,0.10); }
+#jur-overlay .jo-search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: #8a93a3; fill: none; stroke-width: 2; }
+#jur-overlay .jo-list { flex: 1; overflow-y: auto; padding: 4px 0 20px; }
+.jo-section-label { padding: 10px 18px 4px; font-size: 10.5px; font-weight: 700; color: #8a93a3; letter-spacing: 0.09em; text-transform: uppercase; }
+.jo-home-row { background: linear-gradient(90deg, #f6f7f9 0%, #ffffff 100%); }
+.jo-home-row .jo-name { font-weight: 600; color: #014486; }
+.jo-home-icon { width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; color: #0176d3; font-size: 10px; flex-shrink: 0; }
+.jo-home-row:hover { background: #eff2f7; }
+.jo-row { display: flex; align-items: center; gap: 10px; padding: 7px 18px 7px 14px; cursor: pointer; font-size: 13.5px; color: #0d2e42; transition: background .1s; }
+.jo-row:hover { background: #f6f7f9; }
+.jo-row.is-active { background: #e3effc; color: #014486; font-weight: 600; }
+.jo-row .jo-caret { width: 10px; color: #8a93a3; font-size: 10px; flex-shrink: 0; transition: transform .15s; }
+.jo-row.is-open .jo-caret { transform: rotate(90deg); color: #0176d3; }
+.jo-row .jo-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #5e6878; }
+.jo-row .jo-icon svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.6; fill: none; }
+.jo-row .jo-name { flex: 1; line-height: 1.3; }
+.jo-children { display: none; padding: 2px 0 4px; }
+.jo-children.is-open { display: block; }
+.jo-children .jo-row { padding-left: 42px; font-size: 13px; color: #2a3548; }
+.jo-children .jo-row.is-federal { font-weight: 600; color: #0d2e42; }
+.jo-section-sep { height: 1px; background: #ebeff5; margin: 6px 14px; }
+.jo-pinned-sep { height: 1px; background: #ebeff5; margin: 4px 42px 4px; }
+.jo-row .jo-pin-btn { opacity: 0; background: transparent; border: none; color: #8a93a3; cursor: pointer; padding: 4px 5px; border-radius: 4px; transition: opacity .12s, color .12s, background .12s; flex-shrink: 0; display: flex; align-items: center; margin-left: auto; }
+.jo-row .jo-pin-btn svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2; fill: none; }
+.jo-row:hover .jo-pin-btn { opacity: .65; }
+.jo-row .jo-pin-btn:hover { opacity: 1; color: #014486; background: #e3effc; }
+.jo-row .jo-pin-btn.is-home { opacity: 1; color: #2e844a; }
+.jo-row .jo-pin-btn.is-home svg { fill: #2e844a; stroke: #2e844a; }
+#jur-overlay .jo-hint { margin: 2px 14px 6px; padding: 8px 10px; background: #f6f7f9; border: 1px solid #ebeff5; border-radius: 6px; font-size: 11.5px; color: #5e6878; line-height: 1.4; display: flex; align-items: center; gap: 8px; }
+#jur-overlay .jo-hint svg { width: 12px; height: 12px; flex-shrink: 0; stroke: #0176d3; fill: none; stroke-width: 2; }
+#jur-overlay .jo-hint b { color: #0d2e42; font-weight: 600; }
+
+#jur-overlay .jo-empty { padding: 24px 18px; color: #8a93a3; font-size: 13px; text-align: center; }
+@media (max-width: 640px) { #jur-overlay { width: 100vw; left: 0; } #jur-overlay-backdrop { display: none; } }
+
+body.jur-overlay-open .icon-sidebar { width: var(--sidebar-collapsed, 56px) !important; pointer-events: none !important; }
+body.jur-overlay-open .icon-sidebar:hover { width: var(--sidebar-collapsed, 56px) !important; }
+body.jur-overlay-open .icon-sidebar .nav-label,
+body.jur-overlay-open .icon-sidebar .brand-text { opacity: 0 !important; }
+
+/* ==END_JUR_OVERLAY== */
+
+
+.page-eyebrow { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #014486; margin-bottom: 10px; }
+.page-head { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid #ebeff5; }
+.page-head .page-title { font-size: 44px; font-weight: 700; color: #07202e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
+.page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
+
+/* ==STATUSBAR_CSS== */
+.ps-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--secondary);flex-wrap:wrap}
+.ps-breadcrumb a{color:var(--accent-2);font-weight:600}
+.ps-breadcrumb a:hover{text-decoration:underline}
+.ps-sep{color:var(--ink-faint)}
+.ps-current{color:var(--ink-strong);font-weight:700}
+.ps-scope-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;font-size:11px;font-weight:600;color:var(--accent-2);background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:4px;letter-spacing:.02em}
+.ps-ok{color:var(--green);font-weight:600;font-size:12px}
+.ps-ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
+
+/* Sidebar hover-expand: labels reveal + main-content shifts right so it's not covered */
+.icon-sidebar { transition: width .22s cubic-bezier(.4,0,.2,1); }
+body.sidebar-expanded .icon-sidebar { width: var(--sidebar-expanded, 240px) !important; }
+body.sidebar-expanded .icon-sidebar .sidebar-nav-item .nav-label,
+body.sidebar-expanded .icon-sidebar .sidebar-brand .brand-text,
+body.sidebar-expanded .icon-sidebar .sb-invite-body,
+body.sidebar-expanded .icon-sidebar .sidebar-user .nav-label { opacity: 1 !important; pointer-events: auto !important; }
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar { margin-left: var(--sidebar-expanded, 240px) !important; transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+body.sidebar-expanded #jur-overlay { left: var(--sidebar-expanded, 240px) !important; }
+.main-content, .header-bar { transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0d2e42; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
+<script>
+  window.addEventListener("error", function(e) {
+    if (window.GlitchTip) {
+      GlitchTip.captureException(e.error || e);
+    }
+  });
+  window.addEventListener("unhandledrejection", function(e) {
+    if (window.GlitchTip) {
+      GlitchTip.captureException(e.reason);
+    }
+  });
+</script>
+<script src="https://cdn.glitchtip.com/glitchtip.min.js"></script>
+<script>
+  if (window.GlitchTip) {
+    GlitchTip.init({
+      apiUrl: "https://errors.principlesai.org/api/0/",
+      projectId: 1
+    });
+  }
+</script>
+<script id="pai-clerk-sdk" async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ" src="https://clerk.principlesai.org/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript" onload="window.__paiClerkLoaded=true;window.dispatchEvent(new Event('pai:clerk-loaded'))"></script>
+<script id="pai-clerk-v1">
+(function(){
+  if(window.__paiClerkV1) return;
+  window.__paiClerkV1 = true;
+
+  function setHeaderName(user){
+    var el = document.querySelector('.header-user-name');
+    if(!el) return;
+    if(user && user.firstName){
+      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+    }
+    // if no user, leave hardcoded — pai-app-* is public by design
+  }
+
+  function boot(){
+    if(!window.Clerk || typeof window.Clerk.load !== 'function') return;
+    window.Clerk.load().then(function(){
+      setHeaderName(window.Clerk.user);
+      // react to sign-in / sign-out events
+      if(typeof window.Clerk.addListener === 'function'){
+        window.Clerk.addListener(function(state){ setHeaderName(state && state.user); });
+      }
+    }).catch(function(){ /* no-op, keep hardcoded fallback */ });
+  }
+
+  if(window.__paiClerkLoaded){ boot(); }
+  else { window.addEventListener('pai:clerk-loaded', boot); }
+})();
+</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
+</style>
+</head>
+<body>
+
+<nav class="icon-sidebar">
+  <a href="pai-home-private.html" class="sidebar-brand" style="text-decoration:none;color:inherit;">
+    <div class="brand-icon" style="background:var(--accent); padding:0; overflow:hidden;"><img src="pai-mark-white-128.png" alt="PAI" style="width:70%;height:70%;object-fit:contain;display:block;"></div>
+    <span class="brand-text">Principles<span class="ai">AI</span></span>
+  </a>
+    
+  <div class="sidebar-nav-items">
+    <a class="sidebar-nav-item" href="pai-home-private.html" style="text-decoration:none;"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></a>
+      <a class="sidebar-nav-item" href="pai-app-ai-notes" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
+    <div class="sidebar-nav-item" onclick="openJurisdictions()" style="cursor:pointer;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span></div>
+    <a class="sidebar-nav-item" href="pai-app-news" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
+    <div class="sidebar-regions-zone">
+      <div class="sidebar-nav-divider"></div>
+      <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
+      <a class="sidebar-nav-item" href="pai-app-topics" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Topics</span></a>
+      <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <div class="sidebar-nav-divider"></div>
+      <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
+      <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
+      <a class="sidebar-nav-item" href="pai-app-watchlist" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="nav-label">Watchlist</span></a>
+      <a class="sidebar-nav-item active" href="pai-app-settings" style="text-decoration:none;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></a>
+    </div>
+  </div>
+</nav>
+
+<header class="header-bar">
+  <div class="header-nav-arrows">
+    <button><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <span class="header-user-name"></span>
+  <div class="header-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search jurisdictions, enforcement, case law…">
+    <kbd>⌘K</kbd>
+  </div>
+  <div class="header-right">
+    <div class="home-jur-btn"><span class="hjb-flag">&#x1F1EC;&#x1F1E7;</span><span>Set home</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <a href="pai-app-settings" class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></a><a href="#" class="header-logout" onclick="paiLogout(event)" title="Log out"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view">
+
+  <!-- STATUSBAR -->
+  <div class="page-statusbar">
+    <div class="ps-left">
+      <span class="ps-breadcrumb">
+        <a href="pai-home-private.html">Home</a>
+        <span class="ps-sep">›</span>
+        <span class="ps-current">Settings</span>
+      </span>
+      <span class="ps-sep">·</span>
+      <span class="ps-scope-chip">AI · Privacy · Cyber</span>
+      <span class="ps-sep">·</span>
+      <span class="ps-ok">Account & preferences</span>
+    </div>
+    
+  </div>
+
+  <!-- PAGE HEAD -->
+  <div class="page-head">
+    <div class="page-eyebrow">AI · Privacy · Cyber</div>
+    <h1 class="page-title">Settings</h1>
+    <p class="page-sub">Account, billing, team, and notification preferences.</p>
+  </div>
+      <div class="in-item"><span class="num">02</span>Organization</div>
+      <div class="in-item"><span class="num">03</span>Notifications</div>
+      <div class="in-item"><span class="num">04</span>Appearance</div>
+      <div class="in-item"><span class="num">05</span>Integrations</div>
+      <div class="in-item"><span class="num">06</span>Security</div>
+      <div class="in-item"><span class="num">07</span>Billing</div>
+      <div class="in-item"><span class="num">08</span>Data and privacy</div>
+      <div class="in-item"><span class="num">09</span>About</div>
+    </aside>
+
+    <div class="form-area">
+
+      <!-- Profile -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Profile</h2>
+            <div class="sub">How you appear in discussions, videos, and attributions.</div>
+          </div>
+          <div class="saved">Last saved 3 mins ago</div>
+        </div>
+        <div class="avatar-row">
+          <div class="av-lg">DL</div>
+          <div>
+            <button class="btn sm">Upload photo</button>
+            <div style="font-size:11.5px;color:var(--muted);margin-top:8px;font-family:var(--mono);font-weight:500">PNG or JPG. 256×256 minimum.</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Full name</label>
+            <input type="text" value="David Longford">
+          </div>
+          <div class="field">
+            <label>Role title</label>
+            <input type="text" value="Founder">
+          </div>
+        </div>
+        <div class="field">
+          <label>Organization</label>
+          <input type="text" value="Principles AI">
+          <div class="help">Appears next to your name on every post.</div>
+        </div>
+        <div class="field">
+          <label>Short bio</label>
+          <textarea>Solo founder working on regulatory intelligence for practitioners. Former data lawyer. Writes occasionally on the gap between published guidance and operational reality.</textarea>
+          <div class="help">One or two sentences. Shown on your faculty card.</div>
+        </div>
+        <div class="field">
+          <label>Specialisms</label>
+          <div class="tags">
+            <span class="tag">AI governance <button>×</button></span>
+            <span class="tag">DPIA practice <button>×</button></span>
+            <span class="tag">Cross-border transfers <button>×</button></span>
+            <span class="tag">EU AI Act <button>×</button></span>
+            <span class="tag">Vendor risk <button>×</button></span>
+            <button class="tag-add">+ Add</button>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn">Cancel</button>
+          <button class="btn btn-primary">Save changes</button>
+        </div>
+      </section>
+
+      <!-- What you cover (onboarding re-entry) -->
+      <section class="section" id="yourBrief">
+        <div class="section-head">
+          <div>
+            <h2>What you cover</h2>
+            <div class="sub">The jurisdictions, topics, and role that shape your dashboard and alerts.</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 16px;border:1px solid #ebeff5;border-radius:8px;background:#f8fafc;">
+          <div style="font-size:13px;color:#2a3548;line-height:1.5;">
+            <div id="briefSummary" style="font-weight:500;color:#07202e;">Not yet set — you're seeing everything we track.</div>
+            <div style="font-size:12px;color:#8a93a3;margin-top:4px;">Takes about sixty seconds. Changes apply immediately on this device.</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <a class="btn" href="pai-home-private.html#take-tour" style="display:inline-flex;align-items:center;text-decoration:none;">Replay the tour</a>
+            <a class="btn btn-primary" href="pai-home-private.html#edit-brief" style="display:inline-flex;align-items:center;text-decoration:none;">Update what I cover</a>
+          </div>
+        </div>
+        <script>
+        (function(){
+          function render(){
+            var el = document.getElementById('briefSummary');
+            if (!el) return;
+            try {
+              var o = JSON.parse(localStorage.getItem('pai-onboarding-v1') || 'null');
+              if (!o || o.skipped || !(o.jurisdictions||[]).length) return;
+              var j = o.jurisdictions.slice(0,3).join(' · ') + (o.jurisdictions.length>3 ? ' +'+(o.jurisdictions.length-3) : '');
+              var t = (o.topics||[]).join(', ');
+              var roleMap = {counsel:'In-house counsel',dpo:'Data Protection Officer',ciso:'CISO / Security lead','ai-gov':'AI governance lead',consultant:'Consultant',other:'Other'};
+              var r = roleMap[o.role] || '';
+              el.textContent = j + (t?'  ·  '+t:'') + (r?'  ·  '+r:'');
+            } catch(e){}
+          }
+          if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', render);
+          else render();
+        })();
+        </script>
+      </section>
+
+      <!-- Organization -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Organization</h2>
+            <div class="sub">Your workspace and who is in it.</div>
+          </div>
+          <div class="saved">Last saved 14 mins ago</div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Organization name</label>
+            <input type="text" value="Principles AI">
+          </div>
+          <div class="field">
+            <label>Default jurisdiction</label>
+            <select><option>United Kingdom</option><option>European Union</option><option>United States (federal)</option></select>
+          </div>
+        </div>
+
+        <div class="subsection-head">Members</div>
+        <div class="members">
+          <div class="member">
+            <div class="av c1">DL</div>
+            <div class="m-body">
+              <div class="m-name">David Longford</div>
+              <div class="m-email">davidlongford@gmail.com</div>
+            </div>
+            <select class="role-select"><option>Owner</option></select>
+          </div>
+          <div class="member">
+            <div class="av c4">EW</div>
+            <div class="m-body">
+              <div class="m-name">Elena Wyatt</div>
+              <div class="m-email">elena@principlesai.org</div>
+            </div>
+            <select class="role-select"><option>Editor</option><option>Reader</option><option>Owner</option></select>
+          </div>
+          <div class="member">
+            <div class="av c2">MK</div>
+            <div class="m-body">
+              <div class="m-name">Mark Kellerman</div>
+              <div class="m-email">mark@principlesai.org</div>
+            </div>
+            <select class="role-select"><option>Reader</option><option>Editor</option><option>Owner</option></select>
+          </div>
+        </div>
+
+        <div class="seat-bar">
+          <span class="seat-text"><b>3 of 5</b> seats used on your early-access workspace</span>
+          <button class="btn sm">Request more seats</button>
+        </div>
+
+        <div class="field" style="margin-top:22px">
+          <label>Invite a colleague</label>
+          <div class="invite-row">
+            <input type="email" placeholder="name@organization.com">
+            <select class="role-select" style="padding:10px 32px 10px 14px;font-size:12.5px"><option>Reader</option><option>Editor</option></select>
+            <button class="btn btn-primary">Send invite</button>
+          </div>
+          <div class="help">Invites are single-use and expire after 7 days.</div>
+        </div>
+
+        <div class="actions">
+          <button class="btn">Cancel</button>
+          <button class="btn btn-primary">Save changes</button>
+        </div>
+      </section>
+
+      <!-- Notifications -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Notifications</h2>
+            <div class="sub">When and how we reach you outside the product.</div>
+          </div>
+          <div class="saved unsaved">Unsaved changes</div>
+        </div>
+
+        <div class="field">
+          <label>Email digest frequency</label>
+          <div class="pill-group">
+            <button>Real-time</button>
+            <button class="active">Daily 08:00</button>
+            <button>Weekly Monday</button>
+            <button>Off</button>
+          </div>
+          <div class="help">Digest time is local to your jurisdiction chip (Europe/London).</div>
+        </div>
+
+        <div class="subsection-head">Per-domain</div>
+        <div class="toggle-row">
+          <div class="tr-body"><div class="tr-name">AI</div><div class="tr-help">AI Act, GPAI code, member-state transposition, AI-specific enforcement.</div></div>
+          <div class="toggle on"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="tr-body"><div class="tr-name">Privacy</div><div class="tr-help">GDPR, DPA enforcement, cross-border transfers, DPIAs.</div></div>
+          <div class="toggle on"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="tr-body"><div class="tr-name">Cyber</div><div class="tr-help">NIS2, DORA, critical-infrastructure guidance, incident reporting.</div></div>
+          <div class="toggle on"></div>
+        </div>
+
+        <div class="subsection-head">Alert threshold</div>
+        <div class="pill-group">
+          <button>Major only</button>
+          <button class="active">All official</button>
+          <button>Everything</button>
+        </div>
+        <div class="help" style="margin-top:8px">Official means published by a named authority. Everything includes news and commentary.</div>
+
+        <div class="subsection-head">Jurisdictions to follow</div>
+        <div class="tags">
+          <span class="tag">🇬🇧 United Kingdom <button>×</button></span>
+          <span class="tag">🇪🇺 European Union <button>×</button></span>
+          <span class="tag">🇩🇪 Germany <button>×</button></span>
+          <span class="tag">🇫🇷 France <button>×</button></span>
+          <span class="tag">🇮🇹 Italy <button>×</button></span>
+          <span class="tag">🇺🇸 US (federal) <button>×</button></span>
+          <span class="tag">🇺🇸 US (California) <button>×</button></span>
+          <button class="tag-add">+ Add jurisdiction</button>
+        </div>
+
+        <div class="field-row" style="margin-top:24px">
+          <div class="field">
+            <label>Quiet hours start</label>
+            <input type="text" value="20:00">
+          </div>
+          <div class="field">
+            <label>Quiet hours end</label>
+            <input type="text" value="07:30">
+          </div>
+        </div>
+        <div class="help" style="margin-top:-10px">No email alerts during this window. Real-time breaks through only for Major items.</div>
+
+        <div class="actions">
+          <button class="btn">Cancel</button>
+          <button class="btn btn-primary">Save changes</button>
+        </div>
+      </section>
+
+      <!-- Appearance -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Appearance</h2>
+            <div class="sub">Layout preferences. Affects this account only.</div>
+          </div>
+          <div class="saved">Last saved 2 days ago</div>
+        </div>
+        <div class="field">
+          <label>Density</label>
+          <div class="pill-group"><button>Compact</button><button class="active">Comfortable</button></div>
+        </div>
+        <div class="field">
+          <label>Default jurisdiction view</label>
+          <select><option>Regulatory pressure (posture first)</option><option>Chronological feed</option><option>By authority</option></select>
+          <div class="help">How Jurisdictions pages open by default.</div>
+        </div>
+        <div class="field">
+          <label>Default Topics column order</label>
+          <select><option>IP · AI · Standards · Privacy · Cyber · Transfers · Consumer</option><option>Alphabetical</option><option>By recent activity</option></select>
+        </div>
+        <div class="actions">
+          <button class="btn">Cancel</button>
+          <button class="btn btn-primary">Save changes</button>
+        </div>
+      </section>
+
+      <!-- Privacy & Analytics -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Privacy & Analytics</h2>
+            <div class="sub">Control what data we collect about your usage.</div>
+          </div>
+          <div class="saved">Last saved just now</div>
+        </div>
+        <div class="toggle-row" data-toggle="analytics">
+          <div class="tr-body">
+            <div class="tr-name">Analytics</div>
+            <div class="tr-help">We track page views and user interactions to understand feature usage and improve the platform. No personal data is stored. You can opt out here.</div>
+          </div>
+          <div class="toggle on"></div>
+        </div>
+      </section>
+
+      <!-- Integrations -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Integrations</h2>
+            <div class="sub">Forward alerts into tools your team already uses.</div>
+          </div>
+        </div>
+        <div class="integration c-slack">
+          <div class="i-icon">Sl</div>
+          <div class="i-body">
+            <div class="i-name">Slack <span class="flag connected">Connected</span></div>
+            <div class="i-help">Posting to #regulatory-watch. Daily digest at 08:00 UK.</div>
+          </div>
+          <button class="btn sm">Configure</button>
+        </div>
+        <div class="integration c-teams">
+          <div class="i-icon">Te</div>
+          <div class="i-body">
+            <div class="i-name">Microsoft Teams</div>
+            <div class="i-help">Post alerts to a Teams channel.</div>
+          </div>
+          <button class="btn sm">Connect</button>
+        </div>
+        <div class="integration c-email">
+          <div class="i-icon">@</div>
+          <div class="i-body">
+            <div class="i-name">Email digest <span class="flag connected">Active</span></div>
+            <div class="i-help">davidlongford@gmail.com. Daily 08:00 Europe/London.</div>
+          </div>
+          <button class="btn sm">Configure</button>
+        </div>
+        <div class="integration c-webhook">
+          <div class="i-icon">Wh</div>
+          <div class="i-body">
+            <div class="i-name">Webhook</div>
+            <div class="i-help">POST events to your own endpoint. JSON payload.</div>
+          </div>
+          <button class="btn sm">Connect</button>
+        </div>
+        <div class="integration c-api">
+          <div class="i-icon">Api</div>
+          <div class="i-body">
+            <div class="i-name">API access <span class="flag coming">Coming soon</span></div>
+            <div class="i-help">Programmatic access to your watchlists and feeds.</div>
+          </div>
+          <button class="btn sm" disabled style="opacity:.55;cursor:not-allowed">Join waitlist</button>
+        </div>
+      </section>
+
+      <!-- Security -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Security</h2>
+            <div class="sub">Sign-in, sessions, and account protection.</div>
+          </div>
+          <div class="saved">Last signed in 14 min ago</div>
+        </div>
+
+        <div class="subsection-head" style="margin-top:0">Identity</div>
+        <div class="identity-row">
+          <div class="g-icon">G</div>
+          <div class="ident-body">
+            <div class="ident-name">Google · davidlongford@gmail.com</div>
+            <div class="ident-meta">Primary sign-in method · last used 14 min ago</div>
+          </div>
+          <button class="btn sm">Disconnect</button>
+        </div>
+
+        <div class="subsection-head">Multi-factor authentication</div>
+        <div class="mfa-block">
+          <div class="mfa-body">
+            <div class="mfa-name">Managed in identity provider</div>
+            <div class="mfa-sub">Your MFA is handled by your Google account and enforced through Clerk. Update it at myaccount.google.com.</div>
+          </div>
+          <div class="mfa-tag">Enforced</div>
+        </div>
+
+        <div class="subsection-head">Active sessions</div>
+        <div class="session">
+          <div class="s-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg></div>
+          <div class="s-body">
+            <div class="s-name">MacBook Pro · Safari <span class="current">This device</span></div>
+            <div class="s-meta">London, UK · 90.250.24.17 · active now</div>
+          </div>
+          <button class="btn sm" disabled style="opacity:.55;cursor:not-allowed">Sign out</button>
+        </div>
+        <div class="session">
+          <div class="s-icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <div class="s-body">
+            <div class="s-name">iPhone · Mobile Safari</div>
+            <div class="s-meta">London, UK · 82.44.112.9 · last active 2h ago</div>
+          </div>
+          <button class="btn sm">Sign out</button>
+        </div>
+
+        <div class="actions">
+          <button class="btn">Export session log</button>
+        </div>
+      </section>
+
+      <!-- Billing -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Billing</h2>
+            <div class="sub">Nothing to bill right now.</div>
+          </div>
+        </div>
+        <div class="billing-card">
+          <div class="b-eyebrow">Early access</div>
+          <h3>You're on early access</h3>
+          <div class="b-desc">Billing starts once Principles AI exits beta. No card required. We'll write to you 30 days before anything changes, and pricing will be documented in advance.</div>
+          <a class="b-link" href="#">See pricing</a>
+        </div>
+      </section>
+
+      <!-- Data and privacy -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>Data and privacy</h2>
+            <div class="sub">Export or remove your data.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Export</label>
+          <div style="display:flex;gap:10px">
+            <button class="btn sm">Export JSON</button>
+            <button class="btn sm">Export CSV</button>
+          </div>
+          <div class="help">Includes your profile, watchlists, notifications, and posted discussions. Comments authored by others are not included.</div>
+        </div>
+
+        <div class="destructive-card" style="margin-top:22px">
+          <h4>Delete account</h4>
+          <div class="d-help">Permanently removes your profile, watchlists, and all authored content. Your posts in shared discussions remain with authorship redacted. This cannot be undone.</div>
+          <button class="btn btn-danger sm" id="delete-btn">Delete my account</button>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>About</h2>
+            <div class="sub">For debugging, support, and methodology.</div>
+          </div>
+        </div>
+        <div class="about-row"><div class="lbl">Version</div><div class="val">2026.04.20 · build 8241</div></div>
+        <div class="about-row"><div class="lbl">Last signed in</div><div class="val">Today, 14:06 Europe/London</div></div>
+        <div class="about-row"><div class="lbl">Support email</div><div class="val"><a href="mailto:support@principlesai.org">support@principlesai.org</a></div></div>
+        <div class="about-row"><div class="lbl">Methodology</div><div class="val"><a href="#">How we source, atomise, and verify regulatory content</a></div></div>
+      </section>
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="modal-backdrop" id="delete-modal">
+  <div class="modal">
+    <h3>Delete account</h3>
+    <p>Type your email address below to confirm. This will queue a 14-day hold. You can cancel deletion at any time during the hold window by signing in again.</p>
+    <input type="text" placeholder="davidlongford@gmail.com">
+    <div style="display:flex;justify-content:flex-end;gap:8px">
+      <button class="btn sm" onclick="document.getElementById('delete-modal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-danger sm">Confirm deletion</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.in-item').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.querySelectorAll('.in-item').forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+document.querySelectorAll('.toggle').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
+document.querySelectorAll('.pill-group').forEach(g=>{
+  g.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      g.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+});
+document.getElementById('delete-btn').addEventListener('click',()=>{
+  document.getElementById('delete-modal').classList.add('open');
+});
+</script>
+<!-- Mobile nav shim -->
+<style>
+.mobile-nav-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 22px; height: 22px; stroke: #0d2e42; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 860px) {
+  .mobile-nav-toggle { display: flex; }
+  .icon-sidebar { display: none !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.2) !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; }
+  body.mobile-nav-open .icon-sidebar .brand-text,
+  body.mobile-nav-open .icon-sidebar .nav-label { opacity: 1 !important; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+  .header-bar { left: 0 !important; padding-left: 60px !important; }
+  .main-content { margin-left: 0 !important; }
+  .page { padding: 16px !important; }
+}
+
+/* ==CANONICAL_PAGE_CHROME== */
+.page-statusbar { display: grid; grid-template-columns: 1fr auto; gap: 20px; padding: 0 0 18px; margin-bottom: 22px; border-bottom: 1px solid #dbe1ea; align-items: start; min-height: 55px; }
+.page-statusbar .ps-left { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12.5px; color: #5e6878; }
+.page-statusbar .ps-breadcrumb { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+.page-statusbar .ps-breadcrumb a { color: #014486; text-decoration: none; font-weight: 600; }
+.page-statusbar .ps-breadcrumb a:hover { color: #0176d3; text-decoration: underline; }
+.page-statusbar .ps-sep { color: #c8d0dc; font-size: 11px; }
+.page-statusbar .ps-current { color: #0d2e42; font-weight: 700; }
+.page-statusbar .ps-scope-chip { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; font-size: 11px; font-weight: 600; color: #014486; background: #e3effc; border: 1px solid #e3effc; border-radius: 4px; letter-spacing: 0.02em; }
+.page-statusbar .ps-ok { color: #2e844a; font-weight: 600; font-size: 12.5px; }
+.page-statusbar .ps-ok::before { content: ''; display: inline-block; width: 7px; height: 7px; background: #2e844a; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.page-statusbar .page-actions { display: flex; gap: 8px; align-items: center; }
+.page-head { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid #ebeff5; }
+.page-head .page-eyebrow { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #014486; margin-bottom: 10px; }
+.page-head .page-title { font-size: 44px; font-weight: 700; color: #07202e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
+.page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
+.page-head .page-sub.fine { font-size: 12.5px; color: #8a93a3; margin-top: 6px; }
+/* ==END_CANONICAL_PAGE_CHROME== */
+</style>
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==BEGIN_JUR_HTML== Jurisdictions overlay (DG inline-expand pattern) -->
+<div id="jur-overlay-backdrop" onclick="closeJurisdictions()"></div>
+<div id="jur-overlay">
+  <div class="jo-header">
+    <h3 class="jo-title">Jurisdictions</h3>
+    <button class="jo-close" onclick="closeJurisdictions()" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+  </div>
+  <div class="jo-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="jo-search-input" placeholder="Search" oninput="filterJurList(this.value)" autocomplete="off">
+  </div>
+  <div class="jo-hint"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-12a8 8 0 1116 0c0 7.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg><span>Tap a row to open. <b>Pin icon</b> sets home.</span></div>
+  <div class="jo-list" id="jo-list"></div>
+</div>
+<!-- ==END_JUR_HTML== -->
+
+<script src="jurisdictions.js"></script>
+<script id="jur-overlay-js">
+(function(){
+  if(window.openJurisdictions)return;
+  // Federal hierarchies the data file doesn't encode with parent fields
+  var CHILDREN_OF = {
+    'Germany':['Baden-Württemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg','Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia','Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt','Schleswig-Holstein','Thuringia'],
+    'USA':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States of America':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'Canada':['Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
+    'Australia':['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory'],
+    'United Arab Emirates':['Abu Dhabi Global Market','Dubai Health Care City','Dubai International Financial Centre','Emirate of Abu Dhabi','Emirate of Dubai','United Arab Emirates Federal'],
+    'Qatar':['Qatar Financial Centre','Qatar State']
+  };
+  // Reverse map: child name → parent
+  var PARENT_OF = {};
+  Object.keys(CHILDREN_OF).forEach(function(p){ CHILDREN_OF[p].forEach(function(c){ PARENT_OF[c]=p; }); });
+  // Canonical name dedupe (for data duplicates)
+  var NAME_CANONICAL = { 'Bosnia and Herzegovina':'Bosnia & Herzegovina' };
+  function canonical(n){ return NAME_CANONICAL[n] || n; }
+
+  function slugify(n){
+    var s = (n||'').toLowerCase();
+    s = s.replace(/[&\/'()]/g, '');
+    s = s.replace(/[^a-z0-9]+/g, '-');
+    s = s.replace(/-+/g, '-').replace(/^-|-$/g,'');
+    return s;
+  }
+
+
+
+  var JURIS_PAGES = {
+    'United Kingdom':'pai-app-juris-uk.html',
+    'Germany':'pai-app-juris-germany.html',
+    'California':'pai-app-juris-california.html',
+    'Quebec':'pai-app-juris-quebec.html',
+    'OECD':'pai-app-juris-oecd.html'
+  };
+
+  var SKIP_EXPAND = {'United Kingdom':1};
+
+  var INTERNATIONAL = ['OECD','Council of Europe','G7','International'];
+
+  var REGION_PIN = { 'Europe':'European Union', 'Africa':'African Union', 'Asia Pacific':'ASEAN' };
+
+  var TOP_COUNTRIES = ['Canada','Mexico','USA','United States of America','United States'];
+
+  function tl(name){
+    var m={'USA':'United States of America','United States':'United States of America'};
+    return m[name]||name;
+  }
+
+  function buildTree(){
+    if(typeof jurData==='undefined')return null;
+    var top = [];
+    var regionBuckets = {};
+    var seenCanonical = {};
+    Object.keys(jurData).forEach(function(name){
+      var d=jurData[name]; if(!d)return;
+      if(d.parent || PARENT_OF[name]) return;
+      var cn = canonical(name);
+      if(seenCanonical[cn]) return;
+      seenCanonical[cn] = 1;
+      if(d.region === 'Global') return;
+      var region = d.region;
+      
+      if(cn === 'Mexico') region = 'North America';
+      if(!regionBuckets[region]) regionBuckets[region] = { name: region, countries: [] };
+      // Hard-filter: North America region only allows Canada / Mexico / United States
+      if(region === 'North America' && !({'Canada':1,'Mexico':1,'United States':1,'United States of America':1,'USA':1})[cn]) return;
+      regionBuckets[region].countries.push(cn);
+    });
+
+    // Top-level entries in explicit order
+    var topCountryMap = {};
+    top.forEach(function(t){ topCountryMap[t.name]=t; });
+    var orderedTopCountries = ['Canada','Mexico','United States of America']
+      .map(function(n){ return topCountryMap[n]; })
+      .filter(Boolean);
+
+    var REGION_ORDER = ['Europe','North America','Caribbean','Latin America','Asia Pacific','Middle East','Africa'];
+    var regions = [];
+    REGION_ORDER.forEach(function(r){ if(regionBuckets[r]) regions.push(regionBuckets[r]); });
+
+    // Sort countries in each region: pin supranational first, separator, alphabetical rest
+    regions.forEach(function(r){
+      var pin = REGION_PIN[r.name];
+      r.countries.sort(function(a,b){
+        if(a===pin)return -1; if(b===pin)return 1;
+        return a.localeCompare(b);
+      });
+    });
+
+    return { international: INTERNATIONAL, topCountries: orderedTopCountries, regions: regions };
+  }
+
+  var tree = null;
+  function getTree(){ if(!tree) tree = buildTree(); return tree || {international:[],topCountries:[],regions:[]}; }
+
+  function iconGlobe(){
+    return '<span class="jo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>';
+  }
+  function iconFlag(){
+    return '<span class="jo-icon"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>';
+  }
+  function iconChevron(open){
+    return '<span class="jo-caret">'+(open?'&#9662;':'&#9656;')+'</span>';
+  }
+
+  function rowEl(name, kind, opts){
+    opts = opts || {};
+    var el = document.createElement('div');
+    el.className = 'jo-row' + (opts.federal?' is-federal':'');
+    var _curHome = (function(){try{return localStorage.getItem('pai-home-jurisdiction')||''}catch(e){return ''}})();
+    var _isHome = (_curHome && _curHome === name);
+    var _pin = '<button class="jo-pin-btn'+(_isHome?' is-home':'')+'" title="'+(_isHome?'This is your home':'Set as home')+'" aria-label="Set '+name+' as home"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-12a8 8 0 1116 0c0 7.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg></button>';
+    if(opts.expandable){
+      el.setAttribute('data-expandable','1');
+      el.innerHTML = iconChevron(false) + '<span class="jo-name">'+name+'</span>' + _pin;
+    } else {
+      el.innerHTML = '<span class="jo-caret" style="visibility:hidden"></span><span class="jo-name">'+name+'</span>' + _pin;
+    }
+    if(opts.onClick) el.onclick = opts.onClick;
+    var _pinBtn = el.querySelector('.jo-pin-btn');
+    if(_pinBtn){
+      _pinBtn.onclick = function(ev){
+        ev.stopPropagation();
+        try{ localStorage.setItem('pai-home-jurisdiction', name); }catch(e){}
+        var _ov = document.getElementById('jur-overlay'); if(_ov) _ov.removeAttribute('data-built');
+        if(typeof buildList==='function') buildList();
+        if(typeof renderHomeJurBadge==='function') renderHomeJurBadge();
+      };
+    }
+    return el;
+  }
+
+  function buildList(){
+    var t = getTree();
+    var listEl = document.getElementById('jo-list');
+    listEl.innerHTML = '';
+
+    // HOME jurisdiction (if set) — pinned at very top, subtly styled
+    var _home = (function(){try{return localStorage.getItem('pai-home-jurisdiction')||''}catch(e){return ''}})();
+    if(_home){
+      var hlbl = document.createElement('div');
+      hlbl.className = 'jo-section-label';
+      hlbl.textContent = 'My home';
+      listEl.appendChild(hlbl);
+      var hr = document.createElement('div');
+      hr.className = 'jo-row jo-home-row';
+      hr.innerHTML = '<span class="jo-caret" style="visibility:hidden"></span><span class="jo-home-icon">\u25C6</span><span class="jo-name">'+_home+'</span><button class="jo-home-clear" title="Clear home jurisdiction">Clear</button>';
+      hr.querySelector('.jo-home-clear').onclick = function(ev){ ev.stopPropagation(); try{localStorage.removeItem('pai-home-jurisdiction')}catch(e){} document.getElementById('jur-overlay').removeAttribute('data-built'); buildList(); if(typeof renderHomeJurBadge==='function') renderHomeJurBadge(); };
+      hr.onclick = function(){ goJurisdiction(_home); };
+      listEl.appendChild(hr);
+      var hsep = document.createElement('div'); hsep.className = 'jo-section-sep'; listEl.appendChild(hsep);
+    }
+
+    // Regions (Europe, North America, Caribbean, Latin America, Asia Pacific, Middle East, Africa)
+    t.regions.forEach(function(r){
+      listEl.appendChild(buildRegionRow(r));
+    });
+
+    // Thin separator then International section at the BOTTOM
+    var sep = document.createElement('div'); sep.className='jo-section-sep'; listEl.appendChild(sep);
+    var secLbl = document.createElement('div');
+    secLbl.className = 'jo-section-label'; secLbl.textContent = 'International';
+    listEl.appendChild(secLbl);
+    t.international.forEach(function(n){
+      listEl.appendChild(rowEl(n, 'country', { onClick: function(){ goJurisdiction(n); }}));
+    });
+  }
+
+  function buildRegionRow(region){
+    var wrap = document.createElement('div'); wrap.className='jo-region-wrap';
+    var row = rowEl(region.name, 'region', { expandable: true, onClick: function(){ toggleExpand(wrap, row, function(){ renderRegionChildren(wrap, region); }); }});
+    wrap.appendChild(row);
+    var children = document.createElement('div'); children.className='jo-children';
+    wrap.appendChild(children);
+    return wrap;
+  }
+
+  function renderRegionChildren(wrap, region){
+    var container = wrap.querySelector('.jo-children');
+    if(container.dataset.filled==='1') return;
+    container.dataset.filled='1';
+    var pin = REGION_PIN[region.name];
+    region.countries.forEach(function(c, idx){
+      var d = (typeof jurData!=='undefined') ? jurData[c] : null;
+      var hasChildren = (d && d.children && d.children.length>0) || (CHILDREN_OF[c] && CHILDREN_OF[c].length>0);
+      if(hasChildren && !SKIP_EXPAND[c]){
+        container.appendChild(buildExpandableCountryRow(c, c, (d && d.children && d.children.length) ? d.children : (CHILDREN_OF[c] || [])));
+      } else {
+        container.appendChild(rowEl(c, 'country', { onClick: function(){ goJurisdiction(c); }}));
+      }
+      if(pin && idx===0 && region.countries.length>1){
+        var sep=document.createElement('div'); sep.className='jo-pinned-sep'; container.appendChild(sep);
+      }
+    });
+  }
+
+  function buildExpandableCountryRow(name, dataKey, children){
+    var wrap = document.createElement('div');
+    var row = rowEl(name, 'country', { expandable: true, onClick: function(ev){
+      // Toggle (not navigate) if we're already on this jurisdiction's page OR a child of it
+      var cur = window.PAI_JURIS;
+      var isHere = cur === dataKey || cur === name;
+      var isChild = cur && (PARENT_OF[cur] === dataKey || PARENT_OF[cur] === name);
+      if(isHere || isChild){
+        toggleExpand(wrap, row, function(){ fillFederalChildren(wrap, name, children); });
+        return;
+      }
+      location.href = 'pai-app-juris-' + slugify(dataKey) + '.html';
+    }});
+    wrap.appendChild(row);
+    var cont = document.createElement('div'); cont.className='jo-children';
+    wrap.appendChild(cont);
+    return wrap;
+  }
+
+  function fillFederalChildren(wrap, parentName, children){
+    var container = wrap.querySelector('.jo-children');
+    if(container.dataset.filled==='1') return;
+    container.dataset.filled='1';
+    // Federal entry pinned first
+    var federalLabel = (parentName==='United States of America'||parentName==='USA')
+      ? 'United States (USA) Federal'
+      : parentName + ' Federal';
+    var fedRow = document.createElement('div'); fedRow.className='jo-row is-federal';
+    fedRow.innerHTML='<span class="jo-caret" style="visibility:hidden"></span><span class="jo-name">'+federalLabel+'</span>';
+    fedRow.onclick = function(){ goJurisdiction(parentName); };
+    container.appendChild(fedRow);
+    var sep=document.createElement('div'); sep.className='jo-pinned-sep'; container.appendChild(sep);
+    // Alphabetical children
+    var sorted = children.slice().sort();
+    sorted.forEach(function(ch){
+      container.appendChild(rowEl(ch, 'country', { onClick: function(){ goJurisdiction(ch); }}));
+    });
+  }
+
+  function toggleExpand(wrap, row, onOpen){
+    var cont = wrap.querySelector('.jo-children');
+    var opening = !cont.classList.contains('is-open');
+    if(opening){
+      if(onOpen) onOpen();
+      cont.classList.add('is-open');
+      row.classList.add('is-open');
+      // rotate caret
+      var caret=row.querySelector('.jo-caret'); if(caret) caret.innerHTML='&#9662;';
+    } else {
+      cont.classList.remove('is-open');
+      row.classList.remove('is-open');
+      var caret=row.querySelector('.jo-caret'); if(caret) caret.innerHTML='&#9656;';
+    }
+  }
+
+  function openExpandInOverlayByParent(parentName){
+    if(!parentName) return;
+    var all = document.querySelectorAll('#jo-list .jo-row');
+    for(var i=0;i<all.length;i++){
+      var nameEl = all[i].querySelector('.jo-name');
+      if(nameEl && nameEl.textContent === parentName && all[i].hasAttribute('data-expandable')){
+        all[i].click();
+        // Scroll into view
+        all[i].scrollIntoView({ block:'center' });
+        return;
+      }
+    }
+  }
+
+  function goJurisdiction(name){
+    closeJurisdictions();
+    var slug = slugify(name);
+    location.href = 'pai-app-juris-' + slug + '.html';
+  }
+  window.goJurisdiction = goJurisdiction;
+
+  function openJurisdictions(){
+    var o=document.getElementById('jur-overlay'), bd=document.getElementById('jur-overlay-backdrop');
+    if(!o.dataset.built){ buildList(); o.dataset.built='1'; }
+    var list=document.getElementById('jo-list'); if(list) list.scrollTop = 0;
+    var inp2=document.getElementById('jo-search-input'); if(inp2) inp2.value = '';
+    o.classList.add('open'); bd.classList.add('open');
+    document.body.classList.add('jur-overlay-open');
+    // Auto-expand if the current page represents a jurisdiction
+    var cur = window.PAI_JURIS;
+    if(cur){
+      var parent = PARENT_OF[cur] || (CHILDREN_OF[cur] ? cur : null);
+      if(parent){ setTimeout(function(){ expandByName(parent); }, 50); }
+    }
+    var inp=document.getElementById('jo-search-input'); if(inp){ setTimeout(function(){inp.focus()},250); }
+  }
+  
+  function expandByName(name){
+    // If target is inside a region that's lazy-rendered, expand that region first
+    if(typeof jurData !== 'undefined' && jurData[name]){
+      var region = jurData[name].region;
+      
+      if(name === 'Mexico') region = 'North America';
+      var wraps = document.querySelectorAll('#jo-list > .jo-region-wrap');
+      for(var w=0; w<wraps.length; w++){
+        var rn = wraps[w].querySelector(':scope > .jo-row .jo-name');
+        if(rn && rn.textContent.trim() === region){
+          var rrow = wraps[w].querySelector(':scope > .jo-row');
+          if(!rrow.classList.contains('is-open')) rrow.click();
+          break;
+        }
+      }
+    }
+    // Now look for target (after region expansion has rendered children)
+    setTimeout(function(){
+      var all = document.querySelectorAll('#jo-list .jo-row');
+      for(var i=0; i<all.length; i++){
+        var nameEl = all[i].querySelector('.jo-name');
+        if(nameEl && nameEl.textContent.trim() === name){
+          if(all[i].hasAttribute('data-expandable') && !all[i].classList.contains('is-open')){
+            all[i].click();
+          }
+          try { all[i].scrollIntoView({block:'nearest'}); } catch(e){}
+          return;
+        }
+      }
+    }, 120);
+  }
+  window.expandByName = expandByName;
+
+  window.openJurisdictions = openJurisdictions;
+
+  function closeJurisdictions(){
+    var o=document.getElementById('jur-overlay'), bd=document.getElementById('jur-overlay-backdrop');
+    o.classList.remove('open'); bd.classList.remove('open');
+    document.body.classList.remove('jur-overlay-open');
+  }
+  window.closeJurisdictions = closeJurisdictions;
+
+  function filterJurList(q){
+    q = (q||'').trim().toLowerCase();
+    var rows = document.querySelectorAll('#jo-list .jo-row');
+    if(!q){
+      rows.forEach(function(r){ r.style.display=''; });
+      // Close all expanded
+      document.querySelectorAll('#jo-list .jo-children.is-open').forEach(function(c){ c.classList.remove('is-open'); });
+      document.querySelectorAll('#jo-list .jo-row.is-open').forEach(function(r){ r.classList.remove('is-open'); var ct=r.querySelector('.jo-caret'); if(ct) ct.innerHTML='&#9656;'; });
+      return;
+    }
+    // Pre-fill all regions' children so search can match inside
+    document.querySelectorAll('.jo-region-wrap').forEach(function(w){
+      var rn = w.querySelector('.jo-name'); if(!rn) return;
+      // lazy-fill children if empty
+      var cont = w.querySelector('.jo-children');
+      if(cont && cont.dataset.filled!=='1'){
+        var t=getTree(); var match=t.regions.filter(function(r){return r.name===rn.textContent})[0];
+        if(match) renderRegionChildren(w, match);
+      }
+      if(cont) cont.classList.add('is-open');
+    });
+    // Show matching rows and their ancestors
+    rows.forEach(function(r){
+      var name = (r.querySelector('.jo-name')||{}).textContent || '';
+      var hit = name.toLowerCase().indexOf(q) !== -1;
+      r.style.display = hit ? '' : 'none';
+      if(hit){
+        // Make sure parent chain is visible
+        var p = r.parentElement;
+        while(p && p.id !== 'jo-list'){
+          if(p.classList && (p.classList.contains('jo-children') || p.classList.contains('jo-region-wrap'))){
+            p.style.display = '';
+            if(p.classList.contains('jo-children')) p.classList.add('is-open');
+          }
+          p = p.parentElement;
+        }
+      }
+    });
+    // Section label always visible
+    document.querySelectorAll('.jo-section-label').forEach(function(l){ l.style.display=''; });
+  }
+  window.filterJurList = filterJurList;
+
+  // Expand-on-arrival (federal drill landing)
+  function expandOnArrival(){
+    var parent = null;
+    try { parent = sessionStorage.getItem('pai-jur-expand-on-arrive'); sessionStorage.removeItem('pai-jur-expand-on-arrive'); } catch(e){}
+    if(!parent) return;
+    // Open overlay quietly then expand — but Dave wants closed-on-arrival.
+    // So: do not auto-open the overlay. Persist the expand state so NEXT time user opens, it expands.
+    try { sessionStorage.setItem('pai-jur-prev-expanded', parent); } catch(e){}
+  }
+
+  function applyPrevExpandedOnOpen(){
+    var parent = null;
+    try { parent = sessionStorage.getItem('pai-jur-prev-expanded'); } catch(e){}
+    if(!parent) return;
+    setTimeout(function(){ openExpandInOverlayByParent(parent); }, 30);
+  }
+
+  // Esc to close
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeJurisdictions(); }});
+
+  // --- Home jurisdiction persistence (sidebar pin + header badge) ---
+  function getHome(){ try { return localStorage.getItem('pai-home-jurisdiction') || ''; } catch(e) { return ''; } }
+  function renderHomeJurPin(){
+    var zone = document.querySelector('.sidebar-regions-zone'); if(!zone) return;
+    var old = document.getElementById('home-jur-pinned'); if(old) old.remove();
+    var suppressed = zone.querySelector('.sidebar-nav-divider[data-suppressed-for-pin]');
+    if(suppressed){ suppressed.style.display = ''; suppressed.removeAttribute('data-suppressed-for-pin'); }
+  }
+  function renderHomeJurBadge(){
+    var h = getHome();
+    document.querySelectorAll('.home-jur-btn').forEach(function(btn){
+      btn.onclick = openJurisdictions;
+      btn.style.cursor = 'pointer';
+      var spans = btn.querySelectorAll('span');
+      var labelSpan = null;
+      for(var i=0;i<spans.length;i++){ if(!spans[i].classList.contains('hjb-flag')) { labelSpan = spans[i]; break; } }
+      var flagSpan = btn.querySelector('.hjb-flag');
+      if(!h){
+        if(flagSpan) flagSpan.textContent = '';
+        if(labelSpan) labelSpan.textContent = 'Set home';
+      } else {
+        if(flagSpan) flagSpan.textContent = '';
+        if(labelSpan) labelSpan.textContent = h;
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    expandOnArrival();
+    renderHomeJurPin();
+    renderHomeJurBadge();
+  });
+
+  // (deploy14) prev-expanded scroll-hook removed — overlay always opens with full list visible
+})();
+</script>
+
+<script>
+// Set title attribute on each sidebar nav item so hover shows a browser tooltip
+(function(){
+  function applyTitles(){
+    document.querySelectorAll('.icon-sidebar .sidebar-nav-item').forEach(function(el){
+      var lbl = el.querySelector('.nav-label');
+      if(lbl && !el.getAttribute('title')){ el.setAttribute('title', lbl.textContent.trim()); }
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', applyTitles);
+  else applyTitles();
+})();
+</script>
+<script>
+(function(){
+  // Toggle body.sidebar-expanded on sidebar hover — CSS handles the shift
+  var sb = document.querySelector('.icon-sidebar');
+  if(!sb) return;
+  var t;
+  sb.addEventListener('mouseenter', function(){ clearTimeout(t); document.body.classList.add('sidebar-expanded'); });
+  sb.addEventListener('mouseleave', function(){ t = setTimeout(function(){ document.body.classList.remove('sidebar-expanded'); }, 80); });
+})();
+</script>
+<!--
+  PAI Onboarding v2 — full-screen stepper + streaming briefing.
+  Self-contained: vanilla JS, inline <style>, no external scripts.
+  Paste verbatim into each page before the closing body tag.
+
+  Page role is auto-detected:
+    - body.onboarding-home  → full stepper + dashboard personalisation + tour
+    - anywhere else         → helper card + tour-step resume only
+
+  Storage (localStorage, will move server-side once Clerk metadata is wired):
+    pai-onboarding-v2: {v, completedAt, skipped, role, jurisdictions:[], topics:[], cadence, name}
+    pai-tour-v1:       {completed, dismissed, step}
+    pai-last-visit:    ISO string (used for "since you last visited")
+
+  Server-side TODOs (// TODO:server in code):
+    - profile fields should live on Clerk publicMetadata (POST /api/user/brief)
+    - name should come from Clerk session, not be asked
+    - last-visit + "alerts since last visit" should be server-computed
+    - briefing lines should be generated server-side from real jurData + alerts tables
+-->
+<style id="pai-onb-styles">
+  .pai-onb-root, .pai-onb-root * { box-sizing: border-box; }
+  .pai-onb-root { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+  /* ============================================================
+     v2 Stepper — full-screen dark takeover
+     ============================================================ */
+  .pai-step-takeover {
+    position: fixed; inset: 0; background: #ffffff; color: #07202e;
+    z-index: 9500; /* above jur-overlay (9000) since this owns the screen on first login */
+    display: none; flex-direction: column;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+  .pai-step-takeover.open { display: flex; }
+  .pai-step-takeover.closing { animation: pstFadeOut .32s cubic-bezier(.4,0,.2,1) forwards; }
+  @keyframes pstFadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+  /* Topbar */
+  .pst-topbar { display: flex; align-items: center; justify-content: space-between; padding: 22px 32px; flex-shrink: 0; }
+  .pst-brand { display: flex; align-items: center; gap: 10px; }
+  .pst-brand-mark { width: 22px; height: 22px; background: #014486; color: #ffffff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: 'Inter'; font-style: italic; font-weight: 700; font-size: 14px; letter-spacing: -0.5px; }
+  .pst-brand-name { font-size: 13.5px; font-weight: 600; color: #07202e; letter-spacing: -0.005em; }
+  .pst-brand-name em { font-style: italic; font-weight: 500; color: #4a556b; }
+  .pst-exit { background: transparent; border: none; color: #6b7a8f; font-size: 12px; font-weight: 500; cursor: pointer; letter-spacing: 0.01em; }
+  .pst-exit:hover { color: #4a556b; }
+
+  /* Breadcrumb dots */
+  .pst-crumbs { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 4px 0 0; flex-shrink: 0; }
+  .pst-crumbs .pst-crumb-dot { width: 22px; height: 3px; background: #ebeff5; border-radius: 2px; transition: background .25s, width .25s; }
+  .pst-crumbs .pst-crumb-dot.done { background: rgba(1,118,211,0.45); }
+  .pst-crumbs .pst-crumb-dot.current { background: #014486; width: 44px; }
+
+  /* Stage */
+  .pst-stage { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 32px; overflow-y: auto; min-height: 0; }
+  .pst-screen { width: 100%; max-width: 720px; opacity: 0; transform: translateY(8px); transition: opacity .35s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.4,0,.2,1); }
+  .pst-screen.in { opacity: 1; transform: translateY(0); }
+  .pst-screen.out { opacity: 0; transform: translateY(-8px); transition: opacity .2s, transform .2s; }
+
+  .pst-eyebrow { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #6b7a8f; margin: 0 0 16px; }
+  .pst-eyebrow .pst-eyebrow-accent { color: #014486; }
+  .pst-title { font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.018em; color: #07202e; margin: 0 0 12px; }
+  .pst-title em { font-style: normal; color: #014486; }
+  .pst-sub { font-size: 16px; font-weight: 400; line-height: 1.55; color: #8a93a3; margin: 0 0 32px; max-width: 580px; }
+  .pst-hint { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4a556b; letter-spacing: 0.06em; margin-top: 14px; }
+  .pst-hint kbd { font-family: inherit; background: #f6f8fa; border: 1px solid #dbe1ea; border-radius: 3px; padding: 1px 6px; font-size: 10.5px; color: #4a556b; margin: 0 2px; }
+
+  /* Role buttons (vertical list with numeric shortcut) */
+  .pst-role-list { display: flex; flex-direction: column; gap: 8px; }
+  .pst-role-btn { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 16px 20px; background: #fafbfc; border: 1px solid #ebeff5; border-radius: 10px; cursor: pointer; transition: background .15s, border-color .15s, transform .15s; color: #07202e; }
+  .pst-role-btn:hover { background: #f0f6fc; border-color: #a8c3e8; }
+  .pst-role-btn.on { background: #e3effc; border-color: #014486; }
+  .pst-role-btn.focus { border-color: rgba(1,118,211,0.55); background: #e8f1fa; }
+  .pst-role-shortcut { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b7a8f; background: #f6f8fa; border: 1px solid #dbe1ea; border-radius: 4px; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pst-role-btn.on .pst-role-shortcut { color: #014486; border-color: rgba(1,118,211,0.4); background: #e8f1fa; }
+  .pst-role-label { font-size: 15px; font-weight: 500; color: #07202e; flex: 1; }
+  .pst-role-tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b7a8f; letter-spacing: 0.04em; }
+
+  /* Chip clouds (jurisdictions, topics) */
+  .pst-chip-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pst-chip { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; background: #fafbfc; border: 1px solid #ebeff5; border-radius: 999px; font-size: 13.5px; color: #07202e; cursor: pointer; transition: background .12s, border-color .12s; font-weight: 500; }
+  .pst-chip:hover { background: #e8f1fa; border-color: #a8c3e8; }
+  .pst-chip.on { background: #014486; border-color: #014486; color: #ffffff; }
+  .pst-chip.on::before { content: '✓'; font-size: 11px; color: #014486; }
+  .pst-chip.focus { outline: 2px solid rgba(1,118,211,0.32); outline-offset: 2px; }
+
+  .pst-jur-search { margin-top: 14px; position: relative; max-width: 460px; }
+  .pst-jur-search input { width: 100%; padding: 10px 12px 10px 36px; background: #f6f8fa; border: 1px solid #dbe1ea; border-radius: 6px; font-family: inherit; font-size: 13.5px; color: #07202e; outline: none; }
+  .pst-jur-search input::placeholder { color: #6b7a8f; }
+  .pst-jur-search input:focus { border-color: #014486; background: #f0f6fc; }
+  .pst-jur-search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: #6b7a8f; fill: none; stroke-width: 2; }
+  .pst-jur-results { margin-top: 6px; max-height: 180px; overflow-y: auto; background: #f6f8fa; border: 1px solid #dbe1ea; border-radius: 6px; display: none; }
+  .pst-jur-results.show { display: block; }
+  .pst-jur-row { padding: 8px 14px; font-size: 13px; color: #4a556b; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+  .pst-jur-row:hover { background: #e8f1fa; color: #fff; }
+  .pst-jur-row-region { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #6b7a8f; }
+
+  .pst-section-meta { display: flex; align-items: center; justify-content: space-between; margin: -8px 0 18px; }
+  .pst-count { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #014486; font-weight: 600; letter-spacing: 0.04em; }
+  .pst-micro { font-size: 12px; color: #6b7a8f; }
+
+  /* Cadence options */
+  .pst-cadence-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .pst-cadence-btn { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 16px 18px; background: #fafbfc; border: 1px solid #ebeff5; border-radius: 10px; cursor: pointer; transition: background .15s, border-color .15s; text-align: left; color: #07202e; }
+  .pst-cadence-btn:hover { background: #f0f6fc; border-color: #a8c3e8; }
+  .pst-cadence-btn.on { background: #e3effc; border-color: #014486; }
+  .pst-cadence-btn.focus { border-color: rgba(1,118,211,0.55); }
+  .pst-cadence-head { display: flex; align-items: center; gap: 8px; width: 100%; }
+  .pst-cadence-time { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: #07202e; letter-spacing: -0.01em; }
+  .pst-cadence-btn.on .pst-cadence-time { color: #014486; }
+  .pst-cadence-shortcut { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #6b7a8f; border: 1px solid #dbe1ea; border-radius: 3px; padding: 1px 5px; }
+  .pst-cadence-desc { font-size: 12.5px; color: #8a93a3; line-height: 1.45; }
+
+  /* Foot */
+  .pst-foot { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px 26px; flex-shrink: 0; gap: 16px; min-height: 86px; }
+  .pst-back { background: transparent; border: none; color: #6b7a8f; font-size: 13px; font-weight: 500; cursor: pointer; padding: 8px 14px; border-radius: 6px; }
+  .pst-back:hover { color: #4a556b; background: #f6f8fa; }
+  .pst-back[disabled] { opacity: 0; pointer-events: none; }
+  .pst-next { display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: #014486; color: #ffffff; border: none; border-radius: 7px; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background .15s, transform .15s; letter-spacing: -0.005em; }
+  .pst-next:hover { background: #0176d3; }
+  .pst-next[disabled] { background: #dbe1ea; color: #6b7a8f; cursor: not-allowed; }
+  .pst-next kbd { font-family: 'IBM Plex Mono', monospace; background: rgba(255,255,255,0.22); color: #ffffff; border: 1px solid rgba(255,255,255,0.16); border-radius: 3px; font-size: 11px; padding: 0px 5px; font-weight: 600; }
+  .pst-next[disabled] kbd { background: #f6f8fa; color: #6b7a8f; border-color: #ebeff5; }
+
+  /* Running "Your brief" card — bottom-left, builds as they answer */
+  .pst-brief-card { display: flex; align-items: center; gap: 10px; flex: 1; justify-content: center; font-size: 12.5px; color: #6b7a8f; font-weight: 500; opacity: 0; transition: opacity .25s; }
+  .pst-brief-card.show { opacity: 1; }
+  .pst-brief-label { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #4a556b; letter-spacing: 0.12em; text-transform: uppercase; }
+  .pst-brief-pill { display: inline-flex; align-items: center; padding: 3px 10px; background: #f6f8fa; border: 1px solid #ebeff5; border-radius: 999px; color: #4a556b; font-weight: 500; font-size: 11.5px; }
+
+  /* Welcome screen (flourish) */
+  .pst-welcome { text-align: left; }
+  .pst-welcome .pst-title { font-size: 54px; letter-spacing: -0.025em; }
+  .pst-welcome .pst-sub { font-size: 17px; margin-bottom: 10px; }
+  .pst-welcome-meta { margin-top: 28px; display: flex; gap: 24px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b7a8f; letter-spacing: 0.06em; }
+  .pst-welcome-meta span b { color: #4a556b; font-weight: 600; }
+
+  /* Streaming briefing screen */
+  .pst-briefing { text-align: left; max-width: 720px; }
+  .pst-briefing .pst-eyebrow { margin-bottom: 14px; }
+  .pst-briefing-hello { font-size: 22px; font-weight: 600; letter-spacing: -0.012em; color: #07202e; line-height: 1.3; margin: 0 0 22px; }
+  .pst-briefing-hello em { font-style: normal; color: #014486; }
+  .pst-briefing-lines { display: flex; flex-direction: column; gap: 14px; }
+  .pst-briefing-line { display: flex; gap: 14px; padding: 12px 16px; background: #fafbfc; border-left: 2px solid #a8c3e8; border-radius: 0 6px 6px 0; opacity: 0; transform: translateX(-6px); transition: opacity .35s cubic-bezier(.4,0,.2,1), transform .35s cubic-bezier(.4,0,.2,1); }
+  .pst-briefing-line.in { opacity: 1; transform: translateX(0); }
+  .pst-briefing-line-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4a556b; font-weight: 600; letter-spacing: 0.06em; padding-top: 3px; flex-shrink: 0; min-width: 24px; }
+  .pst-briefing-line-body { font-size: 14.5px; color: #4a556b; line-height: 1.55; }
+  .pst-briefing-line-body b { color: #07202e; font-weight: 600; }
+  .pst-briefing-line-body .pst-brief-caret { display: inline-block; width: 6px; height: 14px; background: #014486; margin-left: 2px; vertical-align: text-bottom; animation: pstCaret 1s steps(2) infinite; }
+  .pst-briefing-line.typing .pst-brief-caret { display: inline-block; }
+  @keyframes pstCaret { 50% { opacity: 0; } }
+
+  @media (max-width: 640px) {
+    .pst-title { font-size: 30px; }
+    .pst-welcome .pst-title { font-size: 36px; }
+    .pst-cadence-list { grid-template-columns: 1fr; }
+    .pst-stage { padding: 16px; }
+    .pst-topbar { padding: 16px; }
+    .pst-foot { padding: 14px 16px 18px; }
+    .pst-brief-card { display: none; }
+    .pst-briefing-hello { font-size: 22px; }
+  }
+
+  /* ============================================================
+     Personalisation banner (home, skipped-but-may-come-back)
+     ============================================================ */
+  .pai-onb-brief-chip { display: none; margin: -14px 0 18px; font-size: 12px; color: #5e6878; }
+  .pai-onb-brief-chip.show { display: inline-flex; align-items: center; gap: 8px; }
+  .pai-onb-brief-chip b { color: #07202e; font-weight: 600; }
+  .pai-onb-brief-chip a { color: #0176d3; cursor: pointer; font-weight: 500; text-decoration: none; }
+  .pai-onb-brief-chip a:hover { text-decoration: underline; }
+
+  /* ============================================================
+     Helper card (pinned bottom-right)
+     ============================================================ */
+  .pai-onb-helper { position: fixed; right: 20px; bottom: 20px; width: 280px; background: #fff; border: 1px solid #dbe1ea; border-radius: 10px; box-shadow: 0 6px 20px rgba(10,23,41,0.12); z-index: 7000; padding: 14px 16px; display: none; }
+  .pai-onb-helper.show { display: block; }
+  .pai-onb-helper .oh-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+  .pai-onb-helper .oh-title { font-size: 13.5px; font-weight: 600; color: #f6f8fa; line-height: 1.4; }
+  .pai-onb-helper .oh-close { color: #8a93a3; cursor: pointer; background: transparent; border: none; padding: 0; font-size: 16px; line-height: 1; flex-shrink: 0; }
+  .pai-onb-helper .oh-close:hover { color: #2a3548; }
+  .pai-onb-helper .oh-body { font-size: 12.5px; color: #5e6878; line-height: 1.55; margin-bottom: 10px; }
+  .pai-onb-helper .oh-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .pai-onb-helper .oh-progress { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #8a93a3; letter-spacing: 0.05em; }
+  .pai-onb-helper .oh-cta { font-size: 12.5px; font-weight: 600; color: #0176d3; cursor: pointer; background: transparent; border: none; padding: 0; }
+  .pai-onb-helper .oh-cta:hover { color: #014486; }
+
+  /* ============================================================
+     Tour spotlight
+     ============================================================ */
+  .pai-onb-spot-mask { position: fixed; inset: 0; pointer-events: none; z-index: 7500; display: none; }
+  .pai-onb-spot-mask.show { display: block; }
+  .pai-onb-spot-ring { position: fixed; border: 2px solid #0176d3; border-radius: 8px; box-shadow: 0 0 0 9999px rgba(6,16,30,0.38); z-index: 7501; pointer-events: none; transition: top .2s, left .2s, width .2s, height .2s; display: none; }
+  .pai-onb-spot-ring.show { display: block; }
+  .pai-onb-tip { position: fixed; width: 300px; background: #fff; border: 1px solid #dbe1ea; border-radius: 10px; box-shadow: 0 8px 24px rgba(10,23,41,0.16); z-index: 7502; padding: 14px 16px; display: none; }
+  .pai-onb-tip.show { display: block; }
+  .pai-onb-tip .ot-step { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #8a93a3; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .pai-onb-tip .ot-title { font-size: 14px; font-weight: 600; color: #f6f8fa; margin-bottom: 6px; line-height: 1.4; }
+  .pai-onb-tip .ot-body { font-size: 12.5px; color: #5e6878; line-height: 1.55; margin-bottom: 12px; }
+  .pai-onb-tip .ot-actions { display: flex; align-items: center; justify-content: space-between; }
+  .pai-onb-tip .ot-skip { font-size: 12px; color: #8a93a3; cursor: pointer; background: transparent; border: none; padding: 0; }
+  .pai-onb-tip .ot-skip:hover { color: #2a3548; }
+  .pai-onb-tip .ot-nav { display: flex; gap: 6px; }
+  .pai-onb-tip .ot-btn { height: 28px; padding: 0 12px; border-radius: 5px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid transparent; }
+  .pai-onb-tip .ot-back { background: transparent; color: #5e6878; }
+  .pai-onb-tip .ot-back:hover { color: #f6f8fa; background: #f8fafc; }
+  .pai-onb-tip .ot-next { background: #0176d3; color: #fff; }
+  .pai-onb-tip .ot-next:hover { background: #014486; }
+
+  @media (max-width: 640px) {
+    .pai-onb-helper { right: 12px; bottom: 12px; width: calc(100vw - 24px); max-width: 320px; }
+    .pai-onb-tip { width: calc(100vw - 32px); max-width: 300px; }
+  }
+</style>
+
+<div class="pai-onb-root">
+  <!-- v2 Stepper (takes over the screen on first login / re-edit) -->
+  <div class="pai-step-takeover" id="paiStepTakeover" role="dialog" aria-modal="true" aria-labelledby="paiStepTitle">
+    <div class="pst-topbar">
+      <div class="pst-brand">
+        <span class="pst-brand-mark">P</span>
+        <span class="pst-brand-name">Principles<em>AI</em></span>
+      </div>
+      <button class="pst-exit" id="paiStepExit" type="button">Skip</button>
+    </div>
+    <div class="pst-crumbs" id="paiStepCrumbs"></div>
+    <div class="pst-stage" id="paiStepStage"></div>
+    <div class="pst-foot">
+      <button class="pst-back" id="paiStepBack" type="button">← Back</button>
+      <div class="pst-brief-card" id="paiStepBriefCard"></div>
+      <button class="pst-next" id="paiStepNext" type="button">Continue <kbd>↵</kbd></button>
+    </div>
+  </div>
+
+  <!-- Helper card (pinned bottom-right, global) -->
+  <div class="pai-onb-helper" id="paiOnbHelper">
+    <div class="oh-head">
+      <div class="oh-title" id="paiOnbHelperTitle">New here?</div>
+      <button class="oh-close" id="paiOnbHelperClose" aria-label="Dismiss">×</button>
+    </div>
+    <div class="oh-body" id="paiOnbHelperBody">Five quick stops and you'll know the room.</div>
+    <div class="oh-actions">
+      <span class="oh-progress" id="paiOnbHelperProgress"></span>
+      <button class="oh-cta" id="paiOnbHelperCta">Take the tour →</button>
+    </div>
+  </div>
+
+  <!-- Tour spotlight -->
+  <div class="pai-onb-spot-mask" id="paiOnbSpotMask"></div>
+  <div class="pai-onb-spot-ring" id="paiOnbSpotRing"></div>
+  <div class="pai-onb-tip" id="paiOnbTip" role="dialog" aria-live="polite">
+    <div class="ot-step" id="paiOnbTipStep"></div>
+    <div class="ot-title" id="paiOnbTipTitle"></div>
+    <div class="ot-body" id="paiOnbTipBody"></div>
+    <div class="ot-actions">
+      <button class="ot-skip" id="paiOnbTipSkip">Skip tour</button>
+      <div class="ot-nav">
+        <button class="ot-btn ot-back" id="paiOnbTipBack">Back</button>
+        <button class="ot-btn ot-next" id="paiOnbTipNext">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ================== Config ==================
+  var ONB_KEY = 'pai-onboarding-v2';
+  var TOUR_KEY = 'pai-tour-v1';
+  var VISIT_KEY = 'pai-last-visit';
+
+  var TOPICS = ['AI', 'Privacy', 'Cybersecurity', 'IP', 'Trust & Safety', 'Standards', 'Vendor & Procurement', 'Incident Response'];
+  var ROLES = [
+    { k: 'counsel',    l: 'In-house counsel',           tag: 'LEGAL'   },
+    { k: 'dpo',        l: 'Data Protection Officer',    tag: 'PRIVACY' },
+    { k: 'ciso',       l: 'CISO / Security lead',       tag: 'SECURITY'},
+    { k: 'ai-gov',     l: 'AI governance lead',         tag: 'AI'      },
+    { k: 'consultant', l: 'Consultant / external counsel', tag: 'ADVISORY'},
+    { k: 'other',      l: 'Something else',             tag: ''        }
+  ];
+  var POPULAR_JURS = [
+    'United Kingdom','European Union','United States','Germany','France',
+    'Canada','Australia','Singapore','Japan','Brazil','India','China'
+  ];
+  var CADENCE = [
+    { k: '0700',   time: '07:00 BST', desc: 'Early — plan your day from it.' },
+    { k: '0830',   time: '08:30 BST', desc: 'Morning triage.' },
+    { k: 'midday', time: 'Midday',    desc: 'Mid-day review.' },
+    { k: 'none',   time: 'No daily',  desc: 'Alerts only, as events move.' }
+  ];
+
+  var STEPS = ['welcome','role','jurisdictions','topics','cadence','briefing'];
+  // breadcrumbs show 4 dots for the 4 content steps (role, jurisdictions, topics, cadence)
+  var BREADCRUMB_STEPS = ['role','jurisdictions','topics','cadence'];
+
+  var TOUR_STOPS = [
+    { key:'jurisdictions', selector:'.home-jur-btn',
+      title:'Switch jurisdiction lens',
+      body:'Pick any country, state, or bloc. Everything below — alerts, consultations, enforcement — re-scopes to it.',
+      placement:'bottom' },
+    { key:'topics', selector:'a.sidebar-nav-item[href="pai-app-topics"], .sidebar-nav-item[data-pai-tour="topics"]',
+      title:'The topic lens',
+      body:'Cut the same surface by subject — privacy, AI, cybersecurity, IP, standards. Useful when a topic spans twenty jurisdictions at once.',
+      placement:'right' },
+    { key:'watchlist', selector:'.tw-cell:first-child, a.sidebar-nav-item[href="pai-app-watchlist"], [data-pai-tour="watchlist"]',
+      title:'Your Watchlist',
+      body:'Save any law, authority, or consultation and it lives here. We\'ll alert you when something moves — draft published, deadline closing, guidance revised.',
+      placement:'bottom' },
+    { key:'alerts', selector:'[data-pai-tour="alerts"]',
+      title:'Alerts since your last visit',
+      body:'Filtered to your jurisdictions and topics. The bell shows what\'s new in your jurisdictions and topics since you were last here.',
+      placement:'bottom' },
+    { key:'search', selector:'.header-search',
+      title:'Search the whole library',
+      body:'Laws, authorities, consultations, cases, decisions — typed plain. Try "EU AI Act Article 5" or "ICO reprimand 2025".',
+      placement:'bottom' }
+  ];
+
+  // ================== Storage ==================
+  function loadJSON(k, fallback){
+    try { var raw = localStorage.getItem(k); return raw ? JSON.parse(raw) : fallback; }
+    catch(e){ return fallback; }
+  }
+  function saveJSON(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+  function getOnb(){ return loadJSON(ONB_KEY, null); }
+  function setOnb(v){ saveJSON(ONB_KEY, v); }
+  function getTour(){ return loadJSON(TOUR_KEY, { completed:false, dismissed:false, step:0 }); }
+  function setTour(v){ saveJSON(TOUR_KEY, v); }
+  function picksComplete(o){ return o && !o.skipped && !!o.role && (o.jurisdictions||[]).length>0 && (o.topics||[]).length>0; }
+
+  // ================== Page role ==================
+  var isHome = /pai-home-private\.html$/.test(location.pathname) ||
+               document.body.classList.contains('onboarding-home');
+
+  function tagTourAnchors(){
+    // Second header icon button is the bell (first is bookmark, third is settings link)
+    var icons = document.querySelectorAll('.header-icon-btn');
+    if (icons.length >= 2 && !icons[1].hasAttribute('data-pai-tour')) icons[1].setAttribute('data-pai-tour','alerts');
+  }
+
+  // ================== Stepper state ==================
+  var takeover = null, stage = null, crumbs = null, backBtn = null, nextBtn = null, exitBtn = null, briefCard = null;
+  var stepIdx = 0; // index into STEPS
+  var picks = { role:null, jurisdictions:[], topics:[], cadence:null, name:'' };
+  var stepperOpen = false;
+  var focusIdx = 0; // index of currently focused option within a step
+
+  function openStepper(existing, startAtStep){
+    if (!takeover) return;
+    picks = {
+      role: existing && existing.role || null,
+      jurisdictions: (existing && existing.jurisdictions) ? existing.jurisdictions.slice() : [],
+      topics: (existing && existing.topics) ? existing.topics.slice() : [],
+      cadence: existing && existing.cadence || null,
+      name: existing && existing.name || ''
+    };
+    stepIdx = (typeof startAtStep === 'number') ? startAtStep : 0;
+    takeover.classList.remove('closing');
+    takeover.classList.add('open');
+    stepperOpen = true;
+    document.body.style.overflow = 'hidden';
+    renderStep();
+  }
+  function closeStepper(){
+    if (!takeover) return;
+    stepperOpen = false;
+    takeover.classList.add('closing');
+    setTimeout(function(){
+      takeover.classList.remove('open','closing');
+      document.body.style.overflow = '';
+    }, 320);
+  }
+
+  function renderCrumbs(){
+    if (!crumbs) return;
+    var currentStepName = STEPS[stepIdx];
+    var currentCrumbIdx = BREADCRUMB_STEPS.indexOf(currentStepName);
+    // hide crumbs on welcome + briefing
+    if (currentCrumbIdx === -1) { crumbs.innerHTML = ''; return; }
+    crumbs.innerHTML = BREADCRUMB_STEPS.map(function(_, i){
+      var cls = 'pst-crumb-dot';
+      if (i < currentCrumbIdx) cls += ' done';
+      else if (i === currentCrumbIdx) cls += ' current';
+      return '<span class="'+cls+'"></span>';
+    }).join('');
+  }
+
+  function renderBriefCard(){
+    if (!briefCard) return;
+    var parts = [];
+    if (picks.role) { var r = ROLES.filter(function(x){return x.k===picks.role;})[0]; if (r) parts.push({label:'ROLE', v:r.l}); }
+    if (picks.jurisdictions.length) parts.push({label:'JURIS', v: summariseJurs(picks.jurisdictions)});
+    if (picks.topics.length) parts.push({label:'TOPICS', v: picks.topics.slice(0,3).join(', ') + (picks.topics.length>3 ? ' +'+(picks.topics.length-3) : '')});
+    if (picks.cadence) { var c = CADENCE.filter(function(x){return x.k===picks.cadence;})[0]; if (c) parts.push({label:'DELIVERY', v:c.time}); }
+    if (!parts.length) { briefCard.classList.remove('show'); briefCard.innerHTML=''; return; }
+    briefCard.classList.add('show');
+    briefCard.innerHTML = '<span class="pst-brief-label">Your update</span>' +
+      parts.map(function(p){ return '<span class="pst-brief-pill">'+escapeHTML(p.v)+'</span>'; }).join('');
+  }
+
+  function summariseJurs(list){
+    var map = {'United Kingdom':'UK','European Union':'EU','United States':'US'};
+    var mapped = list.map(function(j){ return map[j] || j; });
+    if (mapped.length <= 2) return mapped.join(' · ');
+    return mapped.slice(0,2).join(' · ') + ' +' + (mapped.length-2);
+  }
+
+  function escapeHTML(s){ return String(s).replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
+
+  // ================== Screen renderers ==================
+  function renderStep(){
+    var name = STEPS[stepIdx];
+    renderCrumbs();
+    renderBriefCard();
+    if (name === 'welcome')       renderWelcome();
+    else if (name === 'role')     renderRole();
+    else if (name === 'jurisdictions') renderJurisdictions();
+    else if (name === 'topics')   renderTopics();
+    else if (name === 'cadence')  renderCadence();
+    else if (name === 'briefing') renderBriefing();
+    updateFoot();
+  }
+
+  function mountScreen(html){
+    // animate out then in
+    var prev = stage.querySelector('.pst-screen');
+    if (prev) {
+      prev.classList.remove('in');
+      prev.classList.add('out');
+      setTimeout(function(){
+        stage.innerHTML = html;
+        var cur = stage.querySelector('.pst-screen');
+        if (cur) requestAnimationFrame(function(){ cur.classList.add('in'); });
+        bindCurrentScreen();
+      }, 150);
+    } else {
+      stage.innerHTML = html;
+      var cur = stage.querySelector('.pst-screen');
+      if (cur) requestAnimationFrame(function(){ cur.classList.add('in'); });
+      bindCurrentScreen();
+    }
+  }
+
+  function renderWelcome(){
+    focusIdx = 0;
+    mountScreen(
+      '<div class="pst-screen pst-welcome">' +
+        '<p class="pst-eyebrow">Welcome to <span class="pst-eyebrow-accent">PAI</span></p>' +
+        '<h1 class="pst-title" id="paiStepTitle">Support for keeping up with every regulator.</h1>' +
+        '<p class="pst-sub">We track privacy, AI, and cybersecurity developments across authorities worldwide. Four short questions — role, jurisdictions, topics, and when you\'d like a daily alert. We use your answers only to scope your dashboard, and daily alert. Change any of it later.</p>' +
+        '<div class="pst-welcome-meta">' +
+          '<span><b>4</b> questions</span>' +
+          '<span>Press <b>Enter</b> to begin</span>' +
+          '<span><b>Esc</b> to skip</span>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderRole(){
+    focusIdx = Math.max(0, ROLES.findIndex(function(r){ return r.k === picks.role; }));
+    if (focusIdx === -1) focusIdx = 0;
+    var html =
+      '<div class="pst-screen">' +
+        '<p class="pst-eyebrow">Question 01 / 04</p>' +
+        '<h2 class="pst-title">What best describes your role?</h2>' +
+        '<p class="pst-sub">So we pitch detail to your role — privacy, security, and AI-governance leads read this differently.</p>' +
+        '<div class="pst-role-list" id="paiRoleList">' +
+          ROLES.map(function(r, i){
+            return '<button type="button" class="pst-role-btn'+(picks.role===r.k?' on':'')+(i===focusIdx?' focus':'')+'" data-role="'+r.k+'" data-idx="'+i+'">'+
+              '<span class="pst-role-shortcut">'+(i+1)+'</span>'+
+              '<span class="pst-role-label">'+escapeHTML(r.l)+'</span>'+
+              (r.tag ? '<span class="pst-role-tag">'+r.tag+'</span>' : '') +
+            '</button>';
+          }).join('') +
+        '</div>' +
+        '<div class="pst-hint"><kbd>1</kbd>–<kbd>6</kbd> to pick · <kbd>↵</kbd> continue</div>' +
+      '</div>';
+    mountScreen(html);
+  }
+
+  function renderJurisdictions(){
+    focusIdx = 0;
+    var html =
+      '<div class="pst-screen">' +
+        '<p class="pst-eyebrow">Question 02 / 04</p>' +
+        '<h2 class="pst-title">Which jurisdictions are in your remit?</h2>' +
+        '<p class="pst-sub">Select any that apply. Globally-material items still surface; these lead your dashboard.</p>' +
+        '<div class="pst-section-meta">' +
+          '<span class="pst-count" id="paiJurCount">'+picks.jurisdictions.length+' selected</span>' +
+          '<span class="pst-micro">Most practitioners pick 3–8</span>' +
+        '</div>' +
+        '<div class="pst-chip-cloud" id="paiJurChips"></div>' +
+        '<div class="pst-jur-search">' +
+          '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
+          '<input type="text" id="paiJurSearch" placeholder="Search 270+ jurisdictions — US states, EU blocs, provinces…" autocomplete="off" />' +
+        '</div>' +
+        '<div class="pst-jur-results" id="paiJurResults"></div>' +
+        '<div class="pst-hint"><kbd>↵</kbd> continue · <kbd>Tab</kbd> jump to search</div>' +
+      '</div>';
+    mountScreen(html);
+  }
+
+  function renderJurChips(){
+    var host = document.getElementById('paiJurChips');
+    if (!host) return;
+    var list = POPULAR_JURS.slice();
+    picks.jurisdictions.forEach(function(j){ if (list.indexOf(j) === -1) list.push(j); });
+    host.innerHTML = list.map(function(j){
+      var on = picks.jurisdictions.indexOf(j) !== -1;
+      return '<button type="button" class="pst-chip'+(on?' on':'')+'" data-jur="'+escapeHTML(j)+'">'+escapeHTML(j)+'</button>';
+    }).join('');
+    var c = document.getElementById('paiJurCount'); if (c) c.textContent = picks.jurisdictions.length + ' selected';
+  }
+
+  function renderTopics(){
+    focusIdx = 0;
+    var html =
+      '<div class="pst-screen">' +
+        '<p class="pst-eyebrow">Question 03 / 04</p>' +
+        '<h2 class="pst-title">Which of these fall under your remit?</h2>' +
+        '<p class="pst-sub">Select any that apply. Privacy, AI, and cybersecurity are the core; add adjacent areas if they\'re part of your work.</p>' +
+        '<div class="pst-section-meta">' +
+          '<span class="pst-count" id="paiTopCount">'+picks.topics.length+' selected</span>' +
+          '<span class="pst-micro">No wrong number</span>' +
+        '</div>' +
+        '<div class="pst-chip-cloud" id="paiTopChips">' +
+          TOPICS.map(function(t){
+            var on = picks.topics.indexOf(t) !== -1;
+            return '<button type="button" class="pst-chip'+(on?' on':'')+'" data-top="'+escapeHTML(t)+'">'+escapeHTML(t)+'</button>';
+          }).join('') +
+        '</div>' +
+        '<div class="pst-hint"><kbd>↵</kbd> continue</div>' +
+      '</div>';
+    mountScreen(html);
+  }
+
+  function renderCadence(){
+    focusIdx = Math.max(0, CADENCE.findIndex(function(c){ return c.k === picks.cadence; }));
+    if (focusIdx === -1) focusIdx = 0;
+    var html =
+      '<div class="pst-screen">' +
+        '<p class="pst-eyebrow">Question 04 / 04 · one more to go</p>' +
+        '<h2 class="pst-title">When should we send your daily alert?</h2>' +
+        '<p class="pst-sub">A single daily alert summarising what moved in your jurisdictions overnight. You can change this any time.</p>' +
+        '<div class="pst-cadence-list" id="paiCadenceList">' +
+          CADENCE.map(function(c, i){
+            return '<button type="button" class="pst-cadence-btn'+(picks.cadence===c.k?' on':'')+(i===focusIdx?' focus':'')+'" data-cad="'+c.k+'" data-idx="'+i+'">'+
+              '<div class="pst-cadence-head">'+
+                '<span class="pst-cadence-time">'+escapeHTML(c.time)+'</span>'+
+                '<span class="pst-cadence-shortcut">'+(i+1)+'</span>'+
+              '</div>'+
+              '<div class="pst-cadence-desc">'+escapeHTML(c.desc)+'</div>'+
+            '</button>';
+          }).join('') +
+        '</div>' +
+        '<div class="pst-hint"><kbd>1</kbd>–<kbd>4</kbd> to pick · <kbd>↵</kbd> preview your update</div>' +
+      '</div>';
+    mountScreen(html);
+  }
+
+  function renderBriefing(){
+    // Save picks now so the dashboard picks them up when stepper closes
+    var payload = {
+      v: 2,
+      completedAt: new Date().toISOString(),
+      skipped: false,
+      role: picks.role,
+      jurisdictions: picks.jurisdictions,
+      topics: picks.topics,
+      cadence: picks.cadence,
+      name: picks.name
+      // TODO:server — POST /api/user/brief with this shape
+    };
+    setOnb(payload);
+
+    var lines = composeBriefing(payload);
+    var html =
+      '<div class="pst-screen pst-briefing">' +
+        '<p class="pst-eyebrow">Your first update · <span class="pst-eyebrow-accent">preview</span></p>' +
+        '<h2 class="pst-briefing-hello" id="paiBriefHello">'+greeting()+'</h2>' +
+        '<div class="pst-briefing-lines" id="paiBriefLines">' +
+          lines.map(function(l, i){
+            return '<div class="pst-briefing-line" data-i="'+i+'"><span class="pst-briefing-line-num">'+String(i+1).padStart(2,'0')+'</span><span class="pst-briefing-line-body">'+l+'</span></div>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+    mountScreen(html);
+    // stream lines in one-by-one
+    streamBriefingLines();
+  }
+
+  function streamBriefingLines(){
+    var lines = document.querySelectorAll('#paiBriefLines .pst-briefing-line');
+    var stagger = 520;
+    lines.forEach(function(line, i){
+      setTimeout(function(){ line.classList.add('in'); }, 150 + i * stagger);
+    });
+    // enable the "Enter dashboard" button after lines finish
+    setTimeout(function(){
+      if (nextBtn) { nextBtn.disabled = false; nextBtn.classList.add('pst-next-ready'); }
+    }, 150 + lines.length * stagger + 200);
+  }
+
+  function greeting(){
+    var h = new Date().getHours();
+    var part = h < 12 ? 'Good morning' : (h < 18 ? 'Good afternoon' : 'Good evening');
+    var name = picks.name || '';
+    return part + (name ? ', <em>' + escapeHTML(name) + '</em>' : '') + '. Here\'s what moved in your jurisdictions.';
+  }
+
+  function composeBriefing(p){
+    // Templated mock-credible lines keyed off picks + jurData.
+    // TODO:server — replace this whole function with a server-rendered briefing.
+    var jurs = p.jurisdictions.slice(0, 3);
+    var topics = p.topics.map(function(t){ return t.toLowerCase(); });
+    var lines = [];
+    var primaryJur = jurs[0] || 'your jurisdictions';
+    var primaryJurShort = summariseJurs([primaryJur]);
+
+    // scope line
+    lines.push('Scoped to <b>' + escapeHTML(summariseJurs(jurs) || 'your picks') + '</b> &middot; ' + escapeHTML(topics.slice(0,3).join(', ') || 'all topics') + '.');
+
+    // jurData-driven lines when available
+    if (typeof jurData !== 'undefined') {
+      var picked = jurs.filter(function(j){ return jurData[j]; });
+      picked.forEach(function(j){
+        var d = jurData[j];
+        if (d.alerts && d.alerts.length) {
+          var a = d.alerts[0];
+          lines.push('<b>' + escapeHTML(j) + '</b> &middot; ' + escapeHTML(a.h) + ' <span style="color:#4a556b;">— ' + escapeHTML(a.d) + '</span>');
+        }
+        if (d.enforcement && d.enforcement.length && lines.length < 6) {
+          var e = d.enforcement[0];
+          lines.push('<b>Enforcement · ' + escapeHTML(j) + '</b> &middot; ' + escapeHTML(e.h));
+        }
+      });
+    }
+
+    // topic-flavoured line
+    if (topics.indexOf('privacy') !== -1 && lines.length < 6) {
+      lines.push('<b>Privacy</b> &middot; EDPB adopted fresh guidance on automated decision-making — six pages, one new test.');
+    }
+    if (topics.indexOf('ai') !== -1 && lines.length < 6) {
+      lines.push('<b>AI</b> &middot; Two consultations open in ' + escapeHTML(primaryJurShort) + ' — Frontier Safety and foundation-model transparency. Both close within 14 days.');
+    }
+    if (topics.indexOf('cyber') !== -1 && lines.length < 6) {
+      lines.push('<b>Cybersecurity</b> &middot; NIS2 transposition deadline missed by three member states. Notifications expected this week.');
+    }
+
+    // close with a personal nudge
+    var cadenceLabel = p.cadence ? ((CADENCE.filter(function(c){return c.k===p.cadence;})[0] || {}).time || '') : '';
+    if (cadenceLabel && cadenceLabel !== 'No daily') {
+      lines.push('You\'ll get this as an email tomorrow at <b>' + escapeHTML(cadenceLabel) + '</b>. Change any time in Settings.');
+    } else if (cadenceLabel === 'No daily') {
+      lines.push('No daily email — we\'ll only nudge you when a Watchlist item moves.');
+    }
+
+    // cap at 7
+    return lines.slice(0, 7);
+  }
+
+  // ================== Screen bindings ==================
+  function bindCurrentScreen(){
+    var name = STEPS[stepIdx];
+    if (name === 'role') bindRole();
+    else if (name === 'jurisdictions') bindJurisdictions();
+    else if (name === 'topics') bindTopics();
+    else if (name === 'cadence') bindCadence();
+  }
+
+  function bindRole(){
+    document.querySelectorAll('#paiRoleList .pst-role-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        picks.role = btn.getAttribute('data-role');
+        renderBriefCard();
+        document.querySelectorAll('#paiRoleList .pst-role-btn').forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        updateFoot();
+      });
+    });
+  }
+
+  function bindJurisdictions(){
+    renderJurChips();
+    var host = document.getElementById('paiJurChips');
+    if (host) host.addEventListener('click', function(e){
+      var b = e.target.closest('.pst-chip');
+      if (!b) return;
+      var j = b.getAttribute('data-jur');
+      var idx = picks.jurisdictions.indexOf(j);
+      if (idx === -1) picks.jurisdictions.push(j); else picks.jurisdictions.splice(idx,1);
+      renderJurChips(); renderBriefCard(); updateFoot();
+    });
+    var input = document.getElementById('paiJurSearch');
+    var results = document.getElementById('paiJurResults');
+    function allNames(){ return (typeof jurData !== 'undefined') ? Object.keys(jurData) : POPULAR_JURS.slice(); }
+    if (input && results) {
+      input.addEventListener('input', function(){
+        var q = (input.value||'').trim().toLowerCase();
+        if (!q) { results.classList.remove('show'); results.innerHTML=''; return; }
+        var names = allNames().filter(function(n){ return n.toLowerCase().indexOf(q) !== -1; }).slice(0, 12);
+        if (!names.length) { results.classList.remove('show'); results.innerHTML=''; return; }
+        results.innerHTML = names.map(function(n){
+          var region = (typeof jurData!=='undefined' && jurData[n]) ? jurData[n].region : '';
+          return '<div class="pst-jur-row" data-name="'+escapeHTML(n)+'">' +
+            '<span>'+escapeHTML(n)+'</span>' +
+            (region?'<span class="pst-jur-row-region">'+escapeHTML(region)+'</span>':'') +
+          '</div>';
+        }).join('');
+        results.classList.add('show');
+      });
+      results.addEventListener('click', function(e){
+        var row = e.target.closest('.pst-jur-row');
+        if (!row) return;
+        var name = row.getAttribute('data-name');
+        if (picks.jurisdictions.indexOf(name) === -1) picks.jurisdictions.push(name);
+        input.value = ''; results.classList.remove('show'); results.innerHTML='';
+        renderJurChips(); renderBriefCard(); updateFoot();
+      });
+    }
+  }
+
+  function bindTopics(){
+    document.querySelectorAll('#paiTopChips .pst-chip').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var t = btn.getAttribute('data-top');
+        var idx = picks.topics.indexOf(t);
+        if (idx === -1) picks.topics.push(t); else picks.topics.splice(idx, 1);
+        btn.classList.toggle('on');
+        var c = document.getElementById('paiTopCount'); if (c) c.textContent = picks.topics.length + ' selected';
+        renderBriefCard(); updateFoot();
+      });
+    });
+  }
+
+  function bindCadence(){
+    document.querySelectorAll('#paiCadenceList .pst-cadence-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        picks.cadence = btn.getAttribute('data-cad');
+        document.querySelectorAll('#paiCadenceList .pst-cadence-btn').forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        renderBriefCard(); updateFoot();
+      });
+    });
+  }
+
+  // ================== Foot buttons ==================
+  function canAdvance(){
+    var name = STEPS[stepIdx];
+    if (name === 'welcome') return true;
+    if (name === 'role') return !!picks.role;
+    if (name === 'jurisdictions') return picks.jurisdictions.length > 0;
+    if (name === 'topics') return picks.topics.length > 0;
+    if (name === 'cadence') return !!picks.cadence;
+    if (name === 'briefing') return true; // enabled by streamBriefingLines when done
+    return false;
+  }
+  function updateFoot(){
+    if (!nextBtn || !backBtn) return;
+    var name = STEPS[stepIdx];
+    backBtn.disabled = (stepIdx === 0);
+    backBtn.style.visibility = (stepIdx === 0) ? 'hidden' : 'visible';
+    if (name === 'welcome') {
+      nextBtn.innerHTML = 'Begin <kbd>↵</kbd>';
+      nextBtn.disabled = false;
+    } else if (name === 'briefing') {
+      nextBtn.innerHTML = 'Enter your dashboard <kbd>↵</kbd>';
+      nextBtn.disabled = true; // becomes enabled after streaming completes
+    } else if (name === 'cadence') {
+      nextBtn.innerHTML = 'Preview my update <kbd>↵</kbd>';
+      nextBtn.disabled = !canAdvance();
+    } else {
+      nextBtn.innerHTML = 'Continue <kbd>↵</kbd>';
+      nextBtn.disabled = !canAdvance();
+    }
+  }
+
+  function advance(){
+    if (!canAdvance()) return;
+    if (stepIdx === STEPS.length - 1) {
+      // finishing briefing → close stepper, land on dashboard
+      closeStepper();
+      applyPersonalisation();
+      // offer tour as the next nudge
+      setTimeout(refreshHelperCard, 400);
+      return;
+    }
+    stepIdx += 1;
+    renderStep();
+  }
+  function retreat(){
+    if (stepIdx === 0) return;
+    stepIdx -= 1;
+    renderStep();
+  }
+
+  // ================== Personalisation (home only) ==================
+  function shortJurs(list){
+    if (!list || !list.length) return '';
+    var map = { 'United Kingdom':'UK','European Union':'EU','United States':'US' };
+    var mapped = list.map(function(j){ return map[j] || j; });
+    if (mapped.length <= 2) return mapped.join(' · ');
+    return mapped.slice(0,2).join(' · ') + ' +' + (mapped.length-2);
+  }
+  function shortTopics(list){
+    if (!list || !list.length) return '';
+    if (list.length === 1) return list[0].toLowerCase();
+    if (list.length === 2) return list.join(' & ').toLowerCase();
+    return list.slice(0,2).join(', ').toLowerCase() + ' +' + (list.length-2);
+  }
+  function applyPersonalisation(){
+    if (!isHome) return;
+    var onb = getOnb();
+    var briefChip = document.getElementById('paiOnbBriefChip');
+    var eyebrow = document.getElementById('briefEyebrow');
+    var greet = document.getElementById('greetLine');
+    var sub = document.querySelector('.page-head .page-sub');
+    var stats = document.querySelector('.daily-stats');
+
+    if (picksComplete(onb)) {
+      if (eyebrow) {
+        var baseDate = eyebrow.textContent.split(' · ')[0];
+        var parts = [baseDate];
+        if (onb.jurisdictions.length) parts.push(shortJurs(onb.jurisdictions).toUpperCase());
+        if (onb.topics.length) parts.push(shortTopics(onb.topics).toUpperCase());
+        eyebrow.textContent = parts.join(' · ');
+      }
+      if (greet) {
+        var alertCount = Math.min(32, 3 + (onb.jurisdictions.length*2) + onb.topics.length*2);
+        greet.textContent = 'Today — ' + alertCount + ' updates in your space.';
+      }
+      if (sub) {
+        sub.textContent = 'Scoped to ' + shortJurs(onb.jurisdictions) + ' · ' + shortTopics(onb.topics) + '.';
+      }
+      if (stats) {
+        var primaryJur = onb.jurisdictions[0] || 'your jurisdictions';
+        stats.innerHTML =
+          '<span><b style="color:#0d2e42;">3 items</b> on your watchlist need attention</span>' +
+          '<span style="color:#c8d0dc;">·</span>' +
+          '<span><b style="color:#0d2e42;">4 consultations</b> closing in '+escapeHTML(primaryJur)+'</span>' +
+          '<span style="color:#c8d0dc;">·</span>' +
+          '<span><b style="color:#0d2e42;" id="jsEnf">—</b> enforcement captured</span>';
+      }
+      if (briefChip) {
+        briefChip.classList.add('show');
+        var picksLabel = shortJurs(onb.jurisdictions) + ' · ' + shortTopics(onb.topics) + ' · ' + roleLabelFor(onb.role);
+        briefChip.innerHTML = 'Showing: <b>'+escapeHTML(picksLabel)+'</b> &nbsp;·&nbsp; <a data-pai-edit-brief>adjust</a>';
+      }
+    } else if (onb && onb.skipped) {
+      if (briefChip) {
+        briefChip.classList.add('show');
+        briefChip.innerHTML = 'Showing everything we track. <a data-pai-edit-brief>Narrow to what you cover →</a>';
+      }
+    }
+  }
+  function roleLabelFor(k){ var r = ROLES.filter(function(x){return x.k===k;})[0]; return r ? r.l.toLowerCase() : ''; }
+
+  function mountHomeHooks(){
+    if (!isHome) return;
+    var head = document.querySelector('.page-head');
+    if (!head) return;
+    if (!document.getElementById('paiOnbBriefChip')) {
+      var chip = document.createElement('div');
+      chip.className = 'pai-onb-brief-chip';
+      chip.id = 'paiOnbBriefChip';
+      var stats = document.querySelector('.daily-stats');
+      if (stats) stats.parentNode.insertBefore(chip, stats);
+    }
+  }
+
+  // ================== Tour ==================
+  var tourState = { active:false, stepIdx:0 };
+  function visibleStopIdx(idx){
+    for (var i = idx; i < TOUR_STOPS.length; i++) {
+      if (findStopTarget(TOUR_STOPS[i])) return i;
+    }
+    return -1;
+  }
+  function findStopTarget(stop){ return stop.selector ? document.querySelector(stop.selector) : null; }
+  function startTour(){
+    if (!isHome) { location.href = 'pai-home-private.html#take-tour'; return; }
+    tourState.active = true;
+    var t = getTour();
+    var idx = visibleStopIdx(t.step || 0);
+    if (idx === -1) { endTour(true); return; }
+    tourState.stepIdx = idx;
+    showStep();
+  }
+  function showStep(){
+    var stop = TOUR_STOPS[tourState.stepIdx];
+    var target = findStopTarget(stop);
+    if (!target) { nextStep(); return; }
+    var rect = target.getBoundingClientRect();
+    var ringEl = document.getElementById('paiOnbSpotRing');
+    var maskEl = document.getElementById('paiOnbSpotMask');
+    var tipEl = document.getElementById('paiOnbTip');
+    maskEl.classList.add('show');
+    ringEl.classList.add('show');
+    ringEl.style.top = (rect.top - 4) + 'px';
+    ringEl.style.left = (rect.left - 4) + 'px';
+    ringEl.style.width = (rect.width + 8) + 'px';
+    ringEl.style.height = (rect.height + 8) + 'px';
+    document.getElementById('paiOnbTipStep').textContent = 'STOP ' + (tourState.stepIdx+1) + ' OF ' + TOUR_STOPS.length;
+    document.getElementById('paiOnbTipTitle').textContent = stop.title;
+    document.getElementById('paiOnbTipBody').textContent = stop.body;
+    document.getElementById('paiOnbTipBack').style.visibility = tourState.stepIdx === 0 ? 'hidden' : 'visible';
+    document.getElementById('paiOnbTipNext').textContent = (tourState.stepIdx === TOUR_STOPS.length-1) ? 'Finish' : 'Next';
+    tipEl.classList.add('show');
+    var tipRect = tipEl.getBoundingClientRect();
+    var margin = 12;
+    var top, left;
+    if (stop.placement === 'right') {
+      top = rect.top; left = rect.right + margin;
+      if (left + tipRect.width > window.innerWidth - 12) left = rect.left + margin;
+    } else {
+      top = rect.bottom + margin; left = rect.left;
+    }
+    top = Math.max(12, Math.min(top, window.innerHeight - tipRect.height - 12));
+    left = Math.max(12, Math.min(left, window.innerWidth - tipRect.width - 12));
+    tipEl.style.top = top + 'px';
+    tipEl.style.left = left + 'px';
+    var helper = document.getElementById('paiOnbHelper'); if (helper) helper.classList.remove('show');
+  }
+  function nextStep(){
+    var next = tourState.stepIdx + 1;
+    if (next >= TOUR_STOPS.length) { endTour(true); return; }
+    var idx = visibleStopIdx(next);
+    if (idx === -1) { endTour(true); return; }
+    tourState.stepIdx = idx;
+    var t = getTour(); t.step = idx; setTour(t);
+    showStep();
+  }
+  function backStep(){
+    if (tourState.stepIdx === 0) return;
+    tourState.stepIdx -= 1;
+    var t = getTour(); t.step = tourState.stepIdx; setTour(t);
+    showStep();
+  }
+  function endTour(completed){
+    tourState.active = false;
+    ['paiOnbSpotRing','paiOnbSpotMask','paiOnbTip'].forEach(function(id){ var el = document.getElementById(id); if (el) el.classList.remove('show'); });
+    var t = getTour(); t.completed = !!completed; t.step = 0; setTour(t);
+    refreshHelperCard();
+  }
+
+  // ================== Helper card ==================
+  function refreshHelperCard(){
+    var helper = document.getElementById('paiOnbHelper');
+    if (!helper) return;
+    var onb = getOnb();
+    var tour = getTour();
+    if (stepperOpen) { helper.classList.remove('show'); return; }
+    if (tourState.active) { helper.classList.remove('show'); return; }
+    if (tour.completed || tour.dismissed) { helper.classList.remove('show'); return; }
+    if (!onb) { helper.classList.remove('show'); return; }
+    var title = document.getElementById('paiOnbHelperTitle');
+    var body = document.getElementById('paiOnbHelperBody');
+    var cta = document.getElementById('paiOnbHelperCta');
+    var progress = document.getElementById('paiOnbHelperProgress');
+    if (isHome) {
+      title.textContent = 'New here?';
+      body.textContent = 'A colleague\'s walk-through — five stops, a minute tops.';
+      cta.textContent = tour.step > 0 ? 'Resume tour →' : 'Take the tour →';
+      progress.textContent = tour.step > 0 ? ('STOP ' + (tour.step+1) + ' / ' + TOUR_STOPS.length) : '';
+    } else {
+      title.textContent = '👋 First look around?';
+      body.textContent = 'The tour lives on your home dashboard — it\'ll make sense of what each surface is for.';
+      cta.textContent = 'Go to tour →';
+      progress.textContent = '';
+    }
+    helper.classList.add('show');
+  }
+
+  // ================== Keyboard handling ==================
+  function handleKey(e){
+    if (!stepperOpen) return;
+    // Don't hijack typing inside search input
+    var inInput = e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA');
+    var name = STEPS[stepIdx];
+
+    if (e.key === 'Escape') {
+      if (name === 'briefing') { advance(); return; } // Esc on briefing = enter dashboard
+      skipOnboarding();
+      return;
+    }
+    if (e.key === 'Enter' && !inInput) { e.preventDefault(); advance(); return; }
+    if (e.key === 'Backspace' && !inInput && stepIdx > 0 && name !== 'briefing') { e.preventDefault(); retreat(); return; }
+
+    // Numeric shortcuts
+    if (!inInput) {
+      if (name === 'role' && /^[1-6]$/.test(e.key)) {
+        e.preventDefault();
+        var i = parseInt(e.key, 10) - 1;
+        var btn = document.querySelector('#paiRoleList .pst-role-btn[data-idx="'+i+'"]');
+        if (btn) btn.click();
+      }
+      if (name === 'cadence' && /^[1-4]$/.test(e.key)) {
+        e.preventDefault();
+        var i2 = parseInt(e.key, 10) - 1;
+        var btn2 = document.querySelector('#paiCadenceList .pst-cadence-btn[data-idx="'+i2+'"]');
+        if (btn2) btn2.click();
+      }
+    }
+  }
+
+  function skipOnboarding(){
+    var cur = getOnb() || {};
+    cur.v = 2;
+    cur.skipped = true;
+    cur.skippedAt = new Date().toISOString();
+    cur.role = picks.role || cur.role || null;
+    cur.jurisdictions = picks.jurisdictions.length ? picks.jurisdictions : (cur.jurisdictions || []);
+    cur.topics = picks.topics.length ? picks.topics : (cur.topics || []);
+    cur.cadence = picks.cadence || cur.cadence || null;
+    setOnb(cur);
+    closeStepper();
+    applyPersonalisation();
+    setTimeout(refreshHelperCard, 400);
+  }
+
+  // ================== Boot ==================
+  function boot(){
+    takeover = document.getElementById('paiStepTakeover');
+    stage = document.getElementById('paiStepStage');
+    crumbs = document.getElementById('paiStepCrumbs');
+    backBtn = document.getElementById('paiStepBack');
+    nextBtn = document.getElementById('paiStepNext');
+    exitBtn = document.getElementById('paiStepExit');
+    briefCard = document.getElementById('paiStepBriefCard');
+
+    if (nextBtn) nextBtn.addEventListener('click', advance);
+    if (backBtn) backBtn.addEventListener('click', retreat);
+    if (exitBtn) exitBtn.addEventListener('click', skipOnboarding);
+
+    // Helper card + tour wiring
+    var helperClose = document.getElementById('paiOnbHelperClose');
+    if (helperClose) helperClose.addEventListener('click', function(){ var t = getTour(); t.dismissed = true; setTour(t); refreshHelperCard(); });
+    var helperCta = document.getElementById('paiOnbHelperCta');
+    if (helperCta) helperCta.addEventListener('click', startTour);
+    var tipNext = document.getElementById('paiOnbTipNext');
+    var tipBack = document.getElementById('paiOnbTipBack');
+    var tipSkip = document.getElementById('paiOnbTipSkip');
+    if (tipNext) tipNext.addEventListener('click', function(){
+      if (tourState.stepIdx === TOUR_STOPS.length-1) endTour(true); else nextStep();
+    });
+    if (tipBack) tipBack.addEventListener('click', backStep);
+    if (tipSkip) tipSkip.addEventListener('click', function(){ endTour(false); var t = getTour(); t.dismissed = true; setTour(t); refreshHelperCard(); });
+
+    // Global edit-brief click delegation
+    document.addEventListener('click', function(e){
+      var t = e.target.closest('[data-pai-edit-brief]');
+      if (t) { e.preventDefault(); openStepper(getOnb(), STEPS.indexOf('role')); }
+    });
+
+    document.addEventListener('keydown', function(e){
+      handleKey(e);
+      if (e.key === 'Escape' && tourState.active) endTour(false);
+    });
+    window.addEventListener('resize', function(){ if (tourState.active) showStep(); });
+    window.addEventListener('scroll', function(){ if (tourState.active) showStep(); }, true);
+
+    tagTourAnchors();
+    mountHomeHooks();
+    applyPersonalisation();
+    saveJSON(VISIT_KEY, new Date().toISOString());
+
+    var onb = getOnb();
+    // First visit anywhere in the app: open the stepper (welcome → questions → briefing) on home only.
+    if (!onb && isHome) {
+      setTimeout(function(){ openStepper(null, 0); }, 150);
+    }
+    // Deep-link: /#take-tour (restart tour)
+    if (isHome && location.hash === '#take-tour') {
+      history.replaceState(null, '', location.pathname + location.search);
+      setTimeout(function(){ var t = getTour(); t.dismissed = false; t.completed = false; t.step = 0; setTour(t); startTour(); }, 250);
+    }
+    // Deep-link: /#edit-brief (re-open stepper at role screen)
+    if (isHome && location.hash === '#edit-brief') {
+      history.replaceState(null, '', location.pathname + location.search);
+      setTimeout(function(){ openStepper(getOnb(), STEPS.indexOf('role')); }, 200);
+    }
+
+    refreshHelperCard();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  // Settings-page hooks
+  window.paiOpenBrief = function(){ openStepper(getOnb(), STEPS.indexOf('role')); };
+  window.paiStartTour = function(){ var t = getTour(); t.dismissed = false; t.completed = false; t.step = 0; setTour(t); startTour(); };
+})();
+</script>
+<!-- /pai-onboarding -->
+
+
+
+<script id="pai-logout-js">
+(function(){
+  if(window.paiLogout) return;
+  window.paiLogout = function(ev){
+    if(ev && ev.preventDefault) ev.preventDefault();
+    try{
+      ['pai-onboarding-v2','pai-onboarding-v1','pai-tour-v1','pai-last-visit','pai-home-jurisdiction'].forEach(function(k){
+        try{ localStorage.removeItem(k); }catch(e){}
+      });
+    }catch(e){}
+    if(window.Clerk && typeof window.Clerk.signOut === 'function'){
+      try{
+        window.Clerk.signOut().then(function(){ window.location.href = '/sign-in'; });
+        return;
+      }catch(e){}
+    }
+    window.location.href = '/sign-in';
+  };
+})();
+</script>
+<script>
+// Analytics opt-out functionality
+(function() {
+  const ANALYTICS_OPT_OUT_KEY = 'pai-analytics-opt-out';
+  
+  // Check if user has opted out
+  function isAnalyticsOptedOut() {
+    return localStorage.getItem(ANALYTICS_OPT_OUT_KEY) === 'true';
+  }
+  
+  // Initialize toggle state from localStorage
+  function initAnalyticsToggle() {
+    const toggle = document.querySelector('[data-toggle="analytics"]');
+    if (!toggle) return;
+    
+    const isOptedOut = isAnalyticsOptedOut();
+    const toggleElement = toggle.querySelector('.toggle');
+    
+    // Set initial state
+    if (!isOptedOut) {
+      toggleElement.classList.add('on');
+    } else {
+      toggleElement.classList.remove('on');
+    }
+    
+    // Add click handler
+    toggleElement.addEventListener('click', function(e) {
+      e.preventDefault();
+      const newState = !isAnalyticsOptedOut();
+      localStorage.setItem(ANALYTICS_OPT_OUT_KEY, newState);
+      
+      if (newState) {
+        toggleElement.classList.remove('on');
+        // Disable Plausible tracking
+        window.plausible && window.plausible('null');
+      } else {
+        toggleElement.classList.add('on');
+      }
+    });
+  }
+  
+  // Disable tracking if opted out
+  if (isAnalyticsOptedOut()) {
+    window.plausibleInitOptions = { allowLocalhost: true };
+    // Block Plausible
+    window.plausible = function() {};
+    // Block GlitchTip
+    window.GlitchTip = undefined;
+  }
+  
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAnalyticsToggle);
+  } else {
+    initAnalyticsToggle();
+  }
+})();
+</script>
+
+<!-- Privacy notice for analytics -->
+<div style="font-size:11px; color:var(--muted); text-align:center; padding:12px 0; border-top:1px solid var(--border-soft); margin-top:20px;">
+  <p>Your usage is tracked locally by Plausible Analytics and GlitchTip (self-hosted in Germany). <a href="/settings#privacy" style="color:var(--accent); text-decoration:underline;">Opt out anytime in Settings.</a> <a href="https://principlesai.org/trust#s15" target="_blank" style="color:var(--accent); text-decoration:underline;">Learn more.</a></p>
+</div>
+
+<div class="nav-scrim" aria-hidden="true"></div>
+</body>
+</html>

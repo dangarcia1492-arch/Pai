@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrinciplesAI — Germany · Variant D3 (EU member-state archetype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIANT D3 — EU MEMBER STATE archetype
+   Germany. Hero = Option 2 (expand rows per domain) with
+   archetype-specific right-rail. Body = homepage feel:
+   daily news → enforcement + case-law carve-outs → paywall.
+   ============================================================ */
+:root {
+  --bg: #fcfcfc;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #eff2f7;
+  --ink: #0a1729;
+  --ink-strong: #06101e;
+  --secondary: #2a3548;
+  --muted: #5e6878;
+  --faint: #8a93a3;
+  --border: #dbe1ea;
+  --border-soft: #ebeff5;
+  --accent: #0176d3;
+  --accent-2: #014486;
+  --accent-soft: #e3effc;
+  --red: #ba0517;
+  --red-bg: #feded8;
+  --amber: #905200;
+  --amber-bg: #fbeecd;
+  --green: #2e844a;
+  --green-bg: #e5f3e9;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px;
+  --radius: 6px;
+  --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent); }
+button { font-family: inherit; font-size: inherit; color: inherit; border: none; background: none; outline: none; cursor: pointer; }
+
+/* HEADER */
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
+.header-bar .brand { font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.005em; text-decoration: none; }
+.header-bar .brand em { font-style: italic; color: var(--accent-2); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); padding: 4px 0; border-bottom: 1px solid transparent; text-decoration: none; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; font-size: 13px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); text-decoration: none; }
+.btn:hover { background: var(--surface-2); border-color: var(--faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
+@media (max-width: 860px) { .mkt-nav { display: none; } }
+
+/* LAYOUT */
+.main-content { padding-top: var(--header-height); }
+.page { max-width: 1280px; margin: 0 auto; padding: 22px 40px 64px; }
+
+/* Back-link (top, alone) */
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--accent-2); text-decoration: none; margin-bottom: 8px; }
+.back-link:hover { color: var(--accent); }
+
+/* Title block — now lives INSIDE .left-col */
+.title-block { margin-bottom: 30px; }
+.jr-title { font-size: 54px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.035em; line-height: 1; margin-bottom: 6px; }
+.jr-subtitle { font-size: 16px; color: var(--muted); font-weight: 500; font-style: italic; margin-bottom: 6px; }
+
+/* Archetype eyebrow — third line of title block */
+.arch-eyebrow {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.arch-eyebrow .code { color: var(--accent-2); margin-left: 4px; }
+
+/* ===== HERO MATRIX — 2-col grid where each domain row shares a grid row with its matching fact ===== */
+.hero-matrix {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  column-gap: 48px;
+  row-gap: 0;
+  margin-bottom: 8px;
+}
+
+/* Row 1: title-block (left) | country outline (right) */
+.m-title { align-self: start; padding-bottom: 32px; }
+.m-map {
+  align-self: start;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 32px;
+}
+.m-map svg { width: 100%; max-width: 120px; height: auto; display: block; }
+.m-map svg .country {
+  fill: var(--accent-soft);
+  stroke: var(--accent-2);
+  stroke-width: 1.25;
+  stroke-linejoin: round;
+}
+
+/* Section head for the expand block — spans both columns, sits between Row 1 and data rows */
+.m-section-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 10px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid var(--border);
+}
+.m-section-head h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink-strong);
+  letter-spacing: -0.01em;
+}
+.m-section-head .hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+
+/* Data rows: every data cell gets top border + min-height so heights match exactly */
+.m-domain, .m-fact {
+  border-top: 1px solid var(--border-soft);
+  min-height: 72px;
+  padding: 14px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* First pair below the section-head uses the stronger border */
+.m-section-head + .m-domain,
+.m-section-head + .m-domain + .m-fact { border-top: 0; }
+/* Bottom border on the last pair (last two grid children) */
+.hero-matrix > :nth-last-child(1),
+.hero-matrix > :nth-last-child(2) { border-bottom: 1px solid var(--border); }
+
+/* Status pills (implementation level) */
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px 2px 5px;
+  border-radius: 3px;
+  vertical-align: 1px;
+  white-space: nowrap;
+  margin-left: 6px;
+}
+.stat-pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stat-pill.op { background: var(--green-bg); color: var(--green); }
+.stat-pill.op .dot { background: var(--green); }
+.stat-pill.partial { background: var(--amber-bg); color: var(--amber); }
+.stat-pill.partial .dot { background: var(--amber); }
+.stat-pill.gap { background: var(--red-bg); color: var(--red); }
+.stat-pill.gap .dot { background: var(--red); }
+
+/* ============================================================
+   IMPLEMENTATION STATUS — own surface, below hero, above news
+   ============================================================ */
+.impl-status { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); }
+.impl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+.impl-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color .15s, box-shadow .15s;
+}
+.impl-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px rgba(10,23,41,0.06);
+  color: var(--ink);
+}
+.impl-card .ic-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.impl-card .ic-dom { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.impl-card .ic-inst { font-size: 14.5px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.005em; line-height: 1.3; margin-top: 2px; }
+.impl-card .ic-note { font-size: 12.5px; color: var(--secondary); line-height: 1.5; margin-top: 6px; }
+.impl-card .ic-cta { margin-top: 10px; font-family: var(--mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-2); }
+.impl-card:hover .ic-cta { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .impl-grid { grid-template-columns: 1fr; }
+}
+
+/* Domain row inner: the details element */
+.m-domain details.dom { width: 100%; margin: 0; padding: 0; border: 0; }
+.m-domain details.dom > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: -8px -12px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color .12s;
+}
+.m-domain details.dom > summary:hover { background: var(--surface-2); }
+.m-domain details.dom > summary::-webkit-details-marker { display: none; }
+.m-domain details.dom > summary .k { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-strong); min-width: 72px; }
+.m-domain details.dom > summary .one-line { flex: 1; font-size: 14px; color: var(--ink); line-height: 1.55; }
+.m-domain details.dom > summary .one-line .dim { color: var(--muted); }
+.m-domain details.dom > summary .one-line b { font-weight: 700; color: var(--ink-strong); }
+.m-domain details.dom > summary .chev {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondary);
+  transition: transform .15s, color .15s, border-color .15s, background-color .15s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.m-domain details.dom > summary:hover .chev { color: var(--accent-2); border-color: var(--accent); }
+.m-domain details.dom[open] > summary .chev { transform: rotate(180deg); color: var(--accent-2); border-color: var(--accent); background: var(--accent-soft); }
+.m-domain details.dom .open-body { margin-top: 14px; padding-left: 86px; display: flex; flex-direction: column; gap: 10px; }
+.m-domain details.dom .open-body .dom-row { font-size: 14px; line-height: 1.6; color: var(--ink); }
+.m-domain details.dom .open-body .dom-row .rk { font-weight: 700; color: var(--ink-strong); }
+.m-domain details.dom .open-body .dom-row .dim { color: var(--muted); }
+.m-domain details.dom .open-body .dom-row a { color: var(--accent-2); font-weight: 500; }
+.phbox {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.55;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-left: 3px solid var(--faint);
+  border-radius: 0 3px 3px 0;
+}
+.phbox .rk { font-weight: 700; color: var(--ink-strong); }
+
+/* EU vs National mini-rows inside each domain */
+.level-row { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: baseline; font-size: 13.5px; line-height: 1.6; }
+.level-row .lvl { font-family: var(--mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--faint); padding-top: 2px; }
+.level-row .lvl.eu { color: var(--accent-2); }
+.level-row .lvl.nat { color: var(--secondary); }
+.level-row .val { color: var(--ink); }
+.level-row .val a { color: var(--accent-2); font-weight: 500; }
+.level-row .val .dim { color: var(--muted); }
+
+/* Fact row inner */
+.m-fact .fact { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
+.m-fact .fact-k { font-family: var(--mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); line-height: 1.4; }
+.m-fact .fact-v { font-size: 28px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.m-fact .fact-v.text { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+.m-fact .fact-sub { display: block; font-family: var(--mono); font-size: 9.5px; font-weight: 500; color: var(--faint); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 3px; }
+
+/* ============================================================
+   BODY — daily news + enforcement + case-law carve-outs
+   ============================================================ */
+.body-grid { margin-top: 64px; padding-top: 36px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr; gap: 40px; }
+
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding-bottom: 12px; margin-bottom: 18px; border-bottom: 1px solid var(--border); }
+.sec-head h2 { font-size: 20px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; }
+.sec-head .sec-sub { font-size: 12px; color: var(--muted); font-weight: 500; }
+.sec-head .sec-link { font-size: 12.5px; color: var(--accent-2); font-weight: 600; text-decoration: none; }
+.sec-head .sec-link:hover { color: var(--accent); }
+
+/* Daily news — row-based feed */
+.news-feed { display: flex; flex-direction: column; }
+.news-item { display: grid; grid-template-columns: 90px 60px 1fr auto; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--border-soft); align-items: baseline; }
+.news-item:last-child { border-bottom: none; }
+.news-item .n-date { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+.news-item .n-dom {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  justify-self: start;
+}
+.news-item .n-dom.ai { background: #efe6fa; color: #5e2a91; }
+.news-item .n-dom.pr { background: #e3effc; color: #014486; }
+.news-item .n-dom.cy { background: #fbeecd; color: #7a4200; }
+.news-item .n-head { font-size: 14px; color: var(--ink-strong); font-weight: 500; line-height: 1.5; letter-spacing: -0.005em; }
+.news-item .n-head b { font-weight: 700; }
+.news-item .n-body { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--faint); letter-spacing: 0.04em; text-transform: uppercase; text-align: right; }
+
+/* 2-col carve-outs (enforcement + case law) */
+.carve-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.carve { display: flex; flex-direction: column; }
+.carve .carve-head { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 2px solid var(--ink-strong); }
+.carve .carve-head h3 { font-size: 15px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.01em; }
+.carve .carve-head .ch-count { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--muted); }
+.carve-item { padding: 12px 0; border-bottom: 1px solid var(--border-soft); }
+.carve-item:last-child { border-bottom: none; }
+.carve-item .ci-meta { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.02em; text-transform: uppercase; }
+.carve-item .ci-meta b { color: var(--ink-strong); font-weight: 700; }
+.carve-item .ci-meta .dot { color: var(--faint); }
+.carve-item .ci-headline { font-size: 13.5px; color: var(--ink-strong); font-weight: 500; line-height: 1.45; }
+.carve-item .ci-pen { display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--red); margin-top: 4px; letter-spacing: 0.02em; }
+.carve-more { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-soft); font-family: var(--mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-2); text-decoration: none; }
+.carve-more:hover { color: var(--accent); }
+
+/* Demo flag */
+.demo-flag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  color: var(--faint);
+  letter-spacing: 0.08em;
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+
+/* Paywall */
+.paywall { margin-top: 24px; padding: 36px 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+.pw-eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-2); margin-bottom: 8px; }
+.pw-title { font-size: 22px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; margin-bottom: 8px; }
+.pw-copy { font-size: 13.5px; color: var(--secondary); line-height: 1.55; max-width: 620px; }
+.pw-ctas { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.pw-cta { height: 40px; padding: 0 22px; border-radius: 6px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; text-decoration: none; }
+.pw-cta.primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+.pw-cta.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.pw-cta.ghost { background: var(--surface); color: var(--secondary); border: 1px solid var(--border); }
+.pw-cta.ghost:hover { background: var(--surface-2); color: var(--ink); border-color: var(--faint); }
+
+/* Footer */
+.footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); flex-wrap: wrap; gap: 8px; }
+.footer a { color: var(--muted); }
+.footer a:hover { color: var(--accent-2); }
+
+.variant-badge { position: fixed; bottom: 16px; right: 16px; background: #06101e; color: #fff; font-family: var(--mono); font-size: 10.5px; font-weight: 700; padding: 7px 12px; border-radius: 4px; letter-spacing: 0.08em; text-transform: uppercase; z-index: 400; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+
+@media (max-width: 1000px) {
+  .hero-matrix { grid-template-columns: 1fr; column-gap: 0; }
+  .m-title { padding-bottom: 16px; }
+  .m-map { padding-bottom: 24px; justify-content: flex-start; }
+  .m-map svg { max-width: 140px; }
+  .carve-row { grid-template-columns: 1fr; gap: 24px; }
+  .news-item { grid-template-columns: 84px 54px 1fr; }
+  .news-item .n-body { grid-column: 1 / -1; text-align: left; margin-top: 2px; }
+}
+@media (max-width: 700px) {
+  .page { padding: 28px 22px 48px; }
+  .jr-title { font-size: 40px; }
+  .paywall { grid-template-columns: 1fr; padding: 28px 24px; }
+  .pw-ctas { flex-direction: row; }
+  .m-domain details.dom .open-body { padding-left: 0; }
+}
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header-bar">
+  <a href="pai-home-public.html" class="brand">Principles<em>AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html">Legislation</a>
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-pricing.html">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary">Get access →</a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="main-content">
+<div class="page">
+
+  <!-- Back-link -->
+  <a class="back-link" href="pai-home-public.html#coverage"><span>←</span> Jurisdictions</a>
+
+  <!-- HERO MATRIX — 2-col CSS Grid so each domain row shares a literal grid row with its matching fact -->
+  <div class="hero-matrix">
+
+    <!-- Row 1: title-block | country outline -->
+    <div class="m-title">
+      <div class="title-block">
+        <h1 class="jr-title">Germany</h1>
+        <div class="jr-subtitle">Bundesrepublik Deutschland</div>
+        <div class="arch-eyebrow">EU member state <span class="code">· DE</span></div>
+      </div>
+    </div>
+    <div class="m-map" aria-hidden="true">
+      <svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <!-- Section head for Law & regulators block -->
+    <div class="m-section-head">
+      <h2>Law &amp; regulators</h2>
+      <span class="hint">Tap a domain to expand</span>
+    </div>
+
+    <!-- Row: AI | EU instruments -->
+    <div class="m-domain">
+      <details class="dom">
+        <summary>
+          <span class="k">AI</span>
+          <span class="one-line"><b>EU AI Act</b> (2024/1689) phased through 2027 &middot; <span class="dim">Germany designating national competent authorities under Art. 70</span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="open-body">
+          <div class="level-row">
+            <span class="lvl eu">EU</span>
+            <span class="val"><a href="#">Regulation (EU) 2024/1689</a> (AI Act), in force 1 Aug 2024 &middot; <span class="dim">phased obligations through 2 Aug 2027</span></span>
+          </div>
+          <div class="level-row">
+            <span class="lvl nat">National</span>
+            <span class="val"><span class="dim">No AI-specific national statute in force.</span> National competent-authority designation ongoing under AI Act Art. 70.</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl nat">Regulator</span>
+            <span class="val"><a href="#">Bundesnetzagentur</a> (BNetzA) <span class="dim">proposed as market-surveillance lead</span>, coordinating with <a href="#">BfDI</a>, <a href="#">BaFin</a>, <a href="#">BSI</a>.</span>
+          </div>
+          <div class="phbox"><span class="rk">Summary:</span> [PLACEHOLDER — 1&ndash;2 sentence factual summary. Dave-written or primary-source-cited.]</div>
+        </div>
+      </details>
+    </div>
+    <div class="m-fact">
+      <div class="fact">
+        <div>
+          <div class="fact-k">EU instruments</div>
+          <span class="fact-sub">AI 1 &middot; PR 1 &middot; CY 2</span>
+        </div>
+        <div class="fact-v">4</div>
+      </div>
+    </div>
+
+    <!-- Row 3: Privacy | National measures -->
+    <div class="m-domain">
+      <details class="dom">
+        <summary>
+          <span class="k">Privacy</span>
+          <span class="one-line"><b>GDPR</b> EU-wide &middot; <b>BDSG</b> + 16 Länder DSGs nationally &middot; <span class="dim">supervision split between BfDI + 16 Landesbeauftragte</span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="open-body">
+          <div class="level-row">
+            <span class="lvl eu">EU</span>
+            <span class="val"><a href="#">Regulation (EU) 2016/679</a> (GDPR) &middot; <a href="#">Directive 2002/58/EC</a> (ePrivacy).</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl nat">National</span>
+            <span class="val"><a href="#">Bundesdatenschutzgesetz</a> 2018 (BDSG), <a href="#">Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz</a> (TDDDG), and 16 <span class="dim">Länder data protection acts</span>.</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl nat">Regulator</span>
+            <span class="val">Federal: <a href="#">Bundesbeauftragter für den Datenschutz und die Informationsfreiheit</a> (BfDI). Länder: 16 <a href="#">Landesdatenschutzbeauftragte</a>.</span>
+          </div>
+          <div class="phbox"><span class="rk">Summary:</span> [PLACEHOLDER]</div>
+        </div>
+      </details>
+    </div>
+    <div class="m-fact">
+      <div class="fact">
+        <div>
+          <div class="fact-k">National measures</div>
+          <span class="fact-sub">BDSG &middot; TDDDG &middot; BSIG</span>
+        </div>
+        <div class="fact-v">3</div>
+      </div>
+    </div>
+
+    <!-- Row 4: Cyber | Next deadline -->
+    <div class="m-domain">
+      <details class="dom">
+        <summary>
+          <span class="k">Cyber</span>
+          <span class="one-line"><b>NIS2</b> transposition in progress &middot; <b>BSI-Gesetz</b> national framework &middot; <span class="dim">BSI as central authority</span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="open-body">
+          <div class="level-row">
+            <span class="lvl eu">EU</span>
+            <span class="val"><a href="#">Directive (EU) 2022/2555</a> (NIS2) &middot; <span class="dim">transposition deadline passed 17 Oct 2024; national implementation act pending</span>.</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl nat">National</span>
+            <span class="val"><a href="#">BSI-Gesetz</a> (BSIG), and relevant provisions of the <a href="#">Strafgesetzbuch</a> (&sect;&sect; 202a ff. Computerstrafrecht).</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl nat">Regulator</span>
+            <span class="val"><a href="#">Bundesamt für Sicherheit in der Informationstechnik</a> (BSI).</span>
+          </div>
+          <div class="phbox"><span class="rk">Summary:</span> [PLACEHOLDER]</div>
+        </div>
+      </details>
+    </div>
+    <div class="m-fact">
+      <div class="fact">
+        <div>
+          <div class="fact-k">Next deadline</div>
+          <span class="fact-sub">AI Act GPAI obligations</span>
+        </div>
+        <div class="fact-v text">2 Aug 2025</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       IMPLEMENTATION STATUS — separate surface; links to Legislation object pages
+       ============================================================ -->
+  <section class="impl-status">
+    <div class="sec-head">
+      <h2>Implementation status</h2>
+      <span class="sec-sub">Where Germany stands on each headline instrument</span>
+      <a href="pai-legislation.html?jurisdiction=DE" class="sec-link">All legislation →</a>
+    </div>
+    <div class="impl-grid">
+      <a class="impl-card" href="pai-legislation-ai-act.html">
+        <div class="ic-row">
+          <span class="ic-dom">AI</span>
+          <span class="stat-pill partial"><span class="dot"></span>Partial</span>
+        </div>
+        <div class="ic-inst">EU AI Act (Regulation 2024/1689)</div>
+        <div class="ic-note">Regulation in force since 1 Aug 2024; phased application through 2 Aug 2027. National competent authorities under Art. 70 still being designated.</div>
+        <div class="ic-cta">See timeline →</div>
+      </a>
+      <a class="impl-card" href="pai-legislation-gdpr.html">
+        <div class="ic-row">
+          <span class="ic-dom">Privacy</span>
+          <span class="stat-pill op"><span class="dot"></span>Operational</span>
+        </div>
+        <div class="ic-inst">GDPR (Regulation 2016/679)</div>
+        <div class="ic-note">In force since 25 May 2018. BDSG + 16 Länder DSGs supplement. Supervision mature across BfDI + Landesbeauftragte.</div>
+        <div class="ic-cta">See timeline →</div>
+      </a>
+      <a class="impl-card" href="pai-legislation-nis2.html">
+        <div class="ic-row">
+          <span class="ic-dom">Cyber</span>
+          <span class="stat-pill gap"><span class="dot"></span>Gap</span>
+        </div>
+        <div class="ic-inst">NIS2 Directive (2022/2555)</div>
+        <div class="ic-note">Transposition deadline 17 Oct 2024 &mdash; passed. National implementation act still pending; Germany currently non-compliant with Directive.</div>
+        <div class="ic-cta">See timeline →</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BODY — daily news + carve-outs (homepage feel)
+       ============================================================ -->
+  <div class="body-grid">
+
+    <!-- DAILY NEWS -->
+    <section class="section">
+      <div class="sec-head">
+        <h2>Daily news<span class="demo-flag">DEMO CONTENT</span></h2>
+        <span class="sec-sub">Across AI &middot; Privacy &middot; Cyber &mdash; last 30 days</span>
+        <a href="#" class="sec-link">All news →</a>
+      </div>
+      <div class="news-feed">
+        <div class="news-item">
+          <span class="n-date">02 Apr</span>
+          <span class="n-dom pr">PR</span>
+          <span class="n-head">[PLACEHOLDER headline &mdash; DPA action or guidance]</span>
+          <span class="n-body">BfDI</span>
+        </div>
+        <div class="news-item">
+          <span class="n-date">29 Mar</span>
+          <span class="n-dom cy">CY</span>
+          <span class="n-head">[PLACEHOLDER headline &mdash; NIS2 transposition update]</span>
+          <span class="n-body">BSI</span>
+        </div>
+        <div class="news-item">
+          <span class="n-date">26 Mar</span>
+          <span class="n-dom ai">AI</span>
+          <span class="n-head">[PLACEHOLDER headline &mdash; AI Act national implementation]</span>
+          <span class="n-body">BMWK</span>
+        </div>
+        <div class="news-item">
+          <span class="n-date">21 Mar</span>
+          <span class="n-dom pr">PR</span>
+          <span class="n-head">[PLACEHOLDER headline &mdash; Länder DPA coordination]</span>
+          <span class="n-body">DSK</span>
+        </div>
+        <div class="news-item">
+          <span class="n-date">18 Mar</span>
+          <span class="n-dom cy">CY</span>
+          <span class="n-head">[PLACEHOLDER headline &mdash; critical-infrastructure advisory]</span>
+          <span class="n-body">BSI</span>
+        </div>
+        <div class="news-item">
+          <span class="n-date">14 Mar</span>
+          <span class="n-dom ai">AI</span>
+          <span class="n-head">[PLACEHOLDER headline &mdash; BNetzA designation update]</span>
+          <span class="n-body">BNetzA</span>
+        </div>
+        <div class="news-item">
+          <span class="n-date">11 Mar</span>
+          <span class="n-dom pr">PR</span>
+          <span class="n-head">[PLACEHOLDER headline &mdash; BayLDA guidance on ADM]</span>
+          <span class="n-body">BayLDA</span>
+        </div>
+        <div class="news-item">
+          <span class="n-date">06 Mar</span>
+          <span class="n-dom cy">CY</span>
+          <span class="n-head">[PLACEHOLDER headline &mdash; BSI IT-Grundschutz update]</span>
+          <span class="n-body">BSI</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARVE-OUTS: Enforcement + Case Law -->
+    <section class="section">
+      <div class="carve-row">
+
+        <!-- Enforcement -->
+        <div class="carve">
+          <div class="carve-head">
+            <h3>Enforcement<span class="demo-flag">DEMO</span></h3>
+            <span class="ch-count">Fines · reprimands · notices</span>
+          </div>
+          <div class="carve-item">
+            <div class="ci-meta"><b>BfDI</b><span class="dot">·</span>28 Mar<span class="dot">·</span>PR</div>
+            <div class="ci-headline">[PLACEHOLDER &mdash; federal DPA enforcement headline]</div>
+            <div class="ci-pen">[Fine amount placeholder]</div>
+          </div>
+          <div class="carve-item">
+            <div class="ci-meta"><b>LfDI BW</b><span class="dot">·</span>19 Mar<span class="dot">·</span>PR</div>
+            <div class="ci-headline">[PLACEHOLDER &mdash; Baden-Württemberg Länder DPA decision]</div>
+            <div class="ci-pen">[Fine amount placeholder]</div>
+          </div>
+          <div class="carve-item">
+            <div class="ci-meta"><b>BSI</b><span class="dot">·</span>11 Mar<span class="dot">·</span>CY</div>
+            <div class="ci-headline">[PLACEHOLDER &mdash; critical-infrastructure enforcement notice]</div>
+          </div>
+          <a class="carve-more" href="#">All enforcement →</a>
+        </div>
+
+        <!-- Case Law -->
+        <div class="carve">
+          <div class="carve-head">
+            <h3>Case law<span class="demo-flag">DEMO</span></h3>
+            <span class="ch-count">Federal &middot; higher regional &middot; CJEU</span>
+          </div>
+          <div class="carve-item">
+            <div class="ci-meta"><b>BVerwG</b><span class="dot">·</span>25 Mar<span class="dot">·</span>PR</div>
+            <div class="ci-headline">[PLACEHOLDER &mdash; Federal Administrative Court ruling citation]</div>
+          </div>
+          <div class="carve-item">
+            <div class="ci-meta"><b>OLG München</b><span class="dot">·</span>14 Mar<span class="dot">·</span>AI</div>
+            <div class="ci-headline">[PLACEHOLDER &mdash; Higher Regional Court ADM decision]</div>
+          </div>
+          <div class="carve-item">
+            <div class="ci-meta"><b>CJEU</b><span class="dot">·</span>pending<span class="dot">·</span>PR</div>
+            <div class="ci-headline">[PLACEHOLDER &mdash; preliminary reference on GDPR Art. 22]</div>
+          </div>
+          <a class="carve-more" href="#">All case law →</a>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Paywall -->
+  <section class="paywall">
+    <div>
+      <div class="pw-eyebrow">Member access</div>
+      <div class="pw-title">Full German coverage</div>
+      <p class="pw-copy">All 17 supervisory authorities (BfDI + 16 Länder DPAs), BSI advisories, full NIS2-transposition tracking, AI Act designation updates, and analyst notes on how each changes your obligations.</p>
+    </div>
+    <div class="pw-ctas">
+      <a href="pai-pricing.html" class="pw-cta primary">Get full Germany access →</a>
+      <a href="pai-pricing.html" class="pw-cta ghost">Try 7 days free</a>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>PrinciplesAI · Germany coverage · updated hourly</span>
+    <a href="pai-home-public.html">← Back to home</a>
+  </div>
+
+</div>
+</div>
+
+<div class="variant-badge">D3 &middot; EU member state &middot; DE</div>
+
+<!-- Country outline — Natural Earth via world-atlas TopoJSON -->
+<script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script>
+(function () {
+  var svg = document.getElementById('country-svg');
+  if (!svg) return;
+  var w = 220, h = 260;
+  var countryIso = '276'; // Germany ISO 3166 numeric
+  fetch('https://unpkg.com/world-atlas@2/countries-50m.json')
+    .then(function (r) { return r.json(); })
+    .then(function (topo) {
+      var features = topojson.feature(topo, topo.objects.countries).features;
+      var de = features.find(function (f) { return f.id === countryIso; });
+      if (!de) return;
+      var projection = d3.geoMercator().fitSize([w, h], de);
+      var path = d3.geoPath().projection(projection);
+      var d3svg = d3.select(svg);
+      d3svg.append('path')
+        .attr('class', 'country')
+        .attr('d', path(de));
+    })
+    .catch(function (e) { console.warn('Country outline unavailable:', e); });
+})();
+</script>
+</body>
+</html>

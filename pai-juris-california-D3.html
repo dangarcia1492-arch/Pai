@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrinciplesAI — California · Variant D3 (US state archetype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f6f7f9; --surface-3: #eff2f7;
+  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878; --faint: #8a93a3;
+  --border: #dbe1ea; --border-soft: #ebeff5;
+  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc;
+  --red: #ba0517; --red-bg: #feded8; --amber: #905200; --amber-bg: #fbeecd; --green: #2e844a; --green-bg: #e5f3e9;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px; --radius: 6px; --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent); }
+button { font-family: inherit; font-size: inherit; color: inherit; border: none; background: none; outline: none; cursor: pointer; }
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
+.header-bar .brand { font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.005em; text-decoration: none; }
+.header-bar .brand em { font-style: italic; color: var(--accent-2); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); padding: 4px 0; border-bottom: 1px solid transparent; text-decoration: none; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; font-size: 13px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); text-decoration: none; }
+.btn:hover { background: var(--surface-2); border-color: var(--faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
+@media (max-width: 860px) { .mkt-nav { display: none; } }
+.main-content { padding-top: var(--header-height); }
+.page { max-width: 1280px; margin: 0 auto; padding: 22px 40px 64px; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--accent-2); text-decoration: none; margin-bottom: 8px; }
+.back-link:hover { color: var(--accent); }
+.title-block { margin-bottom: 30px; }
+.jr-title { font-size: 54px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.035em; line-height: 1; margin-bottom: 6px; }
+.jr-subtitle { font-size: 16px; color: var(--muted); font-weight: 500; font-style: italic; margin-bottom: 6px; }
+.arch-eyebrow { display: inline-block; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.arch-eyebrow .code { color: var(--accent-2); margin-left: 4px; }
+.hero-matrix { display: grid; grid-template-columns: minmax(0, 1fr) 280px; column-gap: 48px; row-gap: 0; margin-bottom: 8px; }
+.m-title { align-self: start; padding-bottom: 32px; }
+.m-map { align-self: start; display: flex; justify-content: center; align-items: flex-start; padding-bottom: 32px; }
+.m-map svg { width: 100%; max-width: 120px; height: auto; display: block; }
+.m-map svg .country { fill: var(--accent-soft); stroke: var(--accent-2); stroke-width: 1.25; stroke-linejoin: round; }
+.m-section-head { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding-bottom: 10px; margin-bottom: 2px; border-bottom: 1px solid var(--border); }
+.m-section-head h2 { font-size: 16px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.01em; }
+.m-section-head .hint { font-family: var(--mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--faint); }
+.m-domain, .m-fact { border-top: 1px solid var(--border-soft); min-height: 72px; padding: 14px 0; display: flex; flex-direction: column; justify-content: center; }
+.m-section-head + .m-domain, .m-section-head + .m-domain + .m-fact { border-top: 0; }
+.hero-matrix > :nth-last-child(1), .hero-matrix > :nth-last-child(2) { border-bottom: 1px solid var(--border); }
+.m-domain details.dom { width: 100%; margin: 0; padding: 0; border: 0; }
+.m-domain details.dom > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px; margin: -8px -12px; padding: 8px 12px; border-radius: 4px; transition: background-color .12s; }
+.m-domain details.dom > summary:hover { background: var(--surface-2); }
+.m-domain details.dom > summary::-webkit-details-marker { display: none; }
+.m-domain details.dom > summary .k { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-strong); min-width: 72px; }
+.m-domain details.dom > summary .one-line { flex: 1; font-size: 14px; color: var(--ink); line-height: 1.55; }
+.m-domain details.dom > summary .one-line .dim { color: var(--muted); }
+.m-domain details.dom > summary .one-line b { font-weight: 700; color: var(--ink-strong); }
+.m-domain details.dom > summary .chev { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--secondary); transition: transform .15s, color .15s, border-color .15s, background-color .15s; flex-shrink: 0; line-height: 1; }
+.m-domain details.dom > summary:hover .chev { color: var(--accent-2); border-color: var(--accent); }
+.m-domain details.dom[open] > summary .chev { transform: rotate(180deg); color: var(--accent-2); border-color: var(--accent); background: var(--accent-soft); }
+.m-domain details.dom .open-body { margin-top: 14px; padding-left: 86px; display: flex; flex-direction: column; gap: 10px; }
+.m-domain details.dom .open-body .dom-row { font-size: 14px; line-height: 1.6; color: var(--ink); }
+.m-domain details.dom .open-body .dom-row .rk { font-weight: 700; color: var(--ink-strong); }
+.m-domain details.dom .open-body .dom-row .dim { color: var(--muted); }
+.m-domain details.dom .open-body .dom-row a { color: var(--accent-2); font-weight: 500; }
+.phbox { font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.55; padding: 10px 14px; background: var(--surface-2); border-left: 3px solid var(--faint); border-radius: 0 3px 3px 0; }
+.phbox .rk { font-weight: 700; color: var(--ink-strong); }
+.level-row { display: grid; grid-template-columns: 88px 1fr; gap: 12px; align-items: baseline; font-size: 13.5px; line-height: 1.6; }
+.level-row .lvl { font-family: var(--mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--faint); padding-top: 2px; }
+.level-row .lvl.state { color: var(--accent-2); }
+.level-row .lvl.fed { color: var(--amber); }
+.level-row .lvl.reg { color: var(--secondary); }
+.level-row .val { color: var(--ink); }
+.level-row .val a { color: var(--accent-2); font-weight: 500; }
+.level-row .val .dim { color: var(--muted); }
+.m-fact .fact { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
+.m-fact .fact-k { font-family: var(--mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); line-height: 1.4; }
+.m-fact .fact-v { font-size: 28px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.m-fact .fact-v.text { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+.m-fact .fact-sub { display: block; font-family: var(--mono); font-size: 9.5px; font-weight: 500; color: var(--faint); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 3px; }
+.stat-pill { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px 2px 5px; border-radius: 3px; white-space: nowrap; }
+.stat-pill .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.stat-pill.op { background: var(--green-bg); color: var(--green); }
+.stat-pill.op .dot { background: var(--green); }
+.stat-pill.partial { background: var(--amber-bg); color: var(--amber); }
+.stat-pill.partial .dot { background: var(--amber); }
+.stat-pill.gap { background: var(--red-bg); color: var(--red); }
+.stat-pill.gap .dot { background: var(--red); }
+.impl-status { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); }
+.impl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+.impl-card { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; text-decoration: none; color: var(--ink); transition: border-color .15s, box-shadow .15s; }
+.impl-card:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(10,23,41,0.06); color: var(--ink); }
+.impl-card .ic-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.impl-card .ic-dom { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+.impl-card .ic-inst { font-size: 14.5px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.005em; line-height: 1.3; margin-top: 2px; }
+.impl-card .ic-note { font-size: 12.5px; color: var(--secondary); line-height: 1.5; margin-top: 6px; }
+.impl-card .ic-cta { margin-top: 10px; font-family: var(--mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-2); }
+.impl-card:hover .ic-cta { color: var(--accent); }
+.body-grid { margin-top: 64px; padding-top: 36px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr; gap: 40px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding-bottom: 12px; margin-bottom: 18px; border-bottom: 1px solid var(--border); }
+.sec-head h2 { font-size: 20px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; }
+.sec-head .sec-sub { font-size: 12px; color: var(--muted); font-weight: 500; }
+.sec-head .sec-link { font-size: 12.5px; color: var(--accent-2); font-weight: 600; text-decoration: none; }
+.sec-head .sec-link:hover { color: var(--accent); }
+.news-feed { display: flex; flex-direction: column; }
+.news-item { display: grid; grid-template-columns: 90px 60px 1fr auto; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--border-soft); align-items: baseline; }
+.news-item:last-child { border-bottom: none; }
+.news-item .n-date { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.02em; }
+.news-item .n-dom { font-family: var(--mono); font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 2px 6px; border-radius: 3px; justify-self: start; }
+.news-item .n-dom.ai { background: #efe6fa; color: #5e2a91; }
+.news-item .n-dom.pr { background: #e3effc; color: #014486; }
+.news-item .n-dom.cy { background: #fbeecd; color: #7a4200; }
+.news-item .n-head { font-size: 14px; color: var(--ink-strong); font-weight: 500; line-height: 1.5; letter-spacing: -0.005em; }
+.news-item .n-body { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--faint); letter-spacing: 0.04em; text-transform: uppercase; text-align: right; }
+.carve-row { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; }
+.carve { display: flex; flex-direction: column; }
+.carve .carve-head { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 2px solid var(--ink-strong); }
+.carve .carve-head h3 { font-size: 15px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.01em; }
+.carve .carve-head .ch-count { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--muted); }
+table.enf { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.enf th { text-align: left; font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding: 8px 10px 8px 0; border-bottom: 1px solid var(--border-soft); }
+table.enf th.fine { text-align: right; }
+table.enf td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--border-soft); vertical-align: top; }
+table.enf td:last-child, table.enf th:last-child { padding-right: 0; }
+table.enf td.c-date { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+table.enf td.c-body { font-weight: 700; color: var(--ink-strong); white-space: nowrap; }
+table.enf td.c-act { color: var(--ink); line-height: 1.45; }
+table.enf td.c-fine { font-family: var(--mono); font-weight: 700; color: var(--red); text-align: right; white-space: nowrap; }
+table.enf td.c-fine.em { color: var(--faint); font-weight: 500; }
+.carve-item { padding: 12px 0; border-bottom: 1px solid var(--border-soft); }
+.carve-item:last-child { border-bottom: none; }
+.carve-item .ci-meta { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.02em; text-transform: uppercase; }
+.carve-item .ci-meta b { color: var(--ink-strong); font-weight: 700; }
+.carve-item .ci-meta .dot { color: var(--faint); }
+.carve-item .ci-headline { font-size: 13px; color: var(--ink-strong); font-weight: 500; line-height: 1.45; }
+.carve-more { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-soft); font-family: var(--mono); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-2); text-decoration: none; }
+.carve-more:hover { color: var(--accent); }
+.demo-flag { display: inline-block; font-family: var(--mono); font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 2px; background: var(--surface-2); color: var(--faint); letter-spacing: 0.08em; margin-left: 6px; vertical-align: 1px; }
+.paywall { margin-top: 24px; padding: 36px 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+.pw-eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-2); margin-bottom: 8px; }
+.pw-title { font-size: 22px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; margin-bottom: 8px; }
+.pw-copy { font-size: 13.5px; color: var(--secondary); line-height: 1.55; max-width: 620px; }
+.pw-ctas { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.pw-cta { height: 40px; padding: 0 22px; border-radius: 6px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; text-decoration: none; }
+.pw-cta.primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+.pw-cta.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.pw-cta.ghost { background: var(--surface); color: var(--secondary); border: 1px solid var(--border); }
+.pw-cta.ghost:hover { background: var(--surface-2); color: var(--ink); border-color: var(--faint); }
+.footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border-soft); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); flex-wrap: wrap; gap: 8px; }
+.footer a { color: var(--muted); }
+.footer a:hover { color: var(--accent-2); }
+.variant-badge { position: fixed; bottom: 16px; right: 16px; background: #06101e; color: #fff; font-family: var(--mono); font-size: 10.5px; font-weight: 700; padding: 7px 12px; border-radius: 4px; letter-spacing: 0.08em; text-transform: uppercase; z-index: 400; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+@media (max-width: 1000px) { .hero-matrix { grid-template-columns: 1fr; column-gap: 0; } .m-title { padding-bottom: 16px; } .m-map { padding-bottom: 24px; justify-content: flex-start; } .m-map svg { max-width: 120px; } .impl-grid { grid-template-columns: 1fr; } .carve-row { grid-template-columns: 1fr; gap: 24px; } .news-item { grid-template-columns: 84px 54px 1fr; } .news-item .n-body { grid-column: 1 / -1; text-align: left; margin-top: 2px; } }
+@media (max-width: 700px) { .page { padding: 28px 22px 48px; } .jr-title { font-size: 40px; } .paywall { grid-template-columns: 1fr; padding: 28px 24px; } .pw-ctas { flex-direction: row; } .m-domain details.dom .open-body { padding-left: 0; } }
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+</head>
+<body>
+
+<header class="header-bar">
+  <a href="pai-home-public.html" class="brand">Principles<em>AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html">Legislation</a>
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-pricing.html">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary">Get access →</a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page">
+
+  <a class="back-link" href="pai-home-public.html#coverage"><span>←</span> Jurisdictions</a>
+
+  <div class="hero-matrix">
+    <div class="m-title">
+      <div class="title-block">
+        <h1 class="jr-title">California</h1>
+        <div class="jr-subtitle">State of California</div>
+        <div class="arch-eyebrow">US state <span class="code">· CA</span></div>
+      </div>
+    </div>
+    <div class="m-map" aria-hidden="true">
+      <svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <div class="m-section-head">
+      <h2>Law &amp; regulators</h2>
+      <span class="hint">Tap a domain to expand</span>
+    </div>
+
+    <div class="m-domain">
+      <details class="dom">
+        <summary>
+          <span class="k">AI</span>
+          <span class="one-line"><b>SB 942</b> AI Transparency Act &middot; <span class="dim">state-level only; federal EO 14110 overlays</span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="open-body">
+          <div class="level-row">
+            <span class="lvl state">State</span>
+            <span class="val"><a href="pai-legislation-sb942.html">SB 942 (California AI Transparency Act)</a> &middot; <a href="pai-legislation-sb1001.html">SB 1001 (Bolstering Online Transparency, automated bots, 2018)</a> &middot; <span class="dim">CCPA ADM regulations (CPPA rulemaking ongoing)</span>.</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl fed">Federal overlay</span>
+            <span class="val"><a href="pai-legislation-eo-14110.html">Executive Order 14110</a> (Safe, Secure, and Trustworthy AI, 2023) &middot; NIST AI Risk Management Framework &middot; sectoral FTC/SEC guidance.</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl reg">Regulator</span>
+            <span class="val"><a href="pai-authority-cppa.html">California Privacy Protection Agency</a> (CPPA) &middot; <a href="pai-authority-ca-ag.html">California Attorney General</a>.</span>
+          </div>
+          <div class="phbox"><span class="rk">Summary:</span> [PLACEHOLDER &mdash; 1&ndash;2 sentence factual summary, Dave-written or primary-source-cited.]</div>
+        </div>
+      </details>
+    </div>
+    <div class="m-fact">
+      <div class="fact">
+        <div>
+          <div class="fact-k">Max fine</div>
+          <span class="fact-sub">CCPA/CPRA &middot; per violation</span>
+        </div>
+        <div class="fact-v text">$7,500</div>
+      </div>
+    </div>
+
+    <div class="m-domain">
+      <details class="dom">
+        <summary>
+          <span class="k">Privacy</span>
+          <span class="one-line"><b>CCPA</b> + <b>CPRA</b> amendments &middot; <span class="dim">CPPA enforces; HIPAA/COPPA/GLBA sectoral federal overlays</span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="open-body">
+          <div class="level-row">
+            <span class="lvl state">State</span>
+            <span class="val"><a href="pai-legislation-ccpa.html">California Consumer Privacy Act 2018</a> (CCPA) &middot; <a href="pai-legislation-cpra.html">California Privacy Rights Act 2020</a> (CPRA) amendments in force since 1 Jan 2023.</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl fed">Federal overlay</span>
+            <span class="val"><a href="pai-legislation-hipaa.html">HIPAA</a> (health), <a href="pai-legislation-coppa.html">COPPA</a> (children), <a href="pai-legislation-glba.html">GLBA</a> (financial), <a href="pai-legislation-ferpa.html">FERPA</a> (education) &mdash; <span class="dim">no comprehensive federal privacy statute</span>.</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl reg">Regulator</span>
+            <span class="val"><a href="pai-authority-cppa.html">California Privacy Protection Agency</a> (CPPA) &middot; <a href="pai-authority-ca-ag.html">California Attorney General</a>.</span>
+          </div>
+          <div class="phbox"><span class="rk">Summary:</span> [PLACEHOLDER]</div>
+        </div>
+      </details>
+    </div>
+    <div class="m-fact">
+      <div class="fact">
+        <div>
+          <div class="fact-k">Private right of action</div>
+          <span class="fact-sub">Breach only &middot; §1798.150</span>
+        </div>
+        <div class="fact-v text">Yes</div>
+      </div>
+    </div>
+
+    <div class="m-domain">
+      <details class="dom">
+        <summary>
+          <span class="k">Cyber</span>
+          <span class="one-line"><b>CCPA §1798.82</b> breach notice &middot; Civil Code §1798.80 &middot; <span class="dim">SEC + CISA federal overlays</span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="open-body">
+          <div class="level-row">
+            <span class="lvl state">State</span>
+            <span class="val"><a href="pai-legislation-ccpa-breach.html">CCPA breach notification</a> (Civil Code §1798.82) &middot; <a href="pai-legislation-ca-1798-80.html">California Customer Records Act</a> (§1798.80 et seq.).</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl fed">Federal overlay</span>
+            <span class="val"><a href="pai-legislation-cisa.html">CISA Cybersecurity Incident Reporting</a> (CIRCIA) &middot; <a href="pai-legislation-sec-cyber.html">SEC cyber disclosure rules</a> for listed entities.</span>
+          </div>
+          <div class="level-row">
+            <span class="lvl reg">Regulator</span>
+            <span class="val"><a href="pai-authority-ca-ag.html">California Attorney General</a> &middot; federal CISA &middot; SEC &middot; sectoral FTC enforcement.</span>
+          </div>
+          <div class="phbox"><span class="rk">Summary:</span> [PLACEHOLDER]</div>
+        </div>
+      </details>
+    </div>
+    <div class="m-fact">
+      <div class="fact">
+        <div>
+          <div class="fact-k">Federal overlays</div>
+          <span class="fact-sub">HIPAA · COPPA · GLBA · FERPA</span>
+        </div>
+        <div class="fact-v">4</div>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="impl-status">
+    <div class="sec-head">
+      <h2>Implementation status</h2>
+      <span class="sec-sub">Where California stands on each headline instrument</span>
+      <a href="pai-legislation.html?jurisdiction=US-CA" class="sec-link">All legislation →</a>
+    </div>
+    <div class="impl-grid">
+      <a class="impl-card" href="pai-legislation-sb942.html">
+        <div class="ic-row">
+          <span class="ic-dom">AI</span>
+          <span class="stat-pill partial"><span class="dot"></span>Partial</span>
+        </div>
+        <div class="ic-inst">SB 942 &mdash; AI Transparency Act</div>
+        <div class="ic-note">Signed Sept 2024; effective 1 Jan 2026. Requires generative-AI providers to offer detection tooling and watermarking. Implementation in preparation; enforcement not yet live.</div>
+        <div class="ic-cta">See timeline →</div>
+      </a>
+      <a class="impl-card" href="pai-legislation-ccpa.html">
+        <div class="ic-row">
+          <span class="ic-dom">Privacy</span>
+          <span class="stat-pill op"><span class="dot"></span>Operational</span>
+        </div>
+        <div class="ic-inst">CCPA &middot; CPRA amendments</div>
+        <div class="ic-note">CCPA in force since 1 Jan 2020; CPRA amendments in force 1 Jan 2023. CPPA rulemaking on automated decision-making and cybersecurity audits ongoing.</div>
+        <div class="ic-cta">See timeline →</div>
+      </a>
+      <a class="impl-card" href="pai-legislation-ccpa-breach.html">
+        <div class="ic-row">
+          <span class="ic-dom">Cyber</span>
+          <span class="stat-pill op"><span class="dot"></span>Operational</span>
+        </div>
+        <div class="ic-inst">CCPA §1798.82 &middot; Customer Records Act</div>
+        <div class="ic-note">Breach-notification regime in force; private right of action available for breach. Federal CIRCIA reporting obligations phasing in alongside.</div>
+        <div class="ic-cta">See timeline →</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="body-grid">
+
+    <section class="section">
+      <div class="sec-head">
+        <h2>Daily news<span class="demo-flag">PLACEHOLDER</span></h2>
+        <span class="sec-sub">Across AI &middot; Privacy &middot; Cyber &mdash; last 30 days</span>
+        <a href="#" class="sec-link">All news →</a>
+      </div>
+      <div class="news-feed">
+        <div class="news-item"><span class="n-date">02 Apr</span><span class="n-dom pr">PR</span><span class="n-head">[PLACEHOLDER &mdash; real news item from scraped feed]</span><span class="n-body">CPPA</span></div>
+        <div class="news-item"><span class="n-date">29 Mar</span><span class="n-dom ai">AI</span><span class="n-head">[PLACEHOLDER]</span><span class="n-body">CA AG</span></div>
+        <div class="news-item"><span class="n-date">26 Mar</span><span class="n-dom cy">CY</span><span class="n-head">[PLACEHOLDER]</span><span class="n-body">CA AG</span></div>
+        <div class="news-item"><span class="n-date">21 Mar</span><span class="n-dom pr">PR</span><span class="n-head">[PLACEHOLDER]</span><span class="n-body">CPPA</span></div>
+        <div class="news-item"><span class="n-date">18 Mar</span><span class="n-dom ai">AI</span><span class="n-head">[PLACEHOLDER]</span><span class="n-body">Legislature</span></div>
+        <div class="news-item"><span class="n-date">14 Mar</span><span class="n-dom pr">PR</span><span class="n-head">[PLACEHOLDER]</span><span class="n-body">CPPA</span></div>
+        <div class="news-item"><span class="n-date">11 Mar</span><span class="n-dom cy">CY</span><span class="n-head">[PLACEHOLDER]</span><span class="n-body">CA AG</span></div>
+        <div class="news-item"><span class="n-date">06 Mar</span><span class="n-dom ai">AI</span><span class="n-head">[PLACEHOLDER]</span><span class="n-body">Governor</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="carve-row">
+        <div class="carve">
+          <div class="carve-head">
+            <h3>Enforcement<span class="demo-flag">PLACEHOLDER</span></h3>
+            <span class="ch-count">Fines &middot; notices &middot; settlements</span>
+          </div>
+          <table class="enf">
+            <thead><tr><th>Date</th><th>Body</th><th>Action</th><th class="fine">Fine</th></tr></thead>
+            <tbody>
+              <tr><td class="c-date">28 Mar</td><td class="c-body">CA AG</td><td class="c-act">[PLACEHOLDER enforcement action]</td><td class="c-fine">$—</td></tr>
+              <tr><td class="c-date">19 Mar</td><td class="c-body">CPPA</td><td class="c-act">[PLACEHOLDER]</td><td class="c-fine">$—</td></tr>
+              <tr><td class="c-date">11 Mar</td><td class="c-body">CA AG</td><td class="c-act">[PLACEHOLDER settlement]</td><td class="c-fine em">—</td></tr>
+            </tbody>
+          </table>
+          <a class="carve-more" href="#">All enforcement →</a>
+        </div>
+        <div class="carve">
+          <div class="carve-head">
+            <h3>Case law<span class="demo-flag">PLACEHOLDER</span></h3>
+            <span class="ch-count">Superior · Court of Appeal · Supreme</span>
+          </div>
+          <div class="carve-item"><div class="ci-meta"><b>CA Ct App</b><span class="dot">·</span>25 Mar<span class="dot">·</span>PR</div><div class="ci-headline">[PLACEHOLDER &mdash; appellate ruling]</div></div>
+          <div class="carve-item"><div class="ci-meta"><b>Superior</b><span class="dot">·</span>14 Mar<span class="dot">·</span>AI</div><div class="ci-headline">[PLACEHOLDER]</div></div>
+          <div class="carve-item"><div class="ci-meta"><b>CA Supreme</b><span class="dot">·</span>pending<span class="dot">·</span>PR</div><div class="ci-headline">[PLACEHOLDER]</div></div>
+          <a class="carve-more" href="#">All case law →</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="paywall">
+    <div>
+      <div class="pw-eyebrow">Member access</div>
+      <div class="pw-title">Full California coverage</div>
+      <p class="pw-copy">CPPA rulemaking tracker, CCPA/CPRA enforcement actions, SB 942 implementation timeline, federal-overlay cross-walks (HIPAA / COPPA / GLBA / FERPA), and analyst notes on how each changes your obligations.</p>
+    </div>
+    <div class="pw-ctas">
+      <a href="pai-pricing.html" class="pw-cta primary">Get full California access →</a>
+      <a href="pai-pricing.html" class="pw-cta ghost">Try 7 days free</a>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>PrinciplesAI · California · updated hourly</span>
+    <a href="pai-home-public.html">← Back to home</a>
+  </div>
+
+</div>
+</div>
+
+<div class="variant-badge">D3 &middot; US state &middot; CA</div>
+
+<script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script>
+(function () {
+  var svg = document.getElementById('country-svg');
+  if (!svg) return;
+  var w = 220, h = 260, fips = '06';
+  fetch('https://unpkg.com/us-atlas@3/states-10m.json')
+    .then(function (r) { return r.json(); })
+    .then(function (topo) {
+      var features = topojson.feature(topo, topo.objects.states).features;
+      var c = features.find(function (f) { return f.id === fips; });
+      if (!c) return;
+      var projection = d3.geoMercator().fitSize([w, h], c);
+      var path = d3.geoPath().projection(projection);
+      d3.select(svg).append('path').attr('class', 'country').attr('d', path(c));
+    })
+    .catch(function (e) { console.warn('State outline unavailable:', e); });
+})();
+</script>
+</body>
+</html>

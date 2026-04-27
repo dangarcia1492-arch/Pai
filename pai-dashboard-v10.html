@@ -62,6 +62,7 @@ button { cursor: pointer; }
 .icon-sidebar:hover .sidebar-brand .brand-text { opacity: 1; }
 .sidebar-nav-items { flex: 1; display: flex; flex-direction: column; gap: 2px; padding: 12px 8px; overflow-y: auto; overflow-x: hidden; }
 .sidebar-regions-zone { position: relative; flex: 1; display: flex; flex-direction: column; gap: 2px; overflow: hidden; min-height: 0; }
+.sidebar-nav-divider { height: 1px; background: #c8d0dc; margin: 12px 16px; flex-shrink: 0; }
 .sidebar-nav-item { display: flex; align-items: center; gap: 14px; height: 40px; padding: 0 12px; border-radius: 4px; cursor: pointer; position: relative; color: var(--secondary); transition: color .15s, background .15s; white-space: nowrap; flex-shrink: 0; }
 .sidebar-nav-item:hover { color: var(--ink); background: var(--surface-3); }
 .sidebar-nav-item.active { color: var(--accent-2); background: var(--accent-soft); font-weight: 600; }
@@ -105,18 +106,18 @@ button { cursor: pointer; }
 
 /* ============ MAIN CONTENT ============ */
 .main-content { margin-left: var(--sidebar-collapsed); padding-top: var(--header-height); min-height: 100vh; }
-.page-view { padding: 40px 48px 52px; max-width: 1480px; margin: 0 auto; }
+.page-view{padding:26px 40px 40px;max-width:1600px;margin:0}
 
 /* ============ HERO GREETING (logged-in state) ============ */
-.page-statusbar {
+.page-statusbar{
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 20px;
   padding: 0 0 22px;
-  margin-bottom: 24px;
+  margin-bottom:22px;
   border-bottom: 1px solid var(--border);
   align-items: start;
-}
+;min-height:55px;margin-bottom:22px}
 .hero-greeting { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .hero-greet-line {
   font-size: 30px; font-weight: 700;
@@ -570,27 +571,294 @@ button { cursor: pointer; }
   .header-search { max-width: none; }
   .header-user-name { display: none; }
 }
+
+
+
+
+
+
+
+
+
+/* ==BEGIN_JUR_OVERLAY== Jurisdictions slide-in overlay (DG pattern) */
+#jur-overlay { position: fixed !important; top: 0 !important; left: var(--sidebar-collapsed, 56px); bottom: 0; width: 340px; background: #fff; border-right: 1px solid #dbe1ea; z-index: 9000; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform .32s cubic-bezier(.4,0,.2,1); box-shadow: 0 12px 40px rgba(10,23,41,0.10); visibility: hidden; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+#jur-overlay.open { transform: translateX(0) !important; visibility: visible !important; display: flex !important; pointer-events: auto !important; }
+#jur-overlay-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: calc(var(--sidebar-collapsed, 56px) + 340px); background: rgba(10,23,41,0.30); z-index: 540; opacity: 0; transition: opacity .25s; pointer-events: none; }
+#jur-overlay-backdrop.open { opacity: 1; pointer-events: auto; }
+#jur-overlay .jo-header { padding: 16px 14px 10px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+#jur-overlay .jo-title { font-size: 17px; font-weight: 600; color: #0a1729; letter-spacing: -0.01em; margin: 0; }
+#jur-overlay .jo-close { background: #eff2f7; border: none; cursor: pointer; color: #2a3548; padding: 5px; border-radius: 999px; display: flex; width: 26px; height: 26px; align-items: center; justify-content: center; }
+#jur-overlay .jo-close:hover { background: #dbe1ea; }
+#jur-overlay .jo-search { margin: 0 14px 8px; position: relative; }
+#jur-overlay .jo-search input { width: 100%; padding: 8px 12px 8px 34px; border: 1px solid #dbe1ea; border-radius: 6px; font-family: inherit; font-size: 13.5px; color: #0a1729; outline: none; background: #fff; }
+#jur-overlay .jo-search input:focus { border-color: #0176d3; box-shadow: 0 0 0 3px rgba(1,118,211,0.10); }
+#jur-overlay .jo-search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: #8a93a3; fill: none; stroke-width: 2; }
+#jur-overlay .jo-list { flex: 1; overflow-y: auto; padding: 4px 0 20px; }
+.jo-section-label { padding: 10px 18px 4px; font-size: 10.5px; font-weight: 700; color: #8a93a3; letter-spacing: 0.09em; text-transform: uppercase; }
+.jo-home-row { background: linear-gradient(90deg, #f6f7f9 0%, #ffffff 100%); }
+.jo-home-row .jo-name { font-weight: 600; color: #014486; }
+.jo-home-icon { width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; color: #0176d3; font-size: 10px; flex-shrink: 0; }
+.jo-home-row:hover { background: #eff2f7; }
+.jo-row { display: flex; align-items: center; gap: 10px; padding: 7px 18px 7px 14px; cursor: pointer; font-size: 13.5px; color: #0a1729; transition: background .1s; }
+.jo-row:hover { background: #f6f7f9; }
+.jo-row.is-active { background: #e3effc; color: #014486; font-weight: 600; }
+.jo-row .jo-caret { width: 10px; color: #8a93a3; font-size: 10px; flex-shrink: 0; transition: transform .15s; }
+.jo-row.is-open .jo-caret { transform: rotate(90deg); color: #0176d3; }
+.jo-row .jo-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #5e6878; }
+.jo-row .jo-icon svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.6; fill: none; }
+.jo-row .jo-name { flex: 1; line-height: 1.3; }
+.jo-children { display: none; padding: 2px 0 4px; }
+.jo-children.is-open { display: block; }
+.jo-children .jo-row { padding-left: 42px; font-size: 13px; color: #2a3548; }
+.jo-children .jo-row.is-federal { font-weight: 600; color: #0a1729; }
+.jo-section-sep { height: 1px; background: #ebeff5; margin: 6px 14px; }
+.jo-pinned-sep { height: 1px; background: #ebeff5; margin: 4px 42px 4px; }
+.jo-row .jo-pin-btn { opacity: 0; background: transparent; border: none; color: #8a93a3; cursor: pointer; padding: 4px 5px; border-radius: 4px; transition: opacity .12s, color .12s, background .12s; flex-shrink: 0; display: flex; align-items: center; margin-left: auto; }
+.jo-row .jo-pin-btn svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2; fill: none; }
+.jo-row:hover .jo-pin-btn { opacity: .65; }
+.jo-row .jo-pin-btn:hover { opacity: 1; color: #014486; background: #e3effc; }
+.jo-row .jo-pin-btn.is-home { opacity: 1; color: #2e844a; }
+.jo-row .jo-pin-btn.is-home svg { fill: #2e844a; stroke: #2e844a; }
+#jur-overlay .jo-hint { margin: 2px 14px 6px; padding: 8px 10px; background: #f6f7f9; border: 1px solid #ebeff5; border-radius: 6px; font-size: 11.5px; color: #5e6878; line-height: 1.4; display: flex; align-items: center; gap: 8px; }
+#jur-overlay .jo-hint svg { width: 12px; height: 12px; flex-shrink: 0; stroke: #0176d3; fill: none; stroke-width: 2; }
+#jur-overlay .jo-hint b { color: #0a1729; font-weight: 600; }
+
+#jur-overlay .jo-empty { padding: 24px 18px; color: #8a93a3; font-size: 13px; text-align: center; }
+@media (max-width: 640px) { #jur-overlay { width: 100vw; left: 0; } #jur-overlay-backdrop { display: none; } }
+
+body.jur-overlay-open .icon-sidebar { width: var(--sidebar-collapsed, 56px) !important; pointer-events: none !important; }
+body.jur-overlay-open .icon-sidebar:hover { width: var(--sidebar-collapsed, 56px) !important; }
+body.jur-overlay-open .icon-sidebar .nav-label,
+body.jur-overlay-open .icon-sidebar .brand-text { opacity: 0 !important; }
+
+/* ==END_JUR_OVERLAY== */
+
+
+/* Sidebar hover-expand: labels reveal + main-content shifts right so it's not covered */
+.icon-sidebar { transition: width .22s cubic-bezier(.4,0,.2,1); }
+body.sidebar-expanded .icon-sidebar { width: var(--sidebar-expanded, 240px) !important; }
+body.sidebar-expanded .icon-sidebar .sidebar-nav-item .nav-label,
+body.sidebar-expanded .icon-sidebar .sidebar-brand .brand-text,
+body.sidebar-expanded .icon-sidebar .sb-invite-body,
+body.sidebar-expanded .icon-sidebar .sidebar-user .nav-label { opacity: 1 !important; pointer-events: auto !important; }
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar { margin-left: var(--sidebar-expanded, 240px) !important; transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+body.sidebar-expanded #jur-overlay { left: var(--sidebar-expanded, 240px) !important; }
+.main-content, .header-bar { transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+
+.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:#2a3548;background:transparent;border:1px solid #dbe1ea;border-radius:5px;text-decoration:none;cursor:pointer;font-family:inherit;margin-left:4px}
+.header-logout:hover{background:#f8fafc;color:#0a1729;border-color:#8a93a3}
+.header-logout svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;flex-shrink:0}
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style><script id="pai-clerk-sdk" async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ" src="https://clerk.principlesai.org/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript" onload="window.__paiClerkLoaded=true;window.dispatchEvent(new Event('pai:clerk-loaded'))"></script>
+<script id="pai-clerk-v1">
+(function(){
+  if(window.__paiClerkV1) return;
+  window.__paiClerkV1 = true;
+
+  function setHeaderName(user){
+    var el = document.querySelector('.header-user-name');
+    if(!el) return;
+    if(user && user.firstName){
+      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+    }
+    // if no user, leave hardcoded — pai-app-* is public by design
+  }
+
+  function boot(){
+    if(!window.Clerk || typeof window.Clerk.load !== 'function') return;
+    window.Clerk.load().then(function(){
+      setHeaderName(window.Clerk.user);
+      // react to sign-in / sign-out events
+      if(typeof window.Clerk.addListener === 'function'){
+        window.Clerk.addListener(function(state){ setHeaderName(state && state.user); });
+      }
+    }).catch(function(){ /* no-op, keep hardcoded fallback */ });
+  }
+
+  if(window.__paiClerkLoaded){ boot(); }
+  else { window.addEventListener('pai:clerk-loaded', boot); }
+})();
+</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
+</style>
+<style id="pai-map-v47">
+/* v47 map polish — lighter sea, solid land (overrides the 0.85 inline opacity
+   that produces the coast ghost), no enacted/proposed/lapsed legend. */
+.map-frame { background: #f3f5f8 !important; }
+.map-frame svg path { opacity: 1 !important; }
+.map-legend { display: none !important; }
 </style>
 </head>
 <body>
 
 <!-- ICON SIDEBAR -->
 <nav class="icon-sidebar">
-  <div class="sidebar-brand">
-    <div class="brand-icon">P</div>
+  <a href="pai-home-private.html" class="sidebar-brand" style="text-decoration:none;color:inherit;">
+    <div class="brand-icon" style="background:var(--accent); padding:0; overflow:hidden;"><img src="pai-mark-white-128.png" alt="PAI" style="width:70%;height:70%;object-fit:contain;display:block;"></div>
     <span class="brand-text">Principles<span class="ai">AI</span></span>
-  </div>
+  </a>
+    
   <div class="sidebar-nav-items">
     <div class="sidebar-nav-item active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></div>
-    <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span><span class="jur-nav-chevron">&#9656;</span></div>
+      <a class="sidebar-nav-item" href="pai-app-ai-notes.html" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
+    <div class="sidebar-nav-item" onclick="openJurisdictions()" style="cursor:pointer;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span></div>
+    <a href="pai-app-news.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
     <div class="sidebar-regions-zone">
-      <a href="pai-authorities.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
-      <a href="pai-news.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="nav-label">News</span></a>
-      <a href="pai-legislation.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
-      <a href="pai-glossary.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
+      <div class="sidebar-nav-divider"></div>
+      <a href="pai-app-authorities.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
+      <a class="sidebar-nav-item" href="pai-app-topics.html" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Topics</span></a>
+      <a href="pai-app-legislation.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <div class="sidebar-nav-divider"></div>
+      <a href="pai-app-glossary.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></div>
-      <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span class="nav-label">Reports</span></div>
-      <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Preferences</span></div>
+      <a href="#" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="nav-label">Watchlist</span></a>
+      <a href="#" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></a>
     </div>
   </div>
   <div class="sb-invite">
@@ -618,7 +886,7 @@ button { cursor: pointer; }
     <button><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
     <button><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
-  <span class="header-user-name">David · PrinciplesAI</span>
+  <span class="header-user-name"></span>
   <div class="header-search">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     <input type="text" placeholder="Search jurisdictions, enforcement, case law…">
@@ -626,9 +894,7 @@ button { cursor: pointer; }
   </div>
   <div class="header-right">
     <div class="home-jur-btn"><span class="hjb-flag">&#x1F1EC;&#x1F1E7;</span><span>United Kingdom</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="badge-count">3</span></button>
-    <button class="header-icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="badge-count">5</span></button>
-    <button class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></button>
+    <a href="pai-app-settings.html" class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></a><a href="#" class="header-logout" onclick="paiLogout(event)" title="Log out"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
   </div>
 </header>
 
@@ -636,27 +902,26 @@ button { cursor: pointer; }
 <div class="main-content">
 <div class="page-view">
 
-  <!-- HERO GREETING (logged-in) -->
+  <!-- STATUSBAR -->
   <div class="page-statusbar">
-    <div class="hero-greeting">
-      <h1 class="hero-greet-line" id="greetLine">Good morning, David</h1>
-      <div class="hero-contextline">
-        <span>Monday, 20 April 2026</span>
-        <span class="ps-sep">·</span>
-        <span>Week 17</span>
-        <span class="ps-sep">·</span>
-        <span class="ps-ok">Pipeline operational</span>
-      </div>
-      <p class="hero-tagline">
-        We do the research. You do the work.
-        <span class="sep">·</span>
-        <em>AI</em> <em>Privacy</em> <em>Cyber</em> <em>Global</em>
-      </p>
+    <div class="ps-left">
+      <span class="ps-breadcrumb">
+        <span class="ps-current">Dashboard</span>
+      </span>
+      <span class="ps-sep">·</span>
+      <span class="ps-scope-chip">AI · Privacy · Cyber</span>
+      <span class="ps-sep">·</span>
+      <span class="ps-ok">Pipeline operational</span>
     </div>
     <div class="page-actions">
-      <button class="btn">Share</button>
-      <button class="btn btn-primary">+ New alert</button>
     </div>
+  </div>
+
+  <!-- PAGE HEAD -->
+  <div class="page-head">
+    <div class="page-eyebrow">AI · Privacy · Cyber</div>
+    <h1 class="page-title" id="greetLine">Good morning, David</h1>
+    <p class="page-sub">We do the research. You do the work — across AI, Privacy, Cybersecurity, and Global.</p>
   </div>
 
   <script>
@@ -678,8 +943,8 @@ button { cursor: pointer; }
       </div>
       <div class="tw-body">
         <div class="tw-label">Watchlist</div>
-        <div class="tw-value">3 alerts</div>
-        <div class="tw-sub"><span class="up">+2</span> since your last visit</div>
+        <div class="tw-value"><span class="val-slot">—</span></div>
+        <div class="tw-sub"><span class="up">—</span> since your last visit</div>
       </div>
       <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
         <polyline points="0,22 9,21 18,16 27,18 36,13 45,15 54,9 63,5 72,3" fill="none" stroke="var(--red-fill)" stroke-width="1.6"/>
@@ -692,7 +957,7 @@ button { cursor: pointer; }
       </div>
       <div class="tw-body">
         <div class="tw-label">Closing ≤ 7 days</div>
-        <div class="tw-value">4 consultations</div>
+        <div class="tw-value"><span class="val-slot">—</span></div>
         <div class="tw-sub">Next: ICO · 23 Apr</div>
       </div>
       <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
@@ -706,8 +971,8 @@ button { cursor: pointer; }
       </div>
       <div class="tw-body">
         <div class="tw-label">Enforcement · 7d</div>
-        <div class="tw-value money">€315.5m</div>
-        <div class="tw-sub"><span class="up">+23%</span> vs prior · 9 actions</div>
+        <div class="tw-value money"><span class="val-slot">—</span></div>
+        <div class="tw-sub"><span class="up">—</span> vs prior · 9 actions</div>
       </div>
       <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
         <polyline points="0,20 9,18 18,21 27,15 36,12 45,14 54,8 63,6 72,3" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
@@ -720,8 +985,8 @@ button { cursor: pointer; }
       </div>
       <div class="tw-body">
         <div class="tw-label">Decisions flagged</div>
-        <div class="tw-value">4 decisions</div>
-        <div class="tw-sub">Curated from 47 published</div>
+        <div class="tw-value"><span class="val-slot">—</span></div>
+        <div class="tw-sub">Curated from <span>—</span> published</div>
       </div>
       <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
         <polyline points="0,15 9,13 18,15 27,9 36,12 45,8 54,10 63,6 72,4" fill="none" stroke="var(--green-fill)" stroke-width="1.6"/>
@@ -736,12 +1001,12 @@ button { cursor: pointer; }
     <!-- MAP (hero) -->
     <div class="panel">
       <div class="panel-head">
-        <div class="panel-title">Coverage <span class="count">last 7 days · 147 read · 47 kept · 3 flagged in your scope</span></div>
+        <div class="panel-title">Coverage <span class="count">last 7 days · <b id="covRead">—</b> read · <b id="covKept">—</b> kept · <b id="covFlagged">—</b> flagged in your scope</span></div>
         <span class="panel-link">Open coverage</span>
       </div>
       <div class="map-wrap">
-        <div class="map-frame">
-          <svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
+        <div class="map-frame map-hero" data-pai-map-placeholder>
+<svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
             <g class="graticule"><line x1="0" y1="120" x2="1000" y2="120"/><line x1="0" y1="240" x2="1000" y2="240"/><line x1="0" y1="360" x2="1000" y2="360"/><line x1="167" y1="0" x2="167" y2="480"/><line x1="333" y1="0" x2="333" y2="480"/><line x1="500" y1="0" x2="500" y2="480"/><line x1="667" y1="0" x2="667" y2="480"/><line x1="833" y1="0" x2="833" y2="480"/></g>
             <g>
               <path class="continent" d="M 140,105 L 180,91 L 230,82 L 290,88 L 320,111 L 315,140 L 290,158 L 260,163 L 240,173 L 230,197 L 210,202 L 195,187 L 175,168 L 155,155 L 140,140 Z"/>
@@ -799,21 +1064,19 @@ button { cursor: pointer; }
         </div>
 
         <div class="hot-view on" id="hot-active">
-          <span class="hot-inline">Ireland · DPC <span class="num">7</span></span>
-          <span class="hot-inline">France · CNIL <span class="num">5</span></span>
-          <span class="hot-inline">Spain · AEPD <span class="num">4</span></span>
-          <span class="hot-inline">EU · EDPB <span class="num">4</span></span>
-          <span class="hot-inline">UK · ICO <span class="num">3</span></span>
-          <span class="hot-inline">Italy · Garante <span class="num">3</span></span>
+          <span class="hot-inline">UK · ICO <span class="num" id="hotIco">—</span></span>
+          <span class="hot-inline ds-muted"><i>More authorities populate once AT2 is wired.</i></span>
         </div>
 
         <div class="hot-view" id="hot-regional">
-          <span class="region-pill">EU / EEA <span class="num">12</span> <span class="sub">jurisdictions</span></span>
-          <span class="region-pill">Common-law <span class="num">5</span> <span class="sub">UK · IE · CA · AU · NZ</span></span>
-          <span class="region-pill">APAC <span class="num">6</span> <span class="sub">JP · KR · SG · IN · ID · TH</span></span>
-          <span class="region-pill">Africa <span class="num">3</span> <span class="sub">KE · ZA · NG</span></span>
-          <span class="region-pill">Middle East <span class="num">2</span></span>
-          <span class="region-pill">Latin America <span class="num">2</span></span>
+          <span class="region-pill">Europe <span class="num" id="regEU">—</span></span>
+          <span class="region-pill">North America <span class="num" id="regNA">—</span></span>
+          <span class="region-pill">Latin America <span class="num" id="regLatAm">—</span></span>
+          <span class="region-pill">Caribbean <span class="num" id="regCaribbean">—</span></span>
+          <span class="region-pill">Africa <span class="num" id="regAF">—</span></span>
+          <span class="region-pill">Middle East <span class="num" id="regME">—</span></span>
+          <span class="region-pill">Asia Pacific <span class="num" id="regAPAC">—</span></span>
+          <span class="region-pill">Global <span class="num" id="regGlobal">—</span></span>
         </div>
       </div>
     </div>
@@ -821,49 +1084,49 @@ button { cursor: pointer; }
     <!-- TODAY -->
     <aside class="panel">
       <div class="panel-head">
-        <div class="panel-title">Today <span class="count">18 published</span></div>
+        <div class="panel-title">Today <span class="count"><b id="todayPublished">—</b> published</span></div>
         <span class="panel-link">Full feed</span>
       </div>
       <ul class="today-list">
         <li class="today-item lead priority">
-          <div class="today-time">09:32<span class="day">today</span></div>
+          <div class="today-time">—<span class="day">—</span></div>
           <div>
-            <div class="today-meta"><span class="today-juris">Ireland · DPC</span><span class="dot">·</span><span>Article 60</span></div>
-            <div class="today-headline"><a href="#">Meta Platforms fined €310m in cross-border ad-targeting decision</a></div>
-            <div class="today-deck">Six-month compliance window. The <b>EDPB binding decision</b> underpinning the lawful-basis finding is the part to read — it sets the shape of every legitimate-interests defence going forward.</div>
-            <div class="today-source">dataprotection.ie · 47 pp decision</div>
-          </div>
-        </li>
-        <li class="today-item priority watch">
-          <div class="today-time">08:15<span class="day">today</span></div>
-          <div>
-            <div class="today-meta"><span class="today-juris">France · CNIL</span></div>
-            <div class="today-headline"><a href="#">Recommendations on AI model training with public data</a></div>
-            <div class="today-source">cnil.fr</div>
+            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
+            <div class="today-headline"><a href="pai-app-news-story-ico-nhs.html">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+            <div class="today-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+            <div class="today-source">ico.org.uk</div>
           </div>
         </li>
         <li class="today-item">
-          <div class="today-time">07:48<span class="day">today</span></div>
+          <div class="today-time">—<span class="day">—</span></div>
           <div>
-            <div class="today-meta"><span class="today-juris">Japan · PPC</span></div>
-            <div class="today-headline"><a href="#">Updated cross-border breach notification guidance</a></div>
-            <div class="today-source">ppc.go.jp</div>
+            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
+            <div class="today-headline"><a href="pai-app-news-story-ico-nhs.html">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+            <div class="today-source">ico.org.uk</div>
           </div>
         </li>
         <li class="today-item">
-          <div class="today-time">22:14<span class="day">yesterday</span></div>
+          <div class="today-time">—<span class="day">—</span></div>
           <div>
-            <div class="today-meta"><span class="today-juris">India · MeitY</span></div>
-            <div class="today-headline"><a href="#">DPDPA implementation rules — second draft consultation</a></div>
-            <div class="today-source">meity.gov.in</div>
+            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
+            <div class="today-headline"><a href="pai-app-news-story-ico-nhs.html">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+            <div class="today-source">ico.org.uk</div>
           </div>
         </li>
         <li class="today-item">
-          <div class="today-time">14:22<span class="day">yesterday</span></div>
+          <div class="today-time">—<span class="day">—</span></div>
           <div>
-            <div class="today-meta"><span class="today-juris">Italy · Garante</span></div>
-            <div class="today-headline"><a href="#">Edtech provider sanctioned €2.8m for profiling minors</a></div>
-            <div class="today-source">garanteprivacy.it</div>
+            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
+            <div class="today-headline"><a href="pai-app-news-story-ico-nhs.html">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+            <div class="today-source">ico.org.uk</div>
+          </div>
+        </li>
+        <li class="today-item">
+          <div class="today-time">—<span class="day">—</span></div>
+          <div>
+            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
+            <div class="today-headline"><a href="pai-app-news-story-ico-nhs.html">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+            <div class="today-source">ico.org.uk</div>
           </div>
         </li>
       </ul>
@@ -877,97 +1140,45 @@ button { cursor: pointer; }
   </div>
   <section class="featured-trio">
 
-    <a class="featured-card" href="#">
+    <a class="featured-card" href="pai-app-news-story-ico-nhs.html">
       <div class="fc-thumb" style="background: linear-gradient(135deg, #032e61 0%, #0176d3 55%, #4ba2e0 100%);">
-        <span class="fc-badge ai"><span class="dot"></span>AI Note</span>
-        <svg class="bg" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid meet">
-          <g fill="rgba(255,255,255,0.20)" stroke="rgba(255,255,255,0.32)" stroke-width="0.9">
-            <path d="M 230,46 L 248,42 L 256,54 L 264,72 L 268,92 L 263,108 L 252,114 L 244,104 L 238,90 L 232,76 L 228,62 Z"/>
-            <path d="M 222,124 L 234,120 L 240,132 L 232,142 L 222,138 Z"/>
-            <path d="M 248,134 L 260,130 L 268,138 L 264,150 L 254,154 L 246,146 Z"/>
-            <path d="M 274,138 L 286,134 L 292,144 L 286,152 L 276,150 Z"/>
-            <path d="M 188,140 L 204,136 L 210,160 L 204,176 L 192,180 L 184,166 L 182,152 Z"/>
-            <path d="M 250,170 L 274,164 L 290,176 L 296,194 L 286,208 L 264,212 L 248,202 L 242,186 Z"/>
-          </g>
-          <g stroke="rgba(255,255,255,0.30)" stroke-width="0.9" fill="none">
-            <line x1="60" y1="60" x2="100" y2="48"/><line x1="100" y1="48" x2="135" y2="78"/>
-            <line x1="80" y1="100" x2="135" y2="78"/>
-            <circle cx="60" cy="60" r="3" fill="rgba(255,255,255,0.55)"/>
-            <circle cx="100" cy="48" r="3" fill="rgba(255,255,255,0.55)"/>
-            <circle cx="135" cy="78" r="3" fill="rgba(255,255,255,0.55)"/>
-            <circle cx="80" cy="100" r="3" fill="rgba(255,255,255,0.55)"/>
-          </g>
-        </svg>
+        <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
       <div class="fc-body">
-        <div class="fc-title">AI governance in the Philippines: where the DPA meets new sectoral guidance</div>
-        <div class="fc-deck">A reading of the NPC's draft AI advisory alongside BSP, IC, and DICT positioning — and what it means for cross-border deployments into ASEAN.</div>
+        <div class="fc-title">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</div>
+        <div class="fc-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="fc-meta">
-          <span class="fc-author"><span class="fc-avatar" style="background:#7c3aed">E</span>Edson</span>
-          <span class="sep">·</span><span class="fc-when">18 Apr</span>
-          <span class="sep">·</span><span>7 min read</span>
+          <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
+          <span class="sep">·</span><span class="fc-when">—</span>
+          <span class="sep">·</span><span>—</span>
         </div>
       </div>
     </a>
-
-    <a class="featured-card" href="#">
+    <a class="featured-card" href="pai-app-news-story-ico-nhs.html">
       <div class="fc-thumb" style="background: linear-gradient(135deg, #06101e 0%, #1f2a3f 50%, #3a475d 100%);">
-        <span class="fc-badge">Video</span>
-        <span class="fc-duration">18:42</span>
-        <svg class="bg" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid meet">
-          <g stroke="rgba(255,255,255,0.20)" stroke-width="1.2" fill="none">
-            <line x1="200" y1="56" x2="130" y2="105"/><line x1="200" y1="56" x2="200" y2="105"/><line x1="200" y1="56" x2="270" y2="105"/>
-            <line x1="130" y1="111" x2="100" y2="160"/><line x1="130" y1="111" x2="160" y2="160"/><line x1="200" y1="111" x2="200" y2="160"/>
-            <line x1="270" y1="111" x2="240" y2="160"/><line x1="270" y1="111" x2="300" y2="160"/>
-          </g>
-          <g fill="rgba(255,255,255,0.32)">
-            <circle cx="200" cy="50" r="6.5"/>
-            <circle cx="130" cy="108" r="5"/><circle cx="200" cy="108" r="5"/><circle cx="270" cy="108" r="5"/>
-            <circle cx="100" cy="166" r="4"/><circle cx="160" cy="166" r="4"/><circle cx="200" cy="166" r="4"/><circle cx="240" cy="166" r="4"/><circle cx="300" cy="166" r="4"/>
-          </g>
-        </svg>
-        <span class="fc-play"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9V3z"/></svg></span>
+        <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
       <div class="fc-body">
-        <div class="fc-title">Automated decision making: where Article 22 ends and the AI Act begins</div>
-        <div class="fc-deck">A 20-minute walkthrough of the overlap between GDPR Art. 22 and AI Act Articles 14, 26, 86 — with worked examples from credit, insurance, and HR.</div>
+        <div class="fc-title">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</div>
+        <div class="fc-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="fc-meta">
-          <span class="fc-author"><span class="fc-avatar" style="background:#c0392b">F</span>Flick Fisher</span>
-          <span class="sep">·</span><span class="fc-when">16 Apr</span>
-          <span class="sep">·</span><span>1.2k views</span>
+          <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
+          <span class="sep">·</span><span class="fc-when">—</span>
+          <span class="sep">·</span><span>—</span>
         </div>
       </div>
     </a>
-
-    <a class="featured-card" href="#">
+    <a class="featured-card" href="pai-app-news-story-ico-nhs.html">
       <div class="fc-thumb" style="background: linear-gradient(135deg, #022d1a 0%, #2e844a 55%, #6fb98a 100%);">
-        <span class="fc-badge chart">Chart of the week</span>
-        <svg class="bg" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid meet">
-          <g fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="0.6">
-            <line x1="40" y1="40" x2="360" y2="40"/><line x1="40" y1="80" x2="360" y2="80"/>
-            <line x1="40" y1="120" x2="360" y2="120"/><line x1="40" y1="160" x2="360" y2="160"/>
-          </g>
-          <g fill="rgba(255,255,255,0.28)">
-            <rect x="60" y="120" width="20" height="60"/>
-            <rect x="92" y="100" width="20" height="80"/>
-            <rect x="124" y="80" width="20" height="100"/>
-            <rect x="156" y="110" width="20" height="70"/>
-            <rect x="188" y="60" width="20" height="120"/>
-            <rect x="220" y="92" width="20" height="88"/>
-            <rect x="252" y="40" width="20" height="140"/>
-            <rect x="284" y="70" width="20" height="110"/>
-            <rect x="316" y="30" width="20" height="150"/>
-          </g>
-          <polyline points="70,150 102,135 134,118 166,128 198,98 230,115 262,80 294,100 326,68" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2"/>
-        </svg>
+        <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
       <div class="fc-body">
-        <div class="fc-title">Enforcement is up 23% across the EU this quarter — here's where it lands</div>
-        <div class="fc-deck">A breakdown of the €315.5m in fines from this week, plotted against prior quarters and split by jurisdiction.</div>
+        <div class="fc-title">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</div>
+        <div class="fc-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="fc-meta">
-          <span class="fc-author"><span class="fc-avatar" style="background:#2e844a">A</span>Analytics</span>
-          <span class="sep">·</span><span class="fc-when">17 Apr</span>
-          <span class="sep">·</span><span>Interactive</span>
+          <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
+          <span class="sep">·</span><span class="fc-when">—</span>
+          <span class="sep">·</span><span>—</span>
         </div>
       </div>
     </a>
@@ -982,64 +1193,16 @@ button { cursor: pointer; }
   <section class="developments">
     <div class="dev-grid">
 
-      <article class="dev-item priority">
-        <div class="dev-meta">
-          <span class="status-pill red">Enforcement</span>
-          <span class="juris">IE · DPC</span>
-          <span class="dot">·</span>
-          <span class="when">today 09:32</span>
-        </div>
-        <div class="dev-headline">Meta Platforms Ireland fined €310m in cross-border ad-targeting decision</div>
-        <div class="dev-deck">Article 60 procedure concluded, six-month compliance window. The EDPB binding decision underpinning the lawful-basis finding sets the shape of every legitimate-interests defence going forward.</div>
-        <div class="dev-source"><span class="link">dataprotection.ie</span> · 47 pp decision</div>
-      </article>
-
-      <article class="dev-item priority watch">
-        <div class="dev-meta">
-          <span class="status-pill blue">Guidance</span>
-          <span class="juris">FR · CNIL</span>
-          <span class="dot">·</span>
-          <span class="when">today 08:15</span>
-        </div>
-        <div class="dev-headline">Recommendations on AI model training with publicly available data</div>
-        <div class="dev-deck">Sets the proportionality test for web-scraped corpora and clarifies the legitimate-interests pathway. Consultation open until 30 May.</div>
-        <div class="dev-source"><span class="link">cnil.fr</span> · consultation draft</div>
-      </article>
-
-      <article class="dev-item">
-        <div class="dev-meta">
-          <span class="status-pill green">Case law</span>
-          <span class="juris">EU · CJEU</span>
-          <span class="dot">·</span>
-          <span class="when">yesterday 19:02</span>
-        </div>
-        <div class="dev-headline"><em>Schrems IV v Commission</em> — judgment delivered (C-446/24)</div>
-        <div class="dev-deck">Clarifies the standard of review for Commission adequacy decisions under Article 45. Practical effect on pending DPF challenges to follow.</div>
-        <div class="dev-source"><span class="link">curia.europa.eu</span> · full judgment</div>
-      </article>
-
       <article class="dev-item">
         <div class="dev-meta">
           <span class="status-pill red">Enforcement</span>
-          <span class="juris">IT · Garante</span>
+          <span class="juris">UK · ICO</span>
           <span class="dot">·</span>
-          <span class="when">yesterday 14:22</span>
+          <span class="when">—</span>
         </div>
-        <div class="dev-headline">Edtech provider sanctioned €2.8m for profiling minors in Lombardy schools</div>
-        <div class="dev-deck">No lawful basis identified; Garante orders deletion of all derived datasets and inferred profiles.</div>
-        <div class="dev-source"><span class="link">garanteprivacy.it</span></div>
-      </article>
-
-      <article class="dev-item">
-        <div class="dev-meta">
-          <span class="status-pill amber">Consultation</span>
-          <span class="juris">IN · MeitY</span>
-          <span class="dot">·</span>
-          <span class="when">yesterday 16:40</span>
-        </div>
-        <div class="dev-headline">DPDPA implementation rules — second draft opens for public comment</div>
-        <div class="dev-deck">Comments due 16 May. Notable changes to consent manager registration and significant data fiduciary classification.</div>
-        <div class="dev-source"><span class="link">meity.gov.in</span></div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+        <div class="dev-source"><span class="link">ico.org.uk</span></div>
       </article>
 
       <article class="dev-item">
@@ -1047,10 +1210,58 @@ button { cursor: pointer; }
           <span class="status-pill red">Enforcement</span>
           <span class="juris">UK · ICO</span>
           <span class="dot">·</span>
-          <span class="when">yesterday 11:55</span>
+          <span class="when">—</span>
         </div>
-        <div class="dev-headline">Enforcement notice to political engagement platform (anonymised)</div>
-        <div class="dev-deck">£750k sanction with six-month remediation. Findings on lawful basis, data minimisation, and onward transfer to third countries.</div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+      </article>
+
+      <article class="dev-item">
+        <div class="dev-meta">
+          <span class="status-pill red">Enforcement</span>
+          <span class="juris">UK · ICO</span>
+          <span class="dot">·</span>
+          <span class="when">—</span>
+        </div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+      </article>
+
+      <article class="dev-item">
+        <div class="dev-meta">
+          <span class="status-pill red">Enforcement</span>
+          <span class="juris">UK · ICO</span>
+          <span class="dot">·</span>
+          <span class="when">—</span>
+        </div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+      </article>
+
+      <article class="dev-item">
+        <div class="dev-meta">
+          <span class="status-pill red">Enforcement</span>
+          <span class="juris">UK · ICO</span>
+          <span class="dot">·</span>
+          <span class="when">—</span>
+        </div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+      </article>
+
+      <article class="dev-item">
+        <div class="dev-meta">
+          <span class="status-pill red">Enforcement</span>
+          <span class="juris">UK · ICO</span>
+          <span class="dot">·</span>
+          <span class="when">—</span>
+        </div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="dev-source"><span class="link">ico.org.uk</span></div>
       </article>
 
@@ -1067,7 +1278,7 @@ button { cursor: pointer; }
 
     <div class="panel">
       <div class="panel-head">
-        <div class="panel-title">Enforcement <span class="count">9 actions · €315.5m</span></div>
+        <div class="panel-title">Enforcement <span class="count"><b id="enfActions">—</b> actions · <b id="enfTotal">—</b></span></div>
         <span class="panel-link">View all</span>
       </div>
       <table class="data-table">
@@ -1075,11 +1286,11 @@ button { cursor: pointer; }
           <tr><th>Regulator</th><th>Target</th><th class="right">Fine</th><th class="right">When</th></tr>
         </thead>
         <tbody>
-          <tr><td class="reg">IE · DPC</td><td class="target">Meta Platforms<span class="sub">art. 60 procedure</span></td><td class="num">€310.0m</td><td class="when">today</td></tr>
-          <tr><td class="reg">IT · Garante</td><td class="target">Edtech (Lombardy)<span class="sub">profiling minors</span></td><td class="num">€2.8m</td><td class="when">4d</td></tr>
-          <tr><td class="reg">ES · AEPD</td><td class="target">Telefónica<span class="sub">SIM swap controls</span></td><td class="num">€1.2m</td><td class="when">2d</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target">Political platform<span class="sub">anonymised</span></td><td class="num">£750k</td><td class="when">3d</td></tr>
-          <tr><td class="reg">KE · ODPC</td><td class="target">Digital lender<span class="sub">contact scraping</span></td><td class="num">KES 4.5m</td><td class="when">5d</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
         </tbody>
       </table>
     </div>
@@ -1091,19 +1302,19 @@ button { cursor: pointer; }
       </div>
       <div class="case-list">
         <div class="case-row">
-          <div class="case-meta"><span class="case-court">CJEU</span><span class="case-when">C-446/24 · today</span></div>
-          <div class="case-name"><em>Schrems IV v Commission</em></div>
-          <div class="case-take">Standard of review for Commission adequacy decisions clarified. Pending DPF challenges affected.</div>
+          <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
+          <div class="case-name"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+          <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
         </div>
         <div class="case-row">
-          <div class="case-meta"><span class="case-court">EDPB</span><span class="case-when">03/2026 · 2d</span></div>
-          <div class="case-name">Cross-border streaming dispute</div>
-          <div class="case-take">Legitimate interests held inapplicable to large-scale behavioural inference; AEPD instructed on sanction.</div>
+          <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
+          <div class="case-name"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+          <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
         </div>
         <div class="case-row">
-          <div class="case-meta"><span class="case-court">UK High Court</span><span class="case-when">KBD · 4d</span></div>
-          <div class="case-name"><em>Prismall v Google &amp; DeepMind</em> [2026] EWHC 412</div>
-          <div class="case-take">Representative action dismissed on de minimis grounds. Narrow reading of <em>Lloyd v Google</em> confirmed.</div>
+          <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
+          <div class="case-name"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+          <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
         </div>
       </div>
     </div>
@@ -1159,7 +1370,7 @@ button { cursor: pointer; }
     <div class="left">
       <span>PrinciplesAI</span>
       <span><span class="ok"></span>Pipeline operational</span>
-      <span>18 published today</span>
+      <span><b id="ftPublished">—</b> published today</span>
     </div>
     <div>v0.9</div>
   </footer>
@@ -1178,5 +1389,719 @@ function setHotView(view, btn) {
 }
 </script>
 
+
+
+<!-- Mobile nav shim -->
+<style>
+.mobile-nav-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 22px; height: 22px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 860px) {
+  .mobile-nav-toggle { display: flex; }
+  .icon-sidebar { display: none !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.2) !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; }
+  body.mobile-nav-open .icon-sidebar .brand-text,
+  body.mobile-nav-open .icon-sidebar .nav-label { opacity: 1 !important; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+  .header-bar { left: 0 !important; padding-left: 60px !important; }
+  .main-content { margin-left: 0 !important; }
+  .page { padding: 16px !important; }
+}
+
+/* ==CANONICAL_PAGE_CHROME== */
+.page-statusbar { display: grid; grid-template-columns: 1fr auto; gap: 20px; padding: 0 0 18px; margin-bottom: 22px; border-bottom: 1px solid #dbe1ea; align-items: start; min-height: 55px; }
+.page-statusbar .ps-left { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12.5px; color: #5e6878; }
+.page-statusbar .ps-breadcrumb { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+.page-statusbar .ps-breadcrumb a { color: #014486; text-decoration: none; font-weight: 600; }
+.page-statusbar .ps-breadcrumb a:hover { color: #0176d3; text-decoration: underline; }
+.page-statusbar .ps-sep { color: #c8d0dc; font-size: 11px; }
+.page-statusbar .ps-current { color: #0a1729; font-weight: 700; }
+.page-statusbar .ps-scope-chip { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; font-size: 11px; font-weight: 600; color: #014486; background: #e3effc; border: 1px solid #e3effc; border-radius: 4px; letter-spacing: 0.02em; }
+.page-statusbar .ps-ok { color: #2e844a; font-weight: 600; font-size: 12.5px; }
+.page-statusbar .ps-ok::before { content: ''; display: inline-block; width: 7px; height: 7px; background: #2e844a; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.page-statusbar .page-actions { display: flex; gap: 8px; align-items: center; }
+.page-head { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid #ebeff5; }
+.page-head .page-eyebrow { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #014486; margin-bottom: 10px; }
+.page-head .page-title { font-size: 44px; font-weight: 700; color: #06101e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
+.page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
+.page-head .page-sub.fine { font-size: 12.5px; color: #8a93a3; margin-top: 6px; }
+/* ==END_CANONICAL_PAGE_CHROME== */
+</style>
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==BEGIN_JUR_HTML== Jurisdictions overlay (DG inline-expand pattern) -->
+<div id="jur-overlay-backdrop" onclick="closeJurisdictions()"></div>
+<div id="jur-overlay">
+  <div class="jo-header">
+    <h3 class="jo-title">Jurisdictions</h3>
+    <button class="jo-close" onclick="closeJurisdictions()" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+  </div>
+  <div class="jo-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="jo-search-input" placeholder="Search" oninput="filterJurList(this.value)" autocomplete="off">
+  </div>
+  <div class="jo-hint"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-12a8 8 0 1116 0c0 7.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg><span>Tap a row to open. <b>Pin icon</b> sets home.</span></div>
+  <div class="jo-list" id="jo-list"></div>
+</div>
+<!-- ==END_JUR_HTML== -->
+
+<script src="jurisdictions.js"></script>
+<script id="jur-overlay-js">
+(function(){
+  if(window.openJurisdictions)return;
+  // Federal hierarchies the data file doesn't encode with parent fields
+  var CHILDREN_OF = {
+    'Germany':['Baden-Württemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg','Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia','Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt','Schleswig-Holstein','Thuringia'],
+    'USA':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States of America':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'Canada':['Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
+    'Australia':['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory'],
+    'United Arab Emirates':['Abu Dhabi Global Market','Dubai Health Care City','Dubai International Financial Centre','Emirate of Abu Dhabi','Emirate of Dubai','United Arab Emirates Federal'],
+    'Qatar':['Qatar Financial Centre','Qatar State']
+  };
+  // Reverse map: child name → parent
+  var PARENT_OF = {};
+  Object.keys(CHILDREN_OF).forEach(function(p){ CHILDREN_OF[p].forEach(function(c){ PARENT_OF[c]=p; }); });
+  // Canonical name dedupe (for data duplicates)
+  var NAME_CANONICAL = { 'Bosnia and Herzegovina':'Bosnia & Herzegovina' };
+  function canonical(n){ return NAME_CANONICAL[n] || n; }
+
+  function slugify(n){
+    var s = (n||'').toLowerCase();
+    s = s.replace(/[&\/'()]/g, '');
+    s = s.replace(/[^a-z0-9]+/g, '-');
+    s = s.replace(/-+/g, '-').replace(/^-|-$/g,'');
+    return s;
+  }
+
+
+
+  var JURIS_PAGES = {
+    'United Kingdom':'pai-app-juris-uk.html',
+    'Germany':'pai-app-juris-germany.html',
+    'California':'pai-app-juris-california.html',
+    'Quebec':'pai-app-juris-quebec.html',
+    'OECD':'pai-app-juris-oecd.html'
+  };
+
+  var SKIP_EXPAND = {'United Kingdom':1};
+
+  var INTERNATIONAL = ['OECD','Council of Europe','G7','International'];
+
+  var REGION_PIN = { 'Europe':'European Union', 'Africa':'African Union', 'Asia Pacific':'ASEAN' };
+
+  var TOP_COUNTRIES = ['Canada','Mexico','USA','United States of America','United States'];
+
+  function tl(name){
+    var m={'USA':'United States of America','United States':'United States of America'};
+    return m[name]||name;
+  }
+
+  function buildTree(){
+    if(typeof jurData==='undefined')return null;
+    var top = [];
+    var regionBuckets = {};
+    var seenCanonical = {};
+    Object.keys(jurData).forEach(function(name){
+      var d=jurData[name]; if(!d)return;
+      if(d.parent || PARENT_OF[name]) return;
+      var cn = canonical(name);
+      if(seenCanonical[cn]) return;
+      seenCanonical[cn] = 1;
+      if(d.region === 'Global') return;
+      var region = d.region;
+      
+      if(cn === 'Mexico') region = 'North America';
+      if(!regionBuckets[region]) regionBuckets[region] = { name: region, countries: [] };
+      // Hard-filter: North America region only allows Canada / Mexico / United States
+      if(region === 'North America' && !({'Canada':1,'Mexico':1,'United States':1,'United States of America':1,'USA':1})[cn]) return;
+      regionBuckets[region].countries.push(cn);
+    });
+
+    // Top-level entries in explicit order
+    var topCountryMap = {};
+    top.forEach(function(t){ topCountryMap[t.name]=t; });
+    var orderedTopCountries = ['Canada','Mexico','United States of America']
+      .map(function(n){ return topCountryMap[n]; })
+      .filter(Boolean);
+
+    var REGION_ORDER = ['Europe','North America','Caribbean','Latin America','Asia Pacific','Middle East','Africa'];
+    var regions = [];
+    REGION_ORDER.forEach(function(r){ if(regionBuckets[r]) regions.push(regionBuckets[r]); });
+
+    // Sort countries in each region: pin supranational first, separator, alphabetical rest
+    regions.forEach(function(r){
+      var pin = REGION_PIN[r.name];
+      r.countries.sort(function(a,b){
+        if(a===pin)return -1; if(b===pin)return 1;
+        return a.localeCompare(b);
+      });
+    });
+
+    return { international: INTERNATIONAL, topCountries: orderedTopCountries, regions: regions };
+  }
+
+  var tree = null;
+  function getTree(){ if(!tree) tree = buildTree(); return tree || {international:[],topCountries:[],regions:[]}; }
+
+  function iconGlobe(){
+    return '<span class="jo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>';
+  }
+  function iconFlag(){
+    return '<span class="jo-icon"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>';
+  }
+  function iconChevron(open){
+    return '<span class="jo-caret">'+(open?'&#9662;':'&#9656;')+'</span>';
+  }
+
+  function rowEl(name, kind, opts){
+    opts = opts || {};
+    var el = document.createElement('div');
+    el.className = 'jo-row' + (opts.federal?' is-federal':'');
+    var _curHome = (function(){try{return localStorage.getItem('pai-home-jurisdiction')||''}catch(e){return ''}})();
+    var _isHome = (_curHome && _curHome === name);
+    var _pin = '<button class="jo-pin-btn'+(_isHome?' is-home':'')+'" title="'+(_isHome?'This is your home':'Set as home')+'" aria-label="Set '+name+' as home"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-12a8 8 0 1116 0c0 7.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg></button>';
+    if(opts.expandable){
+      el.setAttribute('data-expandable','1');
+      el.innerHTML = iconChevron(false) + '<span class="jo-name">'+name+'</span>' + _pin;
+    } else {
+      el.innerHTML = '<span class="jo-caret" style="visibility:hidden"></span><span class="jo-name">'+name+'</span>' + _pin;
+    }
+    if(opts.onClick) el.onclick = opts.onClick;
+    var _pinBtn = el.querySelector('.jo-pin-btn');
+    if(_pinBtn){
+      _pinBtn.onclick = function(ev){
+        ev.stopPropagation();
+        try{ localStorage.setItem('pai-home-jurisdiction', name); }catch(e){}
+        var _ov = document.getElementById('jur-overlay'); if(_ov) _ov.removeAttribute('data-built');
+        if(typeof buildList==='function') buildList();
+        if(typeof renderHomeJurBadge==='function') renderHomeJurBadge();
+      };
+    }
+    return el;
+  }
+
+  function buildList(){
+    var t = getTree();
+    var listEl = document.getElementById('jo-list');
+    listEl.innerHTML = '';
+
+    // HOME jurisdiction (if set) — pinned at very top, subtly styled
+    var _home = (function(){try{return localStorage.getItem('pai-home-jurisdiction')||''}catch(e){return ''}})();
+    if(_home){
+      var hlbl = document.createElement('div');
+      hlbl.className = 'jo-section-label';
+      hlbl.textContent = 'My home';
+      listEl.appendChild(hlbl);
+      var hr = document.createElement('div');
+      hr.className = 'jo-row jo-home-row';
+      hr.innerHTML = '<span class="jo-caret" style="visibility:hidden"></span><span class="jo-home-icon">\u25C6</span><span class="jo-name">'+_home+'</span><button class="jo-home-clear" title="Clear home jurisdiction">Clear</button>';
+      hr.querySelector('.jo-home-clear').onclick = function(ev){ ev.stopPropagation(); try{localStorage.removeItem('pai-home-jurisdiction')}catch(e){} document.getElementById('jur-overlay').removeAttribute('data-built'); buildList(); if(typeof renderHomeJurBadge==='function') renderHomeJurBadge(); };
+      hr.onclick = function(){ goJurisdiction(_home); };
+      listEl.appendChild(hr);
+      var hsep = document.createElement('div'); hsep.className = 'jo-section-sep'; listEl.appendChild(hsep);
+    }
+
+    // Regions (Europe, North America, Caribbean, Latin America, Asia Pacific, Middle East, Africa)
+    t.regions.forEach(function(r){
+      listEl.appendChild(buildRegionRow(r));
+    });
+
+    // Thin separator then International section at the BOTTOM
+    var sep = document.createElement('div'); sep.className='jo-section-sep'; listEl.appendChild(sep);
+    var secLbl = document.createElement('div');
+    secLbl.className = 'jo-section-label'; secLbl.textContent = 'International';
+    listEl.appendChild(secLbl);
+    t.international.forEach(function(n){
+      listEl.appendChild(rowEl(n, 'country', { onClick: function(){ goJurisdiction(n); }}));
+    });
+  }
+
+  function buildRegionRow(region){
+    var wrap = document.createElement('div'); wrap.className='jo-region-wrap';
+    var row = rowEl(region.name, 'region', { expandable: true, onClick: function(){ toggleExpand(wrap, row, function(){ renderRegionChildren(wrap, region); }); }});
+    wrap.appendChild(row);
+    var children = document.createElement('div'); children.className='jo-children';
+    wrap.appendChild(children);
+    return wrap;
+  }
+
+  function renderRegionChildren(wrap, region){
+    var container = wrap.querySelector('.jo-children');
+    if(container.dataset.filled==='1') return;
+    container.dataset.filled='1';
+    var pin = REGION_PIN[region.name];
+    region.countries.forEach(function(c, idx){
+      var d = (typeof jurData!=='undefined') ? jurData[c] : null;
+      var hasChildren = (d && d.children && d.children.length>0) || (CHILDREN_OF[c] && CHILDREN_OF[c].length>0);
+      if(hasChildren && !SKIP_EXPAND[c]){
+        container.appendChild(buildExpandableCountryRow(c, c, (d && d.children && d.children.length) ? d.children : (CHILDREN_OF[c] || [])));
+      } else {
+        container.appendChild(rowEl(c, 'country', { onClick: function(){ goJurisdiction(c); }}));
+      }
+      if(pin && idx===0 && region.countries.length>1){
+        var sep=document.createElement('div'); sep.className='jo-pinned-sep'; container.appendChild(sep);
+      }
+    });
+  }
+
+  function buildExpandableCountryRow(name, dataKey, children){
+    var wrap = document.createElement('div');
+    var row = rowEl(name, 'country', { expandable: true, onClick: function(ev){
+      // Toggle (not navigate) if we're already on this jurisdiction's page OR a child of it
+      var cur = window.PAI_JURIS;
+      var isHere = cur === dataKey || cur === name;
+      var isChild = cur && (PARENT_OF[cur] === dataKey || PARENT_OF[cur] === name);
+      if(isHere || isChild){
+        toggleExpand(wrap, row, function(){ fillFederalChildren(wrap, name, children); });
+        return;
+      }
+      location.href = 'pai-app-juris-' + slugify(dataKey) + '.html';
+    }});
+    wrap.appendChild(row);
+    var cont = document.createElement('div'); cont.className='jo-children';
+    wrap.appendChild(cont);
+    return wrap;
+  }
+
+  function fillFederalChildren(wrap, parentName, children){
+    var container = wrap.querySelector('.jo-children');
+    if(container.dataset.filled==='1') return;
+    container.dataset.filled='1';
+    // Federal entry pinned first
+    var federalLabel = (parentName==='United States of America'||parentName==='USA')
+      ? 'United States (USA) Federal'
+      : parentName + ' Federal';
+    var fedRow = document.createElement('div'); fedRow.className='jo-row is-federal';
+    fedRow.innerHTML='<span class="jo-caret" style="visibility:hidden"></span><span class="jo-name">'+federalLabel+'</span>';
+    fedRow.onclick = function(){ goJurisdiction(parentName); };
+    container.appendChild(fedRow);
+    var sep=document.createElement('div'); sep.className='jo-pinned-sep'; container.appendChild(sep);
+    // Alphabetical children
+    var sorted = children.slice().sort();
+    sorted.forEach(function(ch){
+      container.appendChild(rowEl(ch, 'country', { onClick: function(){ goJurisdiction(ch); }}));
+    });
+  }
+
+  function toggleExpand(wrap, row, onOpen){
+    var cont = wrap.querySelector('.jo-children');
+    var opening = !cont.classList.contains('is-open');
+    if(opening){
+      if(onOpen) onOpen();
+      cont.classList.add('is-open');
+      row.classList.add('is-open');
+      // rotate caret
+      var caret=row.querySelector('.jo-caret'); if(caret) caret.innerHTML='&#9662;';
+    } else {
+      cont.classList.remove('is-open');
+      row.classList.remove('is-open');
+      var caret=row.querySelector('.jo-caret'); if(caret) caret.innerHTML='&#9656;';
+    }
+  }
+
+  function openExpandInOverlayByParent(parentName){
+    if(!parentName) return;
+    var all = document.querySelectorAll('#jo-list .jo-row');
+    for(var i=0;i<all.length;i++){
+      var nameEl = all[i].querySelector('.jo-name');
+      if(nameEl && nameEl.textContent === parentName && all[i].hasAttribute('data-expandable')){
+        all[i].click();
+        // Scroll into view
+        all[i].scrollIntoView({ block:'center' });
+        return;
+      }
+    }
+  }
+
+  function goJurisdiction(name){
+    closeJurisdictions();
+    var slug = slugify(name);
+    location.href = 'pai-app-juris-' + slug + '.html';
+  }
+  window.goJurisdiction = goJurisdiction;
+
+  function openJurisdictions(){
+    var o=document.getElementById('jur-overlay'), bd=document.getElementById('jur-overlay-backdrop');
+    if(!o.dataset.built){ buildList(); o.dataset.built='1'; }
+    var list=document.getElementById('jo-list'); if(list) list.scrollTop = 0;
+    var inp2=document.getElementById('jo-search-input'); if(inp2) inp2.value = '';
+    o.classList.add('open'); bd.classList.add('open');
+    document.body.classList.add('jur-overlay-open');
+    // Auto-expand if the current page represents a jurisdiction
+    var cur = window.PAI_JURIS;
+    if(cur){
+      var parent = PARENT_OF[cur] || (CHILDREN_OF[cur] ? cur : null);
+      if(parent){ setTimeout(function(){ expandByName(parent); }, 50); }
+    }
+    var inp=document.getElementById('jo-search-input'); if(inp){ setTimeout(function(){inp.focus()},250); }
+  }
+  
+  function expandByName(name){
+    // If target is inside a region that's lazy-rendered, expand that region first
+    if(typeof jurData !== 'undefined' && jurData[name]){
+      var region = jurData[name].region;
+      
+      if(name === 'Mexico') region = 'North America';
+      var wraps = document.querySelectorAll('#jo-list > .jo-region-wrap');
+      for(var w=0; w<wraps.length; w++){
+        var rn = wraps[w].querySelector(':scope > .jo-row .jo-name');
+        if(rn && rn.textContent.trim() === region){
+          var rrow = wraps[w].querySelector(':scope > .jo-row');
+          if(!rrow.classList.contains('is-open')) rrow.click();
+          break;
+        }
+      }
+    }
+    // Now look for target (after region expansion has rendered children)
+    setTimeout(function(){
+      var all = document.querySelectorAll('#jo-list .jo-row');
+      for(var i=0; i<all.length; i++){
+        var nameEl = all[i].querySelector('.jo-name');
+        if(nameEl && nameEl.textContent.trim() === name){
+          if(all[i].hasAttribute('data-expandable') && !all[i].classList.contains('is-open')){
+            all[i].click();
+          }
+          try { all[i].scrollIntoView({block:'nearest'}); } catch(e){}
+          return;
+        }
+      }
+    }, 120);
+  }
+  window.expandByName = expandByName;
+
+  window.openJurisdictions = openJurisdictions;
+
+  function closeJurisdictions(){
+    var o=document.getElementById('jur-overlay'), bd=document.getElementById('jur-overlay-backdrop');
+    o.classList.remove('open'); bd.classList.remove('open');
+    document.body.classList.remove('jur-overlay-open');
+  }
+  window.closeJurisdictions = closeJurisdictions;
+
+  function filterJurList(q){
+    q = (q||'').trim().toLowerCase();
+    var rows = document.querySelectorAll('#jo-list .jo-row');
+    if(!q){
+      rows.forEach(function(r){ r.style.display=''; });
+      // Close all expanded
+      document.querySelectorAll('#jo-list .jo-children.is-open').forEach(function(c){ c.classList.remove('is-open'); });
+      document.querySelectorAll('#jo-list .jo-row.is-open').forEach(function(r){ r.classList.remove('is-open'); var ct=r.querySelector('.jo-caret'); if(ct) ct.innerHTML='&#9656;'; });
+      return;
+    }
+    // Pre-fill all regions' children so search can match inside
+    document.querySelectorAll('.jo-region-wrap').forEach(function(w){
+      var rn = w.querySelector('.jo-name'); if(!rn) return;
+      // lazy-fill children if empty
+      var cont = w.querySelector('.jo-children');
+      if(cont && cont.dataset.filled!=='1'){
+        var t=getTree(); var match=t.regions.filter(function(r){return r.name===rn.textContent})[0];
+        if(match) renderRegionChildren(w, match);
+      }
+      if(cont) cont.classList.add('is-open');
+    });
+    // Show matching rows and their ancestors
+    rows.forEach(function(r){
+      var name = (r.querySelector('.jo-name')||{}).textContent || '';
+      var hit = name.toLowerCase().indexOf(q) !== -1;
+      r.style.display = hit ? '' : 'none';
+      if(hit){
+        // Make sure parent chain is visible
+        var p = r.parentElement;
+        while(p && p.id !== 'jo-list'){
+          if(p.classList && (p.classList.contains('jo-children') || p.classList.contains('jo-region-wrap'))){
+            p.style.display = '';
+            if(p.classList.contains('jo-children')) p.classList.add('is-open');
+          }
+          p = p.parentElement;
+        }
+      }
+    });
+    // Section label always visible
+    document.querySelectorAll('.jo-section-label').forEach(function(l){ l.style.display=''; });
+  }
+  window.filterJurList = filterJurList;
+
+  // Expand-on-arrival (federal drill landing)
+  function expandOnArrival(){
+    var parent = null;
+    try { parent = sessionStorage.getItem('pai-jur-expand-on-arrive'); sessionStorage.removeItem('pai-jur-expand-on-arrive'); } catch(e){}
+    if(!parent) return;
+    // Open overlay quietly then expand — but Dave wants closed-on-arrival.
+    // So: do not auto-open the overlay. Persist the expand state so NEXT time user opens, it expands.
+    try { sessionStorage.setItem('pai-jur-prev-expanded', parent); } catch(e){}
+  }
+
+  function applyPrevExpandedOnOpen(){
+    var parent = null;
+    try { parent = sessionStorage.getItem('pai-jur-prev-expanded'); } catch(e){}
+    if(!parent) return;
+    setTimeout(function(){ openExpandInOverlayByParent(parent); }, 30);
+  }
+
+  // Esc to close
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeJurisdictions(); }});
+
+  // --- Home jurisdiction persistence (sidebar pin + header badge) ---
+  function getHome(){ try { return localStorage.getItem('pai-home-jurisdiction') || ''; } catch(e) { return ''; } }
+  function renderHomeJurPin(){
+    var zone = document.querySelector('.sidebar-regions-zone'); if(!zone) return;
+    var old = document.getElementById('home-jur-pinned'); if(old) old.remove();
+    var suppressed = zone.querySelector('.sidebar-nav-divider[data-suppressed-for-pin]');
+    if(suppressed){ suppressed.style.display = ''; suppressed.removeAttribute('data-suppressed-for-pin'); }
+  }
+  function renderHomeJurBadge(){
+    var h = getHome();
+    document.querySelectorAll('.home-jur-btn').forEach(function(btn){
+      btn.onclick = openJurisdictions;
+      btn.style.cursor = 'pointer';
+      var spans = btn.querySelectorAll('span');
+      var labelSpan = null;
+      for(var i=0;i<spans.length;i++){ if(!spans[i].classList.contains('hjb-flag')) { labelSpan = spans[i]; break; } }
+      var flagSpan = btn.querySelector('.hjb-flag');
+      if(!h){
+        if(flagSpan) flagSpan.textContent = '';
+        if(labelSpan) labelSpan.textContent = 'Set home';
+      } else {
+        if(flagSpan) flagSpan.textContent = '';
+        if(labelSpan) labelSpan.textContent = h;
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    expandOnArrival();
+    renderHomeJurPin();
+    renderHomeJurBadge();
+  });
+
+  // (deploy14) prev-expanded scroll-hook removed — overlay always opens with full list visible
+})();
+</script>
+
+<script src="https://gistcdn.githack.com/davidlongford/38bf87bee575b5e881adac29c529daf5/raw/pai-map.js" defer></script>
+<script>
+// Set title attribute on each sidebar nav item so hover shows a browser tooltip
+(function(){
+  function applyTitles(){
+    document.querySelectorAll('.icon-sidebar .sidebar-nav-item').forEach(function(el){
+      var lbl = el.querySelector('.nav-label');
+      if(lbl && !el.getAttribute('title')){ el.setAttribute('title', lbl.textContent.trim()); }
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', applyTitles);
+  else applyTitles();
+})();
+</script>
+<script>
+(function(){
+  // Toggle body.sidebar-expanded on sidebar hover — CSS handles the shift
+  var sb = document.querySelector('.icon-sidebar');
+  if(!sb) return;
+  var t;
+  sb.addEventListener('mouseenter', function(){ clearTimeout(t); document.body.classList.add('sidebar-expanded'); });
+  sb.addEventListener('mouseleave', function(){ t = setTimeout(function(){ document.body.classList.remove('sidebar-expanded'); }, 80); });
+})();
+</script>
+<script id="pai-logout-js">
+(function(){
+  if(window.paiLogout) return;
+  window.paiLogout = function(ev){
+    if(ev && ev.preventDefault) ev.preventDefault();
+    try{
+      ['pai-onboarding-v2','pai-onboarding-v1','pai-tour-v1','pai-last-visit','pai-home-jurisdiction'].forEach(function(k){
+        try{ localStorage.removeItem(k); }catch(e){}
+      });
+    }catch(e){}
+    if(window.Clerk && typeof window.Clerk.signOut === 'function'){
+      try{
+        window.Clerk.signOut().then(function(){ window.location.href = '/sign-in'; });
+        return;
+      }catch(e){}
+    }
+    window.location.href = '/sign-in';
+  };
+})();
+</script>
+
+<script>
+/* Dashboard stats — loaded from stats.json + authorities.json (written by build_marketing_data.py) */
+(async function loadHomeStats() {
+  const setTx = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  try {
+    const [statsR, authR] = await Promise.all([
+      fetch('./stats.json', { cache: 'no-cache' }),
+      fetch('./authorities.json', { cache: 'no-cache' }),
+    ]);
+    if (statsR.ok) {
+      const d = await statsR.json();
+      if (d.news_count != null) setTx('ftPublished', d.news_count.toLocaleString() + ' published');
+    }
+    if (authR.ok) {
+      const auth = await authR.json();
+      const REGION_NORMALISE = {
+        'Europe':'Europe', 'europe':'Europe',
+        'North America':'North America', 'north-america':'North America',
+        'Latin America':'Latin America', 'latin-america':'Latin America',
+        'Caribbean':'Caribbean', 'caribbean':'Caribbean',
+        'Africa':'Africa', 'africa':'Africa',
+        'Middle East':'Middle East', 'middle-east':'Middle East', 'mena':'Middle East',
+        'Asia Pacific':'Asia Pacific', 'Asia-Pacific':'Asia Pacific', 'asia-pacific':'Asia Pacific', 'apac':'Asia Pacific',
+        'Global':'Global', 'global':'Global',
+      };
+      const buckets = {};
+      (auth.rows || []).forEach(r => {
+        const reg = REGION_NORMALISE[r.region];
+        const j = r.jurisdiction_name;
+        if (reg && j) { (buckets[reg] = buckets[reg] || new Set()).add(j); }
+      });
+      const SLOT = { regEU:'Europe', regNA:'North America', regLatAm:'Latin America',
+                     regCaribbean:'Caribbean', regAF:'Africa', regME:'Middle East',
+                     regAPAC:'Asia Pacific', regGlobal:'Global' };
+      Object.entries(SLOT).forEach(([slot, reg]) => {
+        const n = (buckets[reg] || new Set()).size;
+        if (n) setTx(slot, n.toLocaleString());
+      });
+    }
+  } catch (_) { /* leave — on failure */ }
+})();
+</script>
+<div class="nav-scrim" aria-hidden="true"></div>
+
+<script>
+/* News multi-select tickboxes + 'Create report' floating bar (top-left checkbox) */
+(function(){
+  var BAR_ID='paiNewsActionBar';
+  function getRow(cb){ return cb.closest('.wire-row,.news-lead,.news-second,.today-item,.today-row,.news-item'); }
+  function getSource(row){ var a=row.querySelector('a[href]'); return (row.dataset.source||'')||(a?a.href:''); }
+  function getTitle(row){ var h=row.querySelector('h2,h3,h4,.nl-title,.ns-title,.wr-info h4,.wr-title,.today-headline'); return h?h.textContent.trim():(row.textContent||'').trim().slice(0,80); }
+  function getBody(row){ var a=row.querySelector('.wr-src strong,.nl-footer strong,.ns-meta'); return a?a.textContent.trim():''; }
+
+  function ensureCheckbox(row){
+    if(row.querySelector('.pai-news-tick')) return;
+    var label=document.createElement('label');
+    label.className='pai-news-tick';
+    label.style.cssText='position:absolute;top:8px;left:8px;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid rgba(1,118,211,0.45);border-radius:4px;cursor:pointer;z-index:9999;box-shadow:0 1px 3px rgba(10,23,41,0.08);';
+    var cb=document.createElement('input');
+    cb.type='checkbox'; cb.style.cssText='margin:0;cursor:pointer;width:14px;height:14px;accent-color:#0176d3;';
+    cb.addEventListener('click',function(e){ e.stopPropagation(); });
+    cb.addEventListener('change',updateBar);
+    label.appendChild(cb);
+    if(getComputedStyle(row).position==='static') row.style.position='relative';
+    /* Shift any existing left content to make room (nudge padding-left) */
+    if(!row.dataset.paiTickNudge){ row.style.paddingLeft='42px'; row.dataset.paiTickNudge='1'; }
+    row.appendChild(label);
+  }
+
+  function collectSelected(){
+    var out=[];
+    document.querySelectorAll('.pai-news-tick input:checked').forEach(function(cb){
+      var row=getRow(cb); if(!row) return;
+      out.push({ title:getTitle(row), body:getBody(row), url:getSource(row) });
+    });
+    return out;
+  }
+
+  function updateBar(){
+    var items=collectSelected();
+    var bar=document.getElementById(BAR_ID);
+    if(!items.length){ if(bar) bar.remove(); return; }
+    if(!bar){
+      bar=document.createElement('div');
+      bar.id=BAR_ID;
+      bar.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#07202e;color:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 8px 28px rgba(10,23,41,0.3);display:flex;gap:12px;align-items:center;z-index:1000;font-size:13px;font-family:inherit;max-width:calc(100% - 40px)';
+      bar.innerHTML=''
+        +'<span id="paiNewsCount" style="font-weight:500"></span>'
+        +'<span style="opacity:0.35">·</span>'
+        +'<button id="paiNewsPdfBtn" style="padding:7px 14px;border:0;border-radius:6px;background:#0176d3;color:#fff;font-weight:600;cursor:pointer;font-size:12.5px;">Create PDF report</button>'
+        +'<button id="paiNewsEmailBtn" style="padding:7px 14px;border:1px solid rgba(255,255,255,0.25);border-radius:6px;background:transparent;color:#fff;cursor:pointer;font-size:12.5px;">Email report</button>'
+        +'<button id="paiNewsClearBtn" style="padding:6px 10px;border:0;border-radius:6px;background:transparent;color:#fff;cursor:pointer;opacity:0.6;font-size:12.5px;" title="Clear selection">✕</button>';
+      document.body.appendChild(bar);
+      bar.querySelector('#paiNewsPdfBtn').addEventListener('click',createPdf);
+      bar.querySelector('#paiNewsEmailBtn').addEventListener('click',createEmail);
+      bar.querySelector('#paiNewsClearBtn').addEventListener('click',function(){
+        document.querySelectorAll('.pai-news-tick input:checked').forEach(function(i){ i.checked=false; });
+        updateBar();
+      });
+    }
+    bar.querySelector('#paiNewsCount').textContent=items.length+' selected';
+  }
+
+  function createPdf(){
+    var items=collectSelected();
+    if(!items.length) return;
+    var w=window.open('','_blank');
+    if(!w) return;
+    var rows=items.map(function(it,i){
+      return '<article style="margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #dbe1ea">'
+        +'<div style="font-family:monospace;font-size:10.5px;color:#5e6878;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Story '+(i+1)+' · PrinciplesAI report</div>'
+        +'<h2 style="margin:0 0 8px 0;font-size:18px;color:#07202e;letter-spacing:-0.01em">'+(it.title||'—')+'</h2>'
+        +(it.body?'<div style="font-size:12.5px;color:#5e6878;margin-bottom:6px">'+it.body+'</div>':'')
+        +(it.url?'<div style="font-size:12px"><a href="'+it.url+'" style="color:#0176d3">'+it.url+'</a></div>':'')
+        +'</article>';
+    }).join('');
+    var stamp=new Date().toISOString().slice(0,10);
+    w.document.write('<!doctype html><html><head><title>PrinciplesAI report '+stamp+'</title>'
+      +'<style>body{font-family:Inter,system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 24px;color:#0d2e42;line-height:1.5}h1{font-size:22px;margin:0 0 4px 0;color:#07202e}.report-meta{font-size:12px;color:#5e6878;margin-bottom:28px;font-family:monospace}@media print{@page{margin:18mm}}</style></head>'
+      +'<body>'
+      +'<h1>News report — '+items.length+' selected</h1>'
+      +'<div class="report-meta">PrinciplesAI · generated '+new Date().toLocaleString()+'</div>'
+      +rows
+      +'<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script>'
+      +'</body></html>');
+    w.document.close();
+  }
+
+  function createEmail(){
+    var items=collectSelected();
+    if(!items.length) return;
+    var NL = String.fromCharCode(10);
+    var subject='PrinciplesAI news report ('+items.length+' stories)';
+    var body='Here is a selection of stories from PrinciplesAI:'+NL+NL;
+    items.forEach(function(it,i){
+      body += (i+1)+'. '+(it.title||'—')+NL;
+      if(it.body) body += '   '+it.body+NL;
+      if(it.url)  body += '   '+it.url+NL;
+      body += NL;
+    });
+    body += '—'+NL+'Generated via PrinciplesAI';
+    var href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    if(href.length>1800) href=href.slice(0,1800);
+    window.location.href=href;
+  }
+
+  function scan(){
+    document.querySelectorAll('.wire-row,.news-lead,.news-second,.today-item,.today-row,.news-item').forEach(ensureCheckbox);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',scan);
+  else scan();
+  var wireEl=document.getElementById('wireList')||document.querySelector('.wire-list');
+  if(wireEl){ new MutationObserver(scan).observe(wireEl,{childList:true,subtree:false}); }
+  setInterval(scan,2000);
+})();
+</script>
 </body>
 </html>

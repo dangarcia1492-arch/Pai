@@ -1,0 +1,402 @@
+[
+  {
+    "name": "Alabama",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Alaska",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Arizona",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "HB 2394 (proposed)",
+    "bills": 2,
+    "privacy": "No"
+  },
+  {
+    "name": "Arkansas",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "California",
+    "status": "enacted",
+    "statusLabel": "Enacted",
+    "keyLaw": "AB 2013, SB 1047",
+    "bills": 8,
+    "privacy": "CCPA/CPRA"
+  },
+  {
+    "name": "Colorado",
+    "status": "enacted",
+    "statusLabel": "Enacted",
+    "keyLaw": "SB 24-205",
+    "bills": 4,
+    "privacy": "CPA"
+  },
+  {
+    "name": "Connecticut",
+    "status": "enacted",
+    "statusLabel": "Enacted",
+    "keyLaw": "SB 2, HB 6607",
+    "bills": 3,
+    "privacy": "CTDPA"
+  },
+  {
+    "name": "Delaware",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "DPDPA"
+  },
+  {
+    "name": "Florida",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "HB 919 (proposed)",
+    "bills": 2,
+    "privacy": "No"
+  },
+  {
+    "name": "Georgia",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "Hawaii",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "SB 2572 (proposed)",
+    "bills": 2,
+    "privacy": "No"
+  },
+  {
+    "name": "Idaho",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Illinois",
+    "status": "enacted",
+    "statusLabel": "Enacted",
+    "keyLaw": "AIPA (HB 3773)",
+    "bills": 3,
+    "privacy": "BIPA"
+  },
+  {
+    "name": "Indiana",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "SB 150 (proposed)",
+    "bills": 2,
+    "privacy": "ICDPA"
+  },
+  {
+    "name": "Iowa",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "ICDPA"
+  },
+  {
+    "name": "Kansas",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Kentucky",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Louisiana",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "Maine",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "Maryland",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "SB 735 (proposed)",
+    "bills": 3,
+    "privacy": "No"
+  },
+  {
+    "name": "Massachusetts",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "HD 3892 (proposed)",
+    "bills": 4,
+    "privacy": "No"
+  },
+  {
+    "name": "Michigan",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "Minnesota",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "HF 2309 (proposed)",
+    "bills": 2,
+    "privacy": "MCDPA"
+  },
+  {
+    "name": "Mississippi",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Missouri",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "Montana",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "MCDPA"
+  },
+  {
+    "name": "Nebraska",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Nevada",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "New Hampshire",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "NHDPA"
+  },
+  {
+    "name": "New Jersey",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "A 3611 (proposed)",
+    "bills": 3,
+    "privacy": "No"
+  },
+  {
+    "name": "New Mexico",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "New York",
+    "status": "enacted",
+    "statusLabel": "Enacted",
+    "keyLaw": "NYC LL 144",
+    "bills": 3,
+    "privacy": "No"
+  },
+  {
+    "name": "North Carolina",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "North Dakota",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Ohio",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "Oklahoma",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Oregon",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "SB 619 (proposed)",
+    "bills": 2,
+    "privacy": "OCPA"
+  },
+  {
+    "name": "Pennsylvania",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 2,
+    "privacy": "No"
+  },
+  {
+    "name": "Rhode Island",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "South Carolina",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "South Dakota",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Tennessee",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "HB 1120 (proposed)",
+    "bills": 2,
+    "privacy": "TIPA"
+  },
+  {
+    "name": "Texas",
+    "status": "enacted",
+    "statusLabel": "Enacted",
+    "keyLaw": "HB 2060, TRAIA",
+    "bills": 5,
+    "privacy": "TDPSA"
+  },
+  {
+    "name": "Utah",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "SB 149 (AI Policy Act)",
+    "bills": 2,
+    "privacy": "UCPA"
+  },
+  {
+    "name": "Vermont",
+    "status": "in-progress",
+    "statusLabel": "In progress",
+    "keyLaw": "H 410 (proposed)",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "Virginia",
+    "status": "enacted",
+    "statusLabel": "Enacted",
+    "keyLaw": "HB 2094",
+    "bills": 2,
+    "privacy": "VCDPA"
+  },
+  {
+    "name": "Washington",
+    "status": "enacted",
+    "statusLabel": "Enacted",
+    "keyLaw": "SB 5838",
+    "bills": 4,
+    "privacy": "MHMDA"
+  },
+  {
+    "name": "West Virginia",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  },
+  {
+    "name": "Wisconsin",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 1,
+    "privacy": "No"
+  },
+  {
+    "name": "Wyoming",
+    "status": "no-law",
+    "statusLabel": "No AI law",
+    "keyLaw": "-",
+    "bills": 0,
+    "privacy": "No"
+  }
+]

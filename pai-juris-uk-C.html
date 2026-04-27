@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrinciplesAI — United Kingdom · Variant C (compact + sticky rail)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VARIANT C · COMPACT + STICKY RAIL
+   Narrow reading column (~720px) with all zones stacked.
+   Sticky right rail holds:
+     - 3 fact cards (compact)
+     - 4 alert-count chips
+     - TOC anchors
+   ============================================================ */
+:root {
+  --bg:#fcfcfc;--surface:#fff;--surface-2:#f6f7f9;--surface-3:#eff2f7;
+  --ink:#0a1729;--ink-strong:#06101e;--secondary:#2a3548;--muted:#5e6878;--faint:#8a93a3;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#014486;--accent-soft:#e3effc;
+  --green:#2e844a;--amber:#905200;--red:#ba0517;
+  --sans:'Inter',-apple-system,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+  --header-height:52px;--radius:6px;--shadow-1:0 1px 2px rgba(10,23,41,.04);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:15px;scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+button,input{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
+button{cursor:pointer}
+
+.header-bar{position:fixed;top:0;left:0;right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:18px;z-index:200;box-shadow:var(--shadow-1)}
+.header-bar .brand{font-weight:600;font-size:18px;color:var(--ink)}
+.header-bar .brand em{font-style:italic;color:var(--accent-2)}
+.mkt-nav{display:flex;gap:22px;margin-left:28px;align-items:center}
+.mkt-nav a{font-size:13px;font-weight:500;color:var(--secondary);padding:4px 0;border-bottom:1px solid transparent}
+.mkt-nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;height:36px;padding:0 16px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--secondary);cursor:pointer}
+.btn:hover{background:var(--surface-2);border-color:var(--faint);color:var(--ink)}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2);color:#fff}
+@media (max-width:860px){.mkt-nav{display:none}}
+
+.main-content{padding-top:var(--header-height)}
+.page{max-width:1160px;margin:0 auto;padding:36px 40px 72px;display:grid;grid-template-columns:minmax(0,720px) 300px;gap:40px;align-items:start}
+
+.crumb{grid-column:1 / -1;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.02em;text-transform:uppercase;margin-bottom:20px}
+.crumb a{color:var(--muted)}
+.crumb a:hover{color:var(--accent-2)}
+.crumb .sep{color:var(--faint);margin:0 8px}
+.crumb .current{color:var(--ink)}
+
+/* ===== MAIN COLUMN (narrow) ===== */
+.main-col{min-width:0;display:flex;flex-direction:column;gap:52px}
+
+/* Hero (compact, in main col) */
+.hero{padding-bottom:24px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 120px;gap:24px;align-items:center}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--faint);margin-bottom:10px}
+.hero-title{font-size:44px;font-weight:700;color:var(--ink-strong);letter-spacing:-.03em;line-height:1;margin-bottom:12px}
+.hero-anchors{font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
+.hero-anchors b{color:var(--ink-strong);font-weight:600}
+.hero-anchors .sep{color:var(--faint)}
+.hero-map{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-map svg{max-width:80%;max-height:80%}
+.hero-map .iso{position:absolute;top:8px;left:10px;font-family:var(--mono);font-size:10px;font-weight:700;color:var(--faint);letter-spacing:.08em}
+
+/* SECTION */
+.section{}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.section-title{font-size:20px;font-weight:700;color:var(--ink-strong);letter-spacing:-.015em}
+.section-title .count{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--muted);margin-left:10px}
+.section-aside{font-family:var(--mono);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--faint)}
+
+/* Authorities — 2-col grid of type groups (tighter for narrow column) */
+.auth-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.auth-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.auth-group-head{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:6px;border-bottom:1px solid var(--border-soft)}
+.auth-type{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--secondary)}
+.auth-count{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--faint)}
+.auth-item{padding:5px 0;border-bottom:1px solid var(--border-soft)}
+.auth-item:last-child{border-bottom:none}
+.auth-name{font-size:12.5px;font-weight:600;color:var(--ink-strong);line-height:1.3}
+.auth-role{font-size:11px;color:var(--muted);margin-top:1px}
+.auth-acr{font-family:var(--mono);font-size:10px;color:var(--faint);margin-left:5px;font-weight:500}
+
+/* Legislation table (narrow) */
+.leg-table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.leg-head{display:grid;grid-template-columns:1fr 90px 110px;gap:12px;padding:10px 16px;background:var(--surface-2);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.leg-row{display:grid;grid-template-columns:1fr 90px 110px;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border-soft);align-items:center;transition:background .1s}
+.leg-row:last-child{border-bottom:none}
+.leg-row:hover{background:var(--surface-2)}
+.leg-inst{font-size:13px;font-weight:600;color:var(--ink-strong)}
+.leg-type{display:inline-flex;align-items:center;height:20px;padding:0 7px;font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--secondary);background:var(--surface-3);border:1px solid var(--border-soft);border-radius:3px;letter-spacing:.04em;text-transform:uppercase}
+.leg-status{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.leg-status .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.leg-status.live{color:var(--green)}.leg-status.live .dot{background:var(--green)}
+.leg-status.progress{color:var(--amber)}.leg-status.progress .dot{background:var(--amber)}
+.leg-status.published{color:var(--muted)}.leg-status.published .dot{background:var(--faint)}
+
+/* Alerts — tagged lanes but STACKED vertically (since col is narrow) */
+.lane-stack{display:flex;flex-direction:column;gap:12px}
+.alert-lane{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px 8px}
+.lane-head{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:10px;margin-bottom:4px;border-bottom:1px solid var(--border-soft)}
+.lane-type{font-family:var(--mono);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.lane-type.enf{color:var(--red)}
+.lane-type.cons{color:var(--amber)}
+.lane-type.case{color:var(--accent-2)}
+.lane-type.guid{color:var(--secondary)}
+.lane-count{font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--faint)}
+.alert-item{padding:9px 0;border-bottom:1px solid var(--border-soft);display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start}
+.alert-item:last-child{border-bottom:none}
+.alert-meta{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.02em;text-transform:uppercase;padding-top:1px}
+.alert-meta b{color:var(--ink-strong);font-weight:600;display:block}
+.alert-head{font-size:13px;font-weight:500;color:var(--ink-strong);line-height:1.4}
+.lane-more{padding-top:10px;font-family:var(--mono);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-2);display:inline-block}
+
+/* Paywall (full-width via spanning) */
+.paywall{grid-column:1 / -1;margin-top:12px;padding:36px 44px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.pw-head{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-2);margin-bottom:10px}
+.pw-title{font-size:22px;font-weight:700;color:var(--ink-strong);letter-spacing:-.015em;margin-bottom:10px}
+.pw-copy{font-size:14px;color:var(--secondary);line-height:1.55;max-width:620px}
+.pw-ctas{display:flex;flex-direction:column;gap:10px;flex-shrink:0}
+.pw-cta{height:42px;padding:0 22px;border-radius:6px;font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;cursor:pointer}
+.pw-cta.primary{background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.pw-cta.primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.pw-cta.ghost{background:var(--surface);color:var(--secondary);border:1px solid var(--border)}
+.pw-cta.ghost:hover{background:var(--surface-2);color:var(--ink);border-color:var(--faint)}
+
+.footer{grid-column:1 / -1;margin-top:32px;padding-top:18px;border-top:1px solid var(--border);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer a{color:var(--muted)}
+.footer a:hover{color:var(--accent-2)}
+
+/* ===== STICKY RIGHT RAIL ===== */
+.rail{position:sticky;top:calc(var(--header-height) + 24px);display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - var(--header-height) - 48px);overflow-y:auto}
+.rail-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.rail-head{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding-bottom:8px;margin-bottom:10px;border-bottom:1px solid var(--border-soft)}
+.rail-fact{padding:8px 0;border-bottom:1px solid var(--border-soft)}
+.rail-fact:last-child{border-bottom:none}
+.rail-fact .l{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:3px}
+.rail-fact .v{font-size:18px;font-weight:700;color:var(--ink-strong);letter-spacing:-.015em;line-height:1;margin-bottom:4px}
+.rail-fact .s{font-size:11.5px;color:var(--secondary);line-height:1.4}
+.rail-fact .s b{color:var(--ink-strong);font-weight:600}
+/* alert counts in rail */
+.rail-counts{display:flex;flex-direction:column;gap:0}
+.rail-count-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border-soft);font-size:12px}
+.rail-count-row:last-child{border-bottom:none}
+.rail-count-row .name{font-family:var(--mono);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.rail-count-row .name.enf{color:var(--red)}
+.rail-count-row .name.cons{color:var(--amber)}
+.rail-count-row .name.case{color:var(--accent-2)}
+.rail-count-row .name.guid{color:var(--secondary)}
+.rail-count-row .n{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink-strong)}
+/* TOC */
+.rail-toc{display:flex;flex-direction:column;gap:2px}
+.rail-toc a{font-size:12.5px;color:var(--secondary);padding:6px 0;border-bottom:1px solid var(--border-soft)}
+.rail-toc a:last-child{border-bottom:none}
+.rail-toc a:hover{color:var(--accent-2)}
+
+.variant-badge{position:fixed;bottom:16px;right:16px;background:var(--ink-strong);color:#fff;font-family:var(--mono);font-size:10.5px;font-weight:700;padding:7px 12px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase;z-index:400;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+
+@media (max-width:1000px){
+  .page{grid-template-columns:1fr}
+  .rail{position:static;max-height:none;order:-1}
+  .auth-grid{grid-template-columns:1fr}
+}
+@media (max-width:800px){
+  .page{padding:28px 22px 48px}
+  .hero{grid-template-columns:1fr}
+  .hero-title{font-size:38px}
+  .alert-item{grid-template-columns:1fr}
+  .paywall{grid-template-columns:1fr;padding:28px 24px}
+  .pw-ctas{flex-direction:row}
+  .leg-head,.leg-row{grid-template-columns:1fr 90px}
+  .leg-head>:nth-child(2),.leg-row>:nth-child(2){display:none}
+}
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+</head>
+<body>
+
+<header class="header-bar">
+  <a href="pai-home-public.html" class="brand">Principles<em>AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html">Legislation</a>
+    <a href="pai-jobs.html">Jobs</a>
+    <a href="pai-pricing.html">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary">Get access →</a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page">
+
+  <div class="crumb">
+    <a href="pai-home-public.html">Home</a><span class="sep">/</span>
+    <a href="pai-home-public.html#coverage">Jurisdictions</a><span class="sep">/</span>
+    <span class="current">United Kingdom</span>
+  </div>
+
+  <!-- ===== MAIN COLUMN (narrow) ===== -->
+  <div class="main-col">
+
+    <section class="hero">
+      <div>
+        <div class="hero-eyebrow">Jurisdiction · GB · Europe</div>
+        <h1 class="hero-title">United&nbsp;Kingdom</h1>
+        <div class="hero-anchors">
+          <span><b>16</b> authorities</span><span class="sep">·</span>
+          <span><b>7</b> instruments</span><span class="sep">·</span>
+          <span><b>67.7M</b> pop</span><span class="sep">·</span>
+          <span>Updated <b>2h ago</b></span>
+        </div>
+      </div>
+      <div class="hero-map" aria-label="United Kingdom">
+        <span class="iso">GB</span>
+        <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" fill="#eff2f7" stroke="#2a3548" stroke-width="1.2">
+          <path d="M80 25 Q70 35 65 50 Q60 65 55 70 Q50 80 60 95 Q65 105 55 115 Q48 120 50 130 L58 135 Q52 145 58 155 Q65 165 75 170 Q85 175 90 185 Q95 195 100 200 Q110 205 115 210 L125 215 Q130 218 140 215 L145 205 Q150 195 155 185 Q160 175 150 170 Q140 165 135 155 Q130 145 120 140 Q115 135 120 125 Q125 115 130 105 Q135 95 130 85 Q125 75 115 70 Q105 65 100 55 Q95 45 92 35 Q88 25 80 25 Z"/>
+          <path d="M45 15 Q40 22 42 30 Q45 38 52 35 Q58 30 55 22 Q50 15 45 15 Z"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section" id="authorities">
+      <div class="section-head">
+        <h2 class="section-title">Authorities<span class="count">16 · 9 types</span></h2>
+        <span class="section-aside">See all →</span>
+      </div>
+      <div class="auth-grid">
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">DPA</span><span class="auth-count">1</span></div>
+          <div class="auth-item"><div class="auth-name">Information Commissioner's Office<span class="auth-acr">ICO</span></div><div class="auth-role">Data, AI transparency, ADM</div></div>
+        </div>
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">Cyber Agency</span><span class="auth-count">1</span></div>
+          <div class="auth-item"><div class="auth-name">National Cyber Security Centre<span class="auth-acr">NCSC</span></div><div class="auth-role">Frontier-AI cyber, resilience</div></div>
+        </div>
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">Financial Regulator</span><span class="auth-count">3</span></div>
+          <div class="auth-item"><div class="auth-name">Financial Conduct Authority<span class="auth-acr">FCA</span></div><div class="auth-role">Consumer Duty · fairness</div></div>
+          <div class="auth-item"><div class="auth-name">Prudential Regulation Authority<span class="auth-acr">PRA</span></div><div class="auth-role">Model validation · SS1/23</div></div>
+          <div class="auth-item"><div class="auth-name">Bank of England<span class="auth-acr">BoE</span></div><div class="auth-role">Systemic AI, stability</div></div>
+        </div>
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">Competition Auth.</span><span class="auth-count">1</span></div>
+          <div class="auth-item"><div class="auth-name">Competition &amp; Markets Authority<span class="auth-acr">CMA</span></div><div class="auth-role">Foundation-models, SMS</div></div>
+        </div>
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">Telecoms Regulator</span><span class="auth-count">1</span></div>
+          <div class="auth-item"><div class="auth-name">Office of Communications<span class="auth-acr">OFCOM</span></div><div class="auth-role">Online Safety Act</div></div>
+        </div>
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">Government Agency</span><span class="auth-count">2</span></div>
+          <div class="auth-item"><div class="auth-name">DSIT<span class="auth-acr">Dept</span></div><div class="auth-role">AI policy lead</div></div>
+          <div class="auth-item"><div class="auth-name">AI Safety Institute<span class="auth-acr">AISI</span></div><div class="auth-role">Frontier-model evals</div></div>
+        </div>
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">Courts</span><span class="auth-count">3</span></div>
+          <div class="auth-item"><div class="auth-name">Investigatory Powers Tribunal<span class="auth-acr">IPT</span></div><div class="auth-role">Surveillance</div></div>
+          <div class="auth-item"><div class="auth-name">Court of Appeal (Civ)<span class="auth-acr">CA</span></div><div class="auth-role">ADM review</div></div>
+          <div class="auth-item"><div class="auth-name">UK Supreme Court<span class="auth-acr">UKSC</span></div><div class="auth-role">Final appellate</div></div>
+        </div>
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">Civil Society</span><span class="auth-count">2</span></div>
+          <div class="auth-item"><div class="auth-name">Ada Lovelace Institute<span class="auth-acr">ALI</span></div><div class="auth-role">AI ethics / research</div></div>
+          <div class="auth-item"><div class="auth-name">Big Brother Watch<span class="auth-acr">BBW</span></div><div class="auth-role">Civil liberties</div></div>
+        </div>
+        <div class="auth-group">
+          <div class="auth-group-head"><span class="auth-type">Legislature</span><span class="auth-count">2</span></div>
+          <div class="auth-item"><div class="auth-name">Commons S&amp;T Committee<span class="auth-acr">HoC</span></div><div class="auth-role">Lower-chamber oversight</div></div>
+          <div class="auth-item"><div class="auth-name">Lords Comms &amp; Digital<span class="auth-acr">HoL</span></div><div class="auth-role">Upper-chamber oversight</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="legislation">
+      <div class="section-head">
+        <h2 class="section-title">Key Legislation<span class="count">7 instruments</span></h2>
+        <span class="section-aside">Sort · filter →</span>
+      </div>
+      <div class="leg-table">
+        <div class="leg-head"><div>Instrument</div><div>Type</div><div>Status</div></div>
+        <div class="leg-row"><div class="leg-inst">UK GDPR &amp; Data Protection Act 2018</div><div><span class="leg-type">Primary</span></div><div><span class="leg-status live"><span class="dot"></span>In Force</span></div></div>
+        <div class="leg-row"><div class="leg-inst">Online Safety Act 2023</div><div><span class="leg-type">Primary</span></div><div><span class="leg-status live"><span class="dot"></span>In Force</span></div></div>
+        <div class="leg-row"><div class="leg-inst">DMCC Act 2024</div><div><span class="leg-type">Primary</span></div><div><span class="leg-status live"><span class="dot"></span>In Force</span></div></div>
+        <div class="leg-row"><div class="leg-inst">Product Regs &amp; Metrology Bill</div><div><span class="leg-type">Secondary</span></div><div><span class="leg-status progress"><span class="dot"></span>In Progress</span></div></div>
+        <div class="leg-row"><div class="leg-inst">AI White Paper Principles</div><div><span class="leg-type">Secondary</span></div><div><span class="leg-status published"><span class="dot"></span>Published</span></div></div>
+        <div class="leg-row"><div class="leg-inst">ICO AI &amp; Data Protection Guidance</div><div><span class="leg-type">Guideline</span></div><div><span class="leg-status live"><span class="dot"></span>In Force</span></div></div>
+        <div class="leg-row"><div class="leg-inst">FCA AI in Financial Services</div><div><span class="leg-type">Guideline</span></div><div><span class="leg-status progress"><span class="dot"></span>Final 2026</span></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="activity">
+      <div class="section-head">
+        <h2 class="section-title">Recent activity<span class="count">12 · 30d</span></h2>
+        <span class="section-aside">Full wire →</span>
+      </div>
+      <div class="lane-stack">
+        <div class="alert-lane">
+          <div class="lane-head"><span class="lane-type enf">Enforcement</span><span class="lane-count">3</span></div>
+          <div class="alert-item"><div class="alert-meta"><b>ICO</b>25 Mar</div><div class="alert-head">ICO fines NHS Trust £750K over patient-data disclosure</div></div>
+          <div class="alert-item"><div class="alert-meta"><b>ICO</b>18 Mar</div><div class="alert-head">ICO reprimand issued over AI CV-screening</div></div>
+          <div class="alert-item"><div class="alert-meta"><b>FCA</b>11 Mar</div><div class="alert-head">FCA supervisory notice on algorithmic lending</div></div>
+          <a href="#" class="lane-more">All enforcement →</a>
+        </div>
+        <div class="alert-lane">
+          <div class="lane-head"><span class="lane-type cons">Consultations</span><span class="lane-count">3</span></div>
+          <div class="alert-item"><div class="alert-meta"><b>DSIT</b>closes 12 May</div><div class="alert-head">AI Cyber Code of Practice — public consultation</div></div>
+          <div class="alert-item"><div class="alert-meta"><b>AISI</b>rolling</div><div class="alert-head">Third-party evaluations framework — RfC</div></div>
+          <div class="alert-item"><div class="alert-meta"><b>PRA</b>closes 04 Jun</div><div class="alert-head">Operational resilience consultation continues</div></div>
+          <a href="#" class="lane-more">All consultations →</a>
+        </div>
+        <div class="alert-lane">
+          <div class="lane-head"><span class="lane-type case">Case Law</span><span class="lane-count">3</span></div>
+          <div class="alert-item"><div class="alert-meta"><b>CA Civ</b>22 Mar</div><div class="alert-head">Appeal dismissed: ADM credit-scoring challenge</div></div>
+          <div class="alert-item"><div class="alert-meta"><b>IPT</b>08 Mar</div><div class="alert-head">Bulk-data ruling narrows Schedule 7 powers</div></div>
+          <div class="alert-item"><div class="alert-meta"><b>UKSC</b>pending</div><div class="alert-head">Leave granted: data-subject rights in AI training</div></div>
+          <a href="#" class="lane-more">All case law →</a>
+        </div>
+        <div class="alert-lane">
+          <div class="lane-head"><span class="lane-type guid">Guidance</span><span class="lane-count">3</span></div>
+          <div class="alert-item"><div class="alert-meta"><b>ICO</b>31 Mar</div><div class="alert-head">Updated ADM guidance with LLM provisions</div></div>
+          <div class="alert-item"><div class="alert-meta"><b>CMA</b>29 Mar</div><div class="alert-head">Foundation-models interim report published</div></div>
+          <div class="alert-item"><div class="alert-meta"><b>NCSC</b>20 Mar</div><div class="alert-head">Frontier-AI cyber advisory — secure deployment</div></div>
+          <a href="#" class="lane-more">All guidance →</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== STICKY RIGHT RAIL ===== -->
+  <aside class="rail" aria-label="At a glance">
+    <div class="rail-block">
+      <div class="rail-head">At a glance</div>
+      <div class="rail-fact">
+        <div class="l">AI-Specific Law</div>
+        <div class="v">No</div>
+        <div class="s"><b>Sector-led</b> — data, financial, online-safety, cyber law.</div>
+      </div>
+      <div class="rail-fact">
+        <div class="l">Regulators</div>
+        <div class="v">5</div>
+        <div class="s">ICO · FCA · CMA · Ofcom · NCSC</div>
+      </div>
+      <div class="rail-fact">
+        <div class="l">Open Consultations</div>
+        <div class="v">2</div>
+        <div class="s">AI Cyber Code (closes <b>12 May</b>) · Product Regs</div>
+      </div>
+    </div>
+
+    <div class="rail-block">
+      <div class="rail-head">Activity · 30d</div>
+      <div class="rail-counts">
+        <div class="rail-count-row"><span class="name enf">Enforcement</span><span class="n">3</span></div>
+        <div class="rail-count-row"><span class="name cons">Consultations</span><span class="n">3</span></div>
+        <div class="rail-count-row"><span class="name case">Case Law</span><span class="n">3</span></div>
+        <div class="rail-count-row"><span class="name guid">Guidance</span><span class="n">3</span></div>
+      </div>
+    </div>
+
+    <div class="rail-block">
+      <div class="rail-head">Jump to</div>
+      <div class="rail-toc">
+        <a href="#authorities">Authorities · 16</a>
+        <a href="#legislation">Key Legislation · 7</a>
+        <a href="#activity">Recent activity · 12</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PAYWALL -->
+  <section class="paywall">
+    <div>
+      <div class="pw-head">Member access</div>
+      <div class="pw-title">The full UK picture</div>
+      <p class="pw-copy">All 41 public bodies, live alerts on every material move in the jurisdiction, and our analysts' notes on what's coming next and how it affects your work.</p>
+    </div>
+    <div class="pw-ctas">
+      <a href="pai-pricing.html" class="pw-cta primary">Get full UK access →</a>
+      <a href="pai-pricing.html" class="pw-cta ghost">Try 7 days free</a>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>PrinciplesAI · UK coverage · updated hourly</span>
+    <a href="pai-home-public.html">← Back to home</a>
+  </div>
+
+</div>
+</div>
+
+<div class="variant-badge">Variant C · compact + rail</div>
+</body>
+</html>

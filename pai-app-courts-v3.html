@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — Courts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d2e42;--ink-strong:#07202e;--ink-faint:#8a93a3;--muted:#5e6878;
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f7f8fb;--surface-3:#e8ebf1;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#035fa0;--accent-soft:#e3effc;--accent-soft-2:#b9d8ef;
+  --green-fill:#2e844a;--green-bg:#d6f1dc;
+  --red-fill:#ba0517;--red-bg:#feded8;
+  --amber-fill:#ca8501;--amber-bg:#fef0c7;
+  --purple-fill:#6b3fa6;--purple-bg:#ede4f8;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding:0;font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55}
+.wrap{max-width:1280px;margin:0 auto;padding:24px}
+
+/* Header */
+.page-head{padding:18px 0 22px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px}
+h1{font-size:32px;font-weight:700;color:var(--ink-strong);letter-spacing:-.02em;margin:0 0 8px}
+.lede{font-size:14.5px;color:var(--muted);max-width:760px;line-height:1.55}
+.kpi-row{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap}
+.kpi-num{font-size:22px;font-weight:700;color:var(--ink-strong);letter-spacing:-.02em;line-height:1}
+.kpi-label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+.mockup-banner{background:#fff8e0;border-left:3px solid var(--amber-fill);padding:10px 14px;border-radius:4px;font-size:12.5px;color:#5d4c2a;margin-bottom:18px}
+
+/* Toolbar */
+.toolbar{display:flex;gap:14px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.search{flex:1;min-width:260px;padding:10px 14px;border:1px solid var(--border);border-radius:6px;font:inherit;font-size:13.5px;background:var(--surface)}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.tab{padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--muted);background:transparent;border:0;cursor:pointer;border-right:1px solid var(--border);font-family:inherit}
+.tab:last-child{border-right:none}
+.tab.on{background:var(--accent);color:#fff}
+
+/* Region group */
+.region-block{margin-top:20px}
+.region-divider{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border-soft)}
+.region-divider .label{font-family:var(--mono);font-size:11px;color:var(--ink);text-transform:uppercase;letter-spacing:.14em;font-weight:700}
+.region-divider .ct{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:600}
+
+/* Court cards grid (one card per court) */
+.court-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px}
+.court-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s, box-shadow .15s;position:relative}
+.court-card:hover{border-color:var(--accent-soft-2);box-shadow:0 4px 16px rgba(10,23,41,.06)}
+.court-card.featured{border-top:3px solid var(--accent)}
+.featured-badge{position:absolute;top:14px;right:14px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;border-radius:3px}
+.court-head{display:flex;align-items:flex-start;gap:12px}
+.court-flag{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;border-radius:3px;background:var(--surface-3);color:var(--ink);font-family:var(--mono);font-size:10.5px;font-weight:700;flex-shrink:0;margin-top:2px}
+.court-name{flex:1;min-width:0}
+.court-name h2{font-size:17px;font-weight:700;color:var(--ink-strong);margin:0;letter-spacing:-.01em;line-height:1.25}
+.court-name .juris{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+
+/* Case rows within a card */
+.card-cases{margin-top:8px;padding-top:12px;border-top:1px solid var(--border-soft);display:flex;flex-direction:column;gap:10px}
+.card-case{display:flex;gap:12px;align-items:flex-start}
+.case-stage{font-family:var(--mono);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;flex-shrink:0;width:74px;padding-top:1px;line-height:1.5}
+.case-stage.judgment   {color:var(--green-fill)}
+.case-stage.opinion    {color:var(--purple-fill)}
+.case-stage.hearing    {color:var(--accent)}
+.case-stage.scheduled  {color:var(--amber-fill)}
+.case-stage.filed      {color:var(--muted)}
+.case-stage.questions  {color:var(--muted)}
+.case-content{flex:1;min-width:0}
+.case-title{font-size:13.5px;font-weight:600;color:var(--ink-strong);line-height:1.4;margin:0}
+.case-meta{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
+.case-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.chip{display:inline-flex;align-items:center;height:18px;padding:0 7px;font-size:10px;font-weight:500;border-radius:9px;color:var(--ink);font-family:var(--sans);background:var(--surface-2);border:1px solid var(--border-soft)}
+.chip.ai{background:var(--purple-bg);color:var(--purple-fill);border-color:var(--purple-bg)}
+.chip.privacy{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-soft)}
+.chip.cyber{background:var(--green-bg);color:var(--green-fill);border-color:var(--green-bg)}
+
+.card-foot{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--border-soft);margin-top:auto;font-size:11.5px}
+.card-foot a{color:var(--accent);text-decoration:none;font-weight:600}
+.card-foot a:hover{text-decoration:underline}
+.card-foot .ct{font-family:var(--mono);color:var(--muted)}
+
+.empty{padding:60px 0;text-align:center;color:var(--muted);font-size:14px}
+.empty .em-emoji{font-size:32px;display:block;margin-bottom:10px;opacity:.4}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">PrinciplesAI · Coverage</div>
+    <h1>Courts</h1>
+    <p class="lede">Selective case-law tracker for AI, privacy and cybersecurity. One card per court, with the stages we're watching: judgments, opinions, hearings, filings. Editorial curation, no risky positions.</p>
+    <div class="kpi-row">
+      <div><div class="kpi-num" id="kpi-courts">—</div><div class="kpi-label">Courts watched</div></div>
+      <div><div class="kpi-num" id="kpi-cases">—</div><div class="kpi-label">Items this month</div></div>
+      <div><div class="kpi-num" id="kpi-jurisdictions">—</div><div class="kpi-label">Jurisdictions</div></div>
+    </div>
+  </div>
+
+  <div class="mockup-banner"><b>Mockup · placeholder content</b> — one card per court, stage chips inside (judgment / opinion / hearing / filed). ★ = featured doctrine-moving courts.</div>
+
+  <div class="toolbar">
+    <input class="search" id="q" placeholder="Search court, case, theme…">
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-topic="all">All</button>
+      <button class="tab" data-topic="ai">AI</button>
+      <button class="tab" data-topic="privacy">Privacy</button>
+      <button class="tab" data-topic="cyber">Cyber</button>
+    </div>
+  </div>
+
+  <div id="results"><div class="empty">Loading…</div></div>
+</div>
+
+<script>
+/* MOCKUP — one card per COURT. Each card holds the recent activity for that
+   court (judgments, opinions, hearings, filings). Region groups the cards. */
+const COURTS = [
+  /* Europe — featured */
+  {featured:true, name:"Court of Justice of the EU", iso:"EU", juris:"European Union", region:"Europe",
+   cases:[
+     {stage:"opinion",   stageLabel:"A-G Opinion",      date:"12 Apr 2026", title:"Bayerisches Landesamt für Datenschutzaufsicht", citation:"Case C-308/24",    topics:["privacy"], tags:["controller","supervisory authority"]},
+     {stage:"scheduled", stageLabel:"AG opinion sched.",date:"03 Jul 2026", title:"Generative-AI training & InfoSoc Article 4 opt-outs", citation:"Case C-241/26",   topics:["ai","privacy"], tags:["copyright","training data","TDM"]},
+     {stage:"scheduled", stageLabel:"Judgment sched.",  date:"21 May 2026", title:"Across Fiduciaria & Others — beneficial ownership registers", citation:"",          topics:["privacy"], tags:["AML5","public registers"]},
+     {stage:"judgment",  stageLabel:"Judgment",         date:"21 Mar 2026", title:"Commission v Hungary (Values of the EU)",                  citation:"",          topics:["privacy"], tags:["criminal convictions","fundamental rights"]},
+   ]},
+  {featured:true, name:"General Court of the European Union", iso:"EU", juris:"European Union", region:"Europe",
+   cases:[
+     {stage:"hearing",   stageLabel:"Hearing sched.",   date:"14 Jun 2026", title:"Continuum AI — annulment of GPAI systemic-risk designation", citation:"Case T-178/26", topics:["ai"], tags:["AI Act","GPAI","systemic risk"]},
+     {stage:"filed",     stageLabel:"Filed",            date:"08 Apr 2026", title:"Three further GPAI designation challenges consolidated",      citation:"",              topics:["ai"], tags:["AI Act","procedural"]},
+   ]},
+
+  /* North America — featured */
+  {featured:true, name:"US Court of Appeals — 9th Circuit", iso:"US", juris:"USA", region:"North America",
+   cases:[
+     {stage:"judgment",  stageLabel:"Judgment",         date:"18 Apr 2026", title:"Doe v Continuum AI — Section 230 limits for generative AI", citation:"No. 25-15247", topics:["ai"], tags:["Section 230","platform liability"]},
+     {stage:"hearing",   stageLabel:"Oral argument",    date:"02 May 2026", title:"In re California AI Hiring Tool MDL — class certification appeal", citation:"",            topics:["ai","privacy"], tags:["ADM","class action"]},
+   ]},
+  {name:"US Court of Appeals — 4th Circuit", iso:"US", juris:"USA", region:"North America",
+   cases:[
+     {stage:"questions", stageLabel:"Cert pending",     date:"22 Apr 2026", title:"Maryland v OpenAI — class certification on training-data scraping", citation:"",            topics:["ai"], tags:["scraping","fair use"]},
+   ]},
+  {name:"Supreme Court of the United States", iso:"US", juris:"USA", region:"North America",
+   cases:[
+     {stage:"questions", stageLabel:"Cert pending",     date:"15 Apr 2026", title:"Halliday Networks — state-actor cyber-attribution standing",       citation:"",            topics:["cyber"], tags:["standing","state actor"]},
+   ]},
+
+  /* Europe — other Majors */
+  {name:"Bundesgerichtshof", iso:"DE", juris:"Germany", region:"Europe",
+   cases:[
+     {stage:"judgment",  stageLabel:"Judgment",         date:"15 Apr 2026", title:"Meaningful human review under Article 22 GDPR",                       citation:"VI ZR 47/25", topics:["ai","privacy"], tags:["GDPR Art 22","ADM","credit scoring"]},
+   ]},
+  {name:"Court of Appeal (England and Wales)", iso:"GB", juris:"United Kingdom", region:"Europe",
+   cases:[
+     {stage:"hearing",   stageLabel:"Hearing held",     date:"08 Apr 2026", title:"Smith v Halliday Holdings — directors' duty on ransomware payments", citation:"[2026] EWCA Civ 38", topics:["cyber"], tags:["ransomware","director liability","sanctions"]},
+   ]},
+  {name:"Tribunal Constitucional (Spain)", iso:"ES", juris:"Spain", region:"Europe",
+   cases:[
+     {stage:"judgment",  stageLabel:"Judgment",         date:"02 Apr 2026", title:"STC 47/2026 — RTBF obligations on LLM providers",                    citation:"",            topics:["privacy","ai"], tags:["RTBF","Article 17","LLM"]},
+   ]},
+  {name:"Conseil constitutionnel", iso:"FR", juris:"France", region:"Europe",
+   cases:[
+     {stage:"judgment",  stageLabel:"Judgment",         date:"18 Feb 2026", title:"Cross-border data transfer regime — challenge to 2025 implementing decree", citation:"", topics:["privacy"], tags:["SCCs","Cloud Act","data transfers"]},
+   ]},
+  {name:"Belgian Constitutional Court", iso:"BE", juris:"Belgium", region:"Europe",
+   cases:[
+     {stage:"questions", stageLabel:"Pleas published",  date:"17 Apr 2026", title:"Ligue des droits humains — automated facial recognition in transit", citation:"",            topics:["ai","privacy"], tags:["biometrics","public space"]},
+   ]},
+];
+
+const REGION_ORDER = ['Europe','North America','Asia Pacific','Africa','Caribbean','Global','Latin America','Middle East'];
+
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+
+  // KPIs
+  document.getElementById('kpi-courts').textContent = COURTS.length;
+  document.getElementById('kpi-cases').textContent = COURTS.reduce((n,c)=>n+(c.cases||[]).length,0);
+  document.getElementById('kpi-jurisdictions').textContent = new Set(COURTS.map(c=>c.juris)).size;
+
+  var topic="all";
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+      t.classList.add('on');
+      topic = t.getAttribute('data-topic');
+      render();
+    });
+  });
+  document.getElementById('q').addEventListener('input', render);
+
+  function caseRow(c){
+    var topicChips = (c.topics||[]).map(function(t){return '<span class="chip '+t+'">'+t.toUpperCase()+'</span>';}).join('');
+    var themeChips = (c.tags||[]).map(function(t){return '<span class="chip">'+esc(t)+'</span>';}).join('');
+    return '<div class="card-case">'
+      + '<div class="case-stage '+esc(c.stage)+'">'+esc(c.stageLabel)+'</div>'
+      + '<div class="case-content">'
+        + '<div class="case-title">'+esc(c.title)+'</div>'
+        + '<div class="case-meta">'+esc(c.date)+(c.citation?' · '+esc(c.citation):'')+'</div>'
+        + '<div class="case-tags">'+topicChips+themeChips+'</div>'
+      + '</div>'
+    + '</div>';
+  }
+
+  function courtCard(court){
+    var cases = court.cases||[];
+    var rows = cases.map(caseRow).join('');
+    return '<article class="court-card'+(court.featured?' featured':'')+'">'
+      + (court.featured ? '<span class="featured-badge">Featured</span>' : '')
+      + '<div class="court-head">'
+        + '<span class="court-flag">'+esc(court.iso)+'</span>'
+        + '<div class="court-name">'
+          + '<h2>'+esc(court.name)+'</h2>'
+          + '<div class="juris">'+esc(court.juris)+'</div>'
+        + '</div>'
+      + '</div>'
+      + '<div class="card-cases">'+rows+'</div>'
+      + '<div class="card-foot">'
+        + '<span class="ct">'+cases.length+' item'+(cases.length===1?'':'s')+'</span>'
+        + '<a href="#">View court →</a>'
+      + '</div>'
+    + '</article>';
+  }
+
+  function caseMatchesFilter(c, q){
+    if(topic!=='all' && (c.topics||[]).indexOf(topic)<0) return false;
+    if(q){
+      var hay = (c.title+' '+(c.citation||'')+' '+(c.tags||[]).join(' ')).toLowerCase();
+      if(hay.indexOf(q)<0) return false;
+    }
+    return true;
+  }
+
+  function render(){
+    var q = (document.getElementById('q').value||'').toLowerCase().trim();
+    // Filter cases inside each court
+    var filteredCourts = COURTS.map(function(court){
+      var cases = (court.cases||[]).filter(function(c){return caseMatchesFilter(c,q);});
+      return Object.assign({}, court, {cases:cases});
+    }).filter(function(court){
+      // Drop courts with no matching cases UNLESS user has typed nothing AND topic=all
+      if(!q && topic==='all') return true;
+      return court.cases.length>0;
+    });
+
+    if(!filteredCourts.length){
+      document.getElementById('results').innerHTML = '<div class="empty"><span class="em-emoji">⚖</span>No courts match the current filters.</div>';
+      return;
+    }
+
+    // Group by region; preserve featured-first ordering inside each region
+    var byRegion = {};
+    filteredCourts.forEach(function(court){
+      (byRegion[court.region] = byRegion[court.region] || []).push(court);
+    });
+    var ordered = REGION_ORDER.filter(function(r){return byRegion[r];});
+    var html = ordered.map(function(r){
+      var courts = byRegion[r].slice().sort(function(a,b){
+        if(a.featured !== b.featured) return b.featured - a.featured;
+        return a.name.localeCompare(b.name);
+      });
+      return '<div class="region-block">'
+        + '<div class="region-divider"><span class="label">'+esc(r)+'</span><span class="ct">'+courts.length+' court'+(courts.length===1?'':'s')+'</span></div>'
+        + '<div class="court-grid">'+courts.map(courtCard).join('')+'</div>'
+      + '</div>';
+    }).join('');
+    document.getElementById('results').innerHTML = html;
+  }
+  render();
+})();
+</script>
+</body>
+</html>

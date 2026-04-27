@@ -1,241 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PrinciplesAI — United Kingdom</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   UK JURISDICTION — PUBLIC — vertical editorial flow
+   Sections breathe. No tight grids. Three clear answers:
+     what's live  ·  what's proposed  ·  who regulates
+   ============================================================ */
 :root {
-  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f8fafc; --surface-3: #eef2f7;
-  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878;
-  --ink-faint: #8a93a3; --border: #dbe1ea; --border-soft: #ebeff5;
-  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc; --accent-soft-2: #cfe1f6;
-  --green: #2e844a; --green-bg: #d6f1dc; --green-fill: #2e844a;
-  --amber: #905200; --amber-bg: #fef0c7; --amber-fill: #ca8501;
-  --red: #ba0517; --red-bg: #feded8; --red-fill: #ba0517;
-  --display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bg: #fcfcfc;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #eff2f7;
+  --ink: #0a1729;
+  --ink-strong: #06101e;
+  --secondary: #2a3548;
+  --muted: #5e6878;
+  --faint: #8a93a3;
+  --border: #dbe1ea;
+  --border-soft: #ebeff5;
+  --accent: #0176d3;
+  --accent-2: #014486;
+  --accent-soft: #e3effc;
+  --green: #2e844a;
+  --amber: #905200;
   --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, monospace;
   --header-height: 52px;
-  --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
-  --shadow-2: 0 2px 6px rgba(10,23,41,0.07), 0 8px 20px rgba(10,23,41,0.05);
-  --radius: 8px;
+  --radius: 6px;
 }
 *,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { font-size: 15px; }
-body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 13.5px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; }
 a { color: var(--accent); text-decoration: none; }
 button, input { font-family: inherit; font-size: inherit; color: inherit; border: none; background: none; outline: none; }
 button { cursor: pointer; }
 
-/* ============ HEADER (8-item mkt-nav) ============ */
-.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
-.header-bar .brand { font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.005em; }
+/* HEADER */
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; }
+.header-bar .brand { font-weight: 600; font-size: 18px; color: var(--ink); letter-spacing: -0.005em; }
 .header-bar .brand em { font-style: italic; color: var(--accent-2); }
 .mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
-.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); padding: 4px 0; border-bottom: 1px solid transparent; }
 .mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
-.mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
 .header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
-.btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 16px; font-size: 13px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); transition: background .12s, border-color .12s, color .12s; }
-.btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
-.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 1px 2px rgba(1,118,211,0.22); }
+.btn { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; font-size: 13px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); cursor: pointer; }
+.btn:hover { background: var(--surface-2); border-color: var(--faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
 .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
-@media (max-width: 720px) { .mkt-nav { display: none; } }
+@media (max-width: 860px) { .mkt-nav { display: none; } }
 
-/* ============ MAIN ============ */
-.main-content { padding-top: var(--header-height); min-height: 100vh; }
-.page-view { padding: 32px 44px 52px; max-width: 1480px; margin: 0 auto; }
+/* PAGE FRAME — narrow, editorial */
+.main-content { padding-top: var(--header-height); }
+.page { max-width: 980px; margin: 0 auto; padding: 40px 48px 96px; }
 
-/* ============ STATUSBAR ============ */
-.page-statusbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 0 18px; margin-bottom: 22px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-.ps-left { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--secondary); flex-wrap: wrap; }
-.ps-breadcrumb a { color: var(--secondary); font-weight: 500; }
-.ps-breadcrumb a:hover { color: var(--accent-2); }
-.ps-current { color: var(--ink); font-weight: 600; }
-.ps-sep { color: var(--ink-faint); }
-.ps-scope-chip { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; font-size: 11.5px; font-weight: 600; color: var(--accent-2); background: var(--accent-soft); border: 1px solid var(--accent-soft-2); border-radius: 4px; letter-spacing: 0.02em; }
-.ps-ok { color: var(--green); font-weight: 600; font-size: 12.5px; }
-.ps-ok::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--green-fill); border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-.page-actions { display: flex; gap: 10px; flex-shrink: 0; }
+/* Breadcrumb */
+.crumb { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 56px; }
+.crumb a { color: var(--muted); }
+.crumb a:hover { color: var(--accent-2); }
+.crumb .sep { color: var(--faint); margin: 0 10px; }
+.crumb .current { color: var(--ink); }
 
-/* ============ OPERATIONAL HERO ============ */
-.op-hero { display: grid; grid-template-columns: 96px 1fr; gap: 24px; padding-bottom: 24px; margin-bottom: 26px; border-bottom: 1px solid var(--border); align-items: center; }
-.op-iso { width: 96px; height: 96px; border-radius: var(--radius); background: var(--surface-3); border: 1px solid var(--border-soft); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 36px; font-weight: 700; color: var(--secondary); letter-spacing: 0.04em; }
-.op-body { min-width: 0; }
-.op-title-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
-.op-title { font-size: 32px; font-weight: 700; letter-spacing: -0.022em; color: var(--ink-strong); line-height: 1.05; }
-.op-posture { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; padding: 4px 11px; border-radius: 4px; letter-spacing: 0.02em; text-transform: uppercase; border: 1px solid; }
-.op-posture .dot { width: 8px; height: 8px; border-radius: 50%; }
-.op-posture.stable { color: var(--green); background: var(--green-bg); border-color: rgba(46,132,74,0.3); }
-.op-posture.stable .dot { background: var(--green-fill); }
-.op-posture.elevated { color: var(--amber); background: var(--amber-bg); border-color: rgba(202,133,1,0.3); }
-.op-posture.elevated .dot { background: var(--amber-fill); }
-.op-posture.critical { color: var(--red); background: var(--red-bg); border-color: rgba(186,5,23,0.3); }
-.op-posture.critical .dot { background: var(--red-fill); }
-.op-summary { font-size: 14px; color: var(--secondary); max-width: 760px; line-height: 1.55; }
-.op-summary b { color: var(--ink); font-weight: 600; }
-.op-tracks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.op-track { display: inline-flex; align-items: baseline; gap: 8px; font-size: 12px; padding: 5px 10px; border-radius: 4px; background: var(--surface); border: 1px solid var(--border); color: var(--secondary); font-weight: 500; }
-.op-track .lbl { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
-.op-track b { color: var(--ink-strong); font-weight: 600; }
-.op-track.ai .lbl { color: var(--accent-2); }
-.op-track.priv .lbl { color: var(--ink); }
-.op-track.cyber .lbl { color: var(--amber); }
+/* ================================================
+   HERO — quiet identity, big type, lots of air
+   ================================================ */
+.hero { padding-bottom: 48px; margin-bottom: 96px; border-bottom: 1px solid var(--border); }
+.hero-flag { display: inline-flex; align-items: center; justify-content: center; width: 54px; height: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--secondary); letter-spacing: 0.06em; margin-bottom: 28px; }
+.hero-title { font-size: 72px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.035em; line-height: 0.98; margin-bottom: 24px; }
+.hero-lede { font-size: 19px; font-weight: 400; color: var(--secondary); line-height: 1.5; max-width: 740px; margin-bottom: 40px; }
+.hero-lede b { color: var(--ink-strong); font-weight: 600; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 28px; font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.hero-meta .pair b { color: var(--ink-strong); font-weight: 700; margin-right: 6px; }
 
-/* ============ QUIET STATS STRIP ============ */
-.q-stats { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; margin-bottom: 28px; }
-.q-stat { padding: 16px 20px; border-right: 1px solid var(--border-soft); display: flex; flex-direction: column; gap: 3px; }
-.q-stat:last-child { border-right: none; }
-.q-stat .lbl { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-.q-stat .val { font-size: 24px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.018em; line-height: 1.05; font-feature-settings: 'tnum' 1; }
-.q-stat .val.text { font-size: 16px; font-weight: 600; }
-.q-stat .sub { font-size: 11.5px; color: var(--muted); }
+/* ================================================
+   SECTION — label + generous content column
+   ================================================ */
+.section { margin-bottom: 104px; }
+.section-label { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 12px; }
+.section-head { font-size: 32px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.022em; line-height: 1.1; margin-bottom: 16px; }
+.section-kicker { font-size: 16px; color: var(--secondary); line-height: 1.55; max-width: 680px; margin-bottom: 48px; }
+.section-kicker b { color: var(--ink-strong); font-weight: 600; }
 
-/* ============ RESEARCH LAYOUT (facets + sortable table) ============ */
-.research-wrap { display: grid; grid-template-columns: 248px minmax(0, 1fr); gap: 20px; align-items: start; margin-bottom: 36px; }
-.facet-panel { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); padding: 18px 16px; position: sticky; top: calc(var(--header-height) + 16px); max-height: calc(100vh - var(--header-height) - 32px); overflow-y: auto; }
-.facet-search-wrap { position: relative; margin-bottom: 18px; }
-.facet-search { width: 100%; height: 34px; padding: 0 12px 0 32px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 5px; font-size: 12.5px; color: var(--ink); }
-.facet-search::placeholder { color: var(--muted); }
-.facet-search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); background: var(--surface); }
-.facet-search-ico { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(--muted); pointer-events: none; }
-.facet-search-ico svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 2; fill: none; }
-.facet-group { margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border-soft); }
-.facet-group:last-of-type { border-bottom: none; padding-bottom: 0; }
-.facet-group-head { display: flex; align-items: baseline; justify-content: space-between; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
-.facet-group-clear { font-size: 10px; font-weight: 600; color: var(--accent-2); cursor: pointer; letter-spacing: 0.04em; text-transform: none; }
-.facet-opt { display: flex; align-items: center; gap: 8px; padding: 4px 4px; border-radius: 4px; cursor: pointer; font-size: 12px; color: var(--secondary); transition: background .12s, color .12s; }
-.facet-opt:hover { background: var(--surface-3); color: var(--ink); }
-.facet-opt.on { color: var(--ink); font-weight: 600; }
-.facet-cb { width: 14px; height: 14px; border: 1.5px solid #cbd2da; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--surface); }
-.facet-opt.on .facet-cb { background: var(--accent); border-color: var(--accent); }
-.facet-opt.on .facet-cb::after { content: ''; width: 7px; height: 3px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translate(0, -1px); }
-.facet-opt .name { flex: 1; min-width: 0; }
-.facet-opt .count { font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); font-weight: 500; }
-.facet-opt.on .count { color: var(--accent-2); }
-.facet-radio { display: flex; align-items: center; gap: 8px; padding: 4px 4px; font-size: 12px; color: var(--secondary); cursor: pointer; border-radius: 4px; }
-.facet-radio:hover { background: var(--surface-3); }
-.facet-radio .dot { width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid #cbd2da; background: var(--surface); flex-shrink: 0; }
-.facet-radio.on .dot { border-color: var(--accent); background: radial-gradient(circle at center, var(--accent) 0 3.5px, #fff 4px 100%); }
-.facet-radio.on { color: var(--ink); font-weight: 600; }
-.facet-clear-all { display: block; width: 100%; padding: 8px 12px; background: transparent; border: 1px solid var(--border); border-radius: 5px; font-size: 11.5px; font-weight: 600; color: var(--secondary); cursor: pointer; margin-top: 12px; }
-.facet-clear-all:hover { background: var(--red-bg); border-color: var(--red-fill); color: var(--red-fill); }
+/* ================================================
+   INSTRUMENT ROW — one law per row, airy
+   ================================================ */
+.inst-list { border-top: 1px solid var(--border); }
+.inst { display: grid; grid-template-columns: 140px 1fr 180px; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--border); align-items: start; }
+.inst-status { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding-top: 4px; }
+.inst-status.live { color: var(--green); }
+.inst-status.live::before { content: ''; display: inline-block; width: 7px; height: 7px; background: var(--green); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+.inst-status.open { color: var(--amber); }
+.inst-status.open::before { content: ''; display: inline-block; width: 7px; height: 7px; background: var(--amber); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+.inst-main { min-width: 0; }
+.inst-title { font-size: 20px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.012em; line-height: 1.25; margin-bottom: 8px; }
+.inst-desc { font-size: 14.5px; color: var(--secondary); line-height: 1.55; }
+.inst-side { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; text-align: right; padding-top: 4px; display: flex; flex-direction: column; gap: 6px; }
+.inst-side .issuer { color: var(--ink-strong); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.inst-side .date { text-transform: uppercase; letter-spacing: 0.06em; }
 
-/* Toolbar + applied chips */
-.research-main { min-width: 0; }
-.research-toolbar { display: flex; align-items: center; gap: 14px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); margin-bottom: 10px; flex-wrap: wrap; }
-.rt-count { font-size: 12.5px; color: var(--secondary); }
-.rt-count b { color: var(--ink); font-weight: 700; font-family: var(--mono); }
-.rt-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-.rt-sort { height: 30px; padding: 0 11px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 5px; font-size: 12px; font-weight: 600; color: var(--secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
-.rt-sort:hover { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent-2); }
-.applied-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; min-height: 22px; align-items: center; }
-.applied-empty { font-size: 12px; color: var(--muted); }
-.applied-chip { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 4px 0 9px; background: var(--accent); color: #fff; border-radius: 4px; font-size: 11px; font-weight: 600; }
-.applied-chip .group { opacity: 0.72; font-weight: 500; margin-right: 2px; }
-.applied-chip .x { width: 16px; height: 16px; background: rgba(255,255,255,0.18); border: none; border-radius: 3px; color: #fff; cursor: pointer; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+/* ================================================
+   BODIES — 2×3 grid, generous cards
+   ================================================ */
+.bodies-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 32px; }
+.body { padding: 28px 0; border-top: 1px solid var(--border); }
+.body-eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 14px; }
+.body-name { font-size: 19px; font-weight: 600; color: var(--ink-strong); letter-spacing: -0.012em; line-height: 1.25; margin-bottom: 4px; }
+.body-acr { font-family: var(--mono); font-size: 11.5px; font-weight: 500; color: var(--faint); letter-spacing: 0.04em; margin-bottom: 14px; }
+.body-role { font-size: 14px; color: var(--secondary); line-height: 1.55; }
 
-/* Data grid (Authorities-style) */
-.data-grid { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; }
-.dg-head-row { display: grid; grid-template-columns: minmax(0, 2.5fr) 170px 90px 90px 110px 40px; gap: 12px; padding: 10px 18px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-.dg-sort-btn { background: none; border: none; padding: 0; font-family: inherit; font-size: inherit; font-weight: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
-.dg-sort-btn:hover { color: var(--ink); }
-.dg-sort-btn.on { color: var(--accent-2); }
-.dg-sort-btn .ind { font-family: var(--mono); font-weight: 400; font-size: 11px; opacity: 0; }
-.dg-sort-btn.on .ind { opacity: 1; }
-.dg-right { text-align: right; justify-content: flex-end; }
-.dg-row { display: grid; grid-template-columns: minmax(0, 2.5fr) 170px 90px 90px 110px 40px; gap: 12px; padding: 11px 18px; border-bottom: 1px solid var(--border-soft); align-items: center; cursor: pointer; transition: background .1s; }
-.dg-row:last-child { border-bottom: none; }
-.dg-row:hover { background: var(--surface-2); }
-.dg-name { font-size: 13px; font-weight: 600; color: var(--ink-strong); line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.dg-name .acr { font-family: var(--mono); font-size: 10.5px; color: var(--muted); font-weight: 500; margin-left: 6px; }
-.dg-name .sub { display: block; font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dg-type-pill { display: inline-flex; align-items: center; height: 19px; padding: 0 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; border-radius: 10px; white-space: nowrap; }
-.dg-type-pill.dpa { background: var(--ink); }
-.dg-type-pill.court { background: var(--green-fill); }
-.dg-type-pill.cyber { background: var(--amber-fill); }
-.dg-type-pill.agency { background: #475063; }
-.dg-type-pill.competition { background: #6b21a8; }
-.dg-type-pill.financial { background: #014486; }
-.dg-type-pill.telecoms { background: #0e8a7d; }
-.dg-type-pill.standards { background: var(--accent); }
-.dg-type-pill.legislature { background: #6b21a8; }
-.dg-type-pill.ag { background: #b45309; }
-.dg-type-pill.civsoc { background: #475063; }
-.dg-num { font-family: var(--mono); font-size: 12.5px; font-weight: 700; color: var(--ink-strong); text-align: right; font-feature-settings: 'tnum' 1; }
-.dg-num.muted { color: var(--ink-faint); font-weight: 500; }
-.dg-domains { display: inline-flex; gap: 4px; }
-.dg-domain { width: 18px; height: 18px; border-radius: 3px; font-family: var(--mono); font-size: 9px; font-weight: 700; color: #fff; display: inline-flex; align-items: center; justify-content: center; letter-spacing: 0; }
-.dg-domain.ai { background: var(--accent); }
-.dg-domain.priv { background: var(--ink); }
-.dg-domain.cyb { background: var(--amber-fill); }
-.dg-domain.muted { background: var(--surface-3); color: var(--ink-faint); }
-.dg-last { font-size: 11.5px; color: var(--muted); white-space: nowrap; text-align: right; font-family: var(--mono); }
-.dg-last.recent { color: var(--accent-2); font-weight: 600; }
-.dg-star { background: none; border: none; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; color: var(--ink-faint); cursor: pointer; border-radius: 4px; }
-.dg-star:hover { color: var(--accent); background: var(--surface-3); }
-.dg-star svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: currentColor; fill-opacity: 0; }
+.bodies-foot { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); display: flex; justify-content: space-between; align-items: baseline; }
+.bodies-foot b { color: var(--ink-strong); font-weight: 700; }
+.bodies-foot a { color: var(--accent-2); }
+.bodies-foot a:hover { color: var(--accent); }
 
-.dg-locked-row { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; padding: 14px 18px; background: linear-gradient(180deg, rgba(227,239,252,0.4) 0%, rgba(227,239,252,0.7) 100%); border-top: 1px dashed var(--accent-soft-2); }
-.dg-locked-text { font-size: 12.5px; color: var(--secondary); }
-.dg-locked-text b { color: var(--ink); font-weight: 700; }
-.dg-locked-cta { font-size: 12px; font-weight: 600; color: var(--accent-2); display: inline-flex; align-items: center; gap: 5px; }
-.dg-locked-cta::after { content: '→'; font-family: var(--mono); }
+/* ================================================
+   PAYWALL — calm, editorial
+   ================================================ */
+.paywall { margin-top: 32px; padding: 56px 0 8px; border-top: 1px solid var(--border); }
+.pw-label { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-2); margin-bottom: 16px; }
+.pw-head { font-size: 28px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 14px; max-width: 620px; }
+.pw-copy { font-size: 15.5px; color: var(--secondary); line-height: 1.6; max-width: 640px; margin-bottom: 32px; }
+.pw-bullets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 40px; margin-bottom: 40px; max-width: 720px; }
+.pw-bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--secondary); line-height: 1.5; }
+.pw-bullet::before { content: '+'; font-family: var(--mono); font-weight: 700; color: var(--accent-2); flex-shrink: 0; padding-top: 1px; }
+.pw-bullet b { color: var(--ink-strong); font-weight: 600; }
+.pw-ctas { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.pw-cta { height: 44px; padding: 0 22px; border-radius: 6px; font-size: 13.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
+.pw-cta.primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+.pw-cta.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.pw-cta.ghost { background: transparent; color: var(--secondary); border: 1px solid var(--border); }
+.pw-cta.ghost:hover { background: var(--surface-2); color: var(--ink); border-color: var(--faint); }
 
-/* ============ RECENT ITEMS (demoted) ============ */
-.section-eye { display: flex; align-items: baseline; gap: 14px; margin: 6px 4px 14px; }
-.section-eye .lbl { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-strong); }
-.section-eye .meta { font-size: 12.5px; color: var(--muted); }
-.section-eye .meta::before { content: ''; display: inline-block; width: 22px; height: 1px; background: var(--border); vertical-align: middle; margin-right: 12px; margin-bottom: 3px; }
+/* FOOTER */
+.footer { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer a { color: var(--muted); }
+.footer a:hover { color: var(--accent-2); }
 
-.recent-list { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); margin-bottom: 32px; list-style: none; overflow: hidden; }
-.recent-row { display: grid; grid-template-columns: 78px 1fr 100px; gap: 16px; padding: 12px 20px; border-bottom: 1px solid var(--border-soft); cursor: pointer; align-items: start; }
-.recent-row:last-child { border-bottom: none; }
-.recent-row:hover { background: var(--surface-2); }
-.recent-time { font-family: var(--mono); font-size: 10.5px; color: var(--muted); padding-top: 3px; }
-.recent-meta { font-size: 11px; color: var(--secondary); margin-bottom: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.recent-meta b { color: var(--ink); font-weight: 700; }
-.recent-head { font-size: 13.5px; font-weight: 500; color: var(--ink-strong); line-height: 1.35; margin-bottom: 2px; }
-.recent-head a { color: inherit; border-bottom: 1px solid transparent; }
-.recent-head a:hover { border-bottom-color: var(--accent); }
-.recent-src { font-size: 10.5px; color: var(--muted); font-family: var(--mono); }
-.recent-domain { display: flex; gap: 3px; justify-content: flex-end; padding-top: 3px; }
-
-/* ============ PAYWALL ============ */
-.paywall { background: linear-gradient(180deg, rgba(227,239,252,0) 0%, rgba(227,239,252,0.5) 100%), var(--surface); border: 1px solid var(--accent-soft-2); border-radius: var(--radius); padding: 24px 30px; margin-bottom: 24px; text-align: center; }
-.paywall h3 { font-size: 19px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; margin-bottom: 8px; }
-.paywall p { font-size: 13px; color: var(--secondary); margin-bottom: 14px; max-width: 560px; margin-left: auto; margin-right: auto; }
-.paywall b { color: var(--ink); font-weight: 600; }
-.paywall .ctas { display: flex; gap: 10px; justify-content: center; }
-.paywall .cta { height: 38px; padding: 0 18px; border-radius: 5px; font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; }
-.paywall .cta.primary { background: var(--accent); color: #fff; box-shadow: 0 2px 6px rgba(1,118,211,0.28); }
-.paywall .cta.primary:hover { background: var(--accent-2); }
-.paywall .cta.ghost { background: var(--surface); color: var(--secondary); border: 1px solid var(--border); }
-.paywall .cta.ghost:hover { background: var(--surface-2); }
-
-/* ============ FOOTER ============ */
-.jp-footer { border-top: 1px solid var(--border); padding: 20px 0 0; margin-top: 16px; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-
-@media (max-width: 1000px) {
-  .research-wrap { grid-template-columns: 1fr; }
-  .facet-panel { position: static; max-height: none; }
-  .dg-head-row, .dg-row { grid-template-columns: minmax(0, 1.6fr) 110px 70px 90px; gap: 10px; }
-  .dg-head-row > :nth-child(n+5), .dg-row > :nth-child(n+5) { display: none; }
-}
-@media (max-width: 720px) {
-  .header-bar { padding: 0 14px; }
-  .page-view { padding: 24px 14px 32px; }
-  .op-hero { grid-template-columns: 1fr; }
-  .op-iso { width: 64px; height: 64px; font-size: 22px; }
-  .q-stats { grid-template-columns: repeat(2, 1fr); }
-  .q-stat:nth-child(2) { border-right: none; }
-  .q-stat:nth-child(1), .q-stat:nth-child(2) { border-bottom: 1px solid var(--border-soft); }
+/* RESPONSIVE */
+@media (max-width: 820px) {
+  .page { padding: 28px 24px 64px; }
+  .hero-title { font-size: 48px; }
+  .hero-lede { font-size: 17px; }
+  .section { margin-bottom: 72px; }
+  .section-head { font-size: 26px; }
+  .inst { grid-template-columns: 1fr; gap: 8px; padding: 20px 0; }
+  .inst-side { text-align: left; flex-direction: row; gap: 14px; }
+  .bodies-grid { grid-template-columns: 1fr; gap: 0; }
+  .pw-bullets { grid-template-columns: 1fr; }
 }
 </style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 </head>
 <body>
 
@@ -253,348 +175,244 @@ button { cursor: pointer; }
   </nav>
   <div class="header-right">
     <a href="#" class="btn">Sign in</a>
-    <a href="pai-pricing.html" class="btn btn-primary">Get access →</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary">Get access →</a>
   </div>
 </header>
 
 <!-- MAIN -->
 <div class="main-content">
-<div class="page-view">
+<div class="page">
 
-  <!-- STATUSBAR -->
-  <div class="page-statusbar">
-    <div class="ps-left">
-      <span class="ps-breadcrumb">
-        <a href="pai-home-public.html">Home</a>
-        <span class="ps-sep">›</span>
-        <a href="pai-home-public.html#coverage">Jurisdictions</a>
-        <span class="ps-sep">›</span>
-        <span class="ps-current">United Kingdom</span>
-      </span>
-      <span class="ps-sep">·</span>
-      <span class="ps-scope-chip">AI · Privacy · Cyber</span>
-      <span class="ps-sep">·</span>
-      <span class="ps-ok">Pipeline operational</span>
-    </div>
-    <div class="page-actions">
-      <button class="btn">Export list</button>
-      <button class="btn btn-primary">+ Watchlist</button>
-    </div>
+  <div class="crumb">
+    <a href="pai-home-public.html">Home</a>
+    <span class="sep">/</span>
+    <a href="pai-home-public.html#coverage">Jurisdictions</a>
+    <span class="sep">/</span>
+    <span class="current">United Kingdom</span>
   </div>
 
-  <!-- OPERATIONAL HERO -->
-  <header class="op-hero">
-    <div class="op-iso">GB</div>
-    <div class="op-body">
-      <div class="op-title-row">
-        <h1 class="op-title">United Kingdom</h1>
-        <span class="op-posture stable"><span class="dot"></span>Exposure: stable</span>
-      </div>
-      <p class="op-summary">PAI tracks <b>41 bodies</b> across United Kingdom — courts, regulators, agencies and legislatures. <b>22 active</b> in the last 7 days. No enforcement deadline expires this week; <b>3 active consultations</b> are open across AI, privacy and cyber.</p>
-      <div class="op-tracks">
-        <span class="op-track ai"><span class="lbl">AI</span><b>UK AI Cyber Code of Practice</b> · DSIT consultation thread open</span>
-        <span class="op-track priv"><span class="lbl">Privacy</span><b>DPDI / DUAA commencement</b> · ICO guidance updates rolling</span>
-        <span class="op-track cyber"><span class="lbl">Cyber</span><b>NCSC frontier-AI cyber</b> · April advisory series</span>
-      </div>
-    </div>
-  </header>
-
-  <!-- QUIET STATS -->
-  <section class="q-stats">
-    <div class="q-stat">
-      <span class="lbl">Bodies tracked</span>
-      <span class="val">41</span>
-      <span class="sub">since 1 Jan 2025</span>
-    </div>
-    <div class="q-stat">
-      <span class="lbl">Active · 7 days</span>
-      <span class="val">22</span>
-      <span class="sub">54% of tracked bodies</span>
-    </div>
-    <div class="q-stat">
-      <span class="lbl">Items captured · 7d</span>
-      <span class="val">186</span>
-      <span class="sub">across all bodies</span>
-    </div>
-    <div class="q-stat">
-      <span class="lbl">Most-active type</span>
-      <span class="val text">Government Agency</span>
-      <span class="sub">12 bodies</span>
+  <!-- ================================================
+       HERO
+       ================================================ -->
+  <section class="hero">
+    <div class="hero-flag">GB</div>
+    <h1 class="hero-title">United&nbsp;Kingdom</h1>
+    <p class="hero-lede">
+      No standalone AI statute. The UK governs artificial intelligence through <b>existing sectoral regimes</b> — data protection, financial conduct, online safety and cyber — with the <b>DPDI Act now rolling into force</b> and an AI Cyber Code of Practice out for public consultation.
+    </p>
+    <div class="hero-meta">
+      <span class="pair"><b>41</b>public bodies monitored</span>
+      <span class="pair"><b>7</b>tracked instruments</span>
+      <span class="pair"><b>1</b>deadline this month</span>
     </div>
   </section>
 
-  <!-- RESEARCH LAYOUT -->
-  <div class="research-wrap">
+  <!-- ================================================
+       WHAT'S IN FORCE
+       ================================================ -->
+  <section class="section">
+    <div class="section-label">01 — In force</div>
+    <h2 class="section-head">What's binding today</h2>
+    <p class="section-kicker">
+      Four instruments do most of the work. There is no UK AI Act — obligations attach through data protection, online safety, competition and financial-conduct frameworks that already apply to AI systems.
+    </p>
 
-    <aside class="facet-panel">
-      <div class="facet-search-wrap">
-        <span class="facet-search-ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-        <input class="facet-search" placeholder="Search bodies in UK…" />
-      </div>
+    <div class="inst-list">
 
-      <div class="facet-group">
-        <div class="facet-group-head"><span>Body type</span><span class="facet-group-clear">Clear</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Government agency</span><span class="count">12</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Court</span><span class="count">11</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Financial regulator</span><span class="count">4</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Sector regulator</span><span class="count">3</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Legislature</span><span class="count">3</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Civil society</span><span class="count">2</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Cyber agency</span><span class="count">2</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Data protection authority</span><span class="count">1</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Standards body</span><span class="count">3</span></div>
-      </div>
-
-      <div class="facet-group">
-        <div class="facet-group-head"><span>Domain</span><span class="facet-group-clear">Clear</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">AI governance</span><span class="count">18</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Privacy</span><span class="count">14</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Cybersecurity</span><span class="count">11</span></div>
-      </div>
-
-      <div class="facet-group">
-        <div class="facet-group-head"><span>Activity</span></div>
-        <div class="facet-radio on"><span class="dot"></span><span>All</span></div>
-        <div class="facet-radio"><span class="dot"></span><span>Active · 7 days</span></div>
-        <div class="facet-radio"><span class="dot"></span><span>Active · 30 days</span></div>
-        <div class="facet-radio"><span class="dot"></span><span>Quiet 30+ days</span></div>
-      </div>
-
-      <div class="facet-group">
-        <div class="facet-group-head"><span>Region (UK)</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">England &amp; Wales</span><span class="count">29</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Scotland</span><span class="count">7</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">Northern Ireland</span><span class="count">3</span></div>
-        <div class="facet-opt"><span class="facet-cb"></span><span class="name">UK-wide</span><span class="count">2</span></div>
-      </div>
-
-      <button class="facet-clear-all">Clear all filters</button>
-    </aside>
-
-    <main class="research-main">
-
-      <div class="research-toolbar">
-        <span class="rt-count">Showing <b>9</b> of <b>41</b> bodies</span>
-        <div class="rt-right">
-          <button class="rt-sort">Sort: Captured (desc) ▾</button>
+      <div class="inst">
+        <div class="inst-status live">In force</div>
+        <div class="inst-main">
+          <div class="inst-title">Data Protection and Digital Information Act 2024</div>
+          <div class="inst-desc">Amends UK GDPR and the Data Protection Act 2018. Rolling commencement through 2026; ICO has issued guidance on DSARs under the new regime.</div>
+        </div>
+        <div class="inst-side">
+          <span class="issuer">ICO</span>
+          <span class="date">Assented Jul 2024</span>
         </div>
       </div>
 
-      <div class="applied-chips">
-        <span class="applied-empty">No filters applied</span>
-      </div>
-
-      <div class="data-grid">
-        <div class="dg-head-row">
-          <div><button class="dg-sort-btn">Body</button></div>
-          <div><button class="dg-sort-btn">Type</button></div>
-          <div class="dg-right"><button class="dg-sort-btn">Domains</button></div>
-          <div class="dg-right"><button class="dg-sort-btn on">Captured <span class="ind">↓</span></button></div>
-          <div class="dg-right"><button class="dg-sort-btn">Last item</button></div>
-          <div></div>
+      <div class="inst">
+        <div class="inst-status live">In force</div>
+        <div class="inst-main">
+          <div class="inst-title">Online Safety Act 2023</div>
+          <div class="inst-desc">Duty-of-care regime for user-to-user and search services, including AI-generated content. Codes of Practice on illegal-content duties now in force; children's safety codes follow.</div>
         </div>
-
-        <div class="dg-row">
-          <div class="dg-name">Scottish Government<span class="acr">SG</span><span class="sub">Edinburgh · UK-wide policy bodies + devolved govt</span></div>
-          <div><span class="dg-type-pill agency">Gov Agency</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai">AI</span><span class="dg-domain priv">PR</span><span class="dg-domain cyb">CY</span></div>
-          <div class="dg-num">547</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-row">
-          <div class="dg-name">Prudential Regulation Authority<span class="acr">PRA</span><span class="sub">London · banking + insurance prudential supervision</span></div>
-          <div><span class="dg-type-pill financial">Financial</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai">AI</span><span class="dg-domain priv muted">PR</span><span class="dg-domain cyb">CY</span></div>
-          <div class="dg-num">280</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-row">
-          <div class="dg-name">Financial Conduct Authority<span class="acr">FCA</span><span class="sub">London · conduct, markets, AI in financial services</span></div>
-          <div><span class="dg-type-pill financial">Financial</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai">AI</span><span class="dg-domain priv">PR</span><span class="dg-domain cyb">CY</span></div>
-          <div class="dg-num">232</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-row">
-          <div class="dg-name">Information Commissioner's Office<span class="acr">ICO</span><span class="sub">Wilmslow · UK data-protection regulator</span></div>
-          <div><span class="dg-type-pill dpa">DPA</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai">AI</span><span class="dg-domain priv">PR</span><span class="dg-domain cyb">CY</span></div>
-          <div class="dg-num">190</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-row">
-          <div class="dg-name">Bank of England<span class="acr">BoE</span><span class="sub">London · monetary, FMI, operational resilience</span></div>
-          <div><span class="dg-type-pill financial">Financial</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai muted">AI</span><span class="dg-domain priv muted">PR</span><span class="dg-domain cyb">CY</span></div>
-          <div class="dg-num">97</div>
-          <div class="dg-last">yesterday</div>
-          <button class="dg-star"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-row">
-          <div class="dg-name">Big Brother Watch<span class="acr">BBW</span><span class="sub">London · civil-society watchdog, surveillance + biometrics</span></div>
-          <div><span class="dg-type-pill civsoc">Civil Society</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai">AI</span><span class="dg-domain priv">PR</span><span class="dg-domain cyb muted">CY</span></div>
-          <div class="dg-num">94</div>
-          <div class="dg-last">yesterday</div>
-          <button class="dg-star"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-row">
-          <div class="dg-name">Competition Appeal Tribunal<span class="acr">CAT</span><span class="sub">London · competition + digital-markets appeals</span></div>
-          <div><span class="dg-type-pill court">Court</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai">AI</span><span class="dg-domain priv">PR</span><span class="dg-domain cyb muted">CY</span></div>
-          <div class="dg-num">67</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-row">
-          <div class="dg-name">Law Commission of England and Wales<span class="acr">LCEW</span><span class="sub">London · statutory law-reform body</span></div>
-          <div><span class="dg-type-pill agency">Gov Agency</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai">AI</span><span class="dg-domain priv">PR</span><span class="dg-domain cyb muted">CY</span></div>
-          <div class="dg-num">65</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-row">
-          <div class="dg-name">UK National Cyber Security Centre<span class="acr">NCSC</span><span class="sub">London · UK technical authority for cyber</span></div>
-          <div><span class="dg-type-pill cyber">Cyber Agency</span></div>
-          <div class="dg-domains dg-right"><span class="dg-domain ai">AI</span><span class="dg-domain priv muted">PR</span><span class="dg-domain cyb">CY</span></div>
-          <div class="dg-num">59</div>
-          <div class="dg-last">yesterday</div>
-          <button class="dg-star"><svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg></button>
-        </div>
-
-        <div class="dg-locked-row">
-          <div class="dg-locked-text"><b>32 more bodies</b> tracked in the United Kingdom — including OFCOM, OFGEM, OFWAT, CMA, Ofgem, NHS England, AI Safety Institute, DSIT, the senior courts and devolved legislatures.</div>
-          <a href="pai-pricing.html" class="dg-locked-cta">Unlock full UK roster</a>
+        <div class="inst-side">
+          <span class="issuer">OFCOM</span>
+          <span class="date">Phased, from 2025</span>
         </div>
       </div>
 
-    </main>
-  </div>
-
-  <!-- RECENT ITEMS (demoted) -->
-  <div class="section-eye"><span class="lbl">Recent items · United Kingdom</span><span class="meta">Last 7 days, all bodies, newest first</span></div>
-  <ul class="recent-list">
-
-    <li class="recent-row">
-      <div class="recent-time">3d ago</div>
-      <div>
-        <div class="recent-meta"><b>UK NCSC</b> · <span class="dg-type-pill cyber">Cyber Agency</span></div>
-        <h4 class="recent-head"><a href="https://www.ncsc.gov.uk/blogs/retaining-defensive-advantage-in-the-age-of-frontier-ai-cyber-capabilities" target="_blank" rel="noopener">Retaining defensive advantage in the age of frontier AI cyber capabilities</a></h4>
-        <div class="recent-src">www.ncsc.gov.uk ↗</div>
+      <div class="inst">
+        <div class="inst-status live">In force</div>
+        <div class="inst-main">
+          <div class="inst-title">Digital Markets, Competition and Consumers Act 2024</div>
+          <div class="inst-desc">CMA's Digital Markets Unit can now designate firms with Strategic Market Status and impose conduct requirements — the primary lever for foundation-model competition oversight.</div>
+        </div>
+        <div class="inst-side">
+          <span class="issuer">CMA</span>
+          <span class="date">Effective 2025</span>
+        </div>
       </div>
-      <div class="recent-domain"><span class="dg-domain ai">AI</span><span class="dg-domain cyb">CY</span></div>
-    </li>
 
-    <li class="recent-row">
-      <div class="recent-time">3d ago</div>
-      <div>
-        <div class="recent-meta"><b>Office of Gas and Electricity Markets</b> · <span class="dg-type-pill financial">Sector Regulator</span></div>
-        <h4 class="recent-head"><a href="https://www.ofgem.gov.uk/call-for-input/assessment-nesos-business-plan-3-performance" target="_blank" rel="noopener">Assessment of NESO's Business Plan 3 performance</a></h4>
-        <div class="recent-src">www.ofgem.gov.uk ↗</div>
+      <div class="inst">
+        <div class="inst-status live">In force</div>
+        <div class="inst-main">
+          <div class="inst-title">Financial sector supervisory expectations</div>
+          <div class="inst-desc">FCA Consumer Duty plus PRA SS1/23 (model risk management) extend to AI systems in consumer and prudential supervision. Operational-resilience rules apply to third-party AI providers.</div>
+        </div>
+        <div class="inst-side">
+          <span class="issuer">FCA · PRA</span>
+          <span class="date">Active supervision</span>
+        </div>
       </div>
-      <div class="recent-domain"><span class="dg-domain cyb">CY</span></div>
-    </li>
 
-    <li class="recent-row">
-      <div class="recent-time">3d ago</div>
-      <div>
-        <div class="recent-meta"><b>Office of Gas and Electricity Markets</b> · <span class="dg-type-pill financial">Sector Regulator</span></div>
-        <h4 class="recent-head"><a href="https://www.ofgem.gov.uk/transparency-document/connections-reform-and-battery-capacity-update" target="_blank" rel="noopener">Connections reform and battery capacity update</a></h4>
-        <div class="recent-src">www.ofgem.gov.uk ↗</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       ON THE TABLE
+       ================================================ -->
+  <section class="section">
+    <div class="section-label">02 — On the table</div>
+    <h2 class="section-head">What's being decided</h2>
+    <p class="section-kicker">
+      Three live processes worth watching — one statutory consultation with a hard deadline, two rolling requests for comment that will shape how frontier AI and operational resilience are supervised.
+    </p>
+
+    <div class="inst-list">
+
+      <div class="inst">
+        <div class="inst-status open">Open</div>
+        <div class="inst-main">
+          <div class="inst-title">AI Cyber Security Code of Practice</div>
+          <div class="inst-desc">DSIT voluntary code becoming the baseline reference for AI-system security across government procurement. Public consultation on scope and certification model.</div>
+        </div>
+        <div class="inst-side">
+          <span class="issuer">DSIT</span>
+          <span class="date">Closes 12 May</span>
+        </div>
       </div>
-      <div class="recent-domain"><span class="dg-domain cyb">CY</span></div>
-    </li>
 
-    <li class="recent-row">
-      <div class="recent-time">4d ago</div>
-      <div>
-        <div class="recent-meta"><b>Prudential Regulation Authority</b> · <span class="dg-type-pill financial">Financial</span></div>
-        <h4 class="recent-head"><a href="https://www.bankofengland.co.uk/financial-stability/resolution/report-on-the-exercise-of-relevant-sub-delegated-powers-for-fin-year-ending-28-feb-2026" target="_blank" rel="noopener">Report on the exercise of relevant sub-delegated powers · FY ending 28 Feb 2026</a></h4>
-        <div class="recent-src">www.bankofengland.co.uk ↗</div>
+      <div class="inst">
+        <div class="inst-status open">Open</div>
+        <div class="inst-main">
+          <div class="inst-title">Third-party evaluations framework</div>
+          <div class="inst-desc">AISI request for comment on how independent evaluators will be credentialed to test frontier models — the UK's counterpart to the EU AI Act's notified-body regime.</div>
+        </div>
+        <div class="inst-side">
+          <span class="issuer">AISI</span>
+          <span class="date">Rolling, no deadline</span>
+        </div>
       </div>
-      <div class="recent-domain"><span class="dg-domain cyb">CY</span></div>
-    </li>
 
-    <li class="recent-row">
-      <div class="recent-time">4d ago</div>
-      <div>
-        <div class="recent-meta"><b>Department for Science, Innovation and Technology</b> · <span class="dg-type-pill agency">Gov Agency</span></div>
-        <h4 class="recent-head"><a href="https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs" target="_blank" rel="noopener">Department for Environment, Food &amp; Rural Affairs</a></h4>
-        <div class="recent-src">www.gov.uk ↗</div>
+      <div class="inst">
+        <div class="inst-status open">Open</div>
+        <div class="inst-main">
+          <div class="inst-title">Operational resilience — critical third parties</div>
+          <div class="inst-desc">PRA consultation on how systemic technology providers (including frontier-AI suppliers) will be brought inside the financial-services resilience perimeter.</div>
+        </div>
+        <div class="inst-side">
+          <span class="issuer">PRA · BoE</span>
+          <span class="date">Closes 04 Jun</span>
+        </div>
       </div>
-      <div class="recent-domain"><span class="dg-domain ai">AI</span></div>
-    </li>
 
-    <li class="recent-row">
-      <div class="recent-time">4d ago</div>
-      <div>
-        <div class="recent-meta"><b>Scottish Government</b> · <span class="dg-type-pill agency">Gov Agency</span></div>
-        <h4 class="recent-head"><a href="https://www.gov.scot/publications/foi-202600504623/" target="_blank" rel="noopener">Proposed relocation of Glasgow Gaelic Primary School documentation: FOI Review</a></h4>
-        <div class="recent-src">www.gov.scot ↗</div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       WHO REGULATES
+       ================================================ -->
+  <section class="section">
+    <div class="section-label">03 — Who regulates</div>
+    <h2 class="section-head">The anchor set</h2>
+    <p class="section-kicker">
+      Six bodies most legal and compliance desks watch for the UK. Thirty-five more — including the Ada Lovelace Institute, the Investigatory Powers Tribunal, and departmental select committees — are behind the paywall.
+    </p>
+
+    <div class="bodies-grid">
+
+      <div class="body">
+        <div class="body-eyebrow">Data protection authority</div>
+        <div class="body-name">Information Commissioner's Office</div>
+        <div class="body-acr">ICO · Wilmslow</div>
+        <div class="body-role">Independent regulator for data protection and information rights; issues binding guidance on AI transparency, automated decision-making and DSARs.</div>
       </div>
-      <div class="recent-domain"><span class="dg-domain priv">PR</span></div>
-    </li>
 
-    <li class="recent-row">
-      <div class="recent-time">4d ago</div>
-      <div>
-        <div class="recent-meta"><b>AI Safety Institute</b> · <span class="dg-type-pill agency">Gov Agency</span></div>
-        <h4 class="recent-head"><a href="https://www.gov.uk/government/organisations/ministry-of-housing-communities-local-government" target="_blank" rel="noopener">Ministry of Housing, Communities and Local Government</a></h4>
-        <div class="recent-src">www.gov.uk ↗</div>
+      <div class="body">
+        <div class="body-eyebrow">Cyber agency</div>
+        <div class="body-name">National Cyber Security Centre</div>
+        <div class="body-acr">NCSC · London</div>
+        <div class="body-role">Technical authority for UK cyber security; publishes frontier-AI cyber advisories and supplier-vetting guidance used across government procurement.</div>
       </div>
-      <div class="recent-domain"><span class="dg-domain ai">AI</span></div>
-    </li>
 
-    <li class="recent-row">
-      <div class="recent-time">4d ago</div>
-      <div>
-        <div class="recent-meta"><b>Prudential Regulation Authority</b> · <span class="dg-type-pill financial">Financial</span></div>
-        <h4 class="recent-head"><a href="https://www.bankofengland.co.uk/weekly-report/2026/15-april-2026" target="_blank" rel="noopener">Bank of England Weekly Report · 15 April 2026</a></h4>
-        <div class="recent-src">www.bankofengland.co.uk ↗</div>
+      <div class="body">
+        <div class="body-eyebrow">Financial regulator</div>
+        <div class="body-name">Financial Conduct Authority</div>
+        <div class="body-acr">FCA · London</div>
+        <div class="body-role">Conduct supervisor for UK financial services; applies the Consumer Duty and algorithmic-fairness expectations to consumer-facing AI in banking, insurance and investments.</div>
       </div>
-      <div class="recent-domain"><span class="dg-domain cyb">CY</span></div>
-    </li>
 
-    <li class="recent-row">
-      <div class="recent-time">4d ago</div>
-      <div>
-        <div class="recent-meta"><b>Prudential Regulation Authority</b> · <span class="dg-type-pill financial">Financial</span></div>
-        <h4 class="recent-head"><a href="https://www.bankofengland.co.uk/weekly-report/2026/8-april-2026" target="_blank" rel="noopener">Bank of England Weekly Report · 8 April 2026</a></h4>
-        <div class="recent-src">www.bankofengland.co.uk ↗</div>
+      <div class="body">
+        <div class="body-eyebrow">Competition authority</div>
+        <div class="body-name">Competition and Markets Authority</div>
+        <div class="body-acr">CMA · London</div>
+        <div class="body-role">Foundation-model competition lead; operates the Strategic Market Status regime under the DMCC Act and publishes the AI foundation-models programme.</div>
       </div>
-      <div class="recent-domain"><span class="dg-domain cyb">CY</span></div>
-    </li>
 
-  </ul>
+      <div class="body">
+        <div class="body-eyebrow">Telecoms regulator</div>
+        <div class="body-name">Office of Communications</div>
+        <div class="body-acr">OFCOM · London</div>
+        <div class="body-role">Sole enforcer of the Online Safety Act 2023; sets and polices codes of practice covering illegal content, children's safety and AI-generated material.</div>
+      </div>
 
-  <!-- PAYWALL -->
+      <div class="body">
+        <div class="body-eyebrow">Government agency</div>
+        <div class="body-name">AI Safety Institute</div>
+        <div class="body-acr">AISI · London</div>
+        <div class="body-role">Frontier-model evaluations and red-teaming; produces the UK's technical evidence base on advanced-AI risk and informs international safety commitments.</div>
+      </div>
+
+    </div>
+
+    <div class="bodies-foot">
+      <span><b>6</b> shown · <b>35</b> more monitored</span>
+      <a href="pai-authorities.html">All UK authorities →</a>
+    </div>
+  </section>
+
+  <!-- ================================================
+       PAYWALL
+       ================================================ -->
   <section class="paywall">
-    <h3>See every body, every week</h3>
-    <p>Get the full United Kingdom coverage — all <b>41 bodies</b>, every item captured live, ranked by our editors and interpreted by local experts. <b>30-day money-back on annual.</b></p>
-    <div class="ctas">
-      <a href="pai-pricing.html" class="cta primary">Get full access →</a>
-      <a href="pai-home-public.html" class="cta ghost">Free Saturday briefing</a>
+    <div class="pw-label">Member access</div>
+    <h3 class="pw-head">The full UK picture, kept current.</h3>
+    <p class="pw-copy">
+      Public pages carry the anchor set. Members get every monitored body, every filing, and the structured record behind every story — so you can see what's new, what's overdue, and what your clients are exposed to.
+    </p>
+
+    <div class="pw-bullets">
+      <div class="pw-bullet">All <b>41 public bodies</b> with filings traced back to source</div>
+      <div class="pw-bullet"><b>Enforcement log</b> — ICO fines, FCA notices, OFCOM decisions</div>
+      <div class="pw-bullet"><b>Case law</b> from tribunals through the UK Supreme Court</div>
+      <div class="pw-bullet"><b>Consultation deadlines</b> with alert preferences per body</div>
+      <div class="pw-bullet">Version history on every tracked <b>instrument</b></div>
+      <div class="pw-bullet">Research-team <b>notes</b> on what's coming and why it matters</div>
+    </div>
+
+    <div class="pw-ctas">
+      <a href="pai-pricing.html" class="pw-cta primary">Get full UK access →</a>
+      <a href="pai-pricing.html" class="pw-cta ghost">Try 7 days free</a>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="jp-footer">
-    <div>PrinciplesAI · United Kingdom coverage · last refreshed today</div>
-    <div><a href="pai-home-public.html" style="color:var(--accent-2);">← Back to home</a></div>
-  </footer>
+  <!-- Footer -->
+  <div class="footer">
+    <span>PrinciplesAI · United Kingdom · updated hourly</span>
+    <a href="pai-home-public.html">← Back to home</a>
+  </div>
 
 </div>
 </div>

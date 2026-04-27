@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign in — PrinciplesAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --ink:#0a1729; --muted:#5e6878; --border:#dbe1ea; --accent:#0176d3; --bg:#fcfcfc; --surface:#ffffff; }
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--ink); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+.wrap { max-width:440px; width:100%; }
+.brand { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:24px; }
+.brand-icon { width:36px; height:36px; background:var(--accent); border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:22px; font-style:italic; letter-spacing:-1px; }
+.brand-name { font-weight:600; font-size:20px; letter-spacing:-0.01em; color:var(--ink); text-decoration:none; }
+.brand-name .ai { font-style:italic; font-weight:500; }
+#clerk-signin { display:flex; justify-content:center; }
+.fallback { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:32px; text-align:center; }
+.fallback h1 { font-size:18px; font-weight:600; margin-bottom:10px; }
+.fallback p { color:var(--muted); font-size:14px; line-height:1.5; margin-bottom:18px; }
+.fallback a { display:inline-block; padding:10px 20px; background:var(--accent); color:#fff; text-decoration:none; border-radius:6px; font-weight:600; font-size:14px; margin:3px; }
+.fallback a.secondary { background:transparent; color:var(--accent); border:1px solid var(--border); }
+.loading { color:var(--muted); font-size:13px; text-align:center; padding:40px 0; }
+.back { display:block; text-align:center; margin-top:16px; color:var(--muted); font-size:13px; text-decoration:none; }
+.back:hover { color:var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="brand-icon" style="background:var(--accent); padding:0; overflow:hidden;"><img src="pai-mark-white-128.png" alt="PAI" style="width:70%;height:70%;object-fit:contain;display:block;"></div>
+    <a href="/pai-home-public.html" class="brand-name">Principles<span class="ai">AI</span></a>
+  </div>
+  <div id="clerk-signin"><div class="loading">Loading sign-in…</div></div>
+  <div id="clerk-fallback" class="fallback" style="display:none">
+    <h1>Sign-in is temporarily unavailable</h1>
+    <p>We couldn't load the sign-in form. Please try again in a moment, or return to the public site.</p>
+    <a href="/pai-home-public.html" class="secondary">Back to PrinciplesAI</a>
+  </div>
+  <a href="/pai-home-public.html" class="back">← Back to PrinciplesAI</a>
+</div>
+
+<script
+  async
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ"
+  src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
+  type="text/javascript"
+></script>
+<script>
+(function(){
+  var started = false;
+  var failTimer = setTimeout(function(){
+    if (!started) {
+      document.getElementById('clerk-signin').style.display = 'none';
+      document.getElementById('clerk-fallback').style.display = 'block';
+    }
+  }, 8000);
+
+  function mount() {
+    if (!window.Clerk || started) return;
+    started = true;
+    clearTimeout(failTimer);
+    var params = new URLSearchParams(location.search);
+    var mode = params.get('mode') === 'signup' ? 'signup' : 'signin';
+    window.Clerk.load().then(function(){
+      var holder = document.getElementById('clerk-signin');
+      holder.innerHTML = '';
+      var opts = {
+        afterSignInUrl: '/pai-home-private',
+        afterSignUpUrl: '/pai-home-private',
+        signInUrl: '/pai-signin.html',
+        signUpUrl: '/pai-signin.html?mode=signup'
+      };
+      if (mode === 'signup' && typeof window.Clerk.mountSignUp === 'function') {
+        window.Clerk.mountSignUp(holder, opts);
+      } else if (typeof window.Clerk.mountSignIn === 'function') {
+        window.Clerk.mountSignIn(holder, opts);
+      }
+    }).catch(function(){
+      document.getElementById('clerk-signin').style.display = 'none';
+      document.getElementById('clerk-fallback').style.display = 'block';
+    });
+  }
+
+  // Try on ClerkJS ready events + polling fallback
+  window.addEventListener('load', mount);
+  var poll = setInterval(function(){
+    if (window.Clerk) { clearInterval(poll); mount(); }
+  }, 200);
+  setTimeout(function(){ clearInterval(poll); }, 10000);
+})();
+</script>
+</body>
+</html>

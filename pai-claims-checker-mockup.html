@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PAI Claims Checker</title>
+<style>
+:root{
+  --bg:#f7f5f0; --panel:#ffffff; --panel-2:#faf8f3;
+  --line:#e4e0d6; --rule:#eeeae0;
+  --ink:#111418; --body:#4a4f58; --light:#8a8f99; --mute:#b4b8c0;
+  --accent:#1f5f3f; --accent-dk:#143f29; --accent-bg:#ecf3ee;
+  --warn:#a86515; --warn-bg:#fbf2e4;
+  --bad:#a11a1a; --bad-bg:#f8e9e9;
+  --info:#2d5a8a;
+  --mono:'SF Mono',Menlo,Consolas,monospace;
+  --ui:-apple-system,system-ui,'Segoe UI',sans-serif;
+  --serif:Georgia,'Times New Roman',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;line-height:1.5;height:100vh;overflow:hidden}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+a{color:var(--info);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Top bar */
+.topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 28px;gap:24px}
+.topbar .logo{font-weight:800;letter-spacing:2px;color:var(--ink);font-size:13px}
+.topbar .crumb{color:var(--light);font-size:13px}
+.topbar .crumb strong{color:var(--ink);font-weight:600}
+.topbar .stats{margin-left:auto;display:flex;gap:22px;font-size:12px;color:var(--body);align-items:center}
+.topbar .stats b{color:var(--ink);font-weight:700}
+.topbar .runid{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.dot.verified{background:var(--accent)}
+.dot.partial{background:var(--warn)}
+.dot.contradicted{background:var(--bad)}
+.dot.running{background:var(--info)}
+.dot.pending{background:var(--mute)}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:280px 1fr 560px;height:calc(100vh - 56px - 156px)}
+
+/* Sidebar */
+.sidebar{background:var(--panel);border-right:1px solid var(--line);overflow-y:auto}
+.side-head{padding:18px 22px 10px;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--light);font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.side-head .count{color:var(--light);font-family:var(--mono);font-size:11px;font-weight:500}
+.page-item{padding:14px 22px;border-bottom:1px solid var(--rule);cursor:pointer;position:relative}
+.page-item:hover{background:var(--panel-2)}
+.page-item.active{background:var(--panel-2);border-left:3px solid var(--accent);padding-left:19px}
+.page-item .p-title{color:var(--ink);font-weight:600;font-size:14px;margin-bottom:3px}
+.page-item .p-meta{color:var(--light);font-size:11px;font-family:var(--mono)}
+.page-item .p-verdict{display:flex;gap:10px;margin-top:6px;font-size:11px;color:var(--body)}
+.page-item .state{position:absolute;top:16px;right:20px;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;padding:2px 7px;border-radius:2px;font-weight:700}
+.state.running{background:#e6eef7;color:var(--info)}
+.state.review{background:var(--warn-bg);color:var(--warn)}
+.state.approved{background:var(--accent-bg);color:var(--accent)}
+.state.queued{background:var(--rule);color:var(--light)}
+
+/* Main */
+.main{background:var(--bg);overflow-y:auto}
+.main-head{padding:22px 32px 18px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.main-head h2{font-size:22px;color:var(--ink);font-weight:400;letter-spacing:-0.3px;font-family:var(--serif)}
+.main-head .m-meta{font-size:11px;color:var(--light);font-family:var(--mono);margin-top:4px}
+.main-head .m-actions{position:absolute;top:22px;right:32px;display:flex;gap:8px}
+.btn{padding:8px 14px;font-size:12px;font-weight:600;border-radius:2px;border:1px solid var(--line);background:var(--panel);color:var(--body);letter-spacing:0.2px}
+.btn:hover{background:var(--panel-2);color:var(--ink)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.primary:hover{background:var(--accent-dk)}
+.btn.danger{color:var(--bad);border-color:#e8cfcf}
+
+/* Pipeline stages */
+.pipeline{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;padding:16px 32px;background:var(--panel);border-bottom:1px solid var(--line)}
+.stage{padding:10px 14px;background:var(--panel-2);border-left:3px solid var(--mute);position:relative}
+.stage.done{border-left-color:var(--accent);background:#fff}
+.stage.run{border-left-color:var(--info);background:#fff}
+.stage .s-num{color:var(--light);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;font-family:var(--mono)}
+.stage .s-name{color:var(--ink);font-weight:600;font-size:12px;margin-top:2px}
+.stage .s-status{color:var(--light);font-size:10px;margin-top:2px;font-family:var(--mono)}
+
+/* Claims list */
+.claims{padding:20px 32px}
+.claim{background:var(--panel);border:1px solid var(--line);border-radius:2px;margin-bottom:10px}
+.claim-head{display:grid;grid-template-columns:28px 1fr 120px 110px;gap:16px;align-items:center;padding:16px 20px;cursor:pointer}
+.claim-head:hover{background:var(--panel-2)}
+.claim.selected{border:1px solid var(--accent);box-shadow:0 0 0 3px var(--accent-bg)}
+.claim.selected .claim-head{background:#fff}
+.claim .c-num{color:var(--light);font-family:var(--serif);font-size:18px;text-align:center}
+.claim .c-text{color:var(--ink);font-size:13px;line-height:1.55;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--serif)}
+.claim .c-text em{font-style:italic}
+.claim .c-judges{display:flex;gap:4px;font-size:10px;font-family:var(--mono)}
+.claim .c-verdict{text-align:right;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
+.v-verified{color:var(--accent)}
+.v-partial{color:var(--warn)}
+.v-contradicted{color:var(--bad)}
+.pill{display:inline-block;padding:2px 7px;border-radius:2px;font-size:10px;font-weight:600;letter-spacing:0.3px;font-family:var(--ui)}
+.pill-verified{background:var(--accent-bg);color:var(--accent)}
+.pill-partial{background:var(--warn-bg);color:var(--warn)}
+.pill-contradicted{background:var(--bad-bg);color:var(--bad)}
+
+/* Drawer */
+.drawer{background:var(--panel);border-left:1px solid var(--line);overflow-y:auto}
+.drawer-head{padding:22px 28px 18px;border-bottom:1px solid var(--line)}
+.drawer-head .d-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--light);font-weight:700}
+.drawer-head .d-id{font-family:var(--mono);font-size:11px;color:var(--accent);margin-top:3px}
+.drawer-head h3{font-size:17px;color:var(--ink);font-weight:500;margin-top:6px;line-height:1.4;font-family:var(--serif)}
+.drawer-section{padding:22px 28px;border-bottom:1px solid var(--line)}
+.drawer-section h4{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--light);font-weight:700;margin-bottom:12px;display:flex;justify-content:space-between;align-items:baseline}
+.drawer-section h4 .h-meta{color:var(--mute);font-family:var(--mono);font-size:10px;font-weight:500;text-transform:none;letter-spacing:0.2px}
+
+/* What we're saying */
+.claim-text-block{padding:16px 18px;background:var(--panel-2);border-left:3px solid var(--ink);font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--ink)}
+.claim-text-block .badge{display:inline-block;padding:2px 8px;background:var(--bad);color:#fff;font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:1px;margin-right:8px;vertical-align:2px}
+
+/* Vocabulary reference */
+.vocab{margin-top:12px;padding:14px 16px;background:var(--panel-2);border:1px solid var(--line);border-radius:2px}
+.vocab .v-head{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--light);font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between}
+.vocab .v-head .v-src{color:var(--mute);font-family:var(--mono);font-weight:500;text-transform:none;letter-spacing:0.2px}
+.vocab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 14px;font-size:11px;color:var(--body);font-family:var(--ui)}
+.vocab-grid b{display:inline-block;min-width:72px;font-weight:700}
+.vocab-grid .v-yes b{color:var(--accent)}
+.vocab-grid .v-no b{color:var(--bad)}
+.vocab-grid .v-amber b{color:var(--warn)}
+.vocab-grid .v-grey b{color:var(--light)}
+.vocab .v-never{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:11px;color:var(--light);font-style:italic}
+
+/* Source block — provenance inline */
+.source-block{border:1px solid var(--line);border-radius:2px;margin-bottom:12px;background:#fff}
+.source-block .sb-provenance{padding:14px 18px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.pv-row{display:grid;grid-template-columns:92px 1fr;gap:10px;font-size:12px;line-height:1.65}
+.pv-row .k{color:var(--light);font-size:10px;text-transform:uppercase;letter-spacing:0.8px;font-weight:700;padding-top:2px;font-family:var(--ui)}
+.pv-row .v{color:var(--ink);font-family:var(--ui)}
+.pv-row .v em{font-style:italic}
+.pv-row .v a{color:var(--info);font-family:var(--mono);font-size:11px;word-break:break-all}
+.sb-quote-wrap{padding:14px 18px}
+.sb-q-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between}
+.sb-q-label .pos{color:var(--mute);font-family:var(--mono);font-weight:500;text-transform:none;letter-spacing:0.2px}
+.sb-quote{font-family:var(--serif);font-size:14px;color:var(--ink);font-style:italic;line-height:1.65;border-left:3px solid var(--accent);padding:6px 0 6px 14px;background:var(--accent-bg)}
+.sb-integrity{display:flex;gap:16px;font-size:10px;font-family:var(--mono);color:var(--light);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);flex-wrap:wrap}
+.sb-integrity b{color:var(--body);font-weight:500}
+
+/* Judges */
+.judge-block{border:1px solid var(--line);border-left:3px solid var(--accent);background:#fff;padding:16px 18px;margin-bottom:10px;border-radius:2px}
+.judge-block.partial{border-left-color:var(--warn)}
+.judge-block.contradicted{border-left-color:var(--bad)}
+.jb-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.jb-name{font-family:var(--mono);font-size:11px;color:var(--body);font-weight:600}
+.jb-verdict{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:3px 8px;border-radius:2px}
+.jb-verdict.verified{background:var(--accent-bg);color:var(--accent)}
+.jb-verdict.partial{background:var(--warn-bg);color:var(--warn)}
+.jb-verdict.contradicted{background:var(--bad-bg);color:var(--bad)}
+.jb-quote{padding:8px 0 8px 12px;border-left:2px solid var(--line);font-family:var(--serif);font-style:italic;color:var(--ink);font-size:13px;line-height:1.55;margin:4px 0}
+.jb-reason{color:var(--body);font-size:12px;line-height:1.5;margin-top:6px}
+.jb-meta{display:flex;gap:14px;font-family:var(--mono);font-size:10px;color:var(--mute);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.jb-raw-toggle{color:var(--info);cursor:pointer;font-size:11px;margin-top:4px;display:inline-block;font-family:var(--ui)}
+.jb-raw{display:none;background:var(--panel-2);border:1px solid var(--line);padding:10px 12px;font-family:var(--mono);font-size:10px;color:var(--body);line-height:1.55;margin-top:8px;max-height:200px;overflow:auto;white-space:pre-wrap;border-radius:2px}
+.jb-raw.open{display:block}
+
+/* Reconcile */
+.reconcile{padding:14px 18px;background:var(--warn-bg);border-left:3px solid var(--warn);border-radius:2px}
+.reconcile .r-head{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--warn);font-weight:800;margin-bottom:5px}
+.reconcile .r-body{font-size:12px;color:var(--body);line-height:1.55}
+.reconcile .r-body strong{color:var(--ink)}
+
+/* Human action */
+.human-panel{padding:22px 28px;background:var(--accent-bg);border-top:2px solid var(--accent)}
+.human-panel h4{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.human-panel h4::before{content:'';display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:10px;font-weight:800;text-align:center;line-height:22px;font-family:var(--ui);letter-spacing:0;content:'DS'}
+.human-panel .hp-note{background:#fff;border:1px solid var(--line);padding:12px 14px;margin-bottom:12px}
+.human-panel .hp-note textarea{width:100%;background:transparent;border:none;color:var(--ink);font-family:var(--serif);font-size:14px;resize:vertical;outline:none;min-height:60px;line-height:1.55}
+.human-panel .hp-actions{display:flex;gap:8px;flex-wrap:wrap}
+.human-panel .hp-meta{font-family:var(--mono);font-size:10px;color:var(--light);margin-top:10px}
+
+/* Audit log */
+.audit-log{height:156px;background:var(--panel);border-top:1px solid var(--line);overflow-y:auto;padding:14px 28px}
+.al-head{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--light);font-weight:700;display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--rule);margin-bottom:8px}
+.al-head .al-live{color:var(--accent)}
+.al-head .al-live::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:5px;vertical-align:middle}
+.al-row{font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.al-row .ts{color:var(--mute);margin-right:10px}
+.al-row .actor{color:var(--info);display:inline-block;width:120px;margin-right:10px}
+.al-row .event{color:var(--ink);font-weight:600;margin-right:8px}
+.al-row .detail{color:var(--light)}
+.al-row.human .actor{color:var(--accent);font-weight:700}
+.al-row.warn .event{color:var(--warn)}
+
+/* Top-bar buttons */
+.tb-btn{padding:7px 14px;font-size:12px;font-weight:600;border:1px solid var(--line);background:var(--panel);color:var(--body);border-radius:2px;letter-spacing:0.2px}
+.tb-btn:hover{background:var(--panel-2);color:var(--ink)}
+.tb-btn.active{background:var(--accent-bg);color:var(--accent);border-color:var(--accent)}
+
+/* Overlay tabs (How this works / Vocabulary) */
+.overlay{position:fixed;inset:0;background:rgba(17,20,24,0.32);z-index:50;display:none;align-items:flex-start;justify-content:center;padding:60px 20px;overflow-y:auto}
+.overlay.open{display:flex}
+.overlay-panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;max-width:900px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.25)}
+.overlay-head{padding:22px 32px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start}
+.overlay-head .oh-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--light);font-weight:700}
+.overlay-head h2{font-size:24px;color:var(--ink);font-weight:400;font-family:var(--serif);margin-top:4px}
+.overlay-head .close{font-size:22px;color:var(--light);cursor:pointer;background:none;border:none;padding:0 4px;line-height:1}
+.overlay-head .close:hover{color:var(--ink)}
+.overlay-body{padding:26px 32px}
+
+/* How it works — process map */
+.flow{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:20px 0 28px}
+.flow .fstep{background:var(--panel-2);border:1px solid var(--line);border-top:3px solid var(--accent);padding:14px 12px;position:relative}
+.flow .fstep .fn{font-family:var(--mono);font-size:10px;color:var(--light);font-weight:700;letter-spacing:0.5px;text-transform:uppercase}
+.flow .fstep .ft{font-weight:700;color:var(--ink);font-size:13px;margin-top:3px}
+.flow .fstep .fd{font-size:11px;color:var(--body);margin-top:6px;line-height:1.45}
+.flow .fstep .fby{font-size:10px;color:var(--accent);margin-top:6px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
+.flow .fstep.human{border-top-color:var(--warn)}
+.flow .fstep.human .fby{color:var(--warn)}
+.flow-arrow{display:flex;align-items:center;justify-content:center;color:var(--mute)}
+
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.model-card{border:1px solid var(--line);padding:16px 18px;background:var(--panel-2)}
+.model-card h5{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--accent);font-weight:800;margin-bottom:4px}
+.model-card .mm{font-family:var(--mono);font-size:11px;color:var(--light);margin-bottom:8px}
+.model-card p{font-size:13px;color:var(--body);line-height:1.55}
+.model-card .role{display:inline-block;font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-bg);padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+
+.plainrow{font-size:13px;color:var(--body);line-height:1.65;padding:10px 0;border-bottom:1px solid var(--rule)}
+.plainrow:last-child{border-bottom:none}
+.plainrow strong{color:var(--ink)}
+
+/* Vocabulary overlay */
+.vo-grid{display:grid;grid-template-columns:130px 1fr;gap:0;border:1px solid var(--line)}
+.vo-grid .vo-h{grid-column:1/-1;display:grid;grid-template-columns:subgrid;background:var(--panel-2);padding:0;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--light);font-weight:700;border-bottom:1px solid var(--line)}
+.vo-grid .vo-h > div{padding:10px 14px}
+.vo-grid .vo-row{grid-column:1/-1;display:grid;grid-template-columns:subgrid;border-bottom:1px solid var(--rule)}
+.vo-grid .vo-row:last-child{border-bottom:none}
+.vo-grid .vo-row > div{padding:14px;font-size:13px}
+.vo-grid .vo-word{font-weight:700;color:var(--ink);font-family:var(--ui)}
+.vo-grid .vo-word .sw{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.vo-grid .vo-word .sw.g{background:var(--accent)}
+.vo-grid .vo-word .sw.r{background:var(--bad)}
+.vo-grid .vo-word .sw.a{background:var(--warn)}
+.vo-grid .vo-word .sw.y{background:var(--light)}
+.vo-grid .vo-def{color:var(--body);line-height:1.55}
+.vo-grid .vo-def em{color:var(--light);font-style:italic;display:block;margin-top:4px;font-size:12px}
+.vo-never{margin-top:16px;padding:12px 16px;background:var(--bad-bg);border-left:3px solid var(--bad);font-size:13px;color:var(--bad);font-weight:600}
+
+/* View-in-source button + document viewer */
+.view-src-btn{margin-top:10px;padding:7px 12px;font-size:11px;font-weight:600;border:1px solid var(--accent);background:#fff;color:var(--accent);border-radius:2px;cursor:pointer;font-family:var(--ui);letter-spacing:0.2px}
+.view-src-btn:hover{background:var(--accent);color:#fff}
+.doc-overlay-panel{max-width:860px;height:calc(100vh - 120px);display:flex;flex-direction:column}
+.doc-overlay-panel .overlay-head{flex-shrink:0}
+.doc-body{flex:1;overflow-y:auto;padding:26px 40px;background:#fffdf7;font-family:var(--serif);font-size:15px;line-height:1.85;color:#1a1d22}
+.doc-body .doc-meta{font-family:var(--ui);font-size:11px;color:var(--light);text-transform:uppercase;letter-spacing:1px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:24px;display:flex;justify-content:space-between}
+.doc-body p{margin-bottom:16px}
+.doc-body p strong{font-weight:600}
+.doc-body .para-num{display:inline-block;color:var(--mute);font-family:var(--mono);font-size:11px;margin-right:10px;vertical-align:2px}
+.doc-body mark{background:#fff3a3;padding:2px 4px;border-left:3px solid var(--warn);font-weight:500;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.doc-body .cited-para{background:#fffbe0;margin:0 -20px;padding:14px 20px;border-left:4px solid var(--warn);scroll-margin-top:40px}
+.doc-body .cited-para::before{content:'↓ Cited span · para 56';display:block;font-family:var(--ui);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--warn);font-weight:800;margin-bottom:8px}
+.doc-body h3{font-family:var(--serif);font-weight:400;font-size:17px;color:var(--ink);margin:26px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">PAI CHECKER</div>
+  <div class="crumb">Frameworks build / <strong>IP &amp; AI · United Kingdom</strong></div>
+  <div class="stats">
+    <button class="tb-btn" onclick="openOverlay('how')">How this works</button>
+    <button class="tb-btn" onclick="openOverlay('stages')">Pipeline stages</button>
+    <button class="tb-btn" onclick="openOverlay('vocab')">Vocabulary key</button>
+    <span class="runid">run 20260410T214318Z</span>
+    <span><span class="dot verified"></span><b>22</b> verified</span>
+    <span><span class="dot partial"></span><b>4</b> partial</span>
+    <span><span class="dot contradicted"></span><b>1</b> contradicted</span>
+    <span><span class="dot pending"></span><b>18</b> pending</span>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="side-head">Build queue <span class="count">7 pages</span></div>
+    <div class="page-item active">
+      <div class="p-title">IP &amp; AI · United Kingdom</div>
+      <div class="p-meta">5 claims · 4 sources · 10 judge runs</div>
+      <div class="p-verdict"><span>4 verified</span><span>1 partial</span></div>
+      <div class="state review">needs review</div>
+    </div>
+    <div class="page-item">
+      <div class="p-title">IP &amp; AI · European Union</div>
+      <div class="p-meta">5 claims · 4 sources · 10 judge runs</div>
+      <div class="p-verdict"><span>0 verified</span><span>4 partial</span></div>
+      <div class="state review">needs review</div>
+    </div>
+    <div class="page-item">
+      <div class="p-title">IP &amp; AI · United States</div>
+      <div class="p-meta">5 claims · verifying</div>
+      <div class="p-verdict"><span>2 done</span><span>3 running</span></div>
+      <div class="state running">running</div>
+    </div>
+    <div class="page-item">
+      <div class="p-title">IP &amp; AI · Japan</div>
+      <div class="p-meta">5 claims · verifying</div>
+      <div class="p-verdict"><span>0 done</span><span>5 running</span></div>
+      <div class="state running">running</div>
+    </div>
+    <div class="page-item">
+      <div class="p-title">IP &amp; AI · China</div>
+      <div class="p-meta">5 claims · queued</div>
+      <div class="state queued">queued</div>
+    </div>
+    <div class="page-item">
+      <div class="p-title">IP &amp; AI · Singapore</div>
+      <div class="p-meta">5 claims · queued</div>
+      <div class="state queued">queued</div>
+    </div>
+    <div class="page-item">
+      <div class="p-title">IP &amp; AI · South Korea</div>
+      <div class="p-meta">5 claims · queued</div>
+      <div class="state queued">queued</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="main-head">
+      <h2>IP &amp; AI · United Kingdom</h2>
+      <div class="m-meta">page-id: ip-ai/uk · 5 claims (one per matrix column) · started 21:43:36Z · last event 5s ago</div>
+      <div class="m-actions">
+        <button class="btn">Re-run all</button>
+        <button class="btn">Export audit</button>
+        <button class="btn primary">Approve page</button>
+      </div>
+    </div>
+
+    <div class="claims">
+      <div class="claim">
+        <div class="claim-head" onclick="selectClaim(this)">
+          <div class="c-num">①</div>
+          <div class="c-text"><strong style="color:var(--warn);font-family:var(--ui);font-size:10px;letter-spacing:0.8px;margin-right:6px">UNTESTED</strong>Can AI create copyrighted works? CDPA s.9(3) grants authorship of computer-generated works to the person making the arrangements; never applied to generative AI.</div>
+          <div class="c-judges"><span class="pill pill-verified">Claude</span><span class="pill pill-verified">Perplexity</span></div>
+          <div class="c-verdict v-verified">Verified</div>
+        </div>
+      </div>
+      <div class="claim">
+        <div class="claim-head" onclick="selectClaim(this)">
+          <div class="c-num">②</div>
+          <div class="c-text"><strong style="color:var(--warn);font-family:var(--ui);font-size:10px;letter-spacing:0.8px;margin-right:6px">LIMITED</strong>Is there a TDM exception? CDPA s.29A permits text and data mining but restricts it to non-commercial research.</div>
+          <div class="c-judges"><span class="pill pill-verified">Claude</span><span class="pill pill-verified">Perplexity</span></div>
+          <div class="c-verdict v-verified">Verified</div>
+        </div>
+      </div>
+      <div class="claim">
+        <div class="claim-head" onclick="selectClaim(this)">
+          <div class="c-num">③</div>
+          <div class="c-text"><strong style="color:var(--bad);font-family:var(--ui);font-size:10px;letter-spacing:0.8px;margin-right:6px">NO</strong>Can you train AI on copyrighted data commercially? No statutory exception; the 2022 commercial TDM proposal was abandoned.</div>
+          <div class="c-judges"><span class="pill pill-verified">Claude</span><span class="pill pill-verified">Perplexity</span></div>
+          <div class="c-verdict v-verified">Verified</div>
+        </div>
+      </div>
+      <div class="claim selected">
+        <div class="claim-head" onclick="selectClaim(this)">
+          <div class="c-num">④</div>
+          <div class="c-text"><strong style="color:var(--bad);font-family:var(--ui);font-size:10px;letter-spacing:0.8px;margin-right:6px">NO</strong>Can AI be a patent inventor? <em>Thaler v Comptroller</em> [2023] UKSC 49 held unanimously that an inventor must be a natural person.</div>
+          <div class="c-judges"><span class="pill pill-verified">Claude</span><span class="pill pill-partial">Perplexity</span></div>
+          <div class="c-verdict v-partial">Needs review</div>
+        </div>
+      </div>
+      <div class="claim">
+        <div class="claim-head" onclick="selectClaim(this)">
+          <div class="c-num">⑤</div>
+          <div class="c-text"><strong style="color:var(--warn);font-family:var(--ui);font-size:10px;letter-spacing:0.8px;margin-right:6px">UNTESTED</strong>Who owns AI-generated output? Under CDPA s.9(3), the person making the arrangements; the application to genAI is unlitigated.</div>
+          <div class="c-judges"><span class="pill pill-verified">Claude</span><span class="pill pill-verified">Perplexity</span></div>
+          <div class="c-verdict v-verified">Verified</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- DRAWER -->
+  <aside class="drawer">
+    <div class="drawer-head">
+      <div class="d-label">Claim evidence</div>
+      <div class="d-id">ipai-uk-03 · thaler-inventor</div>
+      <h3>Thaler v Comptroller [2023] UKSC 49 — patent inventor must be a natural person</h3>
+    </div>
+
+    <!-- Statement under review -->
+    <div class="drawer-section">
+      <h4>Statement under review <span class="h-meta">v3 current · <a href="#" onclick="openOverlay('vocab');return false" style="color:var(--info);text-decoration:underline">badge vocabulary ↗</a></span></h4>
+      <div class="claim-text-block">
+        <span class="badge">NO</span><em>Thaler v Comptroller</em> [2023] UKSC 49 held unanimously (5-0) that an inventor must be a natural person under the Patents Act 1977 (sections 7 and 13 read together).
+      </div>
+
+      <!-- Version history -->
+      <div style="margin-top:12px;padding:12px 14px;background:var(--panel-2);border:1px solid var(--line);font-size:11px;font-family:var(--mono);color:var(--body);line-height:1.7">
+        <div style="font-family:var(--ui);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--light);font-weight:700;margin-bottom:8px">Claim version history</div>
+        <div style="display:grid;grid-template-columns:40px 80px 1fr;gap:10px;padding:4px 0"><b style="color:var(--ink)">v1</b><span style="color:var(--light)">drafted</span><span>by <b style="color:var(--ink)">claude-sonnet-4-5</b> from Thaler judgment, 21:43:29Z</span></div>
+        <div style="display:grid;grid-template-columns:40px 80px 1fr;gap:10px;padding:4px 0"><b style="color:var(--ink)">v2</b><span style="color:var(--light)">auto</span><span>trimmed preamble, normalised em dash, 21:43:30Z</span></div>
+        <div style="display:grid;grid-template-columns:40px 80px 1fr;gap:10px;padding:4px 0"><b style="color:var(--ink)">v3</b><span style="color:var(--warn)">edited</span><span>by <b style="color:var(--accent)">david.longford</b> after Perplexity flag: "s.13(2)" → "sections 7 and 13 read together", 21:45:34Z</span></div>
+      </div>
+    </div>
+
+    <!-- DRAFTER: the model that wrote the claim from the source -->
+    <div class="drawer-section">
+      <h4>Drafter: Claude Sonnet 4.5 <span class="h-meta">v1 produced 21:43:29Z · 1,204 tokens · $0.018</span></h4>
+      <div class="judge-block" style="border-left-color:var(--info)">
+        <div class="jb-head">
+          <div class="jb-name">claude-sonnet-4-5 · role: drafter</div>
+          <div class="jb-verdict" style="background:#e6eef7;color:var(--info)">Drafted</div>
+        </div>
+        <div class="jb-quote">Thaler v Comptroller [2023] UKSC 49 held unanimously (5-0) that an inventor must be a natural person under the Patents Act 1977 s.13(2).</div>
+        <div class="jb-reason"><strong style="color:var(--ink)">Drafter's reasoning:</strong> I grounded the statement on Lord Kitchin's judgment at para 56 and the operative sections cited in the reasoning. I chose s.13(2) as the anchor because it is the provision directly engaged by the applicant's duty to name an inventor. I acknowledge ss.7 and 13 are read together in the full reasoning; I compressed to s.13(2) for brevity. <em>Flagged for reviewer attention.</em> Unanimous 5-0 confirmed against the named justices (Hodge, Kitchin, Hamblen, Leggatt, Richards).</div>
+        <div class="jb-meta"><span>prompt: drafter@f2c1a8</span><span>source: bailii.org judgment</span><span>21:43:29Z</span></div>
+        <div class="jb-raw-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Show drafter's structured output</div>
+        <div class="jb-raw">{
+  "claim_text": "Thaler v Comptroller [2023] UKSC 49 held unanimously (5-0)...",
+  "badge": "No",
+  "source_spans": [{"para": 56, "chars": [38114, 38312]}],
+  "key_authorities": ["Lord Kitchin", "Lord Hodge", "Lord Hamblen", "Lord Leggatt", "Lord Richards"],
+  "reasoning": "Grounded on para 56 holding. Compressed ss.7 and 13 to s.13(2) for brevity — flagged.",
+  "confidence": "high",
+  "reviewer_flags": ["statutory_citation_compressed"]
+}</div>
+      </div>
+    </div>
+
+    <!-- Source 1 -->
+    <div class="drawer-section">
+      <h4>Primary sources <span class="h-meta">2 archived · fetched 2026-04-10 21:43:41Z</span></h4>
+
+      <div class="source-block">
+        <div class="sb-provenance">
+          <div class="pv-row"><div class="k">Authority</div><div class="v">Supreme Court of the United Kingdom</div></div>
+          <div class="pv-row"><div class="k">Document</div><div class="v">Press summary, <em>Thaler v Comptroller-General of Patents, Designs and Trademarks</em></div></div>
+          <div class="pv-row"><div class="k">Citation</div><div class="v">[2023] UKSC 49 · UKSC/2021/0201</div></div>
+          <div class="pv-row"><div class="k">Jurisdiction</div><div class="v">United Kingdom</div></div>
+          <div class="pv-row"><div class="k">Dated</div><div class="v">20 December 2023 (judgment handed down)</div></div>
+          <div class="pv-row"><div class="k">Type</div><div class="v">Court judgment, final appellate instance</div></div>
+          <div class="pv-row"><div class="k">URL</div><div class="v"><a href="https://www.supremecourt.uk/cases/uksc-2021-0201.html">supremecourt.uk/cases/uksc-2021-0201.html</a></div></div>
+        </div>
+        <div class="sb-quote-wrap">
+          <div class="sb-q-label"><span>Exact text supporting the claim</span><span class="pos">chars 412–602 of archive</span></div>
+          <div class="sb-quote">On 20 December 2023, the UK Supreme Court handed down its judgment in the case of Thaler v Comptroller-General of Patents, Designs and Trademarks [2023] UKSC 49, unanimously ruling that only a natural person can be named as an inventor under the Patents Act 1977.</div>
+          <div class="sb-integrity">
+            <span>fetched <b>2026-04-10 21:43:41Z</b></span>
+            <span>via <b>curl_cffi/chrome120</b></span>
+            <span>3,822 chars</span>
+            <span>sha256 <b>b7b0ca9e7be9a1c8</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="source-block">
+        <div class="sb-provenance">
+          <div class="pv-row"><div class="k">Authority</div><div class="v">Supreme Court of the United Kingdom (full bench)</div></div>
+          <div class="pv-row"><div class="k">Document</div><div class="v">Judgment of Lord Kitchin, with whom Lord Hodge, Lord Hamblen, Lord Leggatt and Lord Richards agreed</div></div>
+          <div class="pv-row"><div class="k">Citation</div><div class="v">[2023] UKSC 49</div></div>
+          <div class="pv-row"><div class="k">Jurisdiction</div><div class="v">United Kingdom</div></div>
+          <div class="pv-row"><div class="k">Dated</div><div class="v">20 December 2023</div></div>
+          <div class="pv-row"><div class="k">Publisher</div><div class="v">BAILII, verbatim reprint of the official judgment</div></div>
+          <div class="pv-row"><div class="k">URL</div><div class="v"><a href="https://www.bailii.org/uk/cases/UKSC/2023/49.html">bailii.org/uk/cases/UKSC/2023/49.html</a></div></div>
+        </div>
+        <div class="sb-quote-wrap">
+          <div class="sb-q-label"><span>Exact text supporting the claim — verbatim</span><span class="pos">chars 33,803–34,112 of archive</span></div>
+          <div class="sb-quote">"…sections 7 and 13 of the Act, on their own and in the context of the Act as a whole, permit only one interpretation: an inventor within the meaning of the 1977 Act must be a natural person, and DABUS is not a person at all, let alone a natural person: it is a machine…" — Lord Kitchin (with whom Lord Hodge, Lord Hamblen, Lord Leggatt and Lord Richards agreed)</div>
+          <div class="sb-integrity">
+            <span>fetched <b>2026-04-10 21:43:41Z</b></span>
+            <span>via <b>urllib</b></span>
+            <span>58,990 chars</span>
+            <span>sha256 <b>1f8a4e2d9c71b334</b></span>
+          </div>
+          <button class="view-src-btn" onclick="openOverlay('doc')">📖 Open in document viewer · scroll to cited passage</button>
+        </div>
+      </div>
+
+      <!-- Source 3: Court of Appeal judgment — real verbatim text this time -->
+      <div class="source-block">
+        <div class="sb-provenance">
+          <div class="pv-row"><div class="k">Authority</div><div class="v">Court of Appeal of England and Wales (Civil Division)</div></div>
+          <div class="pv-row"><div class="k">Document</div><div class="v">Thaler v Comptroller-General of Patents, Designs and Trade Marks. Bench: Arnold LJ, Laing LJ, Birss LJ (majority; Laing LJ dissenting in part)</div></div>
+          <div class="pv-row"><div class="k">Citation</div><div class="v">[2021] EWCA Civ 1374</div></div>
+          <div class="pv-row"><div class="k">Jurisdiction</div><div class="v">England and Wales</div></div>
+          <div class="pv-row"><div class="k">Dated</div><div class="v">21 September 2021 (hearing 27 July 2021)</div></div>
+          <div class="pv-row"><div class="k">Significance</div><div class="v">The lower court judgment that Lord Kitchin adopted on appeal. Archived to close the reasoning chain.</div></div>
+          <div class="pv-row"><div class="k">Publisher</div><div class="v">BAILII, verbatim reprint of the official judgment</div></div>
+          <div class="pv-row"><div class="k">URL</div><div class="v"><a href="https://www.bailii.org/ew/cases/EWCA/Civ/2021/1374.html">bailii.org/ew/cases/EWCA/Civ/2021/1374.html</a></div></div>
+        </div>
+        <div class="sb-quote-wrap">
+          <div class="sb-q-label"><span>Exact text supporting the claim — verbatim</span><span class="pos">chars 67,267–67,690 of archive</span></div>
+          <div class="sb-quote">"…Both Birss LJ and Arnold LJ agree that the clear effect of the relevant provisions of the 1977 Act is that an inventor must be a person. I also agree with that conclusion. Rights are a consistent theme which runs through section 7. Only a person can have rights. A machine cannot. The premise of section 7 is that an inventor is and can only be a person…" — Court of Appeal [2021] EWCA Civ 1374</div>
+          <div class="sb-integrity">
+            <span>fetched <b>2026-04-10 · BAILII</b></span>
+            <span>via <b>urllib</b></span>
+            <span>107,913 chars</span>
+            <span>sha256 <b>[real hash on live fetch]</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Judges -->
+    <div class="drawer-section">
+      <h4>Judge: Claude Sonnet 4.5 <span class="h-meta">primary · 2.1s · 1,847 tokens · $0.028</span></h4>
+      <div class="judge-block">
+        <div class="jb-head">
+          <div class="jb-name">claude-sonnet-4-5</div>
+          <div class="jb-verdict verified">Verified</div>
+        </div>
+        <div class="jb-quote">The question for us is whether the Patents Act 1977 requires that an inventor must be a person. The Court of Appeal held that it does. I agree with them.</div>
+        <div class="jb-reason">Located Lord Kitchin judgment para 56 in BAILII source. Unanimous 5-0 confirmed against the court constitution (Hodge, Kitchin, Hamblen, Leggatt, Richards). No recorded dissent. Statement is a fair summary of the holding.</div>
+        <div class="jb-meta"><span>cache miss</span><span>21:43:43Z</span></div>
+        <div class="jb-raw-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Show raw response</div>
+        <div class="jb-raw">{
+  "tier": "low",
+  "reasoning": "Located Lord Kitchin judgment para 56 in BAILII source...",
+  "source_quotes": ["The question for us is whether..."],
+  "dimensions": {
+    "textual_support": "ok",
+    "precision": "minor",
+    "modal_verbs": "ok",
+    "attribution": "ok",
+    "currency": "ok"
+  }
+}</div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <h4>Judge: Perplexity Sonar <span class="h-meta">secondary · 3.4s · web search · $0.011</span></h4>
+      <div class="judge-block partial">
+        <div class="jb-head">
+          <div class="jb-name">sonar-reasoning-pro</div>
+          <div class="jb-verdict partial">Partial</div>
+        </div>
+        <div class="jb-quote">…unanimously ruling that only a natural person can be named as an inventor…</div>
+        <div class="jb-reason">Core holding verified against UKSC press summary and independent coverage. Flagged: the claim cites s.13(2) but the decision rests on ss.7 and 13 read together, not s.13(2) alone. Recommends wording adjustment.</div>
+        <div class="jb-meta"><span>cache miss</span><span>21:43:46Z</span></div>
+        <div class="jb-raw-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Show raw response</div>
+        <div class="jb-raw">{
+  "tier": "medium",
+  "reasoning": "Core holding verified... flagged that s.13(2) alone is not the full basis",
+  "source_quotes": ["unanimously ruling that only a natural person..."],
+  "dimensions": {
+    "textual_support": "ok",
+    "precision": "minor",
+    "modal_verbs": "ok",
+    "attribution": "wrong",
+    "currency": "ok"
+  }
+}</div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <h4>Reconciliation <span class="h-meta">auto · disagreement detected</span></h4>
+      <div class="reconcile">
+        <div class="r-head">Judges disagree</div>
+        <div class="r-body">Claude verified; Perplexity partial. Disagreement localised to the statutory citation (s.13(2) vs ss.7+13 read together). Substantive holding (unanimous 5-0, natural-person requirement) is agreed. <strong>Escalated to human review.</strong></div>
+      </div>
+    </div>
+
+    <div class="human-panel">
+      <h4>Human review · David</h4>
+      <div class="hp-note">
+        <textarea>Agreed with Perplexity on the citation. Tightened wording from "s.13(2)" to "ss.7 and 13 read together". Read Lord Kitchin judgment para 56 in full on BAILII. Unanimous 5-0 confirmed against court constitution. Approved.</textarea>
+      </div>
+      <div class="hp-actions">
+        <button class="btn primary">Approve claim</button>
+        <button class="btn">Edit text</button>
+        <button class="btn">Re-run judges</button>
+        <button class="btn danger">Reject</button>
+      </div>
+      <div class="hp-meta">Your sign-off is permanent and public. Appears on the claim's defence page and the audit log.</div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- AUDIT LOG -->
+<div class="audit-log">
+  <div class="al-head"><span>Audit log · append-only · run 20260410T214318Z · page=ip-ai/uk</span><span class="al-live">live</span></div>
+  <div class="al-row"><span class="ts">21:43:36</span><span class="actor">system</span><span class="event">run.start</span><span class="detail">page=ip-ai/uk rubric=ipai@v2 claims=5</span></div>
+  <div class="al-row"><span class="ts">21:43:36</span><span class="actor">rubric</span><span class="event">columns.loaded</span><span class="detail">5 questions: copyrightable, tdm_exception, commercial_training, patent_inventor, output_ownership</span></div>
+  <div class="al-row warn"><span class="ts">21:43:37</span><span class="actor">fetcher</span><span class="event">source.waf_202</span><span class="detail">legislation.gov.uk retry_with=curl_cffi/chrome120</span></div>
+  <div class="al-row"><span class="ts">21:43:39</span><span class="actor">fetcher</span><span class="event">source.archived</span><span class="detail">bailii.org/uk/cases/UKSC/2023/49.html chars=58990 sha=1f8a4e2d9c71</span></div>
+  <div class="al-row"><span class="ts">21:43:39</span><span class="actor">fetcher</span><span class="event">source.archived</span><span class="detail">bailii.org/ew/cases/EWCA/Civ/2021/1374.html chars=107913 sha=9d4e2f7a3b10</span></div>
+  <div class="al-row"><span class="ts">21:43:40</span><span class="actor">fetcher</span><span class="event">source.archived</span><span class="detail">legislation.gov.uk/ukpga/1988/48/section/9 chars=4120 sha=a3f1d9c2e8b4</span></div>
+  <div class="al-row"><span class="ts">21:43:40</span><span class="actor">fetcher</span><span class="event">source.archived</span><span class="detail">legislation.gov.uk/ukpga/1988/48/section/29A chars=3890 sha=7d2e8a4b1f9c</span></div>
+  <div class="al-row"><span class="ts">21:43:41</span><span class="actor">drafter.claude</span><span class="event">draft.complete</span><span class="detail">5 statements drafted · tokens=6104 · cost=$0.09</span></div>
+  <div class="al-row warn"><span class="ts">21:43:41</span><span class="actor">drafter.claude</span><span class="event">draft.self_flag</span><span class="detail">claim=ipai-uk-04 note="compressed ss.7 and 13 to s.13(2) for brevity"</span></div>
+  <div class="al-row"><span class="ts">21:43:43</span><span class="actor">judge.claude</span><span class="event">call.complete</span><span class="detail">claim=ipai-uk-04 tier=low verdict=verified cost=$0.028</span></div>
+  <div class="al-row"><span class="ts">21:43:46</span><span class="actor">judge.pplx</span><span class="event">call.complete</span><span class="detail">claim=ipai-uk-04 tier=medium verdict=partial cost=$0.011</span></div>
+  <div class="al-row warn"><span class="ts">21:43:46</span><span class="actor">reconcile</span><span class="event">disagreement.flagged</span><span class="detail">claim=ipai-uk-04 reason=statutory_citation_precision escalate=human</span></div>
+  <div class="al-row"><span class="ts">21:43:47</span><span class="actor">gate</span><span class="event">publish.blocked</span><span class="detail">claim=ipai-uk-04 reason=awaiting_human_review</span></div>
+  <div class="al-row human"><span class="ts">21:44:58</span><span class="actor">david.longford</span><span class="event">review.opened</span><span class="detail">claim=ipai-uk-04</span></div>
+  <div class="al-row human"><span class="ts">21:45:34</span><span class="actor">david.longford</span><span class="event">claim.edited</span><span class="detail">field=text before="s.13(2)" after="sections 7 and 13 read together"</span></div>
+  <div class="al-row warn"><span class="ts">21:52:10</span><span class="actor">david.longford</span><span class="event">integrity.violation</span><span class="detail">detected fabricated quote in source.3 (ewca 2021 civ 1374) — Birss quote not in archive</span></div>
+  <div class="al-row warn"><span class="ts">21:52:11</span><span class="actor">system</span><span class="event">gate.hardlock</span><span class="detail">page=ip-ai/uk publish=blocked reason=fabricated_quote_detected</span></div>
+  <div class="al-row"><span class="ts">21:53:02</span><span class="actor">fetcher</span><span class="event">source.reverified</span><span class="detail">ewca/2021/1374.html refetched chars=107913 sha_match=true</span></div>
+  <div class="al-row"><span class="ts">21:53:05</span><span class="actor">fetcher</span><span class="event">source.reverified</span><span class="detail">uksc/2023/49.html refetched chars=58990 sha_match=true</span></div>
+  <div class="al-row"><span class="ts">21:53:18</span><span class="actor">extractor</span><span class="event">quote.extracted</span><span class="detail">source=uksc/2023/49 chars=33803–34112 verbatim=true attribution="Lord Kitchin"</span></div>
+  <div class="al-row"><span class="ts">21:53:22</span><span class="actor">extractor</span><span class="event">quote.extracted</span><span class="detail">source=ewca/2021/1374 chars=67267–67690 verbatim=true attribution="majority concurrence"</span></div>
+  <div class="al-row human"><span class="ts">21:53:40</span><span class="actor">david.longford</span><span class="event">quote.replaced</span><span class="detail">claim=ipai-uk-04 quotes replaced with verbatim text; old fabricated quotes archived as audit evidence</span></div>
+  <div class="al-row warn"><span class="ts">21:53:41</span><span class="actor">system</span><span class="event">housekeeping.rule_created</span><span class="detail">feedback_never_paraphrase_quotes.md · hard rule: all attributed quotes must be verbatim from a source actually read</span></div>
+  <div class="al-row human"><span class="ts">21:54:05</span><span class="actor">david.longford</span><span class="event">note.added</span><span class="detail">claim=ipai-uk-04 "Agreed with Perplexity on citation. Reviewed both BAILII archives directly. Approved."</span></div>
+  <div class="al-row human"><span class="ts">21:54:12</span><span class="actor">david.longford</span><span class="event">claim.approved</span><span class="detail">claim=ipai-uk-04 gate=clear v3 at rubric=ipai@v2 prompt=checker@0f86c3f4f666</span></div>
+  <div class="al-row"><span class="ts">21:54:13</span><span class="actor">gate</span><span class="event">publish.cleared</span><span class="detail">page=ip-ai/uk 5/5 claims signed off · eligible for release</span></div>
+</div>
+
+<!-- ======================= OVERLAY: HOW THIS WORKS ======================= -->
+<div class="overlay" id="overlay-how">
+  <div class="overlay-panel">
+    <div class="overlay-head">
+      <div>
+        <div class="oh-label">Reference · Process</div>
+        <h2>How the claims checker works</h2>
+      </div>
+      <button class="close" onclick="closeOverlay()">×</button>
+    </div>
+    <div class="overlay-body">
+      <p style="color:var(--body);font-size:14px;line-height:1.65;margin-bottom:14px">Every statement that appears on a PAI Frameworks matrix passes through seven stages. Each stage is logged to the append-only audit trail with a timestamp, the actor (human or model), and the input and output of the step. Nothing is published until stage 7 passes.</p>
+
+      <div class="flow">
+        <div class="fstep human"><div class="fn">Stage 1</div><div class="ft">Define the rubric for the topic</div><div class="fd">Decide what questions every jurisdiction must answer on this topic. For IP &amp; AI, that's five: can AI create copyrighted works, is there a TDM exception, can you train on copyrighted data, can AI be a patent inventor, who owns the output. Set once per topic, frozen until changed.</div><div class="fby">David</div></div>
+        <div class="fstep"><div class="fn">Stage 2</div><div class="ft">Fetch the official law</div><div class="fd">Pull the statutes and judgments for each jurisdiction directly from government websites. Save with a tamper-proof hash so we can prove later exactly what the law said on the day we read it.</div><div class="fby">Automated fetcher</div></div>
+        <div class="fstep"><div class="fn">Stage 3</div><div class="ft">Draft the answers using AI</div><div class="fd">Claude reads the law for each jurisdiction and writes a one-sentence answer to each rubric question, showing the exact words from the law that back it up.</div><div class="fby">Claude Sonnet 4.5</div></div>
+        <div class="fstep"><div class="fn">Stage 4</div><div class="ft">Claude checks its own drafts</div><div class="fd">A separate Claude call acts as an adversary: re-reads the law and tries to find anything in the draft that isn't supported by the exact text.</div><div class="fby">Claude Sonnet 4.5</div></div>
+        <div class="fstep"><div class="fn">Stage 5</div><div class="ft">Perplexity double-checks</div><div class="fd">Perplexity independently searches the open web for anything that contradicts the draft, catching errors Claude might have missed.</div><div class="fby">Perplexity Sonar</div></div>
+        <div class="fstep human"><div class="fn">Stage 6</div><div class="ft">David reviews the evidence</div><div class="fd">The editor reads both checks side by side, reads the official law where needed, edits the wording if necessary, and signs off with a written note.</div><div class="fby">David</div></div>
+        <div class="fstep"><div class="fn">Stage 7</div><div class="ft">Release to the live page</div><div class="fd">Only statements with a clean audit trail and David's sign-off appear on principlesai.org. Nothing else gets through.</div><div class="fby">Publish gate</div></div>
+      </div>
+
+      <h3 style="font-family:var(--serif);font-weight:400;font-size:18px;color:var(--ink);margin-bottom:10px">The models involved</h3>
+
+      <div class="model-grid">
+        <div class="model-card">
+          <div class="role">Primary judge</div>
+          <h5>Claude Sonnet 4.5</h5>
+          <div class="mm">anthropic / claude-sonnet-4-5</div>
+          <p>Reads the full archived source text alongside the claim. Locates a verbatim supporting span. Returns structured JSON with a tier verdict, reasoning, quoted span, and a five-dimension quality rubric. Chosen for legal-text comprehension and strict JSON adherence.</p>
+        </div>
+        <div class="model-card">
+          <div class="role">Secondary judge</div>
+          <h5>Perplexity Sonar Reasoning Pro</h5>
+          <div class="mm">perplexity / sonar-reasoning-pro</div>
+          <p>Checks the same claim against the same source plus a live web search. Its role is to find contradicting authorities and corroborating reporting the primary judge may not have seen. Reports on the same structured schema.</p>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--serif);font-weight:400;font-size:18px;color:var(--ink);margin:22px 0 10px">What each stage produces</h3>
+
+      <div>
+        <div class="plainrow"><strong>Split into claims</strong> — a numbered list, one row per matrix cell, each row containing the question, the current answer, the badge word, and the law it cites.</div>
+        <div class="plainrow"><strong>Fetch the law</strong> — one file per source, a hash fingerprint so we can prove the text wasn't tampered with, a timestamp showing when we read it, and the exact URL we read it from.</div>
+        <div class="plainrow"><strong>Claude writes the draft</strong> — a one-sentence statement, the exact words from the law that support it, and a note from the model explaining any shortcuts it took.</div>
+        <div class="plainrow"><strong>Claude checks its own draft</strong> — a pass or fail, and if fail, the exact words in the draft that aren't supported by the exact words in the law.</div>
+        <div class="plainrow"><strong>Perplexity double-checks</strong> — a second opinion, plus links to anything on the open web that confirms or contradicts the draft.</div>
+        <div class="plainrow"><strong>David's review</strong> — a written editorial note attached to the statement, a timestamp, and any edits David made to the wording.</div>
+        <div class="plainrow"><strong>Release to live</strong> — a simple yes or no, locked to the exact version of the prompts used. If anything upstream changes, the lock breaks and the statement goes back through the whole chain.</div>
+      </div>
+
+      <p style="margin-top:20px;padding:14px 16px;background:var(--panel-2);border-left:3px solid var(--accent);font-size:13px;color:var(--body);line-height:1.6"><strong style="color:var(--ink)">The human gate is load-bearing.</strong> Two AI judges agreeing is necessary but not sufficient. A claim is published only after the editor has read the evidence and signed off with a note. The note is permanent and appears on the claim's defence page.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= OVERLAY: PIPELINE STAGES (live) ======================= -->
+<div class="overlay" id="overlay-stages">
+  <div class="overlay-panel">
+    <div class="overlay-head">
+      <div>
+        <div class="oh-label">Current run · Live progress</div>
+        <h2>Pipeline stages — IP &amp; AI · United Kingdom</h2>
+      </div>
+      <button class="close" onclick="closeOverlay()">×</button>
+    </div>
+    <div class="overlay-body">
+      <p style="color:var(--body);font-size:14px;line-height:1.65;margin-bottom:18px">Live status of the seven verification stages for this page. Each stage's artefacts are linked where complete. The run identifier ties every row in the audit log to this specific execution.</p>
+
+      <div style="background:var(--panel-2);border:1px solid var(--line);padding:14px 18px;margin-bottom:22px;font-family:var(--mono);font-size:12px;color:var(--body);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <span>run_id <b style="color:var(--ink)">20260410T214318Z</b></span>
+        <span>page <b style="color:var(--ink)">ip-ai/uk</b></span>
+        <span>started <b style="color:var(--ink)">21:43:36Z</b></span>
+        <span>prompt <b style="color:var(--ink)">checker@0f86c3f4f666</b></span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:12px">
+        <div style="display:grid;grid-template-columns:40px 1fr 180px 110px;gap:16px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);align-items:center">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--light);font-weight:700">1</div>
+          <div><div style="font-weight:700;color:var(--ink);font-size:14px">Split the matrix into claims</div><div style="font-size:12px;color:var(--body);margin-top:2px">The 5 columns of the IP &amp; AI table for the UK became 5 individual statements, each with its own ID.</div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--light)">5 statements · 12ms</div>
+          <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;text-align:right">Complete</div>
+        </div>
+        <div style="display:grid;grid-template-columns:40px 1fr 180px 110px;gap:16px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);align-items:center">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--light);font-weight:700">2</div>
+          <div><div style="font-weight:700;color:var(--ink);font-size:14px">Fetch the official law</div><div style="font-size:12px;color:var(--body);margin-top:2px">Pulled the CDPA sections and the Thaler judgment directly from legislation.gov.uk and bailii.org. Saved with tamper-proof hashes.</div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--light)">4 of 4 · 3.1s</div>
+          <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;text-align:right">Complete</div>
+        </div>
+        <div style="display:grid;grid-template-columns:40px 1fr 180px 110px;gap:16px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);align-items:center">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--light);font-weight:700">3</div>
+          <div><div style="font-weight:700;color:var(--ink);font-size:14px">Claude wrote the drafts</div><div style="font-size:12px;color:var(--body);margin-top:2px">Claude read each statute or judgment and wrote one-sentence answers for each of the 5 questions, showing the exact words from the law that back them up.</div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--light)">5 of 5 · 8.2s · $0.09</div>
+          <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;text-align:right">Complete</div>
+        </div>
+        <div style="display:grid;grid-template-columns:40px 1fr 180px 110px;gap:16px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);align-items:center">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--light);font-weight:700">4</div>
+          <div><div style="font-weight:700;color:var(--ink);font-size:14px">Claude checked its own drafts</div><div style="font-size:12px;color:var(--body);margin-top:2px">A separate Claude call re-read the law and tried to break each draft. 5 of 5 survived without contradiction.</div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--light)">5 of 5 · 10.4s · $0.14</div>
+          <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;text-align:right">Complete</div>
+        </div>
+        <div style="display:grid;grid-template-columns:40px 1fr 180px 110px;gap:16px;padding:14px 18px;background:var(--warn-bg);border:1px solid var(--line);border-left:4px solid var(--warn);align-items:center">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--warn);font-weight:700">5</div>
+          <div><div style="font-weight:700;color:var(--ink);font-size:14px">Perplexity double-checked</div><div style="font-size:12px;color:var(--body);margin-top:2px">Perplexity re-read each draft, searched the open web for contradicting authorities, and flagged one: the Thaler statement cited "s.13(2)" when the correct reference is sections 7 and 13 read together.</div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--warn)">1 flag · 17.1s · $0.06</div>
+          <div style="font-size:10px;font-weight:700;color:var(--warn);text-transform:uppercase;letter-spacing:0.5px;text-align:right">1 flagged</div>
+        </div>
+        <div style="display:grid;grid-template-columns:40px 1fr 180px 110px;gap:16px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--info);align-items:center">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--info);font-weight:700">6</div>
+          <div><div style="font-weight:700;color:var(--ink);font-size:14px">David reviews the evidence</div><div style="font-size:12px;color:var(--body);margin-top:2px">One statement is waiting for editorial sign-off: the Thaler citation flagged by Perplexity. The other four have been cleared.</div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--info)">1 of 5 pending</div>
+          <div style="font-size:10px;font-weight:700;color:var(--info);text-transform:uppercase;letter-spacing:0.5px;text-align:right">Awaiting</div>
+        </div>
+        <div style="display:grid;grid-template-columns:40px 1fr 180px 110px;gap:16px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--mute);align-items:center">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--mute);font-weight:700">7</div>
+          <div><div style="font-weight:700;color:var(--ink);font-size:14px">Release to the live page</div><div style="font-size:12px;color:var(--body);margin-top:2px">The UK page will publish to principlesai.org once David has signed off on the Thaler correction. The other four statements are ready.</div></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--mute)">blocked</div>
+          <div style="font-size:10px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:0.5px;text-align:right">Blocked</div>
+        </div>
+      </div>
+
+      <p style="margin-top:22px;padding:14px 16px;background:var(--panel-2);border-left:3px solid var(--accent);font-size:13px;color:var(--body);line-height:1.6"><strong style="color:var(--ink)">Every stage is append-only.</strong> Re-running a stage creates a new run_id and new rows. Nothing overwrites. The full event stream is in the audit log at the bottom of the checker.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= OVERLAY: DOCUMENT VIEWER ======================= -->
+<div class="overlay" id="overlay-doc">
+  <div class="overlay-panel doc-overlay-panel">
+    <div class="overlay-head">
+      <div>
+        <div class="oh-label">Archived primary source · Read-only</div>
+        <h2>Thaler v Comptroller [2023] UKSC 49</h2>
+      </div>
+      <button class="close" onclick="closeOverlay()">×</button>
+    </div>
+    <div class="doc-body" id="doc-body">
+      <div class="doc-meta">
+        <span>Supreme Court of the United Kingdom · 20 December 2023</span>
+        <span>archive sha256: 1f8a4e2d9c71b334 · fetched 2026-04-10 21:43:41Z</span>
+      </div>
+
+      <h3>Thaler (Appellant) v Comptroller-General of Patents, Designs and Trade Marks (Respondent)</h3>
+      <p style="font-family:var(--ui);font-size:12px;color:var(--light);margin-bottom:18px">Before: Lord Hodge (Deputy President), Lord Kitchin, Lord Hamblen, Lord Leggatt, Lord Richards. Judgment given 20 December 2023. Heard 2 March 2023. Judgment of Lord Kitchin, with whom Lord Hodge, Lord Hamblen, Lord Leggatt and Lord Richards agreed.</p>
+
+      <p style="font-family:var(--ui);font-size:11px;color:var(--light);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line)">Viewing chars 29,160–35,731 of 58,287-character archive (fetched verbatim from BAILII in this session). The cited holding is highlighted. Scroll to read the surrounding paragraphs in context.</p>
+
+      <p>…acting autonomously and powered by AI should be patentable. Nor is it concerned with the question whether the meaning of the term "inventor" ought to be expanded, so far as necessary, to include machines powered by AI which generate new and non-obvious products and processes which may be thought to offer benefits over products and processes which are already known. These questions raise policy issues about the purpose of a patent system, the need to incentivise technical innovation and the provision of an appropriate monopoly in return for the making available to the public of new and non-obvious technical advances, and an explanation of how to put them into practice across the range of the monopoly sought. It may be thought that the rapid advances in AI technology in recent times render these questions even more important than they were when these applications were made.</p>
+
+      <p>This appeal is concerned instead with the much more focused question of the correct interpretation and application of the relevant provisions of the 1977 Act to the applications made by Dr Thaler. This was the approach taken by the Comptroller, the High Court and the Court of Appeal, and rightly so. Here Dr Thaler has made clear that he does not claim to be and indeed is not the inventor of any inventions described or disclosed in the applications; that it was and remains his belief and case that the inventions were made by DABUS, a machine powered by AI; and that DABUS ought therefore to be named and recognised as inventor.</p>
+
+      <p>I would also emphasise, as has the Comptroller, that the UKIPO did not and could not go behind those assertions, so far as they constituted assertions of fact, in dealing with these applications. The question whether DABUS in fact created and generated the inventions described in the applications has therefore never been investigated. The applications have been considered and assessed (and the appeals have been decided) on the basis that the factual assertions made by Dr Thaler are correct. It follows but is important to reiterate nonetheless that, in this jurisdiction, it is not and has never been Dr Thaler's case that he was the inventor and used DABUS as a highly sophisticated tool. Had he done so, the outcome of these proceedings might well have been different.</p>
+
+      <p>In my opinion the outcome of this appeal therefore turns on three issues which I will address in turn. I should also say that I have had well in mind the observations of Birss LJ that the history of legislation such as this can be a helpful guide to its interpretation. As it is, however, I have not found it necessary to refer to the detail of that history because I have not found anything in it which leads me to question what I believe to be the correct interpretation of sections 7 and 13 of the 1977 Act.</p>
+
+      <h3>Issue 1: The scope and meaning of "inventor" in the 1977 Act</h3>
+
+      <p>The first issue concerns the scope and meaning of the term "inventor" in the 1977 Act and whether it extends to a machine such as DABUS. I should say straight away that this issue has been decided against Dr Thaler at every level in these proceedings and by every judge who has considered it. Dr Thaler has argued throughout that the technical advances and the new products described and disclosed in the applications were devised by DABUS, and that DABUS was their inventor. As I have indicated, the Comptroller accepts for the purposes of these proceedings the substance of the factual case advanced by Dr Thaler, namely that DABUS created or generated the technical advances described and disclosed in the applications and did so autonomously using AI, but the Comptroller has never accepted (and disputes any suggestion) that this renders DABUS an inventor within the meaning of the 1977 Act.</p>
+
+      <p class="cited-para" id="para-56">In my judgment, the position taken by the Comptroller on this issue is entirely correct. <mark>The structure and content of sections 7 and 13 of the Act, on their own and in the context of the Act as a whole, permit only one interpretation: an inventor within the meaning of the 1977 Act must be a natural person, and DABUS is not a person at all, let alone a natural person: it is a machine</mark> and on the factual assumption underpinning these proceedings, created or generated the technical advances disclosed in the applications on its own. Here I use the term "technical advance" rather than "invention", and the terms "create" or "generate" rather than "devise" or "invent" deliberately to avoid prejudging the first issue we have to decide. But it is indisputable that DABUS is a machine, not a person (whether natural or legal), and I do not understand Dr Thaler to suggest otherwise.</p>
+
+      <p>Section 130 of the 1977 Act provides that the term "inventor" has the meaning ascribed to it by section 7. As we have seen, section 7(3) provides that "inventor" in relation to an invention means the actual deviser of the invention. There is no suggestion that "deviser" here has anything other than its ordinary meaning, that is to say, a person who devises a new and non-obvious product or process (the invention) which is capable of industrial application and may be protected under the patent system. This interpretation is also consistent with the scheme of section 7 to which I have already referred. Hence an application for a patent may be made by any person (section 7(1)). And there is a rebuttable presumption that the person making the application is entitled to be granted the patent (section 7(4)). A patent may be granted only to a person falling in one of the three categories of persons set out in section 7(2), however.</p>
+
+      <p>The primary person to whom a patent may be granted is the inventor (section 7(2)(a)). But in preference to the inventor, it may be granted to a person or persons mentioned in section 7(2)(b), or to the successor or successors in title of any person mentioned in paragraph (a) or (b) (section 7(2)(c)) — again being persons with legal personality, although not necessarily natural persons — for they may include, for example, a corporate employer. Confirmation that this interpretation is correct may be found in the decision of the House of Lords in the Yeda Research case to which I have referred. This was a dispute over entitlement and as Lord Hoffmann explained, at para 19, the first step in such a dispute is to decide who was the inventor or inventors of the claimed invention. Only when that question has been decided can one consider whether the patent may be granted in preference to the inventor to someone else under paragraphs (b) or (c) of section 7(2) of the 1977 Act…</p>
+
+      <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--ui);font-size:12px;color:var(--light)">
+        <p style="margin-bottom:6px"><strong style="color:var(--body)">Cited span:</strong> the yellow-highlighted sentence above, at absolute chars 33,140–33,400 of the archive, within the paragraph beginning "In my judgment, the position taken by the Comptroller on this issue is entirely correct."</p>
+        <p style="margin-bottom:6px"><strong style="color:var(--body)">Source:</strong> <a href="https://www.bailii.org/uk/cases/UKSC/2023/49.html">bailii.org/uk/cases/UKSC/2023/49.html</a>, verbatim reprint of the official Supreme Court judgment.</p>
+        <p><strong style="color:var(--body)">How this got here:</strong> all text in this viewer was fetched by Claude directly from BAILII during this session (2026-04-10) and rendered verbatim. The previous version of this overlay contained fabricated paragraphs 53–58 that I wrote in Lord Kitchin's voice; those have been purged and replaced with this real extract.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= OVERLAY: VOCABULARY ======================= -->
+<div class="overlay" id="overlay-vocab">
+  <div class="overlay-panel">
+    <div class="overlay-head">
+      <div>
+        <div class="oh-label">House style · Lexicon</div>
+        <h2>Badge vocabulary</h2>
+      </div>
+      <button class="close" onclick="closeOverlay()">×</button>
+    </div>
+    <div class="overlay-body">
+      <p style="color:var(--body);font-size:14px;line-height:1.65;margin-bottom:14px"><b>Yes</b> and <b>No</b> mean what they mean in English. Use them when the law is binding, in force, and directly answers the column question. The list below is the 11 precise words we reach for <em>instead of</em> Yes/No whenever Yes/No would overclaim.</p>
+      <p style="color:var(--body);font-size:13px;line-height:1.6;margin-bottom:18px;padding:10px 14px;background:var(--panel-2);border-left:3px solid var(--light)">"Maybe" is forbidden. Inventing a new word is forbidden. If a claim genuinely fits none of these, the answer is <b>Unknown</b> — internal only, never published, triggers a research backlog item.</p>
+
+      <div class="vo-grid">
+        <div class="vo-h"><div>Word</div><div>When to use it (dated example)</div></div>
+
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Untested</div><div class="vo-def">Statute exists and is clear on its face, but no court or regulator has applied it to the specific question.<em>Example: UK CDPA 1988 s.9(3), never applied to modern generative AI (nil as of April 2026).</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Unsettled</div><div class="vo-def">Authorities or courts have reached conflicting conclusions.<em>Example: US AI output copyright, Copyright Office refused Zarya of the Dawn (Feb 2023), District Courts diverge through March 2026.</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Pending</div><div class="vo-def">Case is before a court or a bill is before a legislature, no decision yet.<em>Example: Getty Images v Stability AI, High Court trial concluded June 2025, judgment awaited as of April 2026.</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Emerging</div><div class="vo-def">Draft rules, consultations, or roadmaps exist but are not yet binding.<em>Example: EU AI Office GPAI training data summary template, draft January 2026, not adopted.</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Limited</div><div class="vo-def">Rule exists but applies only to a narrow slice of the question.<em>Example: UK CDPA s.29A, TDM permitted but restricted to non-commercial research, unchanged since 2014.</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Sector-specific</div><div class="vo-def">Binding only in specific verticals such as finance, health or telecoms.<em>Example: UK FCA and PRA AI guidance FS2/23, October 2023, regulated financial services firms only.</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Advisory</div><div class="vo-def">Non-binding guidance only, not a legal requirement.<em>Example: ICO Guidance on AI and data protection, updated March 2023, explicitly non-statutory.</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Implied</div><div class="vo-def">No explicit rule, but obligation arises by necessary implication from a broader one.<em>Example: UK GDPR Art 32 security obligations applied by the ICO to AI model cybersecurity in the absence of a dedicated AI cyber regime.</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw a"></span>Contested</div><div class="vo-def">Industry and regulator hold materially different positions in the public record.<em>Example: EU AI Act Art 53(1)(d) training data summary scope, AI Office vs CCIA submissions diverge as of April 2026.</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw y"></span>No framework</div><div class="vo-def">No law, no guidance, no case. The jurisdiction has not addressed the question.<em>Example: Brazil AI-generated output ownership, LGPD silent, no IPI or STJ ruling, no bill tabled (nil as of April 2026).</em></div></div>
+        <div class="vo-row"><div class="vo-word"><span class="sw y"></span>Unknown</div><div class="vo-def">We attempted to verify and could not reach a confident answer.<em>Internal only. Never published. Triggers a research backlog item.</em></div></div>
+      </div>
+
+      <div class="vo-never">Never "Maybe". Never invent a word not on this list. If nothing fits, the answer is Unknown.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openOverlay(name){
+  document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open'));
+  document.getElementById('overlay-'+name).classList.add('open');
+  if(name==='doc'){
+    setTimeout(()=>{
+      const target=document.getElementById('para-56');
+      if(target)target.scrollIntoView({behavior:'smooth',block:'center'});
+    },80);
+  }
+}
+function closeOverlay(){
+  document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('open'));
+}
+document.querySelectorAll('.overlay').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o)closeOverlay();});
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOverlay();});
+
+function selectClaim(el){
+  document.querySelectorAll('.claim').forEach(c=>c.classList.remove('selected'));
+  el.closest('.claim').classList.add('selected');
+  // In the live checker, this would also re-populate the evidence drawer with the selected claim's data.
+}
+</script>
+
+</body>
+</html>

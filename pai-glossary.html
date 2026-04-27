@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Glossary · PrinciplesAI</title>
-<meta name="description" content="Every definition is a claim, every claim is sourced. The practitioner glossary for AI governance, privacy and cyber — grounded in verbatim regulation text." />
+<meta name="description" content="Every definition is sourced verbatim to its regulation. The practitioner glossary for AI governance, privacy and cyber — no paraphrasing, no second-hand summaries." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -277,6 +278,156 @@ a { color: var(--accent); text-decoration: none; }
   .g-hero-stats { justify-content: flex-start; }
   .g-hero-stats .stat { align-items: flex-start; }
 }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
 </head>
 <body>
@@ -295,8 +446,8 @@ a { color: var(--accent); text-decoration: none; }
     <a href="pai-pricing.html">Pricing</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none;">Log out</a>
-    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
+    <a href="/pai-signin.html" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
   </div>
 </header>
 
@@ -312,12 +463,12 @@ a { color: var(--accent); text-decoration: none; }
   <!-- HERO -->
   <header class="g-hero">
     <div>
-      <div class="eyebrow">Glossary · Claims-backed definitions</div>
-      <h1>Every definition is a <em>claim</em>,<br/>every claim is sourced.</h1>
+      <div class="eyebrow">Glossary · Sourced to the regulation</div>
+      <h1>Every definition <em>quotes</em><br/>the regulation itself.</h1>
       <p class="deck">The practitioner reference for AI governance, privacy and cyber. Each term is defined with a <b>verbatim quote from the regulation itself</b> — extracted by our pipeline and approved by our research team. No second-hand summaries.</p>
     </div>
     <div class="g-hero-stats">
-      <div class="stat"><span class="n">214</span><span class="l">Claims</span></div>
+      <div class="stat"><span class="n">214</span><span class="l">Terms</span></div>
       <div class="stat"><span class="n">18</span><span class="l">Instruments</span></div>
       <div class="stat"><span class="n">34</span><span class="l">Jurisdictions</span></div>
     </div>
@@ -370,7 +521,7 @@ a { color: var(--accent); text-decoration: none; }
       <blockquote class="g-term-quote">"…a machine-based system that is designed to operate with varying levels of autonomy and that may exhibit adaptiveness after deployment, and that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations, or decisions that can influence physical or virtual environments."</blockquote>
       <div class="g-term-foot">
         <a href="#" target="_blank" rel="noopener">Art. 3(1) · eur-lex.europa.eu →</a>
-        <span class="cid">claim:pai-2026-0041 · Grade A</span>
+        <span class="cid">ref:pai-2026-0041 · Grade A</span>
       </div>
     </article>
 
@@ -383,7 +534,7 @@ a { color: var(--accent); text-decoration: none; }
       <blockquote class="g-term-quote">"The data subject shall have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning him or her or similarly significantly affects him or her."</blockquote>
       <div class="g-term-foot">
         <a href="#" target="_blank" rel="noopener">Art. 22 · eur-lex.europa.eu →</a>
-        <span class="cid">claim:pai-2026-0042 · Grade A</span>
+        <span class="cid">ref:pai-2026-0042 · Grade A</span>
       </div>
     </article>
 
@@ -401,7 +552,7 @@ a { color: var(--accent); text-decoration: none; }
       <blockquote class="g-term-quote">"the natural or legal person, public authority, agency or other body which, alone or jointly with others, determines the purposes and means of the processing of personal data."</blockquote>
       <div class="g-term-foot">
         <a href="#" target="_blank" rel="noopener">Art. 4(7) · eur-lex.europa.eu →</a>
-        <span class="cid">claim:pai-2026-0043 · Grade A</span>
+        <span class="cid">ref:pai-2026-0043 · Grade A</span>
       </div>
     </article>
 
@@ -414,7 +565,7 @@ a { color: var(--accent); text-decoration: none; }
       <blockquote class="g-term-quote">"any freely given, specific, informed and unambiguous indication of the data subject's wishes by which he or she, by a statement or by a clear affirmative action, signifies agreement to the processing of personal data relating to him or her."</blockquote>
       <div class="g-term-foot">
         <a href="#" target="_blank" rel="noopener">Art. 4(11) · eur-lex.europa.eu →</a>
-        <span class="cid">claim:pai-2026-0044 · Grade A</span>
+        <span class="cid">ref:pai-2026-0044 · Grade A</span>
       </div>
     </article>
 
@@ -432,7 +583,7 @@ a { color: var(--accent); text-decoration: none; }
       <blockquote class="g-term-quote">"an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person."</blockquote>
       <div class="g-term-foot">
         <a href="#" target="_blank" rel="noopener">Art. 4(1) · eur-lex.europa.eu →</a>
-        <span class="cid">claim:pai-2026-0045 · Grade A</span>
+        <span class="cid">ref:pai-2026-0045 · Grade A</span>
       </div>
     </article>
 
@@ -445,7 +596,7 @@ a { color: var(--accent); text-decoration: none; }
       <blockquote class="g-term-quote">"any person who alone or in conjunction with other persons determines the purpose and means of processing of personal data."</blockquote>
       <div class="g-term-foot">
         <a href="#" target="_blank" rel="noopener">s.2(i) · meity.gov.in →</a>
-        <span class="cid">claim:pai-2026-0046 · Grade A</span>
+        <span class="cid">ref:pai-2026-0046 · Grade A</span>
       </div>
     </article>
 
@@ -460,13 +611,13 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Deployer</div><div class="g-term-meta"><span class="g-pill aia">EU AI Act</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">Under <b>Article 3(4) of the EU AI Act</b>, any natural or legal person using an AI system under its authority, except where used in a personal non-professional activity.</p>
         <blockquote class="g-term-quote">"any natural or legal person, public authority, agency or other body using an AI system under its authority except where the AI system is used in the course of a personal non-professional activity."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 3(4) →</a><span class="cid">claim:pai-2026-0047</span></div>
+        <div class="g-term-foot"><a href="#">Art. 3(4) →</a><span class="cid">ref:pai-2026-0047</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">DPIA</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">A data protection impact assessment, required under <b>Article 35 GDPR</b> where processing is likely to result in a high risk to the rights and freedoms of natural persons.</p>
         <blockquote class="g-term-quote">"Where a type of processing in particular using new technologies… is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall, prior to the processing, carry out an assessment of the impact of the envisaged processing operations on the protection of personal data."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 35 →</a><span class="cid">claim:pai-2026-0048</span></div>
+        <div class="g-term-foot"><a href="#">Art. 35 →</a><span class="cid">ref:pai-2026-0048</span></div>
       </article>
     </div>
 
@@ -476,13 +627,13 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Essential entity</div><div class="g-term-meta"><span class="g-pill nis2">NIS 2</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">Under <b>Article 3 NIS 2</b>, entities of a type listed in Annex I operating in sectors of high criticality that exceed the medium-enterprise size threshold.</p>
         <blockquote class="g-term-quote">"entities of a type referred to in Annex I which exceed the ceilings for medium-sized enterprises…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 3 →</a><span class="cid">claim:pai-2026-0049</span></div>
+        <div class="g-term-foot"><a href="#">Art. 3 →</a><span class="cid">ref:pai-2026-0049</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Extraterritorial scope</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def"><b>Article 3(2) GDPR</b> extends the regulation to controllers and processors outside the EU where they offer goods or services to, or monitor the behaviour of, data subjects in the EU.</p>
         <blockquote class="g-term-quote">"…the processing is related to: (a) the offering of goods or services, irrespective of whether a payment of the data subject is required, to such data subjects in the Union; or (b) the monitoring of their behaviour as far as their behaviour takes place within the Union."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 3(2) →</a><span class="cid">claim:pai-2026-0050</span></div>
+        <div class="g-term-foot"><a href="#">Art. 3(2) →</a><span class="cid">ref:pai-2026-0050</span></div>
       </article>
     </div>
 
@@ -492,7 +643,7 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">General-purpose AI model</div><div class="g-term-meta"><span class="g-pill aia">EU AI Act</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">Under <b>Article 3(63) of the EU AI Act</b>, an AI model that displays significant generality and is capable of competently performing a wide range of distinct tasks.</p>
         <blockquote class="g-term-quote">"an AI model… that displays significant generality and is capable of competently performing a wide range of distinct tasks regardless of the way the model is placed on the market."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 3(63) →</a><span class="cid">claim:pai-2026-0051</span></div>
+        <div class="g-term-foot"><a href="#">Art. 3(63) →</a><span class="cid">ref:pai-2026-0051</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Grade (Claim grade)</div><div class="g-term-meta"><span class="g-pill juris">PAI method</span></div></div>
@@ -508,13 +659,13 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">High-risk AI system</div><div class="g-term-meta"><span class="g-pill aia">EU AI Act</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">Under <b>Article 6 of the EU AI Act</b>, an AI system qualifies as high-risk where it meets the product-safety criteria in Annex I or operates in one of the use-cases listed in Annex III (biometrics, critical infrastructure, education, employment, access to services, law enforcement, migration, justice, democratic processes).</p>
         <blockquote class="g-term-quote">"…an AI system shall be considered to be high-risk where both of the following conditions are fulfilled… the AI system is intended to be used as a safety component of a product, or the AI system is itself a product, covered by the Union harmonisation legislation listed in Annex I."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 6 →</a><span class="cid">claim:pai-2026-0053</span></div>
+        <div class="g-term-foot"><a href="#">Art. 6 →</a><span class="cid">ref:pai-2026-0053</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Hallucination (AI)</div><div class="g-term-meta"><span class="g-pill juris">Regulatory term</span></div></div>
         <p class="g-term-def">Not defined in statute. Used by the <b>EU AI Office</b> and national AI authorities to refer to confidently-asserted false outputs from generative AI. Discussed in the EU AI Act recitals as a source of systemic risk for GPAI models.</p>
         <blockquote class="g-term-quote">"…risks can arise from how the models are used, including risks from errors, bias, or misinformation generated by the model, sometimes called 'hallucinations'." (Recital context, aggregated regulator guidance)</blockquote>
-        <div class="g-term-foot"><a href="#">EU AI Office guidance →</a><span class="cid">claim:pai-2026-0054</span></div>
+        <div class="g-term-foot"><a href="#">EU AI Office guidance →</a><span class="cid">ref:pai-2026-0054</span></div>
       </article>
     </div>
 
@@ -524,13 +675,13 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">ICT-related incident</div><div class="g-term-meta"><span class="g-pill dora">DORA</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">Under <b>Article 3(8) DORA</b>, a single event or a series of linked events unplanned by the financial entity that compromises the security of the network and information systems.</p>
         <blockquote class="g-term-quote">"a single event or a series of linked events unplanned by the financial entity that compromises the security of the network and information systems, and has an adverse impact on the availability, authenticity, integrity or confidentiality of data, or on the services provided by the financial entity."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 3(8) →</a><span class="cid">claim:pai-2026-0055</span></div>
+        <div class="g-term-foot"><a href="#">Art. 3(8) →</a><span class="cid">ref:pai-2026-0055</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">International transfer</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Chapter V GDPR regulates transfers of personal data to third countries. Permitted on one of: adequacy decision (<b>Art. 45</b>), appropriate safeguards such as SCCs or BCRs (<b>Art. 46</b>), or derogations (<b>Art. 49</b>).</p>
         <blockquote class="g-term-quote">"Any transfer of personal data which are undergoing processing or are intended for processing after transfer to a third country or to an international organisation shall take place only if… the conditions laid down in this Chapter are complied with by the controller and processor."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 44 →</a><span class="cid">claim:pai-2026-0056</span></div>
+        <div class="g-term-foot"><a href="#">Art. 44 →</a><span class="cid">ref:pai-2026-0056</span></div>
       </article>
     </div>
 
@@ -540,7 +691,7 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Joint controllers</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Under <b>Article 26 GDPR</b>, two or more controllers who jointly determine the purposes and means of processing. Must agree a transparent allocation of responsibilities in an arrangement made available to data subjects.</p>
         <blockquote class="g-term-quote">"Where two or more controllers jointly determine the purposes and means of processing, they shall be joint controllers. They shall in a transparent manner determine their respective responsibilities…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 26 →</a><span class="cid">claim:pai-2026-0057</span></div>
+        <div class="g-term-foot"><a href="#">Art. 26 →</a><span class="cid">ref:pai-2026-0057</span></div>
       </article>
     </div>
 
@@ -550,13 +701,13 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Legitimate interest</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">A lawful basis for processing under <b>Article 6(1)(f) GDPR</b> where processing is necessary for the legitimate interests of the controller or a third party, provided those interests are not overridden by the data subject's rights.</p>
         <blockquote class="g-term-quote">"processing is necessary for the purposes of the legitimate interests pursued by the controller or by a third party, except where such interests are overridden by the interests or fundamental rights and freedoms of the data subject…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 6(1)(f) →</a><span class="cid">claim:pai-2026-0058</span></div>
+        <div class="g-term-foot"><a href="#">Art. 6(1)(f) →</a><span class="cid">ref:pai-2026-0058</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Limited risk</div><div class="g-term-meta"><span class="g-pill aia">EU AI Act</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">The AI Act's transparency tier. <b>Article 50</b> requires providers of systems interacting with humans or generating synthetic media to inform users that they are dealing with an AI.</p>
         <blockquote class="g-term-quote">"Providers shall ensure that AI systems intended to interact directly with natural persons are designed and developed in such a way that the natural persons concerned are informed that they are interacting with an AI system…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 50 →</a><span class="cid">claim:pai-2026-0059</span></div>
+        <div class="g-term-foot"><a href="#">Art. 50 →</a><span class="cid">ref:pai-2026-0059</span></div>
       </article>
     </div>
 
@@ -566,7 +717,7 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Minimal risk</div><div class="g-term-meta"><span class="g-pill aia">EU AI Act</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">The majority of AI systems. Not covered by Title III obligations; voluntary codes encouraged in <b>recital 27</b>.</p>
         <blockquote class="g-term-quote">"This Regulation creates a legal framework for AI… without creating undue legal obstacles… Providers and deployers of AI systems that are not high-risk should be encouraged to apply voluntarily to such AI systems the requirements set out in this Regulation for high-risk AI systems."</blockquote>
-        <div class="g-term-foot"><a href="#">Recital 27 →</a><span class="cid">claim:pai-2026-0060</span></div>
+        <div class="g-term-foot"><a href="#">Recital 27 →</a><span class="cid">ref:pai-2026-0060</span></div>
       </article>
     </div>
 
@@ -576,37 +727,37 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Personal data</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Under <b>Article 4(1) GDPR</b>, any information relating to an identified or identifiable natural person.</p>
         <blockquote class="g-term-quote">"any information relating to an identified or identifiable natural person ('data subject')."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 4(1) →</a><span class="cid">claim:pai-2026-0061</span></div>
+        <div class="g-term-foot"><a href="#">Art. 4(1) →</a><span class="cid">ref:pai-2026-0061</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Personal data breach</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Under <b>Article 4(12) GDPR</b>, a breach of security leading to accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, personal data.</p>
         <blockquote class="g-term-quote">"a breach of security leading to the accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, personal data transmitted, stored or otherwise processed."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 4(12) →</a><span class="cid">claim:pai-2026-0062</span></div>
+        <div class="g-term-foot"><a href="#">Art. 4(12) →</a><span class="cid">ref:pai-2026-0062</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Processor</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Under <b>Article 4(8) GDPR</b>, the natural or legal person which processes personal data on behalf of the controller.</p>
         <blockquote class="g-term-quote">"a natural or legal person, public authority, agency or other body which processes personal data on behalf of the controller."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 4(8) →</a><span class="cid">claim:pai-2026-0063</span></div>
+        <div class="g-term-foot"><a href="#">Art. 4(8) →</a><span class="cid">ref:pai-2026-0063</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Provider (AI Act)</div><div class="g-term-meta"><span class="g-pill aia">EU AI Act</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">Under <b>Article 3(3) of the EU AI Act</b>, the natural or legal person that develops an AI system or a general-purpose AI model, or has it developed, and places it on the market or into service under its own name or trademark.</p>
         <blockquote class="g-term-quote">"…a natural or legal person, public authority, agency or other body that develops an AI system or a general-purpose AI model or that has an AI system or a general-purpose AI model developed and places it on the market or puts the AI system into service under its own name or trademark…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 3(3) →</a><span class="cid">claim:pai-2026-0064</span></div>
+        <div class="g-term-foot"><a href="#">Art. 3(3) →</a><span class="cid">ref:pai-2026-0064</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Pseudonymisation</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Under <b>Article 4(5) GDPR</b>, processing personal data so it can no longer be attributed to a specific data subject without additional information, held separately and subject to technical and organisational measures.</p>
         <blockquote class="g-term-quote">"the processing of personal data in such a manner that the personal data can no longer be attributed to a specific data subject without the use of additional information, provided that such additional information is kept separately…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 4(5) →</a><span class="cid">claim:pai-2026-0065</span></div>
+        <div class="g-term-foot"><a href="#">Art. 4(5) →</a><span class="cid">ref:pai-2026-0065</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Prohibited AI practice</div><div class="g-term-meta"><span class="g-pill aia">EU AI Act</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def"><b>Article 5 of the EU AI Act</b> prohibits subliminal manipulation, exploitation of vulnerabilities, social scoring by public authorities, predictive policing based solely on profiling, untargeted facial image scraping, emotion recognition in workplaces and schools, biometric categorisation inferring sensitive attributes, and real-time remote biometric identification in public spaces (with narrow exceptions).</p>
         <blockquote class="g-term-quote">"The following AI practices shall be prohibited: (a) the placing on the market, the putting into service or the use of an AI system that deploys subliminal techniques beyond a person's consciousness…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 5 →</a><span class="cid">claim:pai-2026-0066</span></div>
+        <div class="g-term-foot"><a href="#">Art. 5 →</a><span class="cid">ref:pai-2026-0066</span></div>
       </article>
     </div>
 
@@ -616,7 +767,7 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Right of erasure</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Under <b>Article 17 GDPR</b> (the "right to be forgotten"), the data subject's right to obtain erasure of personal data without undue delay where specified grounds apply.</p>
         <blockquote class="g-term-quote">"The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay and the controller shall have the obligation to erase personal data without undue delay where one of the following grounds applies…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 17 →</a><span class="cid">claim:pai-2026-0067</span></div>
+        <div class="g-term-foot"><a href="#">Art. 17 →</a><span class="cid">ref:pai-2026-0067</span></div>
       </article>
     </div>
 
@@ -626,19 +777,19 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Special category data</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Under <b>Article 9 GDPR</b>, processing of special category data is prohibited unless a specified condition applies. The categories: racial or ethnic origin, political opinions, religious or philosophical beliefs, trade-union membership, genetic data, biometric data processed for unique identification, health data, sex life or sexual orientation.</p>
         <blockquote class="g-term-quote">"Processing of personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, and the processing of genetic data, biometric data for the purpose of uniquely identifying a natural person, data concerning health or data concerning a natural person's sex life or sexual orientation shall be prohibited."</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 9 →</a><span class="cid">claim:pai-2026-0068</span></div>
+        <div class="g-term-foot"><a href="#">Art. 9 →</a><span class="cid">ref:pai-2026-0068</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Standard Contractual Clauses</div><div class="g-term-meta"><span class="g-pill gdpr">GDPR</span><span class="g-pill juris">EU · UK</span></div></div>
         <p class="g-term-def">Under <b>Article 46(2)(c) GDPR</b>, pre-approved contractual terms issued by the Commission that provide appropriate safeguards for transfers of personal data to third countries.</p>
         <blockquote class="g-term-quote">"…the appropriate safeguards referred to in paragraph 1 may be provided for, without requiring any specific authorisation from a supervisory authority, by: … (c) standard data protection clauses adopted by the Commission…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 46(2)(c) →</a><span class="cid">claim:pai-2026-0069</span></div>
+        <div class="g-term-foot"><a href="#">Art. 46(2)(c) →</a><span class="cid">ref:pai-2026-0069</span></div>
       </article>
       <article class="g-term">
         <div class="g-term-head"><div class="g-term-name">Systemic risk (GPAI)</div><div class="g-term-meta"><span class="g-pill aia">EU AI Act</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">Under <b>Article 3(65) of the EU AI Act</b>, a risk specific to the high-impact capabilities of general-purpose AI models that has a significant impact on the Union market with actual or reasonably foreseeable negative effects.</p>
         <blockquote class="g-term-quote">"a risk that is specific to the high-impact capabilities of general-purpose AI models, having a significant impact on the Union market due to their reach, or due to actual or reasonably foreseeable negative effects on public health, safety, public security, fundamental rights, or the society as a whole…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 3(65) →</a><span class="cid">claim:pai-2026-0070</span></div>
+        <div class="g-term-foot"><a href="#">Art. 3(65) →</a><span class="cid">ref:pai-2026-0070</span></div>
       </article>
     </div>
 
@@ -648,7 +799,7 @@ a { color: var(--accent); text-decoration: none; }
         <div class="g-term-head"><div class="g-term-name">Threat-led penetration testing</div><div class="g-term-meta"><span class="g-pill dora">DORA</span><span class="g-pill juris">EU</span></div></div>
         <p class="g-term-def">Under <b>Article 26 DORA</b>, advanced penetration testing required of systemically important financial entities at least every three years, based on threat intelligence about a firm's specific threat landscape.</p>
         <blockquote class="g-term-quote">"Financial entities… shall carry out at least every 3 years advanced testing by means of TLPT… The testing shall be based on threat intelligence about the financial entity under consideration…"</blockquote>
-        <div class="g-term-foot"><a href="#">Art. 26 →</a><span class="cid">claim:pai-2026-0071</span></div>
+        <div class="g-term-foot"><a href="#">Art. 26 →</a><span class="cid">ref:pai-2026-0071</span></div>
       </article>
     </div>
 
@@ -658,10 +809,10 @@ a { color: var(--accent); text-decoration: none; }
   <div class="g-gate-wrap">
     <div class="g-gate">
       <div class="g-gate-eyebrow">Members only · the rest of the glossary</div>
-      <h2>214 claims-backed terms,<br/><em>every one sourced to its regulation</em>.</h2>
-      <p>Every entry is a claim written by our pipeline, checked by three independent judges, and <b>approved by our research team</b>. Each one links to the article or section it was extracted from. No second-hand summaries, no silent edits.</p>
+      <h2><span id="glossTotal">—</span> sourced terms,<br/><em>every one quoted from its regulation</em>.</h2>
+      <p>Every entry is extracted verbatim by our pipeline, checked by three independent judges, and <b>approved by our research team</b>. Each one links to the article or section it was extracted from. No second-hand summaries, no silent edits.</p>
       <div class="g-gate-stats">
-        <div class="gs"><span class="n">214</span><span class="l">Claims</span></div>
+        <div class="gs"><span class="n">214</span><span class="l">Terms</span></div>
         <div class="gs"><span class="n">18</span><span class="l">Instruments</span></div>
         <div class="gs"><span class="n">34</span><span class="l">Jurisdictions</span></div>
         <div class="gs"><span class="n">100%</span><span class="l">Source-verified</span></div>
@@ -674,14 +825,18 @@ a { color: var(--accent); text-decoration: none; }
     </div>
   </div>
 
-  <!-- How claims work -->
+  <!-- How definitions are sourced -->
   <div class="g-claim-note">
-    <h3>Why every definition here is a claim</h3>
-    <p>Most legal glossaries paraphrase. We don't. Each entry is an atomic claim extracted from the regulation itself by our pipeline, with a <b>verbatim evidence snippet</b> that must be a substring of the source text — then independently voted by three model families (Gemini, Sonnet, Sonar) and approved by a member of our research team before it reaches this page. If a claim fails any gate it never publishes. When a regulation changes, the affected claims are re-extracted and the old versions become correction notices on the <a href="pai-trust.html">permanent claims ledger</a>.</p>
+    <h3>Why every definition here is sourced, not summarised</h3>
+    <p>Most legal glossaries paraphrase. We don't. Each entry is extracted verbatim from the regulation itself by our pipeline, with a <b>verbatim evidence snippet</b> that must be a substring of the source text — then independently voted by three model families (Gemini, Sonnet, Sonar) and approved by a member of our research team before it reaches this page. If an entry fails any gate it never publishes. When a regulation changes, the affected entries are re-extracted and the old versions become correction notices on the <a href="pai-trust.html">permanent source ledger</a>.</p>
   </div>
 
 </div>
 </div>
 
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+<div class="nav-scrim" aria-hidden="true"></div>
 </body>
 </html>

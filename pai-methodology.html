@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Methodology · PrinciplesAI</title>
+<meta name="description" content="How PAI classifies jurisdictions, scans the world, and decides what to publish. The rubric, the pipeline, and what we can't do." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f8fafc; --surface-3: #eff2f7;
+  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878; --ink-faint: #8a93a3;
+  --border: #dbe1ea; --border-soft: #ebeff5;
+  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc; --accent-soft-2: #cfe1f6;
+  --green: #2e844a; --green-fill: #2e844a;
+  --amber: #905200; --amber-fill: #ca8501;
+  --red: #ba0517; --red-fill: #ba0517;
+  --display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px;
+  --radius: 8px;
+  --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
+  --shadow-2: 0 2px 6px rgba(10,23,41,0.07), 0 8px 20px rgba(10,23,41,0.05);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+
+/* Header (same as other marketing pages) */
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 16px; z-index: 200; box-shadow: var(--shadow-1); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.header-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); transition: background .12s, border-color .12s, color .12s; }
+.btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 1px 2px rgba(1,118,211,0.22); }
+.btn-primary:hover { background: var(--accent-2); color: #fff; }
+@media (max-width: 1100px) { .mkt-nav a:nth-child(n+5) { display: none; } }
+@media (max-width: 720px) { .mkt-nav { display: none; } }
+
+/* Main */
+.main-content { padding-top: var(--header-height); }
+.page-view { padding: 48px 20px 80px; max-width: 860px; margin: 0 auto; }
+
+/* Breadcrumb */
+.mx-crumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.mx-crumb a { color: var(--secondary); font-weight: 500; }
+.mx-crumb a:hover { color: var(--accent-2); }
+.mx-crumb .cur { color: var(--ink); font-weight: 600; }
+.mx-crumb .sep { color: var(--ink-faint); margin: 0 8px; }
+
+/* Hero */
+.mx-eyebrow { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-2); margin-bottom: 12px; }
+.mx-h1 { font-family: var(--display); font-size: 40px; font-weight: 700; letter-spacing: -0.018em; color: var(--ink-strong); line-height: 1.08; margin-bottom: 14px; }
+.mx-h1 em { font-style: italic; color: var(--accent-2); font-weight: 600; }
+.mx-sub { font-size: 15.5px; color: var(--secondary); line-height: 1.65; max-width: 680px; margin-bottom: 40px; }
+
+/* Section heading */
+.mx-h2 { font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.012em; line-height: 1.2; margin-bottom: 14px; padding-top: 32px; border-top: 1px solid var(--border-soft); margin-top: 4px; }
+.mx-intro { font-size: 14px; color: var(--secondary); line-height: 1.65; margin-bottom: 22px; }
+.mx-intro b { color: var(--ink); font-weight: 600; }
+
+/* Rubric cards */
+.mx-rubric { display: grid; gap: 12px; margin-bottom: 28px; }
+.mx-rubric-card { border: 1px solid var(--border-soft); border-left-width: 3px; padding: 16px 22px; background: var(--surface); border-radius: 4px; }
+.mx-rubric-card.comp { border-left-color: #0f766e; }
+.mx-rubric-card.sect { border-left-color: var(--accent); }
+.mx-rubric-card.princ { border-left-color: #7c3aed; }
+.mx-rubric-card.emerg { border-left-color: var(--amber-fill); }
+.mx-rubric-card.nyc { border-left-color: var(--ink-faint); }
+.mx-rubric-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.mx-rubric-body { font-size: 13px; color: var(--secondary); line-height: 1.6; }
+.mx-rubric-body b { color: var(--ink); font-weight: 600; }
+
+/* Callout */
+.mx-callout { background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: 5px; padding: 18px 22px; font-size: 13px; color: var(--secondary); line-height: 1.65; margin-bottom: 38px; }
+.mx-callout b { color: var(--ink); font-weight: 600; }
+
+/* Numbered pipeline */
+.mx-steps { list-style: none; padding: 0; margin-bottom: 22px; counter-reset: step; }
+.mx-step { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border-soft); }
+.mx-step:last-child { border-bottom: none; }
+.mx-step::before { counter-increment: step; content: counter(step); font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--accent-2); background: var(--accent-soft); border: 1px solid var(--accent-soft-2); border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; margin-top: 2px; }
+.mx-step-title { font-size: 14.5px; font-weight: 700; color: var(--ink-strong); margin-bottom: 4px; }
+.mx-step-title .who { font-family: var(--mono); font-size: 10.5px; font-weight: 600; color: var(--muted); letter-spacing: 0.04em; margin-left: 8px; text-transform: uppercase; }
+.mx-step-title .who.h { color: var(--accent-2); }
+.mx-step-title .who.m { color: var(--secondary); }
+.mx-step-body { font-size: 13.5px; color: var(--secondary); line-height: 1.6; }
+.mx-step-body b { color: var(--ink); font-weight: 600; }
+
+.mx-tldr { font-size: 13px; color: var(--muted); font-style: italic; line-height: 1.65; margin-bottom: 38px; padding-left: 14px; border-left: 2px solid var(--border); }
+
+/* Limits cards */
+.mx-limits { display: grid; gap: 16px; margin-bottom: 32px; }
+.mx-limit-card { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 20px 24px; }
+.mx-limit-title { font-size: 14.5px; font-weight: 700; color: var(--ink-strong); margin-bottom: 8px; }
+.mx-limit-body { font-size: 13px; color: var(--secondary); line-height: 1.6; margin-bottom: 10px; }
+.mx-limit-body b { color: var(--ink); font-weight: 600; }
+.mx-limit-handle { font-size: 12.5px; color: var(--accent-2); font-weight: 600; line-height: 1.55; }
+.mx-limit-handle::before { content: 'How we handle it:'; color: var(--muted); font-weight: 500; margin-right: 6px; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.08em; display: inline-block; transform: translateY(-1px); }
+
+/* Why + Terms */
+.mx-why { background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 22px 26px; margin-bottom: 22px; }
+.mx-why-lab { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+.mx-why-body { font-size: 13.5px; color: var(--secondary); line-height: 1.65; }
+.mx-why-body b { color: var(--ink); font-weight: 600; }
+
+.mx-terms { border: 1px solid var(--border-soft); border-left: 3px solid var(--ink-faint); background: var(--surface); border-radius: 4px; padding: 18px 24px; margin-bottom: 28px; }
+.mx-terms-lab { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+.mx-terms-body { font-size: 13px; color: var(--secondary); line-height: 1.6; }
+.mx-terms-body b { color: var(--ink); font-weight: 600; }
+.mx-terms-body a { color: var(--accent-2); font-weight: 600; }
+
+.mx-last { font-size: 11.5px; color: var(--ink-faint); margin-top: 24px; }
+.mx-last a { color: var(--accent-2); font-weight: 600; }
+
+.mx-footer { border-top: 1px solid var(--border); padding: 22px 0 0; margin-top: 48px; font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; gap: 10px; }
+.mx-footer a { color: var(--accent-2); font-weight: 600; }
+
+@media (max-width: 720px) {
+  .page-view { padding: 32px 16px 48px; }
+  .mx-h1 { font-size: 32px; }
+  .mx-h2 { font-size: 22px; }
+}
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
+</style>
+</head>
+<body>
+
+<header class="header-bar">
+  <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); letter-spacing:-0.005em; text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public.html">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html">Legislation</a>
+    <a href="pai-home-public.html#jobs">Jobs</a>
+    <a href="pai-glossary.html">Glossary</a>
+    <a href="pai-home-public.html#pricing">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view">
+
+  <nav class="mx-crumb">
+    <a href="pai-home-public.html">Home</a>
+    <span class="sep">›</span>
+    <a href="pai-trust.html">Trust</a>
+    <span class="sep">›</span>
+    <span class="cur">Methodology</span>
+  </nav>
+
+  <div class="mx-eyebrow">Methodology</div>
+  <h1 class="mx-h1">Classification logic &amp; editorial <em>process</em></h1>
+  <p class="mx-sub">How PAI turns a noisy world of regulator websites, draft bills, consultation papers, and court decisions into structured intelligence. Written plainly, because the value is in the judgement calls, not the pipeline.</p>
+
+  <!-- RUBRIC -->
+  <h2 class="mx-h2">Regulatory approach: the rubric</h2>
+  <p class="mx-intro">Every jurisdiction page carries a one-word label summarising how that country regulates AI. It's an editorial call made against this rubric, not a score, and we show the evidence so you can argue with it.</p>
+
+  <div class="mx-rubric">
+    <div class="mx-rubric-card comp">
+      <div class="mx-rubric-title">Comprehensive</div>
+      <div class="mx-rubric-body">A horizontal, AI-specific statute is <b>in force</b> covering multiple sectors. Examples: EU AI Act, Colorado AI Act, China's Interim Measures for Generative AI.</div>
+    </div>
+    <div class="mx-rubric-card sect">
+      <div class="mx-rubric-title">Sectoral</div>
+      <div class="mx-rubric-body">No horizontal AI law, but binding rules touching AI exist inside sector regimes: data protection, financial services, employment, product safety. Examples: US federal (SR-11-7, EEOC guidance), Japan, most of the Gulf.</div>
+    </div>
+    <div class="mx-rubric-card princ">
+      <div class="mx-rubric-title">Principles-based</div>
+      <div class="mx-rubric-body">Government has published a framework, white paper, or national strategy directing existing regulators to act, but no new statute. Examples: UK pre-2026 white paper, Australia's AI ethics framework, Singapore's Model AI Governance Framework.</div>
+    </div>
+    <div class="mx-rubric-card emerg">
+      <div class="mx-rubric-title">Emerging</div>
+      <div class="mx-rubric-body">A draft AI bill or consultation is live. Nothing binding yet, but something is moving. Examples: Brazil PL 2338, India DPDP-adjacent proposals, Canada post-AIDA.</div>
+    </div>
+    <div class="mx-rubric-card nyc">
+      <div class="mx-rubric-title">Not yet classified</div>
+      <div class="mx-rubric-body">We haven't identified a dedicated framework, sectoral overlay, or active bill. Either the jurisdiction genuinely hasn't moved, or our coverage is incomplete. Flag it and we'll look.</div>
+    </div>
+  </div>
+
+  <div class="mx-callout">
+    <b>How we apply it.</b> The label is derived from structured Airtable fields (in-force status, hierarchy, subject tags, pending bills) with a human editor reviewing the edge cases. When the computed label disagrees with a practitioner's gut — which happens most often for the UK, Singapore, and Japan — we sit on the editor's call and document why in the evidence panel. The goal isn't a clever algorithm; it's a defensible call that a regulated firm can take to a board meeting.
+  </div>
+
+  <!-- PIPELINE -->
+  <h2 class="mx-h2">How we scan the world</h2>
+  <p class="mx-intro">PAI monitors just over <b>450 official sources</b> across <b>250+ jurisdictions</b>. The pipeline has machines in it, but the editorial decisions are made by people. Here's the flow:</p>
+
+  <ol class="mx-steps">
+    <li class="mx-step">
+      <div>
+        <div class="mx-step-title">Source curation <span class="who h">Human</span></div>
+        <div class="mx-step-body">Our research team maintains the list of regulators, ministries, courts, and agencies we watch. A source only enters the list after an editor confirms it publishes primary material (statutes, decisions, consultations, guidance) rather than secondary commentary. <b>Law firm blogs are not sources.</b></div>
+      </div>
+    </li>
+    <li class="mx-step">
+      <div>
+        <div class="mx-step-title">Continuous collection <span class="who m">Machine</span></div>
+        <div class="mx-step-body">Every hour, scrapers check each source for new publications. We dedupe by canonical URL against what we've already seen.</div>
+      </div>
+    </li>
+    <li class="mx-step">
+      <div>
+        <div class="mx-step-title">First-pass triage <span class="who m">Machine, supervised</span></div>
+        <div class="mx-step-body">New items are scored against our three practitioner personas (AI governance, privacy, cybersecurity) to decide whether they clear the relevance bar. The rubric is public to the team and adjusted whenever an editor overrides it.</div>
+      </div>
+    </li>
+    <li class="mx-step">
+      <div>
+        <div class="mx-step-title">Editorial writeup <span class="who h">Human-reviewed</span></div>
+        <div class="mx-step-body">Items that pass triage get a structured Alert: what happened, why it matters, who it affects, what to do this week. Machine drafts are permitted; an editor signs off before anything reaches the platform. <b>No opinion, no advice. We report and distil, we don't advocate.</b></div>
+      </div>
+    </li>
+    <li class="mx-step">
+      <div>
+        <div class="mx-step-title">Structured extraction <span class="who m">Machine</span></div>
+        <div class="mx-step-body">Each Alert is linked to the underlying primary record (a Decision, a Guidance Document, a Case, a Consultation) so you can cite the source, not our summary.</div>
+      </div>
+    </li>
+    <li class="mx-step">
+      <div>
+        <div class="mx-step-title">Continuous QC <span class="who h">Human + machine</span></div>
+        <div class="mx-step-body">An always-on agent rechecks published records for link rot, missing authorities, contradictions between the Alert and its linked source. Flags land in a queue an editor works daily.</div>
+      </div>
+    </li>
+  </ol>
+
+  <p class="mx-tldr">The short version: machines surface what's new, humans decide what matters, humans write the words, and machines make sure the citations still work.</p>
+
+  <!-- LIMITS -->
+  <h2 class="mx-h2">What we can't do, and how we handle it</h2>
+  <p class="mx-intro">Every regulatory intelligence product has blind spots. Pretending otherwise wastes your time and ours. Here are ours:</p>
+
+  <div class="mx-limits">
+    <div class="mx-limit-card">
+      <div class="mx-limit-title">Official sources only. You won't read gossip here</div>
+      <div class="mx-limit-body">Every record on PAI is sourced from a primary official publication: the regulator's own website, the court filing, the official journal, the parliamentary text. Law firm blogs, trade gossip, and unverified commentary are not sources.</div>
+      <div class="mx-limit-handle">A small exception — a handful of regulator and legislature websites are routinely unavailable, slow, or publish only in formats we can't reliably parse. In those cases we read a narrow set of community and academic databases as pointers to the primary source. The two we currently rely on are <b>GDPRhub</b>, a case-law and guidance database maintained by noyb and the University of Vienna that reproduces official DPA decisions verbatim alongside the original regulator link, and <b>LegiScan</b>, which mirrors every US state legislature's bills and is our fallback when a state portal is broken, migrated, or rejects access. We only publish once an editor has opened the primary document itself and confirmed the record.</div>
+    </div>
+
+    <div class="mx-limit-card">
+      <div class="mx-limit-title">Things regulators never publish</div>
+      <div class="mx-limit-body">A lot of enforcement happens in settlement letters, supervisory dialogue, and confidential guidance. We can't see what isn't published, and we won't speculate about what's happening behind closed doors.</div>
+      <div class="mx-limit-handle">We label what we know and what we don't. Silence from a regulator is surfaced as "no public activity this quarter", not as "nothing is happening".</div>
+    </div>
+
+    <div class="mx-limit-card">
+      <div class="mx-limit-title">The line between guidance and law</div>
+      <div class="mx-limit-body">In most common-law jurisdictions, regulator guidance isn't binding until a court treats it as authoritative, or a regulator enforces as if it were. Our structured tables (Law / Guidance / Decision / Case Law / Consultation) force a choice that the world doesn't always respect.</div>
+      <div class="mx-limit-handle">An Alert is a single narrative, not a single category. A document that is both guidance and an enforcement signal links to both structured tables, so it appears in each filter view with the same underlying story. The Alert body explains the dual character in plain English.</div>
+    </div>
+
+    <div class="mx-limit-card">
+      <div class="mx-limit-title">We are not your lawyer</div>
+      <div class="mx-limit-body">PAI identifies what's happening and distils it accurately. We don't interpret it for your specific circumstances, and we don't tell you what to do.</div>
+      <div class="mx-limit-handle">Every page links to the primary source so you can form your own view, and our framing always separates "what the rule says" from "what a firm might do about it".</div>
+    </div>
+
+    <div class="mx-limit-card">
+      <div class="mx-limit-title">Mistakes</div>
+      <div class="mx-limit-body">We will make them. A mis-tagged record, a bill marked "in force" that isn't, a citation that goes stale the week after we publish it.</div>
+      <div class="mx-limit-handle">Every page carries a flag-this link, corrections are logged in the changelog, and repeat patterns go into the QC agent's ruleset so the same mistake doesn't happen twice.</div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <div class="mx-why">
+    <div class="mx-why-lab">Why this page exists</div>
+    <div class="mx-why-body">Most regulatory trackers hide their methodology behind a "we use AI" label. We think that's backwards. The machines find the haystack; the humans find the needle. If you're relying on PAI for a compliance decision, you should know which bits we trust to whom, and where we've drawn a line because we'd rather be honest than complete.</div>
+  </div>
+
+  <!-- TERMS -->
+  <div class="mx-terms">
+    <div class="mx-terms-lab">Important — read alongside our Terms</div>
+    <div class="mx-terms-body">PAI is an <b>informational service only</b>. Not legal or compliance advice. Don't rely on it for decisions affecting you or your organisation. Always seek professional advice for your specific circumstances. Full terms and our limitation of liability are in our <a href="https://principlesai.org/terms" target="_blank" rel="noopener">Terms of Service</a>.</div>
+  </div>
+
+  <div class="mx-last">Last reviewed April 2026 · Questions about classification? <a href="mailto:research@principlesai.org">research@principlesai.org</a></div>
+
+  <footer class="mx-footer">
+    <div>PrinciplesAI · Methodology</div>
+    <div><a href="pai-trust.html">Trust &amp; security ↗</a></div>
+  </footer>
+
+</div>
+</div>
+
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+<div class="nav-scrim" aria-hidden="true"></div>
+</body>
+</html>
