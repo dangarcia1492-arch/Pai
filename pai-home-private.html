@@ -873,10 +873,35 @@ body { min-width: 320px !important; }
   .pulse-line { font-size: 11px !important; }
 }
 
-/* Mobile hamburger toggle button */
-.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
-.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0d2e42; stroke-width: 2; fill: none; }
-.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+/* Mobile hamburger toggle — 44x44 minimum tap target per Apple/WCAG */
+.mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 600;          /* above sidebar (500) + header-bar (200) so it's always tappable */
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  border: 1px solid #dbe1ea;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(10,23,41,0.12);
+  padding: 0;
+  pointer-events: auto;  /* defensive — never let a parent disable */
+  -webkit-tap-highlight-color: rgba(10,23,41,0.1);
+}
+.mobile-nav-toggle:active { background: #f0f4fa; }
+.mobile-nav-toggle svg { width: 22px; height: 22px; stroke: #0d2e42; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,23,41,0.4);
+  z-index: 450;
+}
 @media (max-width: 640px) {
   .mobile-nav-toggle { display: flex; }
   body.mobile-nav-open .mobile-nav-backdrop { display: block; }
@@ -964,23 +989,23 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
 <!-- ICON SIDEBAR -->
 <nav class="icon-sidebar">
-  <a href="pai-home-private.html" class="sidebar-brand" style="text-decoration:none;color:inherit;">
+  <a href="pai-home-private" class="sidebar-brand" style="text-decoration:none;color:inherit;">
     <div class="brand-icon" style="background:var(--accent); padding:0; overflow:hidden;"><img src="pai-mark-white-128.png" alt="PAI" style="width:70%;height:70%;object-fit:contain;display:block;"></div>
     <span class="brand-text">Principles<span class="ai">AI</span></span>
   </a>
     
   <div class="sidebar-nav-items">
     <div class="sidebar-nav-item active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></div>
-      <a class="sidebar-nav-item" href="pai-app-ai-notes.html" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
+      <a class="sidebar-nav-item" href="pai-app-ai-notes" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
     <div class="sidebar-nav-item" onclick="openJurisdictions()" style="cursor:pointer;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span></div>
-    <a href="pai-app-news.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
+    <a href="pai-app-news" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
     <div class="sidebar-regions-zone">
       <div class="sidebar-nav-divider"></div>
-      <a href="pai-app-authorities.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
-      <a class="sidebar-nav-item" href="pai-app-topics.html" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Topics</span></a>
-      <a href="pai-app-legislation.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <a href="pai-app-authorities" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
+      <a class="sidebar-nav-item" href="pai-app-topics" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Topics</span></a>
+      <a href="pai-app-legislation" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
       <div class="sidebar-nav-divider"></div>
-      <a href="pai-app-glossary.html" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
+      <a href="pai-app-glossary" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></div>
       <a href="#" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="nav-label">Watchlist</span></a>
       <a href="#" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></a>
@@ -1019,7 +1044,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   </div>
   <div class="header-right">
     <div class="home-jur-btn"><span class="hjb-flag">&#x1F1EC;&#x1F1E7;</span><span>United Kingdom</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
-    <a href="pai-app-settings.html" class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></a><a href="#" class="header-logout" onclick="paiLogout(event)" title="Log out"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
+    <a href="pai-app-settings" class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></a><a href="#" class="header-logout" onclick="paiLogout(event)" title="Log out"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
   </div>
 </header>
 
@@ -1231,7 +1256,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   </div>
   <section class="featured-trio">
 
-    <a class="featured-card" href="pai-app-news-story-ico-nhs.html">
+    <a class="featured-card" href="pai-app-news-story-ico-nhs">
       <div class="fc-thumb" style="background: linear-gradient(135deg, #032e61 0%, #0176d3 55%, #4ba2e0 100%);">
         <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
@@ -1245,7 +1270,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         </div>
       </div>
     </a>
-    <a class="featured-card" href="pai-app-news-story-ico-nhs.html">
+    <a class="featured-card" href="pai-app-news-story-ico-nhs">
       <div class="fc-thumb" style="background: linear-gradient(135deg, #06101e 0%, #1f2a3f 50%, #3a475d 100%);">
         <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
@@ -1259,7 +1284,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         </div>
       </div>
     </a>
-    <a class="featured-card" href="pai-app-news-story-ico-nhs.html">
+    <a class="featured-card" href="pai-app-news-story-ico-nhs">
       <div class="fc-thumb" style="background: linear-gradient(135deg, #022d1a 0%, #2e844a 55%, #6fb98a 100%);">
         <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
@@ -1291,7 +1316,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="dot">·</span>
           <span class="when">—</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
         <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="dev-source"><span class="link">ico.org.uk</span></div>
       </article>
@@ -1303,7 +1328,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="dot">·</span>
           <span class="when">—</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
         <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="dev-source"><span class="link">ico.org.uk</span></div>
       </article>
@@ -1315,7 +1340,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="dot">·</span>
           <span class="when">—</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
         <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="dev-source"><span class="link">ico.org.uk</span></div>
       </article>
@@ -1327,7 +1352,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="dot">·</span>
           <span class="when">—</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
         <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="dev-source"><span class="link">ico.org.uk</span></div>
       </article>
@@ -1339,7 +1364,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="dot">·</span>
           <span class="when">—</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
         <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="dev-source"><span class="link">ico.org.uk</span></div>
       </article>
@@ -1351,7 +1376,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="dot">·</span>
           <span class="when">—</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
         <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
         <div class="dev-source"><span class="link">ico.org.uk</span></div>
       </article>
@@ -1377,11 +1402,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <tr><th>Regulator</th><th>Target</th><th class="right">Fine</th><th class="right">When</th></tr>
         </thead>
         <tbody>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
         </tbody>
       </table>
     </div>
@@ -1394,17 +1419,17 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <div class="case-list">
         <div class="case-row">
           <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
-          <div class="case-name"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+          <div class="case-name"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
           <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
         </div>
         <div class="case-row">
           <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
-          <div class="case-name"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+          <div class="case-name"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
           <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
         </div>
         <div class="case-row">
           <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
-          <div class="case-name"><a href="pai-app-news-story-ico-nhs.html" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
+          <div class="case-name"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
           <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
         </div>
       </div>
@@ -1482,18 +1507,19 @@ function setHotView(view, btn) {
 
 
 
-<!-- Mobile nav shim -->
+<!-- Mobile nav shim — REMOVED 2026-04-27. Was a duplicate of the 802-883
+     block that conflicted on width/display in the 641-860px range. The
+     consolidated mobile rules in the main stylesheet at line ~802 now
+     handle ≤640px (phones); for tablets 641-860px we extend below. -->
 <style>
-.mobile-nav-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
-.mobile-nav-toggle svg { width: 22px; height: 22px; stroke: #0d2e42; stroke-width: 2; fill: none; }
-.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
-@media (max-width: 860px) {
-  .mobile-nav-toggle { display: flex; }
-  .icon-sidebar { display: none !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.2) !important; }
-  body.mobile-nav-open .icon-sidebar { display: flex !important; }
-  body.mobile-nav-open .icon-sidebar .brand-text,
-  body.mobile-nav-open .icon-sidebar .nav-label { opacity: 1 !important; }
-  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+/* Tablet range: 641-860px — show burger, hide sidebar, otherwise inherit phone rules */
+@media (min-width: 641px) and (max-width: 860px) {
+  .mobile-nav-toggle { display: flex !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block !important; }
   .header-bar { left: 0 !important; padding-left: 60px !important; }
   .main-content { margin-left: 0 !important; }
   .page { padding: 16px !important; }
@@ -1761,7 +1787,14 @@ function setHotView(view, btn) {
 
   function buildExpandableCountryRow(name, dataKey, children){
     var wrap = document.createElement('div');
+    // Container-only entities (USA / United States): no own page — clicking
+    // always expands to show "US Federal" + states, never navigates.
+    var EXPAND_ONLY = { 'USA': 1, 'United States': 1, 'United States of America': 1 };
     var row = rowEl(name, 'country', { expandable: true, onClick: function(ev){
+      if (EXPAND_ONLY[name]) {
+        toggleExpand(wrap, row, function(){ fillFederalChildren(wrap, name, children); });
+        return;
+      }
       // Toggle (not navigate) if we're already on this jurisdiction's page OR a child of it
       var cur = window.PAI_JURIS;
       var isHere = cur === dataKey || cur === name;
@@ -2428,11 +2461,11 @@ function setHotView(view, btn) {
       title:'Switch jurisdiction lens',
       body:'Pick any country, state, or bloc. Everything below — alerts, consultations, enforcement — re-scopes to it.',
       placement:'bottom' },
-    { key:'topics', selector:'a.sidebar-nav-item[href="pai-app-topics.html"], .sidebar-nav-item[data-pai-tour="topics"]',
+    { key:'topics', selector:'a.sidebar-nav-item[href="pai-app-topics"], .sidebar-nav-item[data-pai-tour="topics"]',
       title:'The topic lens',
       body:'Cut the same surface by subject — privacy, AI, cybersecurity, IP, standards. Useful when a topic spans twenty jurisdictions at once.',
       placement:'right' },
-    { key:'watchlist', selector:'.tw-cell:first-child, a.sidebar-nav-item[href="pai-app-watchlist.html"], [data-pai-tour="watchlist"]',
+    { key:'watchlist', selector:'.tw-cell:first-child, a.sidebar-nav-item[href="pai-app-watchlist"], [data-pai-tour="watchlist"]',
       title:'Your Watchlist',
       body:'Save any law, authority, or consultation and it lives here. We\'ll alert you when something moves — draft published, deadline closing, guidance revised.',
       placement:'bottom' },
@@ -2994,7 +3027,7 @@ function setHotView(view, btn) {
   }
   function findStopTarget(stop){ return stop.selector ? document.querySelector(stop.selector) : null; }
   function startTour(){
-    if (!isHome) { location.href = 'pai-home-private.html#take-tour'; return; }
+    if (!isHome) { location.href = 'pai-home-private#take-tour'; return; }
     tourState.active = true;
     var t = getTour();
     var idx = visibleStopIdx(t.step || 0);
