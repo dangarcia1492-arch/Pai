@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign in — PrinciplesAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --ink:#0a1729; --muted:#5e6878; --border:#dbe1ea; --accent:#0176d3; --bg:#fcfcfc; --surface:#ffffff; }
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--ink); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+.card { max-width:440px; width:100%; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:36px 32px; text-align:center; box-shadow:0 1px 3px rgba(10,23,41,0.04); }
+.brand { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:20px; }
+.brand-icon { width:36px; height:36px; background:var(--accent); border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:22px; font-style:italic; letter-spacing:-1px; }
+.brand-name { font-weight:600; font-size:20px; letter-spacing:-0.01em; }
+.brand-name .ai { font-style:italic; font-weight:500; }
+h1 { font-size:20px; font-weight:600; margin-bottom:10px; }
+.subtitle { color:var(--muted); font-size:14px; line-height:1.5; margin-bottom:22px; }
+.btn { display:inline-block; padding:11px 24px; background:var(--accent); color:#fff; text-decoration:none; border-radius:6px; font-weight:600; font-size:14px; margin:4px; }
+.btn:hover { background:#014486; }
+.btn.secondary { background:transparent; color:var(--accent); border:1px solid var(--border); }
+.btn.secondary:hover { background:#f6f7f9; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">
+    <div class="brand-icon" style="background:var(--accent); padding:0; overflow:hidden;"><img src="pai-mark-white-128.png" alt="PAI" style="width:70%;height:70%;object-fit:contain;display:block;"></div>
+    <div class="brand-name">Principles<span class="ai">AI</span></div>
+  </div>
+  <h1>Sign in to PrinciplesAI</h1>
+  <div class="subtitle">
+    You need an early-access account to enter the workspace. If you have one, try the app below. Otherwise, visit our public site.
+  </div>
+  <a href="/" class="btn">Try the app</a>
+  <a href="/pai-home-public.html" class="btn secondary">Back to PrinciplesAI.org</a>
+</div>
+<script>
+// If the app's Clerk runtime is already on the page, mount the real SignIn widget.
+// Otherwise the static buttons above are the fallback.
+(function(){
+  function tryMount(){
+    if(!window.Clerk) return false;
+    try {
+      (async function(){
+        if(typeof window.Clerk.load === 'function' && !window.Clerk.loaded){
+          await window.Clerk.load();
+        }
+        var holder = document.createElement('div');
+        holder.id = 'clerk-mount';
+        holder.style.cssText = 'margin-top:20px';
+        document.querySelector('.card').appendChild(holder);
+        if(typeof window.Clerk.mountSignIn === 'function'){
+          window.Clerk.mountSignIn(holder, { afterSignInUrl: '/pai-home-private', afterSignUpUrl: '/pai-home-private' });
+        }
+      })();
+      return true;
+    } catch(e) { return false; }
+  }
+  if(!tryMount()) setTimeout(tryMount, 500);
+})();
+</script>
+</body>
+</html>

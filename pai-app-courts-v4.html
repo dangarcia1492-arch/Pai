@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — Courts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d2e42;--ink-strong:#07202e;--ink-faint:#8a93a3;--muted:#5e6878;
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f7f8fb;--surface-3:#e8ebf1;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#035fa0;--accent-soft:#e3effc;--accent-soft-2:#b9d8ef;
+  --green-fill:#2e844a;--green-bg:#d6f1dc;
+  --red-fill:#ba0517;--red-bg:#feded8;
+  --amber-fill:#ca8501;--amber-bg:#fef0c7;
+  --purple-fill:#6b3fa6;--purple-bg:#ede4f8;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding:0;font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55}
+.wrap{max-width:1280px;margin:0 auto;padding:24px}
+
+.page-head{padding:18px 0 22px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px}
+h1{font-size:32px;font-weight:700;color:var(--ink-strong);letter-spacing:-.02em;margin:0 0 8px}
+.lede{font-size:14.5px;color:var(--muted);max-width:760px;line-height:1.55}
+.kpi-row{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap}
+.kpi-num{font-size:22px;font-weight:700;color:var(--ink-strong);letter-spacing:-.02em;line-height:1}
+.kpi-label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+.mockup-banner{background:#fff8e0;border-left:3px solid var(--amber-fill);padding:10px 14px;border-radius:4px;font-size:12.5px;color:#5d4c2a;margin-bottom:18px}
+
+.toolbar{display:flex;gap:14px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+.search{flex:1;min-width:260px;padding:10px 14px;border:1px solid var(--border);border-radius:6px;font:inherit;font-size:13.5px;background:var(--surface)}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.tab{padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--muted);background:transparent;border:0;cursor:pointer;border-right:1px solid var(--border);font-family:inherit}
+.tab:last-child{border-right:none}
+.tab.on{background:var(--accent);color:#fff}
+
+/* Region cards grid */
+.region-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:16px}
+
+.region-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:0;display:flex;flex-direction:column;overflow:hidden}
+.region-card.featured{border-top:3px solid var(--accent)}
+
+.rc-head{padding:16px 20px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;justify-content:space-between;background:var(--surface-2)}
+.rc-head-left{display:flex;align-items:center;gap:10px}
+.rc-flag{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:24px;border-radius:3px;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:10.5px;font-weight:700}
+.rc-title{font-size:17px;font-weight:700;color:var(--ink-strong);letter-spacing:-.01em;margin:0}
+.rc-meta{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
+.rc-count{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:11px}
+
+.rc-body{padding:6px 20px 18px}
+
+.case-row{padding:11px 0;border-bottom:1px solid var(--border-soft);display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:flex-start}
+.case-row:last-child{border-bottom:none}
+.case-stage-pill{display:inline-flex;align-items:center;height:20px;padding:0 8px;font-family:var(--mono);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-radius:10px;flex-shrink:0;margin-top:2px;white-space:nowrap}
+.stage-judgment   {color:var(--green-fill);background:var(--green-bg)}
+.stage-opinion    {color:var(--purple-fill);background:var(--purple-bg)}
+.stage-hearing    {color:var(--accent);background:var(--accent-soft)}
+.stage-scheduled  {color:var(--amber-fill);background:var(--amber-bg)}
+.stage-filed      {color:var(--muted);background:var(--surface-2);border:1px solid var(--border-soft)}
+.stage-questions  {color:var(--muted);background:var(--surface-2);border:1px solid var(--border-soft)}
+
+.case-body-mid{min-width:0}
+.case-court{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--accent-2);text-transform:uppercase;letter-spacing:.08em;line-height:1.3}
+.case-title{font-size:13.5px;font-weight:600;color:var(--ink-strong);line-height:1.4;margin:1px 0 0}
+.case-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.chip{display:inline-flex;align-items:center;height:18px;padding:0 7px;font-size:10px;font-weight:500;border-radius:9px;color:var(--ink);font-family:var(--sans);background:var(--surface-2);border:1px solid var(--border-soft)}
+.chip.ai     {background:var(--purple-bg);color:var(--purple-fill);border-color:var(--purple-bg)}
+.chip.privacy{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-soft)}
+.chip.cyber  {background:var(--green-bg);color:var(--green-fill);border-color:var(--green-bg)}
+.case-star{color:var(--accent);font-size:13px;line-height:1.3;margin-right:2px}
+
+.case-date{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:600;flex-shrink:0;text-align:right;white-space:nowrap;padding-top:3px}
+
+.rc-foot{margin-top:auto;padding:10px 20px;border-top:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:center;font-size:12px;background:var(--surface-2)}
+.rc-foot a{color:var(--accent);font-weight:600;text-decoration:none}
+.rc-foot a:hover{text-decoration:underline}
+
+.empty{padding:60px 0;text-align:center;color:var(--muted);font-size:14px}
+.empty .em-emoji{font-size:32px;display:block;margin-bottom:10px;opacity:.4}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">PrinciplesAI · Coverage</div>
+    <h1>Courts</h1>
+    <p class="lede">Selective case-law tracker for AI, privacy and cybersecurity. One card per region — what's moving in the courts that matter, with PAI's claim-careful editorial cut.</p>
+    <div class="kpi-row">
+      <div><div class="kpi-num" id="kpi-cases">—</div><div class="kpi-label">Items this month</div></div>
+      <div><div class="kpi-num" id="kpi-courts">—</div><div class="kpi-label">Courts</div></div>
+      <div><div class="kpi-num" id="kpi-jurisdictions">—</div><div class="kpi-label">Jurisdictions</div></div>
+    </div>
+  </div>
+
+  <div class="mockup-banner"><b>Mockup · placeholder content</b> — one card per region, recent activity inside, stage chips colour-coded. ★ = doctrine-moving / featured.</div>
+
+  <div class="toolbar">
+    <input class="search" id="q" placeholder="Search court, case, theme…">
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-topic="all">All</button>
+      <button class="tab" data-topic="ai">AI</button>
+      <button class="tab" data-topic="privacy">Privacy</button>
+      <button class="tab" data-topic="cyber">Cyber</button>
+    </div>
+  </div>
+
+  <div id="results"><div class="empty">Loading…</div></div>
+</div>
+
+<script>
+/* MOCKUP — one card per REGION. Each card lists recent court activity in that region. */
+const CASES = [
+  /* Europe */
+  {region:"Europe", featured:true,
+    court:"Court of Justice of the EU", iso:"EU",
+    stage:"opinion", stageLabel:"A-G Opinion", date:"12 Apr",
+    title:"Bayerisches Landesamt für Datenschutzaufsicht (C-308/24)",
+    topics:["privacy"], tags:["controller","supervisory authority"]},
+  {region:"Europe", featured:true,
+    court:"Court of Justice of the EU", iso:"EU",
+    stage:"scheduled", stageLabel:"AG Op. sched.", date:"03 Jul",
+    title:"Generative-AI training & InfoSoc Article 4 opt-outs (C-241/26)",
+    topics:["ai","privacy"], tags:["copyright","training data","TDM"]},
+  {region:"Europe", featured:true,
+    court:"Court of Justice of the EU", iso:"EU",
+    stage:"scheduled", stageLabel:"Judgment sched.", date:"21 May",
+    title:"Across Fiduciaria & Others — beneficial ownership registers",
+    topics:["privacy"], tags:["AML5","public registers"]},
+  {region:"Europe",
+    court:"Court of Justice of the EU", iso:"EU",
+    stage:"judgment", stageLabel:"Judgment", date:"21 Mar",
+    title:"Commission v Hungary (Values of the EU)",
+    topics:["privacy"], tags:["fundamental rights"]},
+  {region:"Europe", featured:true,
+    court:"General Court of the EU", iso:"EU",
+    stage:"hearing", stageLabel:"Hearing sched.", date:"14 Jun",
+    title:"Continuum AI — annulment of GPAI systemic-risk designation (T-178/26)",
+    topics:["ai"], tags:["AI Act","GPAI","systemic risk"]},
+  {region:"Europe",
+    court:"Bundesgerichtshof", iso:"DE",
+    stage:"judgment", stageLabel:"Judgment", date:"15 Apr",
+    title:"Meaningful human review under Article 22 GDPR (VI ZR 47/25)",
+    topics:["ai","privacy"], tags:["GDPR Art 22","ADM","credit scoring"]},
+  {region:"Europe",
+    court:"Court of Appeal (E&W)", iso:"GB",
+    stage:"hearing", stageLabel:"Hearing held", date:"08 Apr",
+    title:"Smith v Halliday Holdings — directors' duty on ransomware payments",
+    topics:["cyber"], tags:["ransomware","director liability"]},
+  {region:"Europe",
+    court:"Tribunal Constitucional (ES)", iso:"ES",
+    stage:"judgment", stageLabel:"Judgment", date:"02 Apr",
+    title:"STC 47/2026 — RTBF obligations on LLM providers",
+    topics:["privacy","ai"], tags:["RTBF","Article 17","LLM"]},
+  {region:"Europe",
+    court:"Belgian Constitutional Court", iso:"BE",
+    stage:"questions", stageLabel:"Pleas published", date:"17 Apr",
+    title:"Ligue des droits humains — automated facial recognition in transit",
+    topics:["ai","privacy"], tags:["biometrics","public space"]},
+
+  /* North America */
+  {region:"North America", featured:true,
+    court:"US 9th Circuit", iso:"US",
+    stage:"judgment", stageLabel:"Judgment", date:"18 Apr",
+    title:"Doe v Continuum AI — Section 230 limits for generative AI",
+    topics:["ai"], tags:["Section 230","platform liability"]},
+  {region:"North America",
+    court:"US 9th Circuit", iso:"US",
+    stage:"hearing", stageLabel:"Oral argument", date:"02 May",
+    title:"In re California AI Hiring Tool MDL — class certification appeal",
+    topics:["ai","privacy"], tags:["ADM","class action"]},
+  {region:"North America",
+    court:"US 4th Circuit", iso:"US",
+    stage:"questions", stageLabel:"Cert pending", date:"22 Apr",
+    title:"Maryland v OpenAI — class certification on training-data scraping",
+    topics:["ai"], tags:["scraping","fair use"]},
+  {region:"North America",
+    court:"US Supreme Court", iso:"US",
+    stage:"questions", stageLabel:"Cert pending", date:"15 Apr",
+    title:"Halliday Networks — state-actor cyber-attribution standing",
+    topics:["cyber"], tags:["standing","state actor"]}
+];
+
+const REGION_ORDER = ['Europe','North America','Asia Pacific','Africa','Caribbean','Global','Latin America','Middle East'];
+
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+
+  document.getElementById('kpi-cases').textContent = CASES.length;
+  document.getElementById('kpi-courts').textContent = new Set(CASES.map(c=>c.court)).size;
+  document.getElementById('kpi-jurisdictions').textContent = new Set(CASES.map(c=>c.iso)).size;
+
+  var topic="all";
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+      t.classList.add('on');
+      topic = t.getAttribute('data-topic');
+      render();
+    });
+  });
+  document.getElementById('q').addEventListener('input', render);
+
+  function caseRow(c){
+    var topicChips = (c.topics||[]).map(function(t){return '<span class="chip '+t+'">'+t.toUpperCase()+'</span>';}).join('');
+    var themeChips = (c.tags||[]).map(function(t){return '<span class="chip">'+esc(t)+'</span>';}).join('');
+    var star = c.featured ? '<span class="case-star">★</span>' : '';
+    return '<div class="case-row">'
+      + '<span class="case-stage-pill stage-'+esc(c.stage)+'">'+esc(c.stageLabel)+'</span>'
+      + '<div class="case-body-mid">'
+        + '<div class="case-court">'+esc(c.court)+'</div>'
+        + '<div class="case-title">'+star+esc(c.title)+'</div>'
+        + '<div class="case-tags">'+topicChips+themeChips+'</div>'
+      + '</div>'
+      + '<div class="case-date">'+esc(c.date)+'</div>'
+    + '</div>';
+  }
+
+  function caseMatchesFilter(c, q){
+    if(topic!=='all' && (c.topics||[]).indexOf(topic)<0) return false;
+    if(q){
+      var hay = (c.title+' '+c.court+' '+(c.tags||[]).join(' ')+' '+(c.stageLabel||'')).toLowerCase();
+      if(hay.indexOf(q)<0) return false;
+    }
+    return true;
+  }
+
+  function regionCard(region, cases){
+    var hasFeatured = cases.some(function(c){return c.featured;});
+    var courts = new Set(cases.map(function(c){return c.court;}));
+    return '<article class="region-card'+(hasFeatured?' featured':'')+'">'
+      + '<div class="rc-head">'
+        + '<div class="rc-head-left">'
+          + '<div>'
+            + '<h2 class="rc-title">'+esc(region)+'</h2>'
+            + '<div class="rc-meta">'+courts.size+' court'+(courts.size===1?'':'s')+' · '+cases.length+' item'+(cases.length===1?'':'s')+'</div>'
+          + '</div>'
+        + '</div>'
+        + '<span class="rc-count">'+cases.length+'</span>'
+      + '</div>'
+      + '<div class="rc-body">'
+        + cases.map(caseRow).join('')
+      + '</div>'
+      + '<div class="rc-foot">'
+        + '<span style="color:var(--muted);font-family:var(--mono);font-size:10.5px">Sorted: featured first, then newest</span>'
+        + '<a href="#">Open '+esc(region)+' →</a>'
+      + '</div>'
+    + '</article>';
+  }
+
+  function render(){
+    var q = (document.getElementById('q').value||'').toLowerCase().trim();
+    var filtered = CASES.filter(function(c){return caseMatchesFilter(c,q);});
+    if(!filtered.length){
+      document.getElementById('results').innerHTML = '<div class="empty"><span class="em-emoji">⚖</span>No cases match the current filters.</div>';
+      return;
+    }
+    // Group by region
+    var byRegion = {};
+    filtered.forEach(function(c){ (byRegion[c.region] = byRegion[c.region] || []).push(c); });
+    // Sort within each region: featured first, then by date desc
+    Object.keys(byRegion).forEach(function(r){
+      byRegion[r].sort(function(a,b){
+        if(a.featured !== b.featured) return b.featured - a.featured;
+        return (a.date < b.date ? 1 : -1);
+      });
+    });
+    var ordered = REGION_ORDER.filter(function(r){return byRegion[r];});
+    document.getElementById('results').innerHTML =
+      '<div class="region-grid">'
+      + ordered.map(function(r){return regionCard(r, byRegion[r]);}).join('')
+      + '</div>';
+  }
+  render();
+})();
+</script>
+</body>
+</html>

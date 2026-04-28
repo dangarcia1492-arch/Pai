@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Legislation · PrinciplesAI</title>
@@ -121,14 +122,19 @@ button { cursor: pointer; }
 
 /* Data grid */
 .data-grid { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; }
-.dg-head-row { display: grid; grid-template-columns: 36px minmax(0, 2.3fr) 120px 130px 90px 110px 100px 40px; gap: 12px; padding: 10px 18px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.dg-head-row { display: grid; grid-template-columns: 36px minmax(0, 2.3fr) 120px 130px 90px 110px 100px 32px 40px; gap: 12px; padding: 10px 18px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
 .dg-sort-btn { background: none; border: none; padding: 0; font-family: inherit; font-size: inherit; font-weight: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; text-align: left; }
 .dg-sort-btn:hover { color: var(--ink); }
 .dg-sort-btn.on { color: var(--accent-2); }
 .dg-sort-btn .dg-sort-ind { font-family: var(--mono); font-weight: 400; font-size: 11px; opacity: 0; }
 .dg-sort-btn.on .dg-sort-ind { opacity: 1; }
 .dg-right { text-align: right; justify-content: flex-end; }
-.dg-row { display: grid; grid-template-columns: 36px minmax(0, 2.3fr) 120px 130px 90px 110px 100px 40px; gap: 12px; padding: 13px 18px; border-bottom: 1px solid var(--border-soft); align-items: center; cursor: pointer; transition: background .1s; }
+.dg-row { display: grid; grid-template-columns: 36px minmax(0, 2.3fr) 120px 130px 90px 110px 100px 32px 40px; gap: 12px; padding: 13px 18px; border-bottom: 1px solid var(--border-soft); align-items: center; cursor: pointer; transition: background .1s; }
+.dg-source { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 4px; color: var(--ink-faint); text-decoration: none; transition: color .12s, background .12s; }
+.dg-source:hover { color: var(--accent); background: var(--surface-3); }
+.dg-source svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
+.dg-source.disabled { opacity: 0.25; pointer-events: none; }
+.dg-landmark { display: inline-flex; align-items: center; height: 16px; padding: 0 6px; margin-left: 8px; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; background: var(--accent-2, #b45309); border-radius: 3px; vertical-align: middle; }
 .dg-row:last-child { border-bottom: none; }
 .dg-row:hover { background: var(--surface-2); }
 .dg-iso { width: 32px; height: 22px; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: 3px; font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--secondary); letter-spacing: 0.04em; display: inline-flex; align-items: center; justify-content: center; }
@@ -173,8 +179,13 @@ button { cursor: pointer; }
 @media (max-width: 1000px) {
   .research-wrap { grid-template-columns: 1fr; }
   .facet-panel { position: static; max-height: none; }
-  .dg-head-row, .dg-row { grid-template-columns: 36px minmax(0, 1fr) 110px 40px; gap: 10px; }
-  .dg-head-row > :nth-child(n+5), .dg-row > :nth-child(n+5) { display: none; }
+  .dg-head-row, .dg-row { grid-template-columns: 36px minmax(0, 1fr) 110px 32px 40px; gap: 10px; }
+  .dg-head-row > :nth-child(n+6):not(:last-child), .dg-row > :nth-child(n+6):not(:last-child) { display: none; }
+  /* Hide the desktop "in-force"/"last-move"/"domain"/"status" cells on mobile but KEEP the source-link + star (last two cells) visible */
+  .dg-head-row > :nth-child(4), .dg-row > :nth-child(4),
+  .dg-head-row > :nth-child(5), .dg-row > :nth-child(5),
+  .dg-head-row > :nth-child(6), .dg-row > :nth-child(6),
+  .dg-head-row > :nth-child(7), .dg-row > :nth-child(7) { display: none; }
 }
 @media (max-width: 720px) {
   .header-bar { padding: 0 14px; }
@@ -230,6 +241,156 @@ button { cursor: pointer; }
   .record-drawer { width: 100%; }
   .rd-dates { grid-template-columns: 1fr; }
 }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
 </head>
 <body>
@@ -244,7 +405,7 @@ Airtable schema expected per Law/Bill record (table: "Legislation"):
   jurisdiction    · link   · → Jurisdictions
   country         · text   · "European Union"
   iso             · text   · "EU"
-  region          · select · europe | uk-cl | apac | americas | africa | mena
+  region          · select · Europe | North America | Latin America | Caribbean | Africa | Middle East | Asia Pacific | Global
   status          · select · proposed | consultation | in-progress | enacted | in-force | lapsed
   domain          · multi  · ai | privacy | cyber
   date_introduced · date
@@ -261,20 +422,20 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
 -->
 
 <header class="header-bar">
-  <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); letter-spacing:-0.005em; text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
+  <a href="pai-home-public" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); letter-spacing:-0.005em; text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
   <nav class="mkt-nav">
     <a href="pai-jobs.html">Jobs</a>
     <a href="pai-trust.html">Trust</a>
     <span class="mkt-sep" aria-hidden="true"></span>
-    <a href="pai-home-public.html">Home</a>
+    <a href="pai-home-public">Home</a>
     <a href="pai-authorities.html">Authorities</a>
     <a href="pai-news.html">News</a>
     <a href="pai-legislation.html" class="on">Legislation</a>
     <a href="pai-pricing.html">Pricing</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none; height:36px;">Log out</a>
-    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
+    <a href="/pai-signin.html" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
   </div>
 </header>
 
@@ -285,7 +446,7 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
   <div class="page-statusbar">
     <div class="ps-left">
       <span class="ps-breadcrumb">
-        <a href="pai-home-public.html">Home</a>
+        <a href="pai-home-public">Home</a>
         <span class="ps-sep">›</span>
         <span class="ps-current">Legislation</span>
       </span>
@@ -295,7 +456,6 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
       <span class="ps-ok">Register live</span>
     </div>
     <div class="page-actions">
-      <button class="btn">Export list</button>
       <button class="btn btn-primary">+ Watchlist</button>
     </div>
   </div>
@@ -303,7 +463,7 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
   <!-- PAGE HEAD -->
   <div class="lg-page-head">
     <h1 class="page-title">Legislation</h1>
-    <p class="page-sub">PAI tracks <b>187 instruments</b> across <b>42 jurisdictions</b> — bills in progress, acts in force, consultation drafts. <b>109 in force</b>, <b>58 moving through legislatures</b>, <b>6 newly enacted in the last 30 days</b>.</p>
+    <p class="page-sub">PAI tracks <b id="ssTotal">—</b> across <b id="ssJuris">—</b> — bills in progress, acts in force, consultation drafts. <b id="ssInForce">—</b>, <b id="ssInProgress">—</b>, <b id="ssEnacted">—</b>.</p>
     <p class="page-note">Status is refreshed on publication; <b>last move</b> shows the most recent procedural step (committee, reading, transposition, guidance) captured by the pipeline.</p>
   </div>
 
@@ -318,13 +478,20 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
       </div>
 
       <div class="facet-group">
+        <div class="facet-group-head"><span>Landmark</span><span class="facet-group-clear" onclick="fpClearGroup('landmark')">Clear</span></div>
+        <div class="facet-opt" data-facet="landmark" data-value="1" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Landmark AI laws</span><span class="count">—</span></div>
+      </div>
+
+      <div class="facet-group">
         <div class="facet-group-head"><span>Region</span><span class="facet-group-clear" onclick="fpClearGroup('region')">Clear</span></div>
-        <div class="facet-opt" data-facet="region" data-value="europe" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">EU / EEA</span><span class="count">68</span></div>
-        <div class="facet-opt" data-facet="region" data-value="uk-cl" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">UK &amp; Common-law</span><span class="count">22</span></div>
-        <div class="facet-opt" data-facet="region" data-value="apac" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">APAC</span><span class="count">41</span></div>
-        <div class="facet-opt" data-facet="region" data-value="americas" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Americas</span><span class="count">38</span></div>
-        <div class="facet-opt" data-facet="region" data-value="africa" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Africa</span><span class="count">11</span></div>
-        <div class="facet-opt" data-facet="region" data-value="mena" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">MENA</span><span class="count">7</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Europe" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Europe</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="North America" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">North America</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Latin America" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Latin America</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Caribbean" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Caribbean</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Africa" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Africa</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Middle East" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Middle East</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Asia Pacific" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Asia Pacific</span><span class="count">—</span></div>
+        <div class="facet-opt" data-facet="region" data-value="Global" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Global</span><span class="count">—</span></div>
       </div>
 
       <div class="facet-group">
@@ -362,7 +529,7 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
     <main class="research-main">
 
       <div class="research-toolbar">
-        <div class="rt-count"><b id="resultCount">22 of 187</b> instruments shown</div>
+        <div class="rt-count"><b id="resultCount">—</b> instruments shown</div>
         <div class="rt-right">
           <button class="rt-sort" type="button">Sort: Last move ↓ <span style="font-family:var(--mono);font-weight:400;font-size:10px;">▾</span></button>
           <div class="rt-views" role="tablist">
@@ -390,254 +557,15 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
           <button class="dg-sort-btn">Domain <span class="dg-sort-ind">↑</span></button>
           <button class="dg-sort-btn">In force <span class="dg-sort-ind">↑</span></button>
           <button class="dg-sort-btn">Last move <span class="dg-sort-ind">↓</span></button>
+          <button class="dg-sort-btn dg-right" title="Source link">Link ↗</button>
           <div></div>
         </div>
 
-        <div class="dg-row" data-region="europe" data-status="in-force" data-domain="ai" data-activity="30d">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name"><span class="full">EU Artificial Intelligence Act</span><span class="ref">Reg (EU) 2024/1689</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when">01 Aug 24</div>
-          <div class="dg-last recent">3d ago</div>
-          <button class="dg-star on" title="Watchlisted"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-status="in-progress" data-domain="privacy" data-activity="7d">
-          <div class="dg-iso">IN</div>
-          <div class="dg-name"><span class="full">Digital Personal Data Protection Act</span><span class="ref">Act 22 / 2023 · Rules drafting</span></div>
-          <div class="dg-country">India</div>
-          <div><span class="dg-status-pill in-progress">In progress</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when pending">—</div>
-          <div class="dg-last recent">today</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="uk-cl" data-status="in-force" data-domain="privacy" data-activity="30d">
-          <div class="dg-iso">GB</div>
-          <div class="dg-name"><span class="full">Data Protection and Digital Information Act</span><span class="ref">DPDI Act 2024</span></div>
-          <div class="dg-country">United Kingdom</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when">19 Jun 24</div>
-          <div class="dg-last">11 Apr</div>
-          <button class="dg-star on" title="Watchlisted"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-status="in-force" data-domain="ai" data-activity="7d">
-          <div class="dg-iso">KR</div>
-          <div class="dg-name"><span class="full">AI Basic Act</span><span class="ref">Act 19752</span></div>
-          <div class="dg-country">South Korea</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when">21 Jan 26</div>
-          <div class="dg-last recent">17 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="americas" data-status="in-progress" data-domain="privacy" data-activity="30d">
-          <div class="dg-iso">US</div>
-          <div class="dg-name"><span class="full">American Privacy Rights Act</span><span class="ref">H.R. 8818 · 118th Cong · Committee</span></div>
-          <div class="dg-country">United States</div>
-          <div><span class="dg-status-pill in-progress">In progress</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when pending">—</div>
-          <div class="dg-last">02 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-status="in-force" data-domain="cyber" data-activity="30d">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name"><span class="full">Network and Information Security Directive 2</span><span class="ref">Directive (EU) 2022/2555</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip cyber">Cyber</span></div>
-          <div class="dg-when">18 Oct 24</div>
-          <div class="dg-last">09 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-status="in-force" data-domain="privacy" data-activity="30d">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name"><span class="full">General Data Protection Regulation</span><span class="ref">Reg (EU) 2016/679</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when">25 May 18</div>
-          <div class="dg-last">15 Apr</div>
-          <button class="dg-star on" title="Watchlisted"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-status="in-force" data-domain="cyber" data-activity="30d">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name"><span class="full">Cyber Resilience Act</span><span class="ref">Reg (EU) 2024/2847</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip cyber">Cyber</span></div>
-          <div class="dg-when">11 Dec 24</div>
-          <div class="dg-last">14 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-status="in-force" data-domain="privacy" data-activity="30d">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name"><span class="full">Digital Services Act</span><span class="ref">Reg (EU) 2022/2065</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when">17 Feb 24</div>
-          <div class="dg-last">08 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-status="enacted" data-domain="ai" data-activity="7d">
-          <div class="dg-iso">JP</div>
-          <div class="dg-name"><span class="full">AI Promotion Act</span><span class="ref">Law 47 / 2025</span></div>
-          <div class="dg-country">Japan</div>
-          <div><span class="dg-status-pill enacted">Enacted</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when pending">Q3 2026</div>
-          <div class="dg-last recent">12 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-status="in-force" data-domain="ai" data-activity="30d">
-          <div class="dg-iso">CN</div>
-          <div class="dg-name"><span class="full">Generative AI Services Interim Measures</span><span class="ref">CAC Order 15 · 2023</span></div>
-          <div class="dg-country">China</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when">15 Aug 23</div>
-          <div class="dg-last">07 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="americas" data-status="in-force" data-domain="ai" data-activity="30d">
-          <div class="dg-iso">US</div>
-          <div class="dg-name"><span class="full">Colorado AI Act</span><span class="ref">SB 24-205 · Colorado</span></div>
-          <div class="dg-country">United States</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when">01 Feb 26</div>
-          <div class="dg-last">05 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="americas" data-status="in-progress" data-domain="ai" data-activity="30d">
-          <div class="dg-iso">CA</div>
-          <div class="dg-name"><span class="full">Artificial Intelligence and Data Act</span><span class="ref">Bill C-27 · AIDA</span></div>
-          <div class="dg-country">Canada</div>
-          <div><span class="dg-status-pill in-progress">In progress</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when pending">—</div>
-          <div class="dg-last">03 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="uk-cl" data-status="in-force" data-domain="ai" data-activity="30d">
-          <div class="dg-iso">GB</div>
-          <div class="dg-name"><span class="full">Online Safety Act</span><span class="ref">OSA 2023</span></div>
-          <div class="dg-country">United Kingdom</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when">26 Oct 23</div>
-          <div class="dg-last">16 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="americas" data-status="enacted" data-domain="privacy" data-activity="7d">
-          <div class="dg-iso">US</div>
-          <div class="dg-name"><span class="full">Consumer Data Protection Act (amendments)</span><span class="ref">Kentucky · HB 15 · 2026</span></div>
-          <div class="dg-country">United States</div>
-          <div><span class="dg-status-pill enacted">Enacted</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when pending">01 Jan 27</div>
-          <div class="dg-last recent">10 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="americas" data-status="in-progress" data-domain="ai" data-activity="30d">
-          <div class="dg-iso">BR</div>
-          <div class="dg-name"><span class="full">AI Regulatory Framework Bill</span><span class="ref">PL 2338 / 2023 · Senate</span></div>
-          <div class="dg-country">Brazil</div>
-          <div><span class="dg-status-pill in-progress">In progress</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when pending">—</div>
-          <div class="dg-last">01 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-status="in-progress" data-domain="privacy" data-activity="30d">
-          <div class="dg-iso">AU</div>
-          <div class="dg-name"><span class="full">Privacy Act Review · Tranche 2</span><span class="ref">AGD · Exposure Draft</span></div>
-          <div class="dg-country">Australia</div>
-          <div><span class="dg-status-pill in-progress">In progress</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when pending">—</div>
-          <div class="dg-last">28 Mar</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-status="in-progress" data-domain="privacy" data-activity="30d">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name"><span class="full">ePrivacy Regulation</span><span class="ref">COM/2017/010 · Trilogue</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-status-pill in-progress">In progress</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when pending">—</div>
-          <div class="dg-last">14 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-status="proposed" data-domain="ai" data-activity="30d">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name"><span class="full">AI Liability Directive</span><span class="ref">COM/2022/496</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-status-pill proposed">Proposed</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when pending">—</div>
-          <div class="dg-last">04 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="europe" data-status="in-force" data-domain="privacy" data-activity="30d">
-          <div class="dg-iso">EU</div>
-          <div class="dg-name"><span class="full">Data Act</span><span class="ref">Reg (EU) 2023/2854</span></div>
-          <div class="dg-country">European Union</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when">12 Sep 25</div>
-          <div class="dg-last">06 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-status="in-force" data-domain="ai" data-activity="30d">
-          <div class="dg-iso">SG</div>
-          <div class="dg-name"><span class="full">Model AI Governance Framework (AI Verify)</span><span class="ref">IMDA · 2nd Edition</span></div>
-          <div class="dg-country">Singapore</div>
-          <div><span class="dg-status-pill in-force">In force</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip ai">AI</span></div>
-          <div class="dg-when">30 May 24</div>
-          <div class="dg-last">29 Mar</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
-
-        <div class="dg-row" data-region="apac" data-status="consultation" data-domain="privacy" data-activity="7d">
-          <div class="dg-iso">IN</div>
-          <div class="dg-name"><span class="full">DPDPA Implementation Rules (2nd consultation)</span><span class="ref">MeitY · closes 16 May 26</span></div>
-          <div class="dg-country">India</div>
-          <div><span class="dg-status-pill consultation">Consultation</span></div>
-          <div class="dg-domain"><span class="dg-domain-chip privacy">Privacy</span></div>
-          <div class="dg-when pending">—</div>
-          <div class="dg-last recent">16 Apr</div>
-          <button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </div>
+        <!-- Rows rendered by loadLegislation() from legislation.json -->
+        <div id="dgRows"></div>
 
         <div class="dg-pager">
-          <span>Showing 22 of 187 · tracked live since 1 Jan 2025</span>
-          <a href="#">Next page →</a>
+          <span id="pagerCount">Loading…</span>
         </div>
       </div>
 
@@ -652,7 +580,7 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
     <div class="left">
       <span>PrinciplesAI · Legislation register</span>
       <span><span class="ok"></span>Pipeline operational</span>
-      <span>187 instruments · 42 jurisdictions tracked</span>
+      <span id="footStat">— instruments · — jurisdictions tracked</span>
     </div>
     <div>v0.9</div>
   </footer>
@@ -768,6 +696,7 @@ function fpApply() {
   const activityRadio = document.querySelector('.facet-radio[data-facet="activity"].on');
   const activity = activityRadio ? activityRadio.dataset.value : 'all';
   const watchOn = document.querySelector('.facet-opt[data-facet="watchlist"].on') !== null;
+  const landmarkOn = document.querySelector('.facet-opt[data-facet="landmark"].on') !== null;
   const searchEl = document.querySelector('.facet-search');
   const query = (searchEl ? searchEl.value : '').trim().toLowerCase();
 
@@ -778,6 +707,7 @@ function fpApply() {
     const domain = (row.dataset.domain || '').split(',');
     const rowActivity = row.dataset.activity || 'all';
     const starOn = row.querySelector('.dg-star.on') !== null;
+    const landmarkRow = row.dataset.landmark === '1';
     const text = row.textContent.toLowerCase();
 
     const rOk = onRegions.length === 0 || onRegions.includes(region);
@@ -785,14 +715,18 @@ function fpApply() {
     const dOk = onDomains.length === 0 || onDomains.some(d => domain.includes(d));
     const aOk = activity === 'all' || activity === rowActivity || (activity === '30d' && rowActivity === '7d');
     const wOk = !watchOn || starOn;
+    const lmOk = !landmarkOn || landmarkRow;
     const qOk = query === '' || text.includes(query);
 
-    const ok = rOk && sOk && dOk && aOk && wOk && qOk;
+    const ok = rOk && sOk && dOk && aOk && wOk && lmOk && qOk;
     row.style.display = ok ? '' : 'none';
     if (ok) shown++;
   });
   const rc = document.getElementById('resultCount');
-  if (rc) rc.textContent = shown + ' of 187';
+  const total = (window.LEG_TOTAL != null) ? window.LEG_TOTAL : 0;
+  if (rc) rc.textContent = shown + ' of ' + total;
+  const pc = document.getElementById('pagerCount');
+  if (pc) pc.textContent = 'Showing ' + shown + ' of ' + total + ' · tracked live since 1 Jan 2025';
 }
 function fpRemoveChip(group, value) {
   const el = document.querySelector('.facet-opt[data-facet="' + group + '"][data-value="' + value + '"]');
@@ -852,11 +786,17 @@ function rdOpen(row) {
   rdStatus.textContent = statusLabel;
   document.getElementById('rdDomains').innerHTML = domainHtml;
 
-  // Summary — placeholder until Airtable summary field is populated
+  // Summary — from Airtable record when available; else an auto-derived line
+  const sourceUrl = row.dataset.source || '';
+  const summaryTxt = row.dataset.summary || '';
   const domainText = [...row.querySelectorAll('.dg-domain-chip')].map(c => c.textContent).join(' / ');
-  document.getElementById('rdSummary').innerHTML =
-    '<b>' + country + '</b> — ' + (domainText || 'policy') + ' instrument, status <b>' + statusLabel.toLowerCase() + '</b>. ' +
-    'Full editorial summary, text anchors and enforcement commentary available to subscribers.';
+  document.getElementById('rdSummary').textContent = summaryTxt ||
+    (country + ' — ' + (domainText || 'policy') + ' instrument, status ' + statusLabel.toLowerCase() + '.');
+  const rdSrcEl = document.getElementById('rdSource');
+  if (rdSrcEl) {
+    if (sourceUrl) { rdSrcEl.href = sourceUrl; rdSrcEl.style.display = ''; }
+    else { rdSrcEl.style.display = 'none'; }
+  }
 
   // Progress stepper
   const steps = PROGRESS_BY_STATUS[status] || PROGRESS_BY_STATUS['in-force'];
@@ -942,6 +882,230 @@ document.querySelectorAll('.dg-sort-btn').forEach(btn => {
     }
   });
 });
+
+/* ============ LIVE LEGISLATION DATA ============ */
+const STATUS_DISPLAY = {
+  'proposed': 'Proposed',
+  'in-progress': 'In progress',
+  'consultation': 'Consultation',
+  'enacted': 'Enacted',
+  'in-force': 'In force',
+  'lapsed': 'Lapsed',
+};
+const DOMAIN_DISPLAY = { ai: 'AI', privacy: 'Privacy', cyber: 'Cyber' };
+const REGION_LABEL = {
+  'Europe': 'Europe',
+  'North America': 'North America',
+  'Latin America': 'Latin America',
+  'Caribbean': 'Caribbean',
+  'Africa': 'Africa',
+  'Middle East': 'Middle East',
+  'Asia Pacific': 'Asia Pacific',
+  'Global': 'Global',
+};
+
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+
+function renderLegislationRow(r) {
+  const statusCls = r.status || 'in-progress';
+  const statusTxt = STATUS_DISPLAY[statusCls] || statusCls;
+  const domains = (r.domain || []).map(d =>
+    '<span class="dg-domain-chip ' + d + '">' + escHtml(DOMAIN_DISPLAY[d] || d) + '</span>'
+  ).join('');
+  const activity = r.last_move_recent ? '30d' : 'all';
+  const ref = r.reference ? '<span class="ref">' + escHtml(r.reference) + '</span>' : '';
+  const lastCls = r.last_move_recent ? 'dg-last recent' : 'dg-last';
+  const inForce = r.date_in_force_display || '—';
+  const inForceCls = inForce === '—' ? 'dg-when pending' : 'dg-when';
+  const landmark = r.featured ? '<span class="dg-landmark">Landmark</span>' : '';
+  const srcUrl = r.source_url || '';
+  const srcIcon = srcUrl
+    ? '<a class="dg-source" href="' + escHtml(srcUrl) + '" target="_blank" rel="noopener" title="Open original source" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg></a>'
+    : '<span class="dg-source disabled" title="No source URL on file"><svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg></span>';
+  return (
+    '<div class="dg-row" data-region="' + escHtml(r.region) + '"' +
+    ' data-status="' + escHtml(r.status) + '"' +
+    ' data-domain="' + (r.domain || []).join(',') + '"' +
+    ' data-activity="' + activity + '"' +
+    ' data-landmark="' + (r.featured ? '1' : '0') + '"' +
+    ' data-source="' + escHtml(r.source_url) + '"' +
+    ' data-summary="' + escHtml(r.summary) + '">' +
+      '<div class="dg-iso">' + escHtml(r.iso) + '</div>' +
+      '<div class="dg-name"><span class="full">' + escHtml(r.title) + landmark + '</span>' + ref + '</div>' +
+      '<div class="dg-country">' + escHtml(r.jurisdiction_name) + '</div>' +
+      '<div><span class="dg-status-pill ' + statusCls + '">' + statusTxt + '</span></div>' +
+      '<div class="dg-domain">' + domains + '</div>' +
+      '<div class="' + inForceCls + '">' + escHtml(inForce) + '</div>' +
+      '<div class="' + lastCls + '">' + escHtml(r.last_move_display || '—') + '</div>' +
+      '<div>' + srcIcon + '</div>' +
+      '<button class="dg-star" title="Add to watchlist"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>' +
+    '</div>'
+  );
+}
+
+function updateFacetCounts(facets) {
+  document.querySelectorAll('.facet-opt').forEach(el => {
+    const group = el.dataset.facet;
+    const value = el.dataset.value;
+    const countEl = el.querySelector('.count');
+    if (!countEl || !facets[group]) return;
+    const n = facets[group][value] || 0;
+    countEl.textContent = n;
+    el.style.opacity = n === 0 ? '0.4' : '';
+  });
+}
+
+function bindRowHandlers(root) {
+  root.querySelectorAll('.dg-star').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      this.classList.toggle('on');
+      this.title = this.classList.contains('on') ? 'Watchlisted' : 'Add to watchlist';
+      fpApply();
+    });
+  });
+  root.querySelectorAll('.dg-row').forEach(row => {
+    row.addEventListener('click', function(e) {
+      if (e.target.closest('.dg-star')) return;
+      rdOpen(this);
+    });
+  });
+}
+
+async function loadLegislation() {
+  const container = document.getElementById('dgRows');
+  try {
+    const r = await fetch('./legislation.json', { cache: 'no-cache' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+    window.LEG_TOTAL = data.total;
+
+    if (!data.rows.length) {
+      container.innerHTML = '<div style="padding:40px 18px;text-align:center;color:var(--muted);font-size:13px;">No legislation to show yet. The curated register will populate as instruments clear editorial review.</div>';
+    } else {
+      container.innerHTML = data.rows.map(renderLegislationRow).join('');
+      bindRowHandlers(container);
+    }
+
+    // Facet counts
+    updateFacetCounts(data.facets || {});
+
+    // Page-head stats
+    const statuses = data.facets.status || {};
+    const juris = new Set(data.rows.map(x => x.jurisdiction_name).filter(Boolean)).size;
+    const setTx = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+    setTx('ssTotal', data.total + ' instrument' + (data.total === 1 ? '' : 's'));
+    setTx('ssJuris', juris + ' jurisdiction' + (juris === 1 ? '' : 's'));
+    setTx('ssInForce', (statuses['in-force'] || 0) + ' in force');
+    setTx('ssInProgress', (statuses['in-progress'] || 0) + ' moving through legislatures');
+    const recent = data.rows.filter(x => x.last_move_recent).length;
+    setTx('ssEnacted', recent + ' with activity in the last 30 days');
+    setTx('footStat', data.total + ' instruments · ' + juris + ' jurisdictions tracked');
+
+    fpApply();
+  } catch (err) {
+    container.innerHTML = '<div style="padding:40px 18px;text-align:center;color:var(--red);font-size:13px;">Could not load legislation data (' + escHtml(err.message) + ').</div>';
+    const pc = document.getElementById('pagerCount');
+    if (pc) pc.textContent = '—';
+  }
+}
+
+loadLegislation();
+</script>
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+<div class="nav-scrim" aria-hidden="true"></div>
+
+<script>
+/* Client-side CSV export — dumps visible .dg-row rows from the grid */
+(function(){
+  function csvEscape(s){ return '"'+String(s==null?'':s).replace(/"/g,'""')+'"'; }
+  function triggerDownload(filename, csv){
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=url; a.download=filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},500);
+  }
+  window.paiExportCSV=function(){
+    var headRow=document.querySelector('.dg-head-row');
+    var headers=[];
+    if(headRow){ headRow.querySelectorAll('.dg-sort-btn,[role="columnheader"]').forEach(function(el){
+      var t=(el.textContent||'').replace(/\s+/g,' ').trim();
+      if(t) headers.push(t);
+    }); }
+    if(!headers.length) headers=['Name','Country','Type','Status','Date','URL'];
+    var rows=[];
+    document.querySelectorAll('.dg-row').forEach(function(r){
+      if(r.style.display==='none') return;
+      var cells=[];
+      r.querySelectorAll('.dg-iso,.dg-name,.dg-country,.dg-type-pill,.dg-status-pill,.dg-domain,.dg-when,.dg-last,.dg-num').forEach(function(c){
+        cells.push((c.textContent||'').replace(/\s+/g,' ').trim());
+      });
+      var website=r.dataset.website||r.dataset.source||'';
+      if(website) cells.push(website);
+      rows.push(cells.map(csvEscape).join(','));
+    });
+    var csv=headers.map(csvEscape).join(',')+'\n'+rows.join('\n');
+    var stamp=new Date().toISOString().slice(0,10);
+    var filename=(location.pathname.split('/').pop().replace('.html','')||'pai-export')+'_'+stamp+'.csv';
+    triggerDownload(filename,csv);
+  };
+  function bindExport(){
+    document.querySelectorAll('button.btn, .rt-export-btn, button.rt-export-btn').forEach(function(btn){
+      var txt=(btn.textContent||'').toLowerCase();
+      if(!(txt.indexOf('export')>=0 || txt.indexOf('csv')>=0)) return;
+      if(btn.dataset.paiWired) return;
+      btn.dataset.paiWired='1';
+      btn.addEventListener('click',function(e){ e.preventDefault(); window.paiExportCSV(); });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindExport);
+  else bindExport();
+})();
+</script>
+
+<script>
+/* localStorage watchlist — persists starred rows by data-website key */
+(function(){
+  var KEY='paiWatchlist-v1';
+  function getSet(){
+    try{ var v=JSON.parse(localStorage.getItem(KEY)||'[]'); return new Set(Array.isArray(v)?v:[]); }
+    catch(_){ return new Set(); }
+  }
+  function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(Array.from(s))); }catch(_){} }
+  function rowKey(row){ var el=row.querySelector('.dg-name'); return row.dataset.website||row.dataset.source||(el?el.textContent.trim():''); }
+  window.paiWatchRestore=function(){
+    var s=getSet();
+    document.querySelectorAll('.dg-row').forEach(function(r){
+      var k=rowKey(r); if(k && s.has(k)){
+        r.classList.add('watched'); r.dataset.watchlist='on';
+        var btn=r.querySelector('.dg-star'); if(btn) btn.classList.add('on');
+      }
+    });
+  };
+  var orig=window.dgStar;
+  window.dgStar=function(e,btn){
+    if(typeof orig==='function') orig(e,btn);
+    var row=btn.closest('.dg-row'); if(!row) return;
+    var k=rowKey(row); if(!k) return;
+    var s=getSet();
+    if(btn.classList.contains('on')) s.add(k); else s.delete(k);
+    save(s);
+  };
+  var container=document.getElementById('dgRows');
+  if(container){
+    var obs=new MutationObserver(function(){ window.paiWatchRestore(); });
+    obs.observe(container,{childList:true});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',window.paiWatchRestore);
+  else setTimeout(window.paiWatchRestore, 500);
+})();
 </script>
 </body>
 </html>

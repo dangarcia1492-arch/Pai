@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — Courts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d2e42;--ink-strong:#07202e;--ink-faint:#8a93a3;--muted:#5e6878;
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f7f8fb;--border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#035fa0;--accent-soft:#e3effc;
+  --past-bg:#f3f0fc;--past-text:#3d2e7a;--past-chip:#e7e1f7;
+  --upc-bg:#e9f5ed;--upc-text:#1f6943;--upc-chip:#d2eadb;
+  --new-bg:#fef5e0;--new-text:#7a5a14;--new-chip:#f6e6b3;
+  --latest-bg:#fce9ec;--latest-text:#8b1f3a;--latest-chip:#f6cbd2;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding:0;font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55}
+.wrap{max-width:1280px;margin:0 auto;padding:24px}
+.page-head{padding:18px 0 22px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px}
+h1{font-size:32px;font-weight:700;color:var(--ink-strong);letter-spacing:-.02em;margin:0 0 8px}
+.lede{font-size:14.5px;color:var(--muted);max-width:760px;line-height:1.55}
+.mockup-banner{background:#fff8e0;border-left:3px solid #ca8501;padding:10px 14px;border-radius:4px;font-size:12.5px;color:#5d4c2a;margin-bottom:18px}
+.toolbar{display:flex;gap:14px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+.search{flex:1;min-width:260px;padding:10px 14px;border:1px solid var(--border);border-radius:6px;font:inherit;font-size:13.5px;background:var(--surface)}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.tab{padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--muted);background:transparent;border:0;cursor:pointer;border-right:1px solid var(--border);font-family:inherit}
+.tab:last-child{border-right:none}
+.tab.on{background:var(--accent);color:#fff}
+.quads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.quad{border-radius:var(--radius);padding:18px 20px}
+.quad.past{background:var(--past-bg)}
+.quad.upc{background:var(--upc-bg)}
+.quad.new{background:var(--new-bg)}
+.quad.latest{background:var(--latest-bg)}
+.quad-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:8px;border-bottom:1px solid rgba(10,23,41,.08);margin-bottom:6px}
+.quad-title{font-size:14.5px;font-weight:700;letter-spacing:-.005em}
+.quad.past   .quad-title{color:var(--past-text)}
+.quad.upc    .quad-title{color:var(--upc-text)}
+.quad.new    .quad-title{color:var(--new-text)}
+.quad.latest .quad-title{color:var(--latest-text)}
+.quad-brand{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink-strong);opacity:.55;letter-spacing:-.02em}
+.quad-brand::before{content:"[•••] ";color:var(--accent);opacity:1}
+.stage-head{font-family:var(--sans);font-size:12.5px;font-weight:600;margin:14px 0 4px}
+.quad.past   .stage-head{color:var(--past-text)}
+.quad.upc    .stage-head{color:var(--upc-text)}
+.quad.new    .stage-head{color:var(--new-text)}
+.quad.latest .stage-head{color:var(--latest-text)}
+.case-row{padding:10px 0;border-top:1px solid rgba(10,23,41,.06)}
+.case-row:first-of-type{border-top:none}
+.case-line{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.case-name{flex:1;font-size:13.5px;font-weight:600;color:var(--ink-strong);line-height:1.35}
+.case-name .star{color:var(--accent);margin-right:4px;font-size:13px}
+.case-date{font-family:var(--mono);font-size:11.5px;color:var(--muted);font-weight:600;flex-shrink:0;white-space:nowrap}
+.case-court{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+.case-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.chip{display:inline-flex;align-items:center;height:20px;padding:0 9px;font-size:11px;font-weight:500;border-radius:11px;color:var(--ink);font-family:var(--sans)}
+.quad.past   .chip{background:var(--past-chip)}
+.quad.upc    .chip{background:var(--upc-chip)}
+.quad.new    .chip{background:var(--new-chip)}
+.quad.latest .chip{background:var(--latest-chip)}
+.empty-stage{padding:20px 0;color:var(--muted);font-size:12px;text-align:center;font-style:italic}
+@media (max-width: 880px){.quads{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">PrinciplesAI · Coverage</div>
+    <h1>Courts</h1>
+    <p class="lede">Selective case-law tracker for AI, privacy and cybersecurity. Lifecycle view: what just landed, what's coming up, what was filed, what was decided. Editorial curation, no risky positions.</p>
+  </div>
+
+  <div class="mockup-banner"><b>Mockup · placeholder content</b> — illustrative case rows in a lifecycle layout (past · upcoming · new · latest). ★ = doctrine-moving / Major.</div>
+
+  <div class="toolbar">
+    <input class="search" id="q" placeholder="Search cases, courts, themes…">
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-topic="all">All</button>
+      <button class="tab" data-topic="ai">AI</button>
+      <button class="tab" data-topic="privacy">Privacy</button>
+      <button class="tab" data-topic="cyber">Cyber</button>
+    </div>
+  </div>
+
+  <div class="quads" id="quads"></div>
+</div>
+
+<script>
+const CASES = [
+  {quad:"past", stage:"Judgment published", featured:true, title:"Doe v Continuum AI — Section 230 limits for generative AI", court:"US 9th Circuit", iso:"US", date:"18 Apr", tags:["Section 230","platform liability","generative AI"], topics:["ai"]},
+  {quad:"past", stage:"Judgment published", featured:true, title:"BGH on meaningful human review under Article 22 GDPR", court:"Bundesgerichtshof", iso:"DE", date:"15 Apr", tags:["GDPR Art 22","ADM","credit scoring"], topics:["ai","privacy"]},
+  {quad:"past", stage:"A-G opinion delivered", featured:true, title:"Bayerisches Landesamt für Datenschutzaufsicht (Case C-308/24)", court:"CJEU", iso:"EU", date:"12 Apr", tags:["controller","data subject rights","supervisory authority"], topics:["privacy"]},
+  {quad:"past", stage:"Hearing held", title:"Smith v Halliday Holdings — directors' duty on ransomware payments", court:"Court of Appeal (E&W)", iso:"GB", date:"08 Apr", tags:["ransomware","director liability","sanctions"], topics:["cyber"]},
+
+  {quad:"upc", stage:"Judgment scheduled", featured:true, title:"Across Fiduciaria and Others — beneficial ownership registers", court:"CJEU", iso:"EU", date:"21 May", tags:["AML5 Directive","public registers","data protection"], topics:["privacy"]},
+  {quad:"upc", stage:"A-G opinion scheduled", featured:true, title:"Generative-AI training & InfoSoc Article 4 opt-outs (C-241/26)", court:"CJEU", iso:"EU", date:"03 Jul", tags:["copyright","training data","TDM exception"], topics:["ai","privacy"]},
+  {quad:"upc", stage:"Hearing scheduled", featured:true, title:"Continuum AI — annulment of GPAI systemic-risk designation (T-178/26)", court:"General Court of the EU", iso:"EU", date:"14 Jun", tags:["AI Act","GPAI","systemic risk"], topics:["ai"]},
+  {quad:"upc", stage:"Hearing scheduled", title:"Onderwijsgroep Zusters — supervisory authority sanctioning powers", court:"CJEU", iso:"EU", date:"20 May", tags:["fines","supervisory authorities"], topics:["privacy"]},
+
+  {quad:"new", stage:"Questions / pleas published", title:"Ligue des droits humains — automated facial recognition in transit", court:"Belgian Constitutional Court", iso:"BE", date:"17 Apr", tags:["biometrics","facial recognition","public space"], topics:["ai","privacy"]},
+  {quad:"new", stage:"Questions / pleas published", title:"Maryland v OpenAI — class certification on training-data scraping", court:"US 4th Circuit", iso:"US", date:"22 Apr", tags:["class action","scraping","fair use"], topics:["ai"]},
+  {quad:"new", stage:"Filed", title:"Nederlandse Voedsel- en Warenautoriteit & Others (C-155/24)", court:"CJEU", iso:"EU", date:"04 Apr", tags:["ISO standards","standards"], topics:["cyber"]},
+
+  {quad:"latest", stage:"Judgment published", featured:true, title:"STC 47/2026 — RTBF obligations on LLM providers", court:"Tribunal Constitucional (ES)", iso:"ES", date:"02 Apr", tags:["RTBF","Article 17 GDPR","LLM"], topics:["privacy","ai"]},
+  {quad:"latest", stage:"Judgment published", title:"Commission v Hungary (Values of the EU)", court:"CJEU", iso:"EU", date:"21 Mar", tags:["criminal convictions","freedom of expression","human dignity"], topics:["privacy"]},
+  {quad:"latest", stage:"A-G opinion published", title:"Schrems III — assessment of new EU–US Data Privacy Framework", court:"CJEU", iso:"EU", date:"28 Mar", tags:["data transfers","adequacy","Article 46"], topics:["privacy"]},
+];
+
+const QUADS = [
+  {key:"past",   title:"Cases past 30 days",         brand:"PAI Courts"},
+  {key:"upc",    title:"Upcoming cases",              brand:"PAI Courts"},
+  {key:"new",    title:"New cases",                   brand:"PAI Courts"},
+  {key:"latest", title:"Latest judgments & opinions", brand:"PAI Courts"},
+];
+
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+  var topic="all";
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+      t.classList.add('on');
+      topic = t.getAttribute('data-topic');
+      render();
+    });
+  });
+  document.getElementById('q').addEventListener('input', render);
+
+  function caseRow(c){
+    var star = c.featured ? '<span class="star">★</span>' : '';
+    return '<div class="case-row">'
+      + '<div class="case-line">'
+        + '<div class="case-name">'+star+esc(c.title)+'<div class="case-court">'+esc(c.court)+(c.iso?' · '+esc(c.iso):'')+'</div></div>'
+        + '<div class="case-date">'+esc(c.date)+'</div>'
+      + '</div>'
+      + '<div class="case-tags">'+(c.tags||[]).map(function(t){return '<span class="chip">'+esc(t)+'</span>';}).join('')+'</div>'
+    + '</div>';
+  }
+
+  function render(){
+    var q = (document.getElementById('q').value||'').toLowerCase().trim();
+    var filtered = CASES.filter(function(c){
+      if(topic!=='all' && (c.topics||[]).indexOf(topic)<0) return false;
+      if(q){
+        var hay = (c.title+' '+c.court+' '+(c.tags||[]).join(' ')+' '+(c.stage||'')).toLowerCase();
+        if(hay.indexOf(q)<0) return false;
+      }
+      return true;
+    });
+    var byQuad={past:[],upc:[],"new":[],latest:[]};
+    filtered.forEach(function(c){ if(byQuad[c.quad]) byQuad[c.quad].push(c); });
+
+    var html = QUADS.map(function(q){
+      var rows = byQuad[q.key];
+      var byStage = {}; var stageOrder = [];
+      rows.forEach(function(c){
+        if(!byStage[c.stage]){ byStage[c.stage]=[]; stageOrder.push(c.stage); }
+        byStage[c.stage].push(c);
+      });
+      var inner = stageOrder.length
+        ? stageOrder.map(function(s){
+            return '<div class="stage-head">'+esc(s)+'</div>'+byStage[s].map(caseRow).join('');
+          }).join('')
+        : '<div class="empty-stage">Nothing here for the current filter.</div>';
+      return '<div class="quad '+q.key+'">'
+        + '<div class="quad-head"><span class="quad-title">'+esc(q.title)+'</span><span class="quad-brand">'+esc(q.brand)+'</span></div>'
+        + inner
+      + '</div>';
+    }).join('');
+    document.getElementById('quads').innerHTML = html;
+  }
+  render();
+})();
+</script>
+</body>
+</html>

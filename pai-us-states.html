@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>US State AI Laws · PrinciplesAI</title>
+<meta name="description" content="PAI's 50-state AI law matrix — which states have enacted AI laws, which are moving, which are silent, plus state privacy regimes." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcfcfc; --surface: #ffffff; --surface-2: #f8fafc; --surface-3: #eff2f7;
+  --ink: #0a1729; --ink-strong: #06101e; --secondary: #2a3548; --muted: #5e6878; --ink-faint: #8a93a3;
+  --border: #dbe1ea; --border-soft: #ebeff5;
+  --accent: #0176d3; --accent-2: #014486; --accent-soft: #e3effc; --accent-soft-2: #cfe1f6;
+  --green-fill: #2e844a; --green-bg: #d6f1dc;
+  --amber-fill: #ca8501; --amber-bg: #fef0c7;
+  --red-fill: #ba0517; --red-bg: #feded8;
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --header-height: 52px;
+  --radius: 10px;
+  --shadow-1: 0 1px 2px rgba(10,23,41,0.04);
+  --shadow-2: 0 2px 6px rgba(10,23,41,0.07), 0 8px 20px rgba(10,23,41,0.05);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 13.5px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+
+/* Header */
+.header-bar { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 16px; z-index: 200; box-shadow: var(--shadow-1); }
+.mkt-nav { display: flex; gap: 22px; margin-left: 28px; align-items: center; }
+.mkt-nav a { font-size: 13px; font-weight: 500; color: var(--secondary); text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .12s, border-color .12s; }
+.mkt-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+.mkt-nav a.on { color: var(--accent-2); font-weight: 600; }
+.header-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); transition: background .12s, border-color .12s, color .12s; }
+.btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 1px 2px rgba(1,118,211,0.22); }
+.btn-primary:hover { background: var(--accent-2); color: #fff; }
+@media (max-width: 1100px) { .mkt-nav a:nth-child(n+5) { display: none; } }
+@media (max-width: 720px) { .mkt-nav { display: none; } }
+
+/* Main */
+.main-content { padding-top: var(--header-height); min-height: 100vh; }
+.page-view { padding: 40px 48px 52px; max-width: 1180px; margin: 0 auto; }
+
+/* Statusbar */
+.us-statusbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 0 20px; margin-bottom: 24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.us-statusbar .left { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--secondary); flex-wrap: wrap; }
+.us-statusbar a { color: var(--secondary); font-weight: 500; }
+.us-statusbar .cur { color: var(--ink); font-weight: 600; }
+.us-statusbar .sep { color: var(--ink-faint); }
+.us-statusbar .scope { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; font-size: 11.5px; font-weight: 600; color: var(--accent-2); background: var(--accent-soft); border: 1px solid var(--accent-soft-2); border-radius: 4px; letter-spacing: 0.02em; }
+.us-statusbar .ok { color: var(--green-fill); font-weight: 600; font-size: 12.5px; }
+.us-statusbar .ok::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--green-fill); border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+/* Page head */
+.us-head { margin-bottom: 26px; }
+.us-h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.018em; color: var(--ink-strong); line-height: 1.05; }
+.us-sub { font-size: 14.5px; color: var(--secondary); margin-top: 10px; max-width: 760px; line-height: 1.6; }
+.us-sub b { color: var(--ink); font-weight: 600; }
+.us-note { font-size: 12.5px; color: var(--ink-faint); margin-top: 6px; max-width: 760px; }
+.us-note a { color: var(--accent-2); font-weight: 600; }
+
+/* Status snapshot strip */
+.us-snap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border-soft); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); margin-bottom: 30px; overflow: hidden; }
+.us-snap-cell { background: var(--surface); padding: 16px 20px; display: flex; flex-direction: column; gap: 4px; }
+.us-snap-cell .lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.us-snap-cell .val { font-size: 26px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.02em; line-height: 1.05; font-feature-settings: 'tnum' 1; }
+.us-snap-cell .val.green { color: var(--green-fill); }
+.us-snap-cell .val.amber { color: var(--amber-fill); }
+.us-snap-cell .val.muted { color: var(--ink-faint); }
+.us-snap-cell .sub { font-size: 11.5px; color: var(--secondary); }
+
+/* Toolbar */
+.us-toolbar { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); margin-bottom: 12px; flex-wrap: wrap; }
+.us-count { font-size: 13px; color: var(--secondary); }
+.us-count b { color: var(--ink); font-weight: 700; font-family: var(--mono); }
+.us-filters { margin-left: auto; display: inline-flex; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; background: var(--surface-2); }
+.us-fbtn { height: 30px; padding: 0 12px; font-size: 12px; font-weight: 600; background: transparent; border: none; border-right: 1px solid var(--border); color: var(--muted); cursor: pointer; font-family: inherit; }
+.us-fbtn:last-child { border-right: none; }
+.us-fbtn.on { background: var(--ink); color: #fff; }
+.us-search { flex: 0 0 220px; height: 32px; padding: 0 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 5px; font-size: 12.5px; font-family: inherit; color: var(--ink); }
+.us-search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.us-search::placeholder { color: var(--muted); }
+
+/* Data grid */
+.us-grid { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; }
+.us-head-row { display: grid; grid-template-columns: minmax(0, 1.4fr) 140px minmax(0, 1.8fr) 80px minmax(0, 1fr); gap: 14px; padding: 11px 20px; background: var(--surface-2); border-bottom: 1px solid var(--border); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.us-head-row .num { text-align: right; }
+.us-row { display: grid; grid-template-columns: minmax(0, 1.4fr) 140px minmax(0, 1.8fr) 80px minmax(0, 1fr); gap: 14px; padding: 13px 20px; border-bottom: 1px solid var(--border-soft); align-items: center; transition: background .1s; }
+.us-row:last-child { border-bottom: none; }
+.us-row:hover { background: var(--surface-2); }
+.us-name { font-size: 13.5px; font-weight: 600; color: var(--ink-strong); }
+.us-pill { display: inline-flex; align-items: center; height: 22px; padding: 0 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; border-radius: 11px; white-space: nowrap; }
+.us-pill.in-force { background: var(--green-fill); }
+.us-pill.in-progress { background: var(--amber-fill); }
+.us-pill.lapsed { background: var(--ink-faint); }
+.us-keylaw { font-size: 12.5px; color: var(--secondary); font-family: var(--mono); letter-spacing: 0.02em; }
+.us-num { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--ink-strong); text-align: right; font-feature-settings: 'tnum' 1; }
+.us-priv { font-size: 12px; color: var(--secondary); font-family: var(--mono); letter-spacing: 0.02em; }
+.muted { color: var(--ink-faint); font-family: var(--mono); }
+
+/* Footer */
+.footer { border-top: 1px solid var(--border); padding: 22px 4px 4px; margin-top: 40px; display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+.footer a { color: var(--accent-2); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .us-snap { grid-template-columns: repeat(2, 1fr); }
+  .us-head-row, .us-row { grid-template-columns: 1fr 120px 80px; }
+  .us-head-row > :nth-child(3), .us-head-row > :nth-child(5), .us-row > :nth-child(3), .us-row > :nth-child(5) { display: none; }
+}
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
+</style>
+</head>
+<body>
+
+<header class="header-bar">
+  <a href="pai-home-public" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); letter-spacing:-0.005em; text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
+  <nav class="mkt-nav">
+    <a href="pai-home-public">Home</a>
+    <a href="pai-authorities.html">Authorities</a>
+    <a href="pai-news.html">News</a>
+    <a href="pai-legislation.html" class="on">Legislation</a>
+    <a href="pai-home-public.html#jobs">Jobs</a>
+    <a href="pai-glossary.html">Glossary</a>
+    <a href="pai-home-public.html#pricing">Pricing</a>
+    <a href="pai-trust.html">Trust</a>
+  </nav>
+  <div class="header-right">
+    <a href="#" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view">
+
+  <div class="us-statusbar">
+    <div class="left">
+      <a href="pai-home-public">Home</a>
+      <span class="sep">›</span>
+      <a href="pai-legislation.html">Legislation</a>
+      <span class="sep">›</span>
+      <span class="cur">US State AI Laws</span>
+      <span class="sep">·</span>
+      <span class="scope">AI · Privacy</span>
+      <span class="sep">·</span>
+      <span class="ok">Register live</span>
+    </div>
+    <div><button class="btn">Export CSV</button></div>
+  </div>
+
+  <div class="us-head">
+    <h1 class="us-h1">US State AI Laws</h1>
+    <p class="us-sub">The 50-state patchwork. <b>8 states</b> have enacted AI-specific statutes, <b>12 have bills in progress</b>, <b>30 have no AI law</b>. State privacy regimes (<b>16 in force</b>) overlap with AI obligations and are shown in the last column.</p>
+    <p class="us-note">Federal preemption via APRA is unresolved — state regimes continue to be the binding layer. Click any row for the underlying bill history. Last refreshed from pipeline snapshot.</p>
+  </div>
+
+  <section class="us-snap">
+    <div class="us-snap-cell"><span class="lbl">Enacted AI laws</span><span class="val green">8</span><span class="sub">of 50 states + DC</span></div>
+    <div class="us-snap-cell"><span class="lbl">In progress</span><span class="val amber">12</span><span class="sub">Bills in committee or drafting</span></div>
+    <div class="us-snap-cell"><span class="lbl">No AI law</span><span class="val muted">30</span><span class="sub">No active binding AI statute</span></div>
+    <div class="us-snap-cell"><span class="lbl">Bills tracked</span><span class="val">74</span><span class="sub">Across all 50 states</span></div>
+  </section>
+
+  <div class="us-toolbar">
+    <div class="us-count"><b id="resultCount">50 of 50</b> states shown</div>
+    <input class="us-search" placeholder="Search state or bill…" oninput="usSearch(this.value)" />
+    <div class="us-filters" role="tablist">
+      <button class="us-fbtn on" data-status="all" onclick="usFilter(this)">All</button>
+      <button class="us-fbtn" data-status="enacted" onclick="usFilter(this)">Enacted</button>
+      <button class="us-fbtn" data-status="in-progress" onclick="usFilter(this)">In progress</button>
+      <button class="us-fbtn" data-status="no-law" onclick="usFilter(this)">No AI law</button>
+    </div>
+  </div>
+
+  <div class="us-grid">
+    <div class="us-head-row">
+      <div>State</div>
+      <div>AI law status</div>
+      <div>Key AI law / bill</div>
+      <div class="num">Bills</div>
+      <div>State privacy law</div>
+    </div>
+        <div class="us-row" data-status="no-law" data-name="alabama"><div class="us-name">Alabama</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="alaska"><div class="us-name">Alaska</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="in-progress" data-name="arizona"><div class="us-name">Arizona</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">HB 2394 (proposed)</div><div class="us-num">2</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="arkansas"><div class="us-name">Arkansas</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="enacted" data-name="california"><div class="us-name">California</div><div><span class="us-pill in-force">Enacted</span></div><div class="us-keylaw">AB 2013, SB 1047</div><div class="us-num">8</div><div class="us-priv">CCPA/CPRA</div></div>
+        <div class="us-row" data-status="enacted" data-name="colorado"><div class="us-name">Colorado</div><div><span class="us-pill in-force">Enacted</span></div><div class="us-keylaw">SB 24-205</div><div class="us-num">4</div><div class="us-priv">CPA</div></div>
+        <div class="us-row" data-status="enacted" data-name="connecticut"><div class="us-name">Connecticut</div><div><span class="us-pill in-force">Enacted</span></div><div class="us-keylaw">SB 2, HB 6607</div><div class="us-num">3</div><div class="us-priv">CTDPA</div></div>
+        <div class="us-row" data-status="no-law" data-name="delaware"><div class="us-name">Delaware</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv">DPDPA</div></div>
+        <div class="us-row" data-status="in-progress" data-name="florida"><div class="us-name">Florida</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">HB 919 (proposed)</div><div class="us-num">2</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="georgia"><div class="us-name">Georgia</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="in-progress" data-name="hawaii"><div class="us-name">Hawaii</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">SB 2572 (proposed)</div><div class="us-num">2</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="idaho"><div class="us-name">Idaho</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="enacted" data-name="illinois"><div class="us-name">Illinois</div><div><span class="us-pill in-force">Enacted</span></div><div class="us-keylaw">AIPA (HB 3773)</div><div class="us-num">3</div><div class="us-priv">BIPA</div></div>
+        <div class="us-row" data-status="in-progress" data-name="indiana"><div class="us-name">Indiana</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">SB 150 (proposed)</div><div class="us-num">2</div><div class="us-priv">ICDPA</div></div>
+        <div class="us-row" data-status="no-law" data-name="iowa"><div class="us-name">Iowa</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv">ICDPA</div></div>
+        <div class="us-row" data-status="no-law" data-name="kansas"><div class="us-name">Kansas</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="kentucky"><div class="us-name">Kentucky</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="louisiana"><div class="us-name">Louisiana</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="maine"><div class="us-name">Maine</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="in-progress" data-name="maryland"><div class="us-name">Maryland</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">SB 735 (proposed)</div><div class="us-num">3</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="in-progress" data-name="massachusetts"><div class="us-name">Massachusetts</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">HD 3892 (proposed)</div><div class="us-num">4</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="michigan"><div class="us-name">Michigan</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="in-progress" data-name="minnesota"><div class="us-name">Minnesota</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">HF 2309 (proposed)</div><div class="us-num">2</div><div class="us-priv">MCDPA</div></div>
+        <div class="us-row" data-status="no-law" data-name="mississippi"><div class="us-name">Mississippi</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="missouri"><div class="us-name">Missouri</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="montana"><div class="us-name">Montana</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv">MCDPA</div></div>
+        <div class="us-row" data-status="no-law" data-name="nebraska"><div class="us-name">Nebraska</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="nevada"><div class="us-name">Nevada</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="new hampshire"><div class="us-name">New Hampshire</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv">NHDPA</div></div>
+        <div class="us-row" data-status="in-progress" data-name="new jersey"><div class="us-name">New Jersey</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">A 3611 (proposed)</div><div class="us-num">3</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="new mexico"><div class="us-name">New Mexico</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="enacted" data-name="new york"><div class="us-name">New York</div><div><span class="us-pill in-force">Enacted</span></div><div class="us-keylaw">NYC LL 144</div><div class="us-num">3</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="north carolina"><div class="us-name">North Carolina</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="north dakota"><div class="us-name">North Dakota</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="ohio"><div class="us-name">Ohio</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="oklahoma"><div class="us-name">Oklahoma</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="in-progress" data-name="oregon"><div class="us-name">Oregon</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">SB 619 (proposed)</div><div class="us-num">2</div><div class="us-priv">OCPA</div></div>
+        <div class="us-row" data-status="no-law" data-name="pennsylvania"><div class="us-name">Pennsylvania</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">2</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="rhode island"><div class="us-name">Rhode Island</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="south carolina"><div class="us-name">South Carolina</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="south dakota"><div class="us-name">South Dakota</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="in-progress" data-name="tennessee"><div class="us-name">Tennessee</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">HB 1120 (proposed)</div><div class="us-num">2</div><div class="us-priv">TIPA</div></div>
+        <div class="us-row" data-status="enacted" data-name="texas"><div class="us-name">Texas</div><div><span class="us-pill in-force">Enacted</span></div><div class="us-keylaw">HB 2060, TRAIA</div><div class="us-num">5</div><div class="us-priv">TDPSA</div></div>
+        <div class="us-row" data-status="in-progress" data-name="utah"><div class="us-name">Utah</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">SB 149 (AI Policy Act)</div><div class="us-num">2</div><div class="us-priv">UCPA</div></div>
+        <div class="us-row" data-status="in-progress" data-name="vermont"><div class="us-name">Vermont</div><div><span class="us-pill in-progress">In progress</span></div><div class="us-keylaw">H 410 (proposed)</div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="enacted" data-name="virginia"><div class="us-name">Virginia</div><div><span class="us-pill in-force">Enacted</span></div><div class="us-keylaw">HB 2094</div><div class="us-num">2</div><div class="us-priv">VCDPA</div></div>
+        <div class="us-row" data-status="enacted" data-name="washington"><div class="us-name">Washington</div><div><span class="us-pill in-force">Enacted</span></div><div class="us-keylaw">SB 5838</div><div class="us-num">4</div><div class="us-priv">MHMDA</div></div>
+        <div class="us-row" data-status="no-law" data-name="west virginia"><div class="us-name">West Virginia</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="wisconsin"><div class="us-name">Wisconsin</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num">1</div><div class="us-priv"><span class="muted">—</span></div></div>
+        <div class="us-row" data-status="no-law" data-name="wyoming"><div class="us-name">Wyoming</div><div><span class="us-pill lapsed">No AI law</span></div><div class="us-keylaw"><span class="muted">—</span></div><div class="us-num"><span class="muted">0</span></div><div class="us-priv"><span class="muted">—</span></div></div>
+  </div>
+
+  <footer class="footer">
+    <div>PrinciplesAI · US state register · 50 jurisdictions tracked</div>
+    <div><a href="pai-legislation.html">← Full Legislation register</a></div>
+  </footer>
+
+</div>
+</div>
+
+<script>
+let activeStatus = 'all';
+let activeQuery  = '';
+function usFilter(btn) {
+  document.querySelectorAll('.us-fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  activeStatus = btn.dataset.status;
+  apply();
+}
+function usSearch(q) { activeQuery = q.toLowerCase().trim(); apply(); }
+function apply() {
+  let n = 0;
+  document.querySelectorAll('.us-row').forEach(row => {
+    const st = row.dataset.status;
+    const name = row.dataset.name;
+    const text = row.textContent.toLowerCase();
+    const sOk = activeStatus === 'all' || st === activeStatus;
+    const qOk = activeQuery === '' || text.includes(activeQuery);
+    const ok = sOk && qOk;
+    row.style.display = ok ? '' : 'none';
+    if (ok) n++;
+  });
+  document.getElementById('resultCount').textContent = n + ' of 50';
+}
+</script>
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+<div class="nav-scrim" aria-hidden="true"></div>
+</body>
+</html>

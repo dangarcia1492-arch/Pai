@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Trust · PrinciplesAI</title>
@@ -399,25 +400,175 @@ a { color: var(--accent); text-decoration: none; }
   .tr-signals { grid-template-columns: 1fr; }
   .tr-hero h1 { font-size: 32px; }
 }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
 </head>
 <body>
 
 <header class="header-bar">
-  <a href="pai-home-public.html" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
+  <a href="pai-home-public" style="font-family:var(--display); font-weight:600; font-size:18px; color:var(--ink); text-decoration:none;">Principles<em style="font-style:italic; color:var(--accent-2);">AI</em></a>
   <nav class="mkt-nav">
     <a href="pai-jobs.html">Jobs</a>
     <a href="pai-trust.html" class="on">Trust</a>
     <span class="mkt-sep" aria-hidden="true"></span>
-    <a href="pai-home-public.html">Home</a>
+    <a href="pai-home-public">Home</a>
     <a href="pai-authorities.html">Authorities</a>
     <a href="pai-news.html">News</a>
     <a href="pai-legislation.html">Legislation</a>
     <a href="pai-pricing.html">Pricing</a>
   </nav>
   <div class="header-right">
-    <a href="#" class="btn" style="text-decoration:none;">Log out</a>
-    <a href="pai-pricing.html" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
+    <a href="/pai-signin.html" class="btn" style="text-decoration:none;">Sign in</a>
+    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none;">Get access →</a>
   </div>
 </header>
 
@@ -425,7 +576,7 @@ a { color: var(--accent); text-decoration: none; }
 <div class="tr-shell">
 
   <nav class="tr-crumb">
-    <a href="pai-home-public.html">Home</a>
+    <a href="pai-home-public">Home</a>
     <span class="sep">›</span>
     <span class="cur">Trust</span>
   </nav>
@@ -448,8 +599,8 @@ a { color: var(--accent); text-decoration: none; }
       <li><a href="#s12">How AI sits under the Act</a></li>
       <li><a href="#s13">Member rights</a></li>
       <li><a href="#s14">Security &amp; incidents</a></li>
-      <li><a href="#s15">Telemetry &amp; analytics</a></li>
-      <li><a href="#s16">Contact &amp; changes</a></li>
+      <li><a href="#s15">Contact &amp; changes</a></li>
+      <li><a href="#s16">Cookies</a></li>
     </ol>
     <div class="tr-updated">
       <div><b>Last updated</b></div>
@@ -567,7 +718,7 @@ a { color: var(--accent); text-decoration: none; }
     <section class="tr-section" id="s2">
       <h2 class="tr-section-h"><span class="num">02</span>Production intake is AI-free</h2>
       <p class="kicker">Stages 1–5 — Health, Map, Detect, Triage, Select — are deterministic code. No models are called. Enforced three ways.</p>
-      <p>The intake pipeline runs five stages against <strong>2,389 tracked bodies across 329 jurisdictions</strong>, and every stage is plain code, not inference. No LLM SDK is installed on the production box. No model key exists on the production box. Every sift, dedupe and ranking decision is made by rules a developer can read.</p>
+      <p>The intake pipeline runs five stages against <strong><span id="trustBodies">—</span> tracked bodies across <span id="trustJuris">—</span> jurisdictions</strong>, and every stage is plain code, not inference. No LLM SDK is installed on the production box. No model key exists on the production box. Every sift, dedupe and ranking decision is made by rules a developer can read.</p>
 
       <div class="tr-pipe" role="img" aria-label="The 8-stage pipeline, showing where AI is and isn't">
         <div class="stg noai"><span class="num">01</span><span class="nm">Health</span><span class="tag">No AI</span></div>
@@ -754,7 +905,10 @@ a { color: var(--accent); text-decoration: none; }
           <tr><td class="name">Google (Gemini)</td><td>Claim extraction</td><td class="loc">United States (SCC)</td><td>Public regulatory source text only. No member data.</td></tr>
           <tr><td class="name">Perplexity (Sonar)</td><td>Judge B — external corroboration</td><td class="loc">United States (SCC)</td><td>Public regulatory source text only. No member data.</td></tr>
           <tr><td class="name">Cloudflare</td><td>Hosting for the published member-facing site</td><td class="loc">Global edge</td><td>Public site traffic, no member-identified data</td></tr>
-          <tr><td class="name">GoatCounter (self-hosted)</td><td>Cookieless analytics</td><td class="loc">DigitalOcean AMS</td><td>Aggregate page-view counts, no personal data leaves our infra</td></tr>
+          <tr><td class="name">Plausible (self-hosted)</td><td>Cookieless analytics</td><td class="loc">Hetzner, Germany (EU)</td><td>Aggregate page-view counts, no personal data leaves our infra</td></tr>
+          <tr><td class="name">GlitchTip (self-hosted)</td><td>Cookieless error tracking</td><td class="loc">Hetzner, Germany (EU)</td><td>Technical error diagnostics, no cookies, no behavioural profile</td></tr>
+          <tr><td class="name">Crisp</td><td>Live chat on the public marketing site</td><td class="loc">Paris, France (EU)</td><td>Visitor chat messages, IP, browser metadata. Consent-gated via Cookiebot. Not deployed on <code>app.principlesai.org</code>.</td></tr>
+          <tr><td class="name">Cookiebot (Cybot A/S)</td><td>Cookie-consent management</td><td class="loc">Copenhagen, Denmark (EU)</td><td>Consent state, page-visit timestamp. No account data.</td></tr>
         </tbody>
       </table>
     </section>
@@ -811,9 +965,9 @@ a { color: var(--accent); text-decoration: none; }
       <p><strong>Honest gaps.</strong> PrinciplesAI does not currently hold a SOC 2 or ISO 27001 certification. No annual external penetration test on the account-data side. No 24/7 SOC. Two-factor authentication is not yet a member option. These sit on the roadmap before the first enterprise-tier engagement and will be named on this page only when they exist.</p>
     </section>
 
-    <!-- 16 Contact & changes -->
-    <section class="tr-section" id="s16">
-      <h2 class="tr-section-h"><span class="num">16</span>Contact &amp; changes</h2>
+    <!-- 15 Contact & changes -->
+    <section class="tr-section" id="s15">
+      <h2 class="tr-section-h"><span class="num">15</span>Contact &amp; changes</h2>
       <p class="kicker">Direct line to the controller. 30-day notice on any material change to this page.</p>
       <p><strong>Controller.</strong> PrinciplesAI is operated by <strong>David Longford</strong>, established as a sole trader (autónomo) at 18 Avenida Oceano Atlántico, Albolote, Spain. Privacy, trust and data-protection questions go to <a href="mailto:privacy@principlesai.org">privacy@principlesai.org</a>. No ticket queue, no support bot — the mailbox is monitored personally.</p>
       <p><strong>DPO.</strong> PrinciplesAI is below the Article 37 GDPR threshold that mandates a DPO, so none is appointed. If that changes, this page will be updated and the DPO registered with the AEPD.</p>
@@ -821,9 +975,39 @@ a { color: var(--accent); text-decoration: none; }
       <p><strong>Changes to this page.</strong> Material changes — anything that affects how member data is processed, who can access it, where it is stored, or what rights members have — will be notified to <strong>active members by email at least 30 days in advance</strong>.</p>
     </section>
 
+    <!-- 16 Cookies -->
+    <section class="tr-section" id="s16">
+      <h2 class="tr-section-h"><span class="num">16</span>Cookies</h2>
+      <p class="kicker">Two categories, both named. Strictly necessary runs without asking. Everything else waits for your consent.</p>
+      <p><strong>Strictly necessary.</strong> Cloudflare sets <code>_cfuvid</code> and <code>cf_clearance</code> to protect the site against bots and abuse. These load before any consent prompt because the site cannot serve pages without them. They carry no identifier we can read and no behavioural profile.</p>
+      <p><strong>Marketing — consent-gated.</strong> If you accept the marketing category on the Cookiebot banner, Crisp loads to power the chat widget on the public marketing site. Crisp sets a small number of first-party cookies so a returning visitor keeps their chat history. Crisp is hosted in Paris, France. Nothing marketing-category loads on <code>app.principlesai.org</code> — the member app carries no chat widget and no tracking.</p>
+      <p><strong>No analytics, no advertising cookies.</strong> PrinciplesAI runs no Google Analytics, no Mixpanel, no Facebook Pixel, no LinkedIn Insight, no Hotjar, no session replay. Aggregate page-view counts are captured by a self-hosted <strong>Plausible</strong> instance (Hetzner, Germany) that does not set cookies at all, alongside a self-hosted <strong>GlitchTip</strong> error tracker — neither places a cookie on your browser.</p>
+      <p><strong>Consent record.</strong> Cookiebot (Cybot A/S, Copenhagen, Denmark) stores your consent choice in its own cookie so the banner does not reappear on every page. The consent record is retained for 12 months and then refreshed — so you are asked again at least once a year.</p>
+      <p><strong>Change your mind.</strong> Click the small Cookiebot icon fixed to the bottom-left of any marketing page to reopen the banner and change or withdraw any category. Withdrawal takes effect on the next page load; already-set cookies in withdrawn categories are cleared by the browser within the hour.</p>
+      <p><strong>Authenticated app.</strong> <code>app.principlesai.org</code> sets only the session cookies Clerk requires to keep you logged in. No analytics, no marketing, no chat — and therefore no banner.</p>
+    </section>
+
   </div>
 </div>
 </div>
 
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+<div class="nav-scrim" aria-hidden="true"></div>
+
+<script>
+/* Auto-injected stats fetch — populates slot IDs from stats.json */
+(async function loadStats() {
+  try {
+    const r = await fetch('./stats.json', { cache: 'no-cache' });
+    if (!r.ok) return;
+    const d = await r.json();
+    const setTx = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+      if (d.authorities_count != null) setTx('trustBodies', d.authorities_count.toLocaleString());
+      if (d.jurisdictions_count != null) setTx('trustJuris', d.jurisdictions_count.toLocaleString());
+  } catch (_) { /* leave — on failure */ }
+})();
+</script>
 </body>
 </html>

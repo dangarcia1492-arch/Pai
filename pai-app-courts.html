@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — Courts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d2e42;--ink-strong:#07202e;--ink-faint:#8a93a3;--muted:#5e6878;
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f7f8fb;--surface-3:#e8ebf1;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#035fa0;--accent-soft:#e3effc;--accent-soft-2:#b9d8ef;
+  --green-fill:#2e844a;--green-bg:#d6f1dc;
+  --red-fill:#ba0517;--red-bg:#feded8;
+  --amber-fill:#ca8501;--amber-bg:#fef0c7;
+  --purple-fill:#6b3fa6;--purple-bg:#ede4f8;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --radius:8px;
+  --shadow-1:0 1px 3px rgba(10,23,41,0.04);
+  --shadow-2:0 4px 16px rgba(10,23,41,0.06);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding:0;font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14.5px;line-height:1.55}
+.wrap{max-width:1200px;margin:0 auto;padding:24px}
+
+/* Header */
+.page-head{padding:28px 0 22px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;margin-bottom:8px}
+h1{font-size:36px;font-weight:700;color:var(--ink-strong);letter-spacing:-.02em;margin:0 0 12px}
+.lede{font-size:15.5px;color:var(--muted);max-width:760px;line-height:1.6}
+.kpi-row{display:flex;gap:24px;margin-top:22px;flex-wrap:wrap}
+.kpi-num{font-size:22px;font-weight:700;color:var(--ink-strong);letter-spacing:-.02em;line-height:1}
+.kpi-label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+.mockup-banner{background:#fff8e0;border-left:3px solid var(--amber-fill);padding:10px 14px;border-radius:4px;font-size:12.5px;color:#5d4c2a;margin-bottom:24px}
+
+/* Toolbar */
+.toolbar{display:flex;gap:14px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.search{flex:1;min-width:260px;padding:11px 14px;border:1px solid var(--border);border-radius:6px;font:inherit;font-size:14px;background:var(--surface)}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.tab{padding:9px 14px;font-size:12.5px;font-weight:600;color:var(--muted);background:transparent;border:0;cursor:pointer;border-right:1px solid var(--border);font-family:inherit}
+.tab:last-child{border-right:none}
+.tab.on{background:var(--accent);color:#fff}
+
+/* Section labels (Featured / Other) */
+.section-head{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin:28px 0 12px}
+.section-head:first-of-type{margin-top:8px}
+
+/* Featured cards (CJEU, 9th Circuit, etc.) — full width, accent border-top */
+.featured-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:16px;margin-bottom:14px}
+.case-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;transition:border-color .15s, box-shadow .15s;display:flex;flex-direction:column;gap:10px;position:relative}
+.case-card:hover{border-color:var(--accent-soft-2);box-shadow:var(--shadow-2)}
+.case-card.featured{border-top:3px solid var(--accent)}
+.case-card .feat-badge{position:absolute;top:14px;right:14px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;border-radius:3px}
+.case-head{display:flex;align-items:flex-start;gap:12px}
+.case-flag{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;border-radius:3px;background:var(--surface-3);color:var(--ink);font-family:var(--mono);font-size:10.5px;font-weight:700;flex-shrink:0;margin-top:2px}
+.case-head-text{flex:1;min-width:0}
+.case-court{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--accent-2);text-transform:uppercase;letter-spacing:.1em;line-height:1.3}
+.case-meta{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px}
+.case-title{font-size:17px;font-weight:700;color:var(--ink-strong);letter-spacing:-.01em;margin:6px 0 0;line-height:1.3}
+.case-card.featured .case-title{font-size:18.5px}
+.case-summary{font-size:14px;color:var(--ink);line-height:1.6;margin-top:4px}
+
+.case-pick{background:var(--accent-soft);border-left:3px solid var(--accent);padding:9px 13px;border-radius:4px;font-size:13px;color:var(--ink-strong);line-height:1.5}
+.case-pick-label{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;display:block;margin-bottom:3px}
+.case-watch{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--muted);line-height:1.5}
+.case-watch-label{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.14em;flex-shrink:0;padding-top:1px;min-width:42px}
+.case-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
+.tag{display:inline-flex;align-items:center;height:20px;padding:0 9px;font-size:10px;font-weight:700;border-radius:10px;text-transform:uppercase;letter-spacing:.06em;font-family:var(--mono)}
+.tag.ai{background:var(--purple-bg);color:var(--purple-fill)}
+.tag.privacy{background:var(--accent-soft);color:var(--accent)}
+.tag.cyber{background:var(--green-bg);color:var(--green-fill)}
+.tag.theme{background:var(--surface-2);color:var(--muted);border:1px solid var(--border)}
+.case-foot{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--border-soft);margin-top:4px;font-size:11.5px}
+.case-foot .juris{color:var(--muted);font-family:var(--mono);font-size:11px}
+.case-foot a{color:var(--accent);text-decoration:none;font-weight:600;font-size:12px}
+.case-foot a:hover{text-decoration:underline}
+
+/* Standard grid (others) — 3 columns wide, 2 medium, 1 narrow */
+.cases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+
+.empty{padding:60px 0;text-align:center;color:var(--muted);font-size:14px}
+.empty .em-emoji{font-size:32px;display:block;margin-bottom:10px;opacity:.4}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="page-head">
+    <div class="eyebrow">PrinciplesAI · Coverage</div>
+    <h1>Courts</h1>
+    <p class="lede">Selective digest of court decisions worth knowing — what just happened in the courts that move doctrine on AI, privacy and cybersecurity. Editorial, claim-careful, no risky positions.</p>
+    <div class="kpi-row">
+      <div><div class="kpi-num" id="kpi-cases">—</div><div class="kpi-label">Cases this month</div></div>
+      <div><div class="kpi-num" id="kpi-courts">—</div><div class="kpi-label">Courts</div></div>
+      <div><div class="kpi-num" id="kpi-jurisdictions">—</div><div class="kpi-label">Jurisdictions</div></div>
+    </div>
+  </div>
+
+  <div class="mockup-banner"><b>Mockup · placeholder content</b> — illustrative cards. Real entries will be written in PAI's claim-careful house style.</div>
+
+  <div class="toolbar">
+    <input class="search" id="q" placeholder="Search cases, courts, themes…">
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-topic="all">All</button>
+      <button class="tab" data-topic="ai">AI</button>
+      <button class="tab" data-topic="privacy">Privacy</button>
+      <button class="tab" data-topic="cyber">Cyber</button>
+    </div>
+  </div>
+
+  <div id="results"><div class="empty">Loading cases…</div></div>
+</div>
+
+<script>
+/* MOCKUP CASE DATA — placeholder editorial entries.
+   Featured = the courts that move doctrine: CJEU/General Court (EU level)
+   and US Courts of Appeals (esp 9th Circuit for tech). Then UK / Germany /
+   Spain. No Australia / India in this cut — selective by design. */
+const CASES = [
+  /* === FEATURED (Majors) === */
+  {
+    featured: true,
+    title: "Generative-AI training on copyrighted works — opt-out scope",
+    court_name: "Court of Justice of the EU",
+    court_iso: "EU",
+    jurisdiction: "European Union",
+    region: "Europe",
+    date: "2026-04-09",
+    citation: "Case C-241/26",
+    topics: ["ai","privacy"],
+    summary: "Pending preliminary reference asking whether structured machine-readable rights-holder opt-outs bind commercial generative model training under InfoSoc Article 4(4). The Munich Higher Regional Court referred two questions on Article 4 and one on AI Act training-data transparency.",
+    pick: "First time the CJEU is being asked head-on whether passive opt-outs at the file-server level satisfy Article 4(4). Answer ripples through every commercial training pipeline touching EU rights-holders.",
+    watch: "AG opinion expected Q3 2026; final judgment likely H1 2027.",
+    tags: ["copyright","training data","TDM"],
+    link: "#"
+  },
+  {
+    featured: true,
+    title: "Section 230 limits for AI-generated content",
+    court_name: "US Court of Appeals — 9th Circuit",
+    court_iso: "US",
+    jurisdiction: "USA",
+    region: "North America",
+    date: "2026-03-18",
+    citation: "Doe v Continuum AI, Inc., No. 25-15247 (9th Cir. 2026)",
+    topics: ["ai"],
+    summary: "Panel holds Section 230 immunity does not extend to outputs that the platform's own generative model materially produces — distinguishing 'algorithmic ranking of third-party content' (immune) from 'content the platform itself authored at the user's prompt' (not immune). Remand for trial.",
+    pick: "First federal appellate ruling drawing the line on Section 230 + generative AI. Aligns with the doctrinal direction of recent Sup. Ct. dicta but goes further on the specific question. Defines the next 18 months of platform-AI litigation in the US.",
+    watch: "Likely cert petition; circuit split possible if 5th Circuit takes a contrary view in pending appeals.",
+    tags: ["Section 230","platform liability","9th Circuit"],
+    link: "#"
+  },
+  {
+    featured: true,
+    title: "AI Act enforcement scope — first General Court challenge",
+    court_name: "General Court of the European Union",
+    court_iso: "EU",
+    jurisdiction: "European Union",
+    region: "Europe",
+    date: "2026-04-04",
+    citation: "Case T-178/26",
+    topics: ["ai"],
+    summary: "Annulment action by a US-headquartered foundation-model provider challenging the EU AI Office's first significant-systemic-risk designation. Pleas focus on threshold methodology, due process around designation, and proportionality of subsequent obligations.",
+    pick: "First substantive judicial test of how the AI Act's GPAI tiering will be enforced and reviewed. Whatever the General Court does on procedure will set the template for every later challenge.",
+    watch: "Hearing expected late 2026; potential interim measures ruling earlier.",
+    tags: ["AI Act","GPAI","systemic risk"],
+    link: "#"
+  },
+
+  /* === OTHER === */
+  {
+    title: "Article 22 GDPR — when human review counts as 'meaningful'",
+    court_name: "Bundesgerichtshof (Germany)",
+    court_iso: "DE",
+    jurisdiction: "Germany",
+    region: "Europe",
+    date: "2026-03-21",
+    citation: "BGH VI ZR 47/25",
+    topics: ["ai","privacy"],
+    summary: "Where a credit refusal is mathematically derived from a statistical scoring model and the human reviewer cannot, in the ordinary course, override the score, the resulting refusal is a 'decision based solely on automated processing' for Article 22(1) GDPR — even though a human formally signs the letter.",
+    pick: "Second senior-court ruling tightening the 'solely automated' test in two years. Aligns with CJEU SCHUFA (Case C-634/21).",
+    watch: "Implementing guidance from BaFin and the German DPA conference (DSK) expected within 60 days.",
+    tags: ["GDPR Art 22","ADM","scoring"],
+    link: "#"
+  },
+  {
+    title: "Right-to-be-forgotten obligations on LLM providers",
+    court_name: "Tribunal Constitucional (Spain)",
+    court_iso: "ES",
+    jurisdiction: "Spain",
+    region: "Europe",
+    date: "2026-04-02",
+    citation: "STC 47/2026",
+    topics: ["privacy","ai"],
+    summary: "When the AEPD orders an LLM provider to suppress reproduction of an article validly delisted under Article 17 GDPR, the operator's obligation is to apply 'reasonable engineering measures' commensurate with the technical state of the art. 'We can't retrain' is rejected as a per-se defence.",
+    pick: "Concrete European answer to a question every LLM provider has been quietly hoping wouldn't get litigated: yes, you have a follow-on Article 17 duty, and partial mitigation is required.",
+    watch: "EDPB guidelines on Article 17 in generative-AI contexts under preparation.",
+    tags: ["RTBF","Article 17","LLM"],
+    link: "#"
+  },
+  {
+    title: "Ransomware payments and director fiduciary duty",
+    court_name: "Court of Appeal (England and Wales)",
+    court_iso: "GB",
+    jurisdiction: "United Kingdom",
+    region: "Europe",
+    date: "2026-01-27",
+    citation: "Smith v Halliday Holdings plc [2026] EWCA Civ 38",
+    topics: ["cyber"],
+    summary: "Authorising a ransomware payment without contemporaneous OFAC/OFSI sanctions screening, without considering segregation/restoration alternatives, and without legal-privileged board minutes, may amount to a breach of section 174 Companies Act 2006 sufficient to allow a derivative action past the permission stage.",
+    pick: "First UK appellate decision treating ransomware-payment authorisation as a discrete fiduciary-duty event. The 'we had to act fast' defence is weaker than it was.",
+    watch: "OFSI consultation on a 'reasonable steps' safe harbour for ransomware-related licence applications expected mid-2026.",
+    tags: ["ransomware","director liability","sanctions"],
+    link: "#"
+  }
+];
+
+(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+  function fmtDate(iso){
+    if(!iso) return '—';
+    var d = new Date(iso);
+    if(isNaN(d)) return iso;
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+  }
+
+  document.getElementById('kpi-cases').textContent = CASES.length;
+  document.getElementById('kpi-courts').textContent = new Set(CASES.map(c=>c.court_name)).size;
+  document.getElementById('kpi-jurisdictions').textContent = new Set(CASES.map(c=>c.jurisdiction)).size;
+
+  var topic = 'all';
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+      t.classList.add('on');
+      topic = t.getAttribute('data-topic');
+      render();
+    });
+  });
+  document.getElementById('q').addEventListener('input', render);
+
+  function caseCard(c){
+    var topicChips = c.topics.map(t => '<span class="tag '+t+'">'+t.toUpperCase()+'</span>').join('');
+    var themeChips = (c.tags||[]).map(t => '<span class="tag theme">'+esc(t)+'</span>').join('');
+    return '<article class="case-card'+(c.featured?' featured':'')+'">'
+      + (c.featured ? '<span class="feat-badge">Featured</span>' : '')
+      + '<div class="case-head">'
+        + '<span class="case-flag">'+esc(c.court_iso)+'</span>'
+        + '<div class="case-head-text">'
+          + '<div class="case-court">'+esc(c.court_name)+'</div>'
+          + '<div class="case-meta">'+fmtDate(c.date)+(c.citation ? ' · '+esc(c.citation) : '')+'</div>'
+        + '</div>'
+      + '</div>'
+      + '<h3 class="case-title">'+esc(c.title)+'</h3>'
+      + '<div class="case-summary">'+esc(c.summary)+'</div>'
+      + (c.pick ? '<div class="case-pick"><span class="case-pick-label">Why we picked this</span>'+esc(c.pick)+'</div>' : '')
+      + (c.watch ? '<div class="case-watch"><span class="case-watch-label">Watch</span><span>'+esc(c.watch)+'</span></div>' : '')
+      + '<div class="case-tags">'+topicChips+themeChips+'</div>'
+      + '<div class="case-foot">'
+        + '<span class="juris">'+esc(c.jurisdiction)+'</span>'
+        + (c.link && c.link!=='#' ? '<a href="'+esc(c.link)+'" target="_blank" rel="noopener">Read decision ↗</a>' : '<span class="juris" style="opacity:.6">Source forthcoming</span>')
+      + '</div>'
+    + '</article>';
+  }
+
+  function render(){
+    var q = (document.getElementById('q').value||'').toLowerCase().trim();
+    var filtered = CASES.filter(c => {
+      if(topic !== 'all' && c.topics.indexOf(topic) < 0) return false;
+      if(q){
+        var hay = (c.title+' '+c.summary+' '+c.court_name+' '+c.jurisdiction+' '+(c.tags||[]).join(' ')).toLowerCase();
+        if(hay.indexOf(q) < 0) return false;
+      }
+      return true;
+    });
+    if(!filtered.length){
+      document.getElementById('results').innerHTML = '<div class="empty"><span class="em-emoji">⚖</span>No cases match the current filters.</div>';
+      return;
+    }
+    var featured = filtered.filter(c => c.featured);
+    var others = filtered.filter(c => !c.featured);
+    others.sort((a,b) => (a.date < b.date ? 1 : -1));
+    featured.sort((a,b) => (a.date < b.date ? 1 : -1));
+
+    var html = '';
+    if(featured.length){
+      html += '<div class="section-head">Featured · doctrine-moving courts</div>'
+        + '<div class="featured-grid">'+featured.map(caseCard).join('')+'</div>';
+    }
+    if(others.length){
+      html += '<div class="section-head">Other recent picks</div>'
+        + '<div class="cases-grid">'+others.map(caseCard).join('')+'</div>';
+    }
+    document.getElementById('results').innerHTML = html;
+  }
+  render();
+})();
+</script>
+</body>
+</html>

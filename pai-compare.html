@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="73ae863e-ceb0-46a5-92b2-25bffaec2c91" data-blockingmode="auto" type="text/javascript"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PrinciplesAI — product surface</title>
@@ -151,6 +152,156 @@
     .tab .sub { display: none; }
     .tab { padding: 7px 10px; }
   }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<!-- Crisp chat -->
+<script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
 </head>
 <body>
@@ -184,7 +335,43 @@
     </button>
     <button class="tab" data-src="pai-authorities.html">
       <span class="lbl">Authorities</span>
-      <span class="sub">Real-data directory</span>
+      <span class="sub">Public · marketing</span>
+    </button>
+    <button class="tab" data-src="pai-app-authorities.html">
+      <span class="lbl">Authorities · app</span>
+      <span class="sub">Logged-in</span>
+    </button>
+    <button class="tab" data-src="pai-app-news.html">
+      <span class="lbl">News · app</span>
+      <span class="sub">Logged-in</span>
+    </button>
+    <button class="tab" data-src="pai-app-legislation.html">
+      <span class="lbl">Legislation · app</span>
+      <span class="sub">Logged-in</span>
+    </button>
+    <button class="tab" data-src="pai-app-topics.html">
+      <span class="lbl">Topics · app</span>
+      <span class="sub">Juris × topic matrix</span>
+    </button>
+    <button class="tab" data-src="pai-app-glossary.html">
+      <span class="lbl">Glossary · app</span>
+      <span class="sub">Logged-in · 214 defs</span>
+    </button>
+    <button class="tab" data-src="pai-app-juris-uk.html">
+      <span class="lbl">UK · app</span>
+      <span class="sub">Logged-in</span>
+    </button>
+    <button class="tab" data-src="pai-app-juris-california.html">
+      <span class="lbl">CA · app</span>
+      <span class="sub">Logged-in</span>
+    </button>
+    <button class="tab" data-src="pai-app-juris-germany.html">
+      <span class="lbl">DE · app</span>
+      <span class="sub">Logged-in</span>
+    </button>
+    <button class="tab" data-src="pai-app-item-meta-dpc.html">
+      <span class="lbl">News item · app</span>
+      <span class="sub">Article, no paywall</span>
     </button>
     <button class="tab" data-src="pai-legislation.html">
       <span class="lbl">Legislation</span>
@@ -253,5 +440,9 @@
   });
 </script>
 
+<button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+<div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
+<script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
+<div class="nav-scrim" aria-hidden="true"></div>
 </body>
 </html>

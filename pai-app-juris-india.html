@@ -813,8 +813,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           </div>
         </div>
         <div class="kpi-stack">
-          <div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">4</div></div>
-          <div class="kpi"><div class="kpi-label">Regulators</div><div class="kpi-value">2</div></div>
+          <div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">11</div></div>
+          <div class="kpi"><div class="kpi-label">Regulators</div><div class="kpi-value">6</div></div>
           <div class="kpi"><div class="kpi-label">Next activity</div><div class="kpi-sub">MeitY consults on DPDPA implementation rules</div><div class="kpi-value small">25 Mar</div></div>
         </div>
       </div>
@@ -838,42 +838,97 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <section class="impl-section collapsed" id="impl-section">
       <div class="impl-section-head">
         <h2>Implementation status</h2>
-        <div class="impl-sub">Where India stands on each headline instrument</div>
+        <div class="impl-sub">Every instrument the India AI Note relies on — primary law, sectoral, advisory, and proposed</div>
       </div>
       <div class="impl-cards">
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">PRIVACY</div><span class="status-badge partial">● TRACKED</span></div>
-          <div class="impl-name">Digital Personal Data Protection Act 2023</div>
-          <div class="impl-desc">Type: Primary · Status: Enacted (rules pending)</div>
+          <div class="impl-card-top"><div class="impl-domain">PRIVACY</div><span class="status-badge partial">● ENACTED · RULES PENDING</span></div>
+          <div class="impl-name">Digital Personal Data Protection Act 2023 (DPDPA)</div>
+          <div class="impl-desc">Type: Primary · Substantive provisions not yet in force. Will provide the legal basis for claims regarding unauthorised processing of personal data — including for AI training.</div>
         </div>
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">OTHER</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">IT Act 2000</div>
-          <div class="impl-desc">Type: Primary · Status: In Force</div>
+          <div class="impl-card-top"><div class="impl-domain">CYBER</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">Information Technology Act 2000 (IT Act)</div>
+          <div class="impl-desc">Type: Primary · The horizontal cybersecurity / e-commerce / intermediary statute. Used to address content-related AI harms (deepfakes, CSAM, impersonation) and unauthorised access to data via scraping.</div>
         </div>
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge partial">● TRACKED</span></div>
+          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE (FEB 2026)</span></div>
+          <div class="impl-name">IT Rules — Synthetically Generated Information (SGI) Amendment</div>
+          <div class="impl-desc">Type: Primary · Defines SGI; mandates labelling, embedded permanent metadata, takedown for harmful AI content. Significant Social Media Intermediaries (≥5M users) must require user declarations + verify them. Liability triggers on knowing failure.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">CYBER</div><span class="status-badge operational">● IN FORCE (2023)</span></div>
+          <div class="impl-name">Bharatiya Nyaya Sanhita 2023 (BNS)</div>
+          <div class="impl-desc">Type: Primary · India's new criminal code. Used to prosecute AI-enabled offences — obscene content, CSAM, impersonation, deepfake harms — alongside the IT Act.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">IP</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">Copyright Act 1957</div>
+          <div class="impl-desc">Type: Primary · Foundation for claims against AI developers re: unauthorised use of copyrighted works as training data. India has no specific TDM (text & data mining) exception; "fair dealing" is narrow. See <em>ANI v. OpenAI</em> (Delhi HC, CS(COMM) 1028/2024) — landmark training-data infringement test.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge partial">● ADVISORY</span></div>
+          <div class="impl-name">India AI Governance Guidelines (MeitY, Nov 2025)</div>
+          <div class="impl-desc">Type: Guideline · Non-binding but the strongest signal of regulatory direction. Four parts: foundational principles · 6 issue pillars (infrastructure, capacity, policy, risk, accountability, institutions) · phased action plan · techno-legal compliance. Governs <em>applications</em> not technology; empowers sectoral regulators.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">IP</div><span class="status-badge proposed">● PROPOSED · CONSULTATION</span></div>
+          <div class="impl-name">DPIIT Working Paper on Generative AI &amp; Copyright (Part I, Dec 8 2025)</div>
+          <div class="impl-desc">Type: Proposal · Mandatory blanket licensing regime: AI developers automatically licensed for lawfully accessed copyrighted works. Royalties = flat % of <strong>gross global revenue</strong>, collected by new central body (CRCAT). Retroactive — already-commercialised AI may owe past royalties. Burden of proving lawful access on the developer.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE (2024)</span></div>
           <div class="impl-name">IndiaAI Mission</div>
-          <div class="impl-desc">Type: Secondary · Status: Launched 2024</div>
+          <div class="impl-desc">Type: Secondary / programme · Subsidised GPU compute for Indian developers; integration with Digital Public Infrastructure (Aadhaar, UPI). Strategic, not regulatory — sets capacity priorities the Guidelines reference.</div>
         </div>
         <div class="impl-card">
           <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">MeitY Responsible AI Guidelines</div>
-          <div class="impl-desc">Type: Guideline · Status: Published 2024</div>
+          <div class="impl-name">MeitY Responsible AI Guidelines (2024)</div>
+          <div class="impl-desc">Type: Guideline · Earlier non-binding principles for responsible AI development. Superseded in policy weight by the 2025 India AI Governance Guidelines but still cited.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">FINSERV</div><span class="status-badge proposed">● CONSULTATION</span></div>
+          <div class="impl-name">SEBI — Responsible AI in Securities Markets (consultation paper)</div>
+          <div class="impl-desc">Type: Sectoral guidance · Investor protection, fairness, model governance. Regulated entities responsible for outputs of AI/ML tools used in decision-making — material for funds, brokers, market intermediaries operating in India.</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">FINSERV</div><span class="status-badge proposed">● ADVISORY</span></div>
+          <div class="impl-name">RBI Free-AI Report</div>
+          <div class="impl-desc">Type: Sectoral framework · Graded liability, mandatory board-approved AI policies, dedicated AI incident reporting for banks and other RBI-regulated entities.</div>
         </div>
       </div>
-      <button class="impl-see-all" onclick="toggleImpl(this)"><span class="impl-expand-label">See all 4 →</span><span class="impl-collapse-label">Collapse ↑</span></button>
+      <button class="impl-see-all" onclick="toggleImpl(this)"><span class="impl-expand-label">See all 11 →</span><span class="impl-collapse-label">Collapse ↑</span></button>
     </section>
 
     <section class="regulators-section" id="regulators-section"><h2>Regulators &amp; authorities</h2><div class="reg-list-compact">
       <a class="reg-row" href="pai-app-authority-meity">
         <div class="r-scope">IT &amp; Data</div>
-        <div class="r-body"><strong>MeitY</strong> <span class="r-desc">· Oversees DPDPA implementation. Published responsible AI guidelines.</span></div>
+        <div class="r-body"><strong>MeitY</strong> <span class="r-desc">· Ministry of Electronics &amp; Information Technology. Central authority for IT and digital regulation. Oversees the IT Act + IT Rules (incl. the Feb 2026 SGI Amendment) and the rule-making for the DPDPA. Published the India AI Governance Guidelines (Nov 2025) and the earlier Responsible AI Guidelines (2024).</span></div>
         <span class="r-chev">›</span>
       </a>
-      <a class="reg-row" href="pai-app-authority-sebi-rbi-irdai">
-        <div class="r-scope">Sector</div>
-        <div class="r-body"><strong>SEBI / RBI / IRDAI</strong> <span class="r-desc">· Financial regulators addressing AI in financial services, insurance, and securities.</span></div>
+      <a class="reg-row" href="pai-app-authority-cert-in">
+        <div class="r-scope">Cyber</div>
+        <div class="r-body"><strong>CERT-In</strong> <span class="r-desc">· Indian Computer Emergency Response Team — cyber incident response authority constituted under §70B of the IT Act 2000. Receives mandatory incident notifications, including those arising from AI-enabled intrusions, scraping abuses, and deepfake-related cyber harms.</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-sebi">
+        <div class="r-scope">Finserv</div>
+        <div class="r-body"><strong>SEBI</strong> <span class="r-desc">· Securities and Exchange Board of India. Issued a consultation paper on Responsible AI in Securities Markets — investor protection, fairness, model governance. Regulated entities (brokers, funds, market intermediaries) are responsible for outputs of AI/ML tools used in decision-making.</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-rbi">
+        <div class="r-scope">Finserv</div>
+        <div class="r-body"><strong>RBI</strong> <span class="r-desc">· Reserve Bank of India — banking regulator. Issued the Free-AI Report recommending a graded liability framework, mandatory board-approved AI policies, and a dedicated AI incident-reporting mechanism for regulated entities (banks, NBFCs, payment systems).</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-dpiit">
+        <div class="r-scope">IP</div>
+        <div class="r-body"><strong>DPIIT</strong> <span class="r-desc">· Department for Promotion of Industry &amp; Internal Trade. Released the Working Paper on Generative AI &amp; Copyright (Part I, 8 Dec 2025) proposing a mandatory blanket licensing regime for AI training data, with royalties on gross global revenue collected by a new central body (CRCAT).</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-dpdp-board">
+        <div class="r-scope">Privacy</div>
+        <div class="r-body"><strong>DPDP Board</strong> <span class="r-desc">· Data Protection Board of India — statutory regulator to be established under the Digital Personal Data Protection Act 2023. Substantive provisions of the DPDPA are not yet in force; rules and the Board itself remain pending.</span></div>
         <span class="r-chev">›</span>
       </a>
     </div>
