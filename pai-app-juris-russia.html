@@ -540,6 +540,24 @@ body { min-width: 320px !important; }
 .impl-section.collapsed .impl-see-all .impl-collapse-label{display:none}
 .impl-section.collapsed .impl-see-all .impl-expand-label{display:inline}
 
+/* Authorities — card grid (max 18, then See all). Replaces the prior flat list. */
+.authorities-section{margin-top:72px}
+.authorities-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 4px 0}
+.authorities-section .auth-sub{font-size:12.5px;color:#5e6878;margin-bottom:18px}
+.auth-grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px;justify-content:center}
+.auth-card{display:flex;flex-direction:column;padding:14px 16px 12px;border:1px solid #ebeff5;border-radius:10px;background:#fff;text-decoration:none;color:inherit;transition:border-color .12s, box-shadow .12s, background .12s;min-height:96px}
+.auth-card:hover{border-color:#cfe1f6;background:#f8fafc;box-shadow:0 1px 2px rgba(10,23,41,.04)}
+.auth-card .ac-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px}
+.auth-card .ac-type{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5e6878;padding:2px 7px;background:#eff2f7;border-radius:3px}
+.auth-card.is-major .ac-major{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:9px;font-weight:700;letter-spacing:.1em;color:#905200;background:#fbeecd;padding:2px 6px;border-radius:3px}
+.auth-card .ac-name{font-size:13.5px;font-weight:700;color:#0a1729;line-height:1.3;margin-bottom:6px;flex-grow:1}
+.auth-card .ac-foot{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#014486;display:flex;align-items:center;gap:4px}
+.auth-card:hover .ac-foot{color:#0176d3}
+.auth-see-all{display:inline-flex;align-items:center;gap:6px;margin-top:22px;padding:10px 16px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.08em;color:#014486;background:#f6f7f9;border:1px solid #ebeff5;border-radius:6px;text-transform:uppercase;text-decoration:none}
+.auth-see-all:hover{background:#e3effc;border-color:#cfe1f6;color:#0176d3}
+@media (max-width: 900px){ .auth-grid{grid-template-columns:repeat(2, minmax(0,1fr))} }
+@media (max-width: 540px){ .auth-grid{grid-template-columns:1fr} }
+
 /* Regulators — compact one-line rows, whole row is a link */
 .regulators-section{margin-top:72px}
 .regulators-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 16px 0}
@@ -781,7 +799,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="ps-current">Russia</span>
         </span>
         <span class="ps-sep">·</span>
-        <span class="ps-scope-chip">UNITED KINGDOM · UK</span>
+        <span class="ps-scope-chip">EUROPE · RU</span>
         <span class="ps-sep">·</span>
         <span class="ps-ok">Coverage engine operational</span>
       </div>
@@ -794,53 +812,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <h1 class="page-title">Russia</h1>
 
         <p class="page-sub">A living snapshot of AI, privacy and cybersecurity regulation in Russia — what's in force, who enforces it, and what&rsquo;s moving.</p>
-        <div class="pulse-line"><span class="pulse-dot"></span><span class="pulse-next">Next · ICO publishes updated ADM guidance 31 Mar</span><span class="pulse-sep">·</span><span>13 captures this month</span><span class="pulse-sep">·</span><span>4 regulators on-watch</span></div>
       </div>
       <div class="ph-map" aria-hidden="true"><svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg></div>
     </div>
 
-    <section>
-      <div class="law-section">
-        <div class="law-section-head">
-          <h2>Regulatory snapshot</h2>
-          <div class="tap-hint">Tap a domain to expand</div>
-        </div>
-        <div class="domain-rows">
-    
-          <div class="domain-group" data-d="ai">
-            <div class="domain-row" onclick="toggleDomain(this.parentElement)">
-              <div class="dr-label">AI</div>
-              <div class="dr-content"><strong>AI White Paper Principles</strong> <span class="muted">· Published 2023</span></div>
-              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-next">Next <b>31 Mar</b></span></div>
-              <div class="dr-chev">▾</div>
-            </div>
-            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">AI White Paper Principles</a> <span class="dr-muted">· Published 2023</span></li><li><a href="#impl-section">ICO AI &amp; Data Protection Guidance</a> <span class="dr-muted">· In Force</span></li><li><a href="#impl-section">FCA AI in Financial Services Guidance</a> <span class="dr-muted">· Final 2026</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li class="dr-muted">See the full regulators list below.</li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">31 Mar</span> ICO publishes updated ADM guidance</li><li><span class="dr-muted">27 Mar</span> DSIT expands AI Safety Institute mandate</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=united-kingdom&amp;domain=ai">Filter archive by AI →</a></div></div>
-          </div>
-          <div class="domain-group" data-d="privacy">
-            <div class="domain-row" onclick="toggleDomain(this.parentElement)">
-              <div class="dr-label">PRIVACY</div>
-              <div class="dr-content"><strong>UK GDPR &amp; Data Protection Act 2018</strong> <span class="muted">· In Force</span></div>
-              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-reg">ICO</span></div>
-              <div class="dr-chev">▾</div>
-            </div>
-            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">UK GDPR &amp; Data Protection Act 2018</a> <span class="dr-muted">· In Force</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li><a href="#regulators-section">ICO</a> <span class="dr-muted">· Data Protection</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">31 Mar</span> ICO publishes updated ADM guidance</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=united-kingdom&amp;domain=privacy">Filter archive by PRIVACY →</a></div></div>
-          </div>
-          <div class="domain-group empty" data-d="cyber">
-            <div class="domain-row">
-              <div class="dr-label">CYBER</div>
-              <div class="dr-content">Early coverage — no tracked instrument yet</div>
-              <div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div>
-              <div class="dr-chev"></div>
-            </div>
-          </div>
-        </div>
-        <div class="kpi-stack">
-          <div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">7</div></div>
-          <div class="kpi"><div class="kpi-label">Regulators</div><div class="kpi-value">4</div></div>
-          <div class="kpi"><div class="kpi-label">Next activity</div><div class="kpi-sub">ICO publishes updated ADM guidance</div><div class="kpi-value small">31 Mar</div></div>
-        </div>
-      </div>
-    </section>
+    <section><div class="law-section"><div class="law-section-head"><h2>Regulatory snapshot</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group empty" data-d="ai"><div class="domain-row"><div class="dr-label">AI</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">0</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">0/3</div></div></div></div></section>
     
 <section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
       <div class="latest-card" style="opacity:0.7;color:#5e6878">No recent activity recorded yet.</div>
@@ -848,162 +824,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 <a class="latest-see-all" href="pai-app-news?juris=russia">See all Russia items →</a>
 </section>
 
-    <section class="impl-section collapsed" id="impl-section">
-      <div class="impl-section-head">
-        <h2>Implementation status</h2>
-        <div class="impl-sub">Where United Kingdom stands on each headline instrument</div>
-      </div>
-      <div class="impl-cards">
-        <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">PRIVACY</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">UK GDPR &amp; Data Protection Act 2018</div>
-          <div class="impl-desc">Type: Primary · Status: In Force</div>
-        </div>
-        <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">CROSS</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">Online Safety Act 2023</div>
-          <div class="impl-desc">Type: Primary · Status: In Force</div>
-        </div>
-        <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">CROSS</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">Digital Markets, Competition &amp; Consumers Act 2024</div>
-          <div class="impl-desc">Type: Primary · Status: In Force</div>
-        </div>
-        <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">OTHER</div><span class="status-badge partial">● IN PROGRESS</span></div>
-          <div class="impl-name">Product Regulations &amp; Metrology Bill</div>
-          <div class="impl-desc">Type: Secondary · Status: In Progress</div>
-        </div>
-        <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">AI White Paper Principles</div>
-          <div class="impl-desc">Type: Secondary · Status: Published 2023</div>
-        </div>
-        <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">ICO AI &amp; Data Protection Guidance</div>
-          <div class="impl-desc">Type: Guideline · Status: In Force</div>
-        </div>
-      </div>
-      <button class="impl-see-all" onclick="toggleImpl(this)"><span class="impl-expand-label">See all 6 →</span><span class="impl-collapse-label">Collapse ↑</span></button>
-    </section>
+    <section class="impl-section" id="impl-section"><div class="impl-section-head"><h2>Implementation status</h2><div class="impl-sub">Coverage in progress for Russia.</div></div><div class="impl-cards"><div class="empty-msg">Legislation tracking in progress — headline instruments not yet mapped.</div></div></section>
 
-    <section class="regulators-section" id="regulators-section"><h2>Regulators &amp; authorities</h2><div class="reg-list-compact">
-      <a class="reg-row" href="pai-app-authority-national-computer-incident-response-team-russia">
-        <div class="r-scope">Cyber agency</div>
-        <div class="r-body"><strong>National Computer Incident Response Team (Russia)</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-federal-antimonopoly-service-russia">
-        <div class="r-scope">Competition authority</div>
-        <div class="r-body"><strong>Federal Antimonopoly Service (Russia)</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-central-bank-of-russia">
-        <div class="r-scope">Financial regulator</div>
-        <div class="r-body"><strong>Central Bank of Russia</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-federal-antimonopoly-service">
-        <div class="r-scope">Competition authority</div>
-        <div class="r-body"><strong>Federal Antimonopoly Service</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-federal-security-service-fsb-8th-centre">
-        <div class="r-scope">Cyber agency</div>
-        <div class="r-body"><strong>Federal Security Service (FSB) - 8th Centre</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-federation-council">
-        <div class="r-scope">Legislature</div>
-        <div class="r-body"><strong>Federation Council</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-ministry-of-digital-development-communications-and-mass-media">
-        <div class="r-scope">Government agency</div>
-        <div class="r-body"><strong>Ministry of Digital Development, Communications and Mass Media</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-fstec">
-        <div class="r-scope">Cyber agency</div>
-        <div class="r-body"><strong>FSTEC</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-constitutional-court-of-russia">
-        <div class="r-scope">Court</div>
-        <div class="r-body"><strong>Constitutional Court of Russia</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-roskomnadzor">
-        <div class="r-scope">DPA</div>
-        <div class="r-body"><strong>Roskomnadzor</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-supreme-court-of-russia">
-        <div class="r-scope">Court</div>
-        <div class="r-body"><strong>Supreme Court of Russia</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-federal-assembly-of-russia">
-        <div class="r-scope">Legislature</div>
-        <div class="r-body"><strong>Federal Assembly of Russia</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-      <a class="reg-row" href="pai-app-authority-state-duma">
-        <div class="r-scope">Legislature</div>
-        <div class="r-body"><strong>State Duma</strong> <span class="r-desc">—</span></div>
-        <span class="r-chev">›</span>
-      </a>
-    </div>
-    <a class="reg-see-all" href="pai-app-authorities?juris=russia">See all Russia authorities →</a>
-    </section>
+<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">13 of 13 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card is-major" href="pai-app-authority-fstec"><div class="ac-head"><span class="ac-type">Cyber agency</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">FSTEC</div><div class="ac-foot">View authority →</div></a><a class="auth-card is-major" href="pai-app-authority-federal-security-service-fsb-8th-centre"><div class="ac-head"><span class="ac-type">Cyber agency</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">Federal Security Service (FSB) - 8th Centre</div><div class="ac-foot">View authority →</div></a><a class="auth-card is-major" href="pai-app-authority-national-computer-incident-response-team-russia"><div class="ac-head"><span class="ac-type">Cyber agency</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">National Computer Incident Response Team (Russia)</div><div class="ac-foot">View authority →</div></a><a class="auth-card is-major" href="pai-app-authority-roskomnadzor"><div class="ac-head"><span class="ac-type">DPA</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">Roskomnadzor</div><div class="ac-foot">View authority →</div></a><a class="auth-card is-major" href="pai-app-authority-ministry-of-digital-development-communications-and-mass-media"><div class="ac-head"><span class="ac-type">Government agency</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">Ministry of Digital Development, Communications and Mass Media</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-central-bank-of-russia"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Central Bank of Russia</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-federal-antimonopoly-service"><div class="ac-head"><span class="ac-type">Competition authority</span></div><div class="ac-name">Federal Antimonopoly Service</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-federal-antimonopoly-service-russia"><div class="ac-head"><span class="ac-type">Competition authority</span></div><div class="ac-name">Federal Antimonopoly Service (Russia)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-constitutional-court-of-russia"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Constitutional Court of Russia</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-federal-assembly-of-russia"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">Federal Assembly of Russia</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-federation-council"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">Federation Council</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-state-duma"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">State Duma</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-supreme-court-of-russia"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Supreme Court of Russia</div><div class="ac-foot">View authority →</div></a></div></section>
 
-<section class="guidance-section" id="guidance-section">
-  <div class="gs-head">
-    <div>
-      <h2>Practical guidance</h2>
-      <div class="gs-sub">Curated guidance from UK regulators, monitored daily for changes. Click through to each authority for topic-level detail.</div>
-    </div>
-  </div>
-  <div class="gs-grid">
-    <a class="gs-card" href="pai-app-authority-ico#guidance">
-      <div class="gs-card-head">
-        <span class="gs-badge ico">ICO</span>
-        <span class="gs-status live">● Curated</span>
-      </div>
-      <div class="gs-card-name">Information Commissioner's Office</div>
-      <div class="gs-card-meta">8 topics · 328 pages · AI, lawful basis, individual rights, transfers, security, employment, children's information</div>
-      <div class="gs-card-foot">Browse guidance →</div>
-    </a>
-    <a class="gs-card" href="pai-app-authority-fca#guidance">
-      <div class="gs-card-head">
-        <span class="gs-badge fca">FCA</span>
-        <span class="gs-status">● Tracked</span>
-      </div>
-      <div class="gs-card-name">Financial Conduct Authority</div>
-      <div class="gs-card-meta">AI in financial services, algorithmic trading, automated advice, consumer credit ML</div>
-      <div class="gs-card-foot">View authority →</div>
-    </a>
-    <a class="gs-card" href="pai-app-authority-cma#guidance">
-      <div class="gs-card-head">
-        <span class="gs-badge cma">CMA</span>
-        <span class="gs-status">● Tracked</span>
-      </div>
-      <div class="gs-card-name">Competition &amp; Markets Authority</div>
-      <div class="gs-card-meta">Foundation models review, compute concentration, AI mergers, Digital Markets Act</div>
-      <div class="gs-card-foot">View authority →</div>
-    </a>
-    <a class="gs-card" href="pai-app-authority-ofcom#guidance">
-      <div class="gs-card-head">
-        <span class="gs-badge ofcom">OFCOM</span>
-        <span class="gs-status">● Tracked</span>
-      </div>
-      <div class="gs-card-name">Office of Communications</div>
-      <div class="gs-card-meta">Online Safety Act, content moderation, recommender systems, age assurance</div>
-      <div class="gs-card-foot">View authority →</div>
-    </a>
-  </div>
-</section>
+<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for Russia — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-fstec"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">FSTEC</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-federal-security-service-fsb-8th-centre"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Federal Security Service (FSB) - 8th Centre</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-national-computer-incident-response-team-russia"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">National Computer Incident Response Team (Russia)</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-roskomnadzor"><div class="gs-card-head"><span class="gs-badge">DPA</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Roskomnadzor</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
 
 <section class="stream-section"><h2 class="sr-h" style="font-size:18px;margin:0 0 14px;letter-spacing:-0.01em;color:#0a1729">Activity stream</h2><div style="padding:14px 0;color:#5e6878;font-size:13px">No tracked activity yet for Russia.</div></section>
 
@@ -1034,7 +859,7 @@ window.addEventListener('load', function(){
   var svg = document.getElementById('country-svg'); if(!svg) return;
   if(typeof d3 === 'undefined' || typeof topojson === 'undefined') return;
   var w = 220, h = 260;
-  var countryIso = "826";
+  var countryIso = "643";
 
   // Countries that get a cutaway inset for outlying territories. Label only —
   // the split itself is done by polygon area, not bbox.
@@ -1133,7 +958,7 @@ window.addEventListener('load', function(){
   </div>
 </div>
 
-<div class="archetype-badge">UNITED KINGDOM · UK</div>
+<div class="archetype-badge">EUROPE · RU</div>
 
 
 <!-- Mobile nav shim -->

@@ -523,7 +523,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <div class="sidebar-regions-zone">
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
-      <a class="sidebar-nav-item" href="pai-app-topics" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Topics</span></a>
+      <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item active" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
@@ -583,7 +583,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
       <div class="facet-search-wrap">
         <span class="facet-search-ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-        <input class="facet-search" placeholder="Search instruments…">
+        <input class="facet-search" placeholder="Search instruments…" oninput="fpApply()">
       </div>
 
       <div class="facet-group">
@@ -698,11 +698,30 @@ function fpApply(){
   const onStatuses=[...document.querySelectorAll('.facet-opt[data-facet="status"].on')].map(e=>e.dataset.value);
   const onDomains=[...document.querySelectorAll('.facet-opt[data-facet="domain"].on')].map(e=>e.dataset.value);
   const landmarkOn=document.querySelector('.facet-opt[data-facet="landmark"].on')!==null;
+  // Activity is single-select via .facet-radio (default 'all'). Generator
+  // tags rows with data-activity in {7d, 30d, all}; 30d filter also matches
+  // 7d-tagged rows since 7d is a strict subset.
+  const activityRadio=document.querySelector('.facet-radio[data-facet="activity"].on');
+  const onActivity=activityRadio?activityRadio.dataset.value:'all';
+  // Free-text search across title / jurisdiction / reference / summary / iso.
+  // Token-AND: every whitespace-separated term must match data-search.
+  const searchInput=document.querySelector('.facet-search');
+  const searchTokens=(searchInput&&searchInput.value||'').toLowerCase().trim().split(/\s+/).filter(Boolean);
   let shown=0;
   document.querySelectorAll('.dg-row').forEach(row=>{
     const r=row.dataset.region||'',s=row.dataset.status||'',d=row.dataset.domain||'',w=row.dataset.watchlist==='on';
     const lm=row.dataset.landmark==='1';
-    const ok=(onRegions.length===0||onRegions.includes(r))&&(onStatuses.length===0||onStatuses.includes(s))&&(onDomains.length===0||onDomains.includes(d))&&(!watchMine||w)&&(!landmarkOn||lm);
+    // data-domain is comma-joined for multi-domain rows; split before include-check.
+    const rowDomains=d?d.split(','):[];
+    const domainOk=onDomains.length===0||onDomains.some(x=>rowDomains.includes(x));
+    // Activity: 'all' = pass; '30d' = require last_move_recent flag (data-activity==='30d');
+    // '7d' = no data yet, will filter to zero.
+    const a=row.dataset.activity||'all';
+    const activityOk=(onActivity==='all')||(a===onActivity)||(onActivity==='30d'&&a==='7d');
+    // Search: data-search holds lowercased haystack; token-AND.
+    const hay=row.dataset.search||'';
+    const searchOk=searchTokens.length===0||searchTokens.every(t=>hay.includes(t));
+    const ok=(onRegions.length===0||onRegions.includes(r))&&(onStatuses.length===0||onStatuses.includes(s))&&domainOk&&(!watchMine||w)&&(!landmarkOn||lm)&&activityOk&&searchOk;
     row.style.display=ok?'':'none';
     if(ok)shown++;
   });
@@ -712,6 +731,15 @@ function fpApply(){
 }
 function fpRemoveChip(g,v){const el=document.querySelector('.facet-opt[data-facet="'+g+'"][data-value="'+v+'"]');if(el)el.classList.remove('on');fpApply()}
 function dgStar(e,btn){e.stopPropagation();btn.classList.toggle('on');const row=btn.closest('.dg-row');if(btn.classList.contains('on')){row.classList.add('watched');row.dataset.watchlist='on'}else{row.classList.remove('watched');row.dataset.watchlist='off'}}
+function dgNav(row,e){
+  // Skip nav if the user clicked an interactive control inside the row.
+  if(e.target.closest('.dg-star,.dg-source,a,button,input'))return;
+  const slug=row.dataset.slug;
+  if(!slug)return;
+  // Match the URL-without-.html pattern used elsewhere on the site (memory:
+  // pai-juris pages use slug-only URLs for SEO and Cloudflare routing).
+  window.location.href='pai-app-leg-'+slug;
+}
 
 /* ============ LIVE LEGISLATION DATA ============ */
 const STATUS_DISPLAY={'proposed':'Proposed','in-progress':'In progress','consultation':'Consultation','enacted':'Enacted','in-force':'In force','lapsed':'Lapsed'};
@@ -721,7 +749,9 @@ function renderLegislationRow(r){
   const statusCls=r.status||'in-progress';
   const statusTxt=STATUS_DISPLAY[statusCls]||statusCls;
   const domains=(r.domain||[]).map(d=>'<span class="dg-domain-chip '+d+'">'+escHtml(DOMAIN_DISPLAY[d]||d)+'</span>').join('');
-  const activity=r.last_move_recent?'30d':'all';
+  // Tightest matching window wins: 7d > 30d > all. Generator emits both
+  // last_move_7d and last_move_recent (=30d); presence of 7d implies 30d.
+  const activity=r.last_move_7d?'7d':(r.last_move_recent?'30d':'all');
   const ref=r.reference?'<span class="ref">'+escHtml(r.reference)+'</span>':'';
   const lastCls=r.last_move_recent?'dg-last recent':'dg-last';
   const inForce=r.date_in_force_display||'—';
@@ -731,11 +761,19 @@ function renderLegislationRow(r){
   const srcIcon=srcUrl
     ?'<a class="dg-source" href="'+escHtml(srcUrl)+'" target="_blank" rel="noopener" title="Open original source" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg></a>'
     :'<span class="dg-source disabled" title="No source URL on file"><svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg></span>';
+  // Concatenated lowercased text the search box matches against. Keep in
+  // sync with the search-token loop inside fpApply.
+  const searchHay = [r.title, r.jurisdiction_name, r.reference, r.summary, r.iso]
+                      .filter(Boolean).join(' ').toLowerCase();
+  // Per-law page slug (from generator). When present, row is clickable and
+  // navigates to pai-app-leg-{slug} via dgNav (which skips inner controls).
+  const slugAttr = r.slug ? ' data-slug="'+escHtml(r.slug)+'" onclick="dgNav(this,event)" style="cursor:pointer"' : '';
   return (
     '<div class="dg-row" data-region="'+escHtml(r.region)+'" data-status="'+escHtml(r.status)+'"' +
     ' data-domain="'+(r.domain||[]).join(',')+'" data-activity="'+activity+'"' +
     ' data-landmark="'+(r.featured?'1':'0')+'"' +
-    ' data-source="'+escHtml(r.source_url)+'" data-summary="'+escHtml(r.summary)+'">' +
+    ' data-search="'+escHtml(searchHay)+'"' +
+    ' data-source="'+escHtml(r.source_url)+'" data-summary="'+escHtml(r.summary)+'"'+slugAttr+'>' +
       '<div class="dg-iso">'+escHtml(r.iso)+'</div>' +
       '<div class="dg-name-wrap"><div class="dg-name"><span class="full">'+escHtml(r.title)+landmark+'</span>'+ref+'</div></div>' +
       '<div class="dg-country">'+escHtml(r.jurisdiction_name)+'</div>' +
@@ -1614,7 +1652,7 @@ loadLegislation();
       title:'Switch jurisdiction lens',
       body:'Pick any country, state, or bloc. Everything below — alerts, consultations, enforcement — re-scopes to it.',
       placement:'bottom' },
-    { key:'topics', selector:'a.sidebar-nav-item[href="pai-app-topics"], .sidebar-nav-item[data-pai-tour="topics"]',
+    { key:'topics', selector:'a.sidebar-nav-item[href="pai-app-tables"], .sidebar-nav-item[data-pai-tour="topics"]',
       title:'The topic lens',
       body:'Cut the same surface by subject — privacy, AI, cybersecurity, IP, standards. Useful when a topic spans twenty jurisdictions at once.',
       placement:'right' },
