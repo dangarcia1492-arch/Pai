@@ -558,6 +558,29 @@ body { min-width: 320px !important; }
 .reg-see-all{display:inline-flex;align-items:center;gap:6px;margin-top:22px;padding:10px 16px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.08em;color:#014486;background:#f6f7f9;border:1px solid #ebeff5;border-radius:6px;text-transform:uppercase;text-decoration:none}
 .reg-see-all:hover{background:#e3effc;border-color:#cfe1f6;color:#0176d3}
 
+/* Practical guidance summary — slim per-regulator cards linking to authority pages */
+.guidance-section{margin-top:72px}
+.gs-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+.gs-head h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0}
+.gs-sub{font-size:12.5px;color:#5e6878;margin-top:4px;line-height:1.5}
+.gs-grid{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:12px}
+.gs-card{display:flex;flex-direction:column;padding:16px 16px 14px;border:1px solid #ebeff5;border-radius:10px;background:#fff;text-decoration:none;color:inherit;transition:border-color .12s, box-shadow .12s, background .12s}
+.gs-card:hover{border-color:#cfe1f6;background:#f8fafc;box-shadow:0 1px 2px rgba(10,23,41,.04)}
+.gs-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.gs-badge{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;padding:3px 8px;border-radius:4px;background:#eff2f7;color:#0a1729}
+.gs-badge.ico{background:#e3effc;color:#014486}
+.gs-badge.fca{background:#e5f3e9;color:#2e844a}
+.gs-badge.cma{background:#fbeecd;color:#905200}
+.gs-badge.ofcom{background:#f0e6fa;color:#6b2fb0}
+.gs-status{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5e6878}
+.gs-status.live{color:#2e844a}
+.gs-card-name{font-size:13.5px;font-weight:700;color:#0a1729;line-height:1.3;margin-bottom:5px}
+.gs-card-meta{font-size:12px;color:#5e6878;line-height:1.45;margin-bottom:14px;flex-grow:1}
+.gs-card-foot{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#014486}
+.gs-card:hover .gs-card-foot{color:#0176d3}
+@media (max-width: 1100px) { .gs-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 640px) { .gs-grid { grid-template-columns: 1fr; } }
+
 /* Stream — card grid (fills width, no ghost borders) */
 .stream-section{margin-top:72px}
 .stream-tabs{display:flex;gap:0;border-bottom:1px solid #dbe1ea;margin-bottom:18px;flex-wrap:wrap}
@@ -715,7 +738,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <div class="sidebar-regions-zone">
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-authorities"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
-      <a class="sidebar-nav-item" href="pai-app-topics" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Topics</span></a>
+      <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
@@ -758,22 +781,22 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="ps-current">European Union</span>
         </span>
         <span class="ps-sep">·</span>
-        <span class="ps-scope-chip">SUPRANATIONAL UNION · EU</span>
+        <span class="ps-scope-chip">UNITED KINGDOM · UK</span>
         <span class="ps-sep">·</span>
         <span class="ps-ok">Coverage engine operational</span>
       </div>
     </div>
 
     <!-- PAGE HEAD -->
-    <div class="page-head single-col">
+    <div class="page-head">
       <div class="ph-title">
-        <div class="page-eyebrow">SUPRANATIONAL UNION · EU</div>
+        <div class="page-eyebrow">EUROPEAN UNION · EU</div>
         <h1 class="page-title">European Union</h1>
-        <p class="page-sub" style="font-style:italic">Union européenne</p>
+
         <p class="page-sub">A living snapshot of AI, privacy and cybersecurity regulation in European Union — what's in force, who enforces it, and what&rsquo;s moving.</p>
-        <div class="pulse-line"><span class="pulse-dot"></span><span class="pulse-next">Next · EDPB adopts AI model training guidelines 29 Mar</span><span class="pulse-sep">·</span><span>8 captures this month</span><span class="pulse-sep">·</span><span>3 regulators on-watch</span></div>
+        <div class="pulse-line"><span class="pulse-dot"></span><span class="pulse-next">Next · ICO publishes updated ADM guidance 31 Mar</span><span class="pulse-sep">·</span><span>13 captures this month</span><span class="pulse-sep">·</span><span>4 regulators on-watch</span></div>
       </div>
-      
+      <div class="ph-map" aria-hidden="true"><svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg></div>
     </div>
 
     <section>
@@ -787,202 +810,430 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <div class="domain-group" data-d="ai">
             <div class="domain-row" onclick="toggleDomain(this.parentElement)">
               <div class="dr-label">AI</div>
-              <div class="dr-content"><strong>EU AI Act</strong> <span class="muted">· In Force (Aug 2024)</span></div>
-              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-reg">AI Office</span><span class="dr-dot"></span><span class="dr-next">Next <b>29 Mar</b></span></div>
+              <div class="dr-content"><strong>AI White Paper Principles</strong> <span class="muted">· Published 2023</span></div>
+              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-next">Next <b>31 Mar</b></span></div>
               <div class="dr-chev">▾</div>
             </div>
-            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">EU AI Act</a> <span class="dr-muted">· In Force (Aug 2024)</span></li><li><a href="#impl-section">AI Liability Directive</a> <span class="dr-muted">· Dropped</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li><a href="#regulators-section">AI Office</a> <span class="dr-muted">· AI Regulation</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">29 Mar</span> EDPB adopts AI model training guidelines</li><li><span class="dr-muted">24 Mar</span> AI Office publishes GPAI code of practice</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=european-union&amp;domain=ai">Filter archive by AI →</a></div></div>
+            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">AI White Paper Principles</a> <span class="dr-muted">· Published 2023</span></li><li><a href="#impl-section">ICO AI &amp; Data Protection Guidance</a> <span class="dr-muted">· In Force</span></li><li><a href="#impl-section">FCA AI in Financial Services Guidance</a> <span class="dr-muted">· Final 2026</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li class="dr-muted">See the full regulators list below.</li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">31 Mar</span> ICO publishes updated ADM guidance</li><li><span class="dr-muted">27 Mar</span> DSIT expands AI Safety Institute mandate</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=united-kingdom&amp;domain=ai">Filter archive by AI →</a></div></div>
           </div>
           <div class="domain-group" data-d="privacy">
             <div class="domain-row" onclick="toggleDomain(this.parentElement)">
               <div class="dr-label">PRIVACY</div>
-              <div class="dr-content"><strong>GDPR</strong> <span class="muted">· In Force</span></div>
-              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-reg">EDPB / National DPAs</span></div>
+              <div class="dr-content"><strong>UK GDPR &amp; Data Protection Act 2018</strong> <span class="muted">· In Force</span></div>
+              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-reg">ICO</span></div>
               <div class="dr-chev">▾</div>
             </div>
-            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">GDPR</a> <span class="dr-muted">· In Force</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li><a href="#regulators-section">EDPB / National DPAs</a> <span class="dr-muted">· Data Protection</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li class="dr-muted">No recent domain-specific items.</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=european-union&amp;domain=privacy">Filter archive by PRIVACY →</a></div></div>
+            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">UK GDPR &amp; Data Protection Act 2018</a> <span class="dr-muted">· In Force</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li><a href="#regulators-section">ICO</a> <span class="dr-muted">· Data Protection</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">31 Mar</span> ICO publishes updated ADM guidance</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=united-kingdom&amp;domain=privacy">Filter archive by PRIVACY →</a></div></div>
           </div>
-          <div class="domain-group" data-d="cyber">
-            <div class="domain-row" onclick="toggleDomain(this.parentElement)">
+          <div class="domain-group empty" data-d="cyber">
+            <div class="domain-row">
               <div class="dr-label">CYBER</div>
-              <div class="dr-content"><strong>Cyber Resilience Act</strong> <span class="muted">· In Force</span></div>
-              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span></div>
-              <div class="dr-chev">▾</div>
+              <div class="dr-content">Early coverage — no tracked instrument yet</div>
+              <div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div>
+              <div class="dr-chev"></div>
             </div>
-            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">Cyber Resilience Act</a> <span class="dr-muted">· In Force</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li class="dr-muted">See the full regulators list below.</li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li class="dr-muted">No recent domain-specific items.</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=european-union&amp;domain=cyber">Filter archive by CYBER →</a></div></div>
           </div>
         </div>
         <div class="kpi-stack">
-          <div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">8</div></div>
-          <div class="kpi"><div class="kpi-label">Regulators</div><div class="kpi-value">3</div></div>
-          <div class="kpi"><div class="kpi-label">Next activity</div><div class="kpi-sub">EDPB adopts AI model training guidelines</div><div class="kpi-value small">29 Mar</div></div>
+          <div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">7</div></div>
+          <div class="kpi"><div class="kpi-label">Regulators</div><div class="kpi-value">4</div></div>
+          <div class="kpi"><div class="kpi-label">Next activity</div><div class="kpi-sub">ICO publishes updated ADM guidance</div><div class="kpi-value small">31 Mar</div></div>
         </div>
       </div>
     </section>
     
-<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">3 most recent · 8 this month</div></div><div class="latest-grid">
-<a class="latest-card" href="pai-app-news?juris=european-union">
-<div class="lc-meta"><span class="lc-date">29 Mar</span><span class="lc-type">Update</span></div>
-<div class="lc-h">EDPB adopts AI model training guidelines</div>
-<div class="lc-p">Legitimate interest for training data...</div>
-</a>
-<a class="latest-card" href="pai-app-news?juris=european-union">
-<div class="lc-meta"><span class="lc-date">24 Mar</span><span class="lc-type">Update</span></div>
-<div class="lc-h">AI Office publishes GPAI code of practice</div>
-<div class="lc-p">Transparency and safety requirements...</div>
-</a>
-<a class="latest-card" href="pai-app-news?juris=european-union">
-<div class="lc-meta"><span class="lc-date">20 Mar</span><span class="lc-type">Update</span></div>
-<div class="lc-h">High-risk AI deadline approaching</div>
-<div class="lc-p">Aug 2026 compliance deadline...</div>
-</a>
+<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">3 most recent · 120 approved</div></div><div class="latest-grid">
+      <a class="latest-card" href="pai-app-news?juris=european-union">
+        <div class="lc-meta"><span class="lc-date">28 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">Commission services and EDPB will start joint work on guidance on the interplay between EU competition law and data protection law</div>
+        <div class="lc-p">The Commission services and the European Data Protection Board (EDPB) have agreed to work …</div>
+      </a>
+      <a class="latest-card" href="pai-app-news?juris=european-union">
+        <div class="lc-meta"><span class="lc-date">28 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">AI: press conference debrief on the negotiations to update EU rules | News | European Parliament</div>
+        <div class="lc-p">On Wednesday at 11.00, lead MEPs Arba Kokalari and Michael McNamara will hold a press conf…</div>
+      </a>
+      <a class="latest-card" href="pai-app-news?juris=european-union">
+        <div class="lc-meta"><span class="lc-date">27 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">Opinion 9/2026 on the draft decision of the Dutch Supervisory Authority regarding the Controller Binding Corporate Rules of the Jacobs Douwe</div>
+        <div class="lc-p">Opinion 9/2026 on the draft decision of the Dutch Supervisory Authority regarding the Cont…</div>
+      </a>
 </div>
-<a class="latest-see-all" href="pai-app-news?juris=european-union">See all 8 European Union items →</a>
+<a class="latest-see-all" href="pai-app-news?juris=european-union">See all European Union items →</a>
 </section>
 
     <section class="impl-section collapsed" id="impl-section">
       <div class="impl-section-head">
         <h2>Implementation status</h2>
-        <div class="impl-sub">Where European Union stands on each headline instrument</div>
+        <div class="impl-sub">Where United Kingdom stands on each headline instrument</div>
       </div>
       <div class="impl-cards">
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">EU AI Act</div>
-          <div class="impl-desc">Type: Primary · Status: In Force (Aug 2024)</div>
-        </div>
-        <div class="impl-card">
           <div class="impl-card-top"><div class="impl-domain">PRIVACY</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">GDPR</div>
-          <div class="impl-desc">Type: Primary · Status: In Force</div>
-        </div>
-        <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">OTHER</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">Digital Services Act</div>
+          <div class="impl-name">UK GDPR &amp; Data Protection Act 2018</div>
           <div class="impl-desc">Type: Primary · Status: In Force</div>
         </div>
         <div class="impl-card">
           <div class="impl-card-top"><div class="impl-domain">CROSS</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">Digital Markets Act</div>
+          <div class="impl-name">Online Safety Act 2023</div>
           <div class="impl-desc">Type: Primary · Status: In Force</div>
         </div>
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge partial">● TRACKED</span></div>
-          <div class="impl-name">AI Liability Directive</div>
-          <div class="impl-desc">Type: Secondary · Status: Dropped</div>
+          <div class="impl-card-top"><div class="impl-domain">CROSS</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">Digital Markets, Competition &amp; Consumers Act 2024</div>
+          <div class="impl-desc">Type: Primary · Status: In Force</div>
         </div>
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">OTHER</div><span class="status-badge partial">● TRACKED</span></div>
-          <div class="impl-name">Product Liability Directive (revised)</div>
-          <div class="impl-desc">Type: Primary · Status: Enacted</div>
+          <div class="impl-card-top"><div class="impl-domain">OTHER</div><span class="status-badge partial">● IN PROGRESS</span></div>
+          <div class="impl-name">Product Regulations &amp; Metrology Bill</div>
+          <div class="impl-desc">Type: Secondary · Status: In Progress</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">AI White Paper Principles</div>
+          <div class="impl-desc">Type: Secondary · Status: Published 2023</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">ICO AI &amp; Data Protection Guidance</div>
+          <div class="impl-desc">Type: Guideline · Status: In Force</div>
         </div>
       </div>
       <button class="impl-see-all" onclick="toggleImpl(this)"><span class="impl-expand-label">See all 6 →</span><span class="impl-collapse-label">Collapse ↑</span></button>
     </section>
 
     <section class="regulators-section" id="regulators-section"><h2>Regulators &amp; authorities</h2><div class="reg-list-compact">
-      <a class="reg-row" href="pai-app-authority-ai-office">
-        <div class="r-scope">AI Regulation</div>
-        <div class="r-body"><strong>AI Office</strong> <span class="r-desc">· Central oversight of EU AI Act. Coordinates with national authorities. GPAI codes of practice.</span></div>
+      <a class="reg-row" href="pai-app-authority-european-food-safety-authority">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Food Safety Authority</strong> <span class="r-desc">—</span></div>
         <span class="r-chev">›</span>
       </a>
-      <a class="reg-row" href="pai-app-authority-edpb-national-dpas">
-        <div class="r-scope">Data Protection</div>
-        <div class="r-body"><strong>EDPB / National DPAs</strong> <span class="r-desc">· GDPR enforcement across 27 member states. AI model training guidelines.</span></div>
+      <a class="reg-row" href="pai-app-authority-european-aviation-safety-agency">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Aviation Safety Agency</strong> <span class="r-desc">—</span></div>
         <span class="r-chev">›</span>
       </a>
-      <a class="reg-row" href="pai-app-authority-dg-connect">
-        <div class="r-scope">Digital Markets</div>
-        <div class="r-body"><strong>DG CONNECT</strong> <span class="r-desc">· DSA and DMA enforcement. AI implications for platform regulation.</span></div>
+      <a class="reg-row" href="pai-app-authority-european-environment-agency">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Environment Agency</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-eu-coe">
+        <div class="r-scope">International body</div>
+        <div class="r-body"><strong>EU CoE</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-general-court-of-the-eu">
+        <div class="r-scope">Court</div>
+        <div class="r-body"><strong>General Court of the EU</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-union-agency-for-law-enforcement-cooperation">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Union Agency for Law Enforcement Cooperation</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-committee-for-standardization-cenelec">
+        <div class="r-scope">Standards body</div>
+        <div class="r-body"><strong>European Committee for Standardization / CENELEC</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-centre-for-disease-prevention-and-control">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Centre for Disease Prevention and Control</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-securities-and-markets-authority">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Securities and Markets Authority</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-ombudsman">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Ombudsman</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-court-of-justice-of-the-eu">
+        <div class="r-scope">Court</div>
+        <div class="r-body"><strong>Court of Justice of the EU</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-health-and-digital-executive-agency">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Health and Digital Executive Agency</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-board-of-appeal-of-the-european-supervisory-authorities">
+        <div class="r-scope">Court</div>
+        <div class="r-body"><strong>Board of Appeal of the European Supervisory Authorities</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-body-of-european-regulators-for-electronic-communications">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>Body of European Regulators for Electronic Communications</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-central-bank">
+        <div class="r-scope">Financial regulator</div>
+        <div class="r-body"><strong>European Central Bank</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-medicines-agency">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Medicines Agency</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-eu-agency-for-fundamental-rights">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>EU Agency for Fundamental Rights</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-unified-patent-court">
+        <div class="r-scope">Court</div>
+        <div class="r-body"><strong>Unified Patent Court</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-parliament">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Parliament</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-labour-authority">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Labour Authority</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-banking-authority">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Banking Authority</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-cert-eu">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>CERT-EU</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-chemicals-agency">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Chemicals Agency</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-patent-office-boards-of-appeal">
+        <div class="r-scope">Court</div>
+        <div class="r-body"><strong>European Patent Office Boards of Appeal</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-libe-committee">
+        <div class="r-scope">Legislature</div>
+        <div class="r-body"><strong>LIBE Committee</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-eu-anti-fraud-office">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>EU Anti-Fraud Office</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-commission-dg-competition">
+        <div class="r-scope">Competition authority</div>
+        <div class="r-body"><strong>European Commission DG Competition</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-agency-for-the-cooperation-of-energy-regulators">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Agency for the Cooperation of Energy Regulators</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-single-resolution-board">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>Single Resolution Board</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-eu-ai-office">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>EU AI Office</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-systemic-risk-board">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Systemic Risk Board</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-insurance-and-occupational-pensions-authority">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Insurance and Occupational Pensions Authority</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-imco-committee">
+        <div class="r-scope">Legislature</div>
+        <div class="r-body"><strong>IMCO Committee</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-eu-general-court-trade-mark-and-design-cases">
+        <div class="r-scope">Court</div>
+        <div class="r-body"><strong>EU General Court (Trade Mark and Design cases)</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-union-intellectual-property-office">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Union Intellectual Property Office</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-network-of-competition-authorities">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Network of Competition Authorities</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-commission">
+        <div class="r-scope">Government agency</div>
+        <div class="r-body"><strong>European Commission</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-data-protection-board">
+        <div class="r-scope">Other</div>
+        <div class="r-body"><strong>European Data Protection Board</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-eurostat">
+        <div class="r-scope">Standards body</div>
+        <div class="r-body"><strong>Eurostat</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-data-protection-supervisor">
+        <div class="r-scope">DPA</div>
+        <div class="r-body"><strong>European Data Protection Supervisor</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-fundamental-rights-agency">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>Fundamental Rights Agency</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-border-and-coast-guard-agency">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Border and Coast Guard Agency</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-enisa-eu-cybersecurity-agency">
+        <div class="r-scope">Cyber agency</div>
+        <div class="r-body"><strong>ENISA (EU Cybersecurity Agency)</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-commission-dg-connect">
+        <div class="r-scope">Government agency</div>
+        <div class="r-body"><strong>European Commission DG CONNECT</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-agency-for-safety-and-health-at-work">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Agency for Safety and Health at Work</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-digitaleurope">
+        <div class="r-scope">Other</div>
+        <div class="r-body"><strong>DIGITALEUROPE</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-innovation-council-and-smes-executive-agency">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Innovation Council and SMEs Executive Agency</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-union-agency-for-cybersecurity">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Union Agency for Cybersecurity</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-union-agency-for-criminal-justice-cooperation">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Union Agency for Criminal Justice Cooperation</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-data-innovation-board">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Data Innovation Board</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-european-judicial-network">
+        <div class="r-scope"> EU body</div>
+        <div class="r-body"><strong>European Judicial Network</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-general-court-of-the-european-union">
+        <div class="r-scope">Court</div>
+        <div class="r-body"><strong>General Court of the European Union</strong> <span class="r-desc">—</span></div>
         <span class="r-chev">›</span>
       </a>
     </div>
     <a class="reg-see-all" href="pai-app-authorities?juris=european-union">See all European Union authorities →</a>
     </section>
-<section class="stream-section"><h2 class="sr-h" style="font-size:18px;margin:0 0 14px;letter-spacing:-0.01em;color:#0a1729">Activity stream</h2>
+
+<section class="guidance-section" id="guidance-section">
+  <div class="gs-head">
+    <div>
+      <h2>Practical guidance</h2>
+      <div class="gs-sub">Curated guidance from UK regulators, monitored daily for changes. Click through to each authority for topic-level detail.</div>
+    </div>
+  </div>
+  <div class="gs-grid">
+    <a class="gs-card" href="pai-app-authority-ico#guidance">
+      <div class="gs-card-head">
+        <span class="gs-badge ico">ICO</span>
+        <span class="gs-status live">● Curated</span>
+      </div>
+      <div class="gs-card-name">Information Commissioner's Office</div>
+      <div class="gs-card-meta">8 topics · 328 pages · AI, lawful basis, individual rights, transfers, security, employment, children's information</div>
+      <div class="gs-card-foot">Browse guidance →</div>
+    </a>
+    <a class="gs-card" href="pai-app-authority-fca#guidance">
+      <div class="gs-card-head">
+        <span class="gs-badge fca">FCA</span>
+        <span class="gs-status">● Tracked</span>
+      </div>
+      <div class="gs-card-name">Financial Conduct Authority</div>
+      <div class="gs-card-meta">AI in financial services, algorithmic trading, automated advice, consumer credit ML</div>
+      <div class="gs-card-foot">View authority →</div>
+    </a>
+    <a class="gs-card" href="pai-app-authority-cma#guidance">
+      <div class="gs-card-head">
+        <span class="gs-badge cma">CMA</span>
+        <span class="gs-status">● Tracked</span>
+      </div>
+      <div class="gs-card-name">Competition &amp; Markets Authority</div>
+      <div class="gs-card-meta">Foundation models review, compute concentration, AI mergers, Digital Markets Act</div>
+      <div class="gs-card-foot">View authority →</div>
+    </a>
+    <a class="gs-card" href="pai-app-authority-ofcom#guidance">
+      <div class="gs-card-head">
+        <span class="gs-badge ofcom">OFCOM</span>
+        <span class="gs-status">● Tracked</span>
+      </div>
+      <div class="gs-card-name">Office of Communications</div>
+      <div class="gs-card-meta">Online Safety Act, content moderation, recommender systems, age assurance</div>
+      <div class="gs-card-foot">View authority →</div>
+    </a>
+  </div>
+</section>
+
+<section class="stream-section">
+<h2 class="sr-h" style="font-size:18px;margin:0 0 14px;letter-spacing:-0.01em;color:#0a1729">Activity stream</h2>
 <div class="stream-tabs">
-<button class="stream-tab active" data-cat="all">All <span class="st-count">8</span></button>
-<button class="stream-tab" data-cat="enforcement">Enforcement <span class="st-count">1</span></button>
-<button class="stream-tab" data-cat="caselaw">Case law <span class="st-count">1</span></button>
-<button class="stream-tab" data-cat="guidance">Guidance <span class="st-count">2</span></button>
-<button class="stream-tab" data-cat="analysis">Analysis <span class="st-count">1</span></button>
+<button class="stream-tab active" data-cat="all">All <span class="st-count">12</span></button>
 </div>
 <div class="stream-panel" data-cat="all">
-<a class="stream-row type-alerts" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">29 Mar</span><span class="sr-type">Update</span></div>
-<div class="sr-h">EDPB adopts AI model training guidelines</div>
-<div class="sr-p">Legitimate interest for training data...</div>
-</a>
-<a class="stream-row type-alerts" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">24 Mar</span><span class="sr-type">Update</span></div>
-<div class="sr-h">AI Office publishes GPAI code of practice</div>
-<div class="sr-p">Transparency and safety requirements...</div>
-</a>
-<a class="stream-row type-alerts" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">20 Mar</span><span class="sr-type">Update</span></div>
-<div class="sr-h">High-risk AI deadline approaching</div>
-<div class="sr-p">Aug 2026 compliance deadline...</div>
-</a>
-<a class="stream-row type-enforcement" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">18 Mar</span><span class="sr-type">Enforcement</span></div>
-<div class="sr-h">Italian DPA fines ChatGPT operator €15M</div>
-<div class="sr-p">GDPR violations in AI training data...</div>
-</a>
-<a class="stream-row type-caselaw" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">1 Mar</span><span class="sr-type">Case law</span></div>
-<div class="sr-h">CJEU: SCHUFA automated scoring</div>
-<div class="sr-p">Automated decision-making under Art. 22...</div>
-</a>
-<a class="stream-row type-guidance" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">29 Mar</span><span class="sr-type">Guidance</span></div>
-<div class="sr-h">EDPB: AI model training guidelines</div>
-<div class="sr-p">Legitimate interest conditions...</div>
-</a>
-<a class="stream-row type-guidance" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">15 Mar</span><span class="sr-type">Guidance</span></div>
-<div class="sr-h">AI Office: high-risk classification guidance</div>
-<div class="sr-p">Practical guidance for deployers...</div>
-</a>
-<a class="stream-row type-analysis" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">12 Mar</span><span class="sr-type">Analysis</span></div>
-<div class="sr-h">EU AI Act: what high-risk means in practice</div>
-<div class="sr-p">Risk classification implications...</div>
-</a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">28 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Commission services and EDPB will start joint work on guidance on the interplay between EU competition law and data protection law</div><div class="sr-p">The Commission services and the European Data Protection Board (EDPB) have agreed to work together to clarify and give guidance on the inter…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">28 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">AI: press conference debrief on the negotiations to update EU rules | News | European Parliament</div><div class="sr-p">On Wednesday at 11.00, lead MEPs Arba Kokalari and Michael McNamara will hold a press conference following Tuesday’s negotiations with the C…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">27 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Opinion 9/2026 on the draft decision of the Dutch Supervisory Authority regarding the Controller Binding Corporate Rules of the Jacobs Douwe Egberts Group</div><div class="sr-p">Opinion 9/2026 on the draft decision of the Dutch Supervisory Authority regarding the Controller Binding Corporate Rules of the Jacobs Douwe…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">27 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Opinion 10/2026 on the draft decision of the Dutch Supervisory Authority regarding the Controller Binding Corporate Rules of the SLB Group</div><div class="sr-p">27 April 2026 Opinion 10/2026 166.1KB English Download Members: Netherlands Topics: Binding Corporate Rules International Transfers of Data …</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">27 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Opinion 11/2026 on the draft decision of the Belgian Supervisory Authority regarding the Controller Binding Corporate Rules of the Kuwait Petroleum Group</div><div class="sr-p">Opinion 11/2026 on the draft decision of the Belgian Supervisory Authority regarding the Controller Binding Corporate Rules of the Kuwait Pe…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">27 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Opinion 12/2026 on the draft decision of the Spanish Supervisory Authority regarding the Controller Binding Corporate Rules of the Santander Group</div><div class="sr-p">27 April 2026 Opinion 12/2026 166KB English Download Members: Spain Topics: International Transfers of Data Binding Corporate Rules  === ATT…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">27 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Leading digital Europe: BEREC adopts Strategy 2026-2030</div><div class="sr-p">09 December 2025 Leading digital Europe: BEREC adopts Strategy 2026-2030 The Body of European Regulators for Electronic Communications (BERE…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">27 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">BEREC Provides Early Assessment of the Digital Networks Act, Welcoming Ambition While Highlighting Areas for Improvement</div><div class="sr-p">30 March 2026 BEREC Provides Early Assessment of the Digital Networks Act, Welcoming Ambition While Highlighting Areas for Improvement The B…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">26 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Voices of EU Cybersecurity Certification</div><div class="sr-p">Publication date:December 15, 2025 A special publication by ENISA that incorporates feedback from stakeholders involved in building, maintai…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">26 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">ENISA Technical Advisory for Secure Use of Package Managers</div><div class="sr-p">Publication date:March 10, 2026 This document focuses on how developers can securely use package managers as part of their software developm…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">26 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">National Cybersecurity Assessment Framework (NCAF) Tool 2.0</div><div class="sr-p">The National Capabilities Assessment Framework 2.0 (NCAF 2.0) is a key EU instrument designed by ENISA to support Member States in assessing…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=european-union"><div class="sr-head"><span class="sr-date">26 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Respect de la vie privée dans les institutions de l&#39;UE</div><div class="sr-p">[EDPS Opinion 10/2025 on Proposals to amend Directives on periodic roadworthiness tests for motor vehicles and their trailers and on the tec…</div></a>
 </div>
-<div class="stream-panel hidden" data-cat="enforcement">
-<a class="stream-row type-enforcement" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">18 Mar</span><span class="sr-type">Enforcement</span></div>
-<div class="sr-h">Italian DPA fines ChatGPT operator €15M</div>
-<div class="sr-p">GDPR violations in AI training data...</div>
-</a>
-</div>
-<div class="stream-panel hidden" data-cat="caselaw">
-<a class="stream-row type-caselaw" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">1 Mar</span><span class="sr-type">Case law</span></div>
-<div class="sr-h">CJEU: SCHUFA automated scoring</div>
-<div class="sr-p">Automated decision-making under Art. 22...</div>
-</a>
-</div>
-<div class="stream-panel hidden" data-cat="guidance">
-<a class="stream-row type-guidance" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">29 Mar</span><span class="sr-type">Guidance</span></div>
-<div class="sr-h">EDPB: AI model training guidelines</div>
-<div class="sr-p">Legitimate interest conditions...</div>
-</a>
-<a class="stream-row type-guidance" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">15 Mar</span><span class="sr-type">Guidance</span></div>
-<div class="sr-h">AI Office: high-risk classification guidance</div>
-<div class="sr-p">Practical guidance for deployers...</div>
-</a>
-</div>
-<div class="stream-panel hidden" data-cat="analysis">
-<a class="stream-row type-analysis" href="pai-app-news?juris=european-union">
-<div class="sr-head"><span class="sr-date">12 Mar</span><span class="sr-type">Analysis</span></div>
-<div class="sr-h">EU AI Act: what high-risk means in practice</div>
-<div class="sr-p">Risk classification implications...</div>
-</a>
-</div>
-<div class="stream-foot"><span class="stream-foot-note">Showing most recent · archive has 8 items total</span><a class="stream-see-all" href="pai-app-news?juris=european-union">See the full European Union archive →</a></div>
+<div class="stream-foot"><span class="stream-foot-note">Showing most recent · archive has 120 items total</span><a class="stream-see-all" href="pai-app-news?juris=european-union">See the full European Union archive →</a></div>
 </section>
 
 <script>
@@ -1005,10 +1256,113 @@ document.addEventListener('click', function(e){
 });
 </script>
 
+<script src="https://unpkg.com/d3@7/dist/d3.min.js" defer></script>
+<script src="https://unpkg.com/topojson-client@3" defer></script>
+<script>
+window.addEventListener('load', function(){
+  var svg = document.getElementById('country-svg'); if(!svg) return;
+  if(typeof d3 === 'undefined' || typeof topojson === 'undefined') return;
+  var w = 220, h = 260;
+  var countryIso = "826";
+
+  // Countries that get a cutaway inset for outlying territories. Label only —
+  // the split itself is done by polygon area, not bbox.
+  var CUTAWAY = {
+    "724": "Canarias",           // Spain
+    "840": "AK  HI",             // United States
+    "620": "Acores  Madeira",    // Portugal
+    "250": "DOM-TOM",            // France
+    "578": "Svalbard",           // Norway
+    "528": "Caribbean NL",       // Netherlands
+    "554": "Outlying",           // New Zealand
+    "218": "Galapagos"           // Ecuador
+  };
+
+  // Bbox-based area proxy — fast, close enough for largest-vs-rest comparison.
+  function polyArea(poly) {
+    var ring = poly[0];
+    var minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
+    for (var i = 0; i < ring.length; i++) {
+      var p = ring[i];
+      if (p[0] < minLon) minLon = p[0];
+      if (p[0] > maxLon) maxLon = p[0];
+      if (p[1] < minLat) minLat = p[1];
+      if (p[1] > maxLat) maxLat = p[1];
+    }
+    return (maxLon - minLon) * (maxLat - minLat);
+  }
+
+  // Split a MultiPolygon feature into {main, islands} by area.
+  // Main keeps the largest polygon plus any polygon >= 25% of its area
+  // (that's enough to keep NZ North Island with South Island).
+  function splitFeature(f) {
+    if (f.geometry.type !== 'MultiPolygon') return { main: f, islands: null };
+    var polys = f.geometry.coordinates;
+    if (polys.length <= 1) return { main: f, islands: null };
+    var areas = polys.map(polyArea);
+    var maxA = Math.max.apply(null, areas);
+    var threshold = maxA * 0.25;
+    var main = [], islands = [];
+    polys.forEach(function(poly, i){
+      if (areas[i] >= threshold) main.push(poly); else islands.push(poly);
+    });
+    return {
+      main: main.length ? { type:'Feature', properties:{}, geometry:{ type:'MultiPolygon', coordinates: main } } : null,
+      islands: islands.length ? { type:'Feature', properties:{}, geometry:{ type:'MultiPolygon', coordinates: islands } } : null
+    };
+  }
+
+  fetch('https://unpkg.com/world-atlas@2/countries-50m.json')
+    .then(function(r){ return r.json(); })
+    .then(function(topo){
+      var features = topojson.feature(topo, topo.objects.countries).features;
+      var f = features.find(function(x){ return x.id === countryIso; });
+      if(!f) return;
+
+      var label = CUTAWAY[countryIso];
+      if (label) {
+        var split = splitFeature(f);
+        if (split.main && split.islands) {
+          var mainProj = d3.geoMercator().fitSize([w, h], split.main);
+          var mainPath = d3.geoPath().projection(mainProj);
+          d3.select(svg).append('path').attr('class', 'country').attr('d', mainPath(split.main));
+
+          var iW = 66, iH = 54, iX = w - iW - 3, iY = h - iH - 3;
+          var g = d3.select(svg).append('g').attr('transform', 'translate(' + iX + ',' + iY + ')');
+          g.append('rect')
+            .attr('width', iW).attr('height', iH).attr('rx', 2).attr('ry', 2)
+            .attr('fill', 'rgba(0,0,0,0.02)').attr('stroke', '#c8d0dc')
+            .attr('stroke-dasharray', '2,2').attr('stroke-width', 0.5);
+
+          var islandProj = d3.geoMercator().fitSize([iW - 8, iH - 14], split.islands);
+          var t = islandProj.translate();
+          islandProj.translate([t[0] + 4, t[1] + 4]);
+          var islandPath = d3.geoPath().projection(islandProj);
+          g.append('path').attr('class', 'country').attr('d', islandPath(split.islands));
+
+          g.append('text')
+            .attr('x', iW / 2).attr('y', iH - 3)
+            .attr('text-anchor', 'middle').attr('font-size', 5.5)
+            .attr('fill', '#8a93a3')
+            .attr('font-family', 'Inter, -apple-system, sans-serif')
+            .text(label);
+          return;
+        }
+      }
+
+      // Default render — whole country
+      var projection = d3.geoMercator().fitSize([w, h], f);
+      var path = d3.geoPath().projection(projection);
+      d3.select(svg).append('path').attr('class', 'country').attr('d', path(f));
+    })
+    .catch(function(){});
+});
+</script>
+
   </div>
 </div>
 
-<div class="archetype-badge">SUPRANATIONAL UNION · EU</div>
+<div class="archetype-badge">UNITED KINGDOM · UK</div>
 
 
 <!-- Mobile nav shim -->

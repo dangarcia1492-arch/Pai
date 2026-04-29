@@ -558,6 +558,29 @@ body { min-width: 320px !important; }
 .reg-see-all{display:inline-flex;align-items:center;gap:6px;margin-top:22px;padding:10px 16px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.08em;color:#014486;background:#f6f7f9;border:1px solid #ebeff5;border-radius:6px;text-transform:uppercase;text-decoration:none}
 .reg-see-all:hover{background:#e3effc;border-color:#cfe1f6;color:#0176d3}
 
+/* Practical guidance summary — slim per-regulator cards linking to authority pages */
+.guidance-section{margin-top:72px}
+.gs-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+.gs-head h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0}
+.gs-sub{font-size:12.5px;color:#5e6878;margin-top:4px;line-height:1.5}
+.gs-grid{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:12px}
+.gs-card{display:flex;flex-direction:column;padding:16px 16px 14px;border:1px solid #ebeff5;border-radius:10px;background:#fff;text-decoration:none;color:inherit;transition:border-color .12s, box-shadow .12s, background .12s}
+.gs-card:hover{border-color:#cfe1f6;background:#f8fafc;box-shadow:0 1px 2px rgba(10,23,41,.04)}
+.gs-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.gs-badge{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;padding:3px 8px;border-radius:4px;background:#eff2f7;color:#0a1729}
+.gs-badge.ico{background:#e3effc;color:#014486}
+.gs-badge.fca{background:#e5f3e9;color:#2e844a}
+.gs-badge.cma{background:#fbeecd;color:#905200}
+.gs-badge.ofcom{background:#f0e6fa;color:#6b2fb0}
+.gs-status{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5e6878}
+.gs-status.live{color:#2e844a}
+.gs-card-name{font-size:13.5px;font-weight:700;color:#0a1729;line-height:1.3;margin-bottom:5px}
+.gs-card-meta{font-size:12px;color:#5e6878;line-height:1.45;margin-bottom:14px;flex-grow:1}
+.gs-card-foot{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#014486}
+.gs-card:hover .gs-card-foot{color:#0176d3}
+@media (max-width: 1100px) { .gs-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 640px) { .gs-grid { grid-template-columns: 1fr; } }
+
 /* Stream — card grid (fills width, no ghost borders) */
 .stream-section{margin-top:72px}
 .stream-tabs{display:flex;gap:0;border-bottom:1px solid #dbe1ea;margin-bottom:18px;flex-wrap:wrap}
@@ -715,7 +738,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <div class="sidebar-regions-zone">
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-authorities"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
-      <a class="sidebar-nav-item" href="pai-app-topics" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Topics</span></a>
+      <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
@@ -758,7 +781,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <span class="ps-current">Estonia</span>
         </span>
         <span class="ps-sep">·</span>
-        <span class="ps-scope-chip">EU MEMBER STATE · EE</span>
+        <span class="ps-scope-chip">UNITED KINGDOM · UK</span>
         <span class="ps-sep">·</span>
         <span class="ps-ok">Coverage engine operational</span>
       </div>
@@ -767,11 +790,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <!-- PAGE HEAD -->
     <div class="page-head">
       <div class="ph-title">
-        <div class="page-eyebrow">EU MEMBER STATE · EE</div>
+        <div class="page-eyebrow">ESTONIA · EE</div>
         <h1 class="page-title">Estonia</h1>
-        
+
         <p class="page-sub">A living snapshot of AI, privacy and cybersecurity regulation in Estonia — what's in force, who enforces it, and what&rsquo;s moving.</p>
-        <div class="pulse-line"><span class="pulse-dot"></span><span class="pulse-next">Next · AKI AI compliance checklist for public sector 26 Mar</span><span class="pulse-sep">·</span><span>7 captures this month</span><span class="pulse-sep">·</span><span>3 regulators on-watch</span></div>
+        <div class="pulse-line"><span class="pulse-dot"></span><span class="pulse-next">Next · ICO publishes updated ADM guidance 31 Mar</span><span class="pulse-sep">·</span><span>13 captures this month</span><span class="pulse-sep">·</span><span>4 regulators on-watch</span></div>
       </div>
       <div class="ph-map" aria-hidden="true"><svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg></div>
     </div>
@@ -787,20 +810,20 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <div class="domain-group" data-d="ai">
             <div class="domain-row" onclick="toggleDomain(this.parentElement)">
               <div class="dr-label">AI</div>
-              <div class="dr-content"><strong>EU AI Act (directly applicable)</strong> <span class="muted">· In Force</span></div>
-              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-next">Next <b>26 Mar</b></span></div>
+              <div class="dr-content"><strong>AI White Paper Principles</strong> <span class="muted">· Published 2023</span></div>
+              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-next">Next <b>31 Mar</b></span></div>
               <div class="dr-chev">▾</div>
             </div>
-            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">EU AI Act (directly applicable)</a> <span class="dr-muted">· In Force</span></li><li><a href="#impl-section">Kratt AI Strategy</a> <span class="dr-muted">· Published 2019 (updated 2024)</span></li><li><a href="#impl-section">Public Information Act (AI transparency)</a> <span class="dr-muted">· In Force</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li class="dr-muted">See the full regulators list below.</li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">26 Mar</span> AKI AI compliance checklist for public sector</li><li><span class="dr-muted">20 Mar</span> Estonia proposes AI Act national implementation</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=estonia&amp;domain=ai">Filter archive by AI →</a></div></div>
+            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">AI White Paper Principles</a> <span class="dr-muted">· Published 2023</span></li><li><a href="#impl-section">ICO AI &amp; Data Protection Guidance</a> <span class="dr-muted">· In Force</span></li><li><a href="#impl-section">FCA AI in Financial Services Guidance</a> <span class="dr-muted">· Final 2026</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li class="dr-muted">See the full regulators list below.</li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">31 Mar</span> ICO publishes updated ADM guidance</li><li><span class="dr-muted">27 Mar</span> DSIT expands AI Safety Institute mandate</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=united-kingdom&amp;domain=ai">Filter archive by AI →</a></div></div>
           </div>
           <div class="domain-group" data-d="privacy">
             <div class="domain-row" onclick="toggleDomain(this.parentElement)">
               <div class="dr-label">PRIVACY</div>
-              <div class="dr-content"><strong>GDPR / Personal Data Protection Act (IKS)</strong> <span class="muted">· In Force</span></div>
-              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-reg">AKI</span></div>
+              <div class="dr-content"><strong>UK GDPR &amp; Data Protection Act 2018</strong> <span class="muted">· In Force</span></div>
+              <div class="dr-meta"><span class="dr-chip op">● IN FORCE</span><span class="dr-dot"></span><span class="dr-reg">ICO</span></div>
               <div class="dr-chev">▾</div>
             </div>
-            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">GDPR / Personal Data Protection Act (IKS)</a> <span class="dr-muted">· In Force</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li><a href="#regulators-section">AKI</a> <span class="dr-muted">· Data Protection</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">26 Mar</span> AKI AI compliance checklist for public sector</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=estonia&amp;domain=privacy">Filter archive by PRIVACY →</a></div></div>
+            <div class="dr-detail"><div class="dr-col"><div class="dr-col-title">Primary instruments</div><ul><li><a href="#impl-section">UK GDPR &amp; Data Protection Act 2018</a> <span class="dr-muted">· In Force</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Regulators</div><ul><li><a href="#regulators-section">ICO</a> <span class="dr-muted">· Data Protection</span></li></ul></div><div class="dr-col"><div class="dr-col-title">Recent activity</div><ul><li><span class="dr-muted">31 Mar</span> ICO publishes updated ADM guidance</li></ul><a class="dr-quick-filter" href="pai-app-news?juris=united-kingdom&amp;domain=privacy">Filter archive by PRIVACY →</a></div></div>
           </div>
           <div class="domain-group empty" data-d="cyber">
             <div class="domain-row">
@@ -812,161 +835,184 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           </div>
         </div>
         <div class="kpi-stack">
-          <div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">5</div></div>
-          <div class="kpi"><div class="kpi-label">Regulators</div><div class="kpi-value">3</div></div>
-          <div class="kpi"><div class="kpi-label">Next activity</div><div class="kpi-sub">AKI AI compliance checklist for public sector</div><div class="kpi-value small">26 Mar</div></div>
+          <div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">7</div></div>
+          <div class="kpi"><div class="kpi-label">Regulators</div><div class="kpi-value">4</div></div>
+          <div class="kpi"><div class="kpi-label">Next activity</div><div class="kpi-sub">ICO publishes updated ADM guidance</div><div class="kpi-value small">31 Mar</div></div>
         </div>
       </div>
     </section>
     
-<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">3 most recent · 7 this month</div></div><div class="latest-grid">
-<a class="latest-card" href="pai-app-news?juris=estonia">
-<div class="lc-meta"><span class="lc-date">26 Mar</span><span class="lc-type">Update</span></div>
-<div class="lc-h">AKI AI compliance checklist for public sector</div>
-<div class="lc-p">GDPR and AI Act obligations for government AI...</div>
-</a>
-<a class="latest-card" href="pai-app-news?juris=estonia">
-<div class="lc-meta"><span class="lc-date">20 Mar</span><span class="lc-type">Update</span></div>
-<div class="lc-h">Estonia proposes AI Act national implementation</div>
-<div class="lc-p">AKI as notifying and surveillance authority...</div>
-</a>
-<a class="latest-card" href="pai-app-news?juris=estonia">
-<div class="lc-meta"><span class="lc-date">12 Mar</span><span class="lc-type">Update</span></div>
-<div class="lc-h">MKM launches updated Kratt AI strategy</div>
-<div class="lc-p">Expanded government AI with governance guardrails...</div>
-</a>
+<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">3 most recent · 6 approved</div></div><div class="latest-grid">
+      <a class="latest-card" href="pai-app-news?juris=estonia">
+        <div class="lc-meta"><span class="lc-date">22 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">X-TEE ANDMETEENUSE KASUTAMISE KOKKULEPE</div>
+        <div class="lc-p">X-TEE ANDMETEENUSE KASUTAMISE KOKKULEPE ja taotlus x-tee teenustele juurdepääsu võimaldami…</div>
+      </a>
+      <a class="latest-card" href="pai-app-news?juris=estonia">
+        <div class="lc-meta"><span class="lc-date">19 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">Andmekaitse Inspektsioon: oleme teadlikud veebilehest ettevaatust.ee</div>
+        <div class="lc-p">Andmekaitse Inspektsioon: oleme teadlikud veebilehest ettevaatust.ee | Andmekaitse Inspekt…</div>
+      </a>
+      <a class="latest-card" href="pai-app-news?juris=estonia">
+        <div class="lc-meta"><span class="lc-date">19 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">Maksuarvestus ilma liigse andmekogumiseta</div>
+        <div class="lc-p">Maksuarvestus ilma liigse andmekogumiseta | Andmekaitse Inspektsioon Liigu edasi põhisisu …</div>
+      </a>
 </div>
-<a class="latest-see-all" href="pai-app-news?juris=estonia">See all 7 Estonia items →</a>
+<a class="latest-see-all" href="pai-app-news?juris=estonia">See all Estonia items →</a>
 </section>
 
     <section class="impl-section collapsed" id="impl-section">
       <div class="impl-section-head">
         <h2>Implementation status</h2>
-        <div class="impl-sub">Where Estonia stands on each headline instrument</div>
+        <div class="impl-sub">Where United Kingdom stands on each headline instrument</div>
       </div>
       <div class="impl-cards">
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">EU AI Act (directly applicable)</div>
-          <div class="impl-desc">Type: Primary · Status: In Force</div>
-        </div>
-        <div class="impl-card">
           <div class="impl-card-top"><div class="impl-domain">PRIVACY</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">GDPR / Personal Data Protection Act (IKS)</div>
+          <div class="impl-name">UK GDPR &amp; Data Protection Act 2018</div>
           <div class="impl-desc">Type: Primary · Status: In Force</div>
         </div>
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">Kratt AI Strategy</div>
-          <div class="impl-desc">Type: Secondary · Status: Published 2019 (updated 2024)</div>
-        </div>
-        <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
-          <div class="impl-name">Public Information Act (AI transparency)</div>
+          <div class="impl-card-top"><div class="impl-domain">CROSS</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">Online Safety Act 2023</div>
           <div class="impl-desc">Type: Primary · Status: In Force</div>
         </div>
         <div class="impl-card">
-          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge partial">● IN PROGRESS</span></div>
-          <div class="impl-name">AI Act Implementation Measures</div>
+          <div class="impl-card-top"><div class="impl-domain">CROSS</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">Digital Markets, Competition &amp; Consumers Act 2024</div>
+          <div class="impl-desc">Type: Primary · Status: In Force</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">OTHER</div><span class="status-badge partial">● IN PROGRESS</span></div>
+          <div class="impl-name">Product Regulations &amp; Metrology Bill</div>
           <div class="impl-desc">Type: Secondary · Status: In Progress</div>
         </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">AI White Paper Principles</div>
+          <div class="impl-desc">Type: Secondary · Status: Published 2023</div>
+        </div>
+        <div class="impl-card">
+          <div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge operational">● IN FORCE</span></div>
+          <div class="impl-name">ICO AI &amp; Data Protection Guidance</div>
+          <div class="impl-desc">Type: Guideline · Status: In Force</div>
+        </div>
       </div>
-      <button class="impl-see-all" onclick="toggleImpl(this)"><span class="impl-expand-label">See all 5 →</span><span class="impl-collapse-label">Collapse ↑</span></button>
+      <button class="impl-see-all" onclick="toggleImpl(this)"><span class="impl-expand-label">See all 6 →</span><span class="impl-collapse-label">Collapse ↑</span></button>
     </section>
 
     <section class="regulators-section" id="regulators-section"><h2>Regulators &amp; authorities</h2><div class="reg-list-compact">
-      <a class="reg-row" href="pai-app-authority-aki">
-        <div class="r-scope">Data Protection</div>
-        <div class="r-body"><strong>AKI</strong> <span class="r-desc">· GDPR enforcer. AI and automated decision-making guidance for private and public sectors.</span></div>
+      <a class="reg-row" href="pai-app-authority-consumer-protection-and-technical-regulatory-authority-tarbijakaitse-ja-tehnilise-jarelevalve-amet">
+        <div class="r-scope">Competition authority</div>
+        <div class="r-body"><strong>Consumer Protection and Technical Regulatory Authority (Tarbijakaitse ja Tehnilise Jarelevalve Amet)</strong> <span class="r-desc">—</span></div>
         <span class="r-chev">›</span>
       </a>
-      <a class="reg-row" href="pai-app-authority-mkm-eisa">
-        <div class="r-scope">Digital Governance</div>
-        <div class="r-body"><strong>MKM / EISA</strong> <span class="r-desc">· Kratt AI strategy and e-governance AI deployment coordination.</span></div>
+      <a class="reg-row" href="pai-app-authority-data-protection-inspectorate">
+        <div class="r-scope">DPA</div>
+        <div class="r-body"><strong>Data Protection Inspectorate</strong> <span class="r-desc">—</span></div>
         <span class="r-chev">›</span>
       </a>
-      <a class="reg-row" href="pai-app-authority-ria">
-        <div class="r-scope">Cybersecurity</div>
-        <div class="r-body"><strong>RIA</strong> <span class="r-desc">· AI systems in critical infrastructure and e-government services.</span></div>
+      <a class="reg-row" href="pai-app-authority-konkurentsiamet">
+        <div class="r-scope">Competition authority</div>
+        <div class="r-body"><strong>Konkurentsiamet</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-ria-estonia-cyber">
+        <div class="r-scope">Cyber agency</div>
+        <div class="r-body"><strong>RIA Estonia Cyber</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-estonian-parliament-riigikogu">
+        <div class="r-scope">Legislature</div>
+        <div class="r-body"><strong>Estonian Parliament (Riigikogu)</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-supreme-court-of-estonia">
+        <div class="r-scope">Court</div>
+        <div class="r-body"><strong>Supreme Court of Estonia</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-estonian-consumer-protection-and-technical-regulatory-authority">
+        <div class="r-scope">Telecoms regulator</div>
+        <div class="r-body"><strong>Estonian Consumer Protection and Technical Regulatory Authority</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-ministry-of-economic-affairs-and-communications-majandus-ja-kommunikatsiooniministeerium">
+        <div class="r-scope">Government agency</div>
+        <div class="r-body"><strong>Ministry of Economic Affairs and Communications (Majandus- ja Kommunikatsiooniministeerium)</strong> <span class="r-desc">—</span></div>
+        <span class="r-chev">›</span>
+      </a>
+      <a class="reg-row" href="pai-app-authority-estonian-financial-supervision-and-resolution-authority">
+        <div class="r-scope">Financial regulator</div>
+        <div class="r-body"><strong>Estonian Financial Supervision and Resolution Authority</strong> <span class="r-desc">—</span></div>
         <span class="r-chev">›</span>
       </a>
     </div>
     <a class="reg-see-all" href="pai-app-authorities?juris=estonia">See all Estonia authorities →</a>
     </section>
-<section class="stream-section"><h2 class="sr-h" style="font-size:18px;margin:0 0 14px;letter-spacing:-0.01em;color:#0a1729">Activity stream</h2>
+
+<section class="guidance-section" id="guidance-section">
+  <div class="gs-head">
+    <div>
+      <h2>Practical guidance</h2>
+      <div class="gs-sub">Curated guidance from UK regulators, monitored daily for changes. Click through to each authority for topic-level detail.</div>
+    </div>
+  </div>
+  <div class="gs-grid">
+    <a class="gs-card" href="pai-app-authority-ico#guidance">
+      <div class="gs-card-head">
+        <span class="gs-badge ico">ICO</span>
+        <span class="gs-status live">● Curated</span>
+      </div>
+      <div class="gs-card-name">Information Commissioner's Office</div>
+      <div class="gs-card-meta">8 topics · 328 pages · AI, lawful basis, individual rights, transfers, security, employment, children's information</div>
+      <div class="gs-card-foot">Browse guidance →</div>
+    </a>
+    <a class="gs-card" href="pai-app-authority-fca#guidance">
+      <div class="gs-card-head">
+        <span class="gs-badge fca">FCA</span>
+        <span class="gs-status">● Tracked</span>
+      </div>
+      <div class="gs-card-name">Financial Conduct Authority</div>
+      <div class="gs-card-meta">AI in financial services, algorithmic trading, automated advice, consumer credit ML</div>
+      <div class="gs-card-foot">View authority →</div>
+    </a>
+    <a class="gs-card" href="pai-app-authority-cma#guidance">
+      <div class="gs-card-head">
+        <span class="gs-badge cma">CMA</span>
+        <span class="gs-status">● Tracked</span>
+      </div>
+      <div class="gs-card-name">Competition &amp; Markets Authority</div>
+      <div class="gs-card-meta">Foundation models review, compute concentration, AI mergers, Digital Markets Act</div>
+      <div class="gs-card-foot">View authority →</div>
+    </a>
+    <a class="gs-card" href="pai-app-authority-ofcom#guidance">
+      <div class="gs-card-head">
+        <span class="gs-badge ofcom">OFCOM</span>
+        <span class="gs-status">● Tracked</span>
+      </div>
+      <div class="gs-card-name">Office of Communications</div>
+      <div class="gs-card-meta">Online Safety Act, content moderation, recommender systems, age assurance</div>
+      <div class="gs-card-foot">View authority →</div>
+    </a>
+  </div>
+</section>
+
+<section class="stream-section">
+<h2 class="sr-h" style="font-size:18px;margin:0 0 14px;letter-spacing:-0.01em;color:#0a1729">Activity stream</h2>
 <div class="stream-tabs">
-<button class="stream-tab active" data-cat="all">All <span class="st-count">7</span></button>
-<button class="stream-tab" data-cat="enforcement">Enforcement <span class="st-count">1</span></button>
-<button class="stream-tab" data-cat="caselaw">Case law <span class="st-count">1</span></button>
-<button class="stream-tab" data-cat="guidance">Guidance <span class="st-count">1</span></button>
-<button class="stream-tab" data-cat="analysis">Analysis <span class="st-count">1</span></button>
+<button class="stream-tab active" data-cat="all">All <span class="st-count">6</span></button>
 </div>
 <div class="stream-panel" data-cat="all">
-<a class="stream-row type-alerts" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">26 Mar</span><span class="sr-type">Update</span></div>
-<div class="sr-h">AKI AI compliance checklist for public sector</div>
-<div class="sr-p">GDPR and AI Act obligations for government AI...</div>
-</a>
-<a class="stream-row type-alerts" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">20 Mar</span><span class="sr-type">Update</span></div>
-<div class="sr-h">Estonia proposes AI Act national implementation</div>
-<div class="sr-p">AKI as notifying and surveillance authority...</div>
-</a>
-<a class="stream-row type-alerts" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">12 Mar</span><span class="sr-type">Update</span></div>
-<div class="sr-h">MKM launches updated Kratt AI strategy</div>
-<div class="sr-p">Expanded government AI with governance guardrails...</div>
-</a>
-<a class="stream-row type-enforcement" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">16 Mar</span><span class="sr-type">Enforcement</span></div>
-<div class="sr-h">AKI orders municipality to suspend AI welfare tool</div>
-<div class="sr-p">Automated social benefit eligibility without transparency or human oversight...</div>
-</a>
-<a class="stream-row type-caselaw" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">5 Mar</span><span class="sr-type">Case law</span></div>
-<div class="sr-h">Tallinn court: AI administrative decisions</div>
-<div class="sr-p">AI-assisted decisions require meaningful human review...</div>
-</a>
-<a class="stream-row type-guidance" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">22 Mar</span><span class="sr-type">Guidance</span></div>
-<div class="sr-h">AKI: guide on AI and automated decisions</div>
-<div class="sr-p">Compliance for public and private AI deployers...</div>
-</a>
-<a class="stream-row type-analysis" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">10 Mar</span><span class="sr-type">Analysis</span></div>
-<div class="sr-h">Estonia&#x27;s Kratt model: lessons from AI-first governance</div>
-<div class="sr-p">World&#x27;s most digital government approaches AI accountability...</div>
-</a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=estonia"><div class="sr-head"><span class="sr-date">22 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">X-TEE ANDMETEENUSE KASUTAMISE KOKKULEPE</div><div class="sr-p">X-TEE ANDMETEENUSE KASUTAMISE KOKKULEPE ja taotlus x-tee teenustele juurdepääsu võimaldamiseks Riigi Infosüsteemi Amet Pärnu mnt 139a 15169 …</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=estonia"><div class="sr-head"><span class="sr-date">19 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Andmekaitse Inspektsioon: oleme teadlikud veebilehest ettevaatust.ee</div><div class="sr-p">Andmekaitse Inspektsioon: oleme teadlikud veebilehest ettevaatust.ee | Andmekaitse Inspektsioon Liigu edasi põhisisu juurde Juurdepääsetavus…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=estonia"><div class="sr-head"><span class="sr-date">19 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Maksuarvestus ilma liigse andmekogumiseta</div><div class="sr-p">Maksuarvestus ilma liigse andmekogumiseta | Andmekaitse Inspektsioon Liigu edasi põhisisu juurde Juurdepääsetavus Kontrast Vaikesätted Must …</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=estonia"><div class="sr-head"><span class="sr-date">19 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Andmekaitse Inspektsioon avaldas 2025. aasta aastaraamatu: rekordarv kaebuseid ja kasvavad ootused digiajastul</div><div class="sr-p">Andmekaitse Inspektsioon avaldas 2025. aasta aastaraamatu: rekordarv kaebuseid ja kasvavad ootused digiajastul | Andmekaitse Inspektsioon Li…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=estonia"><div class="sr-head"><span class="sr-date">19 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Euroopa Andmekaitsenõukogu aastaraamat keskendub sidusrühmade toetamisele suuniste ja dialoogi kaudu</div><div class="sr-p">Euroopa Andmekaitsenõukogu aastaraamat keskendub sidusrühmade toetamisele suuniste ja dialoogi kaudu | Andmekaitse Inspektsioon Liigu edasi …</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=estonia"><div class="sr-head"><span class="sr-date">19 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">2026. aasta I kvartal: andmekaitserikkumised kasvavad</div><div class="sr-p">2026. aasta I kvartal: andmekaitserikkumised kasvavad | Andmekaitse Inspektsioon Liigu edasi põhisisu juurde Juurdepääsetavus Kontrast Vaike…</div></a>
 </div>
-<div class="stream-panel hidden" data-cat="enforcement">
-<a class="stream-row type-enforcement" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">16 Mar</span><span class="sr-type">Enforcement</span></div>
-<div class="sr-h">AKI orders municipality to suspend AI welfare tool</div>
-<div class="sr-p">Automated social benefit eligibility without transparency or human oversight...</div>
-</a>
-</div>
-<div class="stream-panel hidden" data-cat="caselaw">
-<a class="stream-row type-caselaw" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">5 Mar</span><span class="sr-type">Case law</span></div>
-<div class="sr-h">Tallinn court: AI administrative decisions</div>
-<div class="sr-p">AI-assisted decisions require meaningful human review...</div>
-</a>
-</div>
-<div class="stream-panel hidden" data-cat="guidance">
-<a class="stream-row type-guidance" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">22 Mar</span><span class="sr-type">Guidance</span></div>
-<div class="sr-h">AKI: guide on AI and automated decisions</div>
-<div class="sr-p">Compliance for public and private AI deployers...</div>
-</a>
-</div>
-<div class="stream-panel hidden" data-cat="analysis">
-<a class="stream-row type-analysis" href="pai-app-news?juris=estonia">
-<div class="sr-head"><span class="sr-date">10 Mar</span><span class="sr-type">Analysis</span></div>
-<div class="sr-h">Estonia&#x27;s Kratt model: lessons from AI-first governance</div>
-<div class="sr-p">World&#x27;s most digital government approaches AI accountability...</div>
-</a>
-</div>
-<div class="stream-foot"><span class="stream-foot-note">Showing most recent · archive has 7 items total</span><a class="stream-see-all" href="pai-app-news?juris=estonia">See the full Estonia archive →</a></div>
+<div class="stream-foot"><span class="stream-foot-note">Showing most recent · archive has 6 items total</span><a class="stream-see-all" href="pai-app-news?juris=estonia">See the full Estonia archive →</a></div>
 </section>
 
 <script>
@@ -996,7 +1042,7 @@ window.addEventListener('load', function(){
   var svg = document.getElementById('country-svg'); if(!svg) return;
   if(typeof d3 === 'undefined' || typeof topojson === 'undefined') return;
   var w = 220, h = 260;
-  var countryIso = "233";
+  var countryIso = "826";
 
   // Countries that get a cutaway inset for outlying territories. Label only —
   // the split itself is done by polygon area, not bbox.
@@ -1095,7 +1141,7 @@ window.addEventListener('load', function(){
   </div>
 </div>
 
-<div class="archetype-badge">EU MEMBER STATE · EE</div>
+<div class="archetype-badge">UNITED KINGDOM · UK</div>
 
 
 <!-- Mobile nav shim -->
