@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — GNS · Authority</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
+  --ink:#0a1729;--ink-strong:#06101e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#014486;--accent-3:#032e61;--accent-soft:#e3effc;--accent-soft-2:#cfe1f6;
+  --green:#2e844a;--green-bg:#d6f1dc;--green-fill:#2e844a;
+  --amber:#905200;--amber-bg:#fef0c7;--amber-fill:#ca8501;
+  --red:#ba0517;--red-bg:#feded8;--red-fill:#ba0517;
+  --display:'Inter',-apple-system,sans-serif;--sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --sidebar-collapsed:56px;--sidebar-expanded:280px;--header-height:52px;
+  --shadow-1:0 1px 2px rgba(10,23,41,.04);--shadow-2:0 2px 6px rgba(10,23,41,.07),0 8px 20px rgba(10,23,41,.05);
+  --radius:10px;
+  /* heat scale — solid steps, no gradients */
+  --heat-0:#f4f6fa;
+  --heat-1:#dbe5f4;
+  --heat-2:#b8ccea;
+  --heat-3:#7cabdc;
+  --heat-4:#2c7ec7;
+  --heat-5:#0a4f92;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:15px;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-width:1280px}
+a{color:var(--accent);text-decoration:none}
+button,input{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
+button{cursor:pointer}
+
+.icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden;box-shadow:var(--shadow-1)}
+.icon-sidebar:hover{width:var(--sidebar-expanded);box-shadow:var(--shadow-2)}
+.sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;gap:12px;flex-shrink:0;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+.sidebar-brand .brand-icon{width:28px;height:28px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--display);font-style:italic;font-weight:700;font-size:18px;color:#fff;letter-spacing:-.5px}
+.sidebar-brand .brand-text{font-family:var(--display);font-weight:600;font-size:18px;color:var(--ink);opacity:0;transition:opacity .15s .05s}
+.sidebar-brand .brand-text .ai{font-style:italic;font-weight:500}
+.icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
+.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:12px 8px;overflow-y:auto;overflow-x:hidden}
+.sidebar-nav-item{display:flex;align-items:center;gap:14px;height:40px;padding:0 12px;border-radius:4px;cursor:pointer;position:relative;color:var(--secondary);white-space:nowrap;flex-shrink:0;text-decoration:none}
+.sidebar-nav-item:hover{color:var(--ink);background:var(--surface-3)}
+.sidebar-nav-item.active{color:var(--accent-2);background:var(--accent-soft);font-weight:600}
+.sidebar-nav-item.active::before{content:'';position:absolute;left:-8px;top:8px;bottom:8px;width:3px;background:var(--accent);border-radius:0 3px 3px 0}
+.sidebar-nav-item svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none;flex-shrink:0}
+.sidebar-nav-item .nav-label{font-size:13.5px;font-weight:500;opacity:0;transition:opacity .15s .05s}
+.icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
+.sidebar-user{border-top:1px solid var(--border);padding:8px;flex-shrink:0;display:flex;align-items:center}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+
+.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:18px;z-index:200;box-shadow:var(--shadow-1)}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:var(--secondary);background:transparent;border:1px solid var(--border);border-radius:5px;text-decoration:none}
+.header-logout:hover{background:var(--surface-2);color:var(--ink);border-color:var(--ink-faint)}
+.header-logout svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+.main-content{margin-left:var(--sidebar-collapsed);padding-top:var(--header-height);min-height:100vh}
+.page-view{padding:26px 40px 40px;max-width:1600px;margin:0}
+
+.page-statusbar{display:grid;grid-template-columns:1fr auto;gap:20px;padding:0 0 18px;margin-bottom:22px;border-bottom:1px solid var(--border);align-items:start;min-height:55px;margin-bottom:22px}
+.ps-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--secondary);flex-wrap:wrap}
+.ps-breadcrumb a{color:var(--accent-2);font-weight:600}
+.ps-current{color:var(--ink-strong);font-weight:700}
+.ps-sep{color:var(--ink-faint)}
+.ps-scope-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;font-size:11px;font-weight:600;color:var(--accent-2);background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:4px}
+.ps-ok{color:var(--green);font-weight:600;font-size:12px}
+.ps-ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
+
+.btn{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;font-size:12.5px;font-weight:600;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--secondary);cursor:pointer}
+.btn:hover{background:var(--surface-2);border-color:var(--ink-faint);color:var(--ink)}
+.btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.page-actions{display:flex;gap:10px}
+
+.page-head{margin-bottom:16px}
+.page-title{font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong);line-height:1.1}
+.page-sub{font-size:13.5px;color:var(--secondary);margin-top:8px;max-width:820px;line-height:1.55}
+.page-sub b{color:var(--ink);font-weight:600}
+.page-sub.fine{font-size:12px;color:var(--ink-faint);margin-top:4px}
+.page-sub.fine b{color:var(--muted);font-weight:600}
+
+/* Toolbar */
+.tp-toolbar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);margin-bottom:14px;flex-wrap:wrap}
+.tp-legend{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:500}
+.tp-legend .swatches{display:inline-flex;gap:2px}
+.tp-legend .sw{width:16px;height:14px;border:1px solid var(--border-soft);border-radius:2px}
+.tp-legend .sw.s0{background:var(--heat-0)}
+.tp-legend .sw.s1{background:var(--heat-1)}
+.tp-legend .sw.s2{background:var(--heat-2)}
+.tp-legend .sw.s3{background:var(--heat-3)}
+.tp-legend .sw.s4{background:var(--heat-4)}
+.tp-legend .sw.s5{background:var(--heat-5)}
+.tp-legend .scale-ends{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.tp-sep{width:1px;height:22px;background:var(--border);margin:0 4px}
+.tp-select{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--secondary)}
+.tp-select select{font-family:inherit;font-size:12px;font-weight:600;padding:4px 6px;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--ink)}
+.tp-search-wrap{position:relative;min-width:220px;flex:1;max-width:300px;margin-left:auto}
+.tp-search{width:100%;height:32px;padding:0 10px 0 32px;background:var(--surface-2);border:1px solid var(--border);border-radius:5px;font-size:12.5px;color:var(--ink)}
+.tp-search:focus{outline:none;background:var(--surface);border-color:var(--accent)}
+.tp-search-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--muted);stroke-width:2;fill:none;pointer-events:none}
+
+.tp-mode{display:inline-flex;border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--surface-2)}
+.tp-mode-btn{height:28px;padding:0 10px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--secondary);cursor:pointer;font-size:11.5px;font-weight:600;font-family:inherit}
+.tp-mode-btn:last-child{border-right:none}
+.tp-mode-btn.on{background:var(--ink);color:#fff}
+
+/* Matrix */
+.tp-wrap{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);overflow:auto;margin-bottom:18px}
+.tp-matrix{width:100%;border-collapse:collapse;font-size:12px}
+.tp-matrix thead th{position:sticky;top:0;background:var(--surface-2);border-bottom:1px solid var(--border);padding:14px 12px 10px;font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-align:center;min-width:108px;z-index:5}
+.tp-matrix thead th.corner{text-align:left;width:220px;min-width:220px;position:sticky;left:0;z-index:10;background:var(--surface-2)}
+.tp-matrix thead th.total{width:80px;min-width:80px;background:var(--surface-3);color:var(--ink);border-left:1px solid var(--border)}
+.tp-matrix thead th .sub{display:block;font-family:var(--sans);font-size:9.5px;font-weight:500;color:var(--ink-faint);text-transform:none;letter-spacing:0;margin-top:2px}
+.tp-matrix tbody tr{border-bottom:1px solid var(--border-soft)}
+.tp-matrix tbody tr:last-child{border-bottom:none}
+.tp-matrix tbody tr:hover .tp-rowhead{background:var(--surface-3)}
+.tp-rowhead{position:sticky;left:0;background:var(--surface);padding:12px 14px;z-index:3;border-right:1px solid var(--border-soft);min-width:220px;width:220px}
+.tp-rh-top{display:flex;align-items:center;gap:10px}
+.tp-flag{width:24px;height:18px;background:var(--surface-3);border:1px solid var(--border-soft);border-radius:2px;font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--secondary);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:.02em}
+.tp-jname{font-size:13px;font-weight:600;color:var(--ink-strong);line-height:1.2}
+.tp-jsub{display:block;font-size:10.5px;color:var(--muted);margin-top:2px;font-weight:500}
+.tp-cell{padding:0;text-align:center;vertical-align:middle;border-left:1px solid var(--border-soft);cursor:pointer;height:60px;position:relative;transition:outline .08s}
+.tp-cell:hover{outline:2px solid var(--accent);outline-offset:-2px;z-index:2}
+.tp-cell.lvl-0{background:var(--heat-0)}
+.tp-cell.lvl-1{background:var(--heat-1)}
+.tp-cell.lvl-2{background:var(--heat-2)}
+.tp-cell.lvl-3{background:var(--heat-3)}
+.tp-cell.lvl-4{background:var(--heat-4)}
+.tp-cell.lvl-5{background:var(--heat-5)}
+.tp-cell.empty{background:transparent;color:var(--ink-faint)}
+.tp-cell.empty .n{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--ink-faint)}
+.tp-cell .n{display:block;font-family:var(--mono);font-size:15px;font-weight:700;font-feature-settings:'tnum' 1;line-height:1.05}
+.tp-cell.lvl-3 .n,.tp-cell.lvl-4 .n,.tp-cell.lvl-5 .n{color:#fff}
+.tp-cell.lvl-0 .n,.tp-cell.lvl-1 .n,.tp-cell.lvl-2 .n{color:var(--ink-strong)}
+.tp-cell .d{display:block;font-family:var(--mono);font-size:9.5px;font-weight:500;margin-top:2px;letter-spacing:.02em;opacity:.75}
+.tp-cell.lvl-3 .d,.tp-cell.lvl-4 .d,.tp-cell.lvl-5 .d{color:#fff}
+.tp-cell.lvl-0 .d,.tp-cell.lvl-1 .d,.tp-cell.lvl-2 .d{color:var(--muted)}
+.tp-cell .spark{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:flex-end;gap:1px;height:6px}
+.tp-cell .spark-bar{width:3px;background:currentColor;opacity:.5;border-radius:1px}
+.tp-cell .tip{position:absolute;top:-6px;left:50%;transform:translate(-50%,-100%);background:var(--ink-strong);color:#fff;font-size:10.5px;font-weight:500;padding:5px 8px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s;z-index:10;font-family:var(--sans)}
+.tp-cell:hover .tip{opacity:1}
+.tp-total{background:var(--surface-2);border-left:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink-strong);padding:8px}
+
+.tp-callout{margin:18px 0 24px;padding:14px 18px;background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:var(--radius);color:var(--accent-2);font-size:12.5px}
+.tp-callout b{color:var(--accent-2);font-weight:700}
+.tp-callout .ico{display:inline-block;width:16px;height:16px;vertical-align:-3px;margin-right:6px}
+
+.footer{border-top:1px solid var(--border);padding:20px 4px 4px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.footer .ok{color:var(--green);font-weight:600}
+.footer .ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
+.footer .left{display:flex;gap:26px;align-items:center;font-weight:500}
+
+
+
+
+
+
+
+
+
+.sidebar-nav-divider { height: 1px; background: #c8d0dc; margin: 12px 16px; flex-shrink: 0; }
+/* ==BEGIN_JUR_OVERLAY== Jurisdictions slide-in overlay (DG pattern) */
+#jur-overlay { position: fixed !important; top: 0 !important; left: var(--sidebar-collapsed, 56px); bottom: 0; width: 340px; background: #fff; border-right: 1px solid #dbe1ea; z-index: 9000; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform .32s cubic-bezier(.4,0,.2,1); box-shadow: 0 12px 40px rgba(10,23,41,0.10); visibility: hidden; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+#jur-overlay.open { transform: translateX(0) !important; visibility: visible !important; display: flex !important; pointer-events: auto !important; }
+#jur-overlay-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: calc(var(--sidebar-collapsed, 56px) + 340px); background: rgba(10,23,41,0.30); z-index: 540; opacity: 0; transition: opacity .25s; pointer-events: none; }
+#jur-overlay-backdrop.open { opacity: 1; pointer-events: auto; }
+#jur-overlay .jo-header { padding: 16px 14px 10px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+#jur-overlay .jo-title { font-size: 17px; font-weight: 600; color: #0a1729; letter-spacing: -0.01em; margin: 0; }
+#jur-overlay .jo-close { background: #eff2f7; border: none; cursor: pointer; color: #2a3548; padding: 5px; border-radius: 999px; display: flex; width: 26px; height: 26px; align-items: center; justify-content: center; }
+#jur-overlay .jo-close:hover { background: #dbe1ea; }
+#jur-overlay .jo-search { margin: 0 14px 8px; position: relative; }
+#jur-overlay .jo-search input { width: 100%; padding: 8px 12px 8px 34px; border: 1px solid #dbe1ea; border-radius: 6px; font-family: inherit; font-size: 13.5px; color: #0a1729; outline: none; background: #fff; }
+#jur-overlay .jo-search input:focus { border-color: #0176d3; box-shadow: 0 0 0 3px rgba(1,118,211,0.10); }
+#jur-overlay .jo-search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: #8a93a3; fill: none; stroke-width: 2; }
+#jur-overlay .jo-list { flex: 1; overflow-y: auto; padding: 4px 0 20px; }
+.jo-section-label { padding: 10px 18px 4px; font-size: 10.5px; font-weight: 700; color: #8a93a3; letter-spacing: 0.09em; text-transform: uppercase; }
+.jo-home-row { background: linear-gradient(90deg, #f6f7f9 0%, #ffffff 100%); }
+.jo-home-row .jo-name { font-weight: 600; color: #014486; }
+.jo-home-icon { width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; color: #0176d3; font-size: 10px; flex-shrink: 0; }
+.jo-home-row:hover { background: #eff2f7; }
+.jo-row { display: flex; align-items: center; gap: 10px; padding: 7px 18px 7px 14px; cursor: pointer; font-size: 13.5px; color: #0a1729; transition: background .1s; }
+.jo-row:hover { background: #f6f7f9; }
+.jo-row.is-active { background: #e3effc; color: #014486; font-weight: 600; }
+.jo-row .jo-caret { width: 10px; color: #8a93a3; font-size: 10px; flex-shrink: 0; transition: transform .15s; }
+.jo-row.is-open .jo-caret { transform: rotate(90deg); color: #0176d3; }
+.jo-row .jo-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #5e6878; }
+.jo-row .jo-icon svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.6; fill: none; }
+.jo-row .jo-name { flex: 1; line-height: 1.3; }
+.jo-children { display: none; padding: 2px 0 4px; }
+.jo-children.is-open { display: block; }
+.jo-children .jo-row { padding-left: 42px; font-size: 13px; color: #2a3548; }
+.jo-children .jo-row.is-federal { font-weight: 600; color: #0a1729; }
+.jo-section-sep { height: 1px; background: #ebeff5; margin: 6px 14px; }
+.jo-pinned-sep { height: 1px; background: #ebeff5; margin: 4px 42px 4px; }
+.jo-row .jo-pin-btn { opacity: 0; background: transparent; border: none; color: #8a93a3; cursor: pointer; padding: 4px 5px; border-radius: 4px; transition: opacity .12s, color .12s, background .12s; flex-shrink: 0; display: flex; align-items: center; margin-left: auto; }
+.jo-row .jo-pin-btn svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2; fill: none; }
+.jo-row:hover .jo-pin-btn { opacity: .65; }
+.jo-row .jo-pin-btn:hover { opacity: 1; color: #014486; background: #e3effc; }
+.jo-row .jo-pin-btn.is-home { opacity: 1; color: #2e844a; }
+.jo-row .jo-pin-btn.is-home svg { fill: #2e844a; stroke: #2e844a; }
+#jur-overlay .jo-hint { margin: 2px 14px 6px; padding: 8px 10px; background: #f6f7f9; border: 1px solid #ebeff5; border-radius: 6px; font-size: 11.5px; color: #5e6878; line-height: 1.4; display: flex; align-items: center; gap: 8px; }
+#jur-overlay .jo-hint svg { width: 12px; height: 12px; flex-shrink: 0; stroke: #0176d3; fill: none; stroke-width: 2; }
+#jur-overlay .jo-hint b { color: #0a1729; font-weight: 600; }
+
+#jur-overlay .jo-empty { padding: 24px 18px; color: #8a93a3; font-size: 13px; text-align: center; }
+@media (max-width: 640px) { #jur-overlay { width: 100vw; left: 0; } #jur-overlay-backdrop { display: none; } }
+
+body.jur-overlay-open .icon-sidebar { width: var(--sidebar-collapsed, 56px) !important; pointer-events: none !important; }
+body.jur-overlay-open .icon-sidebar:hover { width: var(--sidebar-collapsed, 56px) !important; }
+body.jur-overlay-open .icon-sidebar .nav-label,
+body.jur-overlay-open .icon-sidebar .brand-text { opacity: 0 !important; }
+
+/* ==END_JUR_OVERLAY== */
+
+
+.page-eyebrow { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #014486; margin-bottom: 10px; }
+.page-head { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid #ebeff5; }
+.page-head .page-title { font-size: 44px; font-weight: 700; color: #06101e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
+.page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
+
+/* Sidebar hover-expand: labels reveal + main-content shifts right so it's not covered */
+.icon-sidebar { transition: width .22s cubic-bezier(.4,0,.2,1); }
+body.sidebar-expanded .icon-sidebar { width: var(--sidebar-expanded, 240px) !important; }
+body.sidebar-expanded .icon-sidebar .sidebar-nav-item .nav-label,
+body.sidebar-expanded .icon-sidebar .sidebar-brand .brand-text,
+body.sidebar-expanded .icon-sidebar .sb-invite-body,
+body.sidebar-expanded .icon-sidebar .sidebar-user .nav-label { opacity: 1 !important; pointer-events: auto !important; }
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar { margin-left: var(--sidebar-expanded, 240px) !important; transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+body.sidebar-expanded #jur-overlay { left: var(--sidebar-expanded, 240px) !important; }
+.main-content, .header-bar { transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+
+/* ==CANONICAL_HEADER_CSS== */
+.header-bar { position: fixed; top: 0; left: var(--sidebar-collapsed); right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
+.header-bar { left: 0; padding: 0 14px; }
+.header-bar { left: 0 !important; padding-left: 60px !important; }
+.header-nav-arrows { display: flex; gap: 4px; }
+.header-nav-arrows button { width: 30px; height: 30px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.header-nav-arrows button:hover { background: var(--surface-3); color: var(--ink); }
+.header-nav-arrows button svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; }
+.header-user-name { font-size: 13px; font-weight: 500; color: var(--secondary); white-space: nowrap; }
+.header-user-name { display: none; }
+.header-search { flex: 1; max-width: 460px; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px; background: var(--surface-3); border-radius: 5px; border: 1px solid transparent; }
+.header-search:focus-within { background: var(--surface); border-color: var(--accent-soft-2); }
+.header-search svg { width: 15px; height: 15px; stroke: var(--muted); stroke-width: 2; fill: none; }
+.header-search input { flex: 1; font-size: 13px; background: transparent; }
+.header-search input::placeholder { color: var(--muted); }
+.header-search kbd { font-family: var(--mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; background: var(--surface); }
+.header-search { max-width: none; }
+.header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.home-jur-btn { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--secondary); cursor: pointer; padding: 6px 12px; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); font-weight: 500; }
+.hjb-flag { font-size: 17px; line-height: 1; }
+.header-icon-btn { width: 36px; height: 36px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: var(--muted); position: relative; }
+.header-icon-btn:hover { background: var(--surface-3); color: var(--ink); }
+.header-icon-btn svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 1.7; fill: none; }
+.header-icon-btn .badge-count { position: absolute; top: 4px; right: 3px; min-width: 17px; height: 17px; padding: 0 5px; background: var(--red-fill); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 600; border-radius: 9px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--surface); box-sizing: content-box; }
+.badge-count { position: absolute; top: 4px; right: 3px; min-width: 17px; height: 17px; padding: 0 5px; background: var(--red-fill); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 600; border-radius: 9px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--surface); box-sizing: content-box; }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+</style>
+<style id="page-authority-ico-css">
+/* Authority directory page — compact, dense, no long scroll */
+.auth-page { max-width: 1200px; }
+.auth-hero { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; padding: 22px 24px; background: #fff; border: 1px solid #ebeff5; border-radius: 10px; margin-bottom: 20px; }
+.auth-hero-left { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.auth-hero-flag { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: #014486; color: #fff; border-radius: 8px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 700; font-size: 18px; letter-spacing: 0.04em; flex-shrink: 0; }
+.auth-hero .auth-name { font-size: 24px; font-weight: 700; color: #06101e; letter-spacing: -0.015em; line-height: 1.15; margin: 0 0 2px 0; }
+.auth-hero .auth-acronym { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; font-weight: 700; color: #014486; letter-spacing: 0.08em; margin-bottom: 6px; }
+.auth-hero .auth-local-name { font-style: italic; color: #5e6878; font-size: 13.5px; margin: 4px 0 8px; line-height: 1.4; }
+.auth-hero .auth-scope-row { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12.5px; color: #5e6878; align-items: center; }
+.auth-hero .auth-scope-row .auth-on { color: #2e844a; font-weight: 600; }
+.auth-save { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 6px; border: 1px solid #0176d3; background: #0176d3; color: #fff; cursor: pointer; font-family: inherit; }
+.auth-save:hover { background: #014486; border-color: #014486; }
+.auth-save.saved { background: #2e844a; border-color: #2e844a; }
+
+.auth-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 24px; }
+.auth-card { background: #fff; border: 1px solid #ebeff5; border-radius: 10px; padding: 18px 20px; }
+.auth-card-title { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; color: #8a93a3; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.auth-card p { font-size: 13px; color: #2a3548; line-height: 1.55; margin: 0; }
+.auth-card p + p { margin-top: 8px; }
+.auth-card .ac-anchor { display: block; margin-top: 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #5e6878; text-decoration: none; }
+.auth-card .ac-anchor b { color: #014486; font-weight: 700; }
+.auth-card a.ac-anchor:hover { color: #014486; }
+.auth-card a.ac-anchor:hover b { color: #0176d3; text-decoration: underline; }
+.auth-kv { display: grid; grid-template-columns: 120px 1fr; gap: 10px; padding: 5px 0; font-size: 12.5px; line-height: 1.4; }
+.auth-kv .k { color: #8a93a3; font-weight: 500; }
+.auth-kv .v { color: #0a1729; font-weight: 600; word-break: break-word; }
+.auth-kv .v a { color: #014486; text-decoration: none; }
+.auth-kv .v a:hover { color: #0176d3; text-decoration: underline; }
+.auth-list { list-style: none; padding: 0; margin: 0; font-size: 12.5px; line-height: 1.65; }
+.auth-list li { padding: 3px 0; color: #0a1729; }
+.auth-list li a { color: #014486; text-decoration: none; }
+.auth-list li a:hover { color: #0176d3; text-decoration: underline; }
+.auth-list li::before { content: '→ '; color: #c8d0dc; font-family: 'IBM Plex Mono', ui-monospace, monospace; margin-right: 4px; }
+
+.auth-activity { background: #fff; border: 1px solid #ebeff5; border-radius: 10px; padding: 18px 20px 14px; margin-bottom: 24px; }
+.auth-activity-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+.auth-activity-head h2 { font-size: 16px; font-weight: 700; color: #0a1729; letter-spacing: -0.005em; margin: 0; }
+.auth-activity-head a { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: #014486; text-decoration: none; text-transform: uppercase; }
+.auth-activity-head a:hover { color: #0176d3; text-decoration: underline; }
+.auth-activity-row { display: grid; grid-template-columns: 60px 100px 1fr; gap: 14px; padding: 11px 4px; border-bottom: 1px solid #ebeff5; align-items: center; text-decoration: none; color: inherit; transition: background .1s; }
+.auth-activity-row:last-child { border-bottom: none; }
+.auth-activity-row:hover { background: #f8fafc; }
+.auth-activity-row .aa-date { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; color: #5e6878; font-weight: 500; }
+.auth-activity-row .aa-type { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; width: fit-content; }
+.auth-activity-row .aa-type.enf { background: #fbeecd; color: #905200; }
+.auth-activity-row .aa-type.guid { background: #e3effc; color: #014486; }
+.auth-activity-row .aa-type.case { background: #e5f3e9; color: #2e844a; }
+.auth-activity-row .aa-type.analysis { background: #f0e6fa; color: #6b2fb0; }
+.auth-activity-row .aa-type.update { background: #eff2f7; color: #5e6878; }
+.auth-activity-row .aa-h { font-size: 13.5px; font-weight: 600; color: #0a1729; line-height: 1.35; }
+
+/* Practical guidance section — curated topic tiles + recent updates rail */
+.auth-guidance { background: #fff; border: 1px solid #ebeff5; border-radius: 10px; padding: 18px 20px 14px; margin-bottom: 24px; }
+.ag-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.ag-head-text h2 { font-size: 16px; font-weight: 700; color: #0a1729; letter-spacing: -0.005em; margin: 0; }
+.ag-sub { font-size: 11.5px; color: #5e6878; margin-top: 3px; }
+.ag-source { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #014486; white-space: nowrap; flex-shrink: 0; text-decoration: none; }
+.ag-source:hover { color: #0176d3; text-decoration: underline; }
+.ag-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.ag-tile { display: flex; flex-direction: column; padding: 13px 14px 11px; border: 1px solid #ebeff5; border-radius: 8px; background: #f8fafc; text-decoration: none; color: inherit; transition: border-color .12s, background .12s; }
+.ag-tile:hover { border-color: #cfe1f6; background: #fff; }
+.ag-tile-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.ag-tag { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; }
+.ag-tag.ai { background: #ede5fb; color: #5a3996; }
+.ag-tag.priv { background: #e3effc; color: #014486; }
+.ag-tag.cyb { background: #fbeecd; color: #905200; }
+.ag-tag.cross { background: #eff2f7; color: #5e6878; }
+.ag-count { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; color: #5e6878; }
+.ag-title { font-size: 13px; font-weight: 700; color: #0a1729; margin: 0 0 5px; line-height: 1.3; }
+.ag-desc { font-size: 11.5px; color: #5e6878; margin: 0 0 9px; line-height: 1.4; flex-grow: 1; }
+.ag-foot { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; color: #8a93a3; }
+.ag-recent { border-top: 1px solid #ebeff5; padding-top: 12px; margin-top: 4px; }
+.ag-recent h3 { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8a93a3; margin: 0 0 8px; }
+.ag-recent-list { list-style: none; padding: 0; margin: 0; }
+.ag-recent-list li { display: grid; grid-template-columns: 60px 1fr 180px; gap: 14px; padding: 7px 4px; font-size: 12px; align-items: baseline; border-bottom: 1px solid #f4f6fa; }
+.ag-recent-list li:last-child { border-bottom: none; }
+.ag-recent-list .agr-date { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; color: #5e6878; }
+.ag-recent-list .agr-section { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; color: #8a93a3; text-transform: uppercase; letter-spacing: 0.05em; text-align: right; }
+.ag-recent-list a { color: #0a1729; text-decoration: none; }
+.ag-recent-list a:hover { color: #0176d3; text-decoration: underline; }
+
+/* Mobile responsive for auth grid */
+@media (max-width: 900px) { .auth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ag-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .auth-grid { grid-template-columns: 1fr; }
+  .ag-grid { grid-template-columns: 1fr; }
+  .ag-recent-list li { grid-template-columns: 50px 1fr; gap: 10px; }
+  .ag-recent-list .agr-section { display: none; }
+  .auth-hero { grid-template-columns: 1fr; gap: 14px; padding: 18px; }
+  .auth-hero-left { gap: 14px; }
+  .auth-hero-flag { width: 44px; height: 44px; font-size: 15px; }
+  .auth-hero .auth-name { font-size: 20px; }
+  .auth-save { width: 100%; justify-content: center; height: 42px; }
+  .auth-activity-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 4px; }
+  .auth-activity-row .aa-type { margin-top: 2px; }
+  .auth-kv { grid-template-columns: 100px 1fr; font-size: 12px; }
+}
+</style>
+<script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
+<script>
+  window.addEventListener("error", function(e) {
+    if (window.GlitchTip) {
+      GlitchTip.captureException(e.error || e);
+    }
+  });
+  window.addEventListener("unhandledrejection", function(e) {
+    if (window.GlitchTip) {
+      GlitchTip.captureException(e.reason);
+    }
+  });
+</script>
+<script src="https://cdn.glitchtip.com/glitchtip.min.js"></script>
+<script>
+  if (window.GlitchTip) {
+    GlitchTip.init({
+      apiUrl: "https://errors.principlesai.org/api/0/",
+      projectId: 1
+    });
+  }
+</script>
+<script id="pai-clerk-sdk" async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ" src="https://clerk.principlesai.org/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript" onload="window.__paiClerkLoaded=true;window.dispatchEvent(new Event('pai:clerk-loaded'))"></script>
+<script id="pai-clerk-v1">
+(function(){
+  if(window.__paiClerkV1) return;
+  window.__paiClerkV1 = true;
+
+  function setHeaderName(user){
+    var el = document.querySelector('.header-user-name');
+    if(!el) return;
+    if(user && user.firstName){
+      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+    }
+    // if no user, leave hardcoded — pai-app-* is public by design
+  }
+
+  function boot(){
+    if(!window.Clerk || typeof window.Clerk.load !== 'function') return;
+    window.Clerk.load().then(function(){
+      setHeaderName(window.Clerk.user);
+      // react to sign-in / sign-out events
+      if(typeof window.Clerk.addListener === 'function'){
+        window.Clerk.addListener(function(state){ setHeaderName(state && state.user); });
+      }
+    }).catch(function(){ /* no-op, keep hardcoded fallback */ });
+  }
+
+  if(window.__paiClerkLoaded){ boot(); }
+  else { window.addEventListener('pai:clerk-loaded', boot); }
+})();
+</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
+</style>
+</head>
+<body>
+<nav class="icon-sidebar">
+  <a href="pai-home-private" class="sidebar-brand" style="text-decoration:none;color:inherit;">
+    <div class="brand-icon" style="background:var(--accent); padding:0; overflow:hidden;"><img src="pai-mark-white-128.png" alt="PAI" style="width:70%;height:70%;object-fit:contain;display:block;"></div>
+    <span class="brand-text">Principles<span class="ai">AI</span></span>
+  </a>
+  <div class="sidebar-nav-items">
+    <a class="sidebar-nav-item" href="pai-home-private" style="text-decoration:none;"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></a>
+      <a class="sidebar-nav-item" href="pai-app-ai-notes" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
+    <div class="sidebar-nav-item" onclick="openJurisdictions()" style="cursor:pointer;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span></div>
+    <a class="sidebar-nav-item" href="pai-app-news" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
+    <div class="sidebar-regions-zone">
+      <div class="sidebar-nav-divider"></div>
+      <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
+      <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
+      <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <div class="sidebar-nav-divider"></div>
+      <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
+      <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
+      <a class="sidebar-nav-item" href="pai-app-watchlist" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="nav-label">Watchlist</span></a>
+      <a class="sidebar-nav-item" href="pai-app-settings" style="text-decoration:none;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></a>
+    </div>
+  </div>
+</nav>
+<header class="header-bar">
+  <div class="header-nav-arrows">
+    <button><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <span class="header-user-name"></span>
+  <div class="header-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search jurisdictions, enforcement, case law…">
+    <kbd>⌘K</kbd>
+  </div>
+  <div class="header-right">
+    <div class="home-jur-btn"><span class="hjb-flag">&#x1F1EC;&#x1F1E7;</span><span>Set home</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <a href="pai-app-settings" class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></a><a href="#" class="header-logout" onclick="paiLogout(event)" title="Log out"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view auth-page">
+
+  <div class="page-statusbar">
+    <div class="ps-left">
+      <span class="ps-breadcrumb">
+        <a href="pai-home-private">Home</a>
+        <span class="ps-sep">›</span>
+        <a href="pai-app-authorities">Authorities</a>
+        <span class="ps-sep">›</span>
+        <span class="ps-current">GNS</span>
+      </span>
+      <span class="ps-sep">·</span>
+      <span class="ps-scope-chip">PT · Cyber agency</span>
+      <span class="ps-sep">·</span>
+      <span class="ps-ok">Verified · 22 Apr 2026</span>
+    </div>
+  </div>
+
+  <!-- HERO CARD -->
+  <div class="auth-hero">
+    <div class="auth-hero-left">
+      <div class="auth-hero-flag">GNS</div>
+      <div>
+        <div class="auth-acronym">PT · Cyber agency</div>
+        <h1 class="auth-name">Gabinete Nacional de Segurança</h1>
+        <div class="auth-scope-row">
+          <span><a href="pai-app-juris-portugal" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">Portugal</a></span>
+          <span>·</span>
+          <span>Cyber agency</span>
+          <span>·</span>
+          <span class="auth-on">● Verified</span>
+        </div>
+      </div>
+    </div>
+    <div class="auth-hero-right">
+      <button class="auth-save" onclick="this.classList.toggle('saved'); this.textContent = this.classList.contains('saved') ? '● Saved to watchlist' : '● Save to watchlist';">● Save to watchlist</button>
+    </div>
+  </div>
+
+  <!-- DIRECTORY GRID — slim v0, 3 cards from AT2 fields only -->
+  <div class="auth-grid">
+    <div class="auth-card">
+      <div class="auth-card-title">Identity</div>
+      <div class="auth-kv"><span class="k">Name</span><span class="v">Gabinete Nacional de Segurança</span></div>
+      <div class="auth-kv"><span class="k">Type</span><span class="v">Cyber agency</span></div>
+      <div class="auth-kv"><span class="k">Verified</span><span class="v">Verified</span></div>
+      <div class="auth-kv"><span class="k">Verified date</span><span class="v">22 Apr 2026</span></div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-card-title">Source</div>
+      <div class="auth-kv"><span class="k">Web</span><span class="v"><a href="https://www.gns.gov.pt/" target="_blank" rel="noopener" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">gns.gov.pt &#x2197;</a></span></div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-card-title">Jurisdiction</div>
+      <div class="auth-kv"><span class="k">Country/state</span><span class="v"><a href="pai-app-juris-portugal" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">Portugal</a></span></div>
+      <div class="auth-kv"><span class="k">ISO</span><span class="v">PT</span></div>
+      <div class="auth-kv"><span class="k">Region</span><span class="v">Europe</span></div>
+      <div class="auth-kv"><span class="k">Instruments</span><span class="v">— (indexing pending)</span></div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="auth-card" style="grid-column: 1 / -1; margin-bottom: 24px;">
+    <div class="auth-card-title">Notes &amp; provenance</div>
+    <p style="font-size: 13px; color: #5e6878; line-height: 1.55;">Seeded from AT1 (recpdmR8NHn3FM4bL) on 2026-04-22. Original Body Type: Cyber Agency</p>
+  </div>
+
+  <!-- PRACTICAL GUIDANCE — empty-state until per-authority guidance pipeline lands -->
+  <div class="auth-guidance" id="guidance">
+    <div class="ag-head">
+      <div class="ag-head-text">
+        <h2>Practical guidance</h2>
+        <div class="ag-sub">Per-authority guidance topic tiles indexing pending. Until wired, see the authority's website.</div>
+      </div>
+      <a class="ag-source" href="https://www.gns.gov.pt/" target="_blank" rel="noopener">GNS website &#x2197;</a>
+    </div>
+    <div style="padding: 18px 0; color: #5e6878; font-size: 13px; line-height: 1.55;">
+      Curated guidance topics for GNS will appear here once the per-authority guidance pipeline is online.
+    </div>
+  </div>
+
+  <!-- RECENT ACTIVITY — PG-driven slot, empty until activity wiring lands -->
+  <div class="auth-activity">
+    <div class="auth-activity-head">
+      <h2>Recent activity from GNS</h2>
+      <a href="pai-app-news?authority=gns">See all →</a>
+    </div>
+    <div style="padding: 14px 4px; font-size: 12.5px; color: #5e6878; line-height: 1.55;">Activity feed indexing pending · per-authority citation tracking comes online with Phase 2.D.</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==BEGIN_JUR_HTML== Jurisdictions overlay (DG inline-expand pattern) -->
+<div id="jur-overlay-backdrop" onclick="closeJurisdictions()"></div>
+<div id="jur-overlay">
+  <div class="jo-header">
+    <h3 class="jo-title">Jurisdictions</h3>
+    <button class="jo-close" onclick="closeJurisdictions()" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+  </div>
+  <div class="jo-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="jo-search-input" placeholder="Search" oninput="filterJurList(this.value)" autocomplete="off">
+  </div>
+  <div class="jo-hint"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-12a8 8 0 1116 0c0 7.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg><span>Tap a row to open. <b>Pin icon</b> sets home.</span></div>
+  <div class="jo-list" id="jo-list"></div>
+</div>
+<!-- ==END_JUR_HTML== -->
+<script src="jurisdictions.js"></script>
+<script id="jur-overlay-js">
+(function(){
+  if(window.openJurisdictions)return;
+  // Federal hierarchies the data file doesn't encode with parent fields
+  var CHILDREN_OF = {
+    'Germany':['Baden-Württemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg','Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia','Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt','Schleswig-Holstein','Thuringia'],
+    'USA':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States of America':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'Canada':['Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
+    'Australia':['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory'],
+    'United Arab Emirates':['Abu Dhabi Global Market','Dubai Health Care City','Dubai International Financial Centre','Emirate of Abu Dhabi','Emirate of Dubai','United Arab Emirates Federal'],
+    'Qatar':['Qatar Financial Centre','Qatar State']
+  };
+  // Reverse map: child name → parent
+  var PARENT_OF = {};
+  Object.keys(CHILDREN_OF).forEach(function(p){ CHILDREN_OF[p].forEach(function(c){ PARENT_OF[c]=p; }); });
+  // Canonical name dedupe (for data duplicates)
+  var NAME_CANONICAL = { 'Bosnia and Herzegovina':'Bosnia & Herzegovina' };
+  function canonical(n){ return NAME_CANONICAL[n] || n; }
+
+  function slugify(n){
+    var s = (n||'').toLowerCase();
+    s = s.replace(/[&\/'()]/g, '');
+    s = s.replace(/[^a-z0-9]+/g, '-');
+    s = s.replace(/-+/g, '-').replace(/^-|-$/g,'');
+    return s;
+  }
+
+
+
+  var JURIS_PAGES = {
+    'United Kingdom':'pai-app-juris-uk.html',
+    'Germany':'pai-app-juris-germany.html',
+    'California':'pai-app-juris-california.html',
+    'Quebec':'pai-app-juris-quebec.html',
+    'OECD':'pai-app-juris-oecd.html'
+  };
+
+  var SKIP_EXPAND = {'United Kingdom':1};
+
+  var INTERNATIONAL = ['OECD','Council of Europe','G7','International'];
+
+  var REGION_PIN = { 'Europe':'European Union', 'Africa':'African Union', 'Asia Pacific':'ASEAN' };
+
+  var TOP_COUNTRIES = ['Canada','Mexico','USA','United States of America','United States'];
+
+  function tl(name){
+    var m={'USA':'United States of America','United States':'United States of America'};
+    return m[name]||name;
+  }
+
+  function buildTree(){
+    if(typeof jurData==='undefined')return null;
+    var top = [];
+    var regionBuckets = {};
+    var seenCanonical = {};
+    Object.keys(jurData).forEach(function(name){
+      var d=jurData[name]; if(!d)return;
+      if(d.parent || PARENT_OF[name]) return;
+      var cn = canonical(name);
+      if(seenCanonical[cn]) return;
+      seenCanonical[cn] = 1;
+      if(d.region === 'Global') return;
+      var region = d.region;
+      
+      if(cn === 'Mexico') region = 'North America';
+      if(!regionBuckets[region]) regionBuckets[region] = { name: region, countries: [] };
+      // Hard-filter: North America region only allows Canada / Mexico / United States
+      if(region === 'North America' && !({'Canada':1,'Mexico':1,'United States':1,'United States of America':1,'USA':1})[cn]) return;
+      regionBuckets[region].countries.push(cn);
+    });
+
+    // Top-level entries in explicit order
+    var topCountryMap = {};
+    top.forEach(function(t){ topCountryMap[t.name]=t; });
+    var orderedTopCountries = ['Canada','Mexico','United States of America']
+      .map(function(n){ return topCountryMap[n]; })
+      .filter(Boolean);
+
+    var REGION_ORDER = ['Europe','North America','Caribbean','Latin America','Asia Pacific','Middle East','Africa'];
+    var regions = [];
+    REGION_ORDER.forEach(function(r){ if(regionBuckets[r]) regions.push(regionBuckets[r]); });
+
+    // Sort countries in each region: pin supranational first, separator, alphabetical rest
+    regions.forEach(function(r){
+      var pin = REGION_PIN[r.name];
+      r.countries.sort(function(a,b){
+        if(a===pin)return -1; if(b===pin)return 1;
+        return a.localeCompare(b);
+      });
+    });
+
+    return { international: INTERNATIONAL, topCountries: orderedTopCountries, regions: regions };
+  }
+
+  var tree = null;
+  function getTree(){ if(!tree) tree = buildTree(); return tree || {international:[],topCountries:[],regions:[]}; }
+
+  function iconGlobe(){
+    return '<span class="jo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>';
+  }
+  function iconFlag(){
+    return '<span class="jo-icon"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>';
+  }
+  function iconChevron(open){
+    return '<span class="jo-caret">'+(open?'&#9662;':'&#9656;')+'</span>';
+  }
+
+  function rowEl(name, kind, opts){
+    opts = opts || {};
+    var el = document.createElement('div');
+    el.className = 'jo-row' + (opts.federal?' is-federal':'');
+    var _curHome = (function(){try{return localStorage.getItem('pai-home-jurisdiction')||''}catch(e){return ''}})();
+    var _isHome = (_curHome && _curHome === name);
+    var _pin = '<button class="jo-pin-btn'+(_isHome?' is-home':'')+'" title="'+(_isHome?'This is your home':'Set as home')+'" aria-label="Set '+name+' as home"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-12a8 8 0 1116 0c0 7.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg></button>';
+    if(opts.expandable){
+      el.setAttribute('data-expandable','1');
+      el.innerHTML = iconChevron(false) + '<span class="jo-name">'+name+'</span>' + _pin;
+    } else {
+      el.innerHTML = '<span class="jo-caret" style="visibility:hidden"></span><span class="jo-name">'+name+'</span>' + _pin;
+    }
+    if(opts.onClick) el.onclick = opts.onClick;
+    var _pinBtn = el.querySelector('.jo-pin-btn');
+    if(_pinBtn){
+      _pinBtn.onclick = function(ev){
+        ev.stopPropagation();
+        try{ localStorage.setItem('pai-home-jurisdiction', name); }catch(e){}
+        var _ov = document.getElementById('jur-overlay'); if(_ov) _ov.removeAttribute('data-built');
+        if(typeof buildList==='function') buildList();
+        if(typeof renderHomeJurBadge==='function') renderHomeJurBadge();
+      };
+    }
+    return el;
+  }
+
+  function buildList(){
+    var t = getTree();
+    var listEl = document.getElementById('jo-list');
+    listEl.innerHTML = '';
+
+    // HOME jurisdiction (if set) — pinned at very top, subtly styled
+    var _home = (function(){try{return localStorage.getItem('pai-home-jurisdiction')||''}catch(e){return ''}})();
+    if(_home){
+      var hlbl = document.createElement('div');
+      hlbl.className = 'jo-section-label';
+      hlbl.textContent = 'My home';
+      listEl.appendChild(hlbl);
+      var hr = document.createElement('div');
+      hr.className = 'jo-row jo-home-row';
+      hr.innerHTML = '<span class="jo-caret" style="visibility:hidden"></span><span class="jo-home-icon">\u25C6</span><span class="jo-name">'+_home+'</span><button class="jo-home-clear" title="Clear home jurisdiction">Clear</button>';
+      hr.querySelector('.jo-home-clear').onclick = function(ev){ ev.stopPropagation(); try{localStorage.removeItem('pai-home-jurisdiction')}catch(e){} document.getElementById('jur-overlay').removeAttribute('data-built'); buildList(); if(typeof renderHomeJurBadge==='function') renderHomeJurBadge(); };
+      hr.onclick = function(){ goJurisdiction(_home); };
+      listEl.appendChild(hr);
+      var hsep = document.createElement('div'); hsep.className = 'jo-section-sep'; listEl.appendChild(hsep);
+    }
+
+    // Regions (Europe, North America, Caribbean, Latin America, Asia Pacific, Middle East, Africa)
+    t.regions.forEach(function(r){
+      listEl.appendChild(buildRegionRow(r));
+    });
+
+    // Thin separator then International section at the BOTTOM
+    var sep = document.createElement('div'); sep.className='jo-section-sep'; listEl.appendChild(sep);
+    var secLbl = document.createElement('div');
+    secLbl.className = 'jo-section-label'; secLbl.textContent = 'International';
+    listEl.appendChild(secLbl);
+    t.international.forEach(function(n){
+      listEl.appendChild(rowEl(n, 'country', { onClick: function(){ goJurisdiction(n); }}));
+    });
+  }
+
+  function buildRegionRow(region){
+    var wrap = document.createElement('div'); wrap.className='jo-region-wrap';
+    var row = rowEl(region.name, 'region', { expandable: true, onClick: function(){ toggleExpand(wrap, row, function(){ renderRegionChildren(wrap, region); }); }});
+    wrap.appendChild(row);
+    var children = document.createElement('div'); children.className='jo-children';
+    wrap.appendChild(children);
+    return wrap;
+  }
+
+  function renderRegionChildren(wrap, region){
+    var container = wrap.querySelector('.jo-children');
+    if(container.dataset.filled==='1') return;
+    container.dataset.filled='1';
+    var pin = REGION_PIN[region.name];
+    region.countries.forEach(function(c, idx){
+      var d = (typeof jurData!=='undefined') ? jurData[c] : null;
+      var hasChildren = (d && d.children && d.children.length>0) || (CHILDREN_OF[c] && CHILDREN_OF[c].length>0);
+      if(hasChildren && !SKIP_EXPAND[c]){
+        container.appendChild(buildExpandableCountryRow(c, c, (d && d.children && d.children.length) ? d.children : (CHILDREN_OF[c] || [])));
+      } else {
+        container.appendChild(rowEl(c, 'country', { onClick: function(){ goJurisdiction(c); }}));
+      }
+      if(pin && idx===0 && region.countries.length>1){
+        var sep=document.createElement('div'); sep.className='jo-pinned-sep'; container.appendChild(sep);
+      }
+    });
+  }
+
+  function buildExpandableCountryRow(name, dataKey, children){
+    var wrap = document.createElement('div');
+    var row = rowEl(name, 'country', { expandable: true, onClick: function(ev){
+      // Toggle (not navigate) if we're already on this jurisdiction's page OR a child of it
+      var cur = window.PAI_JURIS;
+      var isHere = cur === dataKey || cur === name;
+      var isChild = cur && (PARENT_OF[cur] === dataKey || PARENT_OF[cur] === name);
+      if(isHere || isChild){
+        toggleExpand(wrap, row, function(){ fillFederalChildren(wrap, name, children); });
+        return;
+      }
+      location.href = 'pai-app-juris-' + slugify(dataKey) + '.html';
+    }});
+    wrap.appendChild(row);
+    var cont = document.createElement('div'); cont.className='jo-children';
+    wrap.appendChild(cont);
+    return wrap;
+  }
+
+  function fillFederalChildren(wrap, parentName, children){
+    var container = wrap.querySelector('.jo-children');
+    if(container.dataset.filled==='1') return;
+    container.dataset.filled='1';
+    // Federal entry pinned first
+    var federalLabel = (parentName==='United States of America'||parentName==='USA')
+      ? 'United States (USA) Federal'
+      : parentName + ' Federal';
+    var fedRow = document.createElement('div'); fedRow.className='jo-row is-federal';
+    fedRow.innerHTML='<span class="jo-caret" style="visibility:hidden"></span><span class="jo-name">'+federalLabel+'</span>';
+    fedRow.onclick = function(){ goJurisdiction(parentName); };
+    container.appendChild(fedRow);
+    var sep=document.createElement('div'); sep.className='jo-pinned-sep'; container.appendChild(sep);
+    // Alphabetical children
+    var sorted = children.slice().sort();
+    sorted.forEach(function(ch){
+      container.appendChild(rowEl(ch, 'country', { onClick: function(){ goJurisdiction(ch); }}));
+    });
+  }
+
+  function toggleExpand(wrap, row, onOpen){
+    var cont = wrap.querySelector('.jo-children');
+    var opening = !cont.classList.contains('is-open');
+    if(opening){
+      if(onOpen) onOpen();
+      cont.classList.add('is-open');
+      row.classList.add('is-open');
+      // rotate caret
+      var caret=row.querySelector('.jo-caret'); if(caret) caret.innerHTML='&#9662;';
+    } else {
+      cont.classList.remove('is-open');
+      row.classList.remove('is-open');
+      var caret=row.querySelector('.jo-caret'); if(caret) caret.innerHTML='&#9656;';
+    }
+  }
+
+  function openExpandInOverlayByParent(parentName){
+    if(!parentName) return;
+    var all = document.querySelectorAll('#jo-list .jo-row');
+    for(var i=0;i<all.length;i++){
+      var nameEl = all[i].querySelector('.jo-name');
+      if(nameEl && nameEl.textContent === parentName && all[i].hasAttribute('data-expandable')){
+        all[i].click();
+        // Scroll into view
+        all[i].scrollIntoView({ block:'center' });
+        return;
+      }
+    }
+  }
+
+  function goJurisdiction(name){
+    closeJurisdictions();
+    var slug = slugify(name);
+    location.href = 'pai-app-juris-' + slug + '.html';
+  }
+  window.goJurisdiction = goJurisdiction;
+
+  function openJurisdictions(){
+    var o=document.getElementById('jur-overlay'), bd=document.getElementById('jur-overlay-backdrop');
+    if(!o.dataset.built){ buildList(); o.dataset.built='1'; }
+    var list=document.getElementById('jo-list'); if(list) list.scrollTop = 0;
+    var inp2=document.getElementById('jo-search-input'); if(inp2) inp2.value = '';
+    o.classList.add('open'); bd.classList.add('open');
+    document.body.classList.add('jur-overlay-open');
+    // Auto-expand if the current page represents a jurisdiction
+    var cur = window.PAI_JURIS;
+    if(cur){
+      var parent = PARENT_OF[cur] || (CHILDREN_OF[cur] ? cur : null);
+      if(parent){ setTimeout(function(){ expandByName(parent); }, 50); }
+    }
+    var inp=document.getElementById('jo-search-input'); if(inp){ setTimeout(function(){inp.focus()},250); }
+  }
+  
+  function expandByName(name){
+    // If target is inside a region that's lazy-rendered, expand that region first
+    if(typeof jurData !== 'undefined' && jurData[name]){
+      var region = jurData[name].region;
+      
+      if(name === 'Mexico') region = 'North America';
+      var wraps = document.querySelectorAll('#jo-list > .jo-region-wrap');
+      for(var w=0; w<wraps.length; w++){
+        var rn = wraps[w].querySelector(':scope > .jo-row .jo-name');
+        if(rn && rn.textContent.trim() === region){
+          var rrow = wraps[w].querySelector(':scope > .jo-row');
+          if(!rrow.classList.contains('is-open')) rrow.click();
+          break;
+        }
+      }
+    }
+    // Now look for target (after region expansion has rendered children)
+    setTimeout(function(){
+      var all = document.querySelectorAll('#jo-list .jo-row');
+      for(var i=0; i<all.length; i++){
+        var nameEl = all[i].querySelector('.jo-name');
+        if(nameEl && nameEl.textContent.trim() === name){
+          if(all[i].hasAttribute('data-expandable') && !all[i].classList.contains('is-open')){
+            all[i].click();
+          }
+          try { all[i].scrollIntoView({block:'nearest'}); } catch(e){}
+          return;
+        }
+      }
+    }, 120);
+  }
+  window.expandByName = expandByName;
+
+  window.openJurisdictions = openJurisdictions;
+
+  function closeJurisdictions(){
+    var o=document.getElementById('jur-overlay'), bd=document.getElementById('jur-overlay-backdrop');
+    o.classList.remove('open'); bd.classList.remove('open');
+    document.body.classList.remove('jur-overlay-open');
+  }
+  window.closeJurisdictions = closeJurisdictions;
+
+  function filterJurList(q){
+    q = (q||'').trim().toLowerCase();
+    var rows = document.querySelectorAll('#jo-list .jo-row');
+    if(!q){
+      rows.forEach(function(r){ r.style.display=''; });
+      // Close all expanded
+      document.querySelectorAll('#jo-list .jo-children.is-open').forEach(function(c){ c.classList.remove('is-open'); });
+      document.querySelectorAll('#jo-list .jo-row.is-open').forEach(function(r){ r.classList.remove('is-open'); var ct=r.querySelector('.jo-caret'); if(ct) ct.innerHTML='&#9656;'; });
+      return;
+    }
+    // Pre-fill all regions' children so search can match inside
+    document.querySelectorAll('.jo-region-wrap').forEach(function(w){
+      var rn = w.querySelector('.jo-name'); if(!rn) return;
+      // lazy-fill children if empty
+      var cont = w.querySelector('.jo-children');
+      if(cont && cont.dataset.filled!=='1'){
+        var t=getTree(); var match=t.regions.filter(function(r){return r.name===rn.textContent})[0];
+        if(match) renderRegionChildren(w, match);
+      }
+      if(cont) cont.classList.add('is-open');
+    });
+    // Show matching rows and their ancestors
+    rows.forEach(function(r){
+      var name = (r.querySelector('.jo-name')||{}).textContent || '';
+      var hit = name.toLowerCase().indexOf(q) !== -1;
+      r.style.display = hit ? '' : 'none';
+      if(hit){
+        // Make sure parent chain is visible
+        var p = r.parentElement;
+        while(p && p.id !== 'jo-list'){
+          if(p.classList && (p.classList.contains('jo-children') || p.classList.contains('jo-region-wrap'))){
+            p.style.display = '';
+            if(p.classList.contains('jo-children')) p.classList.add('is-open');
+          }
+          p = p.parentElement;
+        }
+      }
+    });
+    // Section label always visible
+    document.querySelectorAll('.jo-section-label').forEach(function(l){ l.style.display=''; });
+  }
+  window.filterJurList = filterJurList;
+
+  // Expand-on-arrival (federal drill landing)
+  function expandOnArrival(){
+    var parent = null;
+    try { parent = sessionStorage.getItem('pai-jur-expand-on-arrive'); sessionStorage.removeItem('pai-jur-expand-on-arrive'); } catch(e){}
+    if(!parent) return;
+    // Open overlay quietly then expand — but Dave wants closed-on-arrival.
+    // So: do not auto-open the overlay. Persist the expand state so NEXT time user opens, it expands.
+    try { sessionStorage.setItem('pai-jur-prev-expanded', parent); } catch(e){}
+  }
+
+  function applyPrevExpandedOnOpen(){
+    var parent = null;
+    try { parent = sessionStorage.getItem('pai-jur-prev-expanded'); } catch(e){}
+    if(!parent) return;
+    setTimeout(function(){ openExpandInOverlayByParent(parent); }, 30);
+  }
+
+  // Esc to close
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeJurisdictions(); }});
+
+  // --- Home jurisdiction persistence (sidebar pin + header badge) ---
+  function getHome(){ try { return localStorage.getItem('pai-home-jurisdiction') || ''; } catch(e) { return ''; } }
+  function renderHomeJurPin(){
+    var zone = document.querySelector('.sidebar-regions-zone'); if(!zone) return;
+    var old = document.getElementById('home-jur-pinned'); if(old) old.remove();
+    var suppressed = zone.querySelector('.sidebar-nav-divider[data-suppressed-for-pin]');
+    if(suppressed){ suppressed.style.display = ''; suppressed.removeAttribute('data-suppressed-for-pin'); }
+  }
+  function renderHomeJurBadge(){
+    var h = getHome();
+    document.querySelectorAll('.home-jur-btn').forEach(function(btn){
+      btn.onclick = openJurisdictions;
+      btn.style.cursor = 'pointer';
+      var spans = btn.querySelectorAll('span');
+      var labelSpan = null;
+      for(var i=0;i<spans.length;i++){ if(!spans[i].classList.contains('hjb-flag')) { labelSpan = spans[i]; break; } }
+      var flagSpan = btn.querySelector('.hjb-flag');
+      if(!h){
+        if(flagSpan) flagSpan.textContent = '';
+        if(labelSpan) labelSpan.textContent = 'Set home';
+      } else {
+        if(flagSpan) flagSpan.textContent = '';
+        if(labelSpan) labelSpan.textContent = h;
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    expandOnArrival();
+    renderHomeJurPin();
+    renderHomeJurBadge();
+  });
+
+  // (deploy14) prev-expanded scroll-hook removed — overlay always opens with full list visible
+})();
+</script>
+<script id="pai-logout-js">
+(function(){
+  if(window.paiLogout) return;
+  window.paiLogout = function(ev){
+    if(ev && ev.preventDefault) ev.preventDefault();
+    try{
+      ['pai-onboarding-v2','pai-onboarding-v1','pai-tour-v1','pai-last-visit','pai-home-jurisdiction'].forEach(function(k){
+        try{ localStorage.removeItem(k); }catch(e){}
+      });
+    }catch(e){}
+    if(window.Clerk && typeof window.Clerk.signOut === 'function'){
+      try{
+        window.Clerk.signOut().then(function(){ window.location.href = '/sign-in'; });
+        return;
+      }catch(e){}
+    }
+    window.location.href = '/sign-in';
+  };
+})();
+</script>
+
+<!-- Privacy notice for analytics -->
+<div style="font-size:11px; color:var(--muted); text-align:center; padding:12px 0; border-top:1px solid var(--border-soft); margin-top:20px;">
+  <p>Your usage is tracked locally by Plausible Analytics and GlitchTip (self-hosted in Germany). <a href="/settings#privacy" style="color:var(--accent); text-decoration:underline;">Opt out anytime in Settings.</a> <a href="https://principlesai.org/trust#s15" target="_blank" style="color:var(--accent); text-decoration:underline;">Learn more.</a></p>
+</div>
+
+<div class="nav-scrim" aria-hidden="true"></div>
+</body>
+</html>
