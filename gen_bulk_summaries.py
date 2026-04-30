@@ -22,7 +22,7 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 PG_URL           = "postgresql://pai:BjypxrDDsN8QImnjNzUQIo7YI8EyRH7@127.0.0.1:15432/pai"
 NEWS_JSON        = Path("news.json")
 DRAFTS_FILE      = Path("demo_summaries_apr29.json")
-MODEL            = "claude-haiku-4-5-20251001"
+MODEL            = "claude-sonnet-4-6"
 MAX_CONCURRENT   = 6
 MIN_SOURCE_LEN   = 250   # chars
 

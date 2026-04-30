@@ -341,15 +341,85 @@ body { min-width: 320px !important; }
   .pulse-line { font-size: 11px !important; }
 }
 
-/* Mobile hamburger toggle button */
-.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
-.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
-.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
-@media (max-width: 640px) {
+/* ==END_MOBILE_RESPONSIVE== */
+
+/* === MOBILE NAV (deploy113) — burger + .mkt-nav drawer + .header-right reveal === */
+.mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 8px; left: 8px;
+  z-index: 600;
+  width: 44px; height: 44px;
+  background: #fff;
+  border: 1px solid #dbe1ea;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(10,23,41,0.12);
+  padding: 0;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: rgba(10,23,41,0.1);
+}
+.mobile-nav-toggle:active { background: #f0f4fa; }
+.mobile-nav-toggle svg { width: 22px; height: 22px; stroke: #0d2e42; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,23,41,0.4);
+  z-index: 450;
+}
+@media (max-width: 720px) {
   .mobile-nav-toggle { display: flex; }
   body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+  body.mobile-nav-open .header-bar { z-index: 500 !important; }
+  body.mobile-nav-open .mkt-nav {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    top: 52px; left: 0;
+    width: 280px;
+    height: calc(100vh - 52px);
+    background: #fff;
+    z-index: 500;
+    padding: 20px 16px 16px;
+    gap: 0;
+    margin: 0;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    overflow-y: auto;
+  }
+  body.mobile-nav-open .mkt-nav a {
+    width: 100%;
+    padding: 14px 8px;
+    border-bottom: 1px solid #ebeff5;
+    font-size: 15px;
+  }
 }
-/* ==END_MOBILE_RESPONSIVE== */
+@media (max-width: 640px) {
+  .header-right { display: none; }
+  body.mobile-nav-open .header-right {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    bottom: 16px; left: 16px;
+    width: 248px;
+    z-index: 501;
+    gap: 8px;
+    margin: 0;
+    padding: 16px 0 0;
+    border-top: 1px solid #ebeff5;
+  }
+  body.mobile-nav-open .header-right .btn {
+    width: 100%;
+    justify-content: center;
+    height: 44px !important;
+  }
+}
+/* === END MOBILE NAV (deploy113) === */
+
 </style>
 <!-- Crisp chat -->
 <script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
@@ -434,8 +504,8 @@ data-* attributes map directly to Airtable fields for client-side filter/sort.
     <a href="pai-pricing.html">Pricing</a>
   </nav>
   <div class="header-right">
-    <a href="/pai-signin.html" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
-    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
+    <a href="/pai-signin" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
+    <a href="/pai-signin?mode=signup" class="btn btn-primary" style="text-decoration:none; height:36px;">Get access →</a>
   </div>
 </header>
 
