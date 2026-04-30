@@ -502,7 +502,7 @@ body { min-width: 320px !important; }
     var el = document.querySelector('.header-user-name');
     if(!el) return;
     if(user && user.firstName){
-      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
     }
     // if no user, leave hardcoded — pai-app-* is public by design
   }
@@ -650,7 +650,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <div class="auth-card-title">Citation</div>
       <div class="auth-kv"><span class="k">Name</span><span class="v">Lei Geral de Proteção de Dados (LGPD)</span></div>
       <div class="auth-kv"><span class="k">Type</span><span class="v">Law</span></div>
-      <div class="auth-kv"><span class="k">Topic</span><span class="v">—</span></div>
+      <div class="auth-kv"><span class="k">Topic</span><span class="v">Privacy</span></div>
       <div class="auth-kv"><span class="k">Verified</span><span class="v">Unverified</span></div>
     </div>
     <div class="auth-card">

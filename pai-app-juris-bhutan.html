@@ -540,6 +540,31 @@ body { min-width: 320px !important; }
 .impl-section.collapsed .impl-see-all .impl-collapse-label{display:none}
 .impl-section.collapsed .impl-see-all .impl-expand-label{display:inline}
 
+/* Implementation Status — three tabbed boards (AI Act / NIS2 / GDPR) */
+.impl-tabs-section{margin-top:48px;margin-bottom:64px}
+.impl-tabs-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 4px 0}
+.impl-tabs-section .impl-tabs-sub{font-size:12.5px;color:#5e6878;margin-bottom:14px}
+.impl-tabnav{display:flex;gap:0;border-bottom:1px solid #ebeff5;margin-bottom:0}
+.impl-tab{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5e6878;background:transparent;border:none;padding:10px 16px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:8px}
+.impl-tab:hover{color:#014486}
+.impl-tab.active{color:#014486;border-bottom-color:#014486}
+.impl-tab .tab-count{font-size:10px;font-weight:600;color:#8a93a3;background:#ebeff5;padding:1px 6px;border-radius:3px;letter-spacing:0}
+.impl-tab.active .tab-count{color:#014486;background:#e3effc}
+.impl-panel{display:none}
+.impl-panel.active{display:block}
+.aiact-list{border-top:1px solid #ebeff5}
+.aiact-row{display:grid;grid-template-columns:200px 1fr auto;gap:18px;padding:14px 4px;border-bottom:1px solid #ebeff5;align-items:start}
+.aiact-row .aiact-label{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;color:#5e6878;text-transform:uppercase;line-height:1.5}
+.aiact-row .aiact-text{font-size:13.5px;color:#0a1729;line-height:1.5}
+.aiact-row .aiact-text a.aiact-source{color:#0176d3;text-decoration:none;font-weight:600;border-bottom:1px solid #cfe1f5}
+.aiact-row .aiact-text a.aiact-source:hover{border-bottom-color:#0176d3}
+.aiact-row .aiact-stub{font-size:13.5px;color:#8a93a3;line-height:1.5;font-style:italic}
+.aiact-pending{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#905200;background:#fbeecd;padding:2px 7px;border-radius:3px;height:fit-content;align-self:start;white-space:nowrap}
+.aiact-verified{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#2e844a;background:#e5f3e9;padding:2px 7px;border-radius:3px;height:fit-content;align-self:start;white-space:nowrap}
+.aiact-unsourced{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5e6878;background:#ebeff5;padding:2px 7px;border-radius:3px;height:fit-content;align-self:start;white-space:nowrap}
+.impl-panel-sub{font-size:12.5px;color:#5e6878;margin:14px 0 12px}
+@media (max-width: 720px){ .aiact-row{grid-template-columns:1fr;gap:6px} .aiact-row .aiact-pending,.aiact-row .aiact-verified,.aiact-row .aiact-unsourced{justify-self:start} .impl-tab{padding:10px 10px;font-size:10px} }
+
 /* Authorities — card grid (max 18, then See all). Replaces the prior flat list. */
 .authorities-section{margin-top:72px}
 .authorities-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 4px 0}
@@ -682,7 +707,7 @@ body { min-width: 320px !important; }
     var el = document.querySelector('.header-user-name');
     if(!el) return;
     if(user && user.firstName){
-      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
     }
     // if no user, leave hardcoded — pai-app-* is public by design
   }
@@ -803,6 +828,30 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <span class="ps-sep">·</span>
         <span class="ps-ok">Coverage engine operational</span>
       </div>
+      <div class="page-actions">
+        <div class="view-toggle" data-juris-slug="bhutan" data-juris-name="Bhutan">
+          <div class="vt-seg" role="tablist" aria-label="Page view">
+            <button class="vt-seg-btn active" data-view="A" role="tab"><span class="vt-dot"></span>Newsroom</button>
+            <button class="vt-seg-btn" data-view="D" role="tab"><span class="vt-dot"></span>Domain-first</button>
+          </div>
+          <button class="vt-save" type="button">Save as default</button>
+          <div class="vt-pop">
+            <button class="vt-opt" data-action="country">
+              <span class="vt-opt-title">Default for <strong>Bhutan</strong> <span class="vt-badge" style="display:none">current</span></span>
+              <span class="vt-opt-sub">Pin this view for Bhutan only. Other jurisdictions follow the global default.</span>
+            </button>
+            <button class="vt-opt" data-action="global">
+              <span class="vt-opt-title">Default for <strong>all jurisdictions</strong> <span class="vt-badge" style="display:none">current</span></span>
+              <span class="vt-opt-sub">Make this the default across the site. Per-country pins still override.</span>
+            </button>
+            <div class="vt-opt-divider"></div>
+            <button class="vt-opt" data-action="reset">
+              <span class="vt-opt-title">Reset Bhutan to global default</span>
+              <span class="vt-opt-sub">Removes the per-country pin. Bhutan will follow the global setting.</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- PAGE HEAD -->
@@ -816,23 +865,149 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <div class="ph-map" aria-hidden="true"><svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg></div>
     </div>
 
-    <section><div class="law-section"><div class="law-section-head"><h2>Regulatory snapshot</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group empty" data-d="ai"><div class="domain-row"><div class="dr-label">AI</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">0</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">0/3</div></div></div></div></section>
-    
+    <!-- ═══ VIEW A — NEWSROOM (default) ═══ -->
+    <div class="juris-view is-active" data-view="A">
+    <!-- Recent activity FIRST — contemporary / time-saving framing per Dave 2026-04-30 -->
 <section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
-      <div class="latest-card" style="opacity:0.7;color:#5e6878">No recent activity recorded yet.</div>
+      <div class="latest-empty" style="grid-column:1/-1;background:#fff;border:1px solid #ebeff5;border-radius:10px;padding:36px 40px;text-align:center">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0176d3" stroke-width="1.5" style="opacity:.5;margin-bottom:14px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <div style="font-family:'Source Serif 4',serif;font-size:18px;color:#0a1729;margin-bottom:8px">No published records yet for Bhutan</div>
+        <div style="font-size:14px;color:#5e6878;line-height:1.6;max-width:520px;margin:0 auto 18px">We&rsquo;re monitoring official sources in this jurisdiction. New enforcement actions, guidance, consultations, and case law will appear here as they&rsquo;re published and reviewed by our research team.</div>
+        <a href="#" onclick="event.preventDefault();return false" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#0176d3;text-decoration:none;padding:8px 16px;border:1px solid #0176d3;border-radius:8px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Notify me when records appear</span></a>
+      </div>
 </div>
 <a class="latest-see-all" href="pai-app-news?juris=bhutan">See all Bhutan items →</a>
 </section>
 
-    <section class="impl-section" id="impl-section"><div class="impl-section-head"><h2>Implementation status</h2><div class="impl-sub">Coverage in progress for Bhutan.</div></div><div class="impl-cards"><div class="empty-msg">Legislation tracking in progress — headline instruments not yet mapped.</div></div></section>
+    <section><div class="law-section"><div class="law-section-head"><h2>Key Legislation</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group empty" data-d="ai"><div class="domain-row"><div class="dr-label">AI</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">0</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">0/3</div></div></div></div></section>
 
-<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">3 of 3 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card" href="pai-app-authority-bhutan-infocomm-and-media-authority"><div class="ac-head"><span class="ac-type">Telecoms regulator</span></div><div class="ac-name">Bhutan InfoComm and Media Authority</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-royal-monetary-authority-of-bhutan"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Royal Monetary Authority of Bhutan</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-government-technology-agency-bhutan"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Government Technology Agency Bhutan</div><div class="ac-foot">View authority →</div></a></div></section>
+    
 
-<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for Bhutan — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-bhutan-infocomm-and-media-authority"><div class="gs-card-head"><span class="gs-badge">Telecoms regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Bhutan InfoComm and Media Authority</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-royal-monetary-authority-of-bhutan"><div class="gs-card-head"><span class="gs-badge">Financial regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Royal Monetary Authority of Bhutan</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-government-technology-agency-bhutan"><div class="gs-card-head"><span class="gs-badge">Government agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Government Technology Agency Bhutan</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
+    
 
-<section class="stream-section"><h2 class="sr-h" style="font-size:18px;margin:0 0 14px;letter-spacing:-0.01em;color:#0a1729">Activity stream</h2><div style="padding:14px 0;color:#5e6878;font-size:13px">No tracked activity yet for Bhutan.</div></section>
+<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">3 of 3 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card" href="pai-app-authority-bima"><div class="ac-head"><span class="ac-type">Telecoms regulator</span></div><div class="ac-name">Bhutan InfoComm and Media Authority</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rmab"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Royal Monetary Authority of Bhutan</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-gtab"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Government Technology Agency Bhutan</div><div class="ac-foot">View authority →</div></a></div></section>
+
+<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for Bhutan — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-bima"><div class="gs-card-head"><span class="gs-badge">Telecoms regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Bhutan InfoComm and Media Authority</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-rmab"><div class="gs-card-head"><span class="gs-badge">Financial regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Royal Monetary Authority of Bhutan</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-gtab"><div class="gs-card-head"><span class="gs-badge">Government agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Government Technology Agency Bhutan</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
+
+
+    </div><!-- /view-A -->
+
+    <!-- ═══ VIEW D — DOMAIN-FIRST ═══ -->
+    <div class="juris-view" data-view="D">
+      <!-- Domain panel as the hero element (re-uses snapshot_html — Key Legislation per AI/Privacy/Cyber) -->
+      <div class="df-domain-hero">
+        <section><div class="law-section"><div class="law-section-head"><h2>Key Legislation</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group empty" data-d="ai"><div class="domain-row"><div class="dr-label">AI</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">0</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">0/3</div></div></div></div></section>
+      </div>
+
+      <!-- Two-column secondary: Recent activity (left) + Implementation status (right) -->
+      <div class="df-secondary-grid">
+        <div>
+<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
+      <div class="latest-empty" style="grid-column:1/-1;background:#fff;border:1px solid #ebeff5;border-radius:10px;padding:36px 40px;text-align:center">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0176d3" stroke-width="1.5" style="opacity:.5;margin-bottom:14px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <div style="font-family:'Source Serif 4',serif;font-size:18px;color:#0a1729;margin-bottom:8px">No published records yet for Bhutan</div>
+        <div style="font-size:14px;color:#5e6878;line-height:1.6;max-width:520px;margin:0 auto 18px">We&rsquo;re monitoring official sources in this jurisdiction. New enforcement actions, guidance, consultations, and case law will appear here as they&rsquo;re published and reviewed by our research team.</div>
+        <a href="#" onclick="event.preventDefault();return false" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#0176d3;text-decoration:none;padding:8px 16px;border:1px solid #0176d3;border-radius:8px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Notify me when records appear</span></a>
+      </div>
+</div>
+<a class="latest-see-all" href="pai-app-news?juris=bhutan">See all Bhutan items →</a>
+</section>
+        </div>
+        <div>
+
+
+        </div>
+      </div>
+
+      <!-- Reference rail at the bottom -->
+      <div class="df-ref-rail">
+<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">3 of 3 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card" href="pai-app-authority-bima"><div class="ac-head"><span class="ac-type">Telecoms regulator</span></div><div class="ac-name">Bhutan InfoComm and Media Authority</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rmab"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Royal Monetary Authority of Bhutan</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-gtab"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Government Technology Agency Bhutan</div><div class="ac-foot">View authority →</div></a></div></section>
+<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for Bhutan — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-bima"><div class="gs-card-head"><span class="gs-badge">Telecoms regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Bhutan InfoComm and Media Authority</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-rmab"><div class="gs-card-head"><span class="gs-badge">Financial regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Royal Monetary Authority of Bhutan</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-gtab"><div class="gs-card-head"><span class="gs-badge">Government agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Government Technology Agency Bhutan</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
+
+      </div>
+    </div><!-- /view-D -->
+
+    <div class="vt-toast" id="vt-toast"></div>
 
 <script>
+/* ─── Juris page view toggle (Newsroom A / Domain-first D) ─── */
+(function(){
+  var KEYS = { global: 'pai-juris-view-default', overrides: 'pai-juris-view-overrides' };
+  var wrap = document.querySelector('.view-toggle');
+  if (!wrap) return;
+  var slug = wrap.dataset.jurisSlug;
+  var name = wrap.dataset.jurisName;
+  var segA = wrap.querySelector('.vt-seg-btn[data-view="A"]');
+  var segD = wrap.querySelector('.vt-seg-btn[data-view="D"]');
+  var saveBtn = wrap.querySelector('.vt-save');
+  var pop = wrap.querySelector('.vt-pop');
+  var optCountry = wrap.querySelector('[data-action="country"]');
+  var optGlobal = wrap.querySelector('[data-action="global"]');
+  var optReset = wrap.querySelector('[data-action="reset"]');
+  var badgeCountry = optCountry.querySelector('.vt-badge');
+  var badgeGlobal = optGlobal.querySelector('.vt-badge');
+  var toast = document.getElementById('vt-toast');
+  var viewA = document.querySelector('.juris-view[data-view="A"]');
+  var viewD = document.querySelector('.juris-view[data-view="D"]');
+
+  function getGlobal(){ return localStorage.getItem(KEYS.global) || 'A'; }
+  function setGlobal(v){ localStorage.setItem(KEYS.global, v); }
+  function getOverrides(){ try { return JSON.parse(localStorage.getItem(KEYS.overrides) || '{}'); } catch(e) { return {}; } }
+  function setOverride(s, v){ var o = getOverrides(); o[s] = v; localStorage.setItem(KEYS.overrides, JSON.stringify(o)); }
+  function clearOverride(s){ var o = getOverrides(); delete o[s]; localStorage.setItem(KEYS.overrides, JSON.stringify(o)); }
+  function effective(){ return getOverrides()[slug] || getGlobal(); }
+
+  var current = effective();
+
+  function render(){
+    if (current === 'A'){ viewA.classList.add('is-active'); viewD.classList.remove('is-active'); }
+    else { viewD.classList.add('is-active'); viewA.classList.remove('is-active'); }
+    segA.classList.toggle('active', current === 'A');
+    segD.classList.toggle('active', current === 'D');
+    var ov = getOverrides()[slug];
+    var gd = getGlobal();
+    var effDefault = ov || gd;
+    segA.classList.toggle('is-default', effDefault === 'A');
+    segD.classList.toggle('is-default', effDefault === 'D');
+    badgeCountry.style.display = (ov === current) ? '' : 'none';
+    badgeGlobal.style.display = (gd === current && !ov) ? '' : 'none';
+    if (ov){
+      optReset.removeAttribute('disabled');
+    } else {
+      optReset.setAttribute('disabled', 'true');
+    }
+  }
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function(){ toast.classList.remove('show'); }, 2400);
+  }
+
+  function switchView(v){ if (v === current) return; current = v; render(); }
+
+  segA.addEventListener('click', function(){ switchView('A'); });
+  segD.addEventListener('click', function(){ switchView('D'); });
+  saveBtn.addEventListener('click', function(e){ e.stopPropagation(); pop.classList.toggle('open'); saveBtn.classList.toggle('open'); });
+  document.addEventListener('click', function(e){ if (!pop.contains(e.target) && e.target !== saveBtn) { pop.classList.remove('open'); saveBtn.classList.remove('open'); } });
+  optCountry.addEventListener('click', function(){
+    setOverride(slug, current); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
+    showToast(name + ' pinned to ' + (current === 'A' ? 'Newsroom' : 'Domain-first'));
+  });
+  optGlobal.addEventListener('click', function(){
+    setGlobal(current); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
+    showToast('Default for all jurisdictions: ' + (current === 'A' ? 'Newsroom' : 'Domain-first'));
+  });
+  optReset.addEventListener('click', function(){
+    if (optReset.hasAttribute('disabled')) return;
+    clearOverride(slug); current = getGlobal(); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
+    showToast(name + ' pin removed — following global default');
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { pop.classList.remove('open'); saveBtn.classList.remove('open'); } });
+  render();
+})();
+
 function toggleDomain(grp){
   if(!grp || grp.classList.contains('empty')) return;
   var wasOpen = grp.classList.contains('is-open');
@@ -995,6 +1170,44 @@ window.addEventListener('load', function(){
 .page-head .page-title { font-size: 44px; font-weight: 700; color: #06101e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
 .page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
 .page-head .page-sub.fine { font-size: 12.5px; color: #8a93a3; margin-top: 6px; }
+
+/* ==VIEW TOGGLE (A=Newsroom / D=Domain-first) — added 2026-04-30== */
+.page-actions .view-toggle { display: inline-flex; gap: 8px; align-items: center; position: relative; }
+.page-actions .vt-seg { display: inline-flex; background: #f6f7f9; border: 1px solid #ebeff5; border-radius: 8px; padding: 3px; gap: 0; position: relative; }
+.page-actions .vt-seg-btn { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #5e6878; background: transparent; border: 0; padding: 6px 11px; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color .2s, background .2s; }
+.page-actions .vt-seg-btn:hover { color: #06101e; }
+.page-actions .vt-seg-btn.active { background: #fff; color: #06101e; box-shadow: 0 1px 3px rgba(10,23,41,.06); }
+.page-actions .vt-seg-btn .vt-dot { width: 5px; height: 5px; border-radius: 50%; background: #0176d3; opacity: 0; transition: opacity .15s; }
+.page-actions .vt-seg-btn.is-default .vt-dot { opacity: 1; }
+.page-actions .vt-save { background: #fff; border: 1px solid #ebeff5; border-radius: 8px; padding: 6px 11px; cursor: pointer; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #06101e; display: inline-flex; align-items: center; gap: 6px; transition: background .15s, border-color .15s; }
+.page-actions .vt-save:hover { background: #f6f7f9; border-color: #cfe1f5; }
+.page-actions .vt-save::after { content: '▾'; font-size: 9px; color: #5e6878; margin-left: 2px; transition: transform .15s; }
+.page-actions .vt-save.open::after { transform: rotate(180deg); }
+.vt-pop { position: absolute; top: calc(100% + 6px); right: 0; z-index: 50; background: #fff; border: 1px solid #ebeff5; border-radius: 10px; box-shadow: 0 12px 32px rgba(10,23,41,.10); padding: 6px; min-width: 320px; opacity: 0; transform: translateY(-6px) scale(.98); pointer-events: none; transform-origin: top right; transition: opacity .2s, transform .2s; }
+.vt-pop.open { opacity: 1; transform: none; pointer-events: auto; }
+.vt-opt { width: 100%; text-align: left; background: transparent; border: 0; padding: 10px 12px; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; transition: background .15s; }
+.vt-opt:hover { background: #f6f7f9; }
+.vt-opt-title { font-size: 13px; font-weight: 600; color: #06101e; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.vt-opt-title .vt-badge { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 9.5px; font-weight: 700; letter-spacing: .06em; color: #2e844a; background: #e5f3e9; padding: 2px 6px; border-radius: 3px; }
+.vt-opt-sub { font-size: 11.5px; color: #5e6878; line-height: 1.4; }
+.vt-opt[disabled] { opacity: .5; cursor: not-allowed; }
+.vt-opt[disabled]:hover { background: transparent; }
+.vt-opt-divider { height: 1px; background: #ebeff5; margin: 4px 8px; }
+.vt-toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px); background: #06101e; color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; box-shadow: 0 12px 36px rgba(10,23,41,.25); z-index: 100; opacity: 0; transition: opacity .35s, transform .35s; display: flex; align-items: center; gap: 10px; }
+.vt-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.vt-toast::before { content: '✓'; color: #2e844a; font-weight: 700; font-size: 14px; background: rgba(255,255,255,.1); width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+
+.juris-view { display: none; }
+.juris-view.is-active { display: block; }
+
+/* Domain-First (D) layout — re-uses the same rendered slots in a different arrangement */
+.df-domain-hero { margin-bottom: 36px; }
+.df-secondary-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; margin-top: 36px; }
+.df-secondary-grid > div { min-width: 0; }
+.df-ref-rail { margin-top: 36px; }
+@media (max-width: 920px) { .df-secondary-grid { grid-template-columns: 1fr; } }
+/* ==END VIEW TOGGLE== */
+
 /* ==END_CANONICAL_PAGE_CHROME== */
 </style>
 <button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>

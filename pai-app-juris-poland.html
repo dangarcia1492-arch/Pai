@@ -540,6 +540,31 @@ body { min-width: 320px !important; }
 .impl-section.collapsed .impl-see-all .impl-collapse-label{display:none}
 .impl-section.collapsed .impl-see-all .impl-expand-label{display:inline}
 
+/* Implementation Status — three tabbed boards (AI Act / NIS2 / GDPR) */
+.impl-tabs-section{margin-top:48px;margin-bottom:64px}
+.impl-tabs-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 4px 0}
+.impl-tabs-section .impl-tabs-sub{font-size:12.5px;color:#5e6878;margin-bottom:14px}
+.impl-tabnav{display:flex;gap:0;border-bottom:1px solid #ebeff5;margin-bottom:0}
+.impl-tab{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5e6878;background:transparent;border:none;padding:10px 16px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:8px}
+.impl-tab:hover{color:#014486}
+.impl-tab.active{color:#014486;border-bottom-color:#014486}
+.impl-tab .tab-count{font-size:10px;font-weight:600;color:#8a93a3;background:#ebeff5;padding:1px 6px;border-radius:3px;letter-spacing:0}
+.impl-tab.active .tab-count{color:#014486;background:#e3effc}
+.impl-panel{display:none}
+.impl-panel.active{display:block}
+.aiact-list{border-top:1px solid #ebeff5}
+.aiact-row{display:grid;grid-template-columns:200px 1fr auto;gap:18px;padding:14px 4px;border-bottom:1px solid #ebeff5;align-items:start}
+.aiact-row .aiact-label{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;color:#5e6878;text-transform:uppercase;line-height:1.5}
+.aiact-row .aiact-text{font-size:13.5px;color:#0a1729;line-height:1.5}
+.aiact-row .aiact-text a.aiact-source{color:#0176d3;text-decoration:none;font-weight:600;border-bottom:1px solid #cfe1f5}
+.aiact-row .aiact-text a.aiact-source:hover{border-bottom-color:#0176d3}
+.aiact-row .aiact-stub{font-size:13.5px;color:#8a93a3;line-height:1.5;font-style:italic}
+.aiact-pending{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#905200;background:#fbeecd;padding:2px 7px;border-radius:3px;height:fit-content;align-self:start;white-space:nowrap}
+.aiact-verified{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#2e844a;background:#e5f3e9;padding:2px 7px;border-radius:3px;height:fit-content;align-self:start;white-space:nowrap}
+.aiact-unsourced{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5e6878;background:#ebeff5;padding:2px 7px;border-radius:3px;height:fit-content;align-self:start;white-space:nowrap}
+.impl-panel-sub{font-size:12.5px;color:#5e6878;margin:14px 0 12px}
+@media (max-width: 720px){ .aiact-row{grid-template-columns:1fr;gap:6px} .aiact-row .aiact-pending,.aiact-row .aiact-verified,.aiact-row .aiact-unsourced{justify-self:start} .impl-tab{padding:10px 10px;font-size:10px} }
+
 /* Authorities — card grid (max 18, then See all). Replaces the prior flat list. */
 .authorities-section{margin-top:72px}
 .authorities-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 4px 0}
@@ -682,7 +707,7 @@ body { min-width: 320px !important; }
     var el = document.querySelector('.header-user-name');
     if(!el) return;
     if(user && user.firstName){
-      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
     }
     // if no user, leave hardcoded — pai-app-* is public by design
   }
@@ -803,6 +828,30 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <span class="ps-sep">·</span>
         <span class="ps-ok">Coverage engine operational</span>
       </div>
+      <div class="page-actions">
+        <div class="view-toggle" data-juris-slug="poland" data-juris-name="Poland">
+          <div class="vt-seg" role="tablist" aria-label="Page view">
+            <button class="vt-seg-btn active" data-view="A" role="tab"><span class="vt-dot"></span>Newsroom</button>
+            <button class="vt-seg-btn" data-view="D" role="tab"><span class="vt-dot"></span>Domain-first</button>
+          </div>
+          <button class="vt-save" type="button">Save as default</button>
+          <div class="vt-pop">
+            <button class="vt-opt" data-action="country">
+              <span class="vt-opt-title">Default for <strong>Poland</strong> <span class="vt-badge" style="display:none">current</span></span>
+              <span class="vt-opt-sub">Pin this view for Poland only. Other jurisdictions follow the global default.</span>
+            </button>
+            <button class="vt-opt" data-action="global">
+              <span class="vt-opt-title">Default for <strong>all jurisdictions</strong> <span class="vt-badge" style="display:none">current</span></span>
+              <span class="vt-opt-sub">Make this the default across the site. Per-country pins still override.</span>
+            </button>
+            <div class="vt-opt-divider"></div>
+            <button class="vt-opt" data-action="reset">
+              <span class="vt-opt-title">Reset Poland to global default</span>
+              <span class="vt-opt-sub">Removes the per-country pin. Poland will follow the global setting.</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- PAGE HEAD -->
@@ -816,8 +865,9 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <div class="ph-map" aria-hidden="true"><svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg></div>
     </div>
 
-    <section><div class="law-section"><div class="law-section-head"><h2>Regulatory snapshot</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group" data-d="ai"><div class="domain-row" onclick="toggleDomain(this.parentElement)"><div class="dr-label">AI</div><div class="dr-content"><strong>Poland AI Act Implementation Bill (KRiBSI)</strong> <span class="muted">· Proposed</span></div><div class="dr-meta"><span class="dr-chip partial">● PROPOSED</span></div><div class="dr-chev">▾</div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">7</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">1/3</div></div></div></div></section>
-    
+    <!-- ═══ VIEW A — NEWSROOM (default) ═══ -->
+    <div class="juris-view is-active" data-view="A">
+    <!-- Recent activity FIRST — contemporary / time-saving framing per Dave 2026-04-30 -->
 <section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">3 most recent · 4 approved</div></div><div class="latest-grid">
       <a class="latest-card" href="pai-app-news?juris=poland">
         <div class="lc-meta"><span class="lc-date">27 Apr</span><span class="lc-type">Update</span></div>
@@ -838,11 +888,15 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 <a class="latest-see-all" href="pai-app-news?juris=poland">See all Poland items →</a>
 </section>
 
-    <section class="impl-section collapsed" id="impl-section"><div class="impl-section-head"><h2>Implementation status</h2><div class="impl-sub">Where Poland stands on each headline instrument</div></div><div class="impl-cards"><div class="impl-card"><div class="impl-card-top"><div class="impl-domain">—</div><span class="status-badge na">● UNKNOWN</span></div><div class="impl-name">Agenda for the 55th session of the Polish Parliament (Sejm)</div><div class="impl-desc">—</div></div><div class="impl-card"><div class="impl-card-top"><div class="impl-domain">—</div><span class="status-badge na">● UNKNOWN</span></div><div class="impl-name">Resolutions adopted by the Polish Parliament (Sejm) at its 54th session</div><div class="impl-desc">—</div></div><div class="impl-card"><div class="impl-card-top"><div class="impl-domain">—</div><span class="status-badge na">● UNKNOWN</span></div><div class="impl-name">Polish Parliament Legislative Projects</div><div class="impl-desc">—</div></div><div class="impl-card"><div class="impl-card-top"><div class="impl-domain">—</div><span class="status-badge na">● UNKNOWN</span></div><div class="impl-name">AI Systems Act (project UC71)</div><div class="impl-desc">—</div></div><div class="impl-card"><div class="impl-card-top"><div class="impl-domain">—</div><span class="status-badge na">● UNKNOWN</span></div><div class="impl-name">Polish Parliament (Sejm) Session Agenda - April 14-15, 2026</div><div class="impl-desc">—</div></div><div class="impl-card"><div class="impl-card-top"><div class="impl-domain">—</div><span class="status-badge na">● UNKNOWN</span></div><div class="impl-name">Laws considered during the 54th session of the Polish Parliament (Sejm)</div><div class="impl-desc">—</div></div><div class="impl-card"><div class="impl-card-top"><div class="impl-domain">AI</div><span class="status-badge partial">● PROPOSED</span></div><div class="impl-name">Poland AI Act Implementation Bill (KRiBSI)</div><div class="impl-desc">Status: Proposed · Date: 2025-01-01</div></div></div></section>
+    <section><div class="law-section"><div class="law-section-head"><h2>Key Legislation</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group" data-d="ai"><div class="domain-row" onclick="toggleDomain(this.parentElement)"><div class="dr-label">AI</div><div class="dr-content"><strong>Poland AI Act Implementation Bill (KRiBSI)</strong> <span class="muted">· Proposed</span></div><div class="dr-meta"><span class="dr-chip partial">● PROPOSED</span></div><div class="dr-chev">▾</div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">7</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">1/3</div></div></div></div></section>
 
-<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">14 of 14 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card is-major" href="pai-app-authority-cert-polska"><div class="ac-head"><span class="ac-type">Cyber agency</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">CERT Polska</div><div class="ac-foot">View authority →</div></a><a class="auth-card is-major" href="pai-app-authority-urzad-ochrony-danych-osobowych"><div class="ac-head"><span class="ac-type">DPA</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">Urzad Ochrony Danych Osobowych</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-office-of-competition-and-consumer-protection"><div class="ac-head"><span class="ac-type">Competition authority</span></div><div class="ac-name">Office of Competition and Consumer Protection</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-office-of-electronic-communications-poland"><div class="ac-head"><span class="ac-type">Telecoms regulator</span></div><div class="ac-name">Office of Electronic Communications Poland</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-polish-financial-supervision-authority"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Polish Financial Supervision Authority</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-council-of-ministers-rada-ministrow"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Council of Ministers (Rada Ministrow)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-pa-stwowa-inspekcja-pracy"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Państwowa Inspekcja Pracy</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rzecznik-praw-dziecka"><div class="ac-head"><span class="ac-type">Other</span></div><div class="ac-name">Rzecznik Praw Dziecka</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rzecznik-praw-pacjenta"><div class="ac-head"><span class="ac-type">Other</span></div><div class="ac-name">Rzecznik Praw Pacjenta</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-constitutional-tribunal-of-poland"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Constitutional Tribunal of Poland</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-polish-parliament-sejm"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">Polish Parliament (Sejm)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-polish-supreme-court"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Polish Supreme Court</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-supreme-administrative-court-of-poland"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Supreme Administrative Court of Poland</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-supreme-court-of-poland"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Supreme Court of Poland</div><div class="ac-foot">View authority →</div></a></div></section>
+    <section class="impl-tabs-section"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:4px"><h2 style="margin:0">Implementation Status</h2><a href="pai-app-tables-regulation-tracker" style="display:inline-flex;align-items:center;gap:6px;background:#0176d3;color:#fff;border:1px solid #0176d3;border-radius:6px;padding:6px 12px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .15s,border-color .15s">Compare in tracker →</a></div><div class="impl-tabs-sub">EU AI Act, NIS2, and GDPR designations for Poland. Each claim links to its primary source.</div><div class="impl-tabnav" role="tablist"><button class="impl-tab active" data-tab="aiact" role="tab" aria-selected="true">EU AI Act <span class="tab-count">2/6</span></button><button class="impl-tab" data-tab="nis2" role="tab" aria-selected="false">NIS2 <span class="tab-count">1/5</span></button><button class="impl-tab" data-tab="gdpr" role="tab" aria-selected="false">GDPR <span class="tab-count">2/5</span></button></div><div class="impl-panel active" data-panel="aiact" role="tabpanel"><div class="impl-panel-sub">Per-state designations under the AI Act (Regulation (EU) 2024/1689) for Poland.</div><div class="aiact-list"><div class="aiact-row"><div class="aiact-label">Market Surveillance Authority</div><div class="aiact-text">As of 26 September 2025, Poland has not notified an AI Act market surveillance authority to the European Commission, despite the 2 August 2025 designation deadline. <a class="aiact-source" href="https://digital-strategy.ec.europa.eu/en/policies/market-surveillance-authorities-under-ai-act" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">Notifying Authority</div><div class="aiact-text">As of 26 September 2025, Poland has not notified an AI Act notifying authority to the European Commission, despite the 2 August 2025 designation deadline. <a class="aiact-source" href="https://digital-strategy.ec.europa.eu/en/policies/market-surveillance-authorities-under-ai-act" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">Fundamental Rights Authorities</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">Regulatory Sandbox</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">Penalties Framework</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">National AI Law / Framework</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div></div></div><div class="impl-panel" data-panel="nis2" role="tabpanel"><div class="impl-panel-sub">NIS2 Directive (EU 2022/2555) transposition and competent-authority status for Poland.</div><div class="aiact-list"><div class="aiact-row"><div class="aiact-label">NIS2 Transposition</div><div class="aiact-text">As of 1 July 2025, the European Commission had issued Poland a reasoned opinion (7 May 2025) for failing to notify complete transposition of the NIS2 Directive (EU 2022/2555). Member States had two months to respond before potential CJEU referral. <a class="aiact-source" href="https://digital-strategy.ec.europa.eu/en/policies/nis-transposition" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">Competent Authority</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">Single Point of Contact</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">CSIRT</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">National Cybersecurity Strategy</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div></div></div><div class="impl-panel" data-panel="gdpr" role="tabpanel"><div class="impl-panel-sub">GDPR (Regulation (EU) 2016/679) supervisory framework and national derogations for Poland.</div><div class="aiact-list"><div class="aiact-row"><div class="aiact-label">Supervisory Authority (DPA)</div><div class="aiact-text">Per the European Data Protection Board&#39;s official members register, the supervisory authority designated by Poland under Article 51 of the GDPR is listed as: Urząd Ochrony Danych Osobowych (Personal Data Protection Office). <a class="aiact-source" href="https://www.edpb.europa.eu/about-edpb/about-edpb/members_en" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">Lead Supervisory Authority</div><div class="aiact-text">Per the European Data Protection Board&#39;s official members register, Urząd Ochrony Danych Osobowych (Personal Data Protection Office) represents Poland on the EDPB. The lead supervisory authority for any specific cross-border processing case under Article 56 GDPR is determined by the controller&#39;s main establishment, not by a per-country designation. <a class="aiact-source" href="https://www.edpb.europa.eu/about-edpb/about-edpb/members_en" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">National Implementing Law</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">DPIA Mandatory List</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">Data Breach Reporting Rules</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div></div></div><script>(function(){var tabs=document.querySelectorAll(".impl-tabs-section .impl-tab");var panels=document.querySelectorAll(".impl-tabs-section .impl-panel");tabs.forEach(function(t){t.addEventListener("click",function(){var k=t.dataset.tab;tabs.forEach(function(x){x.classList.remove("active");x.setAttribute("aria-selected","false");});t.classList.add("active");t.setAttribute("aria-selected","true");panels.forEach(function(p){p.classList.toggle("active",p.dataset.panel===k);});});});})();</script></section>
 
-<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for Poland — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-cert-polska"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">CERT Polska</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-urzad-ochrony-danych-osobowych"><div class="gs-card-head"><span class="gs-badge">DPA</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Urzad Ochrony Danych Osobowych</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-office-of-competition-and-consumer-protection"><div class="gs-card-head"><span class="gs-badge">Competition authority</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Office of Competition and Consumer Protection</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-office-of-electronic-communications-poland"><div class="gs-card-head"><span class="gs-badge">Telecoms regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Office of Electronic Communications Poland</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
+    
+
+<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">13 of 13 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card is-major" href="pai-app-authority-cert-ioyqnb"><div class="ac-head"><span class="ac-type">Cyber agency</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">CERT Polska</div><div class="ac-foot">View authority →</div></a><a class="auth-card is-major" href="pai-app-authority-uodo"><div class="ac-head"><span class="ac-type">DPA</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">Urzad Ochrony Danych Osobowych</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-occp"><div class="ac-head"><span class="ac-type">Competition authority</span></div><div class="ac-name">Office of Competition and Consumer Protection</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-oecp"><div class="ac-head"><span class="ac-type">Telecoms regulator</span></div><div class="ac-name">Office of Electronic Communications Poland</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-pfsa"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Polish Financial Supervision Authority</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rada-ministrow"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Council of Ministers (Rada Ministrow)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-pip"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Państwowa Inspekcja Pracy</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rpd"><div class="ac-head"><span class="ac-type">Other</span></div><div class="ac-name">Rzecznik Praw Dziecka</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rpp"><div class="ac-head"><span class="ac-type">Other</span></div><div class="ac-name">Rzecznik Praw Pacjenta</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-ctp"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Constitutional Tribunal of Poland</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-sejm"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">Polish Parliament (Sejm)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-psc"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Polish Supreme Court</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-sacp"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Supreme Administrative Court of Poland</div><div class="ac-foot">View authority →</div></a></div></section>
+
+<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for Poland — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-cert-ioyqnb"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">CERT Polska</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-uodo"><div class="gs-card-head"><span class="gs-badge">DPA</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Urzad Ochrony Danych Osobowych</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-occp"><div class="gs-card-head"><span class="gs-badge">Competition authority</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Office of Competition and Consumer Protection</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-oecp"><div class="gs-card-head"><span class="gs-badge">Telecoms regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Office of Electronic Communications Poland</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
 
 <section class="stream-section">
 <h2 class="sr-h" style="font-size:18px;margin:0 0 14px;letter-spacing:-0.01em;color:#0a1729">Activity stream</h2>
@@ -857,8 +911,145 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </div>
 <div class="stream-foot"><span class="stream-foot-note">Showing most recent · archive has 4 items total</span><a class="stream-see-all" href="pai-app-news?juris=poland">See the full Poland archive →</a></div>
 </section>
+    </div><!-- /view-A -->
+
+    <!-- ═══ VIEW D — DOMAIN-FIRST ═══ -->
+    <div class="juris-view" data-view="D">
+      <!-- Domain panel as the hero element (re-uses snapshot_html — Key Legislation per AI/Privacy/Cyber) -->
+      <div class="df-domain-hero">
+        <section><div class="law-section"><div class="law-section-head"><h2>Key Legislation</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group" data-d="ai"><div class="domain-row" onclick="toggleDomain(this.parentElement)"><div class="dr-label">AI</div><div class="dr-content"><strong>Poland AI Act Implementation Bill (KRiBSI)</strong> <span class="muted">· Proposed</span></div><div class="dr-meta"><span class="dr-chip partial">● PROPOSED</span></div><div class="dr-chev">▾</div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">7</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">1/3</div></div></div></div></section>
+      </div>
+
+      <!-- Two-column secondary: Recent activity (left) + Implementation status (right) -->
+      <div class="df-secondary-grid">
+        <div>
+<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">3 most recent · 4 approved</div></div><div class="latest-grid">
+      <a class="latest-card" href="pai-app-news?juris=poland">
+        <div class="lc-meta"><span class="lc-date">27 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">Enforcement of a claim from a deceased person requires a legal basis – judgment of the Supreme Administrative Court</div>
+        <div class="lc-p">Enforcement of a claim from a deceased person requires a legal basis – judgment of the Sup…</div>
+      </a>
+      <a class="latest-card" href="pai-app-news?juris=poland">
+        <div class="lc-meta"><span class="lc-date">25 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">116. Posiedzenie plenarne EROD, 10.03.2026 r.</div>
+        <div class="lc-p">116. Posiedzenie plenarne EROD, 10.03.2026 r. EROD i EIOD popierają harmonizację badań kli…</div>
+      </a>
+      <a class="latest-card" href="pai-app-news?juris=poland">
+        <div class="lc-meta"><span class="lc-date">25 Apr</span><span class="lc-type">Update</span></div>
+        <div class="lc-h">118. Posiedzenie plenarne EROD, 15-16.04.2026 r.</div>
+        <div class="lc-p">118. Posiedzenie plenarne EROD, 15-16.04.2026 r. EROD zapewnia przejrzystość w kwestii prz…</div>
+      </a>
+</div>
+<a class="latest-see-all" href="pai-app-news?juris=poland">See all Poland items →</a>
+</section>
+        </div>
+        <div>
+<section class="impl-tabs-section"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:4px"><h2 style="margin:0">Implementation Status</h2><a href="pai-app-tables-regulation-tracker" style="display:inline-flex;align-items:center;gap:6px;background:#0176d3;color:#fff;border:1px solid #0176d3;border-radius:6px;padding:6px 12px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .15s,border-color .15s">Compare in tracker →</a></div><div class="impl-tabs-sub">EU AI Act, NIS2, and GDPR designations for Poland. Each claim links to its primary source.</div><div class="impl-tabnav" role="tablist"><button class="impl-tab active" data-tab="aiact" role="tab" aria-selected="true">EU AI Act <span class="tab-count">2/6</span></button><button class="impl-tab" data-tab="nis2" role="tab" aria-selected="false">NIS2 <span class="tab-count">1/5</span></button><button class="impl-tab" data-tab="gdpr" role="tab" aria-selected="false">GDPR <span class="tab-count">2/5</span></button></div><div class="impl-panel active" data-panel="aiact" role="tabpanel"><div class="impl-panel-sub">Per-state designations under the AI Act (Regulation (EU) 2024/1689) for Poland.</div><div class="aiact-list"><div class="aiact-row"><div class="aiact-label">Market Surveillance Authority</div><div class="aiact-text">As of 26 September 2025, Poland has not notified an AI Act market surveillance authority to the European Commission, despite the 2 August 2025 designation deadline. <a class="aiact-source" href="https://digital-strategy.ec.europa.eu/en/policies/market-surveillance-authorities-under-ai-act" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">Notifying Authority</div><div class="aiact-text">As of 26 September 2025, Poland has not notified an AI Act notifying authority to the European Commission, despite the 2 August 2025 designation deadline. <a class="aiact-source" href="https://digital-strategy.ec.europa.eu/en/policies/market-surveillance-authorities-under-ai-act" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">Fundamental Rights Authorities</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">Regulatory Sandbox</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">Penalties Framework</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">National AI Law / Framework</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div></div></div><div class="impl-panel" data-panel="nis2" role="tabpanel"><div class="impl-panel-sub">NIS2 Directive (EU 2022/2555) transposition and competent-authority status for Poland.</div><div class="aiact-list"><div class="aiact-row"><div class="aiact-label">NIS2 Transposition</div><div class="aiact-text">As of 1 July 2025, the European Commission had issued Poland a reasoned opinion (7 May 2025) for failing to notify complete transposition of the NIS2 Directive (EU 2022/2555). Member States had two months to respond before potential CJEU referral. <a class="aiact-source" href="https://digital-strategy.ec.europa.eu/en/policies/nis-transposition" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">Competent Authority</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">Single Point of Contact</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">CSIRT</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">National Cybersecurity Strategy</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div></div></div><div class="impl-panel" data-panel="gdpr" role="tabpanel"><div class="impl-panel-sub">GDPR (Regulation (EU) 2016/679) supervisory framework and national derogations for Poland.</div><div class="aiact-list"><div class="aiact-row"><div class="aiact-label">Supervisory Authority (DPA)</div><div class="aiact-text">Per the European Data Protection Board&#39;s official members register, the supervisory authority designated by Poland under Article 51 of the GDPR is listed as: Urząd Ochrony Danych Osobowych (Personal Data Protection Office). <a class="aiact-source" href="https://www.edpb.europa.eu/about-edpb/about-edpb/members_en" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">Lead Supervisory Authority</div><div class="aiact-text">Per the European Data Protection Board&#39;s official members register, Urząd Ochrony Danych Osobowych (Personal Data Protection Office) represents Poland on the EDPB. The lead supervisory authority for any specific cross-border processing case under Article 56 GDPR is determined by the controller&#39;s main establishment, not by a per-country designation. <a class="aiact-source" href="https://www.edpb.europa.eu/about-edpb/about-edpb/members_en" target="_blank" rel="noopener">view source →</a></div><span class="aiact-pending" title="Awaiting PAI Research Team verification">● Pending verification</span></div><div class="aiact-row"><div class="aiact-label">National Implementing Law</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">DPIA Mandatory List</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div><div class="aiact-row"><div class="aiact-label">Data Breach Reporting Rules</div><div class="aiact-stub">Pending source verification — claim withheld until a primary source is captured.</div><span class="aiact-unsourced" title="No primary source captured">● Pending source</span></div></div></div><script>(function(){var tabs=document.querySelectorAll(".impl-tabs-section .impl-tab");var panels=document.querySelectorAll(".impl-tabs-section .impl-panel");tabs.forEach(function(t){t.addEventListener("click",function(){var k=t.dataset.tab;tabs.forEach(function(x){x.classList.remove("active");x.setAttribute("aria-selected","false");});t.classList.add("active");t.setAttribute("aria-selected","true");panels.forEach(function(p){p.classList.toggle("active",p.dataset.panel===k);});});});})();</script></section>
+
+        </div>
+      </div>
+
+      <!-- Reference rail at the bottom -->
+      <div class="df-ref-rail">
+<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">13 of 13 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card is-major" href="pai-app-authority-cert-ioyqnb"><div class="ac-head"><span class="ac-type">Cyber agency</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">CERT Polska</div><div class="ac-foot">View authority →</div></a><a class="auth-card is-major" href="pai-app-authority-uodo"><div class="ac-head"><span class="ac-type">DPA</span><span class="ac-major">● MAJOR</span></div><div class="ac-name">Urzad Ochrony Danych Osobowych</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-occp"><div class="ac-head"><span class="ac-type">Competition authority</span></div><div class="ac-name">Office of Competition and Consumer Protection</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-oecp"><div class="ac-head"><span class="ac-type">Telecoms regulator</span></div><div class="ac-name">Office of Electronic Communications Poland</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-pfsa"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Polish Financial Supervision Authority</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rada-ministrow"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Council of Ministers (Rada Ministrow)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-pip"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Państwowa Inspekcja Pracy</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rpd"><div class="ac-head"><span class="ac-type">Other</span></div><div class="ac-name">Rzecznik Praw Dziecka</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rpp"><div class="ac-head"><span class="ac-type">Other</span></div><div class="ac-name">Rzecznik Praw Pacjenta</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-ctp"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Constitutional Tribunal of Poland</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-sejm"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">Polish Parliament (Sejm)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-psc"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Polish Supreme Court</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-sacp"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Supreme Administrative Court of Poland</div><div class="ac-foot">View authority →</div></a></div></section>
+<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for Poland — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-cert-ioyqnb"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">CERT Polska</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-uodo"><div class="gs-card-head"><span class="gs-badge">DPA</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Urzad Ochrony Danych Osobowych</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-occp"><div class="gs-card-head"><span class="gs-badge">Competition authority</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Office of Competition and Consumer Protection</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-oecp"><div class="gs-card-head"><span class="gs-badge">Telecoms regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Office of Electronic Communications Poland</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
+<section class="stream-section">
+<h2 class="sr-h" style="font-size:18px;margin:0 0 14px;letter-spacing:-0.01em;color:#0a1729">Activity stream</h2>
+<div class="stream-tabs">
+<button class="stream-tab active" data-cat="all">All <span class="st-count">4</span></button>
+</div>
+<div class="stream-panel" data-cat="all">
+<a class="stream-row type-alerts" href="pai-app-news?juris=poland"><div class="sr-head"><span class="sr-date">27 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Enforcement of a claim from a deceased person requires a legal basis – judgment of the Supreme Administrative Court</div><div class="sr-p">Enforcement of a claim from a deceased person requires a legal basis – judgment of the Supreme Administrative Court The death of a person wi…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=poland"><div class="sr-head"><span class="sr-date">25 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">116. Posiedzenie plenarne EROD, 10.03.2026 r.</div><div class="sr-p">116. Posiedzenie plenarne EROD, 10.03.2026 r. EROD i EIOD popierają harmonizację badań klinicznych w ramach Europejskiego aktu w sprawie bio…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=poland"><div class="sr-head"><span class="sr-date">25 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">118. Posiedzenie plenarne EROD, 15-16.04.2026 r.</div><div class="sr-p">118. Posiedzenie plenarne EROD, 15-16.04.2026 r. EROD zapewnia przejrzystość w kwestii przetwarzania danych do celów badań naukowych, przysp…</div></a>
+<a class="stream-row type-alerts" href="pai-app-news?juris=poland"><div class="sr-head"><span class="sr-date">19 Apr</span><span class="sr-type">Update</span></div><div class="sr-h">Annual report 2025 from the actions of CERT Polska. The Polish security landscape</div><div class="sr-p">ANNUAL REPORT 2025 from the actions of CERT Polska The Polish security landscape ANNUAL REPORT 2025 from the actions of CERT Polska The Poli…</div></a>
+</div>
+<div class="stream-foot"><span class="stream-foot-note">Showing most recent · archive has 4 items total</span><a class="stream-see-all" href="pai-app-news?juris=poland">See the full Poland archive →</a></div>
+</section>
+      </div>
+    </div><!-- /view-D -->
+
+    <div class="vt-toast" id="vt-toast"></div>
 
 <script>
+/* ─── Juris page view toggle (Newsroom A / Domain-first D) ─── */
+(function(){
+  var KEYS = { global: 'pai-juris-view-default', overrides: 'pai-juris-view-overrides' };
+  var wrap = document.querySelector('.view-toggle');
+  if (!wrap) return;
+  var slug = wrap.dataset.jurisSlug;
+  var name = wrap.dataset.jurisName;
+  var segA = wrap.querySelector('.vt-seg-btn[data-view="A"]');
+  var segD = wrap.querySelector('.vt-seg-btn[data-view="D"]');
+  var saveBtn = wrap.querySelector('.vt-save');
+  var pop = wrap.querySelector('.vt-pop');
+  var optCountry = wrap.querySelector('[data-action="country"]');
+  var optGlobal = wrap.querySelector('[data-action="global"]');
+  var optReset = wrap.querySelector('[data-action="reset"]');
+  var badgeCountry = optCountry.querySelector('.vt-badge');
+  var badgeGlobal = optGlobal.querySelector('.vt-badge');
+  var toast = document.getElementById('vt-toast');
+  var viewA = document.querySelector('.juris-view[data-view="A"]');
+  var viewD = document.querySelector('.juris-view[data-view="D"]');
+
+  function getGlobal(){ return localStorage.getItem(KEYS.global) || 'A'; }
+  function setGlobal(v){ localStorage.setItem(KEYS.global, v); }
+  function getOverrides(){ try { return JSON.parse(localStorage.getItem(KEYS.overrides) || '{}'); } catch(e) { return {}; } }
+  function setOverride(s, v){ var o = getOverrides(); o[s] = v; localStorage.setItem(KEYS.overrides, JSON.stringify(o)); }
+  function clearOverride(s){ var o = getOverrides(); delete o[s]; localStorage.setItem(KEYS.overrides, JSON.stringify(o)); }
+  function effective(){ return getOverrides()[slug] || getGlobal(); }
+
+  var current = effective();
+
+  function render(){
+    if (current === 'A'){ viewA.classList.add('is-active'); viewD.classList.remove('is-active'); }
+    else { viewD.classList.add('is-active'); viewA.classList.remove('is-active'); }
+    segA.classList.toggle('active', current === 'A');
+    segD.classList.toggle('active', current === 'D');
+    var ov = getOverrides()[slug];
+    var gd = getGlobal();
+    var effDefault = ov || gd;
+    segA.classList.toggle('is-default', effDefault === 'A');
+    segD.classList.toggle('is-default', effDefault === 'D');
+    badgeCountry.style.display = (ov === current) ? '' : 'none';
+    badgeGlobal.style.display = (gd === current && !ov) ? '' : 'none';
+    if (ov){
+      optReset.removeAttribute('disabled');
+    } else {
+      optReset.setAttribute('disabled', 'true');
+    }
+  }
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function(){ toast.classList.remove('show'); }, 2400);
+  }
+
+  function switchView(v){ if (v === current) return; current = v; render(); }
+
+  segA.addEventListener('click', function(){ switchView('A'); });
+  segD.addEventListener('click', function(){ switchView('D'); });
+  saveBtn.addEventListener('click', function(e){ e.stopPropagation(); pop.classList.toggle('open'); saveBtn.classList.toggle('open'); });
+  document.addEventListener('click', function(e){ if (!pop.contains(e.target) && e.target !== saveBtn) { pop.classList.remove('open'); saveBtn.classList.remove('open'); } });
+  optCountry.addEventListener('click', function(){
+    setOverride(slug, current); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
+    showToast(name + ' pinned to ' + (current === 'A' ? 'Newsroom' : 'Domain-first'));
+  });
+  optGlobal.addEventListener('click', function(){
+    setGlobal(current); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
+    showToast('Default for all jurisdictions: ' + (current === 'A' ? 'Newsroom' : 'Domain-first'));
+  });
+  optReset.addEventListener('click', function(){
+    if (optReset.hasAttribute('disabled')) return;
+    clearOverride(slug); current = getGlobal(); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
+    showToast(name + ' pin removed — following global default');
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { pop.classList.remove('open'); saveBtn.classList.remove('open'); } });
+  render();
+})();
+
 function toggleDomain(grp){
   if(!grp || grp.classList.contains('empty')) return;
   var wasOpen = grp.classList.contains('is-open');
@@ -1021,6 +1212,44 @@ window.addEventListener('load', function(){
 .page-head .page-title { font-size: 44px; font-weight: 700; color: #06101e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
 .page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
 .page-head .page-sub.fine { font-size: 12.5px; color: #8a93a3; margin-top: 6px; }
+
+/* ==VIEW TOGGLE (A=Newsroom / D=Domain-first) — added 2026-04-30== */
+.page-actions .view-toggle { display: inline-flex; gap: 8px; align-items: center; position: relative; }
+.page-actions .vt-seg { display: inline-flex; background: #f6f7f9; border: 1px solid #ebeff5; border-radius: 8px; padding: 3px; gap: 0; position: relative; }
+.page-actions .vt-seg-btn { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #5e6878; background: transparent; border: 0; padding: 6px 11px; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color .2s, background .2s; }
+.page-actions .vt-seg-btn:hover { color: #06101e; }
+.page-actions .vt-seg-btn.active { background: #fff; color: #06101e; box-shadow: 0 1px 3px rgba(10,23,41,.06); }
+.page-actions .vt-seg-btn .vt-dot { width: 5px; height: 5px; border-radius: 50%; background: #0176d3; opacity: 0; transition: opacity .15s; }
+.page-actions .vt-seg-btn.is-default .vt-dot { opacity: 1; }
+.page-actions .vt-save { background: #fff; border: 1px solid #ebeff5; border-radius: 8px; padding: 6px 11px; cursor: pointer; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #06101e; display: inline-flex; align-items: center; gap: 6px; transition: background .15s, border-color .15s; }
+.page-actions .vt-save:hover { background: #f6f7f9; border-color: #cfe1f5; }
+.page-actions .vt-save::after { content: '▾'; font-size: 9px; color: #5e6878; margin-left: 2px; transition: transform .15s; }
+.page-actions .vt-save.open::after { transform: rotate(180deg); }
+.vt-pop { position: absolute; top: calc(100% + 6px); right: 0; z-index: 50; background: #fff; border: 1px solid #ebeff5; border-radius: 10px; box-shadow: 0 12px 32px rgba(10,23,41,.10); padding: 6px; min-width: 320px; opacity: 0; transform: translateY(-6px) scale(.98); pointer-events: none; transform-origin: top right; transition: opacity .2s, transform .2s; }
+.vt-pop.open { opacity: 1; transform: none; pointer-events: auto; }
+.vt-opt { width: 100%; text-align: left; background: transparent; border: 0; padding: 10px 12px; border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; transition: background .15s; }
+.vt-opt:hover { background: #f6f7f9; }
+.vt-opt-title { font-size: 13px; font-weight: 600; color: #06101e; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.vt-opt-title .vt-badge { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 9.5px; font-weight: 700; letter-spacing: .06em; color: #2e844a; background: #e5f3e9; padding: 2px 6px; border-radius: 3px; }
+.vt-opt-sub { font-size: 11.5px; color: #5e6878; line-height: 1.4; }
+.vt-opt[disabled] { opacity: .5; cursor: not-allowed; }
+.vt-opt[disabled]:hover { background: transparent; }
+.vt-opt-divider { height: 1px; background: #ebeff5; margin: 4px 8px; }
+.vt-toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px); background: #06101e; color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; box-shadow: 0 12px 36px rgba(10,23,41,.25); z-index: 100; opacity: 0; transition: opacity .35s, transform .35s; display: flex; align-items: center; gap: 10px; }
+.vt-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.vt-toast::before { content: '✓'; color: #2e844a; font-weight: 700; font-size: 14px; background: rgba(255,255,255,.1); width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+
+.juris-view { display: none; }
+.juris-view.is-active { display: block; }
+
+/* Domain-First (D) layout — re-uses the same rendered slots in a different arrangement */
+.df-domain-hero { margin-bottom: 36px; }
+.df-secondary-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; margin-top: 36px; }
+.df-secondary-grid > div { min-width: 0; }
+.df-ref-rail { margin-top: 36px; }
+@media (max-width: 920px) { .df-secondary-grid { grid-template-columns: 1fr; } }
+/* ==END VIEW TOGGLE== */
+
 /* ==END_CANONICAL_PAGE_CHROME== */
 </style>
 <button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>

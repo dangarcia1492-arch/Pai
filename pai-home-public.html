@@ -1845,15 +1845,85 @@ body { min-width: 320px !important; }
   .pulse-line { font-size: 11px !important; }
 }
 
-/* Mobile hamburger toggle button */
-.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
-.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0a1729; stroke-width: 2; fill: none; }
-.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
-@media (max-width: 640px) {
+/* ==END_MOBILE_RESPONSIVE== */
+
+/* === MOBILE NAV (deploy113) — burger + .mkt-nav drawer + .header-right reveal === */
+.mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 8px; left: 8px;
+  z-index: 600;
+  width: 44px; height: 44px;
+  background: #fff;
+  border: 1px solid #dbe1ea;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(10,23,41,0.12);
+  padding: 0;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: rgba(10,23,41,0.1);
+}
+.mobile-nav-toggle:active { background: #f0f4fa; }
+.mobile-nav-toggle svg { width: 22px; height: 22px; stroke: #0d2e42; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,23,41,0.4);
+  z-index: 450;
+}
+@media (max-width: 720px) {
   .mobile-nav-toggle { display: flex; }
   body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+  body.mobile-nav-open .header-bar { z-index: 500 !important; }
+  body.mobile-nav-open .mkt-nav {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    top: 52px; left: 0;
+    width: 280px;
+    height: calc(100vh - 52px);
+    background: #fff;
+    z-index: 500;
+    padding: 20px 16px 16px;
+    gap: 0;
+    margin: 0;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    overflow-y: auto;
+  }
+  body.mobile-nav-open .mkt-nav a {
+    width: 100%;
+    padding: 14px 8px;
+    border-bottom: 1px solid #ebeff5;
+    font-size: 15px;
+  }
 }
-/* ==END_MOBILE_RESPONSIVE== */
+@media (max-width: 640px) {
+  .header-right { display: none; }
+  body.mobile-nav-open .header-right {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    bottom: 16px; left: 16px;
+    width: 248px;
+    z-index: 501;
+    gap: 8px;
+    margin: 0;
+    padding: 16px 0 0;
+    border-top: 1px solid #ebeff5;
+  }
+  body.mobile-nav-open .header-right .btn {
+    width: 100%;
+    justify-content: center;
+    height: 44px !important;
+  }
+}
+/* === END MOBILE NAV (deploy113) === */
+
 </style>
 <!-- Crisp chat -->
 <script type="text/plain" data-cookieconsent="marketing">window.$crisp=[];window.CRISP_WEBSITE_ID="01194f31-4735-49c5-aca8-b27a05d98691";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
@@ -1867,7 +1937,7 @@ body { min-width: 320px !important; }
     var el = document.querySelector('.header-user-name');
     if(!el) return;
     if(user && user.firstName){
-      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
     }
     // if no user, leave hardcoded — pai-app-* is public by design
   }
@@ -1947,8 +2017,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <a href="pai-pricing.html">Pricing</a>
   </nav>
   <div class="header-right">
-    <a href="/pai-signin.html" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
-    <a href="/pai-signin.html?mode=signup" class="btn btn-primary" style="text-decoration:none; height:36px;">Start free trial →</a>
+    <a href="/pai-signin" class="btn" style="text-decoration:none; height:36px;">Sign in</a>
+    <a href="/pai-signin?mode=signup" class="btn btn-primary" style="text-decoration:none; height:36px;">Start free trial →</a>
   </div>
 </header>
 
@@ -1965,7 +2035,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <p class="hero-deck-simple" style="max-width: 640px;">Your desk covers all three. PAI is the single source of truth for what just changed, and what it means for your org.</p>
       <p class="hero-scale" style="font-size: 13.5px; color: var(--secondary); margin: 14px 0 0; font-weight: 500; letter-spacing: 0.005em;"><b id="heroBodies" style="color: var(--ink); font-weight: 700;">2,000+</b> authorities &middot; <b id="heroJuris" style="color: var(--ink); font-weight: 700;">270+</b> jurisdictions &middot; updated continuously</p>
       <div class="cycle-cta-row" style="margin-top:24px;">
-        <a href="/pai-signin.html?mode=signup" class="cycle-cta" style="text-decoration:none;">Start 7-day free trial <span style="font-family:var(--mono); font-weight:400;">→</span></a>
+        <a href="/pai-signin?mode=signup" class="cycle-cta" style="text-decoration:none;">Start 7-day free trial <span style="font-family:var(--mono); font-weight:400;">→</span></a>
       </div>
       <p class="cta-fine" style="font-size:11.5px; color:var(--muted); margin:12px 0 0; letter-spacing:0.01em;">No credit card &middot; Monthly rolling &middot; 14-day money-back on annual</p>
     </div>
@@ -2037,7 +2107,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <div class="today-time" style="font-size:10.5px; color:var(--muted); letter-spacing:0.08em;">MORE<span class="day" style="display:block; font-weight:400; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">TODAY</span></div>
           <div>
             <div class="today-meta"><span style="color:var(--muted);font-style:italic;">Signed-in members see the full feed.</span></div>
-            <div class="today-headline" style="font-size:14px;"><a href="/pai-signin.html?mode=signup" style="color:var(--accent);">Start free trial to unlock &rarr;</a></div>
+            <div class="today-headline" style="font-size:14px;"><a href="/pai-signin?mode=signup" style="color:var(--accent);">Start free trial to unlock &rarr;</a></div>
           </div>
         </li>
       </ul>
@@ -2226,20 +2296,20 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <div class="pc-tier">Monthly</div>
       <div class="pc-hint" style="font-size:12.5px; color:var(--muted); margin-top:-6px; margin-bottom:4px;">from $149 / month</div>
       <div class="pc-desc" style="margin:10px 0 20px;">Best for trialing PAI solo. One seat, cancel anytime.</div>
-      <a href="/pai-signin.html?mode=signup?plan=standard-monthly" class="pc-cta" style="text-decoration:none;margin-top:auto;">Start free trial &rarr;</a>
+      <a href="/pai-signin?mode=signup?plan=standard-monthly" class="pc-cta" style="text-decoration:none;margin-top:auto;">Start free trial &rarr;</a>
     </div>
     <div class="price-card featured">
       <div class="pc-ribbon">Most popular &middot; save $298</div>
       <div class="pc-tier">Annual</div>
       <div class="pc-hint" style="font-size:12.5px; color:var(--muted); margin-top:-6px; margin-bottom:4px;">from $1,490 / year &middot; save 2 months</div>
       <div class="pc-desc" style="margin:10px 0 20px;">Two months free vs monthly. 14-day money-back guarantee.</div>
-      <a href="/pai-signin.html?mode=signup?plan=standard-annual" class="pc-cta primary" style="text-decoration:none;margin-top:auto;">Start free trial &rarr;</a>
+      <a href="/pai-signin?mode=signup?plan=standard-annual" class="pc-cta primary" style="text-decoration:none;margin-top:auto;">Start free trial &rarr;</a>
     </div>
     <div class="price-card">
       <div class="pc-tier">Team</div>
       <div class="pc-hint" style="font-size:12.5px; color:var(--muted); margin-top:-6px; margin-bottom:4px;">from $6,900 / year &middot; 5+ seats</div>
       <div class="pc-desc" style="margin:10px 0 20px;">For 5+ seats. One invoice, shared scope and watchlists.</div>
-      <a href="/pai-signin.html?mode=signup?plan=team" class="pc-cta" style="text-decoration:none;margin-top:auto;">Start free trial &rarr;</a>
+      <a href="/pai-signin?mode=signup?plan=team" class="pc-cta" style="text-decoration:none;margin-top:auto;">Start free trial &rarr;</a>
     </div>
     <div class="price-card">
       <div class="pc-tier">Enterprise</div>
@@ -2324,7 +2394,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <div style="font-size: 12.5px; color: var(--muted);">Full dashboard. 7 days.</div>
       </div>
     </div>
-    <a href="/pai-signin.html?mode=signup" class="cycle-cta" style="text-decoration:none; display: inline-flex;">Start 7-day free trial <span style="font-family:var(--mono); font-weight:400;">&rarr;</span></a>
+    <a href="/pai-signin?mode=signup" class="cycle-cta" style="text-decoration:none; display: inline-flex;">Start 7-day free trial <span style="font-family:var(--mono); font-weight:400;">&rarr;</span></a>
     <p style="font-size: 12.5px; color: var(--muted); margin-top: 12px;">No card. No sales call. Cancel anytime.</p>
     <style>@media (max-width: 800px) { .trial-flow-section .tf-steps { grid-template-columns: 1fr !important; } .trial-flow-section .tf-arrow { display: none; } }</style>
   </section>
@@ -2537,7 +2607,7 @@ function setHotView(view, btn) {
 <!-- STICKY TRIAL CTA (appears after scroll past hero) -->
 <div id="stickyCta" style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink); color: white; padding: 12px 20px; display: none; align-items: center; justify-content: center; gap: 16px; z-index: 600; box-shadow: 0 -4px 16px rgba(7, 32, 46, 0.12); font-family: var(--display);">
   <span style="font-size: 13.5px; font-weight: 500;">Privacy, AI and cyber on one desk. Start free &mdash; no card.</span>
-  <a href="/pai-signin.html?mode=signup" style="background: var(--accent); color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 13px;">Start 7-day free trial →</a>
+  <a href="/pai-signin?mode=signup" style="background: var(--accent); color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 13px;">Start 7-day free trial →</a>
   <button id="stickyCtaClose" aria-label="Dismiss" style="background: transparent; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 18px; padding: 0 4px; line-height: 1;">×</button>
 </div>
 <script id="pai-sticky-cta-js">

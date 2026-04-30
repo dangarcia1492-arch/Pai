@@ -1937,7 +1937,7 @@ body { min-width: 320px !important; }
     var el = document.querySelector('.header-user-name');
     if(!el) return;
     if(user && user.firstName){
-      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
     }
     // if no user, leave hardcoded — pai-app-* is public by design
   }

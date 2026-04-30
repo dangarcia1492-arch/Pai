@@ -456,7 +456,7 @@ body { min-width: 320px !important; }
     var el = document.querySelector('.header-user-name');
     if(!el) return;
     if(user && user.firstName){
-      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
+      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
     }
     // if no user, leave hardcoded — pai-app-* is public by design
   }
@@ -771,8 +771,13 @@ function renderAuthorityRow(r){
   const facet=TYPE_TO_FACET[r.type]||'agency';
   const pillLabel=FACET_TO_PILL_LABEL[facet]||escHtml(r.type);
   const iso=r.iso||'';
+  const slug=r.slug||'';
+  // Whole row is an anchor when we have a resolved slug. Otherwise plain div.
+  const tag = slug ? 'a' : 'div';
+  const hrefAttr = slug ? ' href="pai-app-authority-'+escHtml(slug)+'"' : '';
+  const styleAttr = slug ? ' style="text-decoration:none;color:inherit;cursor:pointer"' : '';
   return (
-    '<div class="dg-row" data-region="'+escHtml(r.region)+'" data-type="'+facet+'" data-website="'+escHtml(r.website)+'">' +
+    '<'+tag+' class="dg-row" data-region="'+escHtml(r.region)+'" data-type="'+facet+'" data-website="'+escHtml(r.website)+'"'+hrefAttr+styleAttr+'>' +
       '<div class="dg-iso">'+escHtml(iso)+'</div>' +
       '<div class="dg-name-wrap"><div class="dg-name">'+escHtml(r.name)+(r.acronym?'<span class="acr">'+escHtml(r.acronym)+'</span>':'')+'</div></div>' +
       '<div class="dg-country">'+escHtml(r.jurisdiction_name)+'</div>' +
@@ -780,8 +785,8 @@ function renderAuthorityRow(r){
       '<div class="dg-num">—</div>' +
       '<div class="dg-num">—</div>' +
       '<div class="dg-last">—</div>' +
-      '<button class="dg-star" title="Add to watchlist" onclick="dgStar(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>' +
-    '</div>'
+      '<button class="dg-star" title="Add to watchlist" onclick="dgStar(event,this);event.preventDefault()"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>' +
+    '</'+tag+'>'
   );
 }
 async function loadAuthorities(){
