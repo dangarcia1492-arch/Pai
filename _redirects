@@ -1,0 +1,19 @@
+# Orphan parent redirects (parent jurisdictions that exist as nav-expanders only)
+/pai-app-juris-canada      /pai-app-juris-canada-federal      302
+/pai-app-juris-canada.html /pai-app-juris-canada-federal      302
+/pai-app-juris-usa         /pai-app-juris-us-federal          302
+/pai-app-juris-usa.html    /pai-app-juris-us-federal          302
+/pai-app-juris-australia      /pai-app-juris-australia-federal 302
+/pai-app-juris-australia.html /pai-app-juris-australia-federal 302
+/pai-app-juris-germany     /pai-app-juris-germany-federal     302
+/pai-app-juris-germany.html /pai-app-juris-germany-federal    302
+/pai-app-juris-united-arab-emirates      /pai-app-juris-uae 302
+/pai-app-juris-united-arab-emirates.html /pai-app-juris-uae 302
+/pai-app-juris-united-states         /pai-app-juris-us-federal 302
+/pai-app-juris-united-states.html    /pai-app-juris-us-federal 302
+/pai-app-juris-united-states-of-america         /pai-app-juris-us-federal 302
+/pai-app-juris-united-states-of-america.html    /pai-app-juris-us-federal 302
+
+# Contributor → Faculty rename (May 2026): old URL was deployed briefly before naming convention was settled
+/pai-app-contributor-edsel-tupaz      /pai-app-faculty-edsel-tupaz 302
+/pai-app-contributor-edsel-tupaz.html /pai-app-faculty-edsel-tupaz 302

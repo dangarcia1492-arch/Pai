@@ -1018,6 +1018,21 @@ body { min-width: 320px !important; }
 .ph-pop{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.04em;color:#56657a;margin-top:6px}
 .ph-pop-source{color:#8a93a3;font-style:italic}
 
+
+.ai-note-rail{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:24px 0 32px}
+.ai-note-card{display:flex;flex-direction:column;gap:6px;padding:18px 22px;background:linear-gradient(135deg,#f6f9fd 0%,#fff 100%);border:1px solid #cfe1f5;border-radius:14px;text-decoration:none;color:inherit;transition:border-color .22s,transform .22s,box-shadow .22s;position:relative;overflow:hidden}
+.ai-note-card:hover{border-color:#0176d3;transform:translateY(-2px);box-shadow:0 8px 24px rgba(1,118,211,.10)}
+.ai-note-card.ipai{background:linear-gradient(135deg,#f7f0fa 0%,#fff 100%);border-color:#cfa9e1}
+.ai-note-card.ipai:hover{border-color:#6a3a8c;box-shadow:0 8px 24px rgba(106,58,140,.10)}
+.ai-note-eyebrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#56657a}
+.ai-note-title{font-family:'Inter',-apple-system,sans-serif;font-size:17px;font-weight:600;color:#0a1729;letter-spacing:-0.01em}
+.ai-note-sub{font-size:12.5px;color:#56657a;line-height:1.5}
+.ai-note-cta-arrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.06em;color:#0176d3;margin-top:auto;padding-top:6px;text-transform:uppercase}
+.ai-note-card.ipai .ai-note-cta-arrow{color:#6a3a8c}
+
+
+  /* HIDE-BLEED */
+  .settings, .state-strip { display: none !important; }
 </style>
 <script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
 <script>
@@ -1202,6 +1217,9 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <div class="ph-map" aria-hidden="true"><svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg></div>
     </div>
 
+    <section class="ai-note-rail anim-in" style="--d:1.5"><a class="ai-note-card" href="pai-app-ai-note-china"><div class="ai-note-eyebrow">Editorial deep-dive</div><div class="ai-note-title">China AI Note</div><div class="ai-note-sub">Part A matrix · Part B narrative · contributor-written and signed</div><div class="ai-note-cta-arrow">Read the note →</div></a><a class="ai-note-card ipai" href="pai-app-ipai-note-china"><div class="ai-note-eyebrow">IP &amp; AI deep-dive</div><div class="ai-note-title">China IP &amp; AI Note</div><div class="ai-note-sub">Copyright · patents · ownership when AI is involved</div><div class="ai-note-cta-arrow">Read the note →</div></a></section>
+
+
   <div class="view-stage">
 
   <!-- ═══════════ A - NEWSROOM ═══════════ -->
@@ -1212,7 +1230,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     </div>
 
     <section class="kl anim-in" style="--d:3" id="kl-A">
-      <header class="kl-head"><div><h2>Key Legislation</h2><p>Tracked instruments shaping AI, privacy and cybersecurity in China.</p></div><div class="kl-kpi"><div class="kl-kpi-cell"><span class="kl-kpi-num">16</span><span class="kl-kpi-lbl">Tracked</span></div><div class="kl-kpi-cell"><span class="kl-kpi-num">12</span><span class="kl-kpi-lbl">Verified</span></div></div></header><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="https://www.most.gov.cn/xxgk/xinxifenlei/fdzdgknr/fgzc/gfxwj/gfxwj2023/202310/t20231008_188390.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China Measures for Administration of AI Science and Technology Ethics (Trial)</strong></a></div><div class="kl-status"><span class="pill pill-pending">Needs Review</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Needs Review. View source for full text.</div></div></div><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="https://www.cac.gov.cn/2025-03/21/c_1744174262156096.htm" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China Security Management Measures for Facial Recognition Technology</strong></a></div><div class="kl-status"><span class="pill pill-verified">Verified</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Verified. View source for full text.</div></div></div><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="https://www.gov.cn/gongbao/content/2000/content_60531.htm" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China Administrative Measures on Internet-based Information Services</strong></a></div><div class="kl-status"><span class="pill pill-verified">Verified</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Verified. View source for full text.</div></div></div>
+      <header class="kl-head"><div><h2>Key Legislation</h2><p>Tracked instruments shaping AI, privacy and cybersecurity in China.</p></div><div class="kl-kpi"><div class="kl-kpi-cell"><span class="kl-kpi-num">16</span><span class="kl-kpi-lbl">Tracked</span></div><div class="kl-kpi-cell"><span class="kl-kpi-num">12</span><span class="kl-kpi-lbl">Verified</span></div></div></header><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="pai-app-leg-china-measures-for-administration-of-ai-science-and-technology-ethics-trial" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China Measures for Administration of AI Science and Technology Ethics (Trial)</strong></a></div><div class="kl-status"><span class="pill pill-pending">Needs Review</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Needs Review. View source for full text.</div></div></div><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="pai-app-leg-china-security-management-measures-for-facial-recognition-technology" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China Security Management Measures for Facial Recognition Technology</strong></a></div><div class="kl-status"><span class="pill pill-verified">Verified</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Verified. View source for full text.</div></div></div><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="pai-app-leg-china-administrative-measures-on-internet-based-information-services" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China Administrative Measures on Internet-based Information Services</strong></a></div><div class="kl-status"><span class="pill pill-verified">Verified</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Verified. View source for full text.</div></div></div><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="pai-app-leg-china-interim-measures-for-administration-of-anthropomorphic-interaction-ai-services" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China Interim Measures for Administration of Anthropomorphic Interaction AI Services</strong></a></div><div class="kl-status"><span class="pill pill-pending">Needs Review</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Needs Review. View source for full text.</div></div></div><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="pai-app-leg-china-measures-for-labeling-of-ai-generated-synthetic-content" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China Measures for Labeling of AI-Generated Synthetic Content</strong></a></div><div class="kl-status"><span class="pill pill-verified">Verified</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Verified. View source for full text.</div></div></div><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="pai-app-leg-china-gb-t45654-2025-generative-ai-security-standard" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>China GB/T45654-2025 (Generative AI Security Standard)</strong></a></div><div class="kl-status"><span class="pill pill-pending">Needs Review</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Needs Review. View source for full text.</div></div></div>
     </section>
 
     <div class="impl-strip anim-in" style="--d:4" id="impl-strip-A">
@@ -1886,17 +1904,22 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   }
 
   function buildExpandableCountryRow(name, dataKey, children){
+    // USA family = toggle-only (no main page); UAE→uae; others = navigate via _redirects to slugified name
+    var TOGGLE_ONLY = {'USA':1,'United States':1,'United States of America':1};
+    var EXPLICIT_NAV = {'United Arab Emirates':'pai-app-juris-uae'};
     var wrap = document.createElement('div');
     var row = rowEl(name, 'country', { expandable: true, onClick: function(ev){
       // Toggle (not navigate) if we're already on this jurisdiction's page OR a child of it
       var cur = window.PAI_JURIS;
       var isHere = cur === dataKey || cur === name;
       var isChild = cur && (PARENT_OF[cur] === dataKey || PARENT_OF[cur] === name);
-      if(isHere || isChild){
+      if(isHere || isChild || TOGGLE_ONLY[name] || TOGGLE_ONLY[dataKey]){
         toggleExpand(wrap, row, function(){ fillFederalChildren(wrap, name, children); });
         return;
       }
-      location.href = 'pai-app-juris-' + slugify(dataKey) + '.html';
+      // Persist expand-on-arrival so submenu opens when overlay reopens on landing page
+      try { sessionStorage.setItem('pai-jur-expand-on-arrive', name); } catch(e){}
+      location.href = (EXPLICIT_NAV[name] || EXPLICIT_NAV[dataKey] || ('pai-app-juris-' + slugify(dataKey)));
     }});
     wrap.appendChild(row);
     var cont = document.createElement('div'); cont.className='jo-children';

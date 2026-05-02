@@ -1497,17 +1497,22 @@ window.addEventListener('load', function(){
   }
 
   function buildExpandableCountryRow(name, dataKey, children){
+    // USA family = toggle-only (no main page); UAE→uae; others = navigate via _redirects to slugified name
+    var TOGGLE_ONLY = {'USA':1,'United States':1,'United States of America':1};
+    var EXPLICIT_NAV = {'United Arab Emirates':'pai-app-juris-uae'};
     var wrap = document.createElement('div');
     var row = rowEl(name, 'country', { expandable: true, onClick: function(ev){
       // Toggle (not navigate) if we're already on this jurisdiction's page OR a child of it
       var cur = window.PAI_JURIS;
       var isHere = cur === dataKey || cur === name;
       var isChild = cur && (PARENT_OF[cur] === dataKey || PARENT_OF[cur] === name);
-      if(isHere || isChild){
+      if(isHere || isChild || TOGGLE_ONLY[name] || TOGGLE_ONLY[dataKey]){
         toggleExpand(wrap, row, function(){ fillFederalChildren(wrap, name, children); });
         return;
       }
-      location.href = 'pai-app-juris-' + slugify(dataKey) + '.html';
+      // Persist expand-on-arrival so submenu opens when overlay reopens on landing page
+      try { sessionStorage.setItem('pai-jur-expand-on-arrive', name); } catch(e){}
+      location.href = (EXPLICIT_NAV[name] || EXPLICIT_NAV[dataKey] || ('pai-app-juris-' + slugify(dataKey)));
     }});
     wrap.appendChild(row);
     var cont = document.createElement('div'); cont.className='jo-children';
