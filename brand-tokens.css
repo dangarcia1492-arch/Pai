@@ -1,0 +1,58 @@
+/* PAI brand tokens — single source of truth for type, spacing, surface, elevation.
+   Generated 2026-05-03 per PAI_BRAND_REBUILD_BRIEF.md §2.
+   Templates that need these tokens can either @import this file or inline the :root block. */
+
+:root {
+  /* Type scale (§2b) — replaces hand-rolled font-size values */
+  --fs-xs:    11px;    /* eyebrows / meta labels (Inter small-caps) */
+  --fs-sm:    12.5px;  /* table cells, footnotes */
+  --fs-base:  14px;    /* body */
+  --fs-md:    16px;    /* lead paragraphs, sub-headings */
+  --fs-lg:    19px;    /* card titles */
+  --fs-xl:    24px;    /* section H2 (Inter 600) */
+  --fs-2xl:   32px;    /* sub-hero (serif) */
+  --fs-3xl:   44px;    /* page hero (Source Serif 4) */
+  --fs-num:   56px;    /* big tracker numbers (serif, tabular) */
+
+  /* Spacing scale (§2d) */
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:   12px;
+  --sp-4:   16px;
+  --sp-5:   24px;
+  --sp-6:   32px;
+  --sp-7:   48px;
+  --sp-8:   64px;
+  --sp-9:   96px;
+
+  /* Surfaces (§2e — extends existing 27 color tokens) */
+  --surface-1: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #ebeff5;
+  --ink-extra-faint: #b3bbc7;
+
+  /* Elevation (§2e) */
+  --shadow-1: 0 1px 2px rgba(10,23,41,.04), 0 1px 1px rgba(10,23,41,.03);
+  --shadow-2: 0 4px 14px rgba(10,23,41,.06), 0 2px 4px rgba(10,23,41,.04);
+  --shadow-3: 0 12px 32px rgba(10,23,41,.10), 0 4px 8px rgba(10,23,41,.06);
+
+  /* Font stacks (§2a) */
+  --display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:    'Inter', sans-serif;  /* aliased — true mono only inside <code>/<pre> via system stack */
+}
+
+/* §2c — eyebrow / label / meta / badge / tab-count baseline.
+   Replaces the typewriter pattern with Inter small-caps. */
+.label, .eyebrow, .meta, .badge-text, .tab-count, .page-eyebrow {
+  font-family: var(--sans);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* True monospace ONLY inside literal code blocks */
+code, pre, kbd, samp {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
