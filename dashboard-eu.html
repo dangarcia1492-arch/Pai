@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard — EU member-state (PAI member home)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1729; --link:#014486; --accent:#0176d3;
+    --gray-1:#f6f7f9; --gray-2:#ebeff5; --gray-3:#cfe1f5;
+    --text-mute:#5e6878; --text-soft:#8a93a3;
+    --amber-bg:#fbeecd; --amber-fg:#905200;
+    --green-bg:#e5f3e9; --green-fg:#2e844a;
+    --red-bg:#fde7e7;   --red-fg:#a72929;
+    --gray-bg:#ebeff5;  --gray-fg:#5e6878;
+    --t-fast:.22s;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:'Inter',-apple-system,sans-serif;color:var(--navy);background:#fff;line-height:1.5;font-size:14px;-webkit-font-smoothing:antialiased}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .topbar{display:flex;align-items:center;gap:18px;padding:14px 28px;border-bottom:1px solid var(--gray-2);background:#fff;position:sticky;top:0;z-index:20}
+  .brand{font-family:'Source Serif 4',serif;font-size:18px;font-weight:700;letter-spacing:-0.01em;color:var(--navy)}
+  .brand .dot{display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;vertical-align:middle;margin:0 6px 3px 0}
+  .top-search{flex:1;max-width:420px;position:relative}
+  .top-search input{width:100%;padding:8px 12px 8px 32px;border:1px solid var(--gray-2);border-radius:6px;font-family:inherit;font-size:13px;background:var(--gray-1)}
+  .top-search input:focus{outline:0;border-color:var(--gray-3);background:#fff}
+  .top-search::before{content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;border:1.5px solid var(--text-soft);border-radius:50%}
+  .top-search::after{content:'';position:absolute;left:21px;top:50%;width:7px;height:1.5px;background:var(--text-soft);transform:translateY(2px) rotate(45deg);transform-origin:left}
+  .top-actions{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .top-actions a{color:var(--text-mute)}
+  .top-actions a:hover{color:var(--navy);text-decoration:none}
+  .profile{display:inline-flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid var(--gray-2);border-radius:6px;color:var(--navy)}
+  .profile .av{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace}
+
+  .lc{padding:14px 28px;border-bottom:1px solid var(--gray-2);background:var(--gray-1);display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+  .lc-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:3px}
+  .lc-body{font-size:13.5px;color:var(--navy);line-height:1.5}
+  .lc-body strong{color:var(--navy)}
+  .lc-body em{font-style:italic;color:var(--text-mute)}
+  .lc-body a{color:var(--link);font-weight:600}
+  .lc-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .lc-save{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;background:var(--navy);color:#fff;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .lc-save:hover{text-decoration:none;background:var(--link)}
+  .lc-switch{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .lc-switch .switch{display:inline-flex;border:1px solid var(--gray-2);background:#fff;border-radius:5px;overflow:hidden}
+  .lc-switch .switch a{padding:5px 10px;color:var(--text-mute);border-right:1px solid var(--gray-2);font-size:10px}
+  .lc-switch .switch a:last-child{border-right:0}
+  .lc-switch .switch a.active{background:var(--navy);color:#fff}
+  .lc-switch .switch a:hover{text-decoration:none;color:var(--navy)}
+  .lc-switch .switch a.active:hover{color:#fff}
+
+  .wrap{max-width:1320px;margin:0 auto;padding:28px 28px 96px}
+
+  .hero{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;padding-bottom:22px;border-bottom:1px solid var(--gray-2);margin-bottom:18px}
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:9px}
+  .hero-title{font-family:'Source Serif 4',serif;font-size:32px;font-weight:700;letter-spacing:-0.02em;margin:0 0 6px;line-height:1.18}
+  .hero-sub{font-size:14px;color:var(--text-mute);margin:0;max-width:680px;line-height:1.55}
+  .hero-stats{display:flex;gap:18px;text-align:right}
+  .hero-stat{display:flex;flex-direction:column;gap:2px}
+  .hero-stat-num{font-family:'Source Serif 4',serif;font-size:24px;font-weight:600;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .hero-stat-num.urgent{color:var(--red-fg)}
+  .hero-stat-lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+
+  /* Three-pillar strip — AI Act / NIS2 / GDPR */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+  @media (max-width:900px){.pillars{grid-template-columns:1fr}}
+  .pillar{background:#fff;border:1px solid var(--gray-2);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:5px}
+  .pillar.urgent{border-color:var(--amber-fg);background:var(--amber-bg)}
+  .pillar-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+  .pillar.urgent .pillar-eyebrow{color:var(--amber-fg)}
+  .pillar-title{font-family:'Source Serif 4',serif;font-size:17px;font-weight:600;color:var(--navy);margin:0;letter-spacing:-0.005em}
+  .pillar-body{font-size:13px;color:var(--text-mute);line-height:1.5}
+  .pillar.urgent .pillar-body{color:var(--navy)}
+  .pillar-foot{margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--link)}
+
+  /* Since your last visit row */
+  .since-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+  @media (max-width:900px){.since-row{grid-template-columns:1fr}}
+  .since-card{background:#fff;border:1px solid var(--gray-2);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:7px;cursor:pointer;transition:border-color var(--t-fast),background var(--t-fast)}
+  .since-card:hover{border-color:var(--gray-3);background:var(--gray-1);text-decoration:none}
+  .sc-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .sc-eyebrow.t-deadline{color:var(--amber-fg)}
+  .sc-eyebrow.t-enf{color:var(--red-fg)}
+  .sc-eyebrow.t-new{color:var(--green-fg)}
+  .sc-head{font-family:'Source Serif 4',serif;font-size:15.5px;font-weight:600;color:var(--navy);line-height:1.3}
+  .sc-sum{font-size:12.5px;color:var(--text-mute);line-height:1.5}
+  .sc-juris{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--text-mute);margin-top:2px}
+
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin:0 0 14px}
+  .section-h{font-family:'Source Serif 4',serif;font-size:21px;font-weight:600;color:var(--navy);letter-spacing:-0.01em;margin:0}
+  .section-sub{font-size:13px;color:var(--text-mute)}
+
+  .twocol{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-bottom:36px;align-items:start}
+  @media (max-width:1080px){.twocol{grid-template-columns:1fr}}
+
+  .panel{background:#fff;border:1px solid var(--gray-2);border-radius:10px;overflow:hidden}
+  .panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:14px 18px 10px;border-bottom:1px solid var(--gray-2)}
+  .panel-title{font-family:'Source Serif 4',serif;font-size:15.5px;font-weight:600;color:var(--navy);letter-spacing:-0.005em;margin:0}
+  .panel-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .panel-foot{padding:11px 18px;border-top:1px solid var(--gray-2);background:var(--gray-1);font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+  /* Slovenia spotlight (because user is based here) */
+  .country-spotlight{padding:16px 18px}
+  .cs-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .cs-name{font-family:'Source Serif 4',serif;font-size:16px;font-weight:600;color:var(--navy)}
+  .cs-iso{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--text-mute)}
+  .cs-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:8px 0;border-top:1px solid var(--gray-2);font-size:12.5px;align-items:center}
+  .cs-row .nm{color:var(--navy)}
+  .cs-row .when{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--text-mute)}
+
+  /* EU institutions ticker — 3 rows, compact */
+  .ticker{padding:6px 0}
+  .tk-row{display:grid;grid-template-columns:90px 1fr auto;gap:12px;padding:11px 18px;border-bottom:1px solid var(--gray-2);align-items:center}
+  .tk-row:last-child{border-bottom:0}
+  .tk-body{font-family:'Source Serif 4',serif;font-size:13.5px;font-weight:600;color:var(--navy);line-height:1.35}
+  .tk-org{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .tk-when{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--text-mute)}
+
+  /* EU 27 sidebar widget — compact strip */
+  .eu27{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;padding:14px 18px}
+  .eu-cell{border:1px solid var(--gray-2);border-radius:5px;padding:6px 4px;text-align:center;display:flex;flex-direction:column;gap:3px;cursor:pointer;transition:border-color var(--t-fast),background var(--t-fast);color:inherit;background:#fff}
+  .eu-cell:hover{text-decoration:none;border-color:var(--gray-3);background:var(--gray-1)}
+  .eu-cell.is-mine{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .eu-iso{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--navy)}
+  .eu-pip-row{display:flex;justify-content:center;gap:2px}
+  .pip{width:7px;height:7px;border-radius:2px;background:var(--gray-2)}
+  .pip.s-verified{background:var(--green-fg)}
+  .pip.s-pending{background:var(--amber-fg)}
+  .pip.s-overdue{background:var(--red-fg)}
+  .eu27-legend{padding:0 18px 12px;display:flex;gap:10px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mute)}
+  .eu27-legend .li{display:inline-flex;align-items:center;gap:4px}
+  .eu27-legend .li .pip{width:9px;height:9px}
+
+  /* Countdown */
+  .countdown{padding:16px 18px;border-bottom:1px solid var(--gray-2)}
+  .countdown:last-child{border-bottom:0}
+  .cd-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:5px}
+  .cd-title{font-family:'Source Serif 4',serif;font-size:14.5px;font-weight:600;color:var(--navy);margin:0 0 6px}
+  .cd-num{font-family:'Source Serif 4',serif;font-size:34px;font-weight:700;color:var(--red-fg);line-height:1;font-variant-numeric:tabular-nums}
+  .cd-units{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);margin-left:7px}
+  .cd-meta{margin-top:5px;font-size:12px;color:var(--text-mute)}
+
+  /* Watchlist jumper */
+  .jumper{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:14px 18px}
+  @media (max-width:900px){.jumper{grid-template-columns:repeat(3,1fr)}}
+  .jcell{display:flex;flex-direction:column;gap:3px;padding:11px 12px;border:1px solid var(--gray-2);border-radius:7px;color:inherit;transition:border-color var(--t-fast),background var(--t-fast)}
+  .jcell:hover{text-decoration:none;border-color:var(--gray-3);background:var(--gray-1)}
+  .jcell.is-mine{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .jcell .lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .jcell.is-mine .lbl{color:var(--accent)}
+  .jcell .nm{font-size:13px;font-weight:600;color:var(--navy)}
+  .jcell .ct{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.04em}
+</style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span>Principles AI</div>
+  <div class="top-search"><input placeholder="Search EU regulators, member states, instruments…"></div>
+  <div class="top-actions">
+    <a href="#">Notifications</a>
+    <span class="profile"><span class="av">DL</span> David L.</span>
+  </div>
+</div>
+
+<div class="lc">
+  <div class="lc-l">
+    <div class="lc-eyebrow">Your dashboard</div>
+    <div class="lc-body"><strong>EU member-state</strong> — you're seeing this because your account is based in <a href="#">Slovenia</a>. <em>Want to land directly on the Slovenia page next time?</em></div>
+  </div>
+  <div class="lc-r">
+    <a class="lc-save" href="#">Save Slovenia as my home →</a>
+    <div class="lc-switch">Switch
+      <div class="switch">
+        <a href="dashboard-general.html">General</a>
+        <a href="dashboard-eu.html" class="active">EU</a>
+        <a href="dashboard-us.html">US</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Mon · 30 Apr 2026 · EU</div>
+      <h1 class="hero-title">EU regulatory week, with Slovenia on top</h1>
+      <p class="hero-sub">Three pillars on top — AI Act, NIS2, GDPR — plus what's moved at EU institutions and your watchlisted member states. Slovenia is highlighted because that's your home country.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num urgent">12</div><div class="hero-stat-lbl">Days · Art 5</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">19/27</div><div class="hero-stat-lbl">NIS2 transposed</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">7</div><div class="hero-stat-lbl">EDPB / 30d</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">14</div><div class="hero-stat-lbl">Enf. / 30d</div></div>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <a class="pillar urgent" href="#">
+      <div class="pillar-eyebrow">Pillar · imminent</div>
+      <h3 class="pillar-title">EU AI Act</h3>
+      <div class="pillar-body"><strong>Art 5 prohibitions enforceable in 12 days</strong>. GPAI obligations apply from 2 Aug. NCAs designated in 19 of 27 member states.</div>
+      <div class="pillar-foot">Open AI Act tracker →</div>
+    </a>
+    <a class="pillar" href="#">
+      <div class="pillar-eyebrow">Pillar</div>
+      <h3 class="pillar-title">NIS2</h3>
+      <div class="pillar-body">19 / 27 member states have transposed; 5 have bills in committee, 3 with no public draft. ENISA threat landscape report due Q2.</div>
+      <div class="pillar-foot">Open NIS2 tracker →</div>
+    </a>
+    <a class="pillar" href="#">
+      <div class="pillar-eyebrow">Pillar</div>
+      <h3 class="pillar-title">GDPR</h3>
+      <div class="pillar-body">EDPB Opinion 04/2026 on TIAs for generative-AI providers issued. 28 enforcement actions in EEA past 30 days; €78m largest single fine.</div>
+      <div class="pillar-foot">Open GDPR digest →</div>
+    </a>
+  </div>
+
+  <div class="since-row">
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-deadline">Imminent · 12 days</div>
+      <div class="sc-head">EU AI Act Article 5 prohibitions enforceable</div>
+      <div class="sc-sum">Final preparedness checks for prohibited-practice scoping. Affects every EU 27 deployment.</div>
+      <div class="sc-juris">EU 27</div>
+    </a>
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-enf">Enforcement · yesterday</div>
+      <div class="sc-head">DPC closes inquiry into LLM provider — €78m fine</div>
+      <div class="sc-sum">Largest AI-related GDPR fine to date. Commitments on training-data documentation; full text in two weeks.</div>
+      <div class="sc-juris">Ireland</div>
+    </a>
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-new">Slovenia · 3 days ago</div>
+      <div class="sc-head">Information Commissioner publishes draft AI sandbox rules</div>
+      <div class="sc-sum">Public consultation open until 28 May. Mirrors the CNIL phase-2 model with a stronger small-business carve-out.</div>
+      <div class="sc-juris">Slovenia · IP-RS</div>
+    </a>
+  </div>
+
+  <div class="twocol">
+
+    <div>
+      <div class="panel" style="margin-bottom:24px">
+        <div class="panel-head">
+          <h2 class="panel-title">EU institutions · this week</h2>
+          <div class="panel-meta">3 of 7 · sorted by impact</div>
+        </div>
+        <div class="ticker">
+          <div class="tk-row">
+            <span class="tk-org">European Commission</span>
+            <span class="tk-body">AI Act Article 6 high-risk classification — Implementing Regulation draft published; consultation closes 27 May.</span>
+            <span class="tk-when">Yesterday</span>
+          </div>
+          <div class="tk-row">
+            <span class="tk-org">EDPB</span>
+            <span class="tk-body">Opinion 04/2026 on transfer impact assessments for generative-AI providers refines Schrems II for EEA→US-cloud sub-processor chains.</span>
+            <span class="tk-when">Yesterday</span>
+          </div>
+          <div class="tk-row">
+            <span class="tk-org">AI Office</span>
+            <span class="tk-body">Code of Practice for general-purpose AI — second draft circulated to signatories; signing window opens 15 May.</span>
+            <span class="tk-when">3d ago</span>
+          </div>
+        </div>
+        <div class="panel-foot"><a href="#">All 7 EU institution items →</a></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2 class="panel-title">Slovenia · your home country</h2><div class="panel-meta">SI</div></div>
+        <div class="country-spotlight">
+          <div class="cs-head"><span class="cs-name">Slovenia</span><span class="cs-iso">SI · NCA: AI Office MJU · DPA: IP-RS</span></div>
+          <div class="cs-row"><span class="nm">AI Act NCA designation</span><span class="when">Verified · Mar 2026</span></div>
+          <div class="cs-row"><span class="nm">NIS2 transposition (ZIVK-2)</span><span class="when">In force · Oct 2024</span></div>
+          <div class="cs-row"><span class="nm">Draft AI sandbox rules — IP-RS</span><span class="when">Consultation · until 28 May</span></div>
+          <div class="cs-row"><span class="nm">Open enforcement actions (last 90d)</span><span class="when">2</span></div>
+          <div style="margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><a href="#">Open Slovenia page →</a></div>
+        </div>
+      </div>
+    </div>
+
+    <aside>
+
+      <div class="panel" style="margin-bottom:20px">
+        <div class="panel-head"><h2 class="panel-title">EU 27 · AI Act NCA status</h2><div class="panel-meta">Glance widget</div></div>
+        <div class="eu27">
+          <a class="eu-cell" href="#"><span class="eu-iso">AT</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">BE</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">BG</span><span class="eu-pip-row"><span class="pip s-pending"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">HR</span><span class="eu-pip-row"><span class="pip s-pending"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">CY</span><span class="eu-pip-row"><span class="pip s-overdue"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">CZ</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">DK</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">EE</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">FI</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">FR</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">DE</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">GR</span><span class="eu-pip-row"><span class="pip s-pending"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">HU</span><span class="eu-pip-row"><span class="pip s-overdue"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">IE</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">IT</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">LV</span><span class="eu-pip-row"><span class="pip s-pending"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">LT</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">LU</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">MT</span><span class="eu-pip-row"><span class="pip s-pending"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">NL</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">PL</span><span class="eu-pip-row"><span class="pip s-pending"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">PT</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">RO</span><span class="eu-pip-row"><span class="pip s-pending"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">SK</span><span class="eu-pip-row"><span class="pip s-overdue"></span></span></a>
+          <a class="eu-cell is-mine" href="#"><span class="eu-iso">SI</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">ES</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+          <a class="eu-cell" href="#"><span class="eu-iso">SE</span><span class="eu-pip-row"><span class="pip s-verified"></span></span></a>
+        </div>
+        <div class="eu27-legend">
+          <span class="li"><span class="pip s-verified"></span> NCA designated</span>
+          <span class="li"><span class="pip s-pending"></span> Draft / consultation</span>
+          <span class="li"><span class="pip s-overdue"></span> No public progress</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="countdown">
+          <div class="cd-eyebrow">AI Act · Article 5 prohibitions</div>
+          <h3 class="cd-title">Enforceable in</h3>
+          <div><span class="cd-num">12</span><span class="cd-units">days</span></div>
+          <div class="cd-meta">12 May 2026 · all 27 member states</div>
+        </div>
+        <div class="countdown">
+          <div class="cd-eyebrow">AI Act · GPAI obligations</div>
+          <h3 class="cd-title">Apply from 2 Aug 2026</h3>
+          <div><span class="cd-num" style="color:var(--amber-fg)">94</span><span class="cd-units">days</span></div>
+          <div class="cd-meta">GPAI models placed on the market on/after this date.</div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-h">Watchlisted member states</h2>
+    <div class="section-sub">Slovenia pinned as your home · 3 others on your watchlist</div>
+  </div>
+  <div class="panel">
+    <div class="jumper">
+      <a class="jcell is-mine" href="#"><span class="lbl">SI · my home</span><span class="nm">Slovenia</span><span class="ct">3 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">DE</span><span class="nm">Germany</span><span class="ct">3 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">IT</span><span class="nm">Italy</span><span class="ct">2 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">AT</span><span class="nm">Austria</span><span class="ct">1 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">+</span><span class="nm">Add member state</span><span class="ct">23 available</span></a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

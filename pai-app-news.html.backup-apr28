@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrinciplesAI — Philippines AI Note</title>
+<title>PrinciplesAI — News</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -20,16 +20,16 @@
   --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
   --sidebar-collapsed:56px;--sidebar-expanded:280px;--header-height:52px;
   --shadow-1:0 1px 2px rgba(10,23,41,.04);--shadow-2:0 2px 6px rgba(10,23,41,.07),0 8px 20px rgba(10,23,41,.05);
-  --radius:10px;--radius-chip:4px;
+  --radius:10px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{font-size:15px;-webkit-text-size-adjust:100%}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;min-width:1280px}
 a{color:var(--accent);text-decoration:none}
-button,input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
+button,input{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
 button{cursor:pointer}
 
-/* Icon sidebar */
+/* Shell — sidebar, header, main (canonical 10-item, Brand+Log out only) */
 .icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden;box-shadow:var(--shadow-1)}
 .icon-sidebar:hover{width:var(--sidebar-expanded);box-shadow:var(--shadow-2)}
 .sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;gap:12px;flex-shrink:0;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
@@ -49,164 +49,181 @@ button{cursor:pointer}
 .sidebar-user{border-top:1px solid var(--border);padding:8px;flex-shrink:0;display:flex;align-items:center}
 .user-avatar{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
 
-/* Header bar */
 .header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:18px;z-index:200;box-shadow:var(--shadow-1)}
-.header-nav-arrows{display:flex;gap:4px}
-.header-nav-arrows button{width:30px;height:30px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
-.header-nav-arrows button:hover{background:var(--surface-3);color:var(--ink)}
-.header-nav-arrows button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
-.header-user-name{font-size:13px;font-weight:500;color:var(--secondary);white-space:nowrap}
-.header-search{flex:1;max-width:460px;display:flex;align-items:center;gap:10px;height:36px;padding:0 14px;background:var(--surface-3);border-radius:5px;border:1px solid transparent}
-.header-search:focus-within{background:var(--surface);border-color:var(--accent-soft-2)}
-.header-search svg{width:15px;height:15px;stroke:var(--muted);stroke-width:2;fill:none}
-.header-search input{flex:1;font-size:13px;background:transparent}
-.header-search input::placeholder{color:var(--muted)}
-.header-search kbd{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--border);border-radius:3px;padding:1px 6px;background:var(--surface)}
 .header-right{display:flex;align-items:center;gap:10px;margin-left:auto}
-.home-jur-btn{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--secondary);cursor:pointer;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:var(--surface);font-weight:500}
-.hjb-flag{font-size:17px;line-height:1}
-.header-icon-btn{width:36px;height:36px;border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--muted);position:relative}
-.header-icon-btn:hover{background:var(--surface-3);color:var(--ink)}
-.header-icon-btn svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.7;fill:none}
-.header-icon-btn .badge-count{position:absolute;top:4px;right:3px;min-width:17px;height:17px;padding:0 5px;background:var(--red-fill);color:#fff;font-family:var(--mono);font-size:10px;font-weight:600;border-radius:9px;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface);box-sizing:content-box}
 .header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:var(--secondary);background:transparent;border:1px solid var(--border);border-radius:5px;text-decoration:none;transition:background .12s,color .12s,border-color .12s}
 .header-logout:hover{background:var(--surface-2);color:var(--ink);border-color:var(--ink-faint)}
 .header-logout svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
 
-/* Main */
 .main-content{margin-left:var(--sidebar-collapsed);padding-top:var(--header-height);min-height:100vh}
 .page-view{padding:26px 40px 40px;max-width:1600px;margin:0}
 
 .page-statusbar{display:grid;grid-template-columns:1fr auto;gap:20px;padding:0 0 18px;margin-bottom:22px;border-bottom:1px solid var(--border);align-items:start;min-height:55px;margin-bottom:22px}
-.hero-greeting h1{font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong);line-height:1.15;margin-bottom:6px}
-.hero-sub{font-size:13.5px;color:var(--secondary);font-weight:500;line-height:1.5;max-width:640px}
+.ps-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--secondary);flex-wrap:wrap}
+.ps-breadcrumb a{color:var(--accent-2);font-weight:600}
+.ps-breadcrumb a:hover{text-decoration:underline}
+.ps-current{color:var(--ink-strong);font-weight:700}
+.ps-sep{color:var(--ink-faint)}
+.ps-scope-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;font-size:11px;font-weight:600;color:var(--accent-2);background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:4px;letter-spacing:.02em}
+.ps-ok{color:var(--green);font-weight:600;font-size:12px}
+.ps-ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
+
 .page-actions{display:flex;gap:10px;flex-shrink:0}
-.btn{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 18px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--secondary);transition:background .12s,border-color .12s,color .12s,box-shadow .12s}
+.btn{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;font-size:12.5px;font-weight:600;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--secondary);transition:background .12s,border-color .12s,color .12s,box-shadow .12s;text-decoration:none}
 .btn:hover{background:var(--surface-2);border-color:var(--ink-faint);color:var(--ink)}
+.btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
 .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 1px 2px rgba(1,118,211,.22)}
 .btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2);color:#fff;box-shadow:0 2px 6px rgba(1,118,211,.3)}
-.btn.sm{height:32px;padding:0 12px;font-size:12.5px}
 
-.activity-strip{display:flex;gap:18px;padding:10px 0 14px;margin-bottom:14px;font-size:12.5px;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border-soft)}
-.activity-strip b{color:var(--ink-strong);font-weight:700;font-family:var(--mono);font-size:12px}
-.activity-strip .sep{color:var(--ink-faint)}
+.page-head{margin-bottom:18px}
+.page-title{font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong);line-height:1.1}
+.page-sub{font-size:13.5px;color:var(--secondary);margin-top:8px;max-width:740px;line-height:1.55}
+.page-sub b{color:var(--ink);font-weight:600}
 
-/* Tabs */
-.tab-strip{display:flex;gap:4px;margin-bottom:18px;border-bottom:1px solid var(--border)}
-.tab{position:relative;display:inline-flex;align-items:center;gap:8px;padding:12px 14px;font-size:13.5px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s}
-.tab:hover{color:var(--ink)}
-.tab.active{color:var(--accent-2);border-bottom-color:var(--accent);font-weight:600}
-.tab .tab-count{font-family:var(--mono);font-size:11px;color:var(--ink-faint);background:var(--surface-3);padding:1px 7px;border-radius:9px;font-weight:600}
-.tab.active .tab-count{color:var(--accent-2);background:var(--accent-soft)}
+/* Personalised-to-watchlist banner */
+.personalised-banner{display:flex;align-items:center;gap:14px;padding:10px 14px;margin-bottom:16px;background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:6px;font-size:12.5px;color:var(--accent-2);font-weight:500}
+.personalised-banner svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:currentColor;fill-opacity:.2;flex-shrink:0}
+.personalised-banner b{color:var(--accent-2);font-weight:700;font-family:var(--mono);font-size:12px}
+.personalised-banner .pb-toggle{margin-left:auto;display:inline-flex;border:1px solid var(--accent-soft-2);border-radius:5px;overflow:hidden;background:var(--surface)}
+.personalised-banner .pb-btn{height:26px;padding:0 11px;font-size:11.5px;font-weight:600;color:var(--secondary);border-right:1px solid var(--accent-soft-2);background:var(--surface);cursor:pointer}
+.personalised-banner .pb-btn:last-child{border-right:none}
+.personalised-banner .pb-btn.on{background:var(--accent);color:#fff}
 
-.panel{display:none;background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);overflow:hidden}
-.panel.active{display:block}
+/* Filter bar — ported from pai-news.html */
+.nf-bar{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);margin-bottom:10px;flex-wrap:wrap}
+.nf-search-wrap{position:relative;min-width:240px;flex:1;max-width:360px}
+.nf-search{width:100%;height:36px;padding:0 14px 0 36px;border:1px solid var(--border);border-radius:5px;background:var(--surface-2);font-size:13px;color:var(--ink)}
+.nf-search:focus{outline:none;background:var(--surface);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.nf-search::placeholder{color:var(--muted)}
+.nf-search-ico{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--muted);stroke-width:2;fill:none;pointer-events:none}
+.nf-facets{display:flex;align-items:center;gap:6px;flex:1;flex-wrap:wrap}
+.nf-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:5px;font-size:12.5px;color:var(--secondary);cursor:pointer;font-family:inherit}
+.nf-btn:hover{background:var(--accent-soft);border-color:var(--accent-soft-2);color:var(--accent-2)}
+.nf-btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.nf-btn .lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.nf-btn:hover .lbl,.nf-btn.on .lbl{color:inherit;opacity:.72}
+.nf-btn .val{font-weight:600;color:var(--ink)}
+.nf-btn:hover .val,.nf-btn.on .val{color:inherit}
+.nf-btn .car{font-family:var(--mono);font-size:10px;opacity:.6}
+.nf-spacer{flex:1;min-width:10px}
 
-/* Discussions 3-col */
-.disc-layout{display:grid;grid-template-columns:240px minmax(0,1fr) 400px;min-height:calc(100vh - 260px)}
+.applied-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;min-height:22px;align-items:center;font-size:12px}
+.applied-empty{color:var(--muted);font-weight:500}
+.applied-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 4px 0 9px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600}
+.applied-chip .group{opacity:.72;font-weight:500;margin-right:2px}
+.applied-chip .x{width:16px;height:16px;background:rgba(255,255,255,.18);border:none;border-radius:3px;color:#fff;cursor:pointer;font-size:11px;display:inline-flex;align-items:center;justify-content:center;padding:0}
 
-.channels{border-right:1px solid var(--border-soft);background:var(--surface-2);display:flex;flex-direction:column;overflow-y:auto}
-.channel-group{padding:4px 0}
-.channel-group h3{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:12px 18px 6px}
-.channel{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 18px;font-size:13px;color:var(--secondary);cursor:pointer;border-left:3px solid transparent}
-.channel:hover{background:var(--surface);color:var(--ink)}
-.channel.active{background:var(--surface);color:var(--accent-2);border-left-color:var(--accent);font-weight:600}
-.channel .hash{color:var(--ink-faint);font-family:var(--mono);margin-right:2px}
-.channel.active .hash{color:var(--accent-2)}
-.channel .ch-count{font-family:var(--mono);font-size:10.5px;color:var(--muted);background:var(--surface-3);border-radius:9px;padding:1px 7px;font-weight:600}
-.channel.active .ch-count{background:var(--accent-soft);color:var(--accent-2)}
+/* Small status pills */
+.status-pill-sm{display:inline-flex;align-items:center;height:19px;padding:0 8px;border-radius:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff}
+.status-pill-sm.enf{background:var(--red-fill)}
+.status-pill-sm.cons{background:var(--amber-fill)}
+.status-pill-sm.case{background:var(--green-fill)}
+.status-pill-sm.guid{background:var(--accent)}
+.status-pill-sm.legi{background:#6b21a8}
+.status-pill-sm.alert{background:var(--red-fill)}
 
-.threads{border-right:1px solid var(--border-soft);background:var(--surface);display:flex;flex-direction:column;min-width:0}
-.threads-head{padding:16px 22px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.threads-head h2{font-size:16px;font-weight:700;color:var(--ink-strong);letter-spacing:-.005em}
-.threads-head .desc{font-size:11.5px;color:var(--muted);font-family:var(--mono);font-weight:500}
-.threads-head .actions{margin-left:auto;display:flex;gap:6px}
+/* Lead */
+.news-lead{background:var(--surface);border:1px solid var(--border-soft);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow-1);padding:20px 24px;margin-bottom:18px;position:relative}
+.nl-kick{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-2);display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.news-lead h2{font-size:22px;font-weight:700;color:var(--ink-strong);line-height:1.25;letter-spacing:-.015em;margin-bottom:10px;padding-right:40px}
+.news-lead h2 a{color:inherit}
+.news-lead h2 a:hover{color:var(--accent-2)}
+.nl-deck{font-size:13.5px;color:var(--secondary);line-height:1.55;margin-bottom:12px}
+.nl-footer{display:flex;gap:18px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);padding-top:10px;border-top:1px solid var(--border-soft)}
+.nl-footer strong{color:var(--ink);margin-right:4px;font-weight:600}
+.nl-footer a{color:var(--accent-2);font-weight:600}
+.nl-save{position:absolute;top:20px;right:20px;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-faint);background:transparent;border:1px solid var(--border-soft);border-radius:5px;cursor:pointer}
+.nl-save:hover{color:var(--accent);border-color:var(--accent-soft-2);background:var(--accent-soft)}
+.nl-save.on{color:var(--accent);background:var(--accent-soft);border-color:var(--accent-soft-2)}
+.nl-save svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:currentColor;fill-opacity:0}
+.nl-save.on svg{fill-opacity:1}
 
-.composer{padding:12px 22px;background:var(--surface-2);border-bottom:1px solid var(--border-soft)}
-.composer-bar{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 8px 6px 14px;transition:border-color .12s,box-shadow .12s}
-.composer-bar:focus-within{border-color:var(--accent-soft-2);box-shadow:0 0 0 3px var(--accent-soft)}
-.composer-bar input{flex:1;border:0;font-size:13px;padding:6px 0}
-.composer-bar input::placeholder{color:var(--muted)}
-.composer-bar button{padding:6px 14px;background:var(--accent);color:#fff;border-radius:4px;font-size:12.5px;font-weight:600}
-.composer-bar button:hover{background:var(--accent-2)}
+/* Second leads */
+.news-seconds{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+.news-second{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);padding:16px 20px;position:relative}
+.ns-kick{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-2);margin-bottom:8px}
+.news-second h3{font-size:15px;font-weight:600;color:var(--ink-strong);line-height:1.3;letter-spacing:-.005em;margin-bottom:8px;padding-right:32px}
+.news-second h3 a{color:inherit}
+.ns-meta{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ns-save{position:absolute;top:14px;right:14px;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-faint);background:transparent;border:none;cursor:pointer;border-radius:4px}
+.ns-save:hover{color:var(--accent);background:var(--surface-3)}
+.ns-save.on{color:var(--accent)}
+.ns-save svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:currentColor;fill-opacity:0}
+.ns-save.on svg{fill-opacity:1}
 
-.thread-list{flex:1;overflow-y:auto}
-.thread-row{display:block;padding:14px 22px;border-bottom:1px solid var(--border-soft);cursor:pointer;transition:background .12s;position:relative}
-.thread-row:hover{background:var(--surface-2)}
-.thread-row.selected{background:var(--accent-soft)}
-.thread-row.selected::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
-.thread-row .top{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:12px;color:var(--secondary);font-weight:600}
-.thread-row .author{color:var(--ink)}
-.thread-row .time{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500}
-.thread-row .tag{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;border-radius:9px;background:var(--surface-3);color:var(--secondary);margin-left:auto;text-transform:uppercase;letter-spacing:.04em}
-.thread-row .tag.priority{background:var(--amber-bg);color:var(--amber)}
-.thread-row .title{font-size:13.5px;font-weight:600;color:var(--ink-strong);line-height:1.4;letter-spacing:-.005em;margin-bottom:4px}
-.thread-row .snippet{font-size:12.5px;color:var(--secondary);line-height:1.5;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.thread-row .meta{display:flex;gap:14px;font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:500}
-.thread-row .meta b{color:var(--ink);font-weight:700}
+/* Wire */
+.wire-header{display:flex;justify-content:space-between;align-items:baseline;margin:4px 2px 10px}
+.wire-header h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-strong)}
+.wh-count{font-size:12px;color:var(--muted)}
+.wh-count strong{color:var(--ink);font-weight:700}
+.wire-list{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);overflow:hidden}
+.wire-row{display:grid;grid-template-columns:72px 44px 1fr auto 30px;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border-soft);align-items:start;cursor:pointer;transition:background .1s}
+.wire-row:last-child{border-bottom:none}
+.wire-row:hover{background:var(--surface-2)}
+.wire-row.watched{border-left:2px solid var(--accent);padding-left:16px}
+.wr-ts{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:2px;font-weight:500}
+.wr-jur{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--secondary);padding-top:2px;letter-spacing:.04em;background:var(--surface-3);border:1px solid var(--border-soft);border-radius:3px;text-align:center;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.wr-info h4{font-size:13px;font-weight:500;color:var(--ink-strong);line-height:1.4;margin-bottom:3px}
+.wr-info h4 a{color:inherit}
+.wr-info h4 a:hover{color:var(--accent-2)}
+.wr-src{font-size:11px;color:var(--muted)}
+.wr-src strong{color:var(--ink);font-weight:600}
+.wr-tag{display:inline-flex;align-items:center;height:20px;padding:0 9px;border-radius:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;white-space:nowrap;margin-top:2px}
+.wr-tag.enf{background:var(--red-fill)}
+.wr-tag.cons{background:var(--amber-fill)}
+.wr-tag.case{background:var(--green-fill)}
+.wr-tag.guid{background:var(--accent)}
+.wr-tag.legi{background:#6b21a8}
+.wr-tag.alert{background:var(--red-fill)}
+.wr-star{background:none;border:none;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-faint);cursor:pointer;border-radius:4px;margin-top:-1px}
+.wr-star:hover{color:var(--accent);background:var(--surface-3)}
+.wr-star.on{color:var(--accent)}
+.wr-star svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:currentColor;fill-opacity:0;transition:fill-opacity .12s}
+.wr-star.on svg{fill-opacity:1}
 
-/* Detail */
-.detail{background:var(--surface-2);display:flex;flex-direction:column;overflow-y:auto}
-.detail-head{padding:18px 22px;border-bottom:1px solid var(--border-soft);background:var(--surface)}
-.detail-head .crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:700}
-.detail-head .crumb .sep{color:var(--ink-faint);margin:0 6px}
-.detail-head h3{font-size:16px;font-weight:700;color:var(--ink-strong);line-height:1.35;letter-spacing:-.005em;margin-bottom:10px}
-.detail-head .stats{display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500}
-.detail-head .stats b{color:var(--ink);font-weight:700}
-.msg{padding:14px 22px;border-bottom:1px solid var(--border-soft)}
-.msg-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.msg-top .av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
-.msg-top .name{font-size:13px;font-weight:600;color:var(--ink-strong)}
-.msg-top .role{font-size:11.5px;color:var(--muted);font-family:var(--mono);font-weight:500}
-.msg-top .time{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-left:auto;font-weight:500}
-.msg-body{font-size:13px;line-height:1.6;color:var(--secondary)}
-.msg-body p{margin-bottom:9px}
-.msg-body p:last-child{margin-bottom:0}
-.msg-body blockquote{border-left:3px solid var(--accent-soft-2);padding:2px 12px;color:var(--muted);margin:10px 0;font-size:12.5px}
+.wire-pager{padding:12px 18px;border-top:1px solid var(--border-soft);background:var(--surface-2);font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
+.wire-pager a{color:var(--accent-2);font-weight:600}
 
-.reply-box{padding:16px 22px;background:var(--surface);border-top:1px solid var(--border-soft);margin-top:auto;position:sticky;bottom:0}
-.reply-box textarea{width:100%;min-height:72px;border:1px solid var(--border);border-radius:6px;padding:10px 12px;font:inherit;font-size:13px;line-height:1.5;resize:vertical;transition:border-color .12s,box-shadow .12s}
-.reply-box textarea:focus{border-color:var(--accent-soft-2);box-shadow:0 0 0 3px var(--accent-soft)}
-.reply-box .bar{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.reply-box .hint{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:500}
-.reply-box .hint kbd{display:inline-block;font-family:var(--mono);font-size:10px;padding:1px 5px;border:1px solid var(--border);border-radius:3px;background:var(--surface-2);margin:0 1px}
+/* ==NEWS_LAYOUT== wire + right rail */
+.news-wire-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:32px;align-items:start}
+.news-main{min-width:0}
+.news-rail{position:sticky;top:calc(var(--header-height) + 18px);display:flex;flex-direction:column;gap:22px;font-size:12.5px}
+.news-rail .rail-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);padding:16px 18px}
+.news-rail .rail-title{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;color:#8a93a3;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.news-rail .rail-title .rt-edit{color:#0176d3;font-weight:700;text-decoration:none;letter-spacing:.06em;font-size:9.5px;cursor:pointer}
+.news-rail .rail-title .rt-edit:hover{text-decoration:underline}
+/* Your brief card */
+.news-rail .rb-line{font-size:13px;color:#07202e;font-weight:600;line-height:1.4;margin-bottom:4px;letter-spacing:-.005em}
+.news-rail .rb-sub{font-size:11.5px;color:#5e6878;line-height:1.5}
+.news-rail .rb-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.news-rail .rb-chip{display:inline-flex;align-items:center;padding:3px 8px;background:#f6f7f9;border:1px solid #ebeff5;border-radius:4px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:600;color:#2a3548;letter-spacing:.04em}
+/* Top sources list */
+.news-rail .rs-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-bottom:1px solid #ebeff5;align-items:baseline;font-size:12.5px}
+.news-rail .rs-row:last-child{border-bottom:none}
+.news-rail .rs-name{color:#0d2e42;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.news-rail .rs-name .rs-juris{color:#8a93a3;font-weight:500;margin-right:4px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.04em}
+.news-rail .rs-count{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;font-weight:700;color:#014486;background:#e3effc;padding:1px 8px;border-radius:4px;letter-spacing:.02em}
+/* Coming up */
+.news-rail .cu-row{padding:10px 0;border-bottom:1px solid #ebeff5;font-size:12.5px;line-height:1.45}
+.news-rail .cu-row:last-child{border-bottom:none}
+.news-rail .cu-row .cu-date{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;color:#c47a00;letter-spacing:.04em;margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.news-rail .cu-row .cu-date .cu-days{color:#8a93a3;font-weight:500}
+.news-rail .cu-row .cu-h{color:#07202e;font-weight:600}
+.news-rail .cu-row .cu-body{color:#5e6878;font-weight:400}
+/* Saved */
+.news-rail .sv-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid #ebeff5;font-size:12.5px;line-height:1.4;align-items:start}
+.news-rail .sv-row:last-child{border-bottom:none}
+.news-rail .sv-row a{color:#0d2e42;font-weight:500;text-decoration:none}
+.news-rail .sv-row a:hover{color:#0176d3;text-decoration:underline}
+.news-rail .sv-star{color:#0176d3;flex-shrink:0;font-size:13px}
+.news-rail .rail-see-all{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;font-weight:700;letter-spacing:.08em;color:#014486;text-decoration:none;text-transform:uppercase}
+.news-rail .rail-see-all:hover{color:#0176d3;text-decoration:underline}
+@media (max-width: 1200px){ .news-wire-layout{grid-template-columns:1fr} .news-rail{position:static;order:2;flex-direction:row;flex-wrap:wrap} .news-rail .rail-card{flex:1 1 280px} }
 
-/* Videos */
-.panel-body{padding:24px 28px}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
-.section-head h2{font-size:16px;font-weight:700;color:var(--ink-strong);letter-spacing:-.005em;margin-bottom:2px}
-.section-head .sub{font-size:12px;color:var(--muted);font-family:var(--mono);font-weight:500}
-.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.video-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
-.video-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);border-color:var(--accent-soft-2)}
-.thumb{aspect-ratio:16/9;background:linear-gradient(135deg,var(--accent-soft) 0%,var(--surface-3) 100%);position:relative;display:flex;align-items:center;justify-content:center}
-.thumb::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(1,118,211,.08),transparent 60%)}
-.thumb .play{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.18);position:relative;z-index:1}
-.thumb .play svg{width:18px;height:18px;fill:var(--ink-strong);margin-left:3px}
-.thumb .duration{position:absolute;bottom:10px;right:10px;background:rgba(6,16,30,.92);color:#fff;font-family:var(--mono);font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:3px}
-.thumb .topic{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.96);color:var(--ink-strong);font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-.vbody{padding:14px 16px 16px}
-.vtitle{font-size:13.5px;font-weight:600;color:var(--ink-strong);line-height:1.4;letter-spacing:-.005em;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
-.vmeta{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);font-weight:500}
-.vmeta .av{width:20px;height:20px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
-.vmeta .name{color:var(--ink);font-weight:600}
-
-/* Faculty */
-.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.fac-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);padding:20px 22px;display:flex;gap:16px;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
-.fac-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);border-color:var(--accent-soft-2)}
-.fac-card .av{width:52px;height:52px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0}
-.fac-card .fbody{flex:1;min-width:0}
-.fac-card .fname{font-size:14.5px;font-weight:700;color:var(--ink-strong);letter-spacing:-.005em;margin-bottom:3px}
-.fac-card .frole{font-size:11.5px;color:var(--muted);font-family:var(--mono);font-weight:500;margin-bottom:10px}
-.fac-card .fspec{font-size:12.5px;color:var(--secondary);line-height:1.5;margin-bottom:12px}
-.fac-card .fmeta{display:flex;gap:14px;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--muted)}
-.fac-card .fmeta b{color:var(--ink);font-weight:700}
-
-/* Avatar colors */
-.av.c1{background:#1e3a8a}.av.c2{background:#5b21b6}.av.c3{background:#7c2d12}.av.c4{background:#0f766e}
-.av.c5{background:#be185d}.av.c6{background:#365314}.av.c7{background:#164e63}.av.c8{background:#92400e}
-.av.c9{background:#3730a3}.av.c10{background:#134e4a}.av.c11{background:#701a75}.av.c12{background:#78350f}
+.footer{border-top:1px solid var(--border);padding:20px 4px 4px;margin-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.footer .ok{color:var(--green);font-weight:600}
+.footer .ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
+.footer .left{display:flex;gap:26px;align-items:center;font-weight:500}
 
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-thumb{background:#d0d7e0;border-radius:4px}
@@ -280,16 +297,6 @@ body.jur-overlay-open .icon-sidebar .brand-text { opacity: 0 !important; }
 .page-head .page-title { font-size: 44px; font-weight: 700; color: #07202e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
 .page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
 
-/* ==STATUSBAR_CSS== */
-.ps-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--secondary);flex-wrap:wrap}
-.ps-breadcrumb a{color:var(--accent-2);font-weight:600}
-.ps-breadcrumb a:hover{text-decoration:underline}
-.ps-sep{color:var(--ink-faint)}
-.ps-current{color:var(--ink-strong);font-weight:700}
-.ps-scope-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;font-size:11px;font-weight:600;color:var(--accent-2);background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:4px;letter-spacing:.02em}
-.ps-ok{color:var(--green);font-weight:600;font-size:12px}
-.ps-ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
-
 /* Sidebar hover-expand: labels reveal + main-content shifts right so it's not covered */
 .icon-sidebar { transition: width .22s cubic-bezier(.4,0,.2,1); }
 body.sidebar-expanded .icon-sidebar { width: var(--sidebar-expanded, 240px) !important; }
@@ -301,6 +308,32 @@ body.sidebar-expanded .main-content,
 body.sidebar-expanded .header-bar { margin-left: var(--sidebar-expanded, 240px) !important; transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
 body.sidebar-expanded #jur-overlay { left: var(--sidebar-expanded, 240px) !important; }
 .main-content, .header-bar { transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+
+/* ==CANONICAL_HEADER_CSS== */
+.header-bar { position: fixed; top: 0; left: var(--sidebar-collapsed); right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
+.header-bar { left: 0; padding: 0 14px; }
+.header-bar { left: 0 !important; padding-left: 60px !important; }
+.header-nav-arrows { display: flex; gap: 4px; }
+.header-nav-arrows button { width: 30px; height: 30px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.header-nav-arrows button:hover { background: var(--surface-3); color: var(--ink); }
+.header-nav-arrows button svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; }
+.header-user-name { font-size: 13px; font-weight: 500; color: var(--secondary); white-space: nowrap; }
+.header-user-name { display: none; }
+.header-search { flex: 1; max-width: 460px; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px; background: var(--surface-3); border-radius: 5px; border: 1px solid transparent; }
+.header-search:focus-within { background: var(--surface); border-color: var(--accent-soft-2); }
+.header-search svg { width: 15px; height: 15px; stroke: var(--muted); stroke-width: 2; fill: none; }
+.header-search input { flex: 1; font-size: 13px; background: transparent; }
+.header-search input::placeholder { color: var(--muted); }
+.header-search kbd { font-family: var(--mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; background: var(--surface); }
+.header-search { max-width: none; }
+.header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.home-jur-btn { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--secondary); cursor: pointer; padding: 6px 12px; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); font-weight: 500; }
+.hjb-flag { font-size: 17px; line-height: 1; }
+.header-icon-btn { width: 36px; height: 36px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: var(--muted); position: relative; }
+.header-icon-btn:hover { background: var(--surface-3); color: var(--ink); }
+.header-icon-btn svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 1.7; fill: none; }
+.header-icon-btn .badge-count { position: absolute; top: 4px; right: 3px; min-width: 17px; height: 17px; padding: 0 5px; background: var(--red-fill); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 600; border-radius: 9px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--surface); box-sizing: content-box; }
+.badge-count { position: absolute; top: 4px; right: 3px; min-width: 17px; height: 17px; padding: 0 5px; background: var(--red-fill); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 600; border-radius: 9px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--surface); box-sizing: content-box; }
 
 /* ==MOBILE_RESPONSIVE== */
 body { min-width: 320px !important; }
@@ -443,7 +476,7 @@ body { min-width: 320px !important; }
     var el = document.querySelector('.header-user-name');
     if(!el) return;
     if(user && user.firstName){
-      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
+      el.textContent = user.firstName + ' \u00B7 PrinciplesAI';
     }
     // if no user, leave hardcoded — pai-app-* is public by design
   }
@@ -502,7 +535,6 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
-<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 
@@ -514,15 +546,14 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     
   <div class="sidebar-nav-items">
     <a class="sidebar-nav-item" href="pai-home-private" style="text-decoration:none;"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></a>
-      <a class="sidebar-nav-item active" href="pai-app-ai-notes" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
+      <a class="sidebar-nav-item" href="pai-app-ai-notes" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
     <div class="sidebar-nav-item" onclick="openJurisdictions()" style="cursor:pointer;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span></div>
-    <a class="sidebar-nav-item" href="pai-app-news" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
+    <a class="sidebar-nav-item active" href="pai-app-news" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
     <div class="sidebar-regions-zone">
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
-      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
@@ -550,101 +581,315 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </header>
 
 <div class="main-content">
+<div class="page-view">
 
-<style>
-html{scroll-behavior:smooth}
-.nt-page-wrap{max-width:1400px;margin:0 auto;padding:20px 24px 40px}
-.nt-block{margin:16px 0 40px;padding:0}
-.nt-block-head{display:flex;align-items:flex-start;gap:16px;padding:18px 0 14px;border-bottom:1px solid var(--border,#dbe1ea);margin-bottom:20px}
-.nt-block-head .tp-flag{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:20px;border-radius:3px;background:var(--surface-3,#e8ebf1);color:var(--ink,#0d2e42);font-family:var(--mono,monospace);font-size:10px;font-weight:700;margin-top:4px}
-.nt-block-titles{flex:1}
-.nt-eyebrow{font-family:var(--mono,monospace);font-size:10.5px;font-weight:700;color:var(--accent,#0176d3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
-.nt-title{font-size:28px;font-weight:700;color:var(--ink-strong,#07202e);letter-spacing:-.02em;margin:0 0 4px 0;line-height:1.1}
-.nt-meta{font-size:12.5px;color:var(--muted,#5e6878);margin-bottom:6px}
-.nt-juris-link{display:inline-block;font-size:12px;color:var(--accent,#0176d3);text-decoration:none;margin-top:4px;font-weight:500}
-.nt-juris-link:hover{text-decoration:underline}
-.nt-back-link{font-size:12px;color:var(--muted,#5e6878);text-decoration:none;padding:6px 10px;border:1px solid var(--border,#dbe1ea);border-radius:5px;white-space:nowrap}
-.nt-back-link:hover{color:var(--accent,#0176d3);border-color:var(--accent-soft-2,#b9d8ef);background:var(--accent-soft,#e3effc)}
-.nt-expand{display:grid;grid-template-columns:220px minmax(0,1fr) 280px;gap:24px}
-.nt-toc{position:sticky;top:24px;align-self:start;font-size:12.5px}
-.nt-toc-head{font-family:var(--mono,monospace);font-size:10.5px;font-weight:700;color:var(--muted,#5e6878);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
-.nt-toc-list{list-style:none;padding:0;margin:0}
-.nt-toc-list li{border-left:2px solid var(--border,#dbe1ea);padding:6px 0 6px 12px;margin-left:2px}
-.nt-toc-list li a{color:var(--ink,#0d2e42);text-decoration:none;display:flex;gap:8px;line-height:1.35;font-size:12px}
-.nt-toc-list li a:hover{color:var(--accent,#0176d3)}
-.nt-toc-list li a .k{font-family:var(--mono,monospace);color:var(--muted,#5e6878);font-weight:600;min-width:24px;font-size:10.5px}
-.nt-main{background:var(--surface,#fff);border:1px solid var(--border,#dbe1ea);border-radius:8px;padding:28px 32px;max-width:860px}
-.nt-section{padding:18px 0;border-bottom:1px solid var(--border-soft,#ebeff5)}
-.nt-section:last-child{border-bottom:none}
-.nt-s-kick{font-family:var(--mono,monospace);font-size:10.5px;font-weight:700;color:var(--accent,#0176d3);text-transform:uppercase;letter-spacing:.12em}
-.nt-s-title{font-size:15.5px;font-weight:600;color:var(--ink-strong,#07202e);margin:6px 0 10px;letter-spacing:-.005em;line-height:1.3}
-.nt-s-body{font-size:13.5px;line-height:1.6;color:var(--ink,#0d2e42)}
-.nt-s-body p{margin:0 0 10px}
-.nt-s-body ul.nt-bullets{margin:0 0 10px 18px;padding:0}
-.nt-s-body ul.nt-bullets li{margin-bottom:4px}
-.nt-contrib-wrap{position:sticky;top:24px;align-self:start}
-.nt-contrib{background:var(--surface,#fff);border:1px solid var(--border,#dbe1ea);border-radius:8px;padding:20px;text-align:center}
-.nt-c-photo{width:88px;height:88px;border-radius:50%;background:var(--accent,#0176d3);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;margin:0 auto 12px;overflow:hidden}
-.nt-c-photo.has-img{background:var(--surface-3,#e8ebf1)}
-.nt-c-photo img{width:100%;height:100%;object-fit:cover}
-.nt-c-name{font-weight:600;font-size:14px;color:var(--ink-strong,#07202e);margin-bottom:2px}
-.nt-c-name a{color:inherit;text-decoration:none;border-bottom:1px solid var(--accent,#0176d3)}
-.nt-c-firm{font-size:12px;color:var(--muted,#5e6878);margin-bottom:10px}
-.nt-c-bio{font-size:12.5px;color:var(--ink,#0d2e42);line-height:1.45;text-align:left;margin-bottom:14px;padding:10px;background:var(--surface-2,#f7f8fb);border-radius:6px}
-.nt-c-meta{border-top:1px solid var(--border-soft,#ebeff5);padding-top:12px;text-align:left;font-size:11.5px}
-.nt-c-row{display:flex;justify-content:space-between;padding:4px 0;color:var(--ink,#0d2e42)}
-.nt-c-row .lbl{color:var(--muted,#5e6878);font-family:var(--mono,monospace);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}
-.nt-empty{color:var(--muted,#5e6878);font-style:italic;padding:20px 0}
-@media (max-width:1060px){.nt-expand{grid-template-columns:1fr;gap:18px}.nt-contrib-wrap,.nt-toc{position:static}}
-</style>
-<div class="nt-page-wrap">
-  <section class="nt-block">
-    <header class="nt-block-head">
-      <span class="tp-flag">PH</span>
-      <div class="nt-block-titles">
-        <div class="nt-eyebrow">AI Regulation Note · Part B analysis</div>
-        <h1 class="nt-title">Philippines AI Note</h1>
-        <div class="nt-meta">Reflects the law as at April 2026 · Contributed by <a href="pai-app-faculty-edsel-tupaz" style="color:var(--accent-2);font-weight:600;">Edsel F. Tupaz</a></div>
-        <a class="nt-juris-link" href="pai-app-juris-philippines">Open Philippines jurisdiction page →</a>
-      </div>
-      <a class="nt-back-link" href="pai-app-ai-notes">← Back to matrix</a>
-    </header>
-    <div class="nt-expand">
-      <aside class="nt-toc">
-        <div class="nt-toc-head">Contents</div>
-        <ul class="nt-toc-list"><li><a href="#sec-b0"><span class="k">B0</span> Analysis — B0</a></li><li><a href="#sec-b1"><span class="k">B1</span> Legal Characterisation of AI</a></li><li><a href="#sec-b10"><span class="k">B10</span> Legislative Developments (If Relevant)</a></li><li><a href="#sec-b2"><span class="k">B2</span> Relationship to Higher-Level Law (Where Applicable)</a></li><li><a href="#sec-b3"><span class="k">B3</span> Analysis — B3</a></li><li><a href="#sec-b4"><span class="k">B4</span> Legal Bases Relied on in Practice</a></li><li><a href="#sec-b5"><span class="k">B5</span> Liability Allocation Across the AI Chain</a></li><li><a href="#sec-b6"><span class="k">B6</span> Analysis — B6</a></li><li><a href="#sec-b7"><span class="k">B7</span> Data, Inference, and Automated Decision-Making</a></li><li><a href="#sec-b8"><span class="k">B8</span> AI in Employment and Workplace Contexts</a></li><li><a href="#sec-b9"><span class="k">B9</span> Points of Legal Friction</a></li></ul>
-      </aside>
-      <main class="nt-main"><div class="nt-section" id="sec-b0"><div class="nt-s-kick">B0</div><h3 class="nt-s-title">Analysis — B0</h3><div class="nt-s-body"><p>Briefly list other binding legal frameworks in this jurisdiction that materially shape AI use, with status indicated in brackets.<br>Include only binding frameworks that have been applied, or are clearly applicable, to AI-enabled conduct in this jurisdiction. Do not include frameworks of general application where no AI-specific connection has been established.<br>e.,g. (As seen on IAPP´s AI Tracker)<br>EU –</p><ul class='nt-bullets'><li>General Data Protection Regulation [IN FORCE]</li></ul><ul class='nt-bullets'><li>Digital Services Act [IN FORCE]</li></ul><ul class='nt-bullets'><li>Digital Markets Act [IN FORCE]</li></ul><ul class='nt-bullets'><li>AI Liability Directive [DROPPED]</li></ul><ul class='nt-bullets'><li>Cyber Resilience Act [IN FORCE]</li></ul><ul class='nt-bullets'><li>Ethics guidelines for trustworthy AI [IN FORCE]</li></ul><ul class='nt-bullets'><li>New Product Liability Directive [ENACTED]</li></ul><ul class='nt-bullets'><li>Data Act [IN FORCE]</li></ul><p>Philippines –</p><ul class='nt-bullets'><li>Data Privacy Act of 2012 [IN FORCE]</li></ul><p>This is the core framework governing personal data processing, including AI-enabled processing.</p><ul class='nt-bullets'><li>Cybercrime Prevention Act of 2012 [IN FORCE]</li></ul><p>This applies to AI-enabled conduct where such systems are used to commit or facilitate cybercrimes (e.g., computer-related fraud, identity theft, cyber libel, illegal access, or data interference). It also provides the legal basis for investigation, collection of electronic evidence, and prosecution of offenses involving automated or AI-assisted activities, with enforcement supported by agencies such as the Cybercrime Investigation and Coordinating Center (CICC) and law enforcement units.</p><ul class='nt-bullets'><li>E-Governance Act [IN FORCE]</li></ul><p>This governs AI-enabled systems only insofar as they fall within “emerging technologies” and are deployed as part of E-Government programs. It does not establish AI-specific rules, but requires that such systems comply with the E-Government Master Plan (EGMP) and the Philippine Government Interoperability Framework (PGIF), as well as applicable data privacy, cybersecurity, and information security standards, with the DICT responsible for issuing technical standards and ensuring interoperability and system integration across government ICT systems.</p><ul class='nt-bullets'><li>Internet Transactions Act of 2023 [IN FORCE]</li></ul><p>This applies to AI-enabled systems only to the extent they are used in covered internet transactions, digital platforms, e-marketplaces, e-retailers, or online merchants. It does not provide AI-specific rules, but regulates e-commerce activities, imposes consumer protection and platform obligations, and requires compliance with applicable data privacy and information security standards.</p><ul class='nt-bullets'><li>NPC Circular No. 2022-04 [IN FORCE]</li></ul><p>This imposes registration of data processing systems and mandatory notification of automated decision-making or profiling, including disclosure of logic, lawful basis, and potential impact on data subjects.</p><ul class='nt-bullets'><li>COMELEC Resolution No. 11064 (as amended by 11064-A) [NO LONGER IN FORCE]</li></ul><p>This regulates AI use in elections by requiring registration of official digital platforms, disclosures for AI-generated content, and providing enforcement mechanisms (including takedown coordination and election offense proceedings).</p><ul class='nt-bullets'><li>Supreme Court A.M. No. 25-11-28-SC [IN FORCE]</li></ul><p>This establishes a governance framework for AI in the judiciary, including prior authorization, risk assessment, auditability, monitoring, and incident reporting requirements.</p><ul class='nt-bullets'><li>DepEd Order No. 003, s. 2026 [IN FORCE]</li></ul><p>This requires Privacy Impact Assessments, registration of AI systems in a centralized registry, and adoption of a risk-based approach for AI deployment in education.</p><ul class='nt-bullets'><li>Konektadong Pinoy Act IRR [IN FORCE]</li></ul><p>This imposes cybersecurity-related obligations relevant to AI systems, including impact assessments, audits, certification mechanisms, and reporting of material incidents to DICT (including coordination with national CERT structures).</p><ul class='nt-bullets'><li>BSP Circular No. 1153 [IN FORCE]</li></ul><p>This applies to artificial intelligence/machine learning (AI/ML) use in financial services by requiring controlled testing (regulatory sandbox), risk identification, safeguards, and supervisory oversight before broader deployment.</p></div></div>
-<div class="nt-section" id="sec-b1"><div class="nt-s-kick">B1</div><h3 class="nt-s-title">Legal Characterisation of AI</h3><div class="nt-s-body"><p>Explain how AI systems are treated under existing law or AI-specific law in this jurisdiction.<br>Cover:</p><ul class='nt-bullets'><li>whether AI is treated as a distinct legal category or assessed through outcomes and effects,</li></ul><ul class='nt-bullets'><li>whether the law establishes a formal risk-based categorisation framework (for example, prohibited uses, high-risk systems, or tiered obligations);</li></ul><ul class='nt-bullets'><li>how existing legal concepts are applied to AI-enabled conduct, and</li></ul><ul class='nt-bullets'><li>any features of this jurisdiction&#x27;s law that materially shape that treatment (sector specific, comprehensive etc)</li></ul><ul class='nt-bullets'><li>how this jurisdiction&#x27;s law handles attribution of AI outputs, decisions, or errors to a legal person, and whether gaps in attribution are addressed expressly or left to general principles.</li></ul><p>This section establishes the conceptual baseline for the note.<br>Sample B1.1 – Legal Characterisation of AI (AI-Specific Legislation)<br>Jurisdiction: South Korea<br>In South Korea, AI use and development is governed by the AI Basic Act, formally passed on 26 December 2024 and which came into force on 22 January 2026.  This framework establishes a comprehensive legal foundation for artificial intelligence, including transparency obligations, definitions of high-impact and generative AI, and provisions for governance and oversight.<br>Sector-specific regulations in areas such as finance and healthcare continue to apply existing legal concepts to AI-enabled conduct alongside the Basic Act, meaning that AI is treated both through new AI-specific norms and through the application of traditional legal doctrines according to effects and contexts.<br>Sample B1.2 – Legal Characterisation of AI (No AI-Specific Legislation)<br>Jurisdiction: Japan<br>In Japan, there is no AI-specific statute governing the development or use of artificial intelligence. AI systems are regulated through the application of existing legal frameworks, with legal assessment focused on the effects and outcomes of AI-enabled conduct rather than the technology itself.<br>In practice, AI use is evaluated through established bodies of law, including data protection, consumer protection, competition, product liability, and sector-specific regulation. These frameworks apply to AI systems in the same way as to other digital or automated tools, with AI acting as a factual element that may influence risk assessment, compliance expectations, or evidentiary analysis, rather than as a distinct legal category.<br>Government-issued guidelines and policy documents play an important role in shaping expectations around responsible AI development and deployment, but these instruments are non-binding and do not create enforceable legal obligations. As a result, the legal treatment of AI in Japan is characterised by continuity with existing legal doctrine, supplemented by soft-law guidance rather than formal AI-specific regulation.<br>In the Philippines, there is no comprehensive AI-specific statute governing the development or use of artificial intelligence, although there are a number of pending bills seeking to establish a national AI framework. At present, AI systems are regulated through the application of existing legal frameworks, with legal assessment focused on the effects and outcomes of AI-enabled conduct rather than the technology itself.<br>In practice, AI use is evaluated under established areas of law such as data privacy, cybercrime, consumer protection, and sector-specific regulation. These frameworks apply to AI in the same manner as other digital or automated tools, with AI treated as a means by which regulated activities are carried out rather than as a distinct legal category. Notably, some recent issuances adopt a structured, risk-based approach similar to the EU AI Act. The Supreme Court, through A.M. No. 25-11-28-SC, classifies AI systems into prohibited, high-risk, limited-risk, and minimal-risk categories, with corresponding consequences such as prohibition for unacceptable uses and stricter safeguards for higher-risk systems. The Department of Education, through DepEd Order No. 003, s. 2026, adopts a similar tiered classification and ties each category to differentiated obligations, including mandatory safeguards and human oversight.<br>Attribution of AI outputs, decisions, or errors is not addressed through AI-specific liability rules. Responsibility continues to attach to natural or juridical persons under existing legal principles, such as control, negligence, or contractual obligation.<br>Overall, the Philippine approach remains grounded in existing legal frameworks, supplemented by sector-specific developments that introduce risk-based classification and governance measures, rather than a single, comprehensive AI regulatory regime.</p></div></div>
-<div class="nt-section" id="sec-b10"><div class="nt-s-kick">B10</div><h3 class="nt-s-title">Legislative Developments (If Relevant)</h3><div class="nt-s-body"><p>Note any pending or recently proposed AI-related legislation attributable to this jurisdiction.<br>Clearly distinguish:</p><ul class='nt-bullets'><li>enacted law, and</li></ul><ul class='nt-bullets'><li>proposals, drafts, or consultations.</li></ul><p>Philippines<br>Enacted law<br>There is currently no dedicated statute specifically governing artificial intelligence. AI-related conduct continues to be regulated through existing sectoral laws, such as data privacy, cybercrime, and financial regulation, supplemented by administrative issuances.<br>Proposals, drafts, or consultations<br>Several bills have been filed in the 20th Congress proposing the establishment of a comprehensive national AI framework. These include House Bills Nos. 13, 1920, 2827, 3195, 5158, 6920, 658, 659, 598, 6028, 2323, and 3462, which generally seek to create a Philippine Artificial Intelligence Council or Commission, adopt standards for ethical and accountable AI use, and regulate high-risk AI systems. All of these measures remain pending and have not been enacted into law. This legislative activity is situated within broader policy discussions reflected in the Congressional Policy and Budget Research Department’s Discussion Paper, Global Trends in the Regulation and Governance of Artificial Intelligence (Issue No. 2, February 2025), which surveys international approaches and informs ongoing legislative efforts.<br>Other pending bills, including House Bills Nos. 57, 1484, 3480, 3905, and 7627, reflect alternative or complementary approaches, such as rights-based regulation, sector-specific controls, and institutional oversight mechanisms. The House Committee on Information and Communications Technology has also convened a Technical Working Group (TWG) on the proposed Artificial Intelligence Development and Regulation Act, consolidating multiple House Bills on the subject. The TWG held its first meeting on March 12, 2026, to discuss the proposals, indicating that legislative deliberations are ongoing.<br>At the regulatory level, the Draft BSP Amendments to Regulations on Information Technology Risk Management to Implement Section 6 of the Anti-Financial Account Scamming Act (AFASA) remains under consultation and proposes enhancements to IT risk management rules, including requirements for automated fraud monitoring systems that may rely on machine learning or similar technologies.<br>Similarly, the DICT–CSC Draft Joint Memorandum Circular on Ethical and Trustworthy AI in the Government sets out principles for responsible AI use in government, such as fairness, accountability, and transparency, but remains in draft form since April 18, 2024 and has not been formally adopted.<br>On the policy side, the DOST Artificial Intelligence Roadmap outlines national priorities and strategic directions for AI development and adoption, but it is not a binding legal instrument.<br>Finally, the NPC–Insurance Commission Joint Advisory on PETs provides guidance on the use of privacy-enhancing technologies in the insurance sector; however, it is advisory in nature and does not impose binding legal obligations.<br>Sources:</p><ul class='nt-bullets'><li>https://www.bsp.gov.ph/Media_And_Research/Publications/EN25-01.pdf</li></ul><ul class='nt-bullets'><li>https://www.bsp.gov.ph/Media_And_Research/Special%20Publications/BSP_Thematic_Review_on_the_Use_of_AI_and_ML_in_Financial_Services.pdf</li></ul><ul class='nt-bullets'><li>https://www.bsp.gov.ph/Sites/researchsite/Publications/BSP-Economic-Newsletter/EN21-03.pdf</li></ul><ul class='nt-bullets'><li>https://www.bsp.gov.ph/Regulations/Issuances/2022/1153.pdf</li></ul><ul class='nt-bullets'><li>https://www.bsp.gov.ph/Regulations/Issuances/2023/M-2023-013.pdf</li></ul><ul class='nt-bullets'><li>https://www.bsp.gov.ph/Regulations/Issuances/2024/M-2024-029.pdf</li></ul><ul class='nt-bullets'><li>https://www.bsp.gov.ph/Regulations/Issuances%20of%20Policy%20Exposure%20Drafts/Exposure-Draft_Amendments-to-Regulations-on-IT-Risk-Management-to-Implement-Section-6-of-the-Anti-Financial-Account-Scamming-Act.pdf</li></ul><ul class='nt-bullets'><li>https://sc.judiciary.gov.ph/wp-content/uploads/2026/03/AM-No.-25-11-28-SC.pdf</li></ul><ul class='nt-bullets'><li>https://lawphil.net/administ/comelec/comres2024/comres_11064a_2024.pdf</li></ul><ul class='nt-bullets'><li>https://lawphil.net/administ/comelec/comres2024/comres_11064_2024.pdf</li></ul><ul class='nt-bullets'><li>https://www.deped.gov.ph/wp-content/uploads/DO_s2026_003r-1.pdf</li></ul><ul class='nt-bullets'><li>https://ictstatistics.dict.gov.ph/wp-content/uploads/2024/05/DRAFT-COPY_JMC-on-the-Principles-for-an-Ethical-and-Trustworthy-Use-of-Artificial-Intelligence-AI-in-Government.pdf</li></ul><ul class='nt-bullets'><li>https://privacy.gov.ph/wp-content/uploads/2025/03/NPC-IC-Joint-Advisory-2025.03.11-Considerations-on-the-Use-of-PETs-in-the-Insurance-Industry-w-SGD.pdf</li></ul><ul class='nt-bullets'><li>https://www.deped.gov.ph/wp-content/uploads/DO_s2025_013.pdf</li></ul><ul class='nt-bullets'><li>https://pcieerd.dost.gov.ph/wp-content/uploads/2026/01/Artificial_Intelligence_Roadmap_Dec15.pdf</li></ul><ul class='nt-bullets'><li>https://cpbrd.congress.gov.ph/wp-content/uploads/2025/02/DP2025-02-Global_Trends_in_the_Regulation_and_Governance_of_Artificial_Intelligence.pdf</li></ul></div></div>
-<div class="nt-section" id="sec-b2"><div class="nt-s-kick">B2</div><h3 class="nt-s-title">Relationship to Higher-Level Law (Where Applicable)</h3><div class="nt-s-body"><p>Explain how this jurisdiction&#x27;s own law(s) relates to higher-level legal regimes (e.g. federal, national, or superanational law), where applicable.<br>Focus on:</p><ul class='nt-bullets'><li>whether this jurisdiction adds obligations beyond higher-level law,</li></ul><ul class='nt-bullets'><li>implements or mirrors higher-level requirements, or</li></ul><ul class='nt-bullets'><li>does not add AI-specific obligations beyond higher-level regimes.</li></ul><p>Do not restate higher-level law itself.<br>Where this jurisdiction operates below a higher-level regime, focus only on what this jurisdiction adds, restricts, or permits beyond that regime. Do not restate the content of higher-level law, which is addressed in a separate note.<br>If this jurisdiction is the highest applicable legal level, state that briefly and continue.<br>The Philippines is the highest applicable legal level and is not subject to any overarching federal or supranational AI regime. There is likewise no binding higher-level AI framework applicable to it, as regional instruments to which it is a participant, such as ASEAN Guide on AI Governance and Ethics, are expressly non-binding and serve only as guidance, while the APEC/Global CBPR system, to which it also participates, operates as a voluntary certification mechanism rather than supranational law.</p></div></div>
-<div class="nt-section" id="sec-b3"><div class="nt-s-kick">B3</div><h3 class="nt-s-title">Analysis — B3</h3><div class="nt-s-body"><p>Extraterritorial Reach Explain whether this jurisdiction&#x27;s law applies to AI systems developed or operated outside the jurisdiction, and on what basis.<br>Focus on:</p><ul class='nt-bullets'><li>whether the law asserts jurisdiction based on effects, targeting, establishment, or other connecting factors,</li></ul><ul class='nt-bullets'><li>how that reach is defined or limited in practice, and</li></ul><ul class='nt-bullets'><li>any unresolved questions about where obligations attach in cross-border AI deployments.</li></ul><p>If the law is silent on extraterritorial application, state that and note how general private international law or conflict-of-laws principles would apply.<br>Philippine law does not provide AI-specific rules on extraterritorial reach, but existing statutes expressly extend to cross-border conduct.<br>Under Section 6 of the Data Privacy Act of 2012, the law applies even to processing done outside the Philippines if it relates to personal information of Philippine citizens or residents, or where the entity has a link to the Philippines, such as doing business, maintaining a local presence, or collecting data in the country. This allows AI systems developed or operated abroad to fall within scope where they process personal data of users who are Philippine citizens or residents or otherwise establish a sufficient local nexus.<br>Similarly, Section 21 of the Cybercrime Prevention Act of 2012 provides that jurisdiction attaches where any element of the offense is committed in the Philippines, where a computer system is located in the country, or where damage is caused to a person in the Philippines, regardless of where the act was carried out. It also covers offenses committed by Filipino nationals abroad and provides for designated cybercrime courts with specially trained judges.<br>Where multiple jurisdictions are involved, Philippine law does not set out detailed allocation rules for cross-border AI systems. In such cases, the extent of application and potential overlap with foreign laws would be resolved through general principles of jurisdiction and conflict of laws, including considerations of territoriality, effects, and the parties’ connections to the Philippines.</p></div></div>
-<div class="nt-section" id="sec-b4"><div class="nt-s-kick">B4</div><h3 class="nt-s-title">Legal Bases Relied on in Practice</h3><div class="nt-s-body"><p>Describe the legal bases most commonly relied on when AI-related issues arise under this jurisdiction’s law.<br>Where this jurisdiction has AI-specific legislation, explain whether issues are primarily addressed under that framework, or through existing general or sectoral law.<br>Focus on:</p><ul class='nt-bullets'><li>the types of legal claims, duties, or prohibitions engaged,</li></ul><ul class='nt-bullets'><li>how AI affects their application or evidentiary analysis,</li></ul><ul class='nt-bullets'><li>what courts or regulators tend to focus on, and</li></ul><ul class='nt-bullets'><li>liability frameworks (including tort or civil liability where relevant).</li></ul><p>Avoid restating the structural features of the AI framework described in B1. Focus instead on how disputes, investigations, or claims are actually framed in practice.<br>It is not necessary to list all potentially applicable laws. Focus on those most commonly relied upon in practice.<br>In the Philippines, AI-related issues are not typically framed as “AI cases” but are instead pursued under existing legal regimes depending on the harm involved. In practice, a significant portion of matters arise in the context of fraud, scams, and online misconduct, where AI tools such as deepfakes or automated messaging are used as enabling mechanisms. These are commonly addressed under the Cybercrime Prevention Act of 2012, particularly in relation to computer-related fraud, identity theft, illegal access, and online libel, often in conjunction with the Revised Penal Code provisions on estafa and unlawful publications. Prosecution of these offenses falls within designated cybercrime courts, which are Regional Trial Courts specially assigned and trained to handle cybercrime cases, including those involving digital evidence and technology-enabled conduct. In these cases, AI does not change the nature of the offense but may affect how intent, authorship, or participation is proven.<br>Recent incidents illustrate how authorities are applying these frameworks to AI-enabled conduct. In one instance, complaints were filed before the Philippine National Police Anti-Cybercrime Group involving the alleged dissemination of a deepfake video falsely depicting President Ferdinand Marcos Jr. issuing a military directive. Liability was anchored on existing penal provisions on unlawful publications and similar offenses, with the AI-generated nature of the content forming part of the factual basis. In a separate matter, the National Bureau of Investigation summoned a vlogger for allegedly circulating fabricated medical records of PBBM, which were reportedly enhanced using generative AI tools. These matters remain under investigation, indicating that while existing criminal laws are being used to address AI-generated disinformation, there is as yet no settled jurisprudence on how courts will ultimately treat such conduct.<br>Data protection is another primary legal basis, especially where AI systems process personal data. The Data Privacy Act of 2012 is commonly invoked in cases involving unlawful processing, unauthorized access, or data breaches involving automated systems, with oversight and enforcement exercised by the National Privacy Commission. In practice, the Commission tends to focus on whether the entity can demonstrate compliance with the principles of transparency, legitimate purpose, and proportionality, including the existence of a clear lawful basis for processing. There is also close scrutiny on the adequacy of organizational, physical, and technical security measures, as well as the entity’s ability to document and explain its processing activities. Where automated decision-making or profiling is involved, the focus is on compliance with the notification and disclosure requirements under NPC Circular No. 2022-04, including disclosure of the existence of such processing, the methods and logic used, the lawful basis, and the possible decisions that may significantly affect the data subject’s rights and freedoms.<br>There is, as yet, no settled jurisprudence in the Philippines specifically addressing civil liability arising from AI systems. In the absence of precedent, liability would likely be assessed under existing frameworks, particularly quasi-delict under the Civil Code, where the elements of fault, damage, and causation remain controlling. AI would primarily affect how these elements are established in practice, especially in tracing causation or identifying the responsible actor, rather than introducing a distinct liability regime. In commercial settings, liability is also likely to be addressed contractually, with outcomes turning on agreed obligations, representations, and allocation of risk between parties involved in the development or deployment of AI systems.</p></div></div>
-<div class="nt-section" id="sec-b5"><div class="nt-s-kick">B5</div><h3 class="nt-s-title">Liability Allocation Across the AI Chain</h3><div class="nt-s-body"><p>Describe how liability is allocated between developers, deployers, and users when an AI system causes harm under this jurisdiction&#x27;s law, and identify the most significant unresolved question in that allocation framework.<br>Focus on:</p><ul class='nt-bullets'><li>whether the law distinguishes between these roles expressly or by implication,</li></ul><ul class='nt-bullets'><li>how fault, causation, or product liability doctrines apply across the chain,</li></ul><ul class='nt-bullets'><li>whether contractual allocation between parties is recognised or limited by law, and</li></ul><ul class='nt-bullets'><li>any gaps or unresolved questions in the allocation framework.</li></ul><p>Do not restate the general liability frameworks described in B4. Where chain-specific rules exist, explain them. Where they do not, explain what fills the gap and what remains genuinely unresolved.<br>In the Philippines, as there is currently no comprehensive AI-specific liability law, the legal framework is a patchwork of the Civil Code, the Consumer Act, and emerging administrative issuances from the NPC and DICT.<br>The allocation of liability when an AI system causes harm follows the concept of quasi-delict under Art 2176 of the Civil Code, strict liability on manufacturers for defective products under the Consumer Act (if an AI system is to be classified as a “consumer product”), and data privacy liability under the DPA.<br>Under Article 2176 of the Civil Code, whoever causes damage through fault or negligence is liable, if there are no pre-existing contractual relations. Developers may, therefore, become liable if the harm stems from a design flaw or coding negligence. The challenge here is proving a specific act of negligence in an autonomous system. How can the plaintiff prove proximate cause when the AI’s decision-making logic is opaque and non-linear? Deployers may be held liable under vicarious liability (Art 2180 of the Civil Code), such that if a company deploys an AI agent that causes harm while performing tasks for the company’s benefit, the company is presumed negligent in its selection or supervision of the AI agent. A corporate structure may not be used as a shield for AI misconduct (See piercing discussion in Toledo vs. Toledo Construction). Users may also be liable if they misuse the system or if they fail to exercise human oversight, following the recent issuance of the SC (A.M. No. 25-11-28-SC, 2026).<br>On strict liability under the Consumer Act, the developer may be held liable for the injuries/harm caused by the AI system’s imperfections, regardless of intent or fault. Deployers may be solidarily liable if they fail to identify the developer or if they significantly modify the AI system in a way that caused the defect. However, the Consumer Act only applies to products, so what if an AI is provided as an SaaS without a physical component?<br>Under the DPA, the deployer, as a PIC, bears the primary burden of “accountability,” such that if an AI systems leaks data or makes biased, automated decisions without a legal basis, following NPC Advisory No. 2024-04, the deployer may be liable for administrative fines, even if the “bug” was created by a third-party developer.<br>As for contractual allocation of liability between the parties, contractual shifting of liability is recognized but strictly limited. The Internet Transactions Act generally prohibits clauses that exempt a developer from gross negligence or willful misconduct for being against public policy.<br>A most significant unresolved question is who becomes liable if an AI system causes harm through unpredictable emergent behavior that was not present at the time of its deployment?</p></div></div>
-<div class="nt-section" id="sec-b6"><div class="nt-s-kick">B6</div><h3 class="nt-s-title">Analysis — B6</h3><div class="nt-s-body"><p>Regulatory Guidance and Soft Law Where regulatory guidance, codes of practice, or supervisory expectations materially shape AI-related compliance in this jurisdiction — even without binding legal force — describe their practical significance.<br>Focus on:</p><ul class='nt-bullets'><li>which bodies have issued relevant guidance and in what form,</li></ul><ul class='nt-bullets'><li>whether compliance with guidance is treated as a safe harbour, a factor in enforcement, or otherwise legally relevant, and</li></ul><ul class='nt-bullets'><li>where soft law is effectively filling gaps left by binding frameworks.</li></ul><p>Do not include guidance that is purely aspirational or that has no practical bearing on how organisations approach compliance.<br>In the Philippines, soft law plays a meaningful role in shaping AI-related compliance, particularly where binding rules remain fragmented or sector-specific. Relevant guidance is issued by bodies such as the Department of Information and Communications Technology (DICT), the National Privacy Commission (NPC), and the Bangko Sentral ng Pilipinas (BSP), often in the form of advisories, memoranda, and thematic publications rather than enforceable regulations.<br>While these instruments do not create enforceable obligations on their own, they are treated in practice as persuasive benchmarks for compliance. For instance, NPC-IC Joint Advisory No. 2025-001 on the Use of Privacy Enhancing Technologies (PETs) in the insurance industry informs how regulators assess compliance with accountability and security obligations under the Data Privacy Act. Similarly, BSP issuances such as Memorandum No. M-2023-013 (Guidance Paper on Transaction Monitoring Systems) and Memorandum No. M-2024-029 (reiterating risk management controls under the Anti-Financial Account Scamming Act) set out supervisory expectations on risk-based monitoring, governance, audit trails, and the use of automated or machine learning tools in detecting suspicious or fraudulent activity. In this sense, adherence to such guidance may not operate as a formal safe harbour, but it is often a relevant factor in regulatory assessment, audits, and potential enforcement.<br>Overall, these non-binding issuances function as de facto compliance frameworks. They guide how organizations structure governance, risk management, and documentation around AI, and are often considered by regulators in audits and enforcement in assessing whether an entity has exercised sufficient diligence under existing law.</p></div></div>
-<div class="nt-section" id="sec-b7"><div class="nt-s-kick">B7</div><h3 class="nt-s-title">Data, Inference, and Automated Decision-Making</h3><div class="nt-s-body"><ul class='nt-bullets'><li>Explain how the law in this jurisdiction treats:</li></ul><ul class='nt-bullets'><li>data used to train or operate AI systems, inferences, profiles, or predictions generated by AI, and</li></ul><ul class='nt-bullets'><li>automated or AI-assisted decision-making (ADM), where relevant.</li></ul><p>This section should:</p><ul class='nt-bullets'><li>flag any heightened scrutiny of automated decisions, note where ADM-specific rules or concepts apply, and</li></ul><ul class='nt-bullets'><li>point to the separate ADM note (to be created and published by PrinciplesAI later in 2026) where deeper analysis is required.</li></ul><p>Philippine law does not provide a separate regime for AI data, inferences, or automated decision-making (ADM), but addresses these within existing rules on personal data processing.<br>Under the IRR of the Data Privacy Act and NPC Circular No. 2022-04, “profiling” refers to any form of automated processing of data consisting of the use of personal data, such as an individual’s economic situation, political or religious beliefs, behavioral or marketing activities, personal preferences, electronic communication data, location data, and financial data, among others, in order to evaluate, analyze, or predict his or her performance, qualities, and behavior, among others. As such, data used to train or operate AI systems, as well as the resulting inferences or profiles, are treated as part of personal data processing and are subject to existing requirements on transparency, lawful basis, and accountability.<br>Also under NPC Circular No. 2022-04, a personal information controller or processor that carries out automated decision-making or profiling must indicate this in its registration record and identify the data processing system involved. It must also include the lawful basis for processing, retention period, methods and logic utilized, and the possible decisions relating to the data subject, particularly if such decisions would significantly affect the data subject’s rights and freedoms. The Circular further provides that notification is required where automated processing becomes the sole basis for making decisions about a data subject and such decision would significantly affect the data subject.<br>In the judicial context, A.M. No. 25-11-28-SC of the Supreme Court of the Philippines provides that AI tools must not serve as the sole, primary, or determinative basis of any adjudicatory outcome, and that all outputs must be reviewed and approved by human beings. It also requires that the use of AI tools be disclosed and explained, and that responsibility remains with the user of the AI tool.<br>Sector-specific guidance likewise reflects a cautious approach. For instance, DepEd Order No. 003, s. 2026 discourages the use of AI as a substitute for human authority, including in automated decision-making affecting learners or personnel, and classifies certain AI applications (e.g., emotion recognition tied to decision-making) as posing unacceptable risks absent safeguards. While not a general law, it signals a broader policy direction favoring human oversight in AI-assisted decisions.<br>These rules reflect that automated processing, including profiling and automated decision-making, is subject to specific requirements where it significantly affects the data subject, particularly in relation to disclosure, notification, and human involvement.</p></div></div>
-<div class="nt-section" id="sec-b8"><div class="nt-s-kick">B8</div><h3 class="nt-s-title">AI in Employment and Workplace Contexts</h3><div class="nt-s-body"><p>Explain how this jurisdiction&#x27;s law applies to AI use in employment contexts.<br>Focus on:</p><ul class='nt-bullets'><li>AI-assisted hiring, performance management, monitoring, or termination decisions,</li></ul><ul class='nt-bullets'><li>whether employment law, equality law, or data protection law imposes specific constraints or heightened scrutiny in this context,</li></ul><ul class='nt-bullets'><li>any sector-specific rules or collective bargaining frameworks that shape AI use by employers, and</li></ul><ul class='nt-bullets'><li>whether workers have enforceable rights in relation to AI-assisted decisions affecting them.</li></ul><p>If this jurisdiction&#x27;s law does not address workplace AI in any materially distinct way, state that briefly and continue.<br>Philippine law does not yet regulate workplace AI through a distinct statutory regime. AI-assisted hiring, performance management, monitoring, and termination are governed by existing labor law and data protection rules. In all cases, employers remain responsible for decisions affecting employees. AI outputs cannot replace compliance with due process and lawful cause under labor law, particularly in disciplinary action or termination.<br>The most developed constraints arise from data protection law under the Data Privacy Act of 2012, as interpreted by the National Privacy Commission. In NPC Advisory Opinion No. 2024-003 (Re: random surveillance of telecommuting employees and recording of virtual meetings), the NPC states that monitoring software constitutes processing of personal data requiring a lawful basis, and must comply with transparency, legitimate purpose, and proportionality, with employees informed of the nature, purpose, and extent of processing. In NPC Advisory Opinion No. 2024-005 (Re: use of AI in call analysis and monitoring of call center employees), the NPC recognizes that AI-based scoring and analysis may be used for performance management under legitimate interest, provided that the purpose is specific, the processing is necessary, and it does not override the rights and freedoms of employees. These principles apply across hiring, evaluation, and monitoring, and serve as the main source of heightened scrutiny.<br>Employees have enforceable rights under this framework. These include the right to be informed of processing, the right to object where processing is based on legitimate interest, and the right to have their personal data processed only to the extent necessary for a declared purpose. In the employment context, the NPC also recognizes that consent is generally not the appropriate basis due to the imbalance in the employer-employee relationship, reinforcing the need for proper legal basis and safeguards. Labor law protections continue to apply in parallel, particularly the requirement of due process and just cause in termination, regardless of whether AI tools are used.<br>There are no sector-specific workplace AI regulations or collective bargaining frameworks that materially alter this position. Policy direction instead focuses on workforce adaptation. The Department of Labor and Employment 2023–2028 Labor and Employment Plan recognizes the need to ensure workforce readiness to cope with advances in technology, including “new work processes, robotization, automation, digitalization and artificial intelligence,” and emphasizes promoting gainful employment opportunities and human resource development through skills development and training systems. Findings of the Institute for Labor Studies (2024) note limited displacement but increased demand for AI-related skills, with employers encouraged to support retraining and alternative employment pathways. Overall, AI use in employment is assessed under existing legal standards, with closer scrutiny where it involves monitoring, profiling, or decision-making affecting workers.</p></div></div>
-<div class="nt-section" id="sec-b9"><div class="nt-s-kick">B9</div><h3 class="nt-s-title">Points of Legal Friction</h3><div class="nt-s-body"><p>Identify areas in which AI use exposes structural tension, ambiguity, or strain within existing legal frameworks in this jurisdiction.<br>Explain:</p><ul class='nt-bullets'><li>where existing legal frameworks are strained by AI use, and</li></ul><ul class='nt-bullets'><li>why those tensions arise.</li></ul><p>Please do not</p><ul class='nt-bullets'><li>rank or score risks.</li></ul><ul class='nt-bullets'><li>focus on enforcement mechanics.</li></ul><p>AI use exposes strain in Philippine legal frameworks that are built on assumptions based on human actors and tangible processes. A structural tension arises when the law’s internal logic is challenged by AI, which has a non-human, autonomous, and opaque nature.<br>In intellectual property law, authorship is limited to natural or juridical persons, creating ambiguity where AI systems generate outputs without direct human intervention. This raises uncertainty as to ownership and protection, particularly where only the human-created components of AI-assisted works may qualify. In such cases, it is unclear whether authorship should be attributed to the developer, the user, or neither, especially where the level of human contribution is minimal. Even if authorship may be determined, where multiple parties are involved in the creation process, ownership may be contested. Furthermore, AI systems are often trained on vast datasets, often including copyright material. This raises questions about fair use and potential infringement.<br>Additional strain arises in liability and decision-making contexts, especially since the existing legal framework assumes a direct, traceable line between human intent and harmful action.<br>Civil law on quasi-delicts requires proof of fault, but harm caused by AI systems may involve multiple actors and some AI systems make decisions through processes that are not visible or easily explainable to humans, making attribution difficult.<br>These tensions arise because AI introduces automated, data-driven, and often opaque processes that do not align with frameworks designed for human-led, transparent decision-making.</p></div></div></main>
-      <aside class="nt-contrib-wrap">
-        <div class="nt-contrib">
-          <div class="nt-c-photo" aria-hidden="true">ET</div>
-          <div class="nt-c-name"><a href="pai-app-faculty-edsel-tupaz">Edsel F. Tupaz</a></div>
-          <div class="nt-c-firm">Senior Partner · Gorriceta Africa Cauton &amp; Saavedra</div>
-
-          <div class="nt-c-meta">
-            <div class="nt-c-row"><span class="lbl">Jurisdiction</span><span>Philippines</span></div>
-            <div class="nt-c-row"><span class="lbl">Law as at</span><span>April 2026</span></div>
-            <div class="nt-c-row"><span class="lbl">Sections</span><span>11 Part B topics</span></div>
-            <div class="nt-c-row"><span class="lbl">Bars</span><span>PH · NY</span></div>
-          </div>
-          <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border-soft,#ebeff5);text-align:left;">
-            <a href="pai-app-faculty-edsel-tupaz" style="font-size:11.5px;color:var(--accent-2,#014486);font-weight:600;text-decoration:none;letter-spacing:.01em;">View contributor profile →</a>
-          </div>
-        </div>
-      </aside>
+  <div class="page-statusbar">
+    <div class="ps-left">
+      <span class="ps-breadcrumb"><a href="pai-home-private">Home</a><span class="ps-sep">›</span><span class="ps-current">News</span></span>
+      <span class="ps-sep">·</span>
+      <span class="ps-scope-chip">AI · Privacy · Cyber</span>
+      <span class="ps-sep">·</span>
+      <span class="ps-ok">Coverage engine operational</span>
     </div>
-  </section>
+    <div class="page-actions">
+    </div>
+  </div>
+
+  <div class="page-head">
+    <div class="page-eyebrow">AI · Privacy · Cyber</div>
+    <h1 class="page-title">News</h1>
+    <p class="page-sub">Every substantive item captured this week from <b>tier-1 regulators, courts and agencies</b>, classified and ranked. <b id="newsTotal">—</b> items in the last 7 days across your filters.</p>
+  </div>
+
+  <!-- Personalised to watchlist -->
+  <div class="personalised-banner">
+    <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+    <span>Personalised: showing items from <b id="pbBodies">—</b> bodies on your watchlist + <b id="pbJuris">—</b> jurisdictions you track.</span>
+    <div class="pb-toggle">
+      <button class="pb-btn on">Personalised</button>
+      <button class="pb-btn">All items</button>
+    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="nf-bar">
+    <div class="nf-search-wrap">
+      <svg class="nf-search-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="nf-search" placeholder="Search headlines, bodies, jurisdictions…">
+    </div>
+    <div class="nf-facets">
+      <button class="nf-btn"><span class="lbl">Type</span><span class="val">All</span><span class="car">▾</span></button>
+      <button class="nf-btn"><span class="lbl">Region</span><span class="val">All</span><span class="car">▾</span></button>
+      <button class="nf-btn"><span class="lbl">Jurisdiction</span><span class="val">All</span><span class="car">▾</span></button>
+      <button class="nf-btn"><span class="lbl">Body</span><span class="val">All</span><span class="car">▾</span></button>
+      <div class="nf-spacer"></div>
+      <button class="nf-btn"><span class="lbl">Sort</span><span class="val">Newest first</span><span class="car">▾</span></button>
+    </div>
+  </div>
+
+  <div class="applied-chips"><span class="applied-empty">No filters applied · personalised by your watchlist</span></div>
+
+  <!-- LEAD -->
+  <div class="news-lead">
+    <div class="nl-kick">TODAY'S LEAD · UK · — · <span class="status-pill-sm enf">Enforcement</span></div>
+    <h2><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h2>
+    <p class="nl-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a Data Protection Impact Assessment, without algorithmic-bias testing, and without documenting the lawful basis for the downstream profiling.</p>
+    <div class="nl-footer">
+      <span><strong>Type</strong> Enforcement</span>
+      <span><strong>Authority</strong> ICO</span>
+      <span><strong>Source</strong> <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk ↗</a></span>
+    </div>
+    <button class="nl-save on" title="Saved" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+  </div>
+
+  <!-- SECONDS -->
+  <div class="news-seconds">
+    <div class="news-second">
+      <div class="ns-kick">SECOND LEAD · UK · —</div>
+      <h3><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h3>
+      <div class="ns-meta"><span class="status-pill-sm enf">Enforcement</span> · Information Commissioner's Office</div>
+      <button class="ns-save" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="news-second">
+      <div class="ns-kick">SECOND LEAD · UK · —</div>
+      <h3><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h3>
+      <div class="ns-meta"><span class="status-pill-sm enf">Enforcement</span> · Information Commissioner's Office</div>
+      <button class="ns-save" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+  </div>
+
+  <!-- WIRE + RIGHT RAIL -->
+  <div class="news-wire-layout">
+  <div class="news-main">
+  <div class="wire-header">
+    <h2>The wire</h2>
+    <div class="wh-count"><strong>142</strong> dispatches · real-time from the coverage engine</div>
+  </div>
+
+  <div class="wire-list">
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+    <div class="wire-row">
+      <div class="wr-ts">—</div>
+      <div class="wr-jur">UK</div>
+      <div class="wr-info">
+        <h4><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></h4>
+        <div class="wr-src"><strong>Information Commissioner's Office</strong> · ico.org.uk</div>
+      </div>
+      <div class="wr-tag enf">Enforcement</div>
+      <button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    </div>
+  </div>
+  </div><!-- /news-main -->
+  <aside class="news-rail">
+    <div class="rail-card">
+      <div class="rail-title">What you cover <a href="pai-app-settings#yourBrief" class="rt-edit">Adjust</a></div>
+      <div class="rb-line" id="briefRegions">—</div>
+      <div class="rb-sub"><span id="briefDomains">—</span> · <b id="briefBodies">—</b> watched bodies</div>
+      <div class="rb-chips" id="briefChips">
+        <span class="rb-chip">—</span>
+      </div>
+    </div>
+    <div class="rail-card">
+      <div class="rail-title">Top sources this week</div>
+      <div class="rs-row"><span class="rs-name"><span class="rs-juris">GB</span> ICO</span><span class="rs-count" id="topSrcIco">—</span></div>
+      <div class="rs-row" style="color:var(--muted);font-style:italic;">More sources populate from AT2.</div>
+    </div>
+    <div class="rail-card">
+      <div class="rail-title">Coming up · 30 days</div>
+      <div class="cu-row">
+        <div class="cu-date"><span id="cuDate1">—</span><span class="cu-days" id="cuDays1">—</span></div>
+        <div class="cu-h" id="cuHead1">—</div>
+        <div class="cu-body" id="cuBody1">Deadlines populate from AT2 once consultations are tracked.</div>
+      </div>
+    </div>
+    <div class="rail-card">
+      <div class="rail-title">Recently saved <a href="pai-app-watchlist" class="rt-edit">All</a></div>
+      <div class="sv-row">
+        <a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a>
+        <span class="sv-star">★</span>
+      </div>
+    </div>
+  
+  </aside>
+  </div><!-- /news-wire-layout -->
+
+  <footer class="footer">
+    <div class="left">
+      <span>PrinciplesAI · News</span>
+      <span><span class="ok"></span>Coverage engine operational</span>
+      <span><b id="ftNewsTotal">—</b> items · last 7 days</span>
+    </div>
+    <div>v0.9</div>
+  </footer>
+
 </div>
+</div>
+
+<script>
+function saveToggle(e,btn){e.stopPropagation();btn.classList.toggle('on');const row=btn.closest('.wire-row');if(row){row.classList.toggle('watched',btn.classList.contains('on'))}}
+
+/* ============ NEWS STAT SLOTS ============ */
+/* Wire rendering is deferred until AT2 News table exists; currently shows pattern rows. */
+(async function loadNewsStats(){
+  try {
+    const [statsR, newsR] = await Promise.all([
+      fetch('./stats.json', { cache: 'no-cache' }),
+      fetch('./news.json',  { cache: 'no-cache' }),
+    ]);
+    const setTx = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+    if (statsR.ok) {
+      const s = await statsR.json();
+      if (s.news_count != null)        setTx('newsTotal',    s.news_count.toLocaleString());
+      if (s.news_count != null)        setTx('ftNewsTotal',  s.news_count.toLocaleString());
+      if (s.authorities_count != null) setTx('pbBodies',     s.authorities_count.toLocaleString());
+      if (s.jurisdictions_count != null) setTx('pbJuris',    s.jurisdictions_count.toLocaleString());
+    }
+    if (newsR.ok) {
+      const n = await newsR.json();
+      if (typeof n.total === 'number') setTx('wireTotal', n.total.toLocaleString());
+    }
+  } catch (_) { /* keep — on failure */ }
+})();
+</script>
 <!-- Mobile nav shim -->
 <style>
 .mobile-nav-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
@@ -2025,7 +2270,7 @@ html{scroll-behavior:smooth}
           '<span style="color:#c8d0dc;">·</span>' +
           '<span><b style="color:#0d2e42;">4 consultations</b> closing in '+escapeHTML(primaryJur)+'</span>' +
           '<span style="color:#c8d0dc;">·</span>' +
-          '<span><b style="color:#0d2e42;" id="jsEnf">—</b> enforcement captured</span>';
+          '<span><b style="color:#0d2e42;" id="jsEnfTotal">—</b> enforcement captured</span>';
       }
       if (briefChip) {
         briefChip.classList.add('show');
@@ -2307,5 +2552,118 @@ html{scroll-behavior:smooth}
 </div>
 
 <div class="nav-scrim" aria-hidden="true"></div>
+
+<script>
+/* News multi-select tickboxes + 'Create report' floating bar (top-left checkbox) */
+(function(){
+  var BAR_ID='paiNewsActionBar';
+  function getRow(cb){ return cb.closest('.wire-row,.news-lead,.news-second,.today-item,.today-row,.news-item'); }
+  function getSource(row){ var a=row.querySelector('a[href]'); return (row.dataset.source||'')||(a?a.href:''); }
+  function getTitle(row){ var h=row.querySelector('h2,h3,h4,.nl-title,.ns-title,.wr-info h4,.wr-title,.today-headline'); return h?h.textContent.trim():(row.textContent||'').trim().slice(0,80); }
+  function getBody(row){ var a=row.querySelector('.wr-src strong,.nl-footer strong,.ns-meta'); return a?a.textContent.trim():''; }
+
+  function ensureCheckbox(row){
+    if(row.querySelector('.pai-news-tick')) return;
+    var label=document.createElement('label');
+    label.className='pai-news-tick';
+    label.style.cssText='position:absolute;top:8px;left:8px;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid rgba(1,118,211,0.45);border-radius:4px;cursor:pointer;z-index:9999;box-shadow:0 1px 3px rgba(10,23,41,0.08);';
+    var cb=document.createElement('input');
+    cb.type='checkbox'; cb.style.cssText='margin:0;cursor:pointer;width:14px;height:14px;accent-color:#0176d3;';
+    cb.addEventListener('click',function(e){ e.stopPropagation(); });
+    cb.addEventListener('change',updateBar);
+    label.appendChild(cb);
+    if(getComputedStyle(row).position==='static') row.style.position='relative';
+    /* Shift any existing left content to make room (nudge padding-left) */
+    if(!row.dataset.paiTickNudge){ row.style.paddingLeft='42px'; row.dataset.paiTickNudge='1'; }
+    row.appendChild(label);
+  }
+
+  function collectSelected(){
+    var out=[];
+    document.querySelectorAll('.pai-news-tick input:checked').forEach(function(cb){
+      var row=getRow(cb); if(!row) return;
+      out.push({ title:getTitle(row), body:getBody(row), url:getSource(row) });
+    });
+    return out;
+  }
+
+  function updateBar(){
+    var items=collectSelected();
+    var bar=document.getElementById(BAR_ID);
+    if(!items.length){ if(bar) bar.remove(); return; }
+    if(!bar){
+      bar=document.createElement('div');
+      bar.id=BAR_ID;
+      bar.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#07202e;color:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 8px 28px rgba(10,23,41,0.3);display:flex;gap:12px;align-items:center;z-index:1000;font-size:13px;font-family:inherit;max-width:calc(100% - 40px)';
+      bar.innerHTML=''
+        +'<span id="paiNewsCount" style="font-weight:500"></span>'
+        +'<span style="opacity:0.35">·</span>'
+        +'<button id="paiNewsPdfBtn" style="padding:7px 14px;border:0;border-radius:6px;background:#0176d3;color:#fff;font-weight:600;cursor:pointer;font-size:12.5px;">Create PDF report</button>'
+        +'<button id="paiNewsEmailBtn" style="padding:7px 14px;border:1px solid rgba(255,255,255,0.25);border-radius:6px;background:transparent;color:#fff;cursor:pointer;font-size:12.5px;">Email report</button>'
+        +'<button id="paiNewsClearBtn" style="padding:6px 10px;border:0;border-radius:6px;background:transparent;color:#fff;cursor:pointer;opacity:0.6;font-size:12.5px;" title="Clear selection">✕</button>';
+      document.body.appendChild(bar);
+      bar.querySelector('#paiNewsPdfBtn').addEventListener('click',createPdf);
+      bar.querySelector('#paiNewsEmailBtn').addEventListener('click',createEmail);
+      bar.querySelector('#paiNewsClearBtn').addEventListener('click',function(){
+        document.querySelectorAll('.pai-news-tick input:checked').forEach(function(i){ i.checked=false; });
+        updateBar();
+      });
+    }
+    bar.querySelector('#paiNewsCount').textContent=items.length+' selected';
+  }
+
+  function createPdf(){
+    var items=collectSelected();
+    if(!items.length) return;
+    var w=window.open('','_blank');
+    if(!w) return;
+    var rows=items.map(function(it,i){
+      return '<article style="margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #dbe1ea">'
+        +'<div style="font-family:monospace;font-size:10.5px;color:#5e6878;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Story '+(i+1)+' · PrinciplesAI report</div>'
+        +'<h2 style="margin:0 0 8px 0;font-size:18px;color:#07202e;letter-spacing:-0.01em">'+(it.title||'—')+'</h2>'
+        +(it.body?'<div style="font-size:12.5px;color:#5e6878;margin-bottom:6px">'+it.body+'</div>':'')
+        +(it.url?'<div style="font-size:12px"><a href="'+it.url+'" style="color:#0176d3">'+it.url+'</a></div>':'')
+        +'</article>';
+    }).join('');
+    var stamp=new Date().toISOString().slice(0,10);
+    w.document.write('<!doctype html><html><head><title>PrinciplesAI report '+stamp+'</title>'
+      +'<style>body{font-family:Inter,system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 24px;color:#0d2e42;line-height:1.5}h1{font-size:22px;margin:0 0 4px 0;color:#07202e}.report-meta{font-size:12px;color:#5e6878;margin-bottom:28px;font-family:monospace}@media print{@page{margin:18mm}}</style></head>'
+      +'<body>'
+      +'<h1>News report — '+items.length+' selected</h1>'
+      +'<div class="report-meta">PrinciplesAI · generated '+new Date().toLocaleString()+'</div>'
+      +rows
+      +'<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script>'
+      +'</body></html>');
+    w.document.close();
+  }
+
+  function createEmail(){
+    var items=collectSelected();
+    if(!items.length) return;
+    var NL = String.fromCharCode(10);
+    var subject='PrinciplesAI news report ('+items.length+' stories)';
+    var body='Here is a selection of stories from PrinciplesAI:'+NL+NL;
+    items.forEach(function(it,i){
+      body += (i+1)+'. '+(it.title||'—')+NL;
+      if(it.body) body += '   '+it.body+NL;
+      if(it.url)  body += '   '+it.url+NL;
+      body += NL;
+    });
+    body += '—'+NL+'Generated via PrinciplesAI';
+    var href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    if(href.length>1800) href=href.slice(0,1800);
+    window.location.href=href;
+  }
+
+  function scan(){
+    document.querySelectorAll('.wire-row,.news-lead,.news-second,.today-item,.today-row,.news-item').forEach(ensureCheckbox);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',scan);
+  else scan();
+  var wireEl=document.getElementById('wireList')||document.querySelector('.wire-list');
+  if(wireEl){ new MutationObserver(scan).observe(wireEl,{childList:true,subtree:false}); }
+  setInterval(scan,2000);
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard — US (federal + states) (PAI member home)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1729; --link:#014486; --accent:#0176d3;
+    --gray-1:#f6f7f9; --gray-2:#ebeff5; --gray-3:#cfe1f5;
+    --text-mute:#5e6878; --text-soft:#8a93a3;
+    --amber-bg:#fbeecd; --amber-fg:#905200;
+    --green-bg:#e5f3e9; --green-fg:#2e844a;
+    --red-bg:#fde7e7;   --red-fg:#a72929;
+    --gray-bg:#ebeff5;  --gray-fg:#5e6878;
+    --purple-bg:#ede5fb; --purple-fg:#5b3aa8;
+    --t-fast:.22s;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:'Inter',-apple-system,sans-serif;color:var(--navy);background:#fff;line-height:1.5;font-size:14px;-webkit-font-smoothing:antialiased}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .topbar{display:flex;align-items:center;gap:18px;padding:14px 28px;border-bottom:1px solid var(--gray-2);background:#fff;position:sticky;top:0;z-index:20}
+  .brand{font-family:'Source Serif 4',serif;font-size:18px;font-weight:700;letter-spacing:-0.01em;color:var(--navy)}
+  .brand .dot{display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;vertical-align:middle;margin:0 6px 3px 0}
+  .top-search{flex:1;max-width:420px;position:relative}
+  .top-search input{width:100%;padding:8px 12px 8px 32px;border:1px solid var(--gray-2);border-radius:6px;font-family:inherit;font-size:13px;background:var(--gray-1)}
+  .top-search input:focus{outline:0;border-color:var(--gray-3);background:#fff}
+  .top-search::before{content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;border:1.5px solid var(--text-soft);border-radius:50%}
+  .top-search::after{content:'';position:absolute;left:21px;top:50%;width:7px;height:1.5px;background:var(--text-soft);transform:translateY(2px) rotate(45deg);transform-origin:left}
+  .top-actions{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .top-actions a{color:var(--text-mute)}
+  .top-actions a:hover{color:var(--navy);text-decoration:none}
+  .profile{display:inline-flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid var(--gray-2);border-radius:6px;color:var(--navy)}
+  .profile .av{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace}
+
+  .lc{padding:14px 28px;border-bottom:1px solid var(--gray-2);background:var(--gray-1);display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+  .lc-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:3px}
+  .lc-body{font-size:13.5px;color:var(--navy);line-height:1.5}
+  .lc-body strong{color:var(--navy)}
+  .lc-body em{font-style:italic;color:var(--text-mute)}
+  .lc-body a{color:var(--link);font-weight:600}
+  .lc-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .lc-save{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;background:var(--navy);color:#fff;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .lc-save:hover{text-decoration:none;background:var(--link)}
+  .lc-switch{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .lc-switch .switch{display:inline-flex;border:1px solid var(--gray-2);background:#fff;border-radius:5px;overflow:hidden}
+  .lc-switch .switch a{padding:5px 10px;color:var(--text-mute);border-right:1px solid var(--gray-2);font-size:10px}
+  .lc-switch .switch a:last-child{border-right:0}
+  .lc-switch .switch a.active{background:var(--navy);color:#fff}
+  .lc-switch .switch a:hover{text-decoration:none;color:var(--navy)}
+  .lc-switch .switch a.active:hover{color:#fff}
+
+  .wrap{max-width:1320px;margin:0 auto;padding:28px 28px 96px}
+
+  .hero{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;padding-bottom:22px;border-bottom:1px solid var(--gray-2);margin-bottom:24px}
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:9px}
+  .hero-title{font-family:'Source Serif 4',serif;font-size:32px;font-weight:700;letter-spacing:-0.02em;margin:0 0 6px;line-height:1.18}
+  .hero-sub{font-size:14px;color:var(--text-mute);margin:0;max-width:680px;line-height:1.55}
+  .hero-stats{display:flex;gap:18px;text-align:right}
+  .hero-stat{display:flex;flex-direction:column;gap:2px}
+  .hero-stat-num{font-family:'Source Serif 4',serif;font-size:24px;font-weight:600;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .hero-stat-lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+
+  /* Since your last visit row */
+  .since-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+  @media (max-width:900px){.since-row{grid-template-columns:1fr}}
+  .since-card{background:#fff;border:1px solid var(--gray-2);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:7px;cursor:pointer;transition:border-color var(--t-fast),background var(--t-fast)}
+  .since-card:hover{border-color:var(--gray-3);background:var(--gray-1);text-decoration:none}
+  .sc-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .sc-eyebrow.t-deadline{color:var(--amber-fg)}
+  .sc-eyebrow.t-enf{color:var(--red-fg)}
+  .sc-eyebrow.t-new{color:var(--green-fg)}
+  .sc-eyebrow.t-fed{color:var(--purple-fg)}
+  .sc-head{font-family:'Source Serif 4',serif;font-size:15.5px;font-weight:600;color:var(--navy);line-height:1.3}
+  .sc-sum{font-size:12.5px;color:var(--text-mute);line-height:1.5}
+  .sc-juris{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--text-mute);margin-top:2px}
+
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin:0 0 14px}
+  .section-h{font-family:'Source Serif 4',serif;font-size:21px;font-weight:600;color:var(--navy);letter-spacing:-0.01em;margin:0}
+  .section-sub{font-size:13px;color:var(--text-mute)}
+
+  /* Map panel */
+  .map-panel{background:#fff;border:1px solid var(--gray-2);border-radius:10px;overflow:hidden;margin-bottom:32px}
+  .map-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;padding:14px 18px 0;border-bottom:1px solid var(--gray-2)}
+  .map-head-l{padding-bottom:14px}
+  .map-title{font-family:'Source Serif 4',serif;font-size:17px;font-weight:600;color:var(--navy);margin:0 0 2px;letter-spacing:-0.005em}
+  .map-sub{font-size:12.5px;color:var(--text-mute)}
+
+  .tabs{display:flex;gap:0;align-items:flex-end}
+  .tab{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);background:transparent;border:0;padding:11px 16px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:9px;white-space:nowrap;font-family:'IBM Plex Mono',monospace}
+  .tab:hover{color:var(--navy)}
+  .tab.active{color:var(--link);border-bottom-color:var(--link)}
+  .tab .count{font-size:10px;background:var(--gray-2);padding:2px 7px;border-radius:3px;letter-spacing:0;font-weight:600;color:var(--navy)}
+  .tab.active .count{background:#e3effc;color:var(--link)}
+
+  .map-body{display:none}
+  .map-body.is-active{display:block}
+
+  /* US state grid — 51 cells */
+  .us-grid{display:grid;grid-template-columns:repeat(13,1fr);gap:5px;padding:14px 18px}
+  @media (max-width:1080px){.us-grid{grid-template-columns:repeat(10,1fr)}}
+  @media (max-width:700px){.us-grid{grid-template-columns:repeat(7,1fr)}}
+  .st-cell{border:1px solid var(--gray-2);border-radius:5px;padding:6px 4px;text-align:center;display:flex;flex-direction:column;gap:3px;cursor:pointer;transition:border-color var(--t-fast),background var(--t-fast);color:inherit;background:#fff}
+  .st-cell:hover{text-decoration:none;border-color:var(--gray-3);background:var(--gray-1)}
+  .st-cell.s-priv-live{background:var(--green-bg);border-color:var(--green-fg)}
+  .st-cell.s-priv-bill{background:var(--amber-bg);border-color:var(--amber-fg)}
+  .st-cell.s-ai-narrow{background:#e3effc;border-color:var(--link)}
+  .st-cell.s-ai-omni{background:var(--purple-bg);border-color:var(--purple-fg)}
+  .st-cell.s-mine{box-shadow:inset 0 0 0 2px var(--navy)}
+  .st-iso{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--navy)}
+  .st-when{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;color:var(--text-mute);letter-spacing:.04em;line-height:1.2;min-height:11px}
+
+  .us-legend{padding:0 18px 14px;display:flex;gap:18px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mute)}
+  .us-legend .li{display:inline-flex;align-items:center;gap:6px}
+  .us-legend .swatch{width:14px;height:10px;border:1px solid var(--gray-2);border-radius:3px}
+  .swatch.s-priv-live{background:var(--green-bg);border-color:var(--green-fg)}
+  .swatch.s-priv-bill{background:var(--amber-bg);border-color:var(--amber-fg)}
+  .swatch.s-ai-narrow{background:#e3effc;border-color:var(--link)}
+  .swatch.s-ai-omni{background:var(--purple-bg);border-color:var(--purple-fg)}
+  .map-hint{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mute);padding:10px 18px;background:var(--gray-1);border-top:1px solid var(--gray-2)}
+
+  /* Two-col content below map */
+  .twocol{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-bottom:36px;align-items:start}
+  @media (max-width:1080px){.twocol{grid-template-columns:1fr}}
+
+  .panel{background:#fff;border:1px solid var(--gray-2);border-radius:10px;overflow:hidden}
+  .panel + .panel{margin-top:20px}
+  .panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:14px 18px 10px;border-bottom:1px solid var(--gray-2)}
+  .panel-title{font-family:'Source Serif 4',serif;font-size:15.5px;font-weight:600;color:var(--navy);letter-spacing:-0.005em;margin:0}
+  .panel-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .panel-foot{padding:11px 18px;border-top:1px solid var(--gray-2);background:var(--gray-1);font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+  /* Pre-emption tracker, expanded */
+  .preempt{padding:6px 0}
+  .pe-row{display:grid;grid-template-columns:1fr auto;gap:14px;padding:14px 18px;border-bottom:1px solid var(--gray-2);align-items:start}
+  .pe-row:last-child{border-bottom:0}
+  .pe-bill{font-family:'Source Serif 4',serif;font-size:14.5px;font-weight:600;color:var(--navy);letter-spacing:-0.005em;margin:0 0 4px}
+  .pe-clause{font-size:12.5px;color:var(--text-mute);line-height:1.5;margin-bottom:5px}
+  .pe-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mute)}
+  .pe-stat{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:3px;background:var(--gray-bg);color:var(--gray-fg);white-space:nowrap}
+  .pe-stat.s-active{background:#e3effc;color:var(--link)}
+  .pe-stat.s-cmt{background:var(--amber-bg);color:var(--amber-fg)}
+
+  /* Federal agency rollup */
+  .agency{padding:14px 18px;display:flex;flex-direction:column;gap:11px}
+  .ag-row{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:baseline;padding-bottom:10px;border-bottom:1px solid var(--gray-2)}
+  .ag-row:last-child{border-bottom:0;padding-bottom:0}
+  .ag-name{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--navy)}
+  .ag-body{font-size:12.5px;color:var(--text-mute);line-height:1.5}
+  .ag-count{font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+
+  .jumper{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:14px 18px}
+  @media (max-width:900px){.jumper{grid-template-columns:repeat(3,1fr)}}
+  .jcell{display:flex;flex-direction:column;gap:3px;padding:11px 12px;border:1px solid var(--gray-2);border-radius:7px;color:inherit;transition:border-color var(--t-fast),background var(--t-fast)}
+  .jcell:hover{text-decoration:none;border-color:var(--gray-3);background:var(--gray-1)}
+  .jcell.is-mine{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .jcell .lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .jcell.is-mine .lbl{color:var(--accent)}
+  .jcell .nm{font-size:13px;font-weight:600;color:var(--navy)}
+  .jcell .ct{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.04em}
+</style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span>Principles AI</div>
+  <div class="top-search"><input placeholder="Search states, federal agencies, bills…"></div>
+  <div class="top-actions">
+    <a href="#">Notifications</a>
+    <span class="profile"><span class="av">DL</span> David L.</span>
+  </div>
+</div>
+
+<div class="lc">
+  <div class="lc-l">
+    <div class="lc-eyebrow">Your dashboard</div>
+    <div class="lc-body"><strong>US (federal + states)</strong> — you're seeing this because your account is based in <a href="#">Texas</a>. <em>Want to land directly on the Texas page next time?</em></div>
+  </div>
+  <div class="lc-r">
+    <a class="lc-save" href="#">Save Texas as my home →</a>
+    <div class="lc-switch">Switch
+      <div class="switch">
+        <a href="dashboard-general.html">General</a>
+        <a href="dashboard-eu.html">EU</a>
+        <a href="dashboard-us.html" class="active">US</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Mon · 30 Apr 2026 · US</div>
+      <h1 class="hero-title">US privacy + AI law, this week</h1>
+      <p class="hero-sub">State-by-state movement on privacy, narrow AI laws (deepfakes, kids, employment) and the small set of cross-sector "omnibus" AI laws. Federal preemption tracked separately. Texas highlighted as your home state.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">20</div><div class="hero-stat-lbl">Privacy laws</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">38</div><div class="hero-stat-lbl">Narrow AI laws</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">6</div><div class="hero-stat-lbl">Omnibus AI laws</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">11</div><div class="hero-stat-lbl">Active enf.</div></div>
+    </div>
+  </div>
+
+  <div class="since-row">
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-new">New rule · 6h ago</div>
+      <div class="sc-head">CCPA automated decision-making rules adopted — in force 1 Oct 2026</div>
+      <div class="sc-sum">Pre-deployment risk assessment + opt-out for "significant decisions" effective in 5 months.</div>
+      <div class="sc-juris">California · CPPA</div>
+    </a>
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-fed">Federal · yesterday</div>
+      <div class="sc-head">EO on federal AI procurement — agencies must publish use-case inventories quarterly</div>
+      <div class="sc-sum">Restates and expands OMB M-24-10 procurement requirements; effective immediately.</div>
+      <div class="sc-juris">White House</div>
+    </a>
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-enf">Texas · yesterday</div>
+      <div class="sc-head">Texas AG opens TDPSA investigation into ad-tech firm</div>
+      <div class="sc-sum">First public TDPSA investigation. Sensitive-data inferences from biometric and location signals.</div>
+      <div class="sc-juris">Texas · OAG</div>
+    </a>
+  </div>
+
+  <div class="map-panel">
+    <div class="map-head">
+      <div class="map-head-l">
+        <h2 class="map-title">US state law map</h2>
+        <div class="map-sub">Three dimensions on one canvas — switch tab to recolour.</div>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-tab="priv" onclick="switchTab('priv')">Privacy <span class="count">20</span></button>
+        <button class="tab" data-tab="ai" onclick="switchTab('ai')">AI laws <span class="count">38</span></button>
+        <button class="tab" data-tab="omni" onclick="switchTab('omni')">Omnibus AI <span class="count">6</span></button>
+      </div>
+    </div>
+
+    <div class="map-body is-active" id="map-priv">
+      <div class="us-grid">
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">CA</span><span class="st-when">CCPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">CO</span><span class="st-when">CPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">CT</span><span class="st-when">CTDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">DE</span><span class="st-when">DPDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">FL</span><span class="st-when">FDBR · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">IA</span><span class="st-when">ICDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">IN</span><span class="st-when">CDPA · 2026</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">KY</span><span class="st-when">KCDPA · 2026</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">MD</span><span class="st-when">MDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">MN</span><span class="st-when">MCDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">MT</span><span class="st-when">MCDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">NE</span><span class="st-when">NDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">NH</span><span class="st-when">NHDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">NJ</span><span class="st-when">NJDPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">OR</span><span class="st-when">OCPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">RI</span><span class="st-when">RIDTPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">TN</span><span class="st-when">TIPA · live</span></a>
+        <a class="st-cell s-priv-live s-mine" href="#"><span class="st-iso">TX</span><span class="st-when">TDPSA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">UT</span><span class="st-when">UCPA · live</span></a>
+        <a class="st-cell s-priv-live" href="#"><span class="st-iso">VA</span><span class="st-when">VCDPA · live</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">IL</span><span class="st-when">BIPA + bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">MA</span><span class="st-when">Bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">NY</span><span class="st-when">SHIELD + bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">WA</span><span class="st-when">My Health + bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">PA</span><span class="st-when">Bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">MI</span><span class="st-when">Bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">VT</span><span class="st-when">Bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">OH</span><span class="st-when">Bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">ME</span><span class="st-when">Bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">NC</span><span class="st-when">Bill</span></a>
+        <a class="st-cell s-priv-bill" href="#"><span class="st-iso">WI</span><span class="st-when">Bill</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">AK</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">AL</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">AR</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">AZ</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">DC</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">GA</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">HI</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">ID</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">KS</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">LA</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">MO</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">MS</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">ND</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">NM</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">NV</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">OK</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">SC</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">SD</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">WV</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">WY</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">PR</span><span class="st-when">—</span></a>
+      </div>
+      <div class="us-legend">
+        <span class="li"><span class="swatch s-priv-live"></span> Comprehensive privacy law (live or signed)</span>
+        <span class="li"><span class="swatch s-priv-bill"></span> Active bill / sectoral law</span>
+        <span class="li"><span class="swatch"></span> No comprehensive proposal</span>
+      </div>
+    </div>
+
+    <div class="map-body" id="map-ai">
+      <div class="us-grid">
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">AL</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">AZ</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">CA</span><span class="st-when">5+ AI laws</span></a>
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">CO</span><span class="st-when">Omnibus + 3</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">CT</span><span class="st-when">Gen-AI gov</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">DE</span><span class="st-when">Kids</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">FL</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">GA</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">HI</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">IA</span><span class="st-when">Election</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">ID</span><span class="st-when">Election</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">IL</span><span class="st-when">Employment</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">IN</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">KS</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">KY</span><span class="st-when">Election</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">LA</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">MA</span><span class="st-when">Insurance</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">MD</span><span class="st-when">Bias study</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">MI</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">MN</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">MO</span><span class="st-when">Election</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">MS</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">NC</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">NJ</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">NM</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">NV</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">NY</span><span class="st-when">AEDT + 2</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">OH</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">OR</span><span class="st-when">Election</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">PA</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">RI</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">SC</span><span class="st-when">Election</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">TN</span><span class="st-when">ELVIS Act</span></a>
+        <a class="st-cell s-ai-narrow s-mine" href="#"><span class="st-iso">TX</span><span class="st-when">TRAIGA + 2</span></a>
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">UT</span><span class="st-when">Omnibus AI</span></a>
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">VA</span><span class="st-when">Omnibus (signed)</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">VT</span><span class="st-when">Election</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">WA</span><span class="st-when">Deepfake</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">WI</span><span class="st-when">Election</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">AK</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">AR</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">DC</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">ME</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">MT</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">ND</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">NE</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">NH</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">OK</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">SD</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">WV</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">WY</span><span class="st-when">—</span></a>
+        <a class="st-cell" href="#"><span class="st-iso">PR</span><span class="st-when">—</span></a>
+      </div>
+      <div class="us-legend">
+        <span class="li"><span class="swatch s-ai-narrow"></span> Narrow AI law (deepfakes / kids / employment / election)</span>
+        <span class="li"><span class="swatch s-ai-omni"></span> Omnibus AI law (cross-sector)</span>
+        <span class="li"><span class="swatch"></span> No AI-specific law</span>
+      </div>
+    </div>
+
+    <div class="map-body" id="map-omni">
+      <div class="us-grid">
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">CO</span><span class="st-when">CO AI Act · live</span></a>
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">UT</span><span class="st-when">UAIPA · live</span></a>
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">VA</span><span class="st-when">SB 487 · signed</span></a>
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">CA</span><span class="st-when">SB 1047 (vetoed) + new</span></a>
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">IL</span><span class="st-when">HB-XXXX · committee</span></a>
+        <a class="st-cell s-ai-omni" href="#"><span class="st-iso">CT</span><span class="st-when">SB-2 · committee</span></a>
+        <a class="st-cell s-ai-narrow s-mine" href="#"><span class="st-iso">TX</span><span class="st-when">TRAIGA · live</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">NY</span><span class="st-when">A8195 · committee</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">NJ</span><span class="st-when">A3854 · committee</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">WA</span><span class="st-when">SB-XXXX · committee</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">MD</span><span class="st-when">HB-XXXX · committee</span></a>
+        <a class="st-cell s-ai-narrow" href="#"><span class="st-iso">RI</span><span class="st-when">H7521 · committee</span></a>
+      </div>
+      <div class="us-legend">
+        <span class="li"><span class="swatch s-ai-omni"></span> Omnibus AI law live or signed</span>
+        <span class="li"><span class="swatch s-ai-narrow"></span> Active omnibus AI bill</span>
+      </div>
+      <div class="map-hint">"Omnibus" = cross-sector AI regulation that imposes risk-based duties across many industries (Colorado-model). Distinct from narrow AI laws targeting one harm (deepfakes, kids, election ads). Privacy-law cousin: the 20-state "comprehensive privacy" cluster — different statute family.</div>
+    </div>
+  </div>
+
+  <div class="twocol">
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Federal preemption tracker</h2>
+        <div class="panel-meta">5 bills with preemption clauses</div>
+      </div>
+      <div class="preempt">
+        <div class="pe-row">
+          <div>
+            <h3 class="pe-bill">APRA — American Privacy Rights Act</h3>
+            <div class="pe-clause">Preempts state comprehensive privacy laws with carve-outs for IL BIPA, CA CCPA private right of action, and state employee/health-data laws. Live floor debate in House E&amp;C; markup expected May.</div>
+            <div class="pe-meta">Sponsors · Cantwell (D-WA), Rodgers (R-WA) · introduced Apr 2024 · re-tabled Mar 2026</div>
+          </div>
+          <span class="pe-stat s-active">Active</span>
+        </div>
+        <div class="pe-row">
+          <div>
+            <h3 class="pe-bill">No FAKES Act</h3>
+            <div class="pe-clause">Federal right of publicity covering AI-generated digital replicas. Express preemption of state laws governing the same subject, with carve-out for state consumer-protection statutes.</div>
+            <div class="pe-meta">Sponsors · Coons (D-DE), Tillis (R-NC) · S-XXXX · re-introduced Feb 2026</div>
+          </div>
+          <span class="pe-stat s-active">Active</span>
+        </div>
+        <div class="pe-row">
+          <div>
+            <h3 class="pe-bill">COPIED Act</h3>
+            <div class="pe-clause">Content-provenance and AI-output labelling. Preempts inconsistent state laws on watermarking and provenance disclosure; states may impose stricter rules on synthetic NCII and election content.</div>
+            <div class="pe-meta">Sponsors · Cantwell (D-WA), Blackburn (R-TN) · S-XXXX · committee passed Apr 2026</div>
+          </div>
+          <span class="pe-stat s-cmt">Committee</span>
+        </div>
+        <div class="pe-row">
+          <div>
+            <h3 class="pe-bill">AI Accountability Act</h3>
+            <div class="pe-clause">Federal impact-assessment regime for high-risk AI. No express preemption clause in current draft; floor amendment expected to add one.</div>
+            <div class="pe-meta">Sponsors · Wyden (D-OR), Booker (D-NJ) · S-XXX · introduced Mar 2026</div>
+          </div>
+          <span class="pe-stat">Introduced</span>
+        </div>
+        <div class="pe-row">
+          <div>
+            <h3 class="pe-bill">Algorithmic Accountability Act</h3>
+            <div class="pe-clause">FTC rulemaking authority for automated decision systems. Express preemption of state laws addressing the same subject matter — broader scope than NY AEDT, IL HB-XXXX, CO AI Act.</div>
+            <div class="pe-meta">Sponsors · Wyden (D-OR), Clarke (D-NY) · re-introduced Feb 2026</div>
+          </div>
+          <span class="pe-stat">Introduced</span>
+        </div>
+      </div>
+      <div class="panel-foot"><a href="#">Open preemption analysis →</a></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2 class="panel-title">Federal agency activity · last 30 days</h2><div class="panel-meta">Rollup</div></div>
+      <div class="agency">
+        <div class="ag-row">
+          <span class="ag-name">FTC</span>
+          <span class="ag-body">3 enforcement orders (1 AI deceptive-claims), 1 policy statement on AI in lending</span>
+          <span class="ag-count">4</span>
+        </div>
+        <div class="ag-row">
+          <span class="ag-name">NIST</span>
+          <span class="ag-body">2 publications (AI 600-1 v2.0, AI RMF profile for HR), 1 RFI open</span>
+          <span class="ag-count">3</span>
+        </div>
+        <div class="ag-row">
+          <span class="ag-name">OMB</span>
+          <span class="ag-body">1 memo update (M-25-XX); agency AI-use inventories due Jun 30</span>
+          <span class="ag-count">2</span>
+        </div>
+        <div class="ag-row">
+          <span class="ag-name">EEOC</span>
+          <span class="ag-body">1 technical assistance doc on AI in candidate screening</span>
+          <span class="ag-count">1</span>
+        </div>
+        <div class="ag-row">
+          <span class="ag-name">CFPB</span>
+          <span class="ag-body">1 supervisory highlight covering algorithmic underwriting</span>
+          <span class="ag-count">1</span>
+        </div>
+        <div class="ag-row">
+          <span class="ag-name">NYDFS</span>
+          <span class="ag-body">AI cybersecurity guidance updated (state agency, federal-shaped)</span>
+          <span class="ag-count">1</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-h">Watchlisted states</h2>
+    <div class="section-sub">Texas pinned as your home · 5 others on your watchlist</div>
+  </div>
+  <div class="panel">
+    <div class="jumper">
+      <a class="jcell is-mine" href="#"><span class="lbl">TX · my home</span><span class="nm">Texas</span><span class="ct">2 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">CA</span><span class="nm">California</span><span class="ct">7 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">CO</span><span class="nm">Colorado</span><span class="ct">3 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">NY</span><span class="nm">New York</span><span class="ct">4 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">IL</span><span class="nm">Illinois</span><span class="ct">5 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">+</span><span class="nm">Add state</span><span class="ct">45 available</span></a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(name){
+    document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
+    document.querySelectorAll('.map-body').forEach(b=>b.classList.toggle('is-active', b.id==='map-'+name));
+  }
+</script>
+
+</body>
+</html>

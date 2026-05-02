@@ -534,6 +534,29 @@ button { cursor: pointer; }
 .fc-meta .sep { color: var(--ink-faint); }
 .fc-when { font-family: var(--mono); }
 
+/* ============ FEATURED FACULTY ============ */
+.featured-faculty { margin-bottom: 36px; }
+.ff-card { display: grid; grid-template-columns: 320px 1fr; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; text-decoration: none; color: inherit; transition: transform .18s, box-shadow .18s, border-color .18s; }
+.ff-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--accent-soft-2); text-decoration: none; }
+.ff-portrait { position: relative; min-height: 240px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #032e61 0%, #0176d3 55%, #4ba2e0 100%); overflow: hidden; }
+.ff-portrait::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 60%); pointer-events: none; }
+.ff-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ff-initials { font-family: var(--display); font-size: 88px; font-weight: 700; color: #fff; letter-spacing: -.04em; z-index: 1; text-shadow: 0 4px 16px rgba(0,0,0,.25); line-height: 1; }
+.ff-badge { position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 10px; background: rgba(255,255,255,0.96); color: var(--ink-strong); border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 0 1px 3px rgba(0,0,0,0.18); z-index: 2; }
+.ff-flag { position: absolute; bottom: 14px; left: 14px; font-size: 22px; line-height: 1; z-index: 2; filter: drop-shadow(0 1px 2px rgba(0,0,0,.25)); }
+.ff-body { padding: 22px 26px 24px; display: flex; flex-direction: column; gap: 6px; }
+.ff-eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 4px; }
+.ff-name { font-size: 22px; font-weight: 700; color: var(--ink-strong); letter-spacing: -.012em; line-height: 1.15; margin-bottom: 2px; }
+.ff-role { font-size: 13.5px; color: var(--ink); font-weight: 500; line-height: 1.45; }
+.ff-firm { font-size: 12.5px; color: var(--muted); font-family: var(--mono); }
+.ff-blurb { font-size: 13px; color: var(--secondary); line-height: 1.55; margin: 8px 0 0; }
+.ff-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 12px; font-size: 12.5px; font-weight: 600; color: var(--accent-2); }
+@media (max-width: 900px) {
+  .ff-card { grid-template-columns: 1fr; }
+  .ff-portrait { min-height: 180px; }
+  .ff-initials { font-size: 72px; }
+}
+
 /* ============ DEVELOPMENTS (news feed) ============ */
 .developments {
   background: var(--surface);
@@ -1280,6 +1303,30 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
     </a>
 
+  </section>
+
+  <!-- FEATURED FACULTY -->
+  <div class="section-eyebrow">
+    <span class="lbl">Featured faculty</span>
+    <span class="meta">Practitioner-contributed AI-regulation analysis</span>
+  </div>
+  <section class="featured-faculty">
+    <a class="ff-card" href="pai-app-faculty-edsel-tupaz">
+      <div class="ff-portrait">
+        <span class="ff-badge">Faculty</span>
+        <span class="ff-flag">&#x1F1F5;&#x1F1ED;</span>
+        <!-- Swap <span class="ff-initials">ET</span> for <img src="photo-edsel-tupaz.jpg" alt="Edsel F. Tupaz"> when a portrait is supplied -->
+        <span class="ff-initials">ET</span>
+      </div>
+      <div class="ff-body">
+        <div class="ff-eyebrow">Philippines AI Note · Contributor</div>
+        <div class="ff-name">Edsel F. Tupaz</div>
+        <div class="ff-role">Senior Partner · Head, Data Privacy, Cybersecurity &amp; AI Initiatives</div>
+        <div class="ff-firm">Gorriceta Africa Cauton &amp; Saavedra · Manila</div>
+        <p class="ff-blurb">Dual-qualified under the Philippine and New York Bars. Advises Fortune 500 and NASDAQ-listed companies on AI, data privacy, and cybersecurity across Southeast Asia, and serves as Data Protection Officer for leading startups and incumbents.</p>
+        <span class="ff-cta">Read faculty profile →</span>
+      </div>
+    </a>
   </section>
 
   <!-- DEVELOPMENTS -->

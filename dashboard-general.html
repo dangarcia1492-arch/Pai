@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard — General (PAI member home)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1729; --link:#014486; --accent:#0176d3;
+    --gray-1:#f6f7f9; --gray-2:#ebeff5; --gray-3:#cfe1f5;
+    --text-mute:#5e6878; --text-soft:#8a93a3;
+    --amber-bg:#fbeecd; --amber-fg:#905200;
+    --green-bg:#e5f3e9; --green-fg:#2e844a;
+    --red-bg:#fde7e7;   --red-fg:#a72929;
+    --gray-bg:#ebeff5;  --gray-fg:#5e6878;
+    --t-fast:.22s;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:'Inter',-apple-system,sans-serif;color:var(--navy);background:#fff;line-height:1.5;font-size:14px;-webkit-font-smoothing:antialiased}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .topbar{display:flex;align-items:center;gap:18px;padding:14px 28px;border-bottom:1px solid var(--gray-2);background:#fff;position:sticky;top:0;z-index:20}
+  .brand{font-family:'Source Serif 4',serif;font-size:18px;font-weight:700;letter-spacing:-0.01em;color:var(--navy)}
+  .brand .dot{display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;vertical-align:middle;margin:0 6px 3px 0}
+  .top-search{flex:1;max-width:420px;position:relative}
+  .top-search input{width:100%;padding:8px 12px 8px 32px;border:1px solid var(--gray-2);border-radius:6px;font-family:inherit;font-size:13px;background:var(--gray-1)}
+  .top-search input:focus{outline:0;border-color:var(--gray-3);background:#fff}
+  .top-search::before{content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;border:1.5px solid var(--text-soft);border-radius:50%}
+  .top-search::after{content:'';position:absolute;left:21px;top:50%;width:7px;height:1.5px;background:var(--text-soft);transform:translateY(2px) rotate(45deg);transform-origin:left}
+  .top-actions{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .top-actions a{color:var(--text-mute)}
+  .top-actions a:hover{color:var(--navy);text-decoration:none}
+  .profile{display:inline-flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid var(--gray-2);border-radius:6px;color:var(--navy)}
+  .profile .av{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace}
+
+  /* Location callout — combined scope status + save-as-home + switch */
+  .lc{padding:14px 28px;border-bottom:1px solid var(--gray-2);background:var(--gray-1);display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+  .lc-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:3px}
+  .lc-body{font-size:13.5px;color:var(--navy);line-height:1.5}
+  .lc-body strong{color:var(--navy)}
+  .lc-body em{font-style:italic;color:var(--text-mute)}
+  .lc-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .lc-save{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;background:var(--navy);color:#fff;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .lc-save:hover{text-decoration:none;background:var(--link)}
+  .lc-switch{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .lc-switch .switch{display:inline-flex;border:1px solid var(--gray-2);background:#fff;border-radius:5px;overflow:hidden}
+  .lc-switch .switch a{padding:5px 10px;color:var(--text-mute);border-right:1px solid var(--gray-2);font-size:10px}
+  .lc-switch .switch a:last-child{border-right:0}
+  .lc-switch .switch a.active{background:var(--navy);color:#fff}
+  .lc-switch .switch a:hover{text-decoration:none;color:var(--navy)}
+  .lc-switch .switch a.active:hover{color:#fff}
+
+  .wrap{max-width:1320px;margin:0 auto;padding:28px 28px 96px}
+
+  .hero{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;padding-bottom:22px;border-bottom:1px solid var(--gray-2);margin-bottom:24px}
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:9px}
+  .hero-title{font-family:'Source Serif 4',serif;font-size:32px;font-weight:700;letter-spacing:-0.02em;margin:0 0 6px;line-height:1.18}
+  .hero-sub{font-size:14px;color:var(--text-mute);margin:0;max-width:680px;line-height:1.55}
+  .hero-stats{display:flex;gap:18px;text-align:right}
+  .hero-stat{display:flex;flex-direction:column;gap:2px}
+  .hero-stat-num{font-family:'Source Serif 4',serif;font-size:24px;font-weight:600;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .hero-stat-lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+
+  /* "Since your last visit" — 3 compact cards, no long list */
+  .since-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+  @media (max-width:900px){.since-row{grid-template-columns:1fr}}
+  .since-card{background:#fff;border:1px solid var(--gray-2);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:7px;cursor:pointer;transition:border-color var(--t-fast),background var(--t-fast)}
+  .since-card:hover{border-color:var(--gray-3);background:var(--gray-1);text-decoration:none}
+  .sc-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .sc-eyebrow.t-deadline{color:var(--amber-fg)}
+  .sc-eyebrow.t-enf{color:var(--red-fg)}
+  .sc-eyebrow.t-new{color:var(--green-fg)}
+  .sc-head{font-family:'Source Serif 4',serif;font-size:15.5px;font-weight:600;color:var(--navy);line-height:1.3}
+  .sc-sum{font-size:12.5px;color:var(--text-mute);line-height:1.5}
+  .sc-juris{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--text-mute);margin-top:2px}
+
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin:0 0 14px}
+  .section-h{font-family:'Source Serif 4',serif;font-size:21px;font-weight:600;color:var(--navy);letter-spacing:-0.01em;margin:0}
+  .section-sub{font-size:13px;color:var(--text-mute)}
+
+  /* Quick-views grid (formerly "tracker entry-points") */
+  .qv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:36px}
+  @media (max-width:900px){.qv-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:600px){.qv-grid{grid-template-columns:1fr}}
+  .qv{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--gray-2);border-radius:10px;padding:18px 20px;color:inherit;transition:border-color var(--t-fast),background var(--t-fast)}
+  .qv:hover{text-decoration:none;border-color:var(--gray-3);background:var(--gray-1)}
+  .qv-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .qv-name{font-family:'Source Serif 4',serif;font-size:17px;font-weight:600;letter-spacing:-0.005em;color:var(--navy)}
+  .qv-count{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--text-mute);white-space:nowrap}
+  .qv-sub{font-size:13px;color:var(--text-mute);line-height:1.5}
+  .qv-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);padding-top:8px;border-top:1px solid var(--gray-2)}
+  .qv-foot .new{color:var(--green-fg)}
+  .qv-cta{color:var(--link)}
+
+  /* Watchlist + deadlines two-col */
+  .twocol{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-bottom:36px;align-items:start}
+  @media (max-width:1080px){.twocol{grid-template-columns:1fr}}
+  .panel{background:#fff;border:1px solid var(--gray-2);border-radius:10px;overflow:hidden}
+  .panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:14px 18px 10px;border-bottom:1px solid var(--gray-2)}
+  .panel-title{font-family:'Source Serif 4',serif;font-size:15.5px;font-weight:600;color:var(--navy);letter-spacing:-0.005em;margin:0}
+  .panel-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .panel-foot{padding:11px 18px;border-top:1px solid var(--gray-2);background:var(--gray-1);font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+  .deadline-row{display:grid;grid-template-columns:80px 1fr auto;gap:10px;padding:11px 18px;border-bottom:1px solid var(--gray-2);align-items:center}
+  .deadline-row:last-child{border-bottom:0}
+  .deadline-when{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--amber-fg)}
+  .deadline-when.imminent{color:var(--red-fg)}
+  .deadline-name{font-size:13px;font-weight:600;color:var(--navy)}
+  .deadline-juris{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+
+  /* Region jumper */
+  .jumper{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;padding:14px 18px}
+  @media (max-width:1080px){.jumper{grid-template-columns:repeat(4,1fr)}}
+  .jcell{display:flex;flex-direction:column;gap:3px;padding:11px 12px;border:1px solid var(--gray-2);border-radius:7px;color:inherit;transition:border-color var(--t-fast),background var(--t-fast)}
+  .jcell:hover{text-decoration:none;border-color:var(--gray-3);background:var(--gray-1)}
+  .jcell .lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute)}
+  .jcell .nm{font-size:13px;font-weight:600;color:var(--navy)}
+  .jcell .ct{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.04em}
+</style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span>Principles AI</div>
+  <div class="top-search"><input placeholder="Search regulators, laws, news…"></div>
+  <div class="top-actions">
+    <a href="#">Notifications</a>
+    <span class="profile"><span class="av">DL</span> David L.</span>
+  </div>
+</div>
+
+<div class="lc">
+  <div class="lc-l">
+    <div class="lc-eyebrow">Your dashboard</div>
+    <div class="lc-body"><strong>General</strong> — you haven't set a country or state as your home page. <em>Pick one to land there directly next time.</em></div>
+  </div>
+  <div class="lc-r">
+    <a class="lc-save" href="#">Set a country / state as my home →</a>
+    <div class="lc-switch">Switch
+      <div class="switch">
+        <a href="dashboard-general.html" class="active">General</a>
+        <a href="dashboard-eu.html">EU</a>
+        <a href="dashboard-us.html">US</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Mon · 30 Apr 2026</div>
+      <h1 class="hero-title">Your global watchlist, this week</h1>
+      <p class="hero-sub">Regulatory and enforcement movement across the jurisdictions, topics, and bodies you've pinned. Tables below are the entry points; the three cards underneath surface what's changed since you last visited.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">14</div><div class="hero-stat-lbl">Juris pinned</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">7</div><div class="hero-stat-lbl">Deadlines / 30d</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-lbl">Open enf. flagged</div></div>
+    </div>
+  </div>
+
+  <div class="since-row">
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-enf">Enforcement · 2h ago</div>
+      <div class="sc-head">Garante fines pharma group €4.6m for AI-assisted patient profiling</div>
+      <div class="sc-sum">Mirrors EDPB Opinion 28/2024 reasoning. Likely template for the AEPD case pending in Spain.</div>
+      <div class="sc-juris">Italy</div>
+    </a>
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-new">New rule · 6h ago</div>
+      <div class="sc-head">CCPA automated decision-making rules adopted — in force 1 Oct 2026</div>
+      <div class="sc-sum">Pre-deployment risk assessment + opt-out for "significant decisions" in 5 months.</div>
+      <div class="sc-juris">United States · California</div>
+    </a>
+    <a class="since-card" href="#">
+      <div class="sc-eyebrow t-deadline">Imminent deadline · 12 days</div>
+      <div class="sc-head">EU AI Act Article 5 prohibitions enforceable</div>
+      <div class="sc-sum">Final preparedness checks for prohibited-practice scoping. Affects every EU 27 deployment.</div>
+      <div class="sc-juris">EU 27</div>
+    </a>
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-h">Tables</h2>
+    <div class="section-sub">PAI's underlying datasets — six tables you can scope, filter and watchlist</div>
+  </div>
+
+  <div class="qv-grid">
+    <a class="qv" href="#">
+      <div class="qv-top"><div class="qv-name">Jurisdictions</div><div class="qv-count">182 rows</div></div>
+      <div class="qv-sub">Countries, EU, US states, and multilaterals — each with its own page, regulators, and live instruments.</div>
+      <div class="qv-foot"><span class="new">+3 added / 30d</span><span class="qv-cta">Open table →</span></div>
+    </a>
+    <a class="qv" href="#">
+      <div class="qv-top"><div class="qv-name">Authorities</div><div class="qv-count">441 rows</div></div>
+      <div class="qv-sub">Regulators, supervisors, courts and AI-specific bodies. Mandate, enforcement priorities, recent activity.</div>
+      <div class="qv-foot"><span class="new">+11 / 30d</span><span class="qv-cta">Open table →</span></div>
+    </a>
+    <a class="qv" href="#">
+      <div class="qv-top"><div class="qv-name">Legislation</div><div class="qv-count">602 rows</div></div>
+      <div class="qv-sub">Primary instruments — acts, regulations, delegated/implementing texts. With status, regulator, and source.</div>
+      <div class="qv-foot"><span class="new">+24 / 30d</span><span class="qv-cta">Open table →</span></div>
+    </a>
+    <a class="qv" href="#">
+      <div class="qv-top"><div class="qv-name">Guidance</div><div class="qv-count">1,287 rows</div></div>
+      <div class="qv-sub">Statutory codes, opinions, advisories, supervisory letters. Linked back to the legislation they interpret.</div>
+      <div class="qv-foot"><span class="new">+38 / 30d</span><span class="qv-cta">Open table →</span></div>
+    </a>
+    <a class="qv" href="#">
+      <div class="qv-top"><div class="qv-name">News</div><div class="qv-count">8,940 items</div></div>
+      <div class="qv-sub">Verified regulatory news drawn from primary sources, judges, supervisors, and validated firms. Tagged + timestamped.</div>
+      <div class="qv-foot"><span class="new">+42 this week</span><span class="qv-cta">Open table →</span></div>
+    </a>
+    <a class="qv" href="#">
+      <div class="qv-top"><div class="qv-name">Frameworks</div><div class="qv-count">112 rows</div></div>
+      <div class="qv-sub">OECD, NIST AI RMF, ISO/IEC 42001, GPAI, Council of Europe Framework Convention. Mapped to obligations.</div>
+      <div class="qv-foot"><span class="new">+2 / 30d</span><span class="qv-cta">Open table →</span></div>
+    </a>
+  </div>
+
+  <div class="twocol">
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Upcoming deadlines · next 90 days</h2>
+        <div class="panel-meta">Across pinned jurisdictions</div>
+      </div>
+      <div>
+        <div class="deadline-row">
+          <div class="deadline-when imminent">12 days</div>
+          <div class="deadline-name">EU AI Act — Article 5 prohibitions enforceable</div>
+          <div class="deadline-juris">EU 27</div>
+        </div>
+        <div class="deadline-row">
+          <div class="deadline-when">28 days</div>
+          <div class="deadline-name">UK AI safety voluntary commitments — first quarterly report due</div>
+          <div class="deadline-juris">United Kingdom</div>
+        </div>
+        <div class="deadline-row">
+          <div class="deadline-when">41 days</div>
+          <div class="deadline-name">CPRA risk-assessment regulations — public comment closes</div>
+          <div class="deadline-juris">US · California</div>
+        </div>
+        <div class="deadline-row">
+          <div class="deadline-when">63 days</div>
+          <div class="deadline-name">Colorado AI Act — pre-deployment notice template due</div>
+          <div class="deadline-juris">US · Colorado</div>
+        </div>
+        <div class="deadline-row">
+          <div class="deadline-when">88 days</div>
+          <div class="deadline-name">Japan METI Guidelines v3 — voluntary attestation window</div>
+          <div class="deadline-juris">Japan</div>
+        </div>
+      </div>
+      <div class="panel-foot"><a href="#">Open deadline tracker →</a></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2 class="panel-title">Your watchlist health</h2><div class="panel-meta">Coverage check</div></div>
+      <div style="padding:14px 18px;font-size:13px;color:var(--text-mute);line-height:1.65">
+        <div style="margin-bottom:8px"><strong style="color:var(--navy)">14 jurisdictions</strong> pinned across 6 of 8 PAI regions.</div>
+        <div style="margin-bottom:8px"><strong style="color:var(--green-fg)">3</strong> have new primary instruments since Jan 2026.</div>
+        <div style="margin-bottom:8px"><strong style="color:var(--navy)">0</strong> in your watchlist are dark (no monitored regulator).</div>
+        <div style="margin-bottom:8px"><strong style="color:var(--amber-fg)">2</strong> regions you don't track at all — Caribbean, Africa.</div>
+        <div style="margin-top:14px"><a href="#">Edit watchlist →</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-h">Jump to a region</h2>
+    <div class="section-sub">PAI region taxonomy — 8 buckets, UK in Europe, no common-law bucket</div>
+  </div>
+  <div class="panel">
+    <div class="jumper">
+      <a class="jcell" href="#"><span class="lbl">Region</span><span class="nm">Europe</span><span class="ct">38 juris · 14 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">Region</span><span class="nm">North America</span><span class="ct">3 juris · 9 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">Region</span><span class="nm">Latin America</span><span class="ct">11 juris · 4 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">Region</span><span class="nm">Caribbean</span><span class="ct">12 juris · 1 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">Region</span><span class="nm">Africa</span><span class="ct">22 juris · 3 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">Region</span><span class="nm">Middle East</span><span class="ct">10 juris · 2 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">Region</span><span class="nm">Asia Pacific</span><span class="ct">19 juris · 7 new / 30d</span></a>
+      <a class="jcell" href="#"><span class="lbl">Region</span><span class="nm">Global</span><span class="ct">8 bodies · 2 new / 30d</span></a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
