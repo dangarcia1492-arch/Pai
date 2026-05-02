@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PrinciplesAI — New Zealand</title>
+<title>PrinciplesAI - New Zealand</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -322,7 +322,25 @@ body.sidebar-expanded #jur-overlay { left: var(--sidebar-expanded, 240px) !impor
 body { min-width: 320px !important; }
 
 /* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+.anim-in{opacity:0;transform:translateY(10px);animation:enterUp .6s cubic-bezier(.32,.72,.24,1) forwards;animation-delay:calc(var(--d,0) * 70ms)}
+@keyframes enterUp{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.anim-in{opacity:1;transform:none;animation:none}}
+
+.us-state-lift{margin:18px 0 28px;padding:18px 22px;background:#fafbfc;border:1px solid #eef1f5;border-radius:14px}
+.us-state-lift .uss-row{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.us-state-lift .uss-chip{display:flex;flex-direction:column;gap:5px;flex:1;min-width:200px}
+.us-state-lift .uss-chip-lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#56657a}
+.us-state-lift .uss-chip-val{font-size:14px;font-weight:500;color:#0a1729;line-height:1.4;display:flex;align-items:center;gap:9px}
+.us-state-lift .uss-dot{width:9px;height:9px;border-radius:999px;flex-shrink:0;display:inline-block}
+.us-state-lift .uss-dot-yes{background:#2c7a45}
+.us-state-lift .uss-dot-soft{background:#8a4d00}
+.us-state-lift .uss-dot-empty{background:#dbe1ea}
+.us-state-lift .uss-cta{font-size:12.5px;font-weight:600;color:#014486;background:#fff;border:1px solid #cfe1f5;border-radius:999px;padding:9px 16px;text-decoration:none;white-space:nowrap;transition:background .22s,border-color .22s}
+.us-state-lift .uss-cta:hover{background:#e3effc;border-color:#0176d3}
+
 @media (max-width: 900px) {
+  .us-state-lift .uss-row{gap:18px}
+  .us-state-lift .uss-cta{flex-basis:100%;text-align:center;margin-top:6px}
   .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
   .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
   .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
@@ -360,7 +378,7 @@ body { min-width: 320px !important; }
   .page-head .ph-map { display: none !important; }
   .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
   .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
-  /* Domain row — stack label/primary/meta vertically */
+  /* Domain row - stack label/primary/meta vertically */
   .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
   .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
   .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
@@ -374,7 +392,7 @@ body { min-width: 320px !important; }
   .kpi-stack .kpi:last-child { border-right: none; }
   .kpi-value { font-size: 20px !important; }
   .kpi-value.small { font-size: 13px !important; }
-  /* Latest + impl + stream — single column */
+  /* Latest + impl + stream - single column */
   .latest-grid { grid-template-columns: 1fr !important; }
   .impl-cards { grid-template-columns: 1fr !important; }
   .stream-panel { grid-template-columns: 1fr !important; }
@@ -391,7 +409,7 @@ body { min-width: 320px !important; }
   #jur-overlay { width: 100vw !important; left: 0 !important; }
   #jur-overlay-backdrop { display: none !important; }
   body.jur-overlay-open .icon-sidebar { display: none !important; }
-  /* Header icons — bigger tap targets */
+  /* Header icons - bigger tap targets */
   .header-icon-btn { width: 40px !important; height: 40px !important; }
   .header-logout { padding: 0 11px !important; }
   .header-logout span { display: none; }
@@ -433,12 +451,12 @@ body { min-width: 320px !important; }
 .page-view{padding:26px 40px 40px;max-width:1600px;margin:0}
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#014486;text-decoration:none;margin-bottom:14px;font-family:'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.05em;text-transform:uppercase}
 .back-link:hover{color:#0176d3}
-/* Page head — grid: title block + country outline */
-.page-head{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:40px;align-items:start;margin-bottom:56px!important;padding-bottom:28px!important;border-bottom:1px solid #ebeff5}
+/* Page head - grid: title block + country outline */
+.page-head{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:40px;align-items:start;margin-bottom:48px!important;padding-bottom:48px!important;border-bottom:1px solid #ebeff5}
 .page-head.single-col{grid-template-columns:minmax(0,1fr)}
 .page-head .ph-title{min-width:0}
 .page-head .ph-map{align-self:start;justify-self:end}
-.page-head .ph-map svg{width:140px;height:auto;display:block;opacity:.92}
+.page-head .ph-map svg{width:140px;height:auto;display:block;opacity:.92;position:relative;z-index:1}
 .page-head .ph-map svg .country{fill:#dbe1ea;stroke:#8a93a3;stroke-width:.6;stroke-linejoin:round}
 .page-head .page-sub{font-size:15px;color:#5e6878;line-height:1.55;margin:2px 0 14px;max-width:820px}
 .pulse-line{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;color:#5e6878;padding:8px 14px;background:#f8fafc;border:1px solid #ebeff5;border-radius:999px;font-weight:500;margin-top:4px;flex-wrap:wrap}
@@ -540,7 +558,7 @@ body { min-width: 320px !important; }
 .impl-section.collapsed .impl-see-all .impl-collapse-label{display:none}
 .impl-section.collapsed .impl-see-all .impl-expand-label{display:inline}
 
-/* Implementation Status — three tabbed boards (AI Act / NIS2 / GDPR) */
+/* Implementation Status - three tabbed boards (AI Act / NIS2 / GDPR) */
 .impl-tabs-section{margin-top:48px;margin-bottom:64px}
 .impl-tabs-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 4px 0}
 .impl-tabs-section .impl-tabs-sub{font-size:12.5px;color:#5e6878;margin-bottom:14px}
@@ -565,7 +583,7 @@ body { min-width: 320px !important; }
 .impl-panel-sub{font-size:12.5px;color:#5e6878;margin:14px 0 12px}
 @media (max-width: 720px){ .aiact-row{grid-template-columns:1fr;gap:6px} .aiact-row .aiact-pending,.aiact-row .aiact-verified,.aiact-row .aiact-unsourced{justify-self:start} .impl-tab{padding:10px 10px;font-size:10px} }
 
-/* Authorities — card grid (max 18, then See all). Replaces the prior flat list. */
+/* Authorities - card grid (max 18, then See all). Replaces the prior flat list. */
 .authorities-section{margin-top:72px}
 .authorities-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 4px 0}
 .authorities-section .auth-sub{font-size:12.5px;color:#5e6878;margin-bottom:18px}
@@ -583,7 +601,7 @@ body { min-width: 320px !important; }
 @media (max-width: 900px){ .auth-grid{grid-template-columns:repeat(2, minmax(0,1fr))} }
 @media (max-width: 540px){ .auth-grid{grid-template-columns:1fr} }
 
-/* Regulators — compact one-line rows, whole row is a link */
+/* Regulators - compact one-line rows, whole row is a link */
 .regulators-section{margin-top:72px}
 .regulators-section h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0 0 16px 0}
 .reg-list-compact{border-top:1px solid #ebeff5}
@@ -601,7 +619,7 @@ body { min-width: 320px !important; }
 .reg-see-all{display:inline-flex;align-items:center;gap:6px;margin-top:22px;padding:10px 16px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.08em;color:#014486;background:#f6f7f9;border:1px solid #ebeff5;border-radius:6px;text-transform:uppercase;text-decoration:none}
 .reg-see-all:hover{background:#e3effc;border-color:#cfe1f6;color:#0176d3}
 
-/* Practical guidance summary — slim per-regulator cards linking to authority pages */
+/* Practical guidance summary - slim per-regulator cards linking to authority pages */
 .guidance-section{margin-top:72px}
 .gs-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
 .gs-head h2{font-size:18px;font-weight:700;color:#0a1729;letter-spacing:-0.01em;margin:0}
@@ -624,7 +642,7 @@ body { min-width: 320px !important; }
 @media (max-width: 1100px) { .gs-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (max-width: 640px) { .gs-grid { grid-template-columns: 1fr; } }
 
-/* Stream — card grid (fills width, no ghost borders) */
+/* Stream - card grid (fills width, no ghost borders) */
 .stream-section{margin-top:72px}
 .stream-tabs{display:flex;gap:0;border-bottom:1px solid #dbe1ea;margin-bottom:18px;flex-wrap:wrap}
 .stream-tab{background:none;border:none;padding:12px 18px;cursor:pointer;font-size:13px;font-weight:600;color:#5e6878;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;display:inline-flex;align-items:center;gap:8px}
@@ -657,7 +675,7 @@ body { min-width: 320px !important; }
 .stream-foot .stream-foot-note{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;color:#8a93a3;letter-spacing:.04em}
 @media (max-width: 640px){ .stream-panel{grid-template-columns:1fr} .stream-tab{padding:10px 12px;font-size:12.5px} }
 
-/* Latest activity — See all footer button */
+/* Latest activity - See all footer button */
 .latest-section .latest-see-all{display:inline-flex;align-items:center;gap:6px;margin-top:18px;padding:10px 16px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.08em;color:#014486;background:#f6f7f9;border:1px solid #ebeff5;border-radius:6px;text-transform:uppercase;text-decoration:none}
 .latest-section .latest-see-all:hover{background:#e3effc;border-color:#cfe1f6;color:#0176d3}
 .latest-card{text-decoration:none;color:inherit}
@@ -674,6 +692,332 @@ body { min-width: 320px !important; }
 .hjb-flag{font-size:15px;line-height:1}
 .main-content{margin-left:var(--sidebar-collapsed,56px);padding-top:52px;min-height:100vh}
 /* ==END_GEN_JURIS_CSS== */
+
+  :root{
+    --navy:#0a1729; --link:#014486; --accent:#0176d3;
+    --gray-1:#f6f7f9; --gray-2:#ebeff5; --gray-3:#cfe1f5;
+    --text-mute:#5e6878; --text-soft:#8a93a3;
+    --amber-bg:#fbeecd; --amber-fg:#905200;
+    --green-bg:#e5f3e9; --green-fg:#2e844a;
+    --red-bg:#fde7e7;   --red-fg:#a72929;
+    --gray-bg:#ebeff5;  --gray-fg:#5e6878;
+    --t-fast:.28s; --t-med:.5s; --t-slow:.7s;
+    --easing:cubic-bezier(.32,.72,.24,1);
+  }
+.main-content .wrap{max-width:none;margin:0;padding:28px 40px 96px}
+@media(max-width:860px){.main-content .wrap{padding:16px 18px 60px}}
+
+  /* ────── PAGE ENTRANCE - staggered fade-up ────── */
+@keyframes enterUp{to{opacity:1;transform:none}}
+
+  /* ────── HERO ────── */
+  .hero{display:grid;grid-template-columns:1fr auto;gap:32px;padding:8px 0 28px;border-bottom:1px solid var(--gray-2);align-items:start}
+  .hero-eyebrow{display:flex;gap:10px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:12px}
+  .hero-eyebrow .scope{background:var(--gray-2);color:var(--navy);padding:3px 8px;border-radius:3px}
+  .hero-title{font-family:'Inter',-apple-system,sans-serif;font-size:42px;font-weight:700;letter-spacing:-0.02em;margin:0 0 8px;line-height:1.1}
+  .hero-sub{font-size:14.5px;color:var(--text-mute);margin:0;max-width:600px;line-height:1.55}
+  .hero-pulse{display:flex;gap:14px;margin-top:16px;font-size:12.5px;color:var(--text-mute);align-items:center}
+  .hero-pulse .dot{width:8px;height:8px;border-radius:50%;background:var(--green-fg);position:relative}
+  .hero-pulse .dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:var(--green-fg);opacity:.35;animation:ping 2.4s var(--easing) infinite}
+  @keyframes ping{0%{transform:scale(.6);opacity:.35}80%{transform:scale(1.6);opacity:0}100%{opacity:0}}
+  .hero-flag{width:120px;height:120px;background:linear-gradient(135deg,#dde4ec 0%,#c8d0dc 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--text-mute);letter-spacing:.1em;font-size:11px}
+
+  /* ────── TOP VIEW BAR ────── */
+  .view-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 18px;position:relative;z-index:50}
+  .view-bar-l .crumb{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--text-mute)}
+  .view-bar-l .crumb a{color:var(--text-mute);text-decoration:none}
+  .view-bar-l .crumb a:hover{color:var(--accent)}
+  .view-bar-r{display:flex;align-items:center;gap:8px;position:relative}
+
+  .seg{display:inline-flex;background:var(--gray-1);border:1px solid var(--gray-2);border-radius:8px;padding:3px;gap:0;position:relative}
+  .seg-btn{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mute);background:transparent;border:0;padding:7px 12px;border-radius:5px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:color var(--t-fast) var(--easing);position:relative;z-index:2}
+  .seg-btn:hover{color:var(--navy)}
+  .seg-btn.active{color:var(--navy)}
+  .seg-thumb{position:absolute;top:3px;bottom:3px;background:#fff;border-radius:5px;box-shadow:0 1px 3px rgba(10,23,41,.06);transition:left var(--t-med) var(--easing),width var(--t-med) var(--easing);z-index:1}
+  .seg-btn .default-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0;transition:opacity var(--t-fast)}
+  .seg-btn.is-default .default-dot{opacity:1}
+
+  .save-btn{background:#fff;border:1px solid var(--gray-2);border-radius:8px;padding:7px 12px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);display:inline-flex;align-items:center;gap:6px;transition:background var(--t-fast),border-color var(--t-fast)}
+  .save-btn:hover{background:var(--gray-1);border-color:var(--gray-3)}
+  .save-btn::after{content:"▾";font-size:9px;color:var(--text-mute);margin-left:2px;transition:transform var(--t-fast)}
+  .save-btn.open::after{transform:rotate(180deg)}
+
+  .save-pop{position:absolute;top:calc(100% + 6px);right:0;z-index:1000;background:#fff;border:1px solid var(--gray-2);border-radius:10px;box-shadow:0 12px 32px rgba(10,23,41,.10);padding:6px;min-width:300px;opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;transform-origin:top right;transition:opacity var(--t-fast) var(--easing),transform var(--t-fast) var(--easing)}
+  .save-pop.open{opacity:1;transform:none;pointer-events:auto}
+  .save-opt{width:100%;text-align:left;background:transparent;border:0;padding:10px 12px;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;gap:2px;transition:background var(--t-fast)}
+  .save-opt:hover{background:var(--gray-1)}
+  .save-opt-title{font-size:13px;font-weight:600;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .save-opt-title .badge{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--green-fg);background:var(--green-bg);padding:2px 6px;border-radius:3px}
+  .save-opt-sub{font-size:11.5px;color:var(--text-mute);line-height:1.4}
+  .save-opt[disabled]{opacity:.5;cursor:not-allowed}
+  .save-opt[disabled]:hover{background:transparent}
+  .save-opt-divider{height:1px;background:var(--gray-2);margin:4px 8px}
+
+  /* ────── TOAST ────── */
+  .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 12px 36px rgba(10,23,41,.25);z-index:50;opacity:0;transition:opacity var(--t-med) var(--easing),transform var(--t-med) var(--easing);display:flex;align-items:center;gap:10px}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast::before{content:"✓";color:var(--green-fg);font-weight:700;font-size:14px;background:rgba(255,255,255,.1);width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center}
+
+  /* ────── PILLS ────── */
+  .pill{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:3px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+  .pill::before{content:"";width:6px;height:6px;border-radius:50%;display:inline-block}
+  .pill-pending{color:var(--amber-fg);background:var(--amber-bg)}.pill-pending::before{background:var(--amber-fg)}
+  .pill-source{color:var(--gray-fg);background:var(--gray-bg)}.pill-source::before{background:var(--text-soft)}
+  .pill-overdue{color:var(--red-fg);background:var(--red-bg)}.pill-overdue::before{background:var(--red-fg)}
+  .pill-verified{color:var(--green-fg);background:var(--green-bg)}.pill-verified::before{background:var(--green-fg)}
+
+  /* ────── VIEW PANELS - cross-fade ────── */
+  .view-stage{position:relative}
+  .view{display:none;opacity:0;transition:opacity var(--t-med) var(--easing)}
+  .view.active{display:block;opacity:1}
+  .view.is-leaving{display:block;opacity:0}
+
+  /* ═════════════════════ A - NEWSROOM ═════════════════════ */
+  .nr-stream-block{margin-top:0}
+  .nr-stream-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .nr-stream-head h2{font-family:'Inter',-apple-system,sans-serif;font-size:22px;font-weight:600;margin:0}
+  .nr-stream-head .meta{font-size:12px;color:var(--text-mute);font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+  .nr-stream-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:14px}
+  .nr-card{display:flex;flex-direction:column;gap:8px;padding:18px;background:#fff;border:1px solid var(--gray-2);border-radius:10px;text-decoration:none;color:inherit;transition:border-color var(--t-fast),transform var(--t-fast),box-shadow var(--t-fast)}
+  .nr-card:hover{border-color:var(--gray-3);transform:translateY(-2px);box-shadow:0 6px 22px rgba(10,23,41,.06)}
+  .nr-card.hero-card{grid-row:span 2;background:linear-gradient(135deg,#014486 0%,#0176d3 60%,#3ca7f5 100%);color:#fff}
+  .nr-card.hero-card .nr-meta{color:rgba(255,255,255,.7)}
+  .nr-card.hero-card h3{color:#fff} .nr-card.hero-card p{color:rgba(255,255,255,.85)}
+  .nr-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);display:flex;gap:8px;align-items:center}
+  .nr-card h3{font-family:'Inter',-apple-system,sans-serif;font-size:17px;font-weight:600;margin:0;line-height:1.3;letter-spacing:-0.01em}
+  .nr-card.hero-card h3{font-size:22px;line-height:1.25}
+  .nr-card p{font-size:13px;color:var(--text-mute);margin:0;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .nr-tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+
+  /* IMPL STRIP (A) - c-to-b style drill-in */
+  .impl-strip{margin-top:48px;padding:22px 24px;background:var(--gray-1);border-radius:14px;transition:padding var(--t-med) var(--easing)}
+  .impl-strip-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:14px}
+  .impl-strip-head h2{font-size:15px;font-weight:700;margin:0;display:flex;gap:10px;align-items:center}
+  .impl-strip-head .meta{font-size:11.5px;color:var(--text-mute)}
+  .impl-strip-head .impl-actions{display:none;gap:8px;align-items:center}
+  .impl-strip.expanded .impl-actions{display:inline-flex}
+  .impl-strip-head .impl-back, .impl-strip-head .impl-topics{align-items:center;gap:6px;background:#fff;border:1px solid var(--gray-2);border-radius:6px;padding:5px 10px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);cursor:pointer;transition:all var(--t-fast);display:inline-flex}
+  .impl-strip-head .impl-back::before{content:"←"}
+  .impl-strip-head .impl-topics::after{content:"→"}
+  .impl-strip-head .impl-back:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .impl-strip-head .impl-topics{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .impl-strip-head .impl-topics:hover{background:#015abf;border-color:#015abf}
+
+  .impl-strip-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;transition:grid-template-columns var(--t-med) var(--easing),gap var(--t-med) var(--easing)}
+  .impl-strip.expanded.exp-aiact .impl-strip-grid{grid-template-columns:1fr 0fr 0fr;gap:0}
+  .impl-strip.expanded.exp-nis2  .impl-strip-grid{grid-template-columns:0fr 1fr 0fr;gap:0}
+  .impl-strip.expanded.exp-gdpr  .impl-strip-grid{grid-template-columns:0fr 0fr 1fr;gap:0}
+
+  .impl-mini{background:#fff;border:1px solid var(--gray-2);border-radius:8px;cursor:pointer;min-width:0;overflow:hidden;display:flex;flex-direction:column;transition:transform var(--t-fast),box-shadow var(--t-fast),border-color var(--t-fast),opacity var(--t-med)}
+  .impl-mini:hover:not(.is-active){transform:translateY(-1px);box-shadow:0 4px 14px rgba(10,23,41,.06);border-color:var(--gray-3)}
+  .impl-strip.expanded .impl-mini:not(.is-active){opacity:0;pointer-events:none}
+  .impl-mini.is-active{cursor:default;border-color:var(--gray-3);box-shadow:0 8px 28px rgba(10,23,41,.06)}
+
+  /* Compact view: padded card; fades out when active */
+  .mini-compact{padding:14px 16px;opacity:1;transition:opacity var(--t-fast) var(--easing)}
+  .impl-mini.is-active .mini-compact{opacity:0;height:0;padding:0;margin:0;overflow:hidden;pointer-events:none}
+
+  /* Expanded view: collapses to 0 when inactive (no internal scroll), grows naturally when active.
+     Page scrolls if needed; the strip gets taller. */
+  .mini-expanded{max-height:0;opacity:0;overflow:hidden;padding:0 24px;transition:max-height var(--t-med) var(--easing),opacity var(--t-fast) var(--easing) 0s,padding var(--t-med) var(--easing)}
+  .impl-mini.is-active .mini-expanded{max-height:1500px;opacity:1;padding:20px 24px;transition:max-height var(--t-med) var(--easing),opacity var(--t-fast) var(--easing) var(--t-fast),padding var(--t-med) var(--easing)}
+
+  .impl-mini-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .impl-mini-title{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy)}
+  .impl-mini-num{font-family:'Inter',-apple-system,sans-serif;font-size:24px;font-weight:600;color:var(--navy);line-height:1}
+  .impl-mini-bar{height:5px;background:var(--gray-2);border-radius:3px;overflow:hidden;margin-bottom:6px;position:relative}
+  .impl-mini-fill{height:100%;background:var(--amber-fg);width:0;transition:width 1s var(--easing) .25s}
+  .impl-mini-meta{font-size:11px;color:var(--text-mute);display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+  .impl-mini-meta .open{color:var(--accent);font-weight:600;font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;font-size:10px}
+
+  /* Mini-expanded scoreboard (compact B) */
+  .me-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+  .me-board{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-mute);margin-bottom:4px}
+  .me-title{font-family:'Inter',-apple-system,sans-serif;font-size:17px;font-weight:600;color:var(--navy);margin:0;letter-spacing:-0.01em}
+  .me-pct{display:flex;flex-direction:column;align-items:flex-end;gap:0}
+  .me-pct-num{font-family:'Inter',-apple-system,sans-serif;font-size:26px;font-weight:600;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .me-pct-cap{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+  .me-row{display:grid;grid-template-columns:24px 200px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--gray-2);align-items:start;opacity:0;transform:translateX(6px);animation:meRowIn .45s var(--easing) forwards;animation-delay:calc(var(--i,0) * 35ms)}
+  @keyframes meRowIn{to{opacity:1;transform:none}}
+  .me-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'IBM Plex Mono',monospace;font-size:11px;flex-shrink:0;margin-top:1px}
+  .me-icon.s-overdue{background:var(--red-bg);color:var(--red-fg)} .me-icon.s-overdue::before{content:"!"}
+  .me-icon.s-pending{background:var(--amber-bg);color:var(--amber-fg)} .me-icon.s-pending::before{content:"!"}
+  .me-icon.s-verified{background:var(--green-bg);color:var(--green-fg)} .me-icon.s-verified::before{content:"✓"}
+  .me-icon.s-source{background:var(--gray-bg);color:var(--text-soft)} .me-icon.s-source::before{content:"·"}
+  .me-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);line-height:1.4;padding-top:3px}
+  .me-text{font-size:12.5px;color:var(--navy);line-height:1.5}
+  .me-text.stub{color:var(--text-soft);font-style:italic}
+  .me-text a{color:var(--accent);text-decoration:none;font-weight:600;border-bottom:1px solid var(--gray-3)}
+
+  /* KEY LEGISLATION (used in A) - accordion expand */
+  .kl{margin-top:36px;background:#fff;border:1px solid var(--gray-2);border-radius:14px;overflow:hidden}
+  .kl-head{padding:20px 24px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;border-bottom:1px solid var(--gray-2)}
+  .kl-head h2{font-family:'Inter',-apple-system,sans-serif;font-size:20px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
+  .kl-head p{font-size:12.5px;color:var(--text-mute);margin:0;max-width:440px;line-height:1.5}
+  .kl-kpi{display:flex;gap:18px;text-align:right}
+  .kl-kpi-cell{display:flex;flex-direction:column;gap:1px}
+  .kl-kpi-num{font-family:'Inter',-apple-system,sans-serif;font-size:22px;font-weight:600;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+  .kl-kpi-lbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+
+  .kl-row{border-bottom:1px solid var(--gray-2)}
+  .kl-row:last-child{border-bottom:0}
+  .kl-row-head{display:grid;grid-template-columns:120px 1fr auto 24px;gap:18px;padding:16px 24px;align-items:center;cursor:pointer;transition:background var(--t-fast)}
+  .kl-row-head:hover{background:var(--gray-1)}
+  .kl-domain{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .kl-domain.ai{color:#0a4d7a} .kl-domain.privacy{color:#6a3a8c} .kl-domain.cyber{color:#8a5a1c}
+  .kl-headline{font-size:14px;color:var(--navy);line-height:1.4}
+  .kl-headline strong{font-weight:600}
+  .kl-headline .editor-note{display:block;font-size:11.5px;color:var(--text-mute);margin-top:3px;font-style:italic}
+  .kl-status{display:flex;flex-direction:column;align-items:flex-end;gap:3px;font-size:11px;color:var(--text-mute);font-family:'IBM Plex Mono',monospace;letter-spacing:.06em}
+  .kl-chev{color:#c8d0dc;font-size:14px;text-align:center;transition:transform var(--t-fast),color var(--t-fast)}
+  .kl-row-head:hover .kl-chev{color:var(--accent)}
+  .kl-row.open .kl-chev{transform:rotate(90deg);color:var(--accent)}
+  .kl-detail{max-height:0;overflow:hidden;transition:max-height var(--t-med) var(--easing)}
+  .kl-row.open .kl-detail{max-height:400px}
+  .kl-detail-inner{padding:4px 24px 18px 156px;font-size:13px;color:var(--text-mute);line-height:1.55}
+  .kl-detail-inner ul{list-style:none;padding:0;margin:8px 0 0}
+  .kl-detail-inner li{padding:6px 0;border-bottom:1px dashed var(--gray-2);display:flex;justify-content:space-between;gap:12px;color:var(--navy);font-size:13px}
+  .kl-detail-inner li:last-child{border-bottom:0}
+  .kl-detail-inner li .when{color:var(--text-mute);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em}
+
+  /* Reference rail */
+  .ref-rail{margin-top:48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+  .ref-card{background:#fff;border:1px solid var(--gray-2);border-radius:10px;padding:18px;transition:transform var(--t-fast),border-color var(--t-fast),box-shadow var(--t-fast)}
+  .ref-card:hover{border-color:var(--gray-3);transform:translateY(-1px);box-shadow:0 4px 14px rgba(10,23,41,.04)}
+  .ref-card h3{font-size:14px;font-weight:700;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline}
+  .ref-card h3 .count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-mute);font-weight:600}
+  .ref-list{list-style:none;padding:0;margin:0}
+  .ref-list li{padding:8px 0;border-bottom:1px solid var(--gray-2);font-size:13px}
+  .ref-list li:last-child{border-bottom:0}
+  .ref-list li a{color:var(--navy);text-decoration:none;font-weight:500;transition:color var(--t-fast)}
+  .ref-list li a:hover{color:var(--accent)}
+  .ref-list li .type{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);display:block;margin-bottom:2px}
+  .ref-card-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--gray-2);font-size:11.5px}
+  .ref-card-foot a{color:var(--accent);text-decoration:none;font-weight:600;font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+
+  /* ═════════════════════ D - DOMAIN-FIRST ═════════════════════ */
+  .df-domains{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+  .df-card{background:#fff;border:1px solid var(--gray-2);border-radius:14px;padding:0;display:flex;flex-direction:column;overflow:hidden;transition:border-color var(--t-fast),box-shadow var(--t-fast),transform var(--t-fast);cursor:pointer}
+  .df-card:hover{border-color:var(--gray-3);box-shadow:0 6px 22px rgba(10,23,41,.06);transform:translateY(-2px)}
+  .df-card-head{padding:18px 22px 14px;border-bottom:1px solid var(--gray-2);position:relative;overflow:hidden}
+  .df-card-head::before{content:"";position:absolute;left:0;right:0;top:0;height:3px}
+  .df-card.ai .df-card-head::before{background:#0a4d7a}
+  .df-card.privacy .df-card-head::before{background:#6a3a8c}
+  .df-card.cyber .df-card-head::before{background:#8a5a1c}
+  .df-card-domain{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-mute);margin-bottom:6px}
+  .df-card-headline{font-family:'Inter',-apple-system,sans-serif;font-size:18px;font-weight:600;color:var(--navy);letter-spacing:-0.01em;margin:0 0 8px;line-height:1.3}
+  .df-card-meta{font-size:12px;color:var(--text-mute);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .df-card-body{padding:16px 22px;flex:1;display:flex;flex-direction:column;gap:14px}
+  .df-card-row{display:flex;flex-direction:column;gap:3px}
+  .df-card-rlbl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute)}
+  .df-card-rval{font-size:13px;color:var(--navy)}
+  .df-card-rval a{color:var(--accent);text-decoration:none;font-weight:600}
+  .df-card-foot{padding:12px 22px;background:var(--gray-1);border-top:1px solid var(--gray-2);font-size:11.5px;color:var(--text-mute);display:flex;justify-content:space-between;align-items:center}
+  .df-card-foot a{color:var(--accent);text-decoration:none;font-weight:600;font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;font-size:11px}
+
+  .df-secondary{margin-top:36px;display:grid;grid-template-columns:1.4fr 1fr;gap:18px;transition:grid-template-columns var(--t-med) var(--easing)}
+  .df-secondary.impl-open{grid-template-columns:0fr 1fr}
+  .df-news{background:#fff;border:1px solid var(--gray-2);border-radius:12px;overflow:hidden;transition:opacity var(--t-med) var(--easing)}
+  .df-secondary.impl-open .df-news{opacity:0;pointer-events:none}
+  .df-news-head{padding:16px 20px 12px;border-bottom:1px solid var(--gray-2);display:flex;justify-content:space-between;align-items:baseline}
+  .df-news-head h3{font-family:'Inter',-apple-system,sans-serif;font-size:17px;font-weight:600;margin:0}
+  .df-news-item{padding:12px 20px;border-bottom:1px solid var(--gray-2);display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:start}
+  .df-news-item:last-child{border-bottom:0}
+  .df-news-date{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--text-mute);padding-top:1px}
+  .df-news-title{font-size:13px;color:var(--navy);line-height:1.4;font-weight:500}
+  .df-news-tag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(--gray-2);color:var(--navy);align-self:start;margin-top:1px}
+
+  /* D's implementation status - accordion drill-in */
+  .df-impl{background:#fff;border:1px solid var(--gray-2);border-radius:12px;padding:0;overflow:hidden}
+  .df-impl-head{padding:16px 20px 12px;border-bottom:1px solid var(--gray-2);display:flex;justify-content:space-between;align-items:baseline}
+  .df-impl-head h3{font-family:'Inter',-apple-system,sans-serif;font-size:17px;font-weight:600;margin:0}
+  .df-impl-head .impl-actions{display:none;gap:8px;align-items:center}
+  .df-impl.expanded .impl-actions{display:inline-flex}
+  .df-impl-head .impl-back, .df-impl-head .impl-topics{align-items:center;gap:6px;background:#fff;border:1px solid var(--gray-2);border-radius:6px;padding:5px 10px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);cursor:pointer;transition:all var(--t-fast);display:inline-flex}
+  .df-impl-head .impl-back::before{content:"←"}
+  .df-impl-head .impl-topics::after{content:"→"}
+  .df-impl-head .impl-back:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .df-impl-head .impl-topics{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .df-impl-head .impl-topics:hover{background:#015abf;border-color:#015abf}
+
+  .df-impl-row{border-bottom:1px solid var(--gray-2);transition:opacity var(--t-med) var(--easing),max-height var(--t-med) var(--easing)}
+  .df-impl-row:last-child{border-bottom:0}
+  .df-impl-row-head{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background var(--t-fast)}
+  .df-impl-row-head:hover{background:var(--gray-1)}
+  .df-impl.expanded .df-impl-row:not(.is-active){opacity:0;max-height:0;overflow:hidden;border-bottom-color:transparent}
+  .df-impl.expanded .df-impl-row.is-active .df-impl-row-head{background:var(--gray-1)}
+  .df-impl-board-name{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);display:flex;gap:8px;align-items:center}
+  .df-impl-board-name .num{color:var(--text-mute);font-weight:600}
+  .df-impl-board-pips{display:flex;gap:3px}
+  .df-impl-board-pip{width:11px;height:11px;border-radius:3px;background:var(--gray-2);transition:transform var(--t-fast)}
+  .df-impl-row-head:hover .df-impl-board-pip{transform:scaleY(1.15)}
+  .df-impl-board-pip.s-pending{background:var(--amber-fg)}
+  .df-impl-board-pip.s-verified{background:var(--green-fg)}
+  .df-impl-board-pip.s-overdue{background:var(--red-fg)}
+
+  .df-impl-detail{max-height:0;overflow:hidden;transition:max-height var(--t-med) var(--easing)}
+  .df-impl-row.is-active .df-impl-detail{max-height:1200px}
+  .df-impl-detail-inner{padding:18px 20px 22px;background:#fff}
+
+  /* D row-detail uses a compact B-style row stack */
+  .df-impl-detail-inner .me-row{grid-template-columns:24px 180px 1fr}
+
+  .df-ref-row{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+  /* ────── SETTINGS PREVIEW PANEL ────── */
+  .settings{margin-top:80px;border:1px solid var(--gray-2);border-radius:14px;overflow:hidden;background:#fff}
+  .settings-head{padding:22px 26px;border-bottom:1px solid var(--gray-2);background:linear-gradient(180deg,#f9fbfd 0%,#fff 100%);display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+  .settings-head h2{font-family:'Inter',-apple-system,sans-serif;font-size:22px;font-weight:600;margin:0 0 4px;letter-spacing:-0.01em}
+  .settings-head .crumb{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:8px}
+  .settings-head p{font-size:13px;color:var(--text-mute);margin:0;max-width:560px;line-height:1.55}
+  .settings-body{padding:24px 26px}
+  .settings-row{display:grid;grid-template-columns:240px 1fr auto;gap:24px;padding:18px 0;border-bottom:1px solid var(--gray-2);align-items:center}
+  .settings-row:last-child{border-bottom:0}
+  .settings-row-l h4{font-size:14px;font-weight:600;margin:0 0 3px;color:var(--navy)}
+  .settings-row-l p{font-size:12px;color:var(--text-mute);margin:0;line-height:1.5}
+  .settings-row-m{font-size:13px;color:var(--text-mute)}
+  .settings-row-m strong{color:var(--navy);font-weight:600}
+  .settings-row-r{display:flex;align-items:center;gap:8px;position:relative}
+  .settings-overrides-list{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-mute)}
+  .settings-overrides-list .pin{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;background:var(--gray-1);border:1px solid var(--gray-2);border-radius:4px;margin:2px 4px 2px 0;color:var(--navy);font-weight:600;letter-spacing:.04em}
+  .settings-overrides-list .pin .x{cursor:pointer;color:var(--text-soft);font-size:12px;transition:color var(--t-fast)}
+  .settings-overrides-list .pin .x:hover{color:var(--red-fg)}
+
+  /* STATE STRIP */
+  .state-strip{margin-top:64px;padding:18px 20px;background:var(--gray-1);border:1px dashed var(--gray-3);border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-mute);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .state-strip strong{color:var(--navy)}
+  .state-strip .reset{background:transparent;border:1px solid var(--gray-3);padding:5px 10px;border-radius:5px;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)}
+  .state-strip .reset:hover{background:var(--red-bg);border-color:#f3c2c2;color:var(--red-fg)}
+
+  @media(max-width:920px){
+    .nr-stream-grid,.ref-rail,.df-domains,.df-secondary,.df-ref-row,.impl-strip-grid,.settings-row{grid-template-columns:1fr}
+    .nr-card.hero-card{grid-row:auto}
+    .view-bar{flex-direction:column;align-items:flex-start;gap:10px}
+  }
+
+.kl{background:linear-gradient(180deg,#fafbfc 0%,#fff 100%)}
+.kl-head{background:linear-gradient(180deg,#f6f9fd 0%,#fff 100%)}
+.kl-domain.ai{background:#e3effc;padding:3px 8px;border-radius:4px}
+.kl-domain.privacy{background:#f0e4f7;padding:3px 8px;border-radius:4px}
+.kl-domain.cyber{background:#fbeecd;padding:3px 8px;border-radius:4px}
+.df-card.ai{border-top:3px solid #0176d3}
+.df-card.privacy{border-top:3px solid #6a3a8c}
+.df-card.cyber{border-top:3px solid #b5751f}
+.df-card.ai .df-card-head{background:linear-gradient(180deg,#e3effc 0%,#fff 100%)}
+.df-card.privacy .df-card-head{background:linear-gradient(180deg,#f0e4f7 0%,#fff 100%)}
+.df-card.cyber .df-card-head{background:linear-gradient(180deg,#fbeecd 0%,#fff 100%)}
+.impl-strip{background:linear-gradient(180deg,#f6f9fd 0%,#eef4fb 100%);border:1px solid #cfe1f5}
+
+
+@media (prefers-reduced-motion: reduce){.anim-in{opacity:1!important;transform:none!important;animation:none!important}}
+.anim-in{animation-fill-mode:both}
+
+.ph-meta{margin:6px 0 14px;line-height:1.5}
+.ph-name-en{font-size:14.5px;color:#0a1729;font-weight:500}
+.ph-name-local{font-size:14px;color:#5e6878;font-style:italic;opacity:.85;margin-top:2px}
+.ph-pop{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.04em;color:#56657a;margin-top:6px}
+.ph-pop-source{color:#8a93a3;font-style:italic}
+
 </style>
 <script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
 <script>
@@ -709,7 +1053,7 @@ body { min-width: 320px !important; }
     if(user && user.firstName){
       el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
     }
-    // if no user, leave hardcoded — pai-app-* is public by design
+    // if no user, leave hardcoded - pai-app-* is public by design
   }
 
   function boot(){
@@ -728,7 +1072,7 @@ body { min-width: 320px !important; }
 })();
 </script>
 <style id="pai-nav-v46">
-/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+/* v46 - overlay pattern. Sidebar expands visually (original behaviour),
    content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
 
 /* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
@@ -742,7 +1086,7 @@ body.sidebar-expanded #jur-overlay {
   left: var(--sidebar-collapsed, 56px) !important;
 }
 
-/* Elevation cues on the expanded sidebar — reads as floating over content */
+/* Elevation cues on the expanded sidebar - reads as floating over content */
 body.sidebar-expanded .icon-sidebar,
 .icon-sidebar:hover {
   box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
@@ -766,6 +1110,7 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 <nav class="icon-sidebar">
@@ -783,6 +1128,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <a class="sidebar-nav-item" href="pai-app-authorities"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <a class="sidebar-nav-item" href="pai-app-community"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
@@ -811,326 +1157,415 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </header>
 
 <div class="main-content">
-  <div class="page-view">
 
-    <!-- STATUSBAR -->
-    <div class="page-statusbar">
-      <div class="ps-left">
-        <span class="ps-breadcrumb">
-          <a href="pai-home-private">Home</a>
-          <span class="ps-sep">›</span>
-          <a href="#" onclick="openJurisdictions();return false;">Jurisdictions</a>
-          <span class="ps-sep">›</span>
-          <span class="ps-current">New Zealand</span>
-        </span>
-        <span class="ps-sep">·</span>
-        <span class="ps-scope-chip">ASIA PACIFIC · NZ</span>
-        <span class="ps-sep">·</span>
-        <span class="ps-ok">Coverage engine operational</span>
+<div class="wrap">
+
+  <!-- VIEW BAR -->
+  <div class="view-bar anim-in" style="--d:0">
+    <div class="view-bar-l">
+      <span class="crumb"><a href="pai-app-news">Jurisdictions</a> / Sweden</span>
+    </div>
+    <div class="view-bar-r">
+      <div class="seg" role="tablist" aria-label="Page view">
+        <span class="seg-thumb" id="seg-thumb"></span>
+        <button class="seg-btn active" data-view="A" id="seg-A" role="tab"><span class="default-dot"></span>Newsroom</button>
+        <button class="seg-btn" data-view="D" id="seg-D" role="tab"><span class="default-dot"></span>Domain-first</button>
       </div>
-      <div class="page-actions">
-        <div class="view-toggle" data-juris-slug="new-zealand" data-juris-name="New Zealand">
-          <div class="vt-seg" role="tablist" aria-label="Page view">
-            <button class="vt-seg-btn active" data-view="A" role="tab"><span class="vt-dot"></span>Newsroom</button>
-            <button class="vt-seg-btn" data-view="D" role="tab"><span class="vt-dot"></span>Domain-first</button>
-          </div>
-          <button class="vt-save" type="button">Save as default</button>
-          <div class="vt-pop">
-            <button class="vt-opt" data-action="country">
-              <span class="vt-opt-title">Default for <strong>New Zealand</strong> <span class="vt-badge" style="display:none">current</span></span>
-              <span class="vt-opt-sub">Pin this view for New Zealand only. Other jurisdictions follow the global default.</span>
-            </button>
-            <button class="vt-opt" data-action="global">
-              <span class="vt-opt-title">Default for <strong>all jurisdictions</strong> <span class="vt-badge" style="display:none">current</span></span>
-              <span class="vt-opt-sub">Make this the default across the site. Per-country pins still override.</span>
-            </button>
-            <div class="vt-opt-divider"></div>
-            <button class="vt-opt" data-action="reset">
-              <span class="vt-opt-title">Reset New Zealand to global default</span>
-              <span class="vt-opt-sub">Removes the per-country pin. New Zealand will follow the global setting.</span>
-            </button>
-          </div>
-        </div>
+      <button class="save-btn" id="save-btn" type="button">Save as default</button>
+      <div class="save-pop" id="save-pop">
+        <button class="save-opt" id="opt-country">
+          <span class="save-opt-title">Default for <strong>Sweden</strong> <span class="badge" id="badge-country" style="display:none">current</span></span>
+          <span class="save-opt-sub">Pin this view for Sweden only. Other jurisdictions follow the global default.</span>
+        </button>
+        <button class="save-opt" id="opt-global">
+          <span class="save-opt-title">Default for <strong>all jurisdictions</strong> <span class="badge" id="badge-global" style="display:none">current</span></span>
+          <span class="save-opt-sub">Make this the default across the site. Per-country pins still override.</span>
+        </button>
+        <div class="save-opt-divider"></div>
+        <button class="save-opt" id="opt-reset">
+          <span class="save-opt-title">Reset Sweden to global default</span>
+          <span class="save-opt-sub" id="opt-reset-sub">Removes the per-country pin.</span>
+        </button>
       </div>
     </div>
+  </div>
 
-    <!-- PAGE HEAD -->
-    <div class="page-head">
+  <!-- HERO -->
+  <!-- PAGE HEAD -->
+    <div class="anim-in page-head" style="--d:0">
       <div class="ph-title">
         <div class="page-eyebrow">NEW ZEALAND · NZ</div>
         <h1 class="page-title">New Zealand</h1>
-
-        <p class="page-sub">A living snapshot of AI, privacy and cybersecurity regulation in New Zealand — what's in force, who enforces it, and what&rsquo;s moving.</p>
+        <div class="ph-meta"><div class="ph-name-en">New Zealand</div><div class="ph-name-local">Aotearoa</div><div class="ph-pop">5.22M <span class="ph-pop-source">(Stats NZ, 2024)</span></div></div>
+        <p class="page-sub">A living snapshot of AI, privacy and cybersecurity regulation in New Zealand - what's in force, who enforces it, and what's moving.</p>
       </div>
       <div class="ph-map" aria-hidden="true"><svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg></div>
     </div>
 
-    <!-- ═══ VIEW A — NEWSROOM (default) ═══ -->
-    <div class="juris-view is-active" data-view="A">
-    <!-- Recent activity FIRST — contemporary / time-saving framing per Dave 2026-04-30 -->
-<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
-      <div class="latest-empty" style="grid-column:1/-1;background:#fff;border:1px solid #ebeff5;border-radius:10px;padding:36px 40px;text-align:center">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0176d3" stroke-width="1.5" style="opacity:.5;margin-bottom:14px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        <div style="font-family:'Source Serif 4',serif;font-size:18px;color:#0a1729;margin-bottom:8px">No published records yet for New Zealand</div>
-        <div style="font-size:14px;color:#5e6878;line-height:1.6;max-width:520px;margin:0 auto 18px">We&rsquo;re monitoring 13 official sources and tracking 1 law in this jurisdiction. Stories will appear here as they&rsquo;re published and reviewed by our research team.</div>
-        <a href="#" onclick="event.preventDefault();return false" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#0176d3;text-decoration:none;padding:8px 16px;border:1px solid #0176d3;border-radius:8px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Notify me when records appear</span></a>
-      </div>
-</div>
-<a class="latest-see-all" href="pai-app-news?juris=new-zealand">See all New Zealand items →</a>
-</section>
+  <div class="view-stage">
 
-    <section><div class="law-section"><div class="law-section-head"><h2>Key Legislation</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group" data-d="ai"><div class="domain-row" onclick="toggleDomain(this.parentElement)"><div class="dr-label">AI</div><div class="dr-content"><strong>New Zealand AI Strategy</strong> <span class="muted">· In force</span></div><div class="dr-meta"><span class="dr-chip op">● IN FORCE</span></div><div class="dr-chev">▾</div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">1</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">1/3</div></div></div></div></section>
+  <!-- ═══════════ A - NEWSROOM ═══════════ -->
+  <div class="view active" id="view-A" data-view="A">
 
-    
+    <div class="nr-stream-block anim-in" style="--d:2">
+      <div class="nr-stream-head"><h2>What's happening</h2><span class="meta">No items captured yet</span></div><div class="nr-stream-grid"><a class="nr-card" href="pai-app-news?juris=new-zealand" style="grid-column:span 3"><div class="nr-meta"><span class="pill pill-source">Coverage starts here</span></div><h3>New Zealand coverage queue</h3><p>Items will land here as the PAI Research Team verifies sources for New Zealand.</p></a></div>
+    </div>
 
-    
+    <section class="kl anim-in" style="--d:3" id="kl-A">
+      <header class="kl-head"><div><h2>Key Legislation</h2><p>Tracked instruments shaping AI, privacy and cybersecurity in New Zealand.</p></div><div class="kl-kpi"><div class="kl-kpi-cell"><span class="kl-kpi-num">1</span><span class="kl-kpi-lbl">Tracked</span></div><div class="kl-kpi-cell"><span class="kl-kpi-num">1</span><span class="kl-kpi-lbl">Verified</span></div></div></header><div class="kl-row"><div class="kl-row-head"><span class="kl-domain">Instrument</span><div class="kl-headline"><a href="https://www.mbie.govt.nz/business-and-employment/economic-growth/digital-policy/new-zealands-ai-strategy-investing-with-confidence" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid currentColor"><strong>New Zealand AI Strategy</strong></a></div><div class="kl-status"><span class="pill pill-verified">Verified</span></div><div class="kl-chev">›</div></div><div class="kl-detail"><div class="kl-detail-inner">Status: Verified. View source for full text.</div></div></div>
+    </section>
 
-<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">11 of 11 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card" href="pai-app-authority-cert-49d314"><div class="ac-head"><span class="ac-type">Cyber agency</span></div><div class="ac-name">CERT NZ / NCSC NZ</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-ccnz"><div class="ac-head"><span class="ac-type">Competition authority</span></div><div class="ac-name">Commerce Commission New Zealand</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nz-mvgqup"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Financial Markets Authority (NZ)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-gcsb"><div class="ac-head"><span class="ac-type">Cyber agency</span></div><div class="ac-name">Government Communications Security Bureau</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-pc-rmhjuj"><div class="ac-head"><span class="ac-type">DPA</span></div><div class="ac-name">Privacy Commissioner</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rbnz"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Reserve Bank of New Zealand</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nz-z2updt"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Human Rights Commission (NZ)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nzlii"><div class="ac-head"><span class="ac-type">Other</span></div><div class="ac-name">NZLII</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nzca"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">New Zealand Court of Appeal</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nzp"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">New Zealand Parliament</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-scnz"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Supreme Court of New Zealand</div><div class="ac-foot">View authority →</div></a></div></section>
-
-<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for New Zealand — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-cert-49d314"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">CERT NZ / NCSC NZ</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-ccnz"><div class="gs-card-head"><span class="gs-badge">Competition authority</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Commerce Commission New Zealand</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-nz-mvgqup"><div class="gs-card-head"><span class="gs-badge">Financial regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Financial Markets Authority (NZ)</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-gcsb"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Government Communications Security Bureau</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
-
-
-    </div><!-- /view-A -->
-
-    <!-- ═══ VIEW D — DOMAIN-FIRST ═══ -->
-    <div class="juris-view" data-view="D">
-      <!-- Domain panel as the hero element (re-uses snapshot_html — Key Legislation per AI/Privacy/Cyber) -->
-      <div class="df-domain-hero">
-        <section><div class="law-section"><div class="law-section-head"><h2>Key Legislation</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group" data-d="ai"><div class="domain-row" onclick="toggleDomain(this.parentElement)"><div class="dr-label">AI</div><div class="dr-content"><strong>New Zealand AI Strategy</strong> <span class="muted">· In force</span></div><div class="dr-meta"><span class="dr-chip op">● IN FORCE</span></div><div class="dr-chev">▾</div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">1</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">1/3</div></div></div></div></section>
-      </div>
-
-      <!-- Two-column secondary: Recent activity (left) + Implementation status (right) -->
-      <div class="df-secondary-grid">
-        <div>
-<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
-      <div class="latest-empty" style="grid-column:1/-1;background:#fff;border:1px solid #ebeff5;border-radius:10px;padding:36px 40px;text-align:center">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0176d3" stroke-width="1.5" style="opacity:.5;margin-bottom:14px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        <div style="font-family:'Source Serif 4',serif;font-size:18px;color:#0a1729;margin-bottom:8px">No published records yet for New Zealand</div>
-        <div style="font-size:14px;color:#5e6878;line-height:1.6;max-width:520px;margin:0 auto 18px">We&rsquo;re monitoring 13 official sources and tracking 1 law in this jurisdiction. Stories will appear here as they&rsquo;re published and reviewed by our research team.</div>
-        <a href="#" onclick="event.preventDefault();return false" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#0176d3;text-decoration:none;padding:8px 16px;border:1px solid #0176d3;border-radius:8px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Notify me when records appear</span></a>
-      </div>
-</div>
-<a class="latest-see-all" href="pai-app-news?juris=new-zealand">See all New Zealand items →</a>
-</section>
+    <div class="impl-strip anim-in" style="--d:4" id="impl-strip-A">
+      <div class="impl-strip-head"><h2>Implementation status <span style="color:var(--text-mute);font-weight:400;font-size:13px">- AI · Privacy · Cybersecurity</span></h2><span class="meta">Sourcing in progress</span></div><div style="padding:24px;text-align:center;color:#56657a;font-size:13px;background:#fff;border-radius:8px">PAI Research Team is sourcing per-domain implementation status for New Zealand. <a href="pai-app-tables-us-states" style="color:#0176d3;text-decoration:none;font-weight:600">Compare across jurisdictions →</a></div>
+    </div>
         </div>
-        <div>
 
+        <!-- NIS2 mini -->
+        <div class="impl-mini" data-board="nis2" tabindex="0">
+          <div class="mini-compact">
+            <div class="impl-mini-head"><span class="impl-mini-title">Privacy</span><span class="impl-mini-num">1/5</span></div>
+            <div class="impl-mini-bar"><div class="impl-mini-fill" data-fill="20" style="background:var(--green-fg)"></div></div>
+            <div class="impl-mini-meta"><span>Transposed Dec 2024</span><span class="open">Drill in →</span></div>
+          </div>
+          <div class="mini-expanded">
+            <div class="me-head"><div><div class="me-board">NIS2 · Dir. 2022/2555</div><h3 class="me-title">NIS2 transposition · Sweden</h3></div><div class="me-pct"><span class="me-pct-num">20%</span><span class="me-pct-cap">Sourced</span></div></div>
+            <div class="me-row" style="--i:0"><div class="me-icon s-pending"></div><div class="me-label">NIS2 Transposition</div><div class="me-text">Sweden adopted the Cybersecurity Act 2024:1228 on 18 Dec 2024. <a href="pai-app-news">View source →</a></div></div>
+            <div class="me-row" style="--i:1"><div class="me-icon s-source"></div><div class="me-label">Competent Authority</div><div class="me-text stub">Pending source verification.</div></div>
+            <div class="me-row" style="--i:2"><div class="me-icon s-source"></div><div class="me-label">Single Point of Contact</div><div class="me-text stub">Pending source verification.</div></div>
+            <div class="me-row" style="--i:3"><div class="me-icon s-source"></div><div class="me-label">CSIRT</div><div class="me-text stub">Pending source verification.</div></div>
+            <div class="me-row" style="--i:4"><div class="me-icon s-source"></div><div class="me-label">National Cyber Strategy</div><div class="me-text stub">Pending source verification.</div></div>
+          </div>
+        </div>
 
+        <!-- GDPR mini -->
+        <div class="impl-mini" data-board="gdpr" tabindex="0">
+          <div class="mini-compact">
+            <div class="impl-mini-head"><span class="impl-mini-title">Cybersecurity</span><span class="impl-mini-num">2/5</span></div>
+            <div class="impl-mini-bar"><div class="impl-mini-fill" data-fill="40" style="background:var(--green-fg)"></div></div>
+            <div class="impl-mini-meta"><span>IMY designated SA</span><span class="open">Drill in →</span></div>
+          </div>
+          <div class="mini-expanded">
+            <div class="me-head"><div><div class="me-board">GDPR · Reg. 2016/679</div><h3 class="me-title">GDPR framework · Sweden</h3></div><div class="me-pct"><span class="me-pct-num">40%</span><span class="me-pct-cap">Sourced</span></div></div>
+            <div class="me-row" style="--i:0"><div class="me-icon s-verified"></div><div class="me-label">Supervisory Authority (DPA)</div><div class="me-text">Integritetsskyddsmyndigheten (IMY). <a href="pai-app-news">View source →</a></div></div>
+            <div class="me-row" style="--i:1"><div class="me-icon s-pending"></div><div class="me-label">Lead Supervisory Authority</div><div class="me-text">IMY designated as Lead SA for cross-border processing. <a href="pai-app-news">View source →</a></div></div>
+            <div class="me-row" style="--i:2"><div class="me-icon s-source"></div><div class="me-label">National Implementing Law</div><div class="me-text stub">Pending source verification.</div></div>
+            <div class="me-row" style="--i:3"><div class="me-icon s-source"></div><div class="me-label">DPIA Mandatory List</div><div class="me-text stub">Pending source verification.</div></div>
+            <div class="me-row" style="--i:4"><div class="me-icon s-source"></div><div class="me-label">Breach Reporting Rules</div><div class="me-text stub">Pending source verification.</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ref-rail anim-in" style="--d:5">
+      <div class="ref-card"><h3>Authorities <span class="count">11 tracked</span></h3><ul class="ref-list"><li><span class="type">Court</span><a href="pai-app-authority-scnz">Supreme Court of New Zealand</a></li><li><span class="type">Cyber agency</span><a href="pai-app-authority-gcsb">Government Communications Security Bureau</a></li><li><span class="type">Financial regulator</span><a href="pai-app-authority-nz-mvgqup">Financial Markets Authority (NZ)</a></li><li><span class="type">DPA</span><a href="pai-app-authority-pc-rmhjuj">Privacy Commissioner</a></li></ul><div class="ref-card-foot"><a href="pai-app-authorities?juris=new-zealand">All 11 →</a></div></div><div class="ref-card"><h3>Legislation <span class="count">1 in force</span></h3><ul class="ref-list"><li><span class="type">In force · 2025-07-01</span><a href="pai-app-leg-new-zealand-ai-strategy">New Zealand AI Strategy</a></li></ul><div class="ref-card-foot"><a href="pai-app-legislation?juris=new-zealand">All 1 →</a></div></div><div class="ref-card"><h3>Practical guidance <span class="count">1 documents</span></h3><ul class="ref-list"><li><span class="type">Guidance</span><a href="pai-app-frameworks-ip">Regulatory snapshot</a></li></ul><div class="ref-card-foot"><a href="pai-app-frameworks-ip">All 1 →</a></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ D - DOMAIN-FIRST ═══════════ -->
+  <div class="view" id="view-D" data-view="D">
+    <div style="padding:60px 32px;text-align:center;background:#fff;border:1px solid #ebeff5;border-radius:14px"><div style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8a93a3;margin-bottom:8px">Domain-first view</div><h2 style="font-family:'Inter',-apple-system,sans-serif;font-size:22px;font-weight:600;color:#0a1729;margin:0 0 8px">New Zealand · by domain</h2><p style="font-size:14px;color:#56657a;margin:0 0 18px;max-width:520px;line-height:1.55;margin-left:auto;margin-right:auto">AI / Privacy / Cybersecurity domain breakdown for New Zealand is being sourced. Switch back to <strong>Newsroom</strong> for the latest activity stream.</p></div>
+  </div></div><!-- /view-stage -->
+
+  <!-- ═══════════ SETTINGS PREVIEW ═══════════ -->
+  <section class="settings anim-in" style="--d:7">
+    <header class="settings-head">
+      <div>
+        <div class="crumb">Settings · Preferences</div>
+        <h2>Default page view</h2>
+        <p>Your global default applies to every jurisdiction. Per-country pins (set from any jurisdiction page) layer on top and always win.</p>
+      </div>
+    </header>
+    <div class="settings-body">
+      <div class="settings-row">
+        <div class="settings-row-l">
+          <h4>Default for all jurisdictions</h4>
+          <p>The view a fresh juris page opens in. Same control as the top of any country page.</p>
+        </div>
+        <div class="settings-row-m">
+          Currently: <strong id="settings-current">Newsroom</strong>
+        </div>
+        <div class="settings-row-r">
+          <div class="seg" role="tablist" aria-label="Global default">
+            <span class="seg-thumb" id="settings-thumb"></span>
+            <button class="seg-btn active" data-view="A" id="settings-A" role="tab">Newsroom</button>
+            <button class="seg-btn" data-view="D" id="settings-D" role="tab">Domain-first</button>
+          </div>
         </div>
       </div>
-
-      <!-- Reference rail at the bottom -->
-      <div class="df-ref-rail">
-<section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">11 of 11 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card" href="pai-app-authority-cert-49d314"><div class="ac-head"><span class="ac-type">Cyber agency</span></div><div class="ac-name">CERT NZ / NCSC NZ</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-ccnz"><div class="ac-head"><span class="ac-type">Competition authority</span></div><div class="ac-name">Commerce Commission New Zealand</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nz-mvgqup"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Financial Markets Authority (NZ)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-gcsb"><div class="ac-head"><span class="ac-type">Cyber agency</span></div><div class="ac-name">Government Communications Security Bureau</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-pc-rmhjuj"><div class="ac-head"><span class="ac-type">DPA</span></div><div class="ac-name">Privacy Commissioner</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-rbnz"><div class="ac-head"><span class="ac-type">Financial regulator</span></div><div class="ac-name">Reserve Bank of New Zealand</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nz-z2updt"><div class="ac-head"><span class="ac-type">Government agency</span></div><div class="ac-name">Human Rights Commission (NZ)</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nzlii"><div class="ac-head"><span class="ac-type">Other</span></div><div class="ac-name">NZLII</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nzca"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">New Zealand Court of Appeal</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-nzp"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">New Zealand Parliament</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-scnz"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Supreme Court of New Zealand</div><div class="ac-foot">View authority →</div></a></div></section>
-<section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for New Zealand — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-cert-49d314"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">CERT NZ / NCSC NZ</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-ccnz"><div class="gs-card-head"><span class="gs-badge">Competition authority</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Commerce Commission New Zealand</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-nz-mvgqup"><div class="gs-card-head"><span class="gs-badge">Financial regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Financial Markets Authority (NZ)</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-gcsb"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Government Communications Security Bureau</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
-
+      <div class="settings-row">
+        <div class="settings-row-l">
+          <h4>Per-country pins</h4>
+          <p>Countries you've set to override the global default. Click × to remove.</p>
+        </div>
+        <div class="settings-row-m" id="settings-pins">
+          <span class="settings-overrides-list" id="pins-list">No per-country pins.</span>
+        </div>
+        <div class="settings-row-r">
+          <button class="save-btn" type="button" id="clear-pins">Clear all pins</button>
+        </div>
       </div>
-    </div><!-- /view-D -->
+    </div>
+  </section>
 
-    <div class="vt-toast" id="vt-toast"></div>
+  <!-- STATE STRIP -->
+  <div class="state-strip anim-in" style="--d:8">
+    <div>
+      State (mockup, persisted in localStorage):
+      &nbsp; global default = <strong id="s-global">A</strong>
+      &nbsp; · &nbsp; sweden override = <strong id="s-sweden">none (follows global)</strong>
+      &nbsp; · &nbsp; effective view = <strong id="s-effective">A</strong>
+    </div>
+    <button class="reset" id="reset-all">Clear all prefs</button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-/* ─── Juris page view toggle (Newsroom A / Domain-first D) ─── */
 (function(){
-  var KEYS = { global: 'pai-juris-view-default', overrides: 'pai-juris-view-overrides' };
-  var wrap = document.querySelector('.view-toggle');
-  if (!wrap) return;
-  var slug = wrap.dataset.jurisSlug;
-  var name = wrap.dataset.jurisName;
-  var segA = wrap.querySelector('.vt-seg-btn[data-view="A"]');
-  var segD = wrap.querySelector('.vt-seg-btn[data-view="D"]');
-  var saveBtn = wrap.querySelector('.vt-save');
-  var pop = wrap.querySelector('.vt-pop');
-  var optCountry = wrap.querySelector('[data-action="country"]');
-  var optGlobal = wrap.querySelector('[data-action="global"]');
-  var optReset = wrap.querySelector('[data-action="reset"]');
-  var badgeCountry = optCountry.querySelector('.vt-badge');
-  var badgeGlobal = optGlobal.querySelector('.vt-badge');
-  var toast = document.getElementById('vt-toast');
-  var viewA = document.querySelector('.juris-view[data-view="A"]');
-  var viewD = document.querySelector('.juris-view[data-view="D"]');
+  const SLUG = 'sweden';
+  const KEYS = { global: 'pai-juris-view-default', overrides: 'pai-juris-view-overrides' };
 
-  function getGlobal(){ return localStorage.getItem(KEYS.global) || 'A'; }
-  function setGlobal(v){ localStorage.setItem(KEYS.global, v); }
-  function getOverrides(){ try { return JSON.parse(localStorage.getItem(KEYS.overrides) || '{}'); } catch(e) { return {}; } }
-  function setOverride(s, v){ var o = getOverrides(); o[s] = v; localStorage.setItem(KEYS.overrides, JSON.stringify(o)); }
-  function clearOverride(s){ var o = getOverrides(); delete o[s]; localStorage.setItem(KEYS.overrides, JSON.stringify(o)); }
-  function effective(){ return getOverrides()[slug] || getGlobal(); }
+  // ── State helpers ──
+  function getGlobalDefault(){ return localStorage.getItem(KEYS.global) || 'A'; }
+  function setGlobalDefault(v){ localStorage.setItem(KEYS.global, v); }
+  function getOverrides(){ try { return JSON.parse(localStorage.getItem(KEYS.overrides) || '{}'); } catch { return {}; } }
+  function setOverride(slug, v){ const o = getOverrides(); o[slug] = v; localStorage.setItem(KEYS.overrides, JSON.stringify(o)); }
+  function clearOverride(slug){ const o = getOverrides(); delete o[slug]; localStorage.setItem(KEYS.overrides, JSON.stringify(o)); }
+  function effectiveView(slug){ return getOverrides()[slug] || getGlobalDefault(); }
 
-  var current = effective();
+  // ── DOM refs ──
+  const viewA = document.getElementById('view-A');
+  const viewD = document.getElementById('view-D');
+  const segA = document.getElementById('seg-A'), segD = document.getElementById('seg-D'), segThumb = document.getElementById('seg-thumb');
+  const settingsA = document.getElementById('settings-A'), settingsD = document.getElementById('settings-D'), settingsThumb = document.getElementById('settings-thumb');
+  const settingsCurrent = document.getElementById('settings-current');
+  const pinsList = document.getElementById('pins-list');
+  const clearPinsBtn = document.getElementById('clear-pins');
+  const saveBtn = document.getElementById('save-btn'), savePop = document.getElementById('save-pop');
+  const optCountry = document.getElementById('opt-country'), optGlobal = document.getElementById('opt-global'), optReset = document.getElementById('opt-reset');
+  const badgeCountry = document.getElementById('badge-country'), badgeGlobal = document.getElementById('badge-global'), optResetSub = document.getElementById('opt-reset-sub');
+  const sGlobal = document.getElementById('s-global'), sSweden = document.getElementById('s-sweden'), sEffective = document.getElementById('s-effective');
+  const toast = document.getElementById('toast');
+  const resetAll = document.getElementById('reset-all');
+
+  let currentView = effectiveView(SLUG);
+
+  // ── Segmented thumb positioning ──
+  function positionThumb(thumb, activeBtn){
+    if (!thumb || !activeBtn) return;
+    const parent = thumb.parentElement;
+    const r = activeBtn.getBoundingClientRect();
+    const pr = parent.getBoundingClientRect();
+    thumb.style.left = (r.left - pr.left) + 'px';
+    thumb.style.width = r.width + 'px';
+  }
 
   function render(){
-    if (current === 'A'){ viewA.classList.add('is-active'); viewD.classList.remove('is-active'); }
-    else { viewD.classList.add('is-active'); viewA.classList.remove('is-active'); }
-    segA.classList.toggle('active', current === 'A');
-    segD.classList.toggle('active', current === 'D');
-    var ov = getOverrides()[slug];
-    var gd = getGlobal();
-    var effDefault = ov || gd;
+    // View visibility (cross-fade)
+    if (currentView === 'A'){ viewA.classList.add('active'); viewD.classList.remove('active'); }
+    else { viewD.classList.add('active'); viewA.classList.remove('active'); }
+
+    // Segmented active state + thumb
+    segA.classList.toggle('active', currentView === 'A');
+    segD.classList.toggle('active', currentView === 'D');
+    positionThumb(segThumb, currentView === 'A' ? segA : segD);
+
+    // Default-dot indicators (which option is the effective default for sweden)
+    const ov = getOverrides()[SLUG];
+    const gd = getGlobalDefault();
+    const effDefault = ov || gd;
     segA.classList.toggle('is-default', effDefault === 'A');
     segD.classList.toggle('is-default', effDefault === 'D');
-    badgeCountry.style.display = (ov === current) ? '' : 'none';
-    badgeGlobal.style.display = (gd === current && !ov) ? '' : 'none';
+
+    // Save popover badges
+    badgeCountry.style.display = (ov === currentView) ? '' : 'none';
+    badgeGlobal.style.display  = (gd === currentView && !ov) ? '' : 'none';
     if (ov){
       optReset.removeAttribute('disabled');
+      optResetSub.textContent = `Sweden currently pinned to ${ov === 'A' ? 'Newsroom' : 'Domain-first'}. Reset → follow global (${gd === 'A' ? 'Newsroom' : 'Domain-first'}).`;
     } else {
       optReset.setAttribute('disabled', 'true');
+      optResetSub.textContent = 'No per-country pin set. Sweden already follows the global default.';
     }
+
+    // Settings panel state
+    settingsA.classList.toggle('active', gd === 'A');
+    settingsD.classList.toggle('active', gd === 'D');
+    positionThumb(settingsThumb, gd === 'A' ? settingsA : settingsD);
+    if (settingsCurrent) settingsCurrent.textContent = gd === 'A' ? 'Newsroom' : 'Domain-first';
+
+    // Pins list
+    const overrides = getOverrides();
+    const slugs = Object.keys(overrides);
+    if (!slugs.length) {
+      pinsList.innerHTML = '<em style="font-style:normal;color:var(--text-soft)">No per-country pins.</em>';
+    } else {
+      pinsList.innerHTML = slugs.map(s => {
+        const v = overrides[s];
+        const lbl = v === 'A' ? 'Newsroom' : 'Domain-first';
+        return `<span class="pin">${s} → ${lbl} <span class="x" data-slug="${s}" title="Remove pin">×</span></span>`;
+      }).join('');
+      pinsList.querySelectorAll('.x').forEach(x => x.addEventListener('click', e => {
+        const s = x.dataset.slug;
+        clearOverride(s);
+        if (s === SLUG) currentView = getGlobalDefault();
+        render();
+        showToast(`${s} pin removed`);
+      }));
+    }
+
+    // State strip
+    sGlobal.textContent = gd === 'A' ? 'A · Newsroom' : 'D · Domain-first';
+    sSweden.textContent = ov ? (ov === 'A' ? 'A · Newsroom' : 'D · Domain-first') : 'none (follows global)';
+    sEffective.textContent = currentView === 'A' ? 'A · Newsroom' : 'D · Domain-first';
+
+    // Trigger progress-bar animations on the active view
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.impl-mini-fill').forEach(el => {
+        const target = el.getAttribute('data-fill') + '%';
+        el.style.width = '0%';
+        requestAnimationFrame(() => { el.style.width = target; });
+      });
+    });
   }
 
   function showToast(msg){
     toast.textContent = msg;
     toast.classList.add('show');
     clearTimeout(showToast._t);
-    showToast._t = setTimeout(function(){ toast.classList.remove('show'); }, 2400);
+    showToast._t = setTimeout(()=>toast.classList.remove('show'), 2400);
   }
 
-  function switchView(v){ if (v === current) return; current = v; render(); }
+  function switchView(v){ if (v === currentView) return; currentView = v; render(); }
 
-  segA.addEventListener('click', function(){ switchView('A'); });
-  segD.addEventListener('click', function(){ switchView('D'); });
-  saveBtn.addEventListener('click', function(e){ e.stopPropagation(); pop.classList.toggle('open'); saveBtn.classList.toggle('open'); });
-  document.addEventListener('click', function(e){ if (!pop.contains(e.target) && e.target !== saveBtn) { pop.classList.remove('open'); saveBtn.classList.remove('open'); } });
-  optCountry.addEventListener('click', function(){
-    setOverride(slug, current); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
-    showToast(name + ' pinned to ' + (current === 'A' ? 'Newsroom' : 'Domain-first'));
+  // Top toggle clicks
+  segA.addEventListener('click', ()=>switchView('A'));
+  segD.addEventListener('click', ()=>switchView('D'));
+
+  // Settings toggle (changes GLOBAL default directly)
+  settingsA.addEventListener('click', () => {
+    setGlobalDefault('A');
+    if (!getOverrides()[SLUG]) currentView = 'A';
+    render();
+    showToast('Default for all jurisdictions: Newsroom');
   });
-  optGlobal.addEventListener('click', function(){
-    setGlobal(current); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
-    showToast('Default for all jurisdictions: ' + (current === 'A' ? 'Newsroom' : 'Domain-first'));
+  settingsD.addEventListener('click', () => {
+    setGlobalDefault('D');
+    if (!getOverrides()[SLUG]) currentView = 'D';
+    render();
+    showToast('Default for all jurisdictions: Domain-first');
   });
-  optReset.addEventListener('click', function(){
-    if (optReset.hasAttribute('disabled')) return;
-    clearOverride(slug); current = getGlobal(); pop.classList.remove('open'); saveBtn.classList.remove('open'); render();
-    showToast(name + ' pin removed — following global default');
+  clearPinsBtn.addEventListener('click', () => {
+    localStorage.removeItem(KEYS.overrides);
+    currentView = getGlobalDefault();
+    render();
+    showToast('All per-country pins cleared');
   });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { pop.classList.remove('open'); saveBtn.classList.remove('open'); } });
-  render();
-})();
 
-function toggleDomain(grp){
-  if(!grp || grp.classList.contains('empty')) return;
-  var wasOpen = grp.classList.contains('is-open');
-  document.querySelectorAll('.domain-group.is-open').forEach(function(g){ g.classList.remove('is-open'); });
-  if(!wasOpen) grp.classList.add('is-open');
-}
-function toggleImpl(btn){
-  var sec = btn.closest('.impl-section'); if(!sec) return;
-  sec.classList.toggle('collapsed');
-  sec.classList.toggle('expanded');
-}
-document.addEventListener('click', function(e){
-  var t = e.target.closest('.stream-tab'); if(!t) return;
-  var cat = t.getAttribute('data-cat');
-  document.querySelectorAll('.stream-tab').forEach(function(b){ b.classList.toggle('active', b===t); });
-  document.querySelectorAll('.stream-panel').forEach(function(p){ p.classList.toggle('hidden', p.getAttribute('data-cat') !== cat); });
-});
-</script>
+  // Save popover
+  saveBtn.addEventListener('click', e => { e.stopPropagation(); savePop.classList.toggle('open'); saveBtn.classList.toggle('open'); });
+  document.addEventListener('click', e => { if (!savePop.contains(e.target) && e.target !== saveBtn) { savePop.classList.remove('open'); saveBtn.classList.remove('open'); } });
+  optCountry.addEventListener('click', () => { setOverride(SLUG, currentView); savePop.classList.remove('open'); saveBtn.classList.remove('open'); render(); showToast(`Sweden pinned to ${currentView === 'A' ? 'Newsroom' : 'Domain-first'}`); });
+  optGlobal.addEventListener('click', () => { setGlobalDefault(currentView); savePop.classList.remove('open'); saveBtn.classList.remove('open'); render(); showToast(`Default for all jurisdictions: ${currentView === 'A' ? 'Newsroom' : 'Domain-first'}`); });
+  optReset.addEventListener('click', () => { if (optReset.hasAttribute('disabled')) return; clearOverride(SLUG); currentView = getGlobalDefault(); savePop.classList.remove('open'); saveBtn.classList.remove('open'); render(); showToast(`Sweden pin removed - following global default`); });
+  resetAll.addEventListener('click', () => { localStorage.clear(); currentView = effectiveView(SLUG); render(); showToast('All view preferences cleared'); });
 
-<script src="https://unpkg.com/d3@7/dist/d3.min.js" defer></script>
-<script src="https://unpkg.com/topojson-client@3" defer></script>
-<script>
-window.addEventListener('load', function(){
-  var svg = document.getElementById('country-svg'); if(!svg) return;
-  if(typeof d3 === 'undefined' || typeof topojson === 'undefined') return;
-  var w = 220, h = 260;
-  var countryIso = "554";
+  // ── KL accordion (key legislation rows) ──
+  document.querySelectorAll('.kl-row-head').forEach(head => {
+    head.addEventListener('click', e => { if(e.target.closest('a')) return; head.parentElement.classList.toggle('open'); });
+  });
 
-  // Countries that get a cutaway inset for outlying territories. Label only —
-  // the split itself is done by polygon area, not bbox.
-  var CUTAWAY = {
-    "724": "Canarias",           // Spain
-    "840": "AK  HI",             // United States
-    "620": "Acores  Madeira",    // Portugal
-    "250": "DOM-TOM",            // France
-    "578": "Svalbard",           // Norway
-    "528": "Caribbean NL",       // Netherlands
-    "554": "Outlying",           // New Zealand
-    "218": "Galapagos"           // Ecuador
-  };
-
-  // Bbox-based area proxy — fast, close enough for largest-vs-rest comparison.
-  function polyArea(poly) {
-    var ring = poly[0];
-    var minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
-    for (var i = 0; i < ring.length; i++) {
-      var p = ring[i];
-      if (p[0] < minLon) minLon = p[0];
-      if (p[0] > maxLon) maxLon = p[0];
-      if (p[1] < minLat) minLat = p[1];
-      if (p[1] > maxLat) maxLat = p[1];
-    }
-    return (maxLon - minLon) * (maxLat - minLat);
+  // Topics-page navigation simulator (mockup-only)
+  const BOARD_LABELS = { aiact:'EU AI Act', nis2:'NIS2', gdpr:'GDPR' };
+  function gotoTopics(board){
+    const lbl = BOARD_LABELS[board] || board;
+    showToast(`Would open Topics page → ${lbl} tab → full notes for Sweden`);
+    // Real impl: window.location = `/pai-app-tables?juris=sweden&tab=${board}#impl`
   }
 
-  // Split a MultiPolygon feature into {main, islands} by area.
-  // Main keeps the largest polygon plus any polygon >= 25% of its area
-  // (that's enough to keep NZ North Island with South Island).
-  function splitFeature(f) {
-    if (f.geometry.type !== 'MultiPolygon') return { main: f, islands: null };
-    var polys = f.geometry.coordinates;
-    if (polys.length <= 1) return { main: f, islands: null };
-    var areas = polys.map(polyArea);
-    var maxA = Math.max.apply(null, areas);
-    var threshold = maxA * 0.25;
-    var main = [], islands = [];
-    polys.forEach(function(poly, i){
-      if (areas[i] >= threshold) main.push(poly); else islands.push(poly);
+  // ── A's impl-strip drill-in ──
+  const implStripA = document.getElementById('impl-strip-A');
+  const stripBackBtn = document.getElementById('impl-back-A');
+  const stripTopicsBtn = document.getElementById('impl-topics-A');
+  let stripActiveBoard = null;
+  implStripA.querySelectorAll('.impl-mini').forEach(mini => {
+    mini.addEventListener('click', e => {
+      if (mini.classList.contains('is-active')) return;
+      if (e.target.closest('a')) return;
+      const board = mini.dataset.board;
+      stripActiveBoard = board;
+      implStripA.classList.add('expanded', `exp-${board}`);
+      implStripA.querySelectorAll('.impl-mini').forEach(m => m.classList.toggle('is-active', m === mini));
+      stripTopicsBtn.textContent = `Open ${BOARD_LABELS[board]} in topics`;
     });
-    return {
-      main: main.length ? { type:'Feature', properties:{}, geometry:{ type:'MultiPolygon', coordinates: main } } : null,
-      islands: islands.length ? { type:'Feature', properties:{}, geometry:{ type:'MultiPolygon', coordinates: islands } } : null
-    };
-  }
+    mini.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && !mini.classList.contains('is-active')){ e.preventDefault(); mini.click(); }
+    });
+  });
+  stripBackBtn.addEventListener('click', () => {
+    implStripA.classList.remove('expanded','exp-aiact','exp-nis2','exp-gdpr');
+    implStripA.querySelectorAll('.impl-mini').forEach(m => m.classList.remove('is-active'));
+    stripActiveBoard = null;
+  });
+  stripTopicsBtn.addEventListener('click', () => { if (stripActiveBoard) gotoTopics(stripActiveBoard); });
 
-  fetch('https://unpkg.com/world-atlas@2/countries-50m.json')
-    .then(function(r){ return r.json(); })
-    .then(function(topo){
-      var features = topojson.feature(topo, topo.objects.countries).features;
-      var f = features.find(function(x){ return x.id === countryIso; });
-      if(!f) return;
-
-      var label = CUTAWAY[countryIso];
-      if (label) {
-        var split = splitFeature(f);
-        if (split.main && split.islands) {
-          var mainProj = d3.geoMercator().fitSize([w, h], split.main);
-          var mainPath = d3.geoPath().projection(mainProj);
-          d3.select(svg).append('path').attr('class', 'country').attr('d', mainPath(split.main));
-
-          var iW = 66, iH = 54, iX = w - iW - 3, iY = h - iH - 3;
-          var g = d3.select(svg).append('g').attr('transform', 'translate(' + iX + ',' + iY + ')');
-          g.append('rect')
-            .attr('width', iW).attr('height', iH).attr('rx', 2).attr('ry', 2)
-            .attr('fill', 'rgba(0,0,0,0.02)').attr('stroke', '#c8d0dc')
-            .attr('stroke-dasharray', '2,2').attr('stroke-width', 0.5);
-
-          var islandProj = d3.geoMercator().fitSize([iW - 8, iH - 14], split.islands);
-          var t = islandProj.translate();
-          islandProj.translate([t[0] + 4, t[1] + 4]);
-          var islandPath = d3.geoPath().projection(islandProj);
-          g.append('path').attr('class', 'country').attr('d', islandPath(split.islands));
-
-          g.append('text')
-            .attr('x', iW / 2).attr('y', iH - 3)
-            .attr('text-anchor', 'middle').attr('font-size', 5.5)
-            .attr('fill', '#8a93a3')
-            .attr('font-family', 'Inter, -apple-system, sans-serif')
-            .text(label);
-          return;
-        }
+  // ── D's impl-panel accordion ──
+  const dImpl = document.getElementById('df-impl');
+  const dSecondary = document.getElementById('df-secondary');
+  const dBackBtn = document.getElementById('impl-back-D');
+  const dTopicsBtn = document.getElementById('impl-topics-D');
+  let dActiveBoard = null;
+  dImpl.querySelectorAll('.df-impl-row').forEach(row => {
+    row.querySelector('.df-impl-row-head').addEventListener('click', () => {
+      const wasActive = row.classList.contains('is-active');
+      dImpl.querySelectorAll('.df-impl-row').forEach(r => r.classList.remove('is-active'));
+      if (!wasActive){
+        row.classList.add('is-active');
+        dImpl.classList.add('expanded');
+        dSecondary.classList.add('impl-open');
+        dActiveBoard = row.dataset.board;
+        dTopicsBtn.textContent = `Open ${BOARD_LABELS[dActiveBoard]} in topics`;
+      } else {
+        dImpl.classList.remove('expanded');
+        dSecondary.classList.remove('impl-open');
+        dActiveBoard = null;
       }
+    });
+  });
+  dBackBtn.addEventListener('click', () => {
+    dImpl.classList.remove('expanded');
+    dSecondary.classList.remove('impl-open');
+    dImpl.querySelectorAll('.df-impl-row').forEach(r => r.classList.remove('is-active'));
+    dActiveBoard = null;
+  });
+  dTopicsBtn.addEventListener('click', () => { if (dActiveBoard) gotoTopics(dActiveBoard); });
 
-      // Default render — whole country
-      var projection = d3.geoMercator().fitSize([w, h], f);
-      var path = d3.geoPath().projection(projection);
-      d3.select(svg).append('path').attr('class', 'country').attr('d', path(f));
-    })
-    .catch(function(){});
-});
+  // Esc handlers
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    savePop.classList.remove('open'); saveBtn.classList.remove('open');
+    if (implStripA.classList.contains('expanded')) stripBackBtn.click();
+    if (dImpl.classList.contains('expanded')) dBackBtn.click();
+  });
+
+  // Reposition thumbs on resize
+  window.addEventListener('resize', () => {
+    positionThumb(segThumb, currentView === 'A' ? segA : segD);
+    positionThumb(settingsThumb, getGlobalDefault() === 'A' ? settingsA : settingsD);
+  });
+
+  render();
+  // Position thumbs after fonts settle
+  setTimeout(() => {
+    positionThumb(segThumb, currentView === 'A' ? segA : segD);
+    positionThumb(settingsThumb, getGlobalDefault() === 'A' ? settingsA : settingsD);
+  }, 100);
+})();
 </script>
 
-  </div>
 </div>
 
 <div class="archetype-badge">ASIA PACIFIC · NZ</div>
@@ -1171,7 +1606,7 @@ window.addEventListener('load', function(){
 .page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
 .page-head .page-sub.fine { font-size: 12.5px; color: #8a93a3; margin-top: 6px; }
 
-/* ==VIEW TOGGLE (A=Newsroom / D=Domain-first) — added 2026-04-30== */
+/* ==VIEW TOGGLE (A=Newsroom / D=Domain-first) - added 2026-04-30== */
 .page-actions .view-toggle { display: inline-flex; gap: 8px; align-items: center; position: relative; }
 .page-actions .vt-seg { display: inline-flex; background: #f6f7f9; border: 1px solid #ebeff5; border-radius: 8px; padding: 3px; gap: 0; position: relative; }
 .page-actions .vt-seg-btn { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #5e6878; background: transparent; border: 0; padding: 6px 11px; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: color .2s, background .2s; }
@@ -1200,7 +1635,7 @@ window.addEventListener('load', function(){
 .juris-view { display: none; }
 .juris-view.is-active { display: block; }
 
-/* Domain-First (D) layout — re-uses the same rendered slots in a different arrangement */
+/* Domain-First (D) layout - re-uses the same rendered slots in a different arrangement */
 .df-domain-hero { margin-bottom: 36px; }
 .df-secondary-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; margin-top: 36px; }
 .df-secondary-grid > div { min-width: 0; }
@@ -1256,12 +1691,12 @@ window.addEventListener('load', function(){
   if(window.openJurisdictions)return;
   // Federal hierarchies the data file doesn't encode with parent fields
   var CHILDREN_OF = {
-    'Germany':['Baden-Württemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg','Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia','Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt','Schleswig-Holstein','Thuringia'],
-    'USA':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
-    'United States of America':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
-    'United States':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
-    'Canada':['Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
-    'Australia':['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory'],
+    'Germany':['Germany Federal','Baden-Württemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg','Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia','Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt','Schleswig-Holstein','Thuringia'],
+    'USA':['US Federal','Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States of America':['US Federal','Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States':['US Federal','Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'Canada':['Canada Federal','Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
+    'Australia':['Australia Federal','New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory'],
     'United Arab Emirates':['Abu Dhabi Global Market','Dubai Health Care City','Dubai International Financial Centre','Emirate of Abu Dhabi','Emirate of Dubai','United Arab Emirates Federal'],
     'Qatar':['Qatar Financial Centre','Qatar State']
   };
@@ -1284,7 +1719,6 @@ window.addEventListener('load', function(){
 
   var JURIS_PAGES = {
     'United Kingdom':'pai-app-juris-uk.html',
-    'Germany':'pai-app-juris-germany.html',
     'California':'pai-app-juris-california.html',
     'Quebec':'pai-app-juris-quebec.html',
     'OECD':'pai-app-juris-oecd.html'
@@ -1392,7 +1826,7 @@ window.addEventListener('load', function(){
     var listEl = document.getElementById('jo-list');
     listEl.innerHTML = '';
 
-    // HOME jurisdiction (if set) — pinned at very top, subtly styled
+    // HOME jurisdiction (if set) - pinned at very top, subtly styled
     var _home = (function(){try{return localStorage.getItem('pai-home-jurisdiction')||''}catch(e){return ''}})();
     if(_home){
       var hlbl = document.createElement('div');
@@ -1633,7 +2067,7 @@ window.addEventListener('load', function(){
     var parent = null;
     try { parent = sessionStorage.getItem('pai-jur-expand-on-arrive'); sessionStorage.removeItem('pai-jur-expand-on-arrive'); } catch(e){}
     if(!parent) return;
-    // Open overlay quietly then expand — but Dave wants closed-on-arrival.
+    // Open overlay quietly then expand - but Dave wants closed-on-arrival.
     // So: do not auto-open the overlay. Persist the expand state so NEXT time user opens, it expands.
     try { sessionStorage.setItem('pai-jur-prev-expanded', parent); } catch(e){}
   }
@@ -1681,7 +2115,7 @@ window.addEventListener('load', function(){
     renderHomeJurBadge();
   });
 
-  // (deploy14) prev-expanded scroll-hook removed — overlay always opens with full list visible
+  // (deploy14) prev-expanded scroll-hook removed - overlay always opens with full list visible
 })();
 </script>
 
@@ -1701,7 +2135,7 @@ window.addEventListener('load', function(){
 </script>
 <script>
 (function(){
-  // Toggle body.sidebar-expanded on sidebar hover — CSS handles the shift
+  // Toggle body.sidebar-expanded on sidebar hover - CSS handles the shift
   var sb = document.querySelector('.icon-sidebar');
   if(!sb) return;
   var t;
@@ -1735,5 +2169,107 @@ window.addEventListener('load', function(){
 </div>
 
 <div class="nav-scrim" aria-hidden="true"></div>
+<script src="https://unpkg.com/d3@7/dist/d3.min.js" defer></script>
+<script src="https://unpkg.com/topojson-client@3" defer></script>
+<script>
+window.addEventListener('load', function(){
+  var svg = document.getElementById('country-svg'); if(!svg) return;
+  if(typeof d3 === 'undefined' || typeof topojson === 'undefined') return;
+  var w = 220, h = 260;
+  var countryIso = "554";
+
+  // Countries that get a cutaway inset for outlying territories. Label only -
+  // the split itself is done by polygon area, not bbox.
+  var CUTAWAY = {
+    "724": "Canarias",           // Spain
+    "840": "AK  HI",             // United States
+    "620": "Acores  Madeira",    // Portugal
+    "250": "DOM-TOM",            // France
+    "578": "Svalbard",           // Norway
+    "528": "Caribbean NL",       // Netherlands
+    "554": "Outlying",           // New Zealand
+    "218": "Galapagos"           // Ecuador
+  };
+
+  // Bbox-based area proxy - fast, close enough for largest-vs-rest comparison.
+  function polyArea(poly) {
+    var ring = poly[0];
+    var minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
+    for (var i = 0; i < ring.length; i++) {
+      var p = ring[i];
+      if (p[0] < minLon) minLon = p[0];
+      if (p[0] > maxLon) maxLon = p[0];
+      if (p[1] < minLat) minLat = p[1];
+      if (p[1] > maxLat) maxLat = p[1];
+    }
+    return (maxLon - minLon) * (maxLat - minLat);
+  }
+
+  // Split a MultiPolygon feature into {main, islands} by area.
+  // Main keeps the largest polygon plus any polygon >= 25% of its area
+  // (that's enough to keep NZ North Island with South Island).
+  function splitFeature(f) {
+    if (f.geometry.type !== 'MultiPolygon') return { main: f, islands: null };
+    var polys = f.geometry.coordinates;
+    if (polys.length <= 1) return { main: f, islands: null };
+    var areas = polys.map(polyArea);
+    var maxA = Math.max.apply(null, areas);
+    var threshold = maxA * 0.25;
+    var main = [], islands = [];
+    polys.forEach(function(poly, i){
+      if (areas[i] >= threshold) main.push(poly); else islands.push(poly);
+    });
+    return {
+      main: main.length ? { type:'Feature', properties:{}, geometry:{ type:'MultiPolygon', coordinates: main } } : null,
+      islands: islands.length ? { type:'Feature', properties:{}, geometry:{ type:'MultiPolygon', coordinates: islands } } : null
+    };
+  }
+
+  fetch('https://unpkg.com/world-atlas@2/countries-50m.json')
+    .then(function(r){ return r.json(); })
+    .then(function(topo){
+      var features = topojson.feature(topo, topo.objects.countries).features;
+      var f = features.find(function(x){ return x.id === countryIso; });
+      if(!f) return;
+
+      var label = CUTAWAY[countryIso];
+      if (label) {
+        var split = splitFeature(f);
+        if (split.main && split.islands) {
+          var mainProj = d3.geoMercator().fitSize([w, h], split.main);
+          var mainPath = d3.geoPath().projection(mainProj);
+          d3.select(svg).append('path').attr('class', 'country').attr('d', mainPath(split.main));
+
+          var iW = 66, iH = 54, iX = w - iW - 3, iY = h - iH - 3;
+          var g = d3.select(svg).append('g').attr('transform', 'translate(' + iX + ',' + iY + ')');
+          g.append('rect')
+            .attr('width', iW).attr('height', iH).attr('rx', 2).attr('ry', 2)
+            .attr('fill', 'rgba(0,0,0,0.02)').attr('stroke', '#c8d0dc')
+            .attr('stroke-dasharray', '2,2').attr('stroke-width', 0.5);
+
+          var islandProj = d3.geoMercator().fitSize([iW - 8, iH - 14], split.islands);
+          var t = islandProj.translate();
+          islandProj.translate([t[0] + 4, t[1] + 4]);
+          var islandPath = d3.geoPath().projection(islandProj);
+          g.append('path').attr('class', 'country').attr('d', islandPath(split.islands));
+
+          g.append('text')
+            .attr('x', iW / 2).attr('y', iH - 3)
+            .attr('text-anchor', 'middle').attr('font-size', 5.5)
+            .attr('fill', '#8a93a3')
+            .attr('font-family', 'Inter, -apple-system, sans-serif')
+            .text(label);
+          return;
+        }
+      }
+
+      // Default render - whole country
+      var projection = d3.geoMercator().fitSize([w, h], f);
+      var path = d3.geoPath().projection(projection);
+      d3.select(svg).append('path').attr('class', 'country').attr('d', path(f));
+    })
+    .catch(function(){});
+});
+</script>
 </body>
 </html>

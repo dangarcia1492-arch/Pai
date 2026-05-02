@@ -447,6 +447,36 @@ body { min-width: 320px !important; }
   }
 </script>
 <script id="pai-clerk-sdk" async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ" src="https://clerk.principlesai.org/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript" onload="window.__paiClerkLoaded=true;window.dispatchEvent(new Event('pai:clerk-loaded'))"></script>
+<script id="pai-auth-guard-v2">
+(function(){
+  // Static legacy Settings — superseded by the Next.js route /app/settings.
+  // Behaviour:
+  //   signed-in   → forward to /app/settings (the canonical surface)
+  //   signed-out  → bounce to /sign-in, with redirect_url=/app/settings so
+  //                 post-login they land on the new route, not back here
+  //   Clerk fails → fail closed, bounce to /sign-in
+  // Body stays hidden throughout so the legacy mockup never paints.
+  var DEST = '/app/settings';
+  var s = document.createElement('style');
+  s.textContent = 'html.pai-auth-pending body{visibility:hidden}';
+  document.head.appendChild(s);
+  document.documentElement.classList.add('pai-auth-pending');
+
+  function forward(){ window.location.replace(DEST); }
+  function bounce(){
+    window.location.replace('/sign-in?redirect_url=' + encodeURIComponent(DEST));
+  }
+  function check(){
+    if(!window.Clerk || typeof window.Clerk.load !== 'function'){ bounce(); return; }
+    window.Clerk.load().then(function(){
+      if(window.Clerk.user){ forward(); } else { bounce(); }
+    }).catch(bounce);
+  }
+  var fallback = setTimeout(bounce, 5000); // fail-closed if Clerk never loads
+  function go(){ clearTimeout(fallback); check(); }
+  if(window.__paiClerkLoaded){ go(); } else { window.addEventListener('pai:clerk-loaded', go); }
+})();
+</script>
 <script id="pai-clerk-v1">
 (function(){
   if(window.__paiClerkV1) return;
@@ -515,6 +545,7 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 
@@ -534,6 +565,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
@@ -616,7 +648,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <div class="field-row">
           <div class="field">
             <label>Full name</label>
-            <input type="text" value="David Longford">
+            <input type="text" value="Alex Morgan">
           </div>
           <div class="field">
             <label>Role title</label>
@@ -712,10 +744,10 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <div class="subsection-head">Members</div>
         <div class="members">
           <div class="member">
-            <div class="av c1">DL</div>
+            <div class="av c1">AM</div>
             <div class="m-body">
-              <div class="m-name">David Longford</div>
-              <div class="m-email">davidlongford@gmail.com</div>
+              <div class="m-name">Alex Morgan</div>
+              <div class="m-email">alex@example.com</div>
             </div>
             <select class="role-select"><option>Owner</option></select>
           </div>
@@ -905,7 +937,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <div class="i-icon">@</div>
           <div class="i-body">
             <div class="i-name">Email digest <span class="flag connected">Active</span></div>
-            <div class="i-help">davidlongford@gmail.com. Daily 08:00 Europe/London.</div>
+            <div class="i-help">alex@example.com. Daily 08:00 Europe/London.</div>
           </div>
           <button class="btn sm">Configure</button>
         </div>
@@ -941,7 +973,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <div class="identity-row">
           <div class="g-icon">G</div>
           <div class="ident-body">
-            <div class="ident-name">Google · davidlongford@gmail.com</div>
+            <div class="ident-name">Google · alex@example.com</div>
             <div class="ident-meta">Primary sign-in method · last used 14 min ago</div>
           </div>
           <button class="btn sm">Disconnect</button>
@@ -961,7 +993,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <div class="s-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 22h8M12 18v4"/></svg></div>
           <div class="s-body">
             <div class="s-name">MacBook Pro · Safari <span class="current">This device</span></div>
-            <div class="s-meta">London, UK · 90.250.24.17 · active now</div>
+            <div class="s-meta">London, UK · 203.0.113.42 · active now</div>
           </div>
           <button class="btn sm" disabled style="opacity:.55;cursor:not-allowed">Sign out</button>
         </div>
@@ -969,7 +1001,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <div class="s-icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
           <div class="s-body">
             <div class="s-name">iPhone · Mobile Safari</div>
-            <div class="s-meta">London, UK · 82.44.112.9 · last active 2h ago</div>
+            <div class="s-meta">London, UK · 203.0.113.84 · last active 2h ago</div>
           </div>
           <button class="btn sm">Sign out</button>
         </div>
@@ -1043,7 +1075,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <div class="modal">
     <h3>Delete account</h3>
     <p>Type your email address below to confirm. This will queue a 14-day hold. You can cancel deletion at any time during the hold window by signing in again.</p>
-    <input type="text" placeholder="davidlongford@gmail.com">
+    <input type="text" placeholder="alex@example.com">
     <div style="display:flex;justify-content:flex-end;gap:8px">
       <button class="btn sm" onclick="document.getElementById('delete-modal').classList.remove('open')">Cancel</button>
       <button class="btn btn-danger sm">Confirm deletion</button>

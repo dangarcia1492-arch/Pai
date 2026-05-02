@@ -502,6 +502,7 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 
@@ -521,6 +522,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
@@ -602,7 +604,7 @@ html{scroll-behavior:smooth}
       <div class="nt-block-titles">
         <div class="nt-eyebrow">AI Regulation Note · Part B analysis</div>
         <h1 class="nt-title">Philippines AI Note</h1>
-        <div class="nt-meta">Reflects the law as at April 2026 · Contributed by Tupaz</div>
+        <div class="nt-meta">Reflects the law as at April 2026 · Contributed by <a href="pai-app-contributor-edsel-tupaz" style="color:var(--accent-2);font-weight:600;">Edsel F. Tupaz</a></div>
         <a class="nt-juris-link" href="pai-app-juris-philippines">Open Philippines jurisdiction page →</a>
       </div>
       <a class="nt-back-link" href="pai-app-ai-notes">← Back to matrix</a>
@@ -625,14 +627,18 @@ html{scroll-behavior:smooth}
 <div class="nt-section" id="sec-b9"><div class="nt-s-kick">B9</div><h3 class="nt-s-title">Points of Legal Friction</h3><div class="nt-s-body"><p>Identify areas in which AI use exposes structural tension, ambiguity, or strain within existing legal frameworks in this jurisdiction.<br>Explain:</p><ul class='nt-bullets'><li>where existing legal frameworks are strained by AI use, and</li></ul><ul class='nt-bullets'><li>why those tensions arise.</li></ul><p>Please do not</p><ul class='nt-bullets'><li>rank or score risks.</li></ul><ul class='nt-bullets'><li>focus on enforcement mechanics.</li></ul><p>AI use exposes strain in Philippine legal frameworks that are built on assumptions based on human actors and tangible processes. A structural tension arises when the law’s internal logic is challenged by AI, which has a non-human, autonomous, and opaque nature.<br>In intellectual property law, authorship is limited to natural or juridical persons, creating ambiguity where AI systems generate outputs without direct human intervention. This raises uncertainty as to ownership and protection, particularly where only the human-created components of AI-assisted works may qualify. In such cases, it is unclear whether authorship should be attributed to the developer, the user, or neither, especially where the level of human contribution is minimal. Even if authorship may be determined, where multiple parties are involved in the creation process, ownership may be contested. Furthermore, AI systems are often trained on vast datasets, often including copyright material. This raises questions about fair use and potential infringement.<br>Additional strain arises in liability and decision-making contexts, especially since the existing legal framework assumes a direct, traceable line between human intent and harmful action.<br>Civil law on quasi-delicts requires proof of fault, but harm caused by AI systems may involve multiple actors and some AI systems make decisions through processes that are not visible or easily explainable to humans, making attribution difficult.<br>These tensions arise because AI introduces automated, data-driven, and often opaque processes that do not align with frameworks designed for human-led, transparent decision-making.</p></div></div></main>
       <aside class="nt-contrib-wrap">
         <div class="nt-contrib">
-          <div class="nt-c-photo">T</div>
-          <div class="nt-c-name">Tupaz</div>
-          <div class="nt-c-firm">Contributor firm</div>
-          
+          <div class="nt-c-photo" aria-hidden="true">ET</div>
+          <div class="nt-c-name"><a href="pai-app-contributor-edsel-tupaz">Edsel F. Tupaz</a></div>
+          <div class="nt-c-firm">Senior Partner · Gorriceta Africa Cauton &amp; Saavedra</div>
+
           <div class="nt-c-meta">
             <div class="nt-c-row"><span class="lbl">Jurisdiction</span><span>Philippines</span></div>
             <div class="nt-c-row"><span class="lbl">Law as at</span><span>April 2026</span></div>
             <div class="nt-c-row"><span class="lbl">Sections</span><span>11 Part B topics</span></div>
+            <div class="nt-c-row"><span class="lbl">Bars</span><span>PH · NY</span></div>
+          </div>
+          <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border-soft,#ebeff5);text-align:left;">
+            <a href="pai-app-contributor-edsel-tupaz" style="font-size:11.5px;color:var(--accent-2,#014486);font-weight:600;text-decoration:none;letter-spacing:.01em;">View contributor profile →</a>
           </div>
         </div>
       </aside>

@@ -507,6 +507,7 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 
@@ -577,8 +578,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
       <div class="facet-pinned">
         <div class="pinned-head"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>My watchlist</div>
-        <div class="facet-opt on" data-facet="watchlist" data-value="mine" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">Only instruments I watch</span><span class="count">8</span></div>
-        <div class="facet-opt" data-facet="watchlist" data-value="team" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">+ Team watchlist</span><span class="count">24</span></div>
+<div class="facet-opt" data-facet="watchlist" data-value="team" onclick="fpToggle(this)"><span class="facet-cb"></span><span class="name">+ Team watchlist</span><span class="count">24</span></div>
       </div>
 
       <div class="facet-search-wrap">
@@ -650,8 +650,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
 
       <div class="applied-chips" id="appliedChips">
-        <span class="applied-chip"><span class="group">watchlist:</span> Only instruments I watch<button class="x" onclick="fpRemoveChip('watchlist','mine')">×</button></span>
-      </div>
+</div>
 
       <div class="data-grid">
         <div class="dg-head-row">
@@ -2563,5 +2562,24 @@ loadLegislation();
   else setTimeout(window.paiWatchRestore, 500);
 })();
 </script>
+
+<script>
+(function(){
+  document.querySelectorAll('.facet-search').forEach(function(inp){
+    inp.addEventListener('input', function(){
+      var q = inp.value.trim().toLowerCase();
+      document.querySelectorAll('.dg-row').forEach(function(row){
+        if (!q) { if (!row.dataset.fpHidden) row.style.display=''; return; }
+        var text = (row.textContent||'').toLowerCase();
+        var name = (row.dataset.name||'').toLowerCase();
+        var region = (row.dataset.region||'').toLowerCase();
+        var match = text.indexOf(q) !== -1 || name.indexOf(q) !== -1 || region.indexOf(q) !== -1;
+        row.style.display = match ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

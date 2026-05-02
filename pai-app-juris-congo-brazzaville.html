@@ -322,7 +322,25 @@ body.sidebar-expanded #jur-overlay { left: var(--sidebar-expanded, 240px) !impor
 body { min-width: 320px !important; }
 
 /* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+.anim-in{opacity:0;transform:translateY(10px);animation:enterUp .6s cubic-bezier(.32,.72,.24,1) forwards;animation-delay:calc(var(--d,0) * 70ms)}
+@keyframes enterUp{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.anim-in{opacity:1;transform:none;animation:none}}
+
+.us-state-lift{margin:18px 0 28px;padding:18px 22px;background:#fafbfc;border:1px solid #eef1f5;border-radius:14px}
+.us-state-lift .uss-row{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.us-state-lift .uss-chip{display:flex;flex-direction:column;gap:5px;flex:1;min-width:200px}
+.us-state-lift .uss-chip-lbl{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#56657a}
+.us-state-lift .uss-chip-val{font-size:14px;font-weight:500;color:#0a1729;line-height:1.4;display:flex;align-items:center;gap:9px}
+.us-state-lift .uss-dot{width:9px;height:9px;border-radius:999px;flex-shrink:0;display:inline-block}
+.us-state-lift .uss-dot-yes{background:#2c7a45}
+.us-state-lift .uss-dot-soft{background:#8a4d00}
+.us-state-lift .uss-dot-empty{background:#dbe1ea}
+.us-state-lift .uss-cta{font-size:12.5px;font-weight:600;color:#014486;background:#fff;border:1px solid #cfe1f5;border-radius:999px;padding:9px 16px;text-decoration:none;white-space:nowrap;transition:background .22s,border-color .22s}
+.us-state-lift .uss-cta:hover{background:#e3effc;border-color:#0176d3}
+
 @media (max-width: 900px) {
+  .us-state-lift .uss-row{gap:18px}
+  .us-state-lift .uss-cta{flex-basis:100%;text-align:center;margin-top:6px}
   .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
   .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
   .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
@@ -674,6 +692,13 @@ body { min-width: 320px !important; }
 .hjb-flag{font-size:15px;line-height:1}
 .main-content{margin-left:var(--sidebar-collapsed,56px);padding-top:52px;min-height:100vh}
 /* ==END_GEN_JURIS_CSS== */
+
+.ph-meta{margin:6px 0 14px;line-height:1.5}
+.ph-name-en{font-size:14.5px;color:#0a1729;font-weight:500}
+.ph-name-local{font-size:14px;color:#5e6878;font-style:italic;opacity:.85;margin-top:2px}
+.ph-pop{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;letter-spacing:.04em;color:#56657a;margin-top:6px}
+.ph-pop-source{color:#8a93a3;font-style:italic}
+
 </style>
 <script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
 <script>
@@ -766,6 +791,7 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 <nav class="icon-sidebar">
@@ -783,6 +809,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <a class="sidebar-nav-item" href="pai-app-authorities"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <a class="sidebar-nav-item" href="pai-app-community"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
@@ -855,20 +882,23 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     </div>
 
     <!-- PAGE HEAD -->
-    <div class="page-head">
+    <div class="anim-in page-head" style="--d:0">
       <div class="ph-title">
         <div class="page-eyebrow">CONGO (BRAZZAVILLE) · CG</div>
         <h1 class="page-title">Congo (Brazzaville)</h1>
+        
 
         <p class="page-sub">A living snapshot of AI, privacy and cybersecurity regulation in Congo (Brazzaville) — what's in force, who enforces it, and what&rsquo;s moving.</p>
       </div>
       <div class="ph-map" aria-hidden="true"><svg id="country-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"></svg></div>
     </div>
 
+    
+
     <!-- ═══ VIEW A — NEWSROOM (default) ═══ -->
     <div class="juris-view is-active" data-view="A">
     <!-- Recent activity FIRST — contemporary / time-saving framing per Dave 2026-04-30 -->
-<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
+<section class="anim-in latest-section" style="--d:1"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
       <div class="latest-empty" style="grid-column:1/-1;background:#fff;border:1px solid #ebeff5;border-radius:10px;padding:36px 40px;text-align:center">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0176d3" stroke-width="1.5" style="opacity:.5;margin-bottom:14px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         <div style="font-family:'Source Serif 4',serif;font-size:18px;color:#0a1729;margin-bottom:8px">No published records yet for Congo (Brazzaville)</div>
@@ -895,14 +925,14 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <!-- ═══ VIEW D — DOMAIN-FIRST ═══ -->
     <div class="juris-view" data-view="D">
       <!-- Domain panel as the hero element (re-uses snapshot_html — Key Legislation per AI/Privacy/Cyber) -->
-      <div class="df-domain-hero">
+      <div class="anim-in df-domain-hero" style="--d:1">
         <section><div class="law-section"><div class="law-section-head"><h2>Key Legislation</h2><div class="tap-hint">Tap a domain to expand</div></div><div class="domain-rows"><div class="domain-group empty" data-d="ai"><div class="domain-row"><div class="dr-label">AI</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="privacy"><div class="domain-row"><div class="dr-label">PRIVACY</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div><div class="domain-group empty" data-d="cyber"><div class="domain-row"><div class="dr-label">CYBER</div><div class="dr-content">Early coverage — no tracked instrument yet</div><div class="dr-meta"><span class="dr-chip na">● Not yet tracked</span></div><div class="dr-chev"></div></div></div></div><div class="kpi-stack"><div class="kpi"><div class="kpi-label">Instruments tracked</div><div class="kpi-value">2</div></div><div class="kpi"><div class="kpi-label">Domains covered</div><div class="kpi-value">0/3</div></div></div></div></section>
       </div>
 
       <!-- Two-column secondary: Recent activity (left) + Implementation status (right) -->
-      <div class="df-secondary-grid">
+      <div class="anim-in df-secondary-grid" style="--d:5">
         <div>
-<section class="latest-section"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
+<section class="anim-in latest-section" style="--d:1"><div class="ls-head"><h2>Recent activity</h2><div class="ls-sub">Nothing approved yet</div></div><div class="latest-grid">
       <div class="latest-empty" style="grid-column:1/-1;background:#fff;border:1px solid #ebeff5;border-radius:10px;padding:36px 40px;text-align:center">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0176d3" stroke-width="1.5" style="opacity:.5;margin-bottom:14px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         <div style="font-family:'Source Serif 4',serif;font-size:18px;color:#0a1729;margin-bottom:8px">No published records yet for Congo (Brazzaville)</div>
@@ -920,7 +950,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
 
       <!-- Reference rail at the bottom -->
-      <div class="df-ref-rail">
+      <div class="anim-in df-ref-rail" style="--d:5">
 <section class="authorities-section" id="regulators-section"><h2>Authorities</h2><div class="auth-sub">4 of 4 shown · ranked by Major-flag and supervisory remit.</div><div class="auth-grid"><a class="auth-card" href="pai-app-authority-anssic"><div class="ac-head"><span class="ac-type">Cyber agency</span></div><div class="ac-name">Agence Nationale de Sécurité des Systèmes d&#39;Information du Congo</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-arpce"><div class="ac-head"><span class="ac-type">Telecoms regulator</span></div><div class="ac-name">Agence de Régulation des Postes et des Communications Electroniques</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-anc-pdgrzc"><div class="ac-head"><span class="ac-type">Legislature</span></div><div class="ac-name">Assemblée Nationale du Congo</div><div class="ac-foot">View authority →</div></a><a class="auth-card" href="pai-app-authority-ccc-dd79al"><div class="ac-head"><span class="ac-type">Court</span></div><div class="ac-name">Cour Constitutionnelle du Congo</div><div class="ac-foot">View authority →</div></a></div></section>
 <section class="guidance-section" id="guidance-section"><div class="gs-head"><div><h2>Practical guidance</h2><div class="gs-sub">Top supervisory authorities for Congo (Brazzaville) — click through for each authority’s guidance pages.</div></div></div><div class="gs-grid"><a class="gs-card" href="pai-app-authority-anssic"><div class="gs-card-head"><span class="gs-badge">Cyber agency</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Agence Nationale de Sécurité des Systèmes d&#39;Information du Congo</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-arpce"><div class="gs-card-head"><span class="gs-badge">Telecoms regulator</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Agence de Régulation des Postes et des Communications Electroniques</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-anc-pdgrzc"><div class="gs-card-head"><span class="gs-badge">Legislature</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Assemblée Nationale du Congo</div><div class="gs-card-foot">Browse authority →</div></a><a class="gs-card" href="pai-app-authority-ccc-dd79al"><div class="gs-card-head"><span class="gs-badge">Court</span><span class="gs-status">● Tracked</span></div><div class="gs-card-name">Cour Constitutionnelle du Congo</div><div class="gs-card-foot">Browse authority →</div></a></div></section>
 
@@ -1256,12 +1286,12 @@ window.addEventListener('load', function(){
   if(window.openJurisdictions)return;
   // Federal hierarchies the data file doesn't encode with parent fields
   var CHILDREN_OF = {
-    'Germany':['Baden-Württemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg','Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia','Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt','Schleswig-Holstein','Thuringia'],
-    'USA':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
-    'United States of America':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
-    'United States':['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
-    'Canada':['Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
-    'Australia':['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory'],
+    'Germany':['Germany Federal','Baden-Württemberg','Bavaria','Berlin','Brandenburg','Bremen','Hamburg','Hesse','Lower Saxony','Mecklenburg-Vorpommern','North Rhine-Westphalia','Rhineland-Palatinate','Saarland','Saxony','Saxony-Anhalt','Schleswig-Holstein','Thuringia'],
+    'USA':['US Federal','Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States of America':['US Federal','Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'United States':['US Federal','Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Guam'],
+    'Canada':['Canada Federal','Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
+    'Australia':['Australia Federal','New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory'],
     'United Arab Emirates':['Abu Dhabi Global Market','Dubai Health Care City','Dubai International Financial Centre','Emirate of Abu Dhabi','Emirate of Dubai','United Arab Emirates Federal'],
     'Qatar':['Qatar Financial Centre','Qatar State']
   };
@@ -1284,7 +1314,6 @@ window.addEventListener('load', function(){
 
   var JURIS_PAGES = {
     'United Kingdom':'pai-app-juris-uk.html',
-    'Germany':'pai-app-juris-germany.html',
     'California':'pai-app-juris-california.html',
     'Quebec':'pai-app-juris-quebec.html',
     'OECD':'pai-app-juris-oecd.html'
