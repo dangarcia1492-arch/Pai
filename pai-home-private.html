@@ -539,8 +539,11 @@ button { cursor: pointer; }
 .ff-card { display: grid; grid-template-columns: 320px 1fr; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; text-decoration: none; color: inherit; transition: transform .18s, box-shadow .18s, border-color .18s; }
 .ff-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--accent-soft-2); text-decoration: none; }
 .ff-portrait { position: relative; min-height: 240px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #032e61 0%, #0176d3 55%, #4ba2e0 100%); overflow: hidden; }
-.ff-portrait::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 60%); pointer-events: none; }
-.ff-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ff-portrait::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 60%); pointer-events: none; z-index: 1; }
+.ff-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; filter: contrast(1.04) saturate(1.06); transition: transform .4s ease, filter .4s ease; transform-origin: 50% 20%; }
+.ff-card:hover .ff-portrait img { transform: scale(1.03); filter: contrast(1.08) saturate(1.12); }
+.ff-portrait.has-photo { background: #0a1420; }
+.ff-portrait.has-photo::before { background: linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, rgba(8,14,24,.62) 100%), radial-gradient(ellipse at 50% 38%, transparent 48%, rgba(0,0,0,.55) 100%); }
 .ff-initials { font-family: var(--display); font-size: 88px; font-weight: 700; color: #fff; letter-spacing: -.04em; z-index: 1; text-shadow: 0 4px 16px rgba(0,0,0,.25); line-height: 1; }
 .ff-badge { position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 10px; background: rgba(255,255,255,0.96); color: var(--ink-strong); border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 0 1px 3px rgba(0,0,0,0.18); z-index: 2; }
 .ff-flag { position: absolute; bottom: 14px; left: 14px; font-size: 22px; line-height: 1; z-index: 2; filter: drop-shadow(0 1px 2px rgba(0,0,0,.25)); }
@@ -1260,45 +1263,45 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   </div>
   <section class="featured-trio">
 
-    <a class="featured-card" href="pai-app-news-story-ico-nhs">
+    <a class="featured-card" href="pai-app-news-story-belgium-adopts-national-cyber-crisis-response">
       <div class="fc-thumb" style="background: linear-gradient(135deg, #032e61 0%, #0176d3 55%, #4ba2e0 100%);">
         <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
       <div class="fc-body">
-        <div class="fc-title">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</div>
-        <div class="fc-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+        <div class="fc-title">Belgium Adopts National Cyber Crisis Response Plan by Royal Decree, Replacing 2017 Framework</div>
+        <div class="fc-deck">The Centre for Cybersecurity Belgium has formally adopted an updated national cyber crisis response plan by Royal Decree, grounded in the Law of 26 April 2024 transposing the NIS2 Directive into Belgian law and the Law of 25 May 2007 on civil security, replacing the previous fram</div>
         <div class="fc-meta">
           <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
-          <span class="sep">·</span><span class="fc-when">—</span>
-          <span class="sep">·</span><span>—</span>
+          <span class="sep">·</span><span class="fc-when">2d ago</span>
+          <span class="sep">·</span><span>Belgium</span>
         </div>
       </div>
     </a>
-    <a class="featured-card" href="pai-app-news-story-ico-nhs">
-      <div class="fc-thumb" style="background: linear-gradient(135deg, #06101e 0%, #1f2a3f 50%, #3a475d 100%);">
+    <a class="featured-card" href="pai-app-news-story-edpb-issues-opinion-on-dutch-dpa-draft-decision">
+      <div class="fc-thumb" style="background: linear-gradient(135deg, #06101e 0%, #1f2a3f 55%, #3a475d 100%);">
         <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
       <div class="fc-body">
-        <div class="fc-title">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</div>
-        <div class="fc-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+        <div class="fc-title">EDPB Issues Opinion on Dutch DPA Draft Decision Approving SLB Group Controller Binding Corporate Rules Under Art. 47 GDPR</div>
+        <div class="fc-deck">The European Data Protection Board has issued Opinion 10/2026, adopted on 15 April 2026 and published on 27 April 2026, assessing the draft decision of the Dutch Supervisory Authority to approve Controller Binding Corporate Rules submitted by the SLB Group, under the consistency </div>
         <div class="fc-meta">
           <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
-          <span class="sep">·</span><span class="fc-when">—</span>
-          <span class="sep">·</span><span>—</span>
+          <span class="sep">·</span><span class="fc-when">2d ago</span>
+          <span class="sep">·</span><span>European Union</span>
         </div>
       </div>
     </a>
-    <a class="featured-card" href="pai-app-news-story-ico-nhs">
+    <a class="featured-card" href="pai-app-news-story-belarus-centre-for-personal-data-protection">
       <div class="fc-thumb" style="background: linear-gradient(135deg, #022d1a 0%, #2e844a 55%, #6fb98a 100%);">
         <span class="fc-badge"><span class="dot"></span>News</span>
       </div>
       <div class="fc-body">
-        <div class="fc-title">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</div>
-        <div class="fc-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
+        <div class="fc-title">Belarus Centre for Personal Data Protection Issues Guidance on University Website Publication</div>
+        <div class="fc-deck">The National Centre for Personal Data Protection of the Republic of Belarus has issued formal guidance on the lawful bases and data minimisation requirements for higher education institutions publishing personal data about applicants, students and graduates on their official webs</div>
         <div class="fc-meta">
           <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
-          <span class="sep">·</span><span class="fc-when">—</span>
-          <span class="sep">·</span><span>—</span>
+          <span class="sep">·</span><span class="fc-when">2d ago</span>
+          <span class="sep">·</span><span>Belarus</span>
         </div>
       </div>
     </a>
@@ -1312,11 +1315,10 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   </div>
   <section class="featured-faculty">
     <a class="ff-card" href="pai-app-faculty-edsel-tupaz">
-      <div class="ff-portrait">
+      <div class="ff-portrait has-photo">
+        <img src="edsel-tupaz.jpg" alt="Edsel F. Tupaz">
         <span class="ff-badge">Faculty</span>
         <span class="ff-flag">&#x1F1F5;&#x1F1ED;</span>
-        <!-- Swap <span class="ff-initials">ET</span> for <img src="photo-edsel-tupaz.jpg" alt="Edsel F. Tupaz"> when a portrait is supplied -->
-        <span class="ff-initials">ET</span>
       </div>
       <div class="ff-body">
         <div class="ff-eyebrow">Philippines AI Note · Contributor</div>
@@ -1339,74 +1341,62 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
       <article class="dev-item">
         <div class="dev-meta">
-          <span class="status-pill red">Enforcement</span>
-          <span class="juris">UK · ICO</span>
+          <span class="status-pill">Update</span>
+          <span class="juris">France</span>
           <span class="dot">·</span>
-          <span class="when">—</span>
+          <span class="when">2d ago</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
-        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+        <div class="dev-headline"><a href="pai-app-news-story-cnil-publishes-recommended-template-and-guidance" style="color:inherit;text-decoration:none;">CNIL Publishes Recommended Template and Guidance for DPO Activity Reports</a></div>
       </article>
 
       <article class="dev-item">
         <div class="dev-meta">
-          <span class="status-pill red">Enforcement</span>
-          <span class="juris">UK · ICO</span>
+          <span class="status-pill">Update</span>
+          <span class="juris">Japan</span>
           <span class="dot">·</span>
-          <span class="when">—</span>
+          <span class="when">5d ago</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
-        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+        <div class="dev-headline"><a href="pai-app-news-story-japan-digital-agency-concludes-technology-based" style="color:inherit;text-decoration:none;">Japan Digital Agency Concludes Technology-Based Regulatory Reform Committee After Ten Sessions, Reports 98% of National Analogue Regulations Revised</a></div>
       </article>
 
       <article class="dev-item">
         <div class="dev-meta">
-          <span class="status-pill red">Enforcement</span>
-          <span class="juris">UK · ICO</span>
+          <span class="status-pill">Update</span>
+          <span class="juris">British Columbia</span>
           <span class="dot">·</span>
-          <span class="when">—</span>
+          <span class="when">5d ago</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
-        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+        <div class="dev-headline"><a href="pai-app-news-story-bc-information-and-privacy-commissioner-reports" style="color:inherit;text-decoration:none;">BC Information and Privacy Commissioner Reports 86% Rise in Complaints and AI-Generated File Surge in Legislative Address</a></div>
       </article>
 
       <article class="dev-item">
         <div class="dev-meta">
-          <span class="status-pill red">Enforcement</span>
-          <span class="juris">UK · ICO</span>
+          <span class="status-pill">Update</span>
+          <span class="juris">Australia</span>
           <span class="dot">·</span>
-          <span class="when">—</span>
+          <span class="when">6d ago</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
-        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+        <div class="dev-headline"><a href="pai-app-news-story-oaic-and-esafety-commissioner-formalise" style="color:inherit;text-decoration:none;">OAIC and eSafety Commissioner Formalise Cooperation on Privacy and Online Safety via MOU</a></div>
       </article>
 
       <article class="dev-item">
         <div class="dev-meta">
-          <span class="status-pill red">Enforcement</span>
-          <span class="juris">UK · ICO</span>
+          <span class="status-pill">Update</span>
+          <span class="juris">European Union</span>
           <span class="dot">·</span>
-          <span class="when">—</span>
+          <span class="when">6d ago</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
-        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+        <div class="dev-headline"><a href="pai-app-news-story-council-of-europe-committee-on-new-and-emerging" style="color:inherit;text-decoration:none;">Council of Europe Committee on New and Emerging Technologies holds inaugural meeting in Strasbourg</a></div>
       </article>
 
       <article class="dev-item">
         <div class="dev-meta">
-          <span class="status-pill red">Enforcement</span>
-          <span class="juris">UK · ICO</span>
+          <span class="status-pill">Update</span>
+          <span class="juris">Germany</span>
           <span class="dot">·</span>
-          <span class="when">—</span>
+          <span class="when">6d ago</span>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-        <div class="dev-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
-        <div class="dev-source"><span class="link">ico.org.uk</span></div>
+        <div class="dev-headline"><a href="pai-app-news-story-dsk-and-sector-specific-supervisory-authorities" style="color:inherit;text-decoration:none;">DSK and Sector-Specific Supervisory Authorities Discuss Deepfake Regulation and Rising Complaint Volumes at Stuttgart Meeting</a></div>
       </article>
 
     </div>
@@ -1430,11 +1420,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           <tr><th>Regulator</th><th>Target</th><th class="right">Fine</th><th class="right">When</th></tr>
         </thead>
         <tbody>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
-          <tr><td class="reg">UK · ICO</td><td class="target"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">NHS Foundation Trust</a><span class="sub">AI diagnostic DPIA</span></td><td class="num">£750k</td><td class="when">—</td></tr>
+          <tr><td class="reg">European Union · European Data Protection Board</td><td class="target"><a href="pai-app-news-story-edpb-adopts-opinion-12-2026-on-spanish-dpa-draft" style="color:inherit;text-decoration:none;">EDPB adopts Opinion 12/2026 on Spanish DPA draft decision…</a><span class="sub">The European Data Protection Board has adopted Opinion 12/20…</span></td><td class="num">Update</td><td class="when">2d ago</td></tr>
+          <tr><td class="reg">Czech Republic · National Cybersecurity Authori</td><td class="target"><a href="pai-app-news-story-czech-n-kib-q1-2026-threat-report-records-highest" style="color:inherit;text-decoration:none;">Czech NÚKIB Q1 2026 Threat Report Records Highest Inciden…</a><span class="sub">The National Cybersecurity Authority of the Czech Republic (…</span></td><td class="num">Update</td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">Germany · Federal Ministry of the Interi</td><td class="target"><a href="pai-app-news-story-german-federal-government-approves-draft-law" style="color:inherit;text-decoration:none;">German Federal Government Approves Draft Law Mandating Th…</a><span class="sub">The German Federal Ministry of the Interior has approved a d…</span></td><td class="num">Update</td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">France · ANSSI France</td><td class="target"><a href="pai-app-news-story-anssi-publishes-european-study-on-s-sdlc-and" style="color:inherit;text-decoration:none;">ANSSI Publishes European Study on S-SDLC and DevSecOps, I…</a><span class="sub">France&#x27;s Agence nationale de la sécurité des systèmes d&#x27;info…</span></td><td class="num">Update</td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">Japan · Japan AI Safety Institute</td><td class="target"><a href="pai-app-news-story-japan-ai-safety-institute-publishes-second" style="color:inherit;text-decoration:none;">Japan AI Safety Institute Publishes Second Edition of Kno…</a><span class="sub">Japan&#x27;s AI Safety Institute (AISI Japan) has published the s…</span></td><td class="num">Update</td><td class="when">7d ago</td></tr>
         </tbody>
       </table>
     </div>
@@ -1446,19 +1436,16 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
       <div class="case-list">
         <div class="case-row">
-          <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
-          <div class="case-name"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-          <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
+          <div class="case-meta"><span class="case-court">France</span><span class="case-when">2d ago</span></div>
+          <div class="case-name"><a href="pai-app-news-story-cnil-publishes-recommended-template-and-guidance" style="color:inherit;text-decoration:none;">CNIL Publishes Recommended Template and Guidance for DPO Activity Reports</a></div>
         </div>
         <div class="case-row">
-          <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
-          <div class="case-name"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-          <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
+          <div class="case-meta"><span class="case-court">Japan</span><span class="case-when">5d ago</span></div>
+          <div class="case-name"><a href="pai-app-news-story-japan-digital-agency-concludes-technology-based" style="color:inherit;text-decoration:none;">Japan Digital Agency Concludes Technology-Based Regulatory Reform Committee After Ten Sessions, Reports 98% of National Analogue Regulations Revised</a></div>
         </div>
         <div class="case-row">
-          <div class="case-meta"><span class="case-court">UK · ICO</span><span class="case-when">—</span></div>
-          <div class="case-name"><a href="pai-app-news-story-ico-nhs" style="color:inherit;text-decoration:none;">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-          <div class="case-take">AI triage tool deployed without DPIA, bias testing, or documented lawful basis. Systemic governance failure at deployment stage.</div>
+          <div class="case-meta"><span class="case-court">British Columbia</span><span class="case-when">5d ago</span></div>
+          <div class="case-name"><a href="pai-app-news-story-bc-information-and-privacy-commissioner-reports" style="color:inherit;text-decoration:none;">BC Information and Privacy Commissioner Reports 86% Rise in Complaints and AI-Generated File Surge in Legislative Address</a></div>
         </div>
       </div>
     </div>
