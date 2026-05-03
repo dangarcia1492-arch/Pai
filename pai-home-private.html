@@ -311,9 +311,12 @@ button { cursor: pointer; }
   display: flex; align-items: center; gap: 16px;
   cursor: pointer;
   transition: background .12s;
+  position: relative;
+  overflow: hidden;
 }
 .tw-cell:last-child { border-right: none; }
 .tw-cell:hover { background: var(--surface-2); }
+.tw-cell .tw-icon, .tw-cell .tw-body { position: relative; z-index: 1; }
 .tw-icon {
   width: 36px; height: 36px;
   border-radius: 8px;
@@ -331,7 +334,15 @@ button { cursor: pointer; }
 .tw-value.money { font-family: var(--mono); font-size: 18px; letter-spacing: -0.01em; }
 .tw-sub { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
 .tw-sub .up { color: var(--green); font-weight: 700; font-family: var(--mono); }
-.tw-spark { flex-shrink: 0; width: 72px; height: 28px; align-self: center; opacity: 0.92; }
+/* R1: sparkline demoted to background watermark */
+.tw-spark { position: absolute; right: 14px; bottom: 10px; width: 88px; height: 28px; opacity: 0.10; pointer-events: none; z-index: 0; }
+.tw-spark polyline { stroke-width: 3; }
+.tw-spark circle { display: none; }
+/* R1: inline delta tag next to value */
+.delta-tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; padding: 2px 6px; border-radius: 3px; margin-left: 7px; vertical-align: 4px; font-family: var(--sans); }
+.delta-tag.up   { background: var(--green-bg); color: var(--green); }
+.delta-tag.down { background: var(--red-bg);   color: var(--red);   }
+.delta-tag.flat { background: var(--surface-3); color: var(--muted); }
 
 /* ============ HERO ROW: MAP + TODAY ============ */
 .hero {
@@ -532,6 +543,13 @@ button { cursor: pointer; }
 .fc-author { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--ink); }
 .fc-avatar { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; font-weight: 700; }
 .fc-meta .sep { color: var(--ink-faint); }
+/* R2: thumbnail communicates country + authority */
+.fc-thumb.r2 { background: linear-gradient(160deg, #0d2433 0%, #1a3145 100%); }
+.fc-thumb.r2 .country-flag { position: absolute; top: 12px; right: 12px; font-size: 22px; line-height: 1; background: #fff; width: 30px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,.25); z-index: 2; }
+.fc-thumb.r2 .silhouette { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.18); font-family: var(--display); font-size: 130px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+.fc-thumb.r2 .country-strip { position: absolute; bottom: 12px; left: 12px; right: 12px; color: #fff; display: flex; align-items: baseline; gap: 8px; font-size: 11px; letter-spacing: .02em; font-weight: 500; z-index: 2; }
+.fc-thumb.r2 .country-strip .name { font-family: var(--display); font-size: 14px; letter-spacing: -0.005em; font-weight: 700; }
+.fc-thumb.r2 .country-strip .auth { opacity: .78; font-size: 11.5px; }
 .fc-when { font-family: var(--mono); }
 
 /* ============ FEATURED FACULTY ============ */
@@ -560,6 +578,55 @@ button { cursor: pointer; }
   .ff-initials { font-size: 72px; }
 }
 
+/* ============ BRIEFINGS ROW (Netflix-style faculty banners) ============ */
+.briefings-row { margin-bottom: 36px; }
+.briefings-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(360px, 1fr);
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+}
+.briefings-track::-webkit-scrollbar { height: 8px; }
+.briefings-track::-webkit-scrollbar-track { background: transparent; }
+.briefings-track::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.briefing-card {
+  position: relative;
+  aspect-ratio: 1132 / 309;
+  background: var(--surface-3) center/cover no-repeat;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+  scroll-snap-align: start;
+  text-decoration: none;
+  box-shadow: var(--shadow-1);
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+  display: block;
+}
+.briefing-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--accent-soft-2); text-decoration: none; }
+.briefing-card .bc-pill {
+  position: absolute; top: 12px; left: 12px;
+  background: #ba0517; color: #fff;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
+  padding: 4px 8px; border-radius: 3px;
+  text-transform: uppercase;
+}
+.briefing-card.placeholder {
+  background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-3) 100%);
+  border-style: dashed;
+  display: flex; align-items: center; justify-content: center;
+}
+.briefing-card.placeholder::after {
+  content: 'Next briefing · coming soon';
+  font-size: 12px; color: var(--ink-faint); font-weight: 500;
+}
+@media (max-width: 900px) {
+  .briefings-track { grid-auto-columns: minmax(280px, 1fr); }
+}
+
 /* ============ DEVELOPMENTS (news feed) ============ */
 .developments {
   background: var(--surface);
@@ -569,34 +636,75 @@ button { cursor: pointer; }
   margin-bottom: 36px;
   overflow: hidden;
 }
+/* R3: single-column inbox-style with date column + day-grouped headers */
 .dev-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
+  display: flex;
+  flex-direction: column;
+}
+.dev-day-head {
+  padding: 10px 26px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.dev-day-head .count {
+  color: var(--ink-faint);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-size: 11.5px;
 }
 .dev-item {
-  padding: 20px 26px;
-  border-right: 1px solid var(--border-soft);
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 22px;
+  padding: 14px 26px;
   border-bottom: 1px solid var(--border-soft);
   cursor: pointer;
   transition: background .12s;
   position: relative;
+  align-items: start;
 }
-.dev-item:nth-child(2n) { border-right: none; }
-.dev-item:nth-last-child(-n+2) { border-bottom: none; }
+.dev-item:last-child { border-bottom: none; }
 .dev-item:hover { background: var(--surface-2); }
 .dev-item.priority::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red-fill); }
 .dev-item.priority.watch::before { background: var(--accent); }
 
+/* R3: when becomes the left column; meta line slimmed */
+.dev-when {
+  text-align: right;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  font-feature-settings: 'tnum' 1;
+  padding-top: 1px;
+  letter-spacing: 0;
+}
+.dev-when small {
+  display: block;
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.dev-body { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
 .dev-meta {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 8px;
-  font-size: 11.5px; font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600;
   color: var(--secondary);
   flex-wrap: wrap;
 }
 .dev-meta .juris { color: var(--ink); font-weight: 700; }
-.dev-meta .when { font-family: var(--mono); color: var(--muted); font-weight: 500; }
+.dev-meta .when { font-family: var(--sans); color: var(--muted); font-weight: 500; }
 .dev-meta .dot { color: var(--ink-faint); }
 .status-pill {
   display: inline-flex; align-items: center;
@@ -1083,11 +1191,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
   <!-- PERSONAL SUMMARY ROW (demoted from hero; will personalise) -->
   <div class="daily-stats" style="display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:#5e6878;margin:-8px 0 28px;padding:14px 0 0;border-top:1px dashed #ebeff5;font-weight:500;">
-    <span><b style="color:#0d2e42;">3 items</b> on your watchlist need attention this week</span>
+    <span><b style="color:#0d2e42;">3</b> watchlist items need attention</span>
     <span style="color:#c8d0dc;">·</span>
-    <span><b style="color:#0d2e42;">4 consultations</b> closing in your jurisdictions</span>
+    <span><b style="color:#0d2e42;">4</b> consultations closing</span>
     <span style="color:#c8d0dc;">·</span>
-    <span><b style="color:#0d2e42;" id="statEnfCap">—</b> in enforcement captured</span>
+    <span><b style="color:#0d2e42;" id="statEnfCap">—</b> enforcement actions</span>
   </div>
 
   <script>
@@ -1108,8 +1216,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
       <div class="tw-body">
         <div class="tw-label">Watchlist</div>
-        <div class="tw-value"><span class="val-slot">—</span></div>
-        <div class="tw-sub"><span class="up">+2</span> since your last visit</div>
+        <div class="tw-value"><span class="val-slot">—</span><span class="delta-tag up">▲ 2</span></div>
+        <div class="tw-sub">since your last visit</div>
       </div>
       <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
         <polyline points="0,22 9,21 18,16 27,18 36,13 45,15 54,9 63,5 72,3" fill="none" stroke="var(--red-fill)" stroke-width="1.6"/>
@@ -1136,8 +1244,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
       <div class="tw-body">
         <div class="tw-label">Enforcement · 7d</div>
-        <div class="tw-value money"><span id="twEnf">—</span></div>
-        <div class="tw-sub"><span class="up" id="twEnfChange">—</span> vs prior · <span id="twEnfCount">—</span> actions</div>
+        <div class="tw-value money"><span id="twEnf">—</span><span class="delta-tag up" id="twEnfDelta">▲ —</span></div>
+        <div class="tw-sub"><span id="twEnfCount">—</span> actions vs prior week</div>
       </div>
       <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
         <polyline points="0,20 9,18 18,21 27,15 36,12 45,14 54,8 63,6 72,3" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
@@ -1259,13 +1367,16 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <!-- FEATURED TRIO -->
   <div class="section-eyebrow">
     <span class="lbl">Featured this week</span>
-    <span class="meta">PAI editors · original coverage</span>
+    <span class="meta">Original reporting · this week</span>
   </div>
   <section class="featured-trio">
 
     <a class="featured-card" href="pai-app-news-story-belgium-adopts-national-cyber-crisis-response">
-      <div class="fc-thumb" style="background: linear-gradient(135deg, #032e61 0%, #0176d3 55%, #4ba2e0 100%);">
+      <div class="fc-thumb r2">
         <span class="fc-badge"><span class="dot"></span>News</span>
+        <span class="country-flag">🇧🇪</span>
+        <span class="silhouette">BE</span>
+        <span class="country-strip"><span class="name">Belgium</span><span class="auth">· Centre for Cybersecurity (CCB)</span></span>
       </div>
       <div class="fc-body">
         <div class="fc-title">Belgium Adopts National Cyber Crisis Response Plan by Royal Decree, Replacing 2017 Framework</div>
@@ -1278,8 +1389,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
     </a>
     <a class="featured-card" href="pai-app-news-story-edpb-issues-opinion-on-dutch-dpa-draft-decision">
-      <div class="fc-thumb" style="background: linear-gradient(135deg, #06101e 0%, #1f2a3f 55%, #3a475d 100%);">
+      <div class="fc-thumb r2">
         <span class="fc-badge"><span class="dot"></span>News</span>
+        <span class="country-flag">🇪🇺</span>
+        <span class="silhouette">EU</span>
+        <span class="country-strip"><span class="name">European Union</span><span class="auth">· European Data Protection Board</span></span>
       </div>
       <div class="fc-body">
         <div class="fc-title">EDPB Issues Opinion on Dutch DPA Draft Decision Approving SLB Group Controller Binding Corporate Rules Under Art. 47 GDPR</div>
@@ -1292,8 +1406,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
     </a>
     <a class="featured-card" href="pai-app-news-story-belarus-centre-for-personal-data-protection">
-      <div class="fc-thumb" style="background: linear-gradient(135deg, #022d1a 0%, #2e844a 55%, #6fb98a 100%);">
+      <div class="fc-thumb r2">
         <span class="fc-badge"><span class="dot"></span>News</span>
+        <span class="country-flag">🇧🇾</span>
+        <span class="silhouette">BY</span>
+        <span class="country-strip"><span class="name">Belarus</span><span class="auth">· Centre for Personal Data Protection</span></span>
       </div>
       <div class="fc-body">
         <div class="fc-title">Belarus Centre for Personal Data Protection Issues Guidance on University Website Publication</div>
@@ -1331,6 +1448,24 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     </a>
   </section>
 
+  <!-- BRIEFINGS ROW -->
+  <div class="section-eyebrow">
+    <span class="lbl">PAI Briefings</span>
+    <span class="meta">Bi-monthly explainers from the practitioners shaping AI governance</span>
+  </div>
+  <section class="briefings-row">
+    <div class="briefings-track" role="list">
+      <a class="briefing-card" href="pai-app-leg-eu-omnibus-simplification-package" role="listitem"
+         style="background-image:url('petruta-banner.png')"
+         aria-label="EU Omnibus: What Changed in March & What to Expect Next — Petruta Pirvan">
+        <span class="bc-pill">New</span>
+      </a>
+      <a class="briefing-card placeholder" href="#" role="listitem" aria-label="Next briefing coming soon"></a>
+      <a class="briefing-card placeholder" href="#" role="listitem" aria-label="Next briefing coming soon"></a>
+      <a class="briefing-card placeholder" href="#" role="listitem" aria-label="Next briefing coming soon"></a>
+    </div>
+  </section>
+
   <!-- DEVELOPMENTS -->
   <div class="section-eyebrow">
     <span class="lbl">Developments · this week</span>
@@ -1339,64 +1474,56 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <section class="developments">
     <div class="dev-grid">
 
+      <div class="dev-day-head"><span>Last 3 days</span><span class="count">1 development</span></div>
+
       <article class="dev-item">
-        <div class="dev-meta">
-          <span class="status-pill">Update</span>
-          <span class="juris">France</span>
-          <span class="dot">·</span>
-          <span class="when">2d ago</span>
+        <div class="dev-when">2d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">France</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-cnil-publishes-recommended-template-and-guidance" style="color:inherit;text-decoration:none;">CNIL Publishes Recommended Template and Guidance for DPO Activity Reports</a></div>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-cnil-publishes-recommended-template-and-guidance" style="color:inherit;text-decoration:none;">CNIL Publishes Recommended Template and Guidance for DPO Activity Reports</a></div>
+      </article>
+
+      <div class="dev-day-head"><span>Earlier this week</span><span class="count">5 developments</span></div>
+
+      <article class="dev-item">
+        <div class="dev-when">5d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">Japan</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-japan-digital-agency-concludes-technology-based" style="color:inherit;text-decoration:none;">Japan Digital Agency Concludes Technology-Based Regulatory Reform Committee After Ten Sessions, Reports 98% of National Analogue Regulations Revised</a></div>
+        </div>
       </article>
 
       <article class="dev-item">
-        <div class="dev-meta">
-          <span class="status-pill">Update</span>
-          <span class="juris">Japan</span>
-          <span class="dot">·</span>
-          <span class="when">5d ago</span>
+        <div class="dev-when">5d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">British Columbia</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-bc-information-and-privacy-commissioner-reports" style="color:inherit;text-decoration:none;">BC Information and Privacy Commissioner Reports 86% Rise in Complaints and AI-Generated File Surge in Legislative Address</a></div>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-japan-digital-agency-concludes-technology-based" style="color:inherit;text-decoration:none;">Japan Digital Agency Concludes Technology-Based Regulatory Reform Committee After Ten Sessions, Reports 98% of National Analogue Regulations Revised</a></div>
       </article>
 
       <article class="dev-item">
-        <div class="dev-meta">
-          <span class="status-pill">Update</span>
-          <span class="juris">British Columbia</span>
-          <span class="dot">·</span>
-          <span class="when">5d ago</span>
+        <div class="dev-when">6d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">Australia</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-oaic-and-esafety-commissioner-formalise" style="color:inherit;text-decoration:none;">OAIC and eSafety Commissioner Formalise Cooperation on Privacy and Online Safety via MOU</a></div>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-bc-information-and-privacy-commissioner-reports" style="color:inherit;text-decoration:none;">BC Information and Privacy Commissioner Reports 86% Rise in Complaints and AI-Generated File Surge in Legislative Address</a></div>
       </article>
 
       <article class="dev-item">
-        <div class="dev-meta">
-          <span class="status-pill">Update</span>
-          <span class="juris">Australia</span>
-          <span class="dot">·</span>
-          <span class="when">6d ago</span>
+        <div class="dev-when">6d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">European Union</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-council-of-europe-committee-on-new-and-emerging" style="color:inherit;text-decoration:none;">Council of Europe Committee on New and Emerging Technologies holds inaugural meeting in Strasbourg</a></div>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-oaic-and-esafety-commissioner-formalise" style="color:inherit;text-decoration:none;">OAIC and eSafety Commissioner Formalise Cooperation on Privacy and Online Safety via MOU</a></div>
       </article>
 
       <article class="dev-item">
-        <div class="dev-meta">
-          <span class="status-pill">Update</span>
-          <span class="juris">European Union</span>
-          <span class="dot">·</span>
-          <span class="when">6d ago</span>
+        <div class="dev-when">6d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">Germany</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-dsk-and-sector-specific-supervisory-authorities" style="color:inherit;text-decoration:none;">DSK and Sector-Specific Supervisory Authorities Discuss Deepfake Regulation and Rising Complaint Volumes at Stuttgart Meeting</a></div>
         </div>
-        <div class="dev-headline"><a href="pai-app-news-story-council-of-europe-committee-on-new-and-emerging" style="color:inherit;text-decoration:none;">Council of Europe Committee on New and Emerging Technologies holds inaugural meeting in Strasbourg</a></div>
-      </article>
-
-      <article class="dev-item">
-        <div class="dev-meta">
-          <span class="status-pill">Update</span>
-          <span class="juris">Germany</span>
-          <span class="dot">·</span>
-          <span class="when">6d ago</span>
-        </div>
-        <div class="dev-headline"><a href="pai-app-news-story-dsk-and-sector-specific-supervisory-authorities" style="color:inherit;text-decoration:none;">DSK and Sector-Specific Supervisory Authorities Discuss Deepfake Regulation and Rising Complaint Volumes at Stuttgart Meeting</a></div>
       </article>
 
     </div>
@@ -1406,7 +1533,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <!-- ACTIVITY: Enforcement + Case law -->
   <div class="section-eyebrow">
     <span class="lbl">This week in detail</span>
-    <span class="meta">Enforcement actions and curated case law</span>
+    <span class="meta">Enforcement actions and selected reading</span>
   </div>
   <section class="activity-row">
 
@@ -1417,21 +1544,21 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
       <table class="data-table">
         <thead>
-          <tr><th>Regulator</th><th>Target</th><th class="right">Fine</th><th class="right">When</th></tr>
+          <tr><th>Regulator</th><th>Target</th><th class="right">When</th></tr>
         </thead>
         <tbody>
-          <tr><td class="reg">European Union · European Data Protection Board</td><td class="target"><a href="pai-app-news-story-edpb-adopts-opinion-12-2026-on-spanish-dpa-draft" style="color:inherit;text-decoration:none;">EDPB adopts Opinion 12/2026 on Spanish DPA draft decision…</a><span class="sub">The European Data Protection Board has adopted Opinion 12/20…</span></td><td class="num">Update</td><td class="when">2d ago</td></tr>
-          <tr><td class="reg">Czech Republic · National Cybersecurity Authori</td><td class="target"><a href="pai-app-news-story-czech-n-kib-q1-2026-threat-report-records-highest" style="color:inherit;text-decoration:none;">Czech NÚKIB Q1 2026 Threat Report Records Highest Inciden…</a><span class="sub">The National Cybersecurity Authority of the Czech Republic (…</span></td><td class="num">Update</td><td class="when">7d ago</td></tr>
-          <tr><td class="reg">Germany · Federal Ministry of the Interi</td><td class="target"><a href="pai-app-news-story-german-federal-government-approves-draft-law" style="color:inherit;text-decoration:none;">German Federal Government Approves Draft Law Mandating Th…</a><span class="sub">The German Federal Ministry of the Interior has approved a d…</span></td><td class="num">Update</td><td class="when">7d ago</td></tr>
-          <tr><td class="reg">France · ANSSI France</td><td class="target"><a href="pai-app-news-story-anssi-publishes-european-study-on-s-sdlc-and" style="color:inherit;text-decoration:none;">ANSSI Publishes European Study on S-SDLC and DevSecOps, I…</a><span class="sub">France&#x27;s Agence nationale de la sécurité des systèmes d&#x27;info…</span></td><td class="num">Update</td><td class="when">7d ago</td></tr>
-          <tr><td class="reg">Japan · Japan AI Safety Institute</td><td class="target"><a href="pai-app-news-story-japan-ai-safety-institute-publishes-second" style="color:inherit;text-decoration:none;">Japan AI Safety Institute Publishes Second Edition of Kno…</a><span class="sub">Japan&#x27;s AI Safety Institute (AISI Japan) has published the s…</span></td><td class="num">Update</td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">European Union · European Data Protection Board</td><td class="target"><a href="pai-app-news-story-edpb-adopts-opinion-12-2026-on-spanish-dpa-draft" style="color:inherit;text-decoration:none;">EDPB adopts Opinion 12/2026 on Spanish DPA draft decision…</a><span class="sub">The European Data Protection Board has adopted Opinion 12/20…</span></td><td class="when">2d ago</td></tr>
+          <tr><td class="reg">Czech Republic · National Cybersecurity Authority (NÚKIB)</td><td class="target"><a href="pai-app-news-story-czech-n-kib-q1-2026-threat-report-records-highest" style="color:inherit;text-decoration:none;">Czech NÚKIB Q1 2026 Threat Report Records Highest Inciden…</a><span class="sub">The National Cybersecurity Authority of the Czech Republic (…</span></td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">Germany · Federal Ministry of the Interior (BMI)</td><td class="target"><a href="pai-app-news-story-german-federal-government-approves-draft-law" style="color:inherit;text-decoration:none;">German Federal Government Approves Draft Law Mandating Th…</a><span class="sub">The German Federal Ministry of the Interior has approved a d…</span></td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">France · ANSSI</td><td class="target"><a href="pai-app-news-story-anssi-publishes-european-study-on-s-sdlc-and" style="color:inherit;text-decoration:none;">ANSSI Publishes European Study on S-SDLC and DevSecOps, I…</a><span class="sub">France&#x27;s Agence nationale de la sécurité des systèmes d&#x27;info…</span></td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">Japan · AI Safety Institute (AISI Japan)</td><td class="target"><a href="pai-app-news-story-japan-ai-safety-institute-publishes-second" style="color:inherit;text-decoration:none;">Japan AI Safety Institute Publishes Second Edition of Kno…</a><span class="sub">Japan&#x27;s AI Safety Institute (AISI Japan) has published the s…</span></td><td class="when">7d ago</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="panel">
       <div class="panel-head">
-        <div class="panel-title">Case law <span class="count">worth reading</span></div>
+        <div class="panel-title">Selected reading <span class="count">worth reading this week</span></div>
         <span class="panel-link">View all</span>
       </div>
       <div class="case-list">
@@ -2909,7 +3036,7 @@ function setHotView(view, btn) {
           '<span style="color:#c8d0dc;">·</span>' +
           '<span><b style="color:#0d2e42;">4 consultations</b> closing in '+escapeHTML(primaryJur)+'</span>' +
           '<span style="color:#c8d0dc;">·</span>' +
-          '<span><b style="color:#0d2e42;" id="jsEnf">—</b> enforcement captured</span>';
+          '<span><b style="color:#0d2e42;" id="jsEnf">—</b> enforcement actions</span>';
       }
       if (briefChip) {
         briefChip.classList.add('show');
