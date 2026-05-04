@@ -388,71 +388,6 @@ button { cursor: pointer; }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
 
-/* HOT-LIST strip under the map, inline */
-.map-hotlist {
-  padding: 14px 22px 18px;
-  border-top: 1px solid var(--border-soft);
-}
-.hot-toggle-row {
-  display: flex; align-items: center; gap: 14px;
-  margin-bottom: 12px;
-}
-.hot-toggle {
-  display: inline-flex;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  background: var(--surface-2);
-  padding: 2px;
-  margin-left: auto;
-}
-.ht-btn {
-  font-family: var(--sans);
-  font-size: 11.5px; font-weight: 600;
-  color: var(--muted);
-  padding: 4px 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background .12s, color .12s;
-}
-.ht-btn:hover { color: var(--ink); }
-.ht-btn.on { background: var(--surface); color: var(--accent-2); box-shadow: var(--shadow-1); }
-.hot-view { display: none; flex-wrap: wrap; gap: 8px; align-items: center; }
-.hot-view.on { display: flex; }
-.map-hotlist .h3 {
-  font-size: 10.5px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--muted);
-}
-.region-pill {
-  display: inline-flex; align-items: baseline; gap: 8px;
-  padding: 6px 11px;
-  border-radius: 16px;
-  background: var(--surface-2);
-  border: 1px solid var(--border-soft);
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--ink);
-  cursor: pointer;
-  transition: background .12s, border-color .12s;
-}
-.region-pill:hover { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent-2); }
-.region-pill .num { font-family: var(--mono); font-weight: 700; color: var(--accent-2); font-size: 11.5px; }
-.region-pill .sub { font-size: 10.5px; color: var(--muted); font-weight: 400; }
-.hot-inline {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12.5px;
-  color: var(--ink);
-  padding: 6px 11px;
-  border-radius: 16px;
-  background: var(--surface-2);
-  border: 1px solid var(--border-soft);
-  font-weight: 500;
-  cursor: pointer;
-  transition: background .12s, border-color .12s;
-}
-.hot-inline:hover { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent-2); }
-.hot-inline .num { font-family: var(--mono); font-weight: 700; color: var(--accent-2); font-size: 11.5px; }
-
 /* TODAY feed (hero right) */
 .today-list { list-style: none; padding: 4px 0; }
 .today-item {
@@ -608,12 +543,13 @@ button { cursor: pointer; }
 }
 .briefing-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--accent-soft-2); text-decoration: none; }
 .briefing-card .bc-pill {
-  position: absolute; top: 12px; left: 12px;
+  position: absolute; top: 12px; right: 12px;
   background: #ba0517; color: #fff;
   font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
   padding: 4px 8px; border-radius: 3px;
   text-transform: uppercase;
 }
+.briefing-card.feature { grid-column: span 2; }
 .briefing-card.placeholder {
   background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-3) 100%);
   border-style: dashed;
@@ -751,52 +687,6 @@ button { cursor: pointer; }
 }
 .dev-footer:hover { background: var(--accent-soft); }
 
-/* ============ ACTIVITY ROW: Enforcement + Case law ============ */
-.activity-row {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 24px;
-  margin-bottom: 36px;
-}
-.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.data-table thead th { font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 11px 18px; border-bottom: 1px solid var(--border); background: var(--surface-2); }
-.data-table thead th.right { text-align: right; }
-.data-table tbody td { padding: 14px 18px; border-bottom: 1px solid var(--border-soft); vertical-align: top; color: var(--secondary); }
-.data-table tbody tr:last-child td { border-bottom: none; }
-.data-table tbody tr:hover { background: var(--surface-2); }
-.data-table .reg { font-size: 11.5px; color: var(--secondary); font-weight: 600; white-space: nowrap; }
-.data-table .target { font-weight: 600; color: var(--ink-strong); font-size: 13px; }
-.data-table .target .sub { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 400; }
-.data-table .num { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--ink-strong); text-align: right; white-space: nowrap; padding-top: 14px; }
-.data-table .when { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; white-space: nowrap; padding-top: 15px; }
-.case-list { padding: 4px 0; }
-.case-row { padding: 15px 22px; border-bottom: 1px solid var(--border-soft); }
-.case-row:last-child { border-bottom: none; }
-.case-row:hover { background: var(--surface-2); }
-.case-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; font-weight: 600; color: var(--secondary); margin-bottom: 6px; }
-.case-court { color: var(--ink); font-weight: 700; }
-.case-when { font-family: var(--mono); color: var(--muted); font-weight: 500; }
-.case-name { font-size: 14.5px; font-weight: 600; color: var(--ink-strong); line-height: 1.3; margin-bottom: 6px; }
-.case-name em { font-family: var(--display); font-style: italic; font-weight: 600; font-size: 17px; }
-.case-take { font-size: 12.5px; color: var(--secondary); line-height: 1.5; }
-
-/* ============ CONSULTATIONS ============ */
-.consultations { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); margin-bottom: 28px; }
-.cons-grid { display: grid; grid-template-columns: repeat(4, 1fr); padding: 4px 0 8px; }
-.cons-item { padding: 18px 22px; border-right: 1px solid var(--border-soft); display: flex; flex-direction: column; gap: 10px; cursor: pointer; transition: background .12s; }
-.cons-item:last-child { border-right: none; }
-.cons-item:hover { background: var(--surface-2); }
-.cons-deadline-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.cons-deadline { font-family: var(--mono); font-size: 15px; font-weight: 700; color: var(--ink-strong); }
-.cons-body { font-size: 13px; line-height: 1.4; color: var(--ink-strong); font-weight: 500; }
-.cons-body em { font-family: var(--display); font-style: italic; font-size: 14.5px; font-weight: 600; }
-.cons-source { font-size: 11.5px; font-weight: 500; color: var(--muted); }
-.cons-progress { width: 100%; height: 4px; background: var(--surface-3); border-radius: 2px; overflow: hidden; }
-.cons-progress-bar { height: 100%; border-radius: 2px; }
-.cons-progress-bar.red { background: var(--red-fill); }
-.cons-progress-bar.amber { background: var(--amber-fill); }
-.cons-progress-bar.cool { background: var(--ink-faint); }
-
 /* ============ FOOTER ============ */
 .footer { background: transparent; border-top: 1px solid var(--border); padding: 22px 4px 4px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
 .footer .ok { color: var(--green); font-weight: 600; }
@@ -812,8 +702,6 @@ button { cursor: pointer; }
   .featured-trio { grid-template-columns: 1fr; }
   .dev-grid { grid-template-columns: 1fr; }
   .dev-item { border-right: none; }
-  .activity-row { grid-template-columns: 1fr; }
-  .cons-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 720px) {
   .icon-sidebar { display: none; }
@@ -825,7 +713,6 @@ button { cursor: pointer; }
   .thisweek { grid-template-columns: 1fr; }
   .tw-cell { border-right: none; border-bottom: 1px solid var(--border-soft); }
   .tw-cell:last-child { border-bottom: none; }
-  .cons-grid { grid-template-columns: 1fr; }
   .header-search { max-width: none; }
   .header-user-name { display: none; }
 }
@@ -1192,10 +1079,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <!-- PERSONAL SUMMARY ROW (demoted from hero; will personalise) -->
   <div class="daily-stats" style="display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:#5e6878;margin:-8px 0 28px;padding:14px 0 0;border-top:1px dashed #ebeff5;font-weight:500;">
     <span><b style="color:#0d2e42;">3</b> watchlist items need attention</span>
-    <span style="color:#c8d0dc;">·</span>
-    <span><b style="color:#0d2e42;">4</b> consultations closing</span>
-    <span style="color:#c8d0dc;">·</span>
-    <span><b style="color:#0d2e42;" id="statEnfCap">—</b> enforcement actions</span>
   </div>
 
   <script>
@@ -1327,31 +1210,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
           </div>
         </div>
       </div>
-      <div class="map-hotlist">
-        <div class="hot-toggle-row">
-          <span class="h3" id="hotLabel">Most active this week</span>
-          <div class="hot-toggle">
-            <button class="ht-btn on" onclick="setHotView('active', this)">Most active</button>
-            <button class="ht-btn" onclick="setHotView('regional', this)">By region</button>
-          </div>
-        </div>
-
-        <div class="hot-view on" id="hot-active">
-          <span class="hot-inline">UK · ICO <span class="num" id="hotIco">—</span></span>
-          <span class="hot-inline ds-muted"><i>More authorities populate once AT2 is wired.</i></span>
-        </div>
-
-        <div class="hot-view" id="hot-regional">
-          <span class="region-pill">Europe <span class="num" id="regEU">—</span></span>
-          <span class="region-pill">North America <span class="num" id="regNA">—</span></span>
-          <span class="region-pill">Latin America <span class="num" id="regLatAm">—</span></span>
-          <span class="region-pill">Caribbean <span class="num" id="regCaribbean">—</span></span>
-          <span class="region-pill">Africa <span class="num" id="regAF">—</span></span>
-          <span class="region-pill">Middle East <span class="num" id="regME">—</span></span>
-          <span class="region-pill">Asia Pacific <span class="num" id="regAPAC">—</span></span>
-          <span class="region-pill">Global <span class="num" id="regGlobal">—</span></span>
-        </div>
-      </div>
     </div>
 
     <!-- TODAY -->
@@ -1362,14 +1220,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
       <ul class="today-list" id="todayList"></ul>
     </aside>
-  </section>
-
-  <!-- FEATURED TRIO -->
-  <div class="section-eyebrow">
-    <span class="lbl">Featured this week</span>
-    <span class="meta">Original reporting · this week</span>
-  </div>
-  <section class="featured-trio" id="js-featured-trio">
   </section>
 
   <!-- FEATURED FACULTY -->
@@ -1402,15 +1252,22 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   </div>
   <section class="briefings-row">
     <div class="briefings-track" role="list">
-      <a class="briefing-card" href="pai-app-leg-eu-omnibus-simplification-package" role="listitem"
+      <a class="briefing-card feature" href="pai-app-leg-eu-omnibus-simplification-package" role="listitem"
          style="background-image:url('petruta-banner.png')"
          aria-label="EU Omnibus: What Changed in March & What to Expect Next — Petruta Pirvan">
         <span class="bc-pill">New</span>
       </a>
       <a class="briefing-card placeholder" href="#" role="listitem" aria-label="Next briefing coming soon"></a>
       <a class="briefing-card placeholder" href="#" role="listitem" aria-label="Next briefing coming soon"></a>
-      <a class="briefing-card placeholder" href="#" role="listitem" aria-label="Next briefing coming soon"></a>
     </div>
+  </section>
+
+  <!-- FEATURED TRIO -->
+  <div class="section-eyebrow">
+    <span class="lbl">Featured this week</span>
+    <span class="meta">Original reporting · this week</span>
+  </div>
+  <section class="featured-trio" id="js-featured-trio">
   </section>
 
   <!-- DEVELOPMENTS -->
@@ -1421,81 +1278,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <section class="developments">
     <div class="dev-grid" id="js-dev-grid"></div>
     <div class="dev-footer">Load earlier developments →</div>
-  </section>
-
-  <!-- ACTIVITY: Enforcement + Case law -->
-  <div class="section-eyebrow">
-    <span class="lbl">This week in detail</span>
-    <span class="meta">Enforcement actions and selected reading</span>
-  </div>
-  <section class="activity-row">
-
-    <div class="panel">
-      <div class="panel-head">
-        <div class="panel-title">Enforcement <span class="count"><b id="enfActions">—</b> actions · <b id="enfTotal">—</b></span></div>
-        <span class="panel-link">View all</span>
-      </div>
-      <table class="data-table">
-        <thead>
-          <tr><th>Regulator</th><th>Target</th><th class="right">When</th></tr>
-        </thead>
-        <tbody id="js-enf-tbody"></tbody>
-      </table>
-    </div>
-
-    <div class="panel">
-      <div class="panel-head">
-        <div class="panel-title">Selected reading <span class="count">worth reading this week</span></div>
-        <span class="panel-link">View all</span>
-      </div>
-      <div class="case-list" id="js-reading-list"></div>
-    </div>
-  </section>
-
-  <!-- CONSULTATIONS -->
-  <section class="consultations">
-    <div class="panel-head">
-      <div class="panel-title">Consultations <span class="count">closing soon</span></div>
-      <span class="panel-link">Full calendar</span>
-    </div>
-    <div class="cons-grid">
-      <div class="cons-item">
-        <div class="cons-deadline-row">
-          <span class="cons-deadline">23 Apr</span>
-          <span class="status-pill red">in 6d</span>
-        </div>
-        <div class="cons-progress"><div class="cons-progress-bar red" style="width:75%"></div></div>
-        <div class="cons-body">ICO · draft guidance on AI and the right to explanation</div>
-        <div class="cons-source">UK · ico.org.uk</div>
-      </div>
-      <div class="cons-item">
-        <div class="cons-deadline-row">
-          <span class="cons-deadline">30 Apr</span>
-          <span class="status-pill amber">in 12d</span>
-        </div>
-        <div class="cons-progress"><div class="cons-progress-bar amber" style="width:55%"></div></div>
-        <div class="cons-body">CNIL · recommendations on AI model training using public data</div>
-        <div class="cons-source">France · cnil.fr</div>
-      </div>
-      <div class="cons-item">
-        <div class="cons-deadline-row">
-          <span class="cons-deadline">8 May</span>
-          <span class="status-pill grey">in 21d</span>
-        </div>
-        <div class="cons-progress"><div class="cons-progress-bar cool" style="width:35%"></div></div>
-        <div class="cons-body">EDPB · guidelines on legitimate interests post-<em>Schrems IV</em></div>
-        <div class="cons-source">EU · edpb.europa.eu</div>
-      </div>
-      <div class="cons-item">
-        <div class="cons-deadline-row">
-          <span class="cons-deadline">16 May</span>
-          <span class="status-pill grey">in 28d</span>
-        </div>
-        <div class="cons-progress"><div class="cons-progress-bar cool" style="width:20%"></div></div>
-        <div class="cons-body">MeitY · DPDPA implementation rules, second draft</div>
-        <div class="cons-source">India · meity.gov.in</div>
-      </div>
-    </div>
   </section>
 
   <footer class="footer">
@@ -1509,19 +1291,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
 </div>
 </div>
-
-<script>
-function setHotView(view, btn) {
-  document.querySelectorAll('.ht-btn').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  document.querySelectorAll('.hot-view').forEach(v => v.classList.remove('on'));
-  document.getElementById('hot-' + view).classList.add('on');
-  document.getElementById('hotLabel').textContent =
-    view === 'active' ? 'Most active this week' : 'Coverage by region';
-}
-</script>
-
-
 
 <!-- Mobile nav shim -->
 <style>
@@ -3344,32 +3113,6 @@ function setHotView(view, btn) {
       }).join('');
     }
 
-    /* Enforcement table — top 5 */
-    var enfTbody = document.getElementById('js-enf-tbody');
-    if (enfTbody) {
-      enfTbody.innerHTML = rows.slice(0, 5).map(function(row) {
-        var reg = [row.jurisdiction_name, row.body_name].filter(Boolean).join(' · ');
-        var shortTitle = row.title.length > 52 ? row.title.slice(0, 52) + '…' : row.title;
-        var shortDeck = (row.summary || '').slice(0, 60);
-        return '<tr>' +
-          '<td class="reg">' + escHTML(reg) + '</td>' +
-          '<td class="target"><a href="pai-app-news-story-' + escHTML(row.at2_id) + '" style="color:inherit;text-decoration:none;">' + escHTML(shortTitle) + '</a>' +
-          (shortDeck ? '<span class="sub">' + escHTML(shortDeck) + '…</span>' : '') +
-          '</td>' +
-          '<td class="when">' + escHTML(row.date_display) + '</td></tr>';
-      }).join('');
-    }
-
-    /* Selected reading — top 3 */
-    var readList = document.getElementById('js-reading-list');
-    if (readList) {
-      readList.innerHTML = rows.slice(0, 3).map(function(row) {
-        return '<div class="case-row">' +
-          '<div class="case-meta"><span class="case-court">' + escHTML(row.jurisdiction_name) + '</span><span class="case-when">' + escHTML(row.date_display) + '</span></div>' +
-          '<div class="case-name"><a href="pai-app-news-story-' + escHTML(row.at2_id) + '" style="color:inherit;text-decoration:none;">' + escHTML(row.title) + '</a></div>' +
-          '</div>';
-      }).join('');
-    }
   } catch (_) { /* leave sections empty on error */ }
 })();
 </script>
