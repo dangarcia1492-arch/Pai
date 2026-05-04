@@ -1,0 +1,6 @@
+Contact: mailto:security@principlesai.org
+Contact: mailto:davidlongford@gmail.com
+Expires: 2027-05-03T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://app.principlesai.org/.well-known/security.txt
+Policy: https://app.principlesai.org/trust
