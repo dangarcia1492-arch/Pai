@@ -91,9 +91,38 @@
   .col-slot.is-active .pip{box-shadow:0 0 0 3px rgba(255,255,255,.5)}
   .col-slot.is-active .summary-line{color:#fff}
 
-  .matrix-row.head .col-slot{cursor:default;align-items:flex-start;background:var(--gray-1);transform:none;padding:14px 8px}
+  .matrix-row.head .col-slot{cursor:default;align-items:stretch;background:var(--gray-1);transform:none;padding:10px 8px;gap:0}
   .matrix-row.head .col-slot:hover{background:var(--gray-1);transform:none;box-shadow:none}
-  .col-slot-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);text-align:center;line-height:1.35}
+  .matrix-row.head .col-juris{cursor:pointer}
+  .matrix-row.head .col-juris.is-sorted .name::after{content:""}
+  .col-slot-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);text-align:center;line-height:1.35;cursor:pointer;padding:6px 4px;border-radius:4px;transition:background var(--t-fast),color var(--t-fast)}
+  .col-slot-label:hover{background:rgba(0,0,0,.04);color:var(--navy)}
+  .col-slot-label .sort-ind{display:inline-block;margin-left:4px;font-size:10px;color:var(--text-soft);transition:color var(--t-fast)}
+  .col-slot-label.is-sorted{color:var(--accent-2)}
+  .col-slot-label.is-sorted .sort-ind{color:var(--accent)}
+  .col-slot-controls{display:flex;justify-content:center;gap:2px;margin-top:4px;align-items:center}
+  .th-filter{background:transparent;border:1px solid transparent;color:var(--text-soft);cursor:pointer;font-size:11px;padding:2px 7px;border-radius:4px;line-height:1;font-family:'Inter',sans-serif;font-weight:600;letter-spacing:0;transition:all var(--t-fast)}
+  .th-filter:hover{background:var(--gray-2);color:var(--navy);border-color:var(--gray-3)}
+  .th-filter.has-filter{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent-soft-2)}
+  .th-filter .fcount{display:inline-block;padding:0 4px;background:var(--accent);color:#fff;border-radius:8px;font-size:9px;margin-left:3px;line-height:1.4}
+  /* row striping for visual rhythm */
+  .matrix-row:not(.head):nth-child(even){background:rgba(10,23,41,.013)}
+  .matrix-row:not(.head):nth-child(even):hover{background:var(--gray-1)}
+  /* filter popover */
+  .th-filter-popover{position:fixed;background:#fff;border:1px solid var(--gray-2);border-radius:9px;box-shadow:0 8px 24px rgba(10,23,41,.15);padding:8px;min-width:220px;z-index:200;font-family:'Inter',sans-serif}
+  .fpop-title{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);padding:4px 8px 8px;border-bottom:1px solid var(--gray-2);margin-bottom:4px}
+  .fpop-row{display:flex;gap:9px;align-items:center;padding:6px 8px;border-radius:5px;cursor:pointer;font-size:12.5px;color:var(--navy)}
+  .fpop-row:hover{background:var(--gray-1)}
+  .fpop-row input{cursor:pointer;width:14px;height:14px;accent-color:var(--accent)}
+  .fpop-row .fpip{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+  .fpop-row .fpip.s-verified{background:var(--green-fg)}
+  .fpop-row .fpip.s-pending{background:var(--amber-fg)}
+  .fpop-row .fpip.s-source{background:#c8d0dc}
+  .fpop-actions{display:flex;gap:6px;padding:6px 4px 2px;border-top:1px solid var(--gray-2);margin-top:4px}
+  .fpop-actions button{flex:1;padding:6px;border:1px solid var(--gray-3);background:#fff;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;color:var(--text-mute);font-family:'Inter',sans-serif;transition:all var(--t-fast)}
+  .fpop-actions button:hover{border-color:var(--navy);color:var(--navy)}
+  .fpop-actions .fpop-apply{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .fpop-actions .fpop-apply:hover{background:var(--accent-2);border-color:var(--accent-2);color:#fff}
 
   .pip{width:14px;height:14px;border-radius:4px;background:var(--gray-2);transition:transform var(--t-fast)}
   .pip.s-verified{background:var(--green-fg)}
@@ -234,6 +263,13 @@
 
   let activeTab = tabs[0].key;
   let activeFilter = filters[0];
+  // sortState: {col: 'juris' | <slotKey>, dir: 'asc' | 'desc'}.
+  // Default: by jurisdiction name asc.
+  let sortState = { col: 'juris', dir: 'asc' };
+  // columnFilters: { <slotKey>: ['verified','pending','source'] } — empty array == no filter on that col.
+  let columnFilters = {};
+  const STATUS_LABELS = { verified: 'Verified', pending: 'Pending verify', source: 'Awaiting source' };
+  const STATUS_RANK = { verified: 0, pending: 1, source: 2 };
 
   const matrix = document.getElementById('matrix');
   const tabsEl = document.getElementById('tabs');
@@ -304,6 +340,38 @@
     });
   }
 
+  function passesColumnFilters(state){
+    for (const slotKey of Object.keys(columnFilters)){
+      const allowed = columnFilters[slotKey];
+      if (!allowed || allowed.length === 0) continue;
+      const c = getCell(state.slug, activeTab, slotKey);
+      if (!allowed.includes(c.status)) return false;
+    }
+    return true;
+  }
+
+  function applySort(rows){
+    if (!sortState.col) return rows;
+    const dir = sortState.dir === 'asc' ? 1 : -1;
+    if (sortState.col === 'juris'){
+      return rows.slice().sort((a,b) => a.name.localeCompare(b.name) * dir);
+    }
+    const slotKey = sortState.col;
+    return rows.slice().sort((a,b) => {
+      const ca = getCell(a.slug, activeTab, slotKey);
+      const cb = getCell(b.slug, activeTab, slotKey);
+      const ra = STATUS_RANK[ca.status] ?? 9;
+      const rb = STATUS_RANK[cb.status] ?? 9;
+      if (ra !== rb) return (ra - rb) * dir;
+      return a.name.localeCompare(b.name); // stable tiebreak by name asc
+    });
+  }
+
+  function sortIcon(col){
+    if (sortState.col !== col) return '↕';
+    return sortState.dir === 'asc' ? '↑' : '↓';
+  }
+
   function renderMatrix(){
     const tab = tabs.find(t => t.key === activeTab);
     if (!tab) return;
@@ -314,19 +382,30 @@
     html += `<div class="matrix-row head" style="grid-template-columns:${cols}">`;
     const entityLbl = meta.entity_label || 'Jurisdiction';
     const isoSub = meta.iso_sub_label || 'ISO · alphabetical';
-    html += `<div class="col-juris"><div class="name">${entityLbl}</div><div class="iso">${isoSub}</div></div>`;
+    const jurisSorted = sortState.col === 'juris' ? ' is-sorted' : '';
+    html += `<div class="col-juris${jurisSorted}" data-sort-col="juris" title="Click to sort by ${entityLbl.toLowerCase()}"><div class="name">${entityLbl} <span class="sort-ind">${sortIcon('juris')}</span></div><div class="iso">${isoSub}</div></div>`;
     slots.forEach(s => {
-      html += `<div class="col-slot"><div class="col-slot-label">${s.label}</div></div>`;
+      const isSorted = sortState.col === s.key ? ' is-sorted' : '';
+      const fActive = (columnFilters[s.key] && columnFilters[s.key].length > 0) ? ' has-filter' : '';
+      const fCount = (columnFilters[s.key] && columnFilters[s.key].length > 0) ? `<span class="fcount">${columnFilters[s.key].length}</span>` : '';
+      html += `<div class="col-slot">
+        <div class="col-slot-label${isSorted}" data-sort-col="${s.key}" title="Click to sort by ${s.label}">${s.label} <span class="sort-ind">${sortIcon(s.key)}</span></div>
+        <div class="col-slot-controls">
+          <button class="th-filter${fActive}" data-filter-col="${s.key}" title="Filter ${s.label}">Filter${fCount}</button>
+        </div>
+      </div>`;
     });
     html += `</div>`;
 
-    states.filter(passesFilter).forEach(state => {
+    const filtered = states.filter(passesFilter).filter(passesColumnFilters);
+    const sorted = applySort(filtered);
+    sorted.forEach(state => {
       html += `<div class="matrix-row" style="grid-template-columns:${cols}">`;
       const jurisHref = state.juris_path || `pai-app-juris-${state.slug}.html`;
       html += `<div class="col-juris"><div class="name"><a href="${jurisHref}">${state.name}</a></div><div class="iso">${state.iso}</div></div>`;
       slots.forEach(s => {
         const c = getCell(state.slug, activeTab, s.key);
-        const summaryShort = ({verified:'Verified', pending:'Pending verify', source:'Awaiting source'})[c.status];
+        const summaryShort = STATUS_LABELS[c.status] || c.status;
         html += `<div class="col-slot" data-slug="${state.slug}" data-slot="${s.key}">
           <div class="pip s-${c.status}"></div>
           <div class="summary-line">${summaryShort}</div>
@@ -335,11 +414,90 @@
       html += `</div>`;
     });
 
+    if (sorted.length === 0){
+      html += `<div class="matrix-row" style="grid-template-columns:1fr;padding:32px;text-align:center;color:var(--text-mute);font-size:13px">No rows match the current filters. <button onclick="window.__resetCols()" style="background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:13px;padding:0;margin-left:6px">Clear column filters</button></div>`;
+    }
+
     matrix.innerHTML = html;
 
     matrix.querySelectorAll('.col-slot[data-slug]').forEach(cell => {
       cell.addEventListener('click', () => openDetail(cell.dataset.slug, cell.dataset.slot, cell));
     });
+    matrix.querySelectorAll('[data-sort-col]').forEach(el => {
+      el.addEventListener('click', () => {
+        const k = el.dataset.sortCol;
+        if (sortState.col === k){
+          sortState = { col: k, dir: sortState.dir === 'asc' ? 'desc' : 'asc' };
+        } else {
+          sortState = { col: k, dir: 'asc' };
+        }
+        renderMatrix();
+      });
+    });
+    matrix.querySelectorAll('.th-filter[data-filter-col]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        openFilterPopover(btn, btn.dataset.filterCol);
+      });
+    });
+  }
+
+  // expose reset for the empty-state link
+  window.__resetCols = function(){ columnFilters = {}; renderMatrix(); };
+
+  // ── Filter popover ─────────────────────────────────
+  function closeFilterPopover(){
+    document.getElementById('th-filter-popover')?.remove();
+    document.removeEventListener('click', closeFilterPopoverOnClickOutside, true);
+  }
+  function closeFilterPopoverOnClickOutside(e){
+    if (!e.target.closest('#th-filter-popover')) closeFilterPopover();
+  }
+  function openFilterPopover(anchor, slotKey){
+    closeFilterPopover();
+    const tab = tabs.find(t => t.key === activeTab);
+    const slot = tab.slots.find(s => s.key === slotKey);
+    const current = columnFilters[slotKey] || [];
+    const pop = document.createElement('div');
+    pop.className = 'th-filter-popover';
+    pop.id = 'th-filter-popover';
+    pop.innerHTML = `
+      <div class="fpop-title">Filter · ${slot.label}</div>
+      ${['verified','pending','source'].map(s => `
+        <label class="fpop-row">
+          <input type="checkbox" value="${s}" ${current.includes(s) ? 'checked' : ''}>
+          <span class="fpip s-${s}"></span>
+          <span>${STATUS_LABELS[s]}</span>
+        </label>`).join('')}
+      <div class="fpop-actions">
+        <button class="fpop-clear">Clear</button>
+        <button class="fpop-apply">Apply</button>
+      </div>`;
+    document.body.appendChild(pop);
+    const r = anchor.getBoundingClientRect();
+    pop.style.top = (r.bottom + 6) + 'px';
+    pop.style.left = Math.max(8, Math.min(window.innerWidth - 232, r.left + r.width/2 - 110)) + 'px';
+    pop.querySelector('.fpop-clear').addEventListener('click', () => {
+      delete columnFilters[slotKey];
+      closeFilterPopover();
+      renderMatrix();
+    });
+    pop.querySelector('.fpop-apply').addEventListener('click', () => {
+      const checked = Array.from(pop.querySelectorAll('input:checked')).map(i => i.value);
+      if (checked.length === 0) delete columnFilters[slotKey];
+      else columnFilters[slotKey] = checked;
+      closeFilterPopover();
+      renderMatrix();
+    });
+    pop.querySelectorAll('.fpop-row').forEach(row => {
+      row.addEventListener('click', e => {
+        if (e.target.tagName !== 'INPUT'){
+          const cb = row.querySelector('input');
+          cb.checked = !cb.checked;
+        }
+      });
+    });
+    setTimeout(() => document.addEventListener('click', closeFilterPopoverOnClickOutside, true), 0);
   }
 
   // Detail panel
