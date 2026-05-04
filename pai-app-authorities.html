@@ -1391,7 +1391,7 @@ loadAuthorities();
   /* Topbar */
   .pst-topbar { display: flex; align-items: center; justify-content: space-between; padding: 22px 32px; flex-shrink: 0; }
   .pst-brand { display: flex; align-items: center; gap: 10px; }
-  .pst-brand-mark { width: 22px; height: 22px; background: #014486; color: #ffffff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: 'Inter'; font-style: italic; font-weight: 700; font-size: 14px; letter-spacing: -0.5px; }
+  .pst-brand-mark { width: 24px; height: 24px; flex-shrink: 0; }
   .pst-brand-name { font-size: 13.5px; font-weight: 600; color: #07202e; letter-spacing: -0.005em; }
   .pst-brand-name em { font-style: italic; font-weight: 500; color: #4a556b; }
   .pst-exit { background: transparent; border: none; color: #6b7a8f; font-size: 12px; font-weight: 500; cursor: pointer; letter-spacing: 0.01em; }
@@ -1570,7 +1570,11 @@ loadAuthorities();
   <div class="pai-step-takeover" id="paiStepTakeover" role="dialog" aria-modal="true" aria-labelledby="paiStepTitle">
     <div class="pst-topbar">
       <div class="pst-brand">
-        <span class="pst-brand-mark">P</span>
+        <svg class="pst-brand-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="12" height="12" rx="2" fill="white" transform="rotate(45 12 12)"/>
+          <rect x="5" y="12" width="14" height="4" rx="1.5" fill="white"/>
+          <rect x="5" y="16" width="14" height="4" rx="1.5" fill="white"/>
+        </svg>
         <span class="pst-brand-name">Principles<em>AI</em></span>
       </div>
       <button class="pst-exit" id="paiStepExit" type="button">Skip</button>

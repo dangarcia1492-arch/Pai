@@ -1,216 +1,785 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrinciplesAI — China AI Note</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrinciplesAI — Home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght..60,400;8..60,600;8..60,700&family=Inter:wght;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
-  --ink:#0d2e42;--ink-strong:#07202e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
-  --border:#dbe1ea;--border-soft:#ebeff5;
-  --accent:#0176d3;--accent-2:#014486;--accent-3:#032e61;--accent-soft:#e3effc;--accent-soft-2:#cfe1f6;
-  --green:#2e844a;--green-bg:#d6f1dc;--green-fill:#2e844a;
-  --amber:#905200;--amber-bg:#fef0c7;--amber-fill:#ca8501;
-  --red:#ba0517;--red-bg:#feded8;--red-fill:#ba0517;
-  --display:'Inter',-apple-system,sans-serif;--sans:'Inter',-apple-system,'Segoe UI',sans-serif;
-  --mono:'Inter',sans-serif;
-  --sidebar-collapsed:56px;--sidebar-expanded:280px;--header-height:52px;
-  --shadow-1:0 1px 2px rgba(10,23,41,.04);--shadow-2:0 2px 6px rgba(10,23,41,.07),0 8px 20px rgba(10,23,41,.05);
-  --radius:10px;--radius-chip:4px;
+:root {
+  --bg: #fcfcfc;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #eff2f7;
+  --ink: #0d2e42;
+  --ink-strong: #07202e;
+  --secondary: #2a3548;
+  --muted: #5e6878;
+  --ink-faint: #8a93a3;
+  --border: #dbe1ea;
+  --border-soft: #ebeff5;
+  --accent: #0176d3;
+  --accent-2: #014486;
+  --accent-3: #032e61;
+  --accent-soft: #e3effc;
+  --accent-soft-2: #cfe1f6;
+  --green: #2e844a;
+  --green-bg: #d6f1dc;
+  --green-fill: #2e844a;
+  --amber: #905200;
+  --amber-bg: #fef0c7;
+  --amber-fill: #ca8501;
+  --red: #ba0517;
+  --red-bg: #feded8;
+  --red-fill: #ba0517;
+  --display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono: 'Inter', sans-serif;
+  --sidebar-collapsed: 56px;
+  --sidebar-expanded: 280px;
+  --header-height: 52px;
+  --shadow-1: 0 1px 2px rgba(10, 23, 41, 0.04);
+  --shadow-2: 0 2px 6px rgba(10, 23, 41, 0.07), 0 8px 20px rgba(10, 23, 41, 0.05);
+  --radius: 10px;
+  --radius-chip: 4px;
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-size:15px;-webkit-text-size-adjust:100%}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;min-width:1280px}
-a{color:var(--accent);text-decoration:none}
-button,input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
-button{cursor:pointer}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 15px; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 13.5px; line-height: 1.55; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+a { color: var(--accent); text-decoration: none; }
+button, input { font-family: inherit; font-size: inherit; color: inherit; border: none; background: none; outline: none; }
+button { cursor: pointer; }
 
-/* Icon sidebar */
-.icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden;box-shadow:var(--shadow-1)}
-.icon-sidebar:hover{width:var(--sidebar-expanded);box-shadow:var(--shadow-2)}
-.sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;gap:12px;flex-shrink:0;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
-.sidebar-brand .brand-icon{width:28px;height:28px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--display);font-style:italic;font-weight:700;font-size:18px;color:#fff;letter-spacing:-.5px}
-.sidebar-brand .brand-text{font-family:var(--display);font-weight:600;font-size:18px;color:var(--ink);opacity:0;transition:opacity .15s .05s}
-.sidebar-brand .brand-text .ai{font-style:italic;font-weight:500}
-.icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
-.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:12px 8px;overflow-y:auto;overflow-x:hidden}
-.sidebar-nav-item{display:flex;align-items:center;gap:14px;height:40px;padding:0 12px;border-radius:4px;cursor:pointer;position:relative;color:var(--secondary);transition:color .15s,background .15s;white-space:nowrap;flex-shrink:0;text-decoration:none}
-.sidebar-nav-item:hover{color:var(--ink);background:var(--surface-3)}
-.sidebar-nav-item.active{color:var(--accent-2);background:var(--accent-soft);font-weight:600}
-.sidebar-nav-item.active::before{content:'';position:absolute;left:-8px;top:8px;bottom:8px;width:3px;background:var(--accent);border-radius:0 3px 3px 0}
-.sidebar-nav-item svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none;flex-shrink:0}
-.sidebar-nav-item .nav-label{font-size:13.5px;font-weight:500;opacity:0;transition:opacity .15s .05s}
-.sidebar-nav-item.active .nav-label{font-weight:600}
-.icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
-.sidebar-user{border-top:1px solid var(--border);padding:8px;flex-shrink:0;display:flex;align-items:center}
-.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+/* ============ ICON SIDEBAR ============ */
+.icon-sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-collapsed); background: var(--surface); border-right: 1px solid var(--border); z-index: 300; display: flex; flex-direction: column; transition: width .25s cubic-bezier(.4,0,.2,1); overflow: hidden; box-shadow: var(--shadow-1); }
+.icon-sidebar:hover { width: var(--sidebar-expanded); box-shadow: var(--shadow-2); }
+.sidebar-brand { display: flex; align-items: center; height: var(--header-height); padding: 0 16px; gap: 12px; flex-shrink: 0; border-bottom: 1px solid var(--border); overflow: hidden; white-space: nowrap; }
+.sidebar-brand .brand-icon { width: 28px; height: 28px; background: var(--accent); border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--display); font-style: italic; font-weight: 700; font-size: 18px; color: #fff; letter-spacing: -0.5px; }
+.sidebar-brand .brand-text { font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--ink); opacity: 0; transition: opacity .15s .05s; }
+.sidebar-brand .brand-text .ai { font-style: italic; font-weight: 500; }
+.icon-sidebar:hover .sidebar-brand .brand-text { opacity: 1; }
+.sidebar-nav-items { flex: 1; display: flex; flex-direction: column; gap: 2px; padding: 12px 8px; overflow-y: auto; overflow-x: hidden; }
+.sidebar-regions-zone { position: relative; flex: 1; display: flex; flex-direction: column; gap: 2px; overflow: hidden; min-height: 0; }
+.sidebar-nav-divider { height: 1px; background: #c8d0dc; margin: 12px 16px; flex-shrink: 0; }
+.sidebar-nav-item { display: flex; align-items: center; gap: 14px; height: 40px; padding: 0 12px; border-radius: 4px; cursor: pointer; position: relative; color: var(--secondary); transition: color .15s, background .15s; white-space: nowrap; flex-shrink: 0; }
+.sidebar-nav-item:hover { color: var(--ink); background: var(--surface-3); }
+.sidebar-nav-item.active { color: var(--accent-2); background: var(--accent-soft); font-weight: 600; }
+.sidebar-nav-item.active::before { content: ''; position: absolute; left: -8px; top: 8px; bottom: 8px; width: 3px; background: var(--accent); border-radius: 0 3px 3px 0; }
+.sidebar-nav-item svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.7; fill: none; flex-shrink: 0; }
+.sidebar-nav-item .nav-label { font-size: 13.5px; font-weight: 500; opacity: 0; transition: opacity .15s .05s; }
+.sidebar-nav-item.active .nav-label { font-weight: 600; }
+.icon-sidebar:hover .sidebar-nav-item .nav-label { opacity: 1; }
+.sidebar-nav-item .jur-nav-chevron { font-size: 11px; margin-left: auto; opacity: 0; transition: opacity .15s .05s; color: var(--ink-faint); }
+.icon-sidebar:hover .sidebar-nav-item .jur-nav-chevron { opacity: 1; }
+.sb-invite { display: flex; align-items: flex-start; gap: 12px; padding: 16px 14px 18px; cursor: pointer; overflow: hidden; border-top: 1px solid var(--border-soft); }
+.sb-invite svg.sb-invite-icon { width: 18px; height: 18px; stroke: #2a7a6b; fill: none; flex-shrink: 0; stroke-width: 1.7; margin-top: 1px; }
+.sb-invite-body { opacity: 0; transition: opacity .15s .05s; flex: 1; min-width: 0; }
+.icon-sidebar:hover .sb-invite-body { opacity: 1; }
+.sb-invite-label { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.sb-invite-sub { font-size: 12px; line-height: 1.5; color: var(--muted); margin-bottom: 10px; }
+.sb-invite-btn { font-size: 12.5px; font-weight: 600; color: var(--accent); text-decoration: none; }
+.sidebar-user { border-top: 1px solid var(--border); padding: 8px 8px; flex-shrink: 0; display: flex; align-items: center; }
+.user-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
 
-/* Header bar */
-.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:18px;z-index:200;box-shadow:var(--shadow-1)}
-.header-nav-arrows{display:flex;gap:4px}
-.header-nav-arrows button{width:30px;height:30px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
-.header-nav-arrows button:hover{background:var(--surface-3);color:var(--ink)}
-.header-nav-arrows button svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
-.header-user-name{font-size:13px;font-weight:500;color:var(--secondary);white-space:nowrap}
-.header-search{flex:1;max-width:460px;display:flex;align-items:center;gap:10px;height:36px;padding:0 14px;background:var(--surface-3);border-radius:5px;border:1px solid transparent}
-.header-search:focus-within{background:var(--surface);border-color:var(--accent-soft-2)}
-.header-search svg{width:15px;height:15px;stroke:var(--muted);stroke-width:2;fill:none}
-.header-search input{flex:1;font-size:13px;background:transparent}
-.header-search input::placeholder{color:var(--muted)}
-.header-search kbd{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--border);border-radius:3px;padding:1px 6px;background:var(--surface)}
-.header-right{display:flex;align-items:center;gap:10px;margin-left:auto}
-.home-jur-btn{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--secondary);cursor:pointer;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:var(--surface);font-weight:500}
-.hjb-flag{font-size:17px;line-height:1}
-.header-icon-btn{width:36px;height:36px;border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--muted);position:relative}
-.header-icon-btn:hover{background:var(--surface-3);color:var(--ink)}
-.header-icon-btn svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.7;fill:none}
-.header-icon-btn .badge-count{position:absolute;top:4px;right:3px;min-width:17px;height:17px;padding:0 5px;background:var(--red-fill);color:#fff;font-family:var(--mono);font-size:10px;font-weight:600;border-radius:9px;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface);box-sizing:content-box}
-.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:var(--secondary);background:transparent;border:1px solid var(--border);border-radius:5px;text-decoration:none;transition:background .12s,color .12s,border-color .12s}
-.header-logout:hover{background:var(--surface-2);color:var(--ink);border-color:var(--ink-faint)}
-.header-logout svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+/* ============ HEADER BAR ============ */
+.header-bar { position: fixed; top: 0; left: var(--sidebar-collapsed); right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
+.header-nav-arrows { display: flex; gap: 4px; }
+.header-nav-arrows button { width: 30px; height: 30px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.header-nav-arrows button:hover { background: var(--surface-3); color: var(--ink); }
+.header-nav-arrows button svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; }
+.header-user-name { font-size: 13px; font-weight: 500; color: var(--secondary); white-space: nowrap; }
+.header-search { flex: 1; max-width: 460px; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px; background: var(--surface-3); border-radius: 5px; border: 1px solid transparent; }
+.header-search:focus-within { background: var(--surface); border-color: var(--accent-soft-2); }
+.header-search svg { width: 15px; height: 15px; stroke: var(--muted); stroke-width: 2; fill: none; }
+.header-search input { flex: 1; font-size: 13px; background: transparent; }
+.header-search input::placeholder { color: var(--muted); }
+.header-search kbd { font-family: var(--mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; background: var(--surface); }
+.header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.home-jur-btn { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--secondary); cursor: pointer; padding: 6px 12px; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); font-weight: 500; }
+.hjb-flag { font-size: 17px; line-height: 1; }
+.header-icon-btn { width: 36px; height: 36px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: var(--muted); position: relative; }
+.header-icon-btn:hover { background: var(--surface-3); color: var(--ink); }
+.header-icon-btn svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 1.7; fill: none; }
+.header-icon-btn .badge-count { position: absolute; top: 4px; right: 3px; min-width: 17px; height: 17px; padding: 0 5px; background: var(--red-fill); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 600; border-radius: 9px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--surface); box-sizing: content-box; }
 
-/* Main */
-.main-content{margin-left:var(--sidebar-collapsed);padding-top:var(--header-height);min-height:100vh}
+/* ============ MAIN CONTENT ============ */
+.main-content { margin-left: var(--sidebar-collapsed); padding-top: var(--header-height); min-height: 100vh; }
 .page-view{padding:26px 40px 40px;max-width:1600px;margin:0}
 
-.page-statusbar{display:grid;grid-template-columns:1fr auto;gap:20px;padding:0 0 18px;margin-bottom:22px;border-bottom:1px solid var(--border);align-items:start;min-height:55px;margin-bottom:22px}
-.hero-greeting h1{font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong);line-height:1.15;margin-bottom:6px}
-.hero-sub{font-size:13.5px;color:var(--secondary);font-weight:500;line-height:1.5;max-width:640px}
-.page-actions{display:flex;gap:10px;flex-shrink:0}
-.btn{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 18px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--secondary);transition:background .12s,border-color .12s,color .12s,box-shadow .12s}
-.btn:hover{background:var(--surface-2);border-color:var(--ink-faint);color:var(--ink)}
-.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 1px 2px rgba(1,118,211,.22)}
-.btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2);color:#fff;box-shadow:0 2px 6px rgba(1,118,211,.3)}
-.btn.sm{height:32px;padding:0 12px;font-size:12.5px}
+/* ============ HERO GREETING (logged-in state) ============ */
+.page-statusbar{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  padding: 0 0 22px;
+  margin-bottom:22px;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+;min-height:55px;margin-bottom:22px}
+.hero-greeting { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.hero-greet-line {
+  font-size: 30px; font-weight: 700;
+  letter-spacing: -0.022em; color: var(--ink-strong);
+  line-height: 1.1;
+}
+.hero-greet-line em { font-style: normal; color: var(--accent-2); }
+.hero-tagline {
+  font-size: 13px; font-weight: 500;
+  color: var(--muted);
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.hero-tagline em {
+  font-style: normal; font-weight: 600;
+  color: var(--accent-2);
+}
+.hero-tagline .sep { color: var(--ink-faint); }
+.hero-contextline {
+  font-size: 12.5px; color: var(--secondary);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-top: 2px;
+}
 
-.activity-strip{display:flex;gap:18px;padding:10px 0 14px;margin-bottom:14px;font-size:12.5px;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border-soft)}
-.activity-strip b{color:var(--ink-strong);font-weight:700;font-family:var(--mono);font-size:12px}
-.activity-strip .sep{color:var(--ink-faint)}
+/* ============ LOGGED-OUT STATIC HERO (understated) ============ */
+.hero-eyebrow {
+  font-size: 11.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: var(--accent-2);
+  margin-bottom: 12px;
+}
+.static-hero {
+  font-size: 42px; font-weight: 700;
+  letter-spacing: -0.025em; color: var(--ink-strong);
+  line-height: 1.06;
+  margin-bottom: 14px;
+}
+.static-hero .sh-sub {
+  color: var(--muted);
+  font-weight: 600;
+}
+/* legacy (unused now) */
+.cycle-hero {
+  font-size: 40px; font-weight: 700;
+  letter-spacing: -0.025em; color: var(--ink-strong);
+  line-height: 1.08;
+  margin-bottom: 10px;
+}
+/* Slot-machine cycle word — proper vertical slide with width transition */
+.cycle-word {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  height: 1.08em;          /* matches cycle-hero line-height */
+  overflow: hidden;
+  color: var(--accent-2);
+  transition: width .45s cubic-bezier(0.65,0.05,0.36,1);
+  width: 1.8em;            /* initial — JS sets to match active word */
+}
+.cycle-track {
+  position: absolute;
+  top: 0; left: 0;
+  display: flex; flex-direction: column;
+  transition: transform .55s cubic-bezier(0.65,0.05,0.36,1);
+  will-change: transform;
+}
+.cycle-track .w {
+  display: block;
+  height: 1.08em;
+  line-height: 1.08em;
+  white-space: nowrap;
+}
+/* Hidden sizer spans — used only by JS to measure word width */
+.cycle-sizer {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+  top: -9999px; left: -9999px;
+  font: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+.cycle-sub {
+  font-size: 16px; color: var(--secondary);
+  font-weight: 500;
+  margin-top: 4px;
+}
+.cycle-cta-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 18px;
+}
+.cycle-cta {
+  height: 42px; padding: 0 22px;
+  background: var(--accent); color: #fff;
+  border-radius: 6px; border: 1px solid var(--accent);
+  font-size: 14px; font-weight: 600;
+  box-shadow: 0 2px 6px rgba(1, 118, 211, 0.28);
+  cursor: pointer;
+}
+.cycle-cta:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.cycle-cta.ghost { background: transparent; color: var(--accent-2); border-color: var(--accent-soft-2); box-shadow: none; }
+.cycle-cta.ghost:hover { background: var(--accent-soft); }
+.cycle-freepeek {
+  font-size: 12.5px; color: var(--muted);
+  margin-left: 6px;
+}
+.cycle-freepeek b { color: var(--ink); font-weight: 600; }
 
-/* Tabs */
-.tab-strip{display:flex;gap:4px;margin-bottom:18px;border-bottom:1px solid var(--border)}
-.tab{position:relative;display:inline-flex;align-items:center;gap:8px;padding:12px 14px;font-size:13.5px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .12s}
-.tab:hover{color:var(--ink)}
-.tab.active{color:var(--accent-2);border-bottom-color:var(--accent);font-weight:600}
-.tab .tab-count{font-family:var(--mono);font-size:11px;color:var(--ink-faint);background:var(--surface-3);padding:1px 7px;border-radius:9px;font-weight:600}
-.tab.active .tab-count{color:var(--accent-2);background:var(--accent-soft)}
+/* Paywall banner on logged-out page */
+.paywall-banner {
+  background: linear-gradient(180deg, rgba(241,244,248,0) 0%, rgba(241,244,248,0.95) 30%, rgba(241,244,248,1) 100%);
+  margin-top: -120px;
+  padding: 120px 40px 44px;
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  pointer-events: none;
+}
+.paywall-card {
+  pointer-events: auto;
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-2);
+  padding: 28px 32px 28px;
+}
+.paywall-eyebrow {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+}
+.paywall-title {
+  font-size: 22px; font-weight: 700;
+  color: var(--ink-strong);
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+.paywall-sub {
+  font-size: 13.5px; color: var(--secondary);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+.paywall-ctas { display: flex; gap: 10px; justify-content: center; }
+.ps-left {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13.5px; color: var(--secondary);
+  flex-wrap: wrap;
+}
+.ps-date {
+  font-size: 15px; font-weight: 700;
+  color: var(--ink-strong);
+  letter-spacing: -0.005em;
+}
+.ps-week, .ps-scope { font-weight: 500; color: var(--secondary); }
+.ps-sep { color: var(--ink-faint); }
+.ps-ok { color: var(--green); font-weight: 600; font-size: 12.5px; }
+.ps-ok::before { content: ''; display: inline-block; width: 8px; height: 8px; background: var(--green-fill); border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.ps-scope-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 24px; padding: 0 10px;
+  font-size: 11.5px; font-weight: 600;
+  color: var(--accent-2);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-soft-2);
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.page-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.btn { display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 18px; font-size: 13px; font-weight: 600; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--secondary); transition: background .12s, border-color .12s, color .12s, box-shadow .12s; }
+.btn:hover { background: var(--surface-2); border-color: var(--ink-faint); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 1px 2px rgba(1, 118, 211, 0.22); }
+.btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); color: #fff; box-shadow: 0 2px 6px rgba(1, 118, 211, 0.3); }
 
-.panel{display:none;background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);overflow:hidden}
-.panel.active{display:block}
+/* ============ THIS-WEEK STRIP (quiet summary, not a KPI shout) ============ */
+.thisweek {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.tw-cell {
+  padding: 18px 22px;
+  border-right: 1px solid var(--border-soft);
+  display: flex; align-items: center; gap: 16px;
+  cursor: pointer;
+  transition: background .12s;
+  position: relative;
+  overflow: hidden;
+}
+.tw-cell:last-child { border-right: none; }
+.tw-cell:hover { background: var(--surface-2); }
+.tw-cell .tw-icon, .tw-cell .tw-body { position: relative; z-index: 1; }
+.tw-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.tw-icon.red { background: var(--red-bg); color: var(--red); }
+.tw-icon.amber { background: var(--amber-bg); color: var(--amber); }
+.tw-icon.blue { background: var(--accent-soft); color: var(--accent-2); }
+.tw-icon.green { background: var(--green-bg); color: var(--green); }
+.tw-icon svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.9; fill: none; }
+.tw-body { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.tw-label { font-size: 11.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.tw-value { font-size: 22px; font-weight: 700; color: var(--ink-strong); line-height: 1.1; letter-spacing: -0.015em; font-feature-settings: 'tnum' 1; }
+.tw-value.money { font-family: var(--mono); font-size: 18px; letter-spacing: -0.01em; }
+.tw-sub { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+.tw-sub .up { color: var(--green); font-weight: 700; font-family: var(--mono); }
+/* R1: sparkline demoted to background watermark */
+.tw-spark { position: absolute; right: 14px; bottom: 10px; width: 88px; height: 28px; opacity: 0.10; pointer-events: none; z-index: 0; }
+.tw-spark polyline { stroke-width: 3; }
+.tw-spark circle { display: none; }
+/* R1: inline delta tag next to value */
+.delta-tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; padding: 2px 6px; border-radius: 3px; margin-left: 7px; vertical-align: 4px; font-family: var(--sans); }
+.delta-tag.up   { background: var(--green-bg); color: var(--green); }
+.delta-tag.down { background: var(--red-bg);   color: var(--red);   }
+.delta-tag.flat { background: var(--surface-3); color: var(--muted); }
 
-/* Discussions 3-col */
-.disc-layout{display:grid;grid-template-columns:240px minmax(0,1fr) 400px;min-height:calc(100vh - 260px)}
+/* ============ HERO ROW: MAP + TODAY ============ */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(360px, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.panel { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); }
+.panel-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px 14px; border-bottom: 1px solid var(--border-soft); gap: 12px; }
+.panel-title { font-size: 15.5px; font-weight: 600; color: var(--ink-strong); display: flex; align-items: baseline; gap: 10px; letter-spacing: -0.005em; }
+.panel-title .count { font-size: 12px; font-weight: 500; color: var(--muted); }
+.panel-link { font-size: 12.5px; font-weight: 600; color: var(--accent-2); cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+.panel-link::after { content: '→'; font-family: var(--mono); font-weight: 400; }
+.panel-link:hover { text-decoration: underline; }
 
-.channels{border-right:1px solid var(--border-soft);background:var(--surface-2);display:flex;flex-direction:column;overflow-y:auto}
-.channel-group{padding:4px 0}
-.channel-group h3{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:12px 18px 6px}
-.channel{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 18px;font-size:13px;color:var(--secondary);cursor:pointer;border-left:3px solid transparent}
-.channel:hover{background:var(--surface);color:var(--ink)}
-.channel.active{background:var(--surface);color:var(--accent-2);border-left-color:var(--accent);font-weight:600}
-.channel .hash{color:var(--ink-faint);font-family:var(--mono);margin-right:2px}
-.channel.active .hash{color:var(--accent-2)}
-.channel .ch-count{font-family:var(--mono);font-size:10.5px;color:var(--muted);background:var(--surface-3);border-radius:9px;padding:1px 7px;font-weight:600}
-.channel.active .ch-count{background:var(--accent-soft);color:var(--accent-2)}
+/* MAP (hero) */
+.map-wrap { padding: 20px 22px 14px; }
+.map-frame {
+  position: relative;
+  background: var(--surface-3);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  aspect-ratio: 2.1 / 1;
+  overflow: hidden;
+}
+.map-frame svg { width: 100%; height: 100%; display: block; }
+.graticule line { stroke: #e0e5ec; stroke-width: 0.5; }
+.continent { fill: #d6dde6; stroke: #c2cad6; stroke-width: 0.4; }
+.marker-dot.ai { fill: var(--accent); }
+.marker-dot.privacy { fill: var(--ink); }
+.marker-dot.cyber { fill: var(--amber-fill); }
+.map-legend {
+  position: absolute; bottom: 10px; left: 10px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid var(--border-soft);
+  border-radius: 5px;
+  padding: 6px 10px;
+  display: flex; gap: 14px;
+  font-size: 11.5px; font-weight: 500;
+  color: var(--secondary);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
 
-.threads{border-right:1px solid var(--border-soft);background:var(--surface);display:flex;flex-direction:column;min-width:0}
-.threads-head{padding:16px 22px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.threads-head h2{font-size:16px;font-weight:700;color:var(--ink-strong);letter-spacing:-.005em}
-.threads-head .desc{font-size:11.5px;color:var(--muted);font-family:var(--mono);font-weight:500}
-.threads-head .actions{margin-left:auto;display:flex;gap:6px}
+/* HOT-LIST strip under the map, inline */
+.map-hotlist {
+  padding: 14px 22px 18px;
+  border-top: 1px solid var(--border-soft);
+}
+.hot-toggle-row {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 12px;
+}
+.hot-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface-2);
+  padding: 2px;
+  margin-left: auto;
+}
+.ht-btn {
+  font-family: var(--sans);
+  font-size: 11.5px; font-weight: 600;
+  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.ht-btn:hover { color: var(--ink); }
+.ht-btn.on { background: var(--surface); color: var(--accent-2); box-shadow: var(--shadow-1); }
+.hot-view { display: none; flex-wrap: wrap; gap: 8px; align-items: center; }
+.hot-view.on { display: flex; }
+.map-hotlist .h3 {
+  font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.region-pill {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  padding: 6px 11px;
+  border-radius: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .12s, border-color .12s;
+}
+.region-pill:hover { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent-2); }
+.region-pill .num { font-family: var(--mono); font-weight: 700; color: var(--accent-2); font-size: 11.5px; }
+.region-pill .sub { font-size: 10.5px; color: var(--muted); font-weight: 400; }
+.hot-inline {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12.5px;
+  color: var(--ink);
+  padding: 6px 11px;
+  border-radius: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .12s, border-color .12s;
+}
+.hot-inline:hover { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent-2); }
+.hot-inline .num { font-family: var(--mono); font-weight: 700; color: var(--accent-2); font-size: 11.5px; }
 
-.composer{padding:12px 22px;background:var(--surface-2);border-bottom:1px solid var(--border-soft)}
-.composer-bar{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 8px 6px 14px;transition:border-color .12s,box-shadow .12s}
-.composer-bar:focus-within{border-color:var(--accent-soft-2);box-shadow:0 0 0 3px var(--accent-soft)}
-.composer-bar input{flex:1;border:0;font-size:13px;padding:6px 0}
-.composer-bar input::placeholder{color:var(--muted)}
-.composer-bar button{padding:6px 14px;background:var(--accent);color:#fff;border-radius:4px;font-size:12.5px;font-weight:600}
-.composer-bar button:hover{background:var(--accent-2)}
+/* TODAY feed (hero right) */
+.today-list { list-style: none; padding: 4px 0; }
+.today-item {
+  padding: 15px 22px;
+  border-bottom: 1px solid var(--border-soft);
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 14px;
+  align-items: start;
+  position: relative;
+  cursor: pointer;
+  transition: background .12s;
+}
+.today-item:last-child { border-bottom: none; }
+.today-item:hover { background: var(--surface-2); }
+.today-item.priority::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red-fill); }
+.today-item.priority.watch::before { background: var(--accent); }
 
-.thread-list{flex:1;overflow-y:auto}
-.thread-row{display:block;padding:14px 22px;border-bottom:1px solid var(--border-soft);cursor:pointer;transition:background .12s;position:relative}
-.thread-row:hover{background:var(--surface-2)}
-.thread-row.selected{background:var(--accent-soft)}
-.thread-row.selected::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
-.thread-row .top{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:12px;color:var(--secondary);font-weight:600}
-.thread-row .author{color:var(--ink)}
-.thread-row .time{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500}
-.thread-row .tag{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;border-radius:9px;background:var(--surface-3);color:var(--secondary);margin-left:auto;text-transform:uppercase;letter-spacing:.04em}
-.thread-row .tag.priority{background:var(--amber-bg);color:var(--amber)}
-.thread-row .title{font-size:13.5px;font-weight:600;color:var(--ink-strong);line-height:1.4;letter-spacing:-.005em;margin-bottom:4px}
-.thread-row .snippet{font-size:12.5px;color:var(--secondary);line-height:1.5;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.thread-row .meta{display:flex;gap:14px;font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:500}
-.thread-row .meta b{color:var(--ink);font-weight:700}
+.today-time {
+  font-family: var(--mono);
+  font-size: 11.5px; font-weight: 500;
+  color: var(--secondary);
+  padding-top: 2px;
+  text-align: right;
+  line-height: 1.3;
+  font-feature-settings: 'tnum' 1;
+}
+.today-time .day { display: block; font-family: var(--sans); font-size: 10px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; font-weight: 500; }
+.today-meta {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 4px;
+  font-size: 11.5px; font-weight: 600; color: var(--secondary);
+}
+.today-juris { color: var(--ink); font-weight: 700; }
+.today-meta .dot { color: var(--ink-faint); }
+.today-headline { font-size: 13.5px; font-weight: 500; color: var(--ink-strong); line-height: 1.4; margin-bottom: 4px; }
+.today-headline a { color: inherit; border-bottom: 1px solid transparent; }
+.today-headline a:hover { border-bottom-color: var(--accent); text-decoration: none; }
+.today-source { font-size: 11px; font-weight: 500; color: var(--muted); }
 
-/* Detail */
-.detail{background:var(--surface-2);display:flex;flex-direction:column;overflow-y:auto}
-.detail-head{padding:18px 22px;border-bottom:1px solid var(--border-soft);background:var(--surface)}
-.detail-head .crumb{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:700}
-.detail-head .crumb .sep{color:var(--ink-faint);margin:0 6px}
-.detail-head h3{font-size:16px;font-weight:700;color:var(--ink-strong);line-height:1.35;letter-spacing:-.005em;margin-bottom:10px}
-.detail-head .stats{display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:500}
-.detail-head .stats b{color:var(--ink);font-weight:700}
-.msg{padding:14px 22px;border-bottom:1px solid var(--border-soft)}
-.msg-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.msg-top .av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
-.msg-top .name{font-size:13px;font-weight:600;color:var(--ink-strong)}
-.msg-top .role{font-size:11.5px;color:var(--muted);font-family:var(--mono);font-weight:500}
-.msg-top .time{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-left:auto;font-weight:500}
-.msg-body{font-size:13px;line-height:1.6;color:var(--secondary)}
-.msg-body p{margin-bottom:9px}
-.msg-body p:last-child{margin-bottom:0}
-.msg-body blockquote{border-left:3px solid var(--accent-soft-2);padding:2px 12px;color:var(--muted);margin:10px 0;font-size:12.5px}
+/* Promoted "lead" Today item — slightly bigger, with standfirst */
+.today-item.lead { padding: 20px 22px 22px; }
+.today-item.lead .today-headline { font-size: 16px; font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; margin-bottom: 6px; }
+.today-item.lead .today-deck { font-size: 12.5px; color: var(--secondary); line-height: 1.5; margin-bottom: 8px; }
+.today-item.lead .today-deck b { color: var(--ink); font-weight: 600; }
+.today-item.lead .today-source { font-size: 11.5px; font-weight: 600; color: var(--accent-2); }
+.today-item.lead .today-source::after { content: ' ↗'; font-family: var(--mono); }
 
-.reply-box{padding:16px 22px;background:var(--surface);border-top:1px solid var(--border-soft);margin-top:auto;position:sticky;bottom:0}
-.reply-box textarea{width:100%;min-height:72px;border:1px solid var(--border);border-radius:6px;padding:10px 12px;font:inherit;font-size:13px;line-height:1.5;resize:vertical;transition:border-color .12s,box-shadow .12s}
-.reply-box textarea:focus{border-color:var(--accent-soft-2);box-shadow:0 0 0 3px var(--accent-soft)}
-.reply-box .bar{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.reply-box .hint{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:500}
-.reply-box .hint kbd{display:inline-block;font-family:var(--mono);font-size:10px;padding:1px 5px;border:1px solid var(--border);border-radius:3px;background:var(--surface-2);margin:0 1px}
+/* ============ SECTION EYEBROW ============ */
+.section-eyebrow { display: flex; align-items: baseline; gap: 16px; margin: 8px 2px 16px; }
+.section-eyebrow .lbl { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-strong); }
+.section-eyebrow .meta { font-size: 13px; color: var(--muted); }
+.section-eyebrow .meta::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--border); vertical-align: middle; margin-right: 14px; margin-bottom: 3px; }
 
-/* Videos */
-.panel-body{padding:24px 28px}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
-.section-head h2{font-size:16px;font-weight:700;color:var(--ink-strong);letter-spacing:-.005em;margin-bottom:2px}
-.section-head .sub{font-size:12px;color:var(--muted);font-family:var(--mono);font-weight:500}
-.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.video-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
-.video-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);border-color:var(--accent-soft-2)}
-.thumb{aspect-ratio:16/9;background:linear-gradient(135deg,var(--accent-soft) 0%,var(--surface-3) 100%);position:relative;display:flex;align-items:center;justify-content:center}
-.thumb::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(1,118,211,.08),transparent 60%)}
-.thumb .play{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.96);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.18);position:relative;z-index:1}
-.thumb .play svg{width:18px;height:18px;fill:var(--ink-strong);margin-left:3px}
-.thumb .duration{position:absolute;bottom:10px;right:10px;background:rgba(6,16,30,.92);color:#fff;font-family:var(--mono);font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:3px}
-.thumb .topic{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.96);color:var(--ink-strong);font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-.vbody{padding:14px 16px 16px}
-.vtitle{font-size:13.5px;font-weight:600;color:var(--ink-strong);line-height:1.4;letter-spacing:-.005em;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
-.vmeta{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);font-weight:500}
-.vmeta .av{width:20px;height:20px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
-.vmeta .name{color:var(--ink);font-weight:600}
+/* ============ FEATURED TRIO ============ */
+.featured-trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.featured-card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+}
+.featured-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--accent-soft-2); text-decoration: none; }
+.fc-thumb { position: relative; aspect-ratio: 16 / 9; background: var(--surface-3); overflow: hidden; }
+.fc-thumb svg.bg { width: 100%; height: 100%; display: block; }
+.fc-badge { position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 10px; background: rgba(255,255,255,0.96); color: var(--ink-strong); border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 0 1px 3px rgba(0,0,0,0.18); }
+.fc-badge.ai { background: var(--accent); color: #fff; }
+.fc-badge.chart { background: var(--green-fill); color: #fff; }
+.fc-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: #fff; }
+.fc-duration { position: absolute; bottom: 12px; right: 12px; font-family: var(--mono); font-size: 11px; font-weight: 600; background: rgba(6, 16, 30, 0.92); color: #fff; padding: 3px 8px; border-radius: 3px; }
+.fc-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 58px; height: 58px; background: rgba(255,255,255,0.96); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.32); transition: transform .18s; }
+.featured-card:hover .fc-play { transform: translate(-50%, -50%) scale(1.08); }
+.fc-play svg { width: 22px; height: 22px; fill: var(--ink-strong); margin-left: 3px; }
+.fc-body { padding: 18px 22px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.fc-title { font-size: 15.5px; font-weight: 600; color: var(--ink-strong); line-height: 1.35; letter-spacing: -0.005em; }
+.fc-deck { font-size: 12.5px; color: var(--secondary); line-height: 1.5; }
+.fc-meta { display: flex; align-items: center; gap: 10px; font-size: 11.5px; color: var(--muted); margin-top: auto; padding-top: 4px; }
+.fc-author { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--ink); }
+.fc-avatar { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; font-weight: 700; }
+.fc-meta .sep { color: var(--ink-faint); }
+/* R2: thumbnail communicates country + authority */
+.fc-thumb.r2 { background: linear-gradient(160deg, #0d2433 0%, #1a3145 100%); }
+.fc-thumb.r2 .country-flag { position: absolute; top: 12px; right: 12px; font-size: 22px; line-height: 1; background: #fff; width: 30px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,.25); z-index: 2; }
+.fc-thumb.r2 .silhouette { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.18); font-family: var(--display); font-size: 130px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+.fc-thumb.r2 .country-strip { position: absolute; bottom: 12px; left: 12px; right: 12px; color: #fff; display: flex; align-items: baseline; gap: 8px; font-size: 11px; letter-spacing: .02em; font-weight: 500; z-index: 2; }
+.fc-thumb.r2 .country-strip .name { font-family: var(--display); font-size: 14px; letter-spacing: -0.005em; font-weight: 700; }
+.fc-thumb.r2 .country-strip .auth { opacity: .78; font-size: 11.5px; }
+.fc-when { font-family: var(--mono); }
 
-/* Faculty */
-.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.fac-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);padding:20px 22px;display:flex;gap:16px;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
-.fac-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);border-color:var(--accent-soft-2)}
-.fac-card .av{width:52px;height:52px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0}
-.fac-card .fbody{flex:1;min-width:0}
-.fac-card .fname{font-size:14.5px;font-weight:700;color:var(--ink-strong);letter-spacing:-.005em;margin-bottom:3px}
-.fac-card .frole{font-size:11.5px;color:var(--muted);font-family:var(--mono);font-weight:500;margin-bottom:10px}
-.fac-card .fspec{font-size:12.5px;color:var(--secondary);line-height:1.5;margin-bottom:12px}
-.fac-card .fmeta{display:flex;gap:14px;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--muted)}
-.fac-card .fmeta b{color:var(--ink);font-weight:700}
+/* ============ FEATURED FACULTY ============ */
+.featured-faculty { margin-bottom: 36px; }
+.ff-card { display: grid; grid-template-columns: 320px 1fr; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); overflow: hidden; text-decoration: none; color: inherit; transition: transform .18s, box-shadow .18s, border-color .18s; }
+.ff-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--accent-soft-2); text-decoration: none; }
+.ff-portrait { position: relative; min-height: 240px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #032e61 0%, #0176d3 55%, #4ba2e0 100%); overflow: hidden; }
+.ff-portrait::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.14), transparent 60%); pointer-events: none; z-index: 1; }
+.ff-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%; filter: contrast(1.04) saturate(1.06); transition: transform .4s ease, filter .4s ease; transform-origin: 50% 20%; }
+.ff-card:hover .ff-portrait img { transform: scale(1.03); filter: contrast(1.08) saturate(1.12); }
+.ff-portrait.has-photo { background: #0a1420; }
+.ff-portrait.has-photo::before { background: linear-gradient(180deg, rgba(255,255,255,.10) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, rgba(8,14,24,.62) 100%), radial-gradient(ellipse at 50% 38%, transparent 48%, rgba(0,0,0,.55) 100%); }
+.ff-initials { font-family: var(--display); font-size: 88px; font-weight: 700; color: #fff; letter-spacing: -.04em; z-index: 1; text-shadow: 0 4px 16px rgba(0,0,0,.25); line-height: 1; }
+.ff-badge { position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 10px; background: rgba(255,255,255,0.96); color: var(--ink-strong); border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 0 1px 3px rgba(0,0,0,0.18); z-index: 2; }
+.ff-flag { position: absolute; bottom: 14px; left: 14px; font-size: 22px; line-height: 1; z-index: 2; filter: drop-shadow(0 1px 2px rgba(0,0,0,.25)); }
+.ff-body { padding: 22px 26px 24px; display: flex; flex-direction: column; gap: 6px; }
+.ff-eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 4px; }
+.ff-name { font-size: 22px; font-weight: 700; color: var(--ink-strong); letter-spacing: -.012em; line-height: 1.15; margin-bottom: 2px; }
+.ff-role { font-size: 13.5px; color: var(--ink); font-weight: 500; line-height: 1.45; }
+.ff-firm { font-size: 12.5px; color: var(--muted); font-family: var(--mono); }
+.ff-blurb { font-size: 13px; color: var(--secondary); line-height: 1.55; margin: 8px 0 0; }
+.ff-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 12px; font-size: 12.5px; font-weight: 600; color: var(--accent-2); }
+@media (max-width: 900px) {
+  .ff-card { grid-template-columns: 1fr; }
+  .ff-portrait { min-height: 180px; }
+  .ff-initials { font-size: 72px; }
+}
 
-/* Avatar colors */
-.av.c1{background:#1e3a8a}.av.c2{background:#5b21b6}.av.c3{background:#7c2d12}.av.c4{background:#0f766e}
-.av.c5{background:#be185d}.av.c6{background:#365314}.av.c7{background:#164e63}.av.c8{background:#92400e}
-.av.c9{background:#3730a3}.av.c10{background:#134e4a}.av.c11{background:#701a75}.av.c12{background:#78350f}
+/* ============ DEVELOPMENTS (news feed) ============ */
+.developments {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  margin-bottom: 36px;
+  overflow: hidden;
+}
+/* R3: single-column inbox-style with date column + day-grouped headers */
+.dev-grid {
+  display: flex;
+  flex-direction: column;
+}
+.dev-day-head {
+  padding: 10px 26px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.dev-day-head .count {
+  color: var(--ink-faint);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-size: 11.5px;
+}
+.dev-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 22px;
+  padding: 14px 26px;
+  border-bottom: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: background .12s;
+  position: relative;
+  align-items: start;
+}
+.dev-item:last-child { border-bottom: none; }
+.dev-item:hover { background: var(--surface-2); }
+.dev-item.priority::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red-fill); }
+.dev-item.priority.watch::before { background: var(--accent); }
 
-::-webkit-scrollbar{width:8px;height:8px}
-::-webkit-scrollbar-thumb{background:#d0d7e0;border-radius:4px}
-::-webkit-scrollbar-thumb:hover{background:#b6bfcc}
+/* R3: when becomes the left column; meta line slimmed */
+.dev-when {
+  text-align: right;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  font-feature-settings: 'tnum' 1;
+  padding-top: 1px;
+  letter-spacing: 0;
+}
+.dev-when small {
+  display: block;
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.dev-body { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.dev-meta {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600;
+  color: var(--secondary);
+  flex-wrap: wrap;
+}
+.dev-meta .juris { color: var(--ink); font-weight: 700; }
+.dev-meta .when { font-family: var(--sans); color: var(--muted); font-weight: 500; }
+.dev-meta .dot { color: var(--ink-faint); }
+.status-pill {
+  display: inline-flex; align-items: center;
+  height: 20px; padding: 0 9px;
+  border-radius: 10px;
+  font-size: 10.5px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+.status-pill.red { background: var(--red-fill); }
+.status-pill.amber { background: var(--amber-fill); }
+.status-pill.blue { background: var(--accent); }
+.status-pill.green { background: var(--green-fill); }
+.status-pill.grey { background: var(--ink-faint); }
+
+.dev-headline {
+  font-size: 15.5px; font-weight: 600;
+  color: var(--ink-strong); line-height: 1.35;
+  margin-bottom: 6px;
+  letter-spacing: -0.005em;
+}
+.dev-headline em { font-family: var(--display); font-style: italic; font-weight: 600; font-size: 17px; }
+.dev-deck {
+  font-size: 12.5px;
+  color: var(--secondary); line-height: 1.5;
+  margin-bottom: 8px;
+}
+.dev-source {
+  font-size: 11px; font-weight: 500;
+  color: var(--muted);
+}
+.dev-source .link { color: var(--accent-2); font-weight: 600; }
+.dev-source .link::after { content: ' ↗'; font-family: var(--mono); }
+
+.dev-footer {
+  padding: 16px 26px;
+  text-align: center;
+  background: var(--surface-2);
+  font-size: 12.5px; font-weight: 600;
+  color: var(--accent-2);
+  cursor: pointer;
+  border-top: 1px solid var(--border-soft);
+}
+.dev-footer:hover { background: var(--accent-soft); }
+
+/* ============ ACTIVITY ROW: Enforcement + Case law ============ */
+.activity-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table thead th { font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 11px 18px; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+.data-table thead th.right { text-align: right; }
+.data-table tbody td { padding: 14px 18px; border-bottom: 1px solid var(--border-soft); vertical-align: top; color: var(--secondary); }
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover { background: var(--surface-2); }
+.data-table .reg { font-size: 11.5px; color: var(--secondary); font-weight: 600; white-space: nowrap; }
+.data-table .target { font-weight: 600; color: var(--ink-strong); font-size: 13px; }
+.data-table .target .sub { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 400; }
+.data-table .num { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--ink-strong); text-align: right; white-space: nowrap; padding-top: 14px; }
+.data-table .when { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; white-space: nowrap; padding-top: 15px; }
+.case-list { padding: 4px 0; }
+.case-row { padding: 15px 22px; border-bottom: 1px solid var(--border-soft); }
+.case-row:last-child { border-bottom: none; }
+.case-row:hover { background: var(--surface-2); }
+.case-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; font-weight: 600; color: var(--secondary); margin-bottom: 6px; }
+.case-court { color: var(--ink); font-weight: 700; }
+.case-when { font-family: var(--mono); color: var(--muted); font-weight: 500; }
+.case-name { font-size: 14.5px; font-weight: 600; color: var(--ink-strong); line-height: 1.3; margin-bottom: 6px; }
+.case-name em { font-family: var(--display); font-style: italic; font-weight: 600; font-size: 17px; }
+.case-take { font-size: 12.5px; color: var(--secondary); line-height: 1.5; }
+
+/* ============ CONSULTATIONS ============ */
+.consultations { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); margin-bottom: 28px; }
+.cons-grid { display: grid; grid-template-columns: repeat(4, 1fr); padding: 4px 0 8px; }
+.cons-item { padding: 18px 22px; border-right: 1px solid var(--border-soft); display: flex; flex-direction: column; gap: 10px; cursor: pointer; transition: background .12s; }
+.cons-item:last-child { border-right: none; }
+.cons-item:hover { background: var(--surface-2); }
+.cons-deadline-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cons-deadline { font-family: var(--mono); font-size: 15px; font-weight: 700; color: var(--ink-strong); }
+.cons-body { font-size: 13px; line-height: 1.4; color: var(--ink-strong); font-weight: 500; }
+.cons-body em { font-family: var(--display); font-style: italic; font-size: 14.5px; font-weight: 600; }
+.cons-source { font-size: 11.5px; font-weight: 500; color: var(--muted); }
+.cons-progress { width: 100%; height: 4px; background: var(--surface-3); border-radius: 2px; overflow: hidden; }
+.cons-progress-bar { height: 100%; border-radius: 2px; }
+.cons-progress-bar.red { background: var(--red-fill); }
+.cons-progress-bar.amber { background: var(--amber-fill); }
+.cons-progress-bar.cool { background: var(--ink-faint); }
+
+/* ============ FOOTER ============ */
+.footer { background: transparent; border-top: 1px solid var(--border); padding: 22px 4px 4px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+.footer .ok { color: var(--green); font-weight: 600; }
+.footer .ok::before { content: ''; display: inline-block; width: 7px; height: 7px; background: var(--green-fill); border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.footer .left { display: flex; gap: 26px; align-items: center; font-weight: 500; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1180px) {
+  .thisweek { grid-template-columns: repeat(2, 1fr); }
+  .tw-cell:nth-child(2) { border-right: none; }
+  .tw-cell:nth-child(1), .tw-cell:nth-child(2) { border-bottom: 1px solid var(--border-soft); }
+  .hero { grid-template-columns: 1fr; }
+  .featured-trio { grid-template-columns: 1fr; }
+  .dev-grid { grid-template-columns: 1fr; }
+  .dev-item { border-right: none; }
+  .activity-row { grid-template-columns: 1fr; }
+  .cons-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 720px) {
+  .icon-sidebar { display: none; }
+  .header-bar { left: 0; padding: 0 14px; }
+  .main-content { margin-left: 0; }
+  .page-view { padding: 24px 14px 32px; }
+  .page-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .page-title { font-size: 28px; }
+  .thisweek { grid-template-columns: 1fr; }
+  .tw-cell { border-right: none; border-bottom: 1px solid var(--border-soft); }
+  .tw-cell:last-child { border-bottom: none; }
+  .cons-grid { grid-template-columns: 1fr; }
+  .header-search { max-width: none; }
+  .header-user-name { display: none; }
+}
 
 
 
@@ -220,7 +789,6 @@ button{cursor:pointer}
 
 
 
-.sidebar-nav-divider { height: 1px; background: #c8d0dc; margin: 12px 16px; flex-shrink: 0; }
 /* ==BEGIN_JUR_OVERLAY== Jurisdictions slide-in overlay (DG pattern) */
 #jur-overlay { position: fixed !important; top: 0 !important; left: var(--sidebar-collapsed, 56px); bottom: 0; width: 340px; background: #fff; border-right: 1px solid #dbe1ea; z-index: 9000; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform .32s cubic-bezier(.4,0,.2,1); box-shadow: 0 12px 40px rgba(10,23,41,0.10); visibility: hidden; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 #jur-overlay.open { transform: translateX(0) !important; visibility: visible !important; display: flex !important; pointer-events: auto !important; }
@@ -275,21 +843,6 @@ body.jur-overlay-open .icon-sidebar .brand-text { opacity: 0 !important; }
 /* ==END_JUR_OVERLAY== */
 
 
-.page-eyebrow { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #014486; margin-bottom: 10px; }
-.page-head { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid #ebeff5; }
-.page-head .page-title { font-size: 44px; font-weight: 700; color: #07202e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
-.page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
-
-/* ==STATUSBAR_CSS== */
-.ps-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--secondary);flex-wrap:wrap}
-.ps-breadcrumb a{color:var(--accent-2);font-weight:600}
-.ps-breadcrumb a:hover{text-decoration:underline}
-.ps-sep{color:var(--ink-faint)}
-.ps-current{color:var(--ink-strong);font-weight:700}
-.ps-scope-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;font-size:11px;font-weight:600;color:var(--accent-2);background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:4px;letter-spacing:.02em}
-.ps-ok{color:var(--green);font-weight:600;font-size:12px}
-.ps-ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
-
 /* Sidebar hover-expand: labels reveal + main-content shifts right so it's not covered */
 .icon-sidebar { transition: width .22s cubic-bezier(.4,0,.2,1); }
 body.sidebar-expanded .icon-sidebar { width: var(--sidebar-expanded, 240px) !important; }
@@ -301,6 +854,10 @@ body.sidebar-expanded .main-content,
 body.sidebar-expanded .header-bar { margin-left: var(--sidebar-expanded, 240px) !important; transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
 body.sidebar-expanded #jur-overlay { left: var(--sidebar-expanded, 240px) !important; }
 .main-content, .header-bar { transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+
+.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:#2a3548;background:transparent;border:1px solid #dbe1ea;border-radius:5px;text-decoration:none;cursor:pointer;font-family:inherit;margin-left:4px}
+.header-logout:hover{background:#f8fafc;color:#0d2e42;border-color:#8a93a3}
+.header-logout svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;flex-shrink:0}
 
 /* ==MOBILE_RESPONSIVE== */
 body { min-width: 320px !important; }
@@ -412,27 +969,6 @@ body { min-width: 320px !important; }
 /* ==END_MOBILE_RESPONSIVE== */
 </style>
 <script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
-<script>
-  window.addEventListener("error", function(e) {
-    if (window.GlitchTip) {
-      GlitchTip.captureException(e.error || e);
-    }
-  });
-  window.addEventListener("unhandledrejection", function(e) {
-    if (window.GlitchTip) {
-      GlitchTip.captureException(e.reason);
-    }
-  });
-</script>
-<script src="https://cdn.glitchtip.com/glitchtip.min.js"></script>
-<script>
-  if (window.GlitchTip) {
-    GlitchTip.init({
-      apiUrl: "https://errors.principlesai.org/api/0/",
-      projectId: 1
-    });
-  }
-</script>
 <script id="pai-clerk-sdk" async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ" src="https://clerk.principlesai.org/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript" onload="window.__paiClerkLoaded=true;window.dispatchEvent(new Event('pai:clerk-loaded'))"></script>
 <script id="pai-clerk-v1">
 (function(){
@@ -440,10 +976,14 @@ body { min-width: 320px !important; }
   window.__paiClerkV1 = true;
 
   function setHeaderName(user){
-    var el = document.querySelector('.header-user-name');
-    if(!el) return;
+    var hdr = document.querySelector('.header-user-name');
+    var sideName = document.querySelector('.js-sidebar-name');
+    var sideAvatar = document.querySelector('.js-sidebar-avatar');
     if(user && user.firstName){
-      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
+      var fullName = user.firstName + (user.lastName ? ' ' + user.lastName : '');
+      if(hdr) hdr.textContent = 'Hello ' + fullName;
+      if(sideName) sideName.textContent = fullName;
+      if(sideAvatar) sideAvatar.textContent = user.firstName.charAt(0).toUpperCase();
     }
     // if no user, leave hardcoded — pai-app-* is public by design
   }
@@ -502,10 +1042,18 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
+<style id="pai-map-v47">
+/* v47 map polish — lighter sea, solid land (overrides the 0.85 inline opacity
+   that produces the coast ghost), no enacted/proposed/lapsed legend. */
+.map-frame { background: #f3f5f8 !important; }
+.map-frame svg path { opacity: 1 !important; }
+.map-legend { display: none !important; }
+</style>
 <link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
-<body>
+<body class="onboarding-home">
 
+<!-- ICON SIDEBAR -->
 <nav class="icon-sidebar">
   <a href="pai-home-private" class="sidebar-brand" style="text-decoration:none;color:inherit;">
     <div class="brand-icon" style="background:var(--accent); padding:0; overflow:hidden;"><img src="pai-mark-white-128.png" alt="PAI" style="width:70%;height:70%;object-fit:contain;display:block;"></div>
@@ -513,25 +1061,42 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   </a>
     
   <div class="sidebar-nav-items">
-    <a class="sidebar-nav-item" href="pai-home-private" style="text-decoration:none;"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></a>
-      <a class="sidebar-nav-item active" href="pai-app-ai-notes" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
+    <div class="sidebar-nav-item active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></div>
+      <a class="sidebar-nav-item" href="pai-app-ai-notes" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
     <div class="sidebar-nav-item" onclick="openJurisdictions()" style="cursor:pointer;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span></div>
-    <a class="sidebar-nav-item" href="pai-app-news" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
+    <a href="pai-app-news" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
     <div class="sidebar-regions-zone">
       <div class="sidebar-nav-divider"></div>
-      <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
+      <a href="pai-app-authorities" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
-      <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
-      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
+      <a href="pai-app-legislation" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
       <div class="sidebar-nav-divider"></div>
-      <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
-      <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
-      <a class="sidebar-nav-item" href="pai-app-watchlist" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="nav-label">Watchlist</span></a>
-      <a class="sidebar-nav-item" href="pai-app-settings" style="text-decoration:none;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></a>
+      <a href="pai-app-glossary" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
+      <div class="sidebar-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></div>
+      <a href="#" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="nav-label">Watchlist</span></a>
+      <a href="#" class="sidebar-nav-item" style="text-decoration:none;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></a>
+    </div>
+  </div>
+  <div class="sb-invite">
+    <svg class="sb-invite-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+    <div class="sb-invite-body">
+      <div class="sb-invite-label">Invite a colleague</div>
+      <div class="sb-invite-sub">Give your team 7 days free access to PAI.</div>
+      <div class="sb-invite-btn">Send invite →</div>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-nav-item">
+      <div style="position:relative;flex-shrink:0"><div class="user-avatar js-sidebar-avatar"></div></div>
+      <div class="nav-label" style="display:flex;flex-direction:column;line-height:1.3;flex:1;min-width:0">
+        <span class="js-sidebar-name" style="font-weight:600;font-size:13px;color:var(--ink)"></span>
+        <span style="font-size:11px;color:var(--muted)">PrinciplesAI</span>
+      </div>
     </div>
   </div>
 </nav>
 
+<!-- HEADER BAR -->
 <header class="header-bar">
   <div class="header-nav-arrows">
     <button><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
@@ -544,103 +1109,479 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <kbd>⌘K</kbd>
   </div>
   <div class="header-right">
-    <div class="home-jur-btn"><span class="hjb-flag">&#x1F1EC;&#x1F1E7;</span><span>Set home</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="home-jur-btn"><span class="hjb-flag">&#x1F1EC;&#x1F1E7;</span><span>United Kingdom</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
     <a href="pai-app-settings" class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></a><a href="#" class="header-logout" onclick="paiLogout(event)" title="Log out"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
   </div>
 </header>
 
+<!-- MAIN CONTENT -->
 <div class="main-content">
+<div class="page-view">
 
-<style>
-html{scroll-behavior:smooth}
-.nt-page-wrap{max-width:1400px;margin:0 auto;padding:20px 24px 40px}
-.nt-block{margin:16px 0 40px;padding:0}
-.nt-block-head{display:flex;align-items:flex-start;gap:16px;padding:18px 0 14px;border-bottom:1px solid var(--border,#dbe1ea);margin-bottom:20px}
-.nt-block-head .tp-flag{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:20px;border-radius:3px;background:var(--surface-3,#e8ebf1);color:var(--ink,#0d2e42);font-family:var(--mono,monospace);font-size:10px;font-weight:700;margin-top:4px}
-.nt-block-titles{flex:1}
-.nt-eyebrow{font-family:var(--mono,monospace);font-size:10.5px;font-weight:700;color:var(--accent,#0176d3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
-.nt-title{font-size:28px;font-weight:700;color:var(--ink-strong,#07202e);letter-spacing:-.02em;margin:0 0 4px 0;line-height:1.1}
-.nt-meta{font-size:12.5px;color:var(--muted,#5e6878);margin-bottom:6px}
-.nt-juris-link{display:inline-block;font-size:12px;color:var(--accent,#0176d3);text-decoration:none;margin-top:4px;font-weight:500}
-.nt-juris-link:hover{text-decoration:underline}
-.nt-back-link{font-size:12px;color:var(--muted,#5e6878);text-decoration:none;padding:6px 10px;border:1px solid var(--border,#dbe1ea);border-radius:5px;white-space:nowrap}
-.nt-back-link:hover{color:var(--accent,#0176d3);border-color:var(--accent-soft-2,#b9d8ef);background:var(--accent-soft,#e3effc)}
-.nt-expand{display:grid;grid-template-columns:220px minmax(0,1fr) 280px;gap:24px}
-.nt-toc{position:sticky;top:24px;align-self:start;font-size:12.5px}
-.nt-toc-head{font-family:var(--mono,monospace);font-size:10.5px;font-weight:700;color:var(--muted,#5e6878);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
-.nt-toc-list{list-style:none;padding:0;margin:0}
-.nt-toc-list li{border-left:2px solid var(--border,#dbe1ea);padding:6px 0 6px 12px;margin-left:2px}
-.nt-toc-list li a{color:var(--ink,#0d2e42);text-decoration:none;display:flex;gap:8px;line-height:1.35;font-size:12px}
-.nt-toc-list li a:hover{color:var(--accent,#0176d3)}
-.nt-toc-list li a .k{font-family:var(--mono,monospace);color:var(--muted,#5e6878);font-weight:600;min-width:24px;font-size:10.5px}
-.nt-main{background:var(--surface,#fff);border:1px solid var(--border,#dbe1ea);border-radius:8px;padding:28px 32px;max-width:860px}
-.nt-section{padding:18px 0;border-bottom:1px solid var(--border-soft,#ebeff5)}
-.nt-section:last-child{border-bottom:none}
-.nt-s-kick{font-family:var(--mono,monospace);font-size:10.5px;font-weight:700;color:var(--accent,#0176d3);text-transform:uppercase;letter-spacing:.12em}
-.nt-s-title{font-size:15.5px;font-weight:600;color:var(--ink-strong,#07202e);margin:6px 0 10px;letter-spacing:-.005em;line-height:1.3}
-.nt-s-body{font-size:13.5px;line-height:1.6;color:var(--ink,#0d2e42)}
-.nt-s-body p{margin:0 0 10px}
-.nt-s-body ul.nt-bullets{margin:0 0 10px 18px;padding:0}
-.nt-s-body ul.nt-bullets li{margin-bottom:4px}
-.nt-contrib-wrap{position:sticky;top:24px;align-self:start}
-.nt-contrib{background:var(--surface,#fff);border:1px solid var(--border,#dbe1ea);border-radius:8px;padding:20px;text-align:center}
-.nt-c-photo{width:88px;height:88px;border-radius:50%;background:var(--accent,#0176d3);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;margin:0 auto 12px;overflow:hidden}
-.nt-c-photo.has-img{background:var(--surface-3,#e8ebf1)}
-.nt-c-photo img{width:100%;height:100%;object-fit:cover}
-.nt-c-name{font-weight:600;font-size:14px;color:var(--ink-strong,#07202e);margin-bottom:2px}
-.nt-c-name a{color:inherit;text-decoration:none;border-bottom:1px solid var(--accent,#0176d3)}
-.nt-c-firm{font-size:12px;color:var(--muted,#5e6878);margin-bottom:10px}
-.nt-c-bio{font-size:12.5px;color:var(--ink,#0d2e42);line-height:1.45;text-align:left;margin-bottom:14px;padding:10px;background:var(--surface-2,#f7f8fb);border-radius:6px}
-.nt-c-meta{border-top:1px solid var(--border-soft,#ebeff5);padding-top:12px;text-align:left;font-size:11.5px}
-.nt-c-row{display:flex;justify-content:space-between;padding:4px 0;color:var(--ink,#0d2e42)}
-.nt-c-row .lbl{color:var(--muted,#5e6878);font-family:var(--mono,monospace);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em}
-.nt-empty{color:var(--muted,#5e6878);font-style:italic;padding:20px 0}
-@media (max-width:1060px){.nt-expand{grid-template-columns:1fr;gap:18px}.nt-contrib-wrap,.nt-toc{position:static}}
-</style>
-<div class="nt-page-wrap">
-  <section class="nt-block">
-    <header class="nt-block-head">
-      <span class="tp-flag">CN</span>
-      <div class="nt-block-titles">
-        <div class="nt-eyebrow">AI Regulation Note · Part B analysis</div>
-        <h1 class="nt-title">China AI Note</h1>
-        <div class="nt-meta">Reflects the law as at February 2026 · Contributed by Han Kun</div>
-        <a class="nt-juris-link" href="pai-app-juris-china">Open China jurisdiction page →</a>
+  <!-- STATUSBAR -->
+  <div class="page-statusbar">
+    <div class="ps-left">
+      <span class="ps-breadcrumb">
+        <span class="ps-current">Home</span>
+      </span>
+      <span class="ps-sep">·</span>
+      <span class="ps-scope-chip">AI · Privacy · Cyber</span>
+      <span class="ps-sep">·</span>
+      <span class="ps-ok">Coverage engine operational</span>
+    </div>
+    <div class="page-actions">
+    </div>
+  </div>
+
+  <!-- PAGE HEAD -->
+  <div class="page-head">
+    <div class="page-eyebrow" id="briefEyebrow">WEDNESDAY · 22 APRIL</div>
+    <h1 class="page-title" id="greetLine">Today's update.</h1>
+    <p class="page-sub">AI, privacy and cybersecurity.</p>
+  </div>
+
+  <!-- PERSONAL SUMMARY ROW (demoted from hero; will personalise) -->
+  <div class="daily-stats" style="display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:#5e6878;margin:-8px 0 28px;padding:14px 0 0;border-top:1px dashed #ebeff5;font-weight:500;">
+    <span><b style="color:#0d2e42;">3</b> watchlist items need attention</span>
+    <span style="color:#c8d0dc;">·</span>
+    <span><b style="color:#0d2e42;">4</b> consultations closing</span>
+    <span style="color:#c8d0dc;">·</span>
+    <span><b style="color:#0d2e42;" id="statEnfCap">—</b> enforcement actions</span>
+  </div>
+
+  <script>
+    (function() {
+      const now = new Date();
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const eyebrow = document.getElementById('briefEyebrow');
+      if (eyebrow) eyebrow.textContent = days[now.getDay()].toUpperCase() + ' · ' + now.getDate() + ' ' + months[now.getMonth()].toUpperCase() + ' ' + now.getFullYear();
+    })();
+  </script>
+
+  <!-- THIS WEEK STRIP (quiet, iconic, not a KPI shout) -->
+  <section class="thisweek">
+    <div class="tw-cell">
+      <div class="tw-icon red">
+        <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
       </div>
-      <a class="nt-back-link" href="pai-app-ai-notes">← Back to matrix</a>
-    </header>
-    <div class="nt-expand">
-      <aside class="nt-toc">
-        <div class="nt-toc-head">Contents</div>
-        <ul class="nt-toc-list"><li><a href="#sec-b0"><span class="k">B0</span> Analysis — B0</a></li><li><a href="#sec-b1"><span class="k">B1</span> Legal Characterisation of AI</a></li><li><a href="#sec-b10"><span class="k">B10</span> Legislative Developments (If Relevant)</a></li><li><a href="#sec-b2"><span class="k">B2</span> Relationship to Higher-Level Law (Where Applicable)</a></li><li><a href="#sec-b3"><span class="k">B3</span> Analysis — B3</a></li><li><a href="#sec-b4"><span class="k">B4</span> Legal Bases Relied on in Practice</a></li><li><a href="#sec-b5"><span class="k">B5</span> Liability Allocation Across the AI Chain</a></li><li><a href="#sec-b6"><span class="k">B6</span> Analysis — B6</a></li><li><a href="#sec-b7"><span class="k">B7</span> Data, Inference, and Automated Decision-Making</a></li><li><a href="#sec-b8"><span class="k">B8</span> AI in Employment and Workplace Contexts Explain how this jurisdiction&#x27;</a></li><li><a href="#sec-b9"><span class="k">B9</span> Points of Legal Friction</a></li></ul>
-      </aside>
-      <main class="nt-main"><div class="nt-section" id="sec-b0"><div class="nt-s-kick">B0</div><h3 class="nt-s-title">Analysis — B0</h3><div class="nt-s-body"><p>Briefly list other binding legal frameworks in this jurisdiction that materially shape AI use, with status indicated in brackets.<br>Include only binding frameworks that have been applied, or are clearly applicable, to AI-enabled conduct in this jurisdiction. Do not include frameworks of general application where no AI-specific connection has been established.<br>e.,g. (As seen on IAPP´s AI Tracker)<br>EU –</p><ul class='nt-bullets'><li>General Data Protection Regulation [IN FORCE]</li></ul><ul class='nt-bullets'><li>Digital Services Act [IN FORCE]</li></ul><ul class='nt-bullets'><li>Digital Markets Act [IN FORCE]</li></ul><ul class='nt-bullets'><li>AI Liability Directive [DROPPED]</li></ul><ul class='nt-bullets'><li>Cyber Resilience Act [IN FORCE]</li></ul><ul class='nt-bullets'><li>Ethics guidelines for trustworthy AI [IN FORCE]</li></ul><ul class='nt-bullets'><li>New Product Liability Directive [ENACTED]</li></ul><ul class='nt-bullets'><li>Data Act [IN FORCE]</li></ul><p>Mainland China –</p><ul class='nt-bullets'><li>Cybersecurity Law of the People&#x27;s Republic of China  (“Cybersecurity Law”) [IN FORCE]</li></ul><ul class='nt-bullets'><li>Data Security Law of the People&#x27;s Republic of China   (“Data Security Law”) [IN FORCE]</li></ul><ul class='nt-bullets'><li>Personal Information Protection Law of the People&#x27;s Republic of China (“PIPL”)  [IN FORCE]</li></ul><ul class='nt-bullets'><li>Administrative Measures on Internet-based Information Services [IN FORCE]</li></ul><ul class='nt-bullets'><li>Administrative Provisions on Recommendation Algorithms in Internet-based Information Services [IN FORCE]</li></ul><ul class='nt-bullets'><li>Administrative Provisions on Deep Synthesis in Internet-based Information Services [IN FORCE]</li></ul><ul class='nt-bullets'><li>Interim Measures for the Management of Generative Artificial Intelligence Services [IN FORCE]</li></ul><ul class='nt-bullets'><li>Technology Ethics Review Measures (Trial) [IN FORCE]</li></ul><ul class='nt-bullets'><li>Regulation on Network Data Security Management [IN FORCE]</li></ul><ul class='nt-bullets'><li>Measures for the Labeling of AI-Generated Synthetic Content [IN FORCE]</li></ul><ul class='nt-bullets'><li>The mandatory national standard GB 45438-2025, Cybersecurity Technology—Labeling Method for Content Generated by Artificial Intelligence [IN FORCE]</li></ul><ul class='nt-bullets'><li>TC260-003 guidelines, Basic Security Requirements for Generative Artificial Intelligence Service  [IN FORCE]</li></ul><ul class='nt-bullets'><li>The recommended national standard GB/T45654—2025, Cyber Security Technology—Basic Security Requirements for Generative Artificial Intelligence Service  [IN FORCE]</li></ul></div></div>
-<div class="nt-section" id="sec-b1"><div class="nt-s-kick">B1</div><h3 class="nt-s-title">Legal Characterisation of AI</h3><div class="nt-s-body"><p>Explain how AI systems are treated under existing law or AI-specific law in this jurisdiction.<br>Cover:</p><ul class='nt-bullets'><li>whether AI is treated as a distinct legal category or assessed through outcomes and effects,</li></ul><ul class='nt-bullets'><li>whether the law establishes a formal risk-based categorisation framework (for example, prohibited uses, high-risk systems, or tiered obligations);</li></ul><ul class='nt-bullets'><li>how existing legal concepts are applied to AI-enabled conduct, and</li></ul><ul class='nt-bullets'><li>any features of this jurisdiction&#x27;s law that materially shape that treatment (sector specific, comprehensive etc)</li></ul><ul class='nt-bullets'><li>how this jurisdiction&#x27;s law handles attribution of AI outputs, decisions, or errors to a legal person, and whether gaps in attribution are addressed expressly or left to general principles.</li></ul><p>This section establishes the conceptual baseline for the note.<br>Sample B1.1 – Legal Characterisation of AI (AI-Specific Legislation)<br>Jurisdiction: South Korea<br>In South Korea, AI use and development is governed by the AI Basic Act, formally passed on 26 December 2024 and which came into force on 22 January 2026.  This framework establishes a comprehensive legal foundation for artificial intelligence, including transparency obligations, definitions of high-impact and generative AI, and provisions for governance and oversight.<br>Sector-specific regulations in areas such as finance and healthcare continue to apply existing legal concepts to AI-enabled conduct alongside the Basic Act, meaning that AI is treated both through new AI-specific norms and through the application of traditional legal doctrines according to effects and contexts.<br>Sample B1.2 – Legal Characterisation of AI (No AI-Specific Legislation)<br>Jurisdiction: Japan<br>In Japan, there is no AI-specific statute governing the development or use of artificial intelligence. AI systems are regulated through the application of existing legal frameworks, with legal assessment focused on the effects and outcomes of AI-enabled conduct rather than the technology itself.<br>In practice, AI use is evaluated through established bodies of law, including data protection, consumer protection, competition, product liability, and sector-specific regulation. These frameworks apply to AI systems in the same way as to other digital or automated tools, with AI acting as a factual element that may influence risk assessment, compliance expectations, or evidentiary analysis, rather than as a distinct legal category.<br>Government-issued guidelines and policy documents play an important role in shaping expectations around responsible AI development and deployment, but these instruments are non-binding and do not create enforceable legal obligations. As a result, the legal treatment of AI in Japan is characterised by continuity with existing legal doctrine, supplemented by soft-law guidance rather than formal AI-specific regulation.<br>B1 – Legal Characterisation of AI (AI-Specific Legislation)<br>Jurisdiction: China<br>In China, AI is governed through a layered and risk-based regulatory framework rather than as a single consolidated legal category. This regime is anchored in generally applicable foundation laws, including the Cybersecurity Law, Data Security Law, and Personal Information Protection Law (PIPL), which impose baseline obligations on data handling, system security, and cross-border transfers.<br>Building upon this foundation, China has developed a suite of targeted administrative rules to address specific technological functions. While the Generative AI Measures establish the primary framework for content safety and security assessments, they are supported by more granular regulations. The typical examples are the Administrative Provisions on Deep Synthesis, which govern AI-generated materials that could obscure reality, and the AI Content Labeling Measures (set to take effect in September 2025). The latter, supported by mandatory national standards (e.g., GB 45438-2025), introduces differentiated explicit and implicit labeling obligations to ensure AI-generated content is identifiable to the public.<br>Furthermore, regulatory attention has recently shifted toward advanced interactive risks. The Interim Measures for the Management of Anthropomorphic AI Interactive Services (draft for comments), released in late 2025, signal a new focus on AI systems that simulate human emotions, personalities, or social interactions. These draft rules aim to mitigate risks such as user manipulation, emotional dependency, and cognitive autonomy. Collectively, these measures, along with requirements for Algorithm Filing and Technology Ethics Reviews, create a dense compliance web that operationalizes high-level principles.<br>Beyond these requirements, sector-specific regulators (e.g., in the education, healthcare, and automotive sectors) continue to publish specialized guidelines to outline unique risk profiles in sensitive domains. In the longer term, a unified Artificial Intelligence Law remains under legislative discussion to provide greater coherence across these diverse instruments, though its final introduction timeline remains uncertain.<br>Regarding the attribution of liability to legal entities for AI-generated outputs or errors, China has yet to establish a specialized statutory regime. Instead, liability is determined pursuant to the principles of general tort law and the Civil Code. Courts and regulators increasingly evaluate whether service providers have fulfilled their duty of care and implemented reasonable technical safeguards, such as proactive monitoring and remediation mechanisms, rather than relying solely on boilerplate disclaimers. Notably, under Article 69 of the PIPL, a fault-presumption standard applies if the AI-related harm involves personal information infringement.<br>Beyond these cross-sectoral requirements, some sector-specific regulators (e.g., in the education and healthcare sectors) have also published specialized guidelines. These guidelines outline unique risk profiles and specific applications associated with AI applications in sensitive domains.<br>Regarding the attribution of liability to legal entities for AI-generated outputs, decisions, or errors, China has yet to establish a specialized statutory regime. Instead, liability is determined pursuant to the principles of general tort law, with the specific circumstances of each case dictating the allocation of responsibility.</p></div></div>
-<div class="nt-section" id="sec-b10"><div class="nt-s-kick">B10</div><h3 class="nt-s-title">Legislative Developments (If Relevant)</h3><div class="nt-s-body"><p>Note any pending or recently proposed AI-related legislation attributable to this jurisdiction.<br>Clearly distinguish:</p><ul class='nt-bullets'><li>enacted law, and</li></ul><ul class='nt-bullets'><li>proposals, drafts, or consultations.</li></ul><p>According to the 2025 Legislative Work Plan issued by the State Council of the PRC, a unified AI Act is unlikely to be introduced in the near future. China is instead continuing to advance legislative efforts aimed at promoting the healthy development of AI. Several AI-related regulations have completed the public consultation process but have not yet been formally issued, and are expected to be promulgated in the near future following the incorporation of feedback received during consultation. Key pending AI-related regulations include:</p><ul class='nt-bullets'><li>Measures for the Administration of AI Science and Technology Ethics (Trial) (“AI Ethics Measures”) were published in August 2025, setting out ethics review requirements for AI scientific and technological activities, including the responsible entities, registration and reporting obligations, key review focus areas, and review procedures. The AI Ethics Measures are intended to apply to AI scientific R&amp;D activities conducted within mainland China that may pose ethical risks in areas such as life and health, human dignity, the ecological environment, public order, and sustainable development, as well as other activities that are legally required to undergo AI ethics review.</li></ul><ul class='nt-bullets'><li>Interim Measures for the Administration of Anthropomorphic Interaction AI Services (“Anthropomorphic Interaction AI Measures”), released in December 2025, specifically target AI anthropomorphic interaction services, i.e., products or services that simulate human personality traits, thinking patterns and communication styles to engage in emotional interaction with users through text, images, audio or video. The draft measures require providers to implement user notification and intervention mechanisms aimed at mitigating risks of user confusion, emotional dependence, or physical harm (including self-harm or suicide).</li></ul></div></div>
-<div class="nt-section" id="sec-b2"><div class="nt-s-kick">B2</div><h3 class="nt-s-title">Relationship to Higher-Level Law (Where Applicable)</h3><div class="nt-s-body"><p>Explain how this jurisdiction&#x27;s own law(s) relates to higher-level legal regimes (e.g. federal, national, or superanational law), where applicable.<br>Focus on:</p><ul class='nt-bullets'><li>whether this jurisdiction adds obligations beyond higher-level law,</li></ul><ul class='nt-bullets'><li>implements or mirrors higher-level requirements, or</li></ul><ul class='nt-bullets'><li>does not add AI-specific obligations beyond higher-level regimes.</li></ul><p>Do not restate higher-level law itself.<br>Where this jurisdiction operates below a higher-level regime, focus only on what this jurisdiction adds, restricts, or permits beyond that regime. Do not restate the content of higher-level law, which is addressed in a separate note.<br>If this jurisdiction is the highest applicable legal level, state that briefly and continue.<br>Given that the design, deployment, and application of AI inherently implicate critical compliance areas such as cybersecurity, data security, and personal information protection, higher-level statutes—such as the PIPL, the Cybersecurity Law, and the Data Security Law—stipulate overarching obligations that extend beyond AI-specific rules. These foundational laws mandate the strict protection of personal data, cybersecurity, and data security throughout the AI lifecycle.<br>Additionally, traditional legal frameworks governing intellectual property and fair competition—primarily established within the Civil Code of the People&#x27;s Republic of China, the Copyright Law of the People&#x27;s Republic of China, and the Anti-Unfair Competition Law of the People&#x27;s Republic of China —apply equally to AI operations.<br>In China, AI-specific regulations apply the principles of these laws by setting clear rules for the AI industry. For example, requirements for algorithm transparency and content labeling are simply designed to protect users&#x27; right to know. Similarly, the duty to block illegal content just continues China&#x27;s long-standing content safety standards.</p></div></div>
-<div class="nt-section" id="sec-b3"><div class="nt-s-kick">B3</div><h3 class="nt-s-title">Analysis — B3</h3><div class="nt-s-body"><p>Extraterritorial Reach Explain whether this jurisdiction&#x27;s law applies to AI systems developed or operated outside the jurisdiction, and on what basis.<br>Focus on:</p><ul class='nt-bullets'><li>whether the law asserts jurisdiction based on effects, targeting, establishment, or other connecting factors,</li></ul><ul class='nt-bullets'><li>how that reach is defined or limited in practice, and</li></ul><ul class='nt-bullets'><li>any unresolved questions about where obligations attach in cross-border AI deployments.</li></ul><p>If the law is silent on extraterritorial application, state that and note how general private international law or conflict-of-laws principles would apply.<br>Under the Generative AI Measures and the PIPL, any generative AI services offered to the public within the territory of the People&#x27;s Republic of China must comply with relevant Chinese laws. In practice, if an AI system is easily accessible and usable in China without restrictions (such as IP blocks or phone number verification),  it may be deemed as targeting the Chinese market and thus subject to mandatory regulatory requirements of Chinese AI laws.<br>Due to this &quot;targeting&quot; standard, cross-border AI deployments must adhere to Chinese regulations whenever their service scope involves China—even if the training data, computing resources, and model infrastructure are located across multiple foreign jurisdictions.</p></div></div>
-<div class="nt-section" id="sec-b4"><div class="nt-s-kick">B4</div><h3 class="nt-s-title">Legal Bases Relied on in Practice</h3><div class="nt-s-body"><p>Describe the legal bases most commonly relied on when AI-related issues arise under this jurisdiction’s law.<br>Where this jurisdiction has AI-specific legislation, explain whether issues are primarily addressed under that framework, or through existing general or sectoral law.<br>Focus on:</p><ul class='nt-bullets'><li>the types of legal claims, duties, or prohibitions engaged,</li></ul><ul class='nt-bullets'><li>how AI affects their application or evidentiary analysis,</li></ul><ul class='nt-bullets'><li>what courts or regulators tend to focus on, and</li></ul><ul class='nt-bullets'><li>liability frameworks (including tort or civil liability where relevant).</li></ul><p>Avoid restating the structural features of the AI framework described in B1. Focus instead on how disputes, investigations, or claims are actually framed in practice.<br>It is not necessary to list all potentially applicable laws. Focus on those most commonly relied upon in practice.<br>In China, the Cyberspace Administration of China (CAC) serves as the primary regulator for both personal information protection and AI supervision within Mainland China. Local CAC branches have enforced several AI-related cases grounded in AI-specific legislation. A notable example is the November 2024 &quot;Qinglang&quot; special campaign—Combating the Abuse of AI Technology—jointly launched by the CAC and other authorities. Enforcement highlights include: (i) generative AI products providing public services without the required filing or registration; (ii) the dissemination or sale of tutorials and tools for unauthorized generative AI development; (iii) inadequate management of training data; and (iv) the propagation of AI-generated illegal content, such as rumors.<br>Notably, AI-specific legislation does not directly specify the liabilities for specific illegal or criminal activities. Instead, these regulations require penalties in accordance with other relevant laws and regulations, such as the Cybersecurity Law, the Data Security Law, and the PIPL. Furthermore, they emphasize that criminal liabilities should be pursued if the violation constitutes a crime.<br>Chinese courts have adjudicated several landmark AI cases, primarily focusing on intellectual property (IP) rights (e.g., the copyrightability of AI outputs and protection of personality/voice rights), personal information infringements, and &quot;AI-assisted cheating&quot; involving computer system interference. Unlike administrative enforcement, the legal basis for these civil rulings typically rests on general statutes rather than AI-specific rules.<br>In summary, China has established a functional liability framework in the administrative sphere by linking AI-specific legislation with foundational laws like the PIPL. However, in the realm of civil liability, the legal landscape remains reliant on general frameworks such as the Civil Code.</p></div></div>
-<div class="nt-section" id="sec-b5"><div class="nt-s-kick">B5</div><h3 class="nt-s-title">Liability Allocation Across the AI Chain</h3><div class="nt-s-body"><p>Describe how liability is allocated between developers, deployers, and users when an AI system causes harm under this jurisdiction&#x27;s law, and identify the most significant unresolved question in that allocation framework.<br>Focus on:</p><ul class='nt-bullets'><li>whether the law distinguishes between these roles expressly or by implication,</li></ul><ul class='nt-bullets'><li>how fault, causation, or product liability doctrines apply across the chain,</li></ul><ul class='nt-bullets'><li>whether contractual allocation between parties is recognised or limited by law, and</li></ul><ul class='nt-bullets'><li>any gaps or unresolved questions in the allocation framework.</li></ul><p>Do not restate the general liability frameworks described in B4. Where chain-specific rules exist, explain them. Where they do not, explain what fills the gap and what remains genuinely unresolved.<br>Currently, there are no laws or regulations specifically addressing the allocation of liability for harm caused by AI systems. Therefore, the responsibility for harm caused by an AI system is determined based on the principles of general civil tort law and the specific circumstances of each case.<br>According to the Civil Code, the party responsible for damage is determined based on the fault that caused the harm. This fault can be attributed to the developer, the deployer, and the user. If multiple parties contribute to the damage, they are held individually liable for their respective share. In cases where determining individual responsibility is impossible, joint and several liability may be imposed. The victim’s fault or events such as force majeure may partially or completely absolve the party responsible for the damage.<br>In general, the Civil Code permits parties to limit or exclude liability by contract reasonably. However, any clause that purports to exclude liability for personal injury, or for property damage caused by wilful misconduct or gross negligence, will be deemed invalid. In the context of AI products or services, service terms pre-drafted by service providers probably constitute standard terms. If the provider fails to draw the users’ attention to and adequately explain liability limitation or exclusion clauses, such clauses may be deemed not incorporated into the contract. Moreover, where such clauses unreasonably exclude or mitigate the provider’s liability, increase the users’ liability, or restrict the users’ principal rights, they may be held invalid.<br>There is ongoing debate within the academic and practical communities regarding the liability for defective AI systems, which remains one of the most significant unresolved questions in that allocation framework.</p><ul class='nt-bullets'><li>One view is that product liability under the Product Quality Law should apply. On this approach, AI developers would be held liable for damage caused by defects in their products on a no-fault basis, unless they can rely on a statutory defence, such as the defect being undetectable with current scientific and technical knowledge.</li></ul><ul class='nt-bullets'><li>Others believe that the aforementioned approach may lead to an unlimited expansion of liability, potentially hindering technological innovation. As an alternative, they advocate a fault-based regime, under which AI developers would be liable for infringement of others’ civil rights only to the extent of their fault, with fault-presumption or strict liability applied only in limited circumstances expressly provided by law.</li></ul></div></div>
-<div class="nt-section" id="sec-b6"><div class="nt-s-kick">B6</div><h3 class="nt-s-title">Analysis — B6</h3><div class="nt-s-body"><p>Regulatory Guidance and Soft Law Where regulatory guidance, codes of practice, or supervisory expectations materially shape AI-related compliance in this jurisdiction — even without binding legal force — describe their practical significance.<br>Focus on:</p><ul class='nt-bullets'><li>which bodies have issued relevant guidance and in what form,</li></ul><ul class='nt-bullets'><li>whether compliance with guidance is treated as a safe harbour, a factor in enforcement, or otherwise legally relevant, and</li></ul><ul class='nt-bullets'><li>where soft law is effectively filling gaps left by binding frameworks.</li></ul><p>Do not include guidance that is purely aspirational or that has no practical bearing on how organisations approach compliance.<br>In China, AI-related requirements under applicable laws and regulations are further clarified through national standards and technical guidelines, which complement the existing legal and regulatory framework. Such standards and documents may be either mandatory or recommended in nature. These guidelines facilitate the interpretation and implementation of applicable laws and regulations, support AI service providers in assessing the compliance of their services, and serve as a reference for competent authorities when evaluating the safety of services in regulatory procedures such as LLM launch filings, thereby effectively bridging gaps not fully addressed by binding rules.<br>For example, in the case of generative AI services, which are a key regulatory focus in China, relevant standards and guidelines are typically issued by the National Information Security Standardization Technical Committee (TC260), including but not limited to:</p><ul class='nt-bullets'><li>The mandatory national standard GB 45438-2025, Cybersecurity Technology – Labeling Method for Content Generated by Artificial Intelligence, was released in February 2025 and took effect on September 1, 2025. As a supporting standard to the Measures for the Labeling of AI-Generated Synthetic Content, it specifies detailed methods and provides examples for labeling various types of AI-generated content, including explicit labels for AI-generated content and interactive interfaces, as well as implicit labels embedded in the metadata of AI-generated files.</li></ul><ul class='nt-bullets'><li>The Basic Security Requirements for Generative Artificial Intelligence Service (“TC260-003 guidelines”) released on February 29, 2024, specifies the basic security requirements for generative AI services. This guideline serves as an important reference in the security assessment process during the LLM launch filing and covers aspects such as training data security, model security, security measures, and criteria for security assessments.</li></ul><ul class='nt-bullets'><li>The recommended national standard GB/T45654-2025, Cyber Security Technology - Basic Security Requirements for Generative Artificial Intelligence Service, was released in April 2025 and took effect on November 1, 2025. It further refines the requirements set out in the TC260-003 guidelines and introduces several additional provisions, such as security mechanisms for on-device large models, requirements for refusal to answer inappropriate questions, and specifications for the regular updates of test question banks.</li></ul></div></div>
-<div class="nt-section" id="sec-b7"><div class="nt-s-kick">B7</div><h3 class="nt-s-title">Data, Inference, and Automated Decision-Making</h3><div class="nt-s-body"><ul class='nt-bullets'><li>Explain how the law in this jurisdiction treats:</li></ul><ul class='nt-bullets'><li>data used to train or operate AI systems, inferences, profiles, or predictions generated by AI, and</li></ul><ul class='nt-bullets'><li>automated or AI-assisted decision-making (ADM), where relevant.</li></ul><p>This section should:</p><ul class='nt-bullets'><li>flag any heightened scrutiny of automated decisions, note where ADM-specific rules or concepts apply, and</li></ul><ul class='nt-bullets'><li>point to the separate ADM note (to be created and published by PrinciplesAI later in 2026) where deeper analysis is required.</li></ul><p>In light of the regulatory focus on generative AI services in China, applicable laws and regulatory guidance set out specific requirements for the safety management of training data used to develop or optimise such services. Under Article 7 of the Generative AI Measures, providers conducting training data processing activities are required to: (i) use data and underlying models from lawful sources; (ii) refrain from infringing the intellectual property rights of others; (iii) where personal information is involved, obtain valid consent or otherwise rely on a lawful basis under applicable laws and regulations; (iv) improve data quality and enhance the authenticity, accuracy, objectivity and diversity of training data; and (v) comply with other applicable legal and regulatory requirements. In addition, the TC260-003 guidelines further elaborate on these requirements by setting out more detailed safety expectations across source security, content safety, and annotation security. In practice, generative AI service providers are required to assess the safety of training data against these requirements in the context of LLM launch filings.<br>Inferences, profiles or predictions generated by AI should comply with applicable content safety and ethical requirements, and should not be unlawful, discriminatory, or infringe the lawful rights and interests of others. For algorithmic services used to recommend general content to users, the Algorithm Recommendation Regulations require providers to strengthen the management of user models and user labels, and prohibit the use of illegal or harmful information as user interests or labels for recommendation purposes. In addition, the TC260-003 guidelines require providers of generative AI services with heightened safety requirements—such as automated control, medical information services, psychological counselling, and critical information infrastructure—to adopt measures to prevent the generation of inaccurate content (i.e., content that significantly deviates from scientific consensus or mainstream understanding) or unreliable content (i.e., content that, while not materially incorrect, fails to provide meaningful assistance to users).<br>Under PRC law, automated decision-making (ADM) is regulated from the perspectives of personal information protection and algorithm governance. According to Article 73 of the PIPL, ADM refers to activities carried out through computer programs that automatically analyse and evaluate an individual’s behavioural patterns, interests, or economic, health or credit status, and make decisions accordingly. Where ADM involves personal information, the PIPL requires that: (i) ADM is conducted in a transparent and fair manner, and individuals are not subject to unreasonable differential treatment in transaction terms, such as pricing; (ii) for information push or commercial marketing, individuals should be provided with non-personalised options or a convenient opt-out mechanism; and (iii) where decisions made by ADM have a material impact on individuals’ rights and interests, individuals have the right to request an explanation and to refuse decisions solely made by ADM. In addition, algorithms used to support ADM—such as those for personalised recommendations, ranking, and dispatching decisions (e.g., route planning and resource allocation)—are regulated under the Algorithm Recommendation Regulations, and relevant service providers are required to complete algorithm filing with the CAC.</p></div></div>
-<div class="nt-section" id="sec-b8"><div class="nt-s-kick">B8</div><h3 class="nt-s-title">AI in Employment and Workplace Contexts Explain how this jurisdiction&#x27;s law applies to AI use in employment contexts.</h3><div class="nt-s-body"><p>Focus on:</p><ul class='nt-bullets'><li>AI-assisted hiring, performance management, monitoring, or termination decisions,</li></ul><ul class='nt-bullets'><li>whether employment law, equality law, or data protection law imposes specific constraints or heightened scrutiny in this context,</li></ul><ul class='nt-bullets'><li>any sector-specific rules or collective bargaining frameworks that shape AI use by employers, and</li></ul><ul class='nt-bullets'><li>whether workers have enforceable rights in relation to AI-assisted decisions affecting them.</li></ul><p>If this jurisdiction&#x27;s law does not address workplace AI in any materially distinct way, state that briefly and continue.<br>In the employment context, existing AI-related regulations primarily focus on the impact on workers’ rights. Under Article 20 of the Algorithm Recommendation Regulations, where algorithms are used to provide work allocation or scheduling, service providers are required to (1) safeguard workers’ lawful rights and interests, including the right to remuneration and rest; and (2) establish and refine algorithmic mechanisms governing employee management, including but not limited to order allocation, remuneration structure and payment, working hours, rewards and penalties.<br>In addition, the use of AI in hiring, performance management, and other employment-related decision-making must avoid discriminatory outcomes. Judicial practice has made clear that factors such as region or gender, where unrelated to the inherent requirements of the working role, cannot serve as a basis for employment decisions. Reliance on such factors may constitute unlawful employment discrimination. The use of AI systems in these contexts may further amplify such discriminatory effects, and therefore requires appropriate human oversight and intervention in practice.<br>Moreover, where employers use AI to make decisions that have a material impact on candidates or employees or, such as hiring, performance evaluation, or termination, they are required to ensure compliance with ADM requirements under the PIPL. This includes providing individuals with the right to request an explanation and to challenge such decisions, as well as the right to opt out of decisions made solely through ADM and to request human intervention as an alternative.</p></div></div>
-<div class="nt-section" id="sec-b9"><div class="nt-s-kick">B9</div><h3 class="nt-s-title">Points of Legal Friction</h3><div class="nt-s-body"><p>Identify areas in which AI use exposes structural tension, ambiguity, or strain within existing legal frameworks in this jurisdiction.<br>Explain:</p><ul class='nt-bullets'><li>where existing legal frameworks are strained by AI use, and</li></ul><ul class='nt-bullets'><li>why those tensions arise.</li></ul><p>Please do not</p><ul class='nt-bullets'><li>rank or score risks.</li></ul><ul class='nt-bullets'><li>focus on enforcement mechanics.</li></ul><p>Under PRC law, AI exposes growing strain within existing legal frameworks, particularly with respect to the ownership of AI-generated content and the allocation of liability for AI-related harm.</p><ul class='nt-bullets'><li>Ownership of AI-Generated Content. The current Copyright Law is premised on a human authorship paradigm. However, the rise of AI challenges this foundation. In particular, whether AI-generated content qualifies as a “work” under copyright law, and whether the relevant rights should be attributed to the developer, the user, or another party, remains unsettled in judicial practice. Divergent approaches have emerged across cases, reflecting underlying uncertainty as to how existing copyright doctrines should accommodate AI-generated content.</li></ul><ul class='nt-bullets'><li>Liability Allocation for Harm Caused by Defective AI Systems. Traditional tort law typically requires a clear line of causation between conduct and harm. By contrast, the “black box” nature of AI systems makes it difficult for victims to establish causation between the acts or omissions of developers or service providers and the resulting damage. As noted in Question B5, both academic and practical debates remain ongoing as to the appropriate liability framework. In particular, there is no consensus on whether such cases should be addressed under traditional fault-based liability, or strict liability regimes from product liability.</li></ul></div></div></main>
-      <aside class="nt-contrib-wrap">
-        <div class="nt-contrib">
-          <div class="nt-c-photo">H</div>
-          <div class="nt-c-name">Han Kun</div>
-          <div class="nt-c-firm">Han Kun Law Offices</div>
-          
-          <div class="nt-c-meta">
-            <div class="nt-c-row"><span class="lbl">Jurisdiction</span><span>China</span></div>
-            <div class="nt-c-row"><span class="lbl">Law as at</span><span>February 2026</span></div>
-            <div class="nt-c-row"><span class="lbl">Sections</span><span>11 Part B topics</span></div>
-          </div>
-        </div>
-      </aside>
+      <div class="tw-body">
+        <div class="tw-label">Watchlist</div>
+        <div class="tw-value"><span class="val-slot">—</span><span class="delta-tag up">▲ 2</span></div>
+        <div class="tw-sub">since your last visit</div>
+      </div>
+      <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
+        <polyline points="0,22 9,21 18,16 27,18 36,13 45,15 54,9 63,5 72,3" fill="none" stroke="var(--red-fill)" stroke-width="1.6"/>
+        <circle cx="72" cy="3" r="2.2" fill="var(--red-fill)"/>
+      </svg>
+    </div>
+    <div class="tw-cell">
+      <div class="tw-icon amber">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="tw-body">
+        <div class="tw-label">Closing ≤ 7 days</div>
+        <div class="tw-value"><span class="val-slot">—</span></div>
+        <div class="tw-sub">Next: ICO · 23 Apr</div>
+      </div>
+      <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
+        <polyline points="0,15 9,17 18,14 27,16 36,12 45,14 54,10 63,12 72,8" fill="none" stroke="var(--amber-fill)" stroke-width="1.6"/>
+        <circle cx="72" cy="8" r="2.2" fill="var(--amber-fill)"/>
+      </svg>
+    </div>
+    <div class="tw-cell">
+      <div class="tw-icon blue">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="tw-body">
+        <div class="tw-label">Enforcement · 7d</div>
+        <div class="tw-value money"><span id="twEnf">—</span><span class="delta-tag up" id="twEnfDelta">▲ —</span></div>
+        <div class="tw-sub"><span id="twEnfCount">—</span> actions vs prior week</div>
+      </div>
+      <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
+        <polyline points="0,20 9,18 18,21 27,15 36,12 45,14 54,8 63,6 72,3" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+        <circle cx="72" cy="3" r="2.2" fill="var(--accent)"/>
+      </svg>
+    </div>
+    <div class="tw-cell">
+      <div class="tw-icon green">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="tw-body">
+        <div class="tw-label">Decisions flagged</div>
+        <div class="tw-value"><span id="twDecisions">—</span> decisions</div>
+        <div class="tw-sub">Curated from <span id="twPublished">—</span> published</div>
+      </div>
+      <svg class="tw-spark" viewBox="0 0 72 28" preserveAspectRatio="none">
+        <polyline points="0,15 9,13 18,15 27,9 36,12 45,8 54,10 63,6 72,4" fill="none" stroke="var(--green-fill)" stroke-width="1.6"/>
+        <circle cx="72" cy="4" r="2.2" fill="var(--green-fill)"/>
+      </svg>
     </div>
   </section>
+
+  <!-- HERO: MAP + TODAY -->
+  <section class="hero">
+
+    <!-- MAP (hero) -->
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Coverage <span class="count">last 7 days · <b id="covRead">—</b> read · <b id="covKept">—</b> kept · <b id="covFlagged">—</b> flagged in your scope</span></div>
+        <span class="panel-link">Open coverage</span>
+      </div>
+      <div class="map-wrap">
+        <div class="map-frame map-hero">
+<svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
+            <g class="graticule"><line x1="0" y1="120" x2="1000" y2="120"/><line x1="0" y1="240" x2="1000" y2="240"/><line x1="0" y1="360" x2="1000" y2="360"/><line x1="167" y1="0" x2="167" y2="480"/><line x1="333" y1="0" x2="333" y2="480"/><line x1="500" y1="0" x2="500" y2="480"/><line x1="667" y1="0" x2="667" y2="480"/><line x1="833" y1="0" x2="833" y2="480"/></g>
+            <g>
+              <path class="continent" d="M 140,105 L 180,91 L 230,82 L 290,88 L 320,111 L 315,140 L 290,158 L 260,163 L 240,173 L 230,197 L 210,202 L 195,187 L 175,168 L 155,155 L 140,140 Z"/>
+              <path class="continent" d="M 210,202 L 230,207 L 240,216 L 245,230 L 240,240 L 230,245 L 225,236 L 220,226 L 215,216 Z"/>
+              <path class="continent" d="M 280,254 L 305,250 L 325,258 L 345,282 L 360,316 L 362,346 L 355,370 L 340,380 L 325,370 L 310,346 L 298,321 L 290,297 L 285,273 Z"/>
+              <path class="continent" d="M 475,91 L 505,84 L 540,88 L 565,101 L 555,120 L 535,130 L 510,135 L 490,127 L 478,110 Z"/>
+              <path class="continent" d="M 495,158 L 540,149 L 580,158 L 610,178 L 620,211 L 615,250 L 600,283 L 580,307 L 560,317 L 540,312 L 520,293 L 505,259 L 495,226 L 490,193 Z"/>
+              <path class="continent" d="M 610,149 L 645,144 L 670,154 L 675,173 L 665,187 L 640,192 L 620,178 L 612,163 Z"/>
+              <path class="continent" d="M 570,91 L 640,82 L 720,82 L 790,91 L 850,101 L 890,115 L 900,134 L 885,154 L 860,158 L 825,154 L 780,154 L 740,158 L 710,163 L 685,154 L 665,139 L 640,130 L 610,120 L 580,111 Z"/>
+              <path class="continent" d="M 695,158 L 720,154 L 740,163 L 735,192 L 720,207 L 705,197 L 698,178 Z"/>
+              <path class="continent" d="M 770,187 L 800,182 L 815,197 L 810,216 L 790,226 L 775,221 L 768,207 Z"/>
+              <path class="continent" d="M 880,134 L 895,130 L 900,144 L 895,158 L 885,161 L 878,149 Z"/>
+              <path class="continent" d="M 830,307 L 880,298 L 920,302 L 935,321 L 925,346 L 895,356 L 855,353 L 830,341 L 822,326 Z"/>
+              <path class="continent" d="M 945,360 L 960,357 L 962,374 L 952,379 L 945,373 Z"/>
+              <path class="continent" d="M 478,91 L 490,88 L 493,104 L 485,110 L 478,104 Z"/>
+              <path class="continent" d="M 515,72 L 540,67 L 545,86 L 535,96 L 520,91 Z"/>
+            </g>
+            <circle class="marker-dot ai" cx="510" cy="110" r="3.8"/>
+            <circle class="marker-dot privacy" cx="485" cy="102" r="3.8"/>
+            <circle class="marker-dot privacy" cx="520" cy="106" r="3.8"/>
+            <circle class="marker-dot ai" cx="535" cy="129" r="3.8"/>
+            <circle class="marker-dot privacy" cx="490" cy="131" r="3.8"/>
+            <circle class="marker-dot ai" cx="483" cy="98" r="3.8"/>
+            <circle class="marker-dot cyber" cx="514" cy="100" r="3.8"/>
+            <circle class="marker-dot ai" cx="172" cy="150" r="3.8"/>
+            <circle class="marker-dot privacy" cx="286" cy="136" r="3.8"/>
+            <circle class="marker-dot privacy" cx="290" cy="119" r="3.8"/>
+            <circle class="marker-dot ai" cx="340" cy="298" r="3.8"/>
+            <circle class="marker-dot privacy" cx="225" cy="192" r="3.8"/>
+            <circle class="marker-dot cyber" cx="888" cy="144" r="3.8"/>
+            <circle class="marker-dot privacy" cx="855" cy="139" r="3.8"/>
+            <circle class="marker-dot ai" cx="788" cy="211" r="3.8"/>
+            <circle class="marker-dot privacy" cx="905" cy="331" r="3.8"/>
+            <circle class="marker-dot ai" cx="715" cy="177" r="3.8"/>
+            <circle class="marker-dot privacy" cx="650" cy="173" r="3.8"/>
+            <circle class="marker-dot privacy" cx="568" cy="307" r="3.8"/>
+            <circle class="marker-dot privacy" cx="605" cy="245" r="3.8"/>
+            <circle class="marker-dot ai" cx="530" cy="216" r="3.8"/>
+            <circle class="marker-dot privacy" cx="515" cy="142" r="3.8"/>
+          </svg>
+          <div class="map-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span>AI</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--ink)"></span>Privacy</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--amber-fill)"></span>Cyber</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-hotlist">
+        <div class="hot-toggle-row">
+          <span class="h3" id="hotLabel">Most active this week</span>
+          <div class="hot-toggle">
+            <button class="ht-btn on" onclick="setHotView('active', this)">Most active</button>
+            <button class="ht-btn" onclick="setHotView('regional', this)">By region</button>
+          </div>
+        </div>
+
+        <div class="hot-view on" id="hot-active">
+          <span class="hot-inline">UK · ICO <span class="num" id="hotIco">—</span></span>
+          <span class="hot-inline ds-muted"><i>More authorities populate once AT2 is wired.</i></span>
+        </div>
+
+        <div class="hot-view" id="hot-regional">
+          <span class="region-pill">Europe <span class="num" id="regEU">—</span></span>
+          <span class="region-pill">North America <span class="num" id="regNA">—</span></span>
+          <span class="region-pill">Latin America <span class="num" id="regLatAm">—</span></span>
+          <span class="region-pill">Caribbean <span class="num" id="regCaribbean">—</span></span>
+          <span class="region-pill">Africa <span class="num" id="regAF">—</span></span>
+          <span class="region-pill">Middle East <span class="num" id="regME">—</span></span>
+          <span class="region-pill">Asia Pacific <span class="num" id="regAPAC">—</span></span>
+          <span class="region-pill">Global <span class="num" id="regGlobal">—</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODAY -->
+    <aside class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Today <span class="count"><b id="todayPublished">—</b> published</span></div>
+        <span class="panel-link">Full feed</span>
+      </div>
+      <ul class="today-list" id="todayList"></ul>
+    </aside>
+  </section>
+
+  <!-- FEATURED TRIO -->
+  <div class="section-eyebrow">
+    <span class="lbl">Featured this week</span>
+    <span class="meta">Original reporting · this week</span>
+  </div>
+  <section class="featured-trio">
+
+    <a class="featured-card" href="pai-app-news-story-belgium-adopts-national-cyber-crisis-response">
+      <div class="fc-thumb r2">
+        <span class="fc-badge"><span class="dot"></span>News</span>
+        <span class="country-flag">🇧🇪</span>
+        <span class="silhouette">BE</span>
+        <span class="country-strip"><span class="name">Belgium</span><span class="auth">· Centre for Cybersecurity (CCB)</span></span>
+      </div>
+      <div class="fc-body">
+        <div class="fc-title">Belgium Adopts National Cyber Crisis Response Plan by Royal Decree, Replacing 2017 Framework</div>
+        <div class="fc-deck">The Centre for Cybersecurity Belgium has formally adopted an updated national cyber crisis response plan by Royal Decree, grounded in the Law of 26 April 2024 transposing the NIS2 Directive into Belgian law and the Law of 25 May 2007 on civil security, replacing the previous fram</div>
+        <div class="fc-meta">
+          <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
+          <span class="sep">·</span><span class="fc-when">2d ago</span>
+          <span class="sep">·</span><span>Belgium</span>
+        </div>
+      </div>
+    </a>
+    <a class="featured-card" href="pai-app-news-story-edpb-issues-opinion-on-dutch-dpa-draft-decision">
+      <div class="fc-thumb r2">
+        <span class="fc-badge"><span class="dot"></span>News</span>
+        <span class="country-flag">🇪🇺</span>
+        <span class="silhouette">EU</span>
+        <span class="country-strip"><span class="name">European Union</span><span class="auth">· European Data Protection Board</span></span>
+      </div>
+      <div class="fc-body">
+        <div class="fc-title">EDPB Issues Opinion on Dutch DPA Draft Decision Approving SLB Group Controller Binding Corporate Rules Under Art. 47 GDPR</div>
+        <div class="fc-deck">The European Data Protection Board has issued Opinion 10/2026, adopted on 15 April 2026 and published on 27 April 2026, assessing the draft decision of the Dutch Supervisory Authority to approve Controller Binding Corporate Rules submitted by the SLB Group, under the consistency </div>
+        <div class="fc-meta">
+          <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
+          <span class="sep">·</span><span class="fc-when">2d ago</span>
+          <span class="sep">·</span><span>European Union</span>
+        </div>
+      </div>
+    </a>
+    <a class="featured-card" href="pai-app-news-story-belarus-centre-for-personal-data-protection">
+      <div class="fc-thumb r2">
+        <span class="fc-badge"><span class="dot"></span>News</span>
+        <span class="country-flag">🇧🇾</span>
+        <span class="silhouette">BY</span>
+        <span class="country-strip"><span class="name">Belarus</span><span class="auth">· Centre for Personal Data Protection</span></span>
+      </div>
+      <div class="fc-body">
+        <div class="fc-title">Belarus Centre for Personal Data Protection Issues Guidance on University Website Publication</div>
+        <div class="fc-deck">The National Centre for Personal Data Protection of the Republic of Belarus has issued formal guidance on the lawful bases and data minimisation requirements for higher education institutions publishing personal data about applicants, students and graduates on their official webs</div>
+        <div class="fc-meta">
+          <span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>
+          <span class="sep">·</span><span class="fc-when">2d ago</span>
+          <span class="sep">·</span><span>Belarus</span>
+        </div>
+      </div>
+    </a>
+
+  </section>
+
+  <!-- FEATURED FACULTY -->
+  <div class="section-eyebrow">
+    <span class="lbl">Featured faculty</span>
+    <span class="meta">Practitioner-contributed AI-regulation analysis</span>
+  </div>
+  <section class="featured-faculty">
+    <a class="ff-card" href="pai-app-faculty-edsel-tupaz">
+      <div class="ff-portrait has-photo">
+        <img src="edsel-tupaz.jpg" alt="Edsel F. Tupaz">
+        <span class="ff-badge">Faculty</span>
+        <span class="ff-flag">&#x1F1F5;&#x1F1ED;</span>
+      </div>
+      <div class="ff-body">
+        <div class="ff-eyebrow">Philippines AI Note · Contributor</div>
+        <div class="ff-name">Edsel F. Tupaz</div>
+        <div class="ff-role">Senior Partner · Head, Data Privacy, Cybersecurity &amp; AI Initiatives</div>
+        <div class="ff-firm">Gorriceta Africa Cauton &amp; Saavedra · Manila</div>
+        <p class="ff-blurb">Dual-qualified under the Philippine and New York Bars. Advises Fortune 500 and NASDAQ-listed companies on AI, data privacy, and cybersecurity across Southeast Asia, and serves as Data Protection Officer for leading startups and incumbents.</p>
+        <span class="ff-cta">Read faculty profile →</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- DEVELOPMENTS -->
+  <div class="section-eyebrow">
+    <span class="lbl">Developments · this week</span>
+    <span class="meta">Filtered to your jurisdictions</span>
+  </div>
+  <section class="developments">
+    <div class="dev-grid">
+
+      <div class="dev-day-head"><span>Last 3 days</span><span class="count">1 development</span></div>
+
+      <article class="dev-item">
+        <div class="dev-when">2d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">France</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-cnil-publishes-recommended-template-and-guidance" style="color:inherit;text-decoration:none;">CNIL Publishes Recommended Template and Guidance for DPO Activity Reports</a></div>
+        </div>
+      </article>
+
+      <div class="dev-day-head"><span>Earlier this week</span><span class="count">5 developments</span></div>
+
+      <article class="dev-item">
+        <div class="dev-when">5d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">Japan</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-japan-digital-agency-concludes-technology-based" style="color:inherit;text-decoration:none;">Japan Digital Agency Concludes Technology-Based Regulatory Reform Committee After Ten Sessions, Reports 98% of National Analogue Regulations Revised</a></div>
+        </div>
+      </article>
+
+      <article class="dev-item">
+        <div class="dev-when">5d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">British Columbia</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-bc-information-and-privacy-commissioner-reports" style="color:inherit;text-decoration:none;">BC Information and Privacy Commissioner Reports 86% Rise in Complaints and AI-Generated File Surge in Legislative Address</a></div>
+        </div>
+      </article>
+
+      <article class="dev-item">
+        <div class="dev-when">6d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">Australia</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-oaic-and-esafety-commissioner-formalise" style="color:inherit;text-decoration:none;">OAIC and eSafety Commissioner Formalise Cooperation on Privacy and Online Safety via MOU</a></div>
+        </div>
+      </article>
+
+      <article class="dev-item">
+        <div class="dev-when">6d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">European Union</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-council-of-europe-committee-on-new-and-emerging" style="color:inherit;text-decoration:none;">Council of Europe Committee on New and Emerging Technologies holds inaugural meeting in Strasbourg</a></div>
+        </div>
+      </article>
+
+      <article class="dev-item">
+        <div class="dev-when">6d<small>ago</small></div>
+        <div class="dev-body">
+          <div class="dev-meta"><span class="status-pill">Update</span><span class="juris">Germany</span></div>
+          <div class="dev-headline"><a href="pai-app-news-story-dsk-and-sector-specific-supervisory-authorities" style="color:inherit;text-decoration:none;">DSK and Sector-Specific Supervisory Authorities Discuss Deepfake Regulation and Rising Complaint Volumes at Stuttgart Meeting</a></div>
+        </div>
+      </article>
+
+    </div>
+    <div class="dev-footer">Load earlier developments →</div>
+  </section>
+
+  <!-- ACTIVITY: Enforcement + Case law -->
+  <div class="section-eyebrow">
+    <span class="lbl">This week in detail</span>
+    <span class="meta">Enforcement actions and selected reading</span>
+  </div>
+  <section class="activity-row">
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Enforcement <span class="count"><b id="enfActions">—</b> actions · <b id="enfTotal">—</b></span></div>
+        <span class="panel-link">View all</span>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr><th>Regulator</th><th>Target</th><th class="right">When</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="reg">European Union · European Data Protection Board</td><td class="target"><a href="pai-app-news-story-edpb-adopts-opinion-12-2026-on-spanish-dpa-draft" style="color:inherit;text-decoration:none;">EDPB adopts Opinion 12/2026 on Spanish DPA draft decision…</a><span class="sub">The European Data Protection Board has adopted Opinion 12/20…</span></td><td class="when">2d ago</td></tr>
+          <tr><td class="reg">Czech Republic · National Cybersecurity Authority (NÚKIB)</td><td class="target"><a href="pai-app-news-story-czech-n-kib-q1-2026-threat-report-records-highest" style="color:inherit;text-decoration:none;">Czech NÚKIB Q1 2026 Threat Report Records Highest Inciden…</a><span class="sub">The National Cybersecurity Authority of the Czech Republic (…</span></td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">Germany · Federal Ministry of the Interior (BMI)</td><td class="target"><a href="pai-app-news-story-german-federal-government-approves-draft-law" style="color:inherit;text-decoration:none;">German Federal Government Approves Draft Law Mandating Th…</a><span class="sub">The German Federal Ministry of the Interior has approved a d…</span></td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">France · ANSSI</td><td class="target"><a href="pai-app-news-story-anssi-publishes-european-study-on-s-sdlc-and" style="color:inherit;text-decoration:none;">ANSSI Publishes European Study on S-SDLC and DevSecOps, I…</a><span class="sub">France&#x27;s Agence nationale de la sécurité des systèmes d&#x27;info…</span></td><td class="when">7d ago</td></tr>
+          <tr><td class="reg">Japan · AI Safety Institute (AISI Japan)</td><td class="target"><a href="pai-app-news-story-japan-ai-safety-institute-publishes-second" style="color:inherit;text-decoration:none;">Japan AI Safety Institute Publishes Second Edition of Kno…</a><span class="sub">Japan&#x27;s AI Safety Institute (AISI Japan) has published the s…</span></td><td class="when">7d ago</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Selected reading <span class="count">worth reading this week</span></div>
+        <span class="panel-link">View all</span>
+      </div>
+      <div class="case-list">
+        <div class="case-row">
+          <div class="case-meta"><span class="case-court">France</span><span class="case-when">2d ago</span></div>
+          <div class="case-name"><a href="pai-app-news-story-cnil-publishes-recommended-template-and-guidance" style="color:inherit;text-decoration:none;">CNIL Publishes Recommended Template and Guidance for DPO Activity Reports</a></div>
+        </div>
+        <div class="case-row">
+          <div class="case-meta"><span class="case-court">Japan</span><span class="case-when">5d ago</span></div>
+          <div class="case-name"><a href="pai-app-news-story-japan-digital-agency-concludes-technology-based" style="color:inherit;text-decoration:none;">Japan Digital Agency Concludes Technology-Based Regulatory Reform Committee After Ten Sessions, Reports 98% of National Analogue Regulations Revised</a></div>
+        </div>
+        <div class="case-row">
+          <div class="case-meta"><span class="case-court">British Columbia</span><span class="case-when">5d ago</span></div>
+          <div class="case-name"><a href="pai-app-news-story-bc-information-and-privacy-commissioner-reports" style="color:inherit;text-decoration:none;">BC Information and Privacy Commissioner Reports 86% Rise in Complaints and AI-Generated File Surge in Legislative Address</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTATIONS -->
+  <section class="consultations">
+    <div class="panel-head">
+      <div class="panel-title">Consultations <span class="count">closing soon</span></div>
+      <span class="panel-link">Full calendar</span>
+    </div>
+    <div class="cons-grid">
+      <div class="cons-item">
+        <div class="cons-deadline-row">
+          <span class="cons-deadline">23 Apr</span>
+          <span class="status-pill red">in 6d</span>
+        </div>
+        <div class="cons-progress"><div class="cons-progress-bar red" style="width:75%"></div></div>
+        <div class="cons-body">ICO · draft guidance on AI and the right to explanation</div>
+        <div class="cons-source">UK · ico.org.uk</div>
+      </div>
+      <div class="cons-item">
+        <div class="cons-deadline-row">
+          <span class="cons-deadline">30 Apr</span>
+          <span class="status-pill amber">in 12d</span>
+        </div>
+        <div class="cons-progress"><div class="cons-progress-bar amber" style="width:55%"></div></div>
+        <div class="cons-body">CNIL · recommendations on AI model training using public data</div>
+        <div class="cons-source">France · cnil.fr</div>
+      </div>
+      <div class="cons-item">
+        <div class="cons-deadline-row">
+          <span class="cons-deadline">8 May</span>
+          <span class="status-pill grey">in 21d</span>
+        </div>
+        <div class="cons-progress"><div class="cons-progress-bar cool" style="width:35%"></div></div>
+        <div class="cons-body">EDPB · guidelines on legitimate interests post-<em>Schrems IV</em></div>
+        <div class="cons-source">EU · edpb.europa.eu</div>
+      </div>
+      <div class="cons-item">
+        <div class="cons-deadline-row">
+          <span class="cons-deadline">16 May</span>
+          <span class="status-pill grey">in 28d</span>
+        </div>
+        <div class="cons-progress"><div class="cons-progress-bar cool" style="width:20%"></div></div>
+        <div class="cons-body">MeitY · DPDPA implementation rules, second draft</div>
+        <div class="cons-source">India · meity.gov.in</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="left">
+      <span>PrinciplesAI</span>
+      <span><span class="ok"></span>Pipeline operational</span>
+      <span><b id="ftPublished">—</b> published today</span>
+    </div>
+    <div>v0.9</div>
+  </footer>
+
 </div>
+</div>
+
+<script>
+function setHotView(view, btn) {
+  document.querySelectorAll('.ht-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.hot-view').forEach(v => v.classList.remove('on'));
+  document.getElementById('hot-' + view).classList.add('on');
+  document.getElementById('hotLabel').textContent =
+    view === 'active' ? 'Most active this week' : 'Coverage by region';
+}
+</script>
+
+
+
 <!-- Mobile nav shim -->
 <style>
 .mobile-nav-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
@@ -680,8 +1621,6 @@ html{scroll-behavior:smooth}
 <button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
 <div class="mobile-nav-backdrop" onclick="document.body.classList.remove('mobile-nav-open')"></div>
 <script>document.addEventListener('click',function(e){var a=e.target.closest('.icon-sidebar .sidebar-nav-item'); if(a&&a.tagName==='A'){document.body.classList.remove('mobile-nav-open')}});</script>
-
-
 
 
 
@@ -931,7 +1870,7 @@ html{scroll-behavior:smooth}
         toggleExpand(wrap, row, function(){ fillFederalChildren(wrap, name, children); });
         return;
       }
-      location.href = 'pai-app-juris-' + slugify(dataKey) + '.html';
+      location.href = 'pai-app-juris-' + slugify(dataKey);
     }});
     wrap.appendChild(row);
     var cont = document.createElement('div'); cont.className='jo-children';
@@ -992,7 +1931,7 @@ html{scroll-behavior:smooth}
   function goJurisdiction(name){
     closeJurisdictions();
     var slug = slugify(name);
-    location.href = 'pai-app-juris-' + slug + '.html';
+    location.href = 'pai-app-juris-' + slug;
   }
   window.goJurisdiction = goJurisdiction;
 
@@ -1154,6 +2093,7 @@ html{scroll-behavior:smooth}
 })();
 </script>
 
+<script src="https://gistcdn.githack.com/davidlongford/38bf87bee575b5e881adac29c529daf5/raw/pai-map.js" defer></script>
 <script>
 // Set title attribute on each sidebar nav item so hover shows a browser tooltip
 (function(){
@@ -1218,7 +2158,7 @@ html{scroll-behavior:smooth}
   /* Topbar */
   .pst-topbar { display: flex; align-items: center; justify-content: space-between; padding: 22px 32px; flex-shrink: 0; }
   .pst-brand { display: flex; align-items: center; gap: 10px; }
-  .pst-brand-mark { width: 24px; height: 24px; flex-shrink: 0; }
+  .pst-brand-mark { width: 22px; height: 22px; background: #014486; color: #ffffff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: 'Inter'; font-style: italic; font-weight: 700; font-size: 14px; letter-spacing: -0.5px; }
   .pst-brand-name { font-size: 13.5px; font-weight: 600; color: #07202e; letter-spacing: -0.005em; }
   .pst-brand-name em { font-style: italic; font-weight: 500; color: #4a556b; }
   .pst-exit { background: transparent; border: none; color: #6b7a8f; font-size: 12px; font-weight: 500; cursor: pointer; letter-spacing: 0.01em; }
@@ -1397,11 +2337,7 @@ html{scroll-behavior:smooth}
   <div class="pai-step-takeover" id="paiStepTakeover" role="dialog" aria-modal="true" aria-labelledby="paiStepTitle">
     <div class="pst-topbar">
       <div class="pst-brand">
-        <svg class="pst-brand-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <rect x="6" y="6" width="12" height="12" rx="2" fill="white" transform="rotate(45 12 12)"/>
-          <rect x="5" y="12" width="14" height="4" rx="1.5" fill="white"/>
-          <rect x="5" y="16" width="14" height="4" rx="1.5" fill="white"/>
-        </svg>
+        <span class="pst-brand-mark">P</span>
         <span class="pst-brand-name">Principles<em>AI</em></span>
       </div>
       <button class="pst-exit" id="paiStepExit" type="button">Skip</button>
@@ -1453,6 +2389,14 @@ html{scroll-behavior:smooth}
   var ONB_KEY = 'pai-onboarding-v2';
   var TOUR_KEY = 'pai-tour-v1';
   var VISIT_KEY = 'pai-last-visit';
+
+  // Preview-only replay trigger: ?replay=1 or #replay clears state so the stepper fires.
+  if (/[?&]replay=1/.test(location.search) || location.hash === '#replay') {
+    try { localStorage.removeItem(ONB_KEY); localStorage.removeItem(TOUR_KEY); localStorage.removeItem(VISIT_KEY); } catch(e){}
+    if (location.hash === '#replay' || location.search.indexOf('replay=1') !== -1) {
+      history.replaceState(null, '', location.pathname);
+    }
+  }
 
   var TOPICS = ['AI', 'Privacy', 'Cybersecurity', 'IP', 'Trust & Safety', 'Standards', 'Vendor & Procurement', 'Incident Response'];
   var ROLES = [
@@ -2025,7 +2969,7 @@ html{scroll-behavior:smooth}
           '<span style="color:#c8d0dc;">·</span>' +
           '<span><b style="color:#0d2e42;">4 consultations</b> closing in '+escapeHTML(primaryJur)+'</span>' +
           '<span style="color:#c8d0dc;">·</span>' +
-          '<span><b style="color:#0d2e42;" id="jsEnf">—</b> enforcement captured</span>';
+          '<span><b style="color:#0d2e42;" id="jsEnf">—</b> enforcement actions</span>';
       }
       if (briefChip) {
         briefChip.classList.add('show');
@@ -2301,11 +3245,202 @@ html{scroll-behavior:smooth}
   };
 })();
 </script>
-<!-- Privacy notice for analytics -->
-<div style="font-size:11px; color:var(--muted); text-align:center; padding:12px 0; border-top:1px solid var(--border-soft); margin-top:20px;">
-  <p>Your usage is tracked locally by Plausible Analytics and GlitchTip (self-hosted in Germany). <a href="/settings#privacy" style="color:var(--accent); text-decoration:underline;">Opt out anytime in Settings.</a> <a href="https://principlesai.org/trust#s15" target="_blank" style="color:var(--accent); text-decoration:underline;">Learn more.</a></p>
-</div>
 
+<script>
+/* Home stats — loaded from stats.json + authorities.json (written by build_marketing_data.py) */
+(async function loadHomeStats() {
+  const setTx = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+  try {
+    const [statsR, authR] = await Promise.all([
+      fetch('./stats.json', { cache: 'no-cache' }),
+      fetch('./authorities.json', { cache: 'no-cache' }),
+    ]);
+    if (statsR.ok) {
+      const d = await statsR.json();
+      if (d.news_count != null) setTx('ftPublished', d.news_count.toLocaleString() + ' published');
+      if (d.news_count != null) setTx('todayPublished', d.news_count.toLocaleString());
+    }
+    if (authR.ok) {
+      const auth = await authR.json();
+      const REGION_NORMALISE = {
+        'Europe':'Europe', 'europe':'Europe',
+        'North America':'North America', 'north-america':'North America',
+        'Latin America':'Latin America', 'latin-america':'Latin America',
+        'Caribbean':'Caribbean', 'caribbean':'Caribbean',
+        'Africa':'Africa', 'africa':'Africa',
+        'Middle East':'Middle East', 'middle-east':'Middle East', 'mena':'Middle East',
+        'Asia Pacific':'Asia Pacific', 'Asia-Pacific':'Asia Pacific', 'asia-pacific':'Asia Pacific', 'apac':'Asia Pacific',
+        'Global':'Global', 'global':'Global',
+      };
+      const buckets = {};
+      (auth.rows || []).forEach(r => {
+        const reg = REGION_NORMALISE[r.region];
+        const j = r.jurisdiction_name;
+        if (reg && j) { (buckets[reg] = buckets[reg] || new Set()).add(j); }
+      });
+      const SLOT = { regEU:'Europe', regNA:'North America', regLatAm:'Latin America',
+                     regCaribbean:'Caribbean', regAF:'Africa', regME:'Middle East',
+                     regAPAC:'Asia Pacific', regGlobal:'Global' };
+      Object.entries(SLOT).forEach(([slot, reg]) => {
+        const n = (buckets[reg] || new Set()).size;
+        if (n) setTx(slot, n.toLocaleString());
+      });
+    }
+  } catch (_) { /* leave — on failure */ }
+})();
+
+/* Today panel — loaded from news.json */
+(async function loadTodayFeed() {
+  const list = document.getElementById('todayList');
+  if (!list) return;
+  const escHTML = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const sourceHost = u => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(_) { return ''; } };
+  try {
+    const r = await fetch('./news.json', { cache: 'no-cache' });
+    if (!r.ok) return;
+    const d = await r.json();
+    const rows = (d.rows || []).slice(0, 5);
+    if (!rows.length) return;
+    list.innerHTML = rows.map((row, i) => {
+      const isLead = i === 0;
+      const cls = isLead ? 'today-item lead priority' : 'today-item';
+      const day = escHTML(row.date_display || '');
+      const juris = escHTML(row.jurisdiction_name || '');
+      const body = escHTML(row.body_name || '');
+      const topic = escHTML(row.topic || '');
+      const title = escHTML(row.title || '');
+      const summary = escHTML(row.summary || '');
+      const url = escHTML(row.source_url || '#');
+      const host = escHTML(sourceHost(row.source_url || ''));
+      const metaParts = [juris, body].filter(Boolean).join(' · ');
+      const deckHTML = (isLead && summary) ? `<div class="today-deck">${summary}</div>` : '';
+      const topicHTML = topic ? `<span class="dot">·</span><span>${topic}</span>` : '';
+      return `<li class="${cls}">
+        <div class="today-time">${day || '—'}<span class="day">${day ? '' : '—'}</span></div>
+        <div>
+          <div class="today-meta"><span class="today-juris">${metaParts}</span>${topicHTML}</div>
+          <div class="today-headline"><a href="${url}" target="_blank" rel="noopener">${title}</a></div>
+          ${deckHTML}
+          ${host ? `<div class="today-source">${host}</div>` : ''}
+        </div>
+      </li>`;
+    }).join('');
+  } catch (_) { /* leave hardcoded fallback if any */ }
+})();
+</script>
 <div class="nav-scrim" aria-hidden="true"></div>
+
+<script>
+/* News multi-select tickboxes + 'Create report' floating bar (top-left checkbox) */
+(function(){
+  var BAR_ID='paiNewsActionBar';
+  function getRow(cb){ return cb.closest('.wire-row,.news-lead,.news-second,.today-item,.today-row,.news-item'); }
+  function getSource(row){ var a=row.querySelector('a[href]'); return (row.dataset.source||'')||(a?a.href:''); }
+  function getTitle(row){ var h=row.querySelector('h2,h3,h4,.nl-title,.ns-title,.wr-info h4,.wr-title,.today-headline'); return h?h.textContent.trim():(row.textContent||'').trim().slice(0,80); }
+  function getBody(row){ var a=row.querySelector('.wr-src strong,.nl-footer strong,.ns-meta'); return a?a.textContent.trim():''; }
+
+  function ensureCheckbox(row){
+    if(row.querySelector('.pai-news-tick')) return;
+    var label=document.createElement('label');
+    label.className='pai-news-tick';
+    label.style.cssText='position:absolute;top:8px;left:8px;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid rgba(1,118,211,0.45);border-radius:4px;cursor:pointer;z-index:9999;box-shadow:0 1px 3px rgba(10,23,41,0.08);';
+    var cb=document.createElement('input');
+    cb.type='checkbox'; cb.style.cssText='margin:0;cursor:pointer;width:14px;height:14px;accent-color:#0176d3;';
+    cb.addEventListener('click',function(e){ e.stopPropagation(); });
+    cb.addEventListener('change',updateBar);
+    label.appendChild(cb);
+    if(getComputedStyle(row).position==='static') row.style.position='relative';
+    /* Shift any existing left content to make room (nudge padding-left) */
+    if(!row.dataset.paiTickNudge){ row.style.paddingLeft='42px'; row.dataset.paiTickNudge='1'; }
+    row.appendChild(label);
+  }
+
+  function collectSelected(){
+    var out=[];
+    document.querySelectorAll('.pai-news-tick input:checked').forEach(function(cb){
+      var row=getRow(cb); if(!row) return;
+      out.push({ title:getTitle(row), body:getBody(row), url:getSource(row) });
+    });
+    return out;
+  }
+
+  function updateBar(){
+    var items=collectSelected();
+    var bar=document.getElementById(BAR_ID);
+    if(!items.length){ if(bar) bar.remove(); return; }
+    if(!bar){
+      bar=document.createElement('div');
+      bar.id=BAR_ID;
+      bar.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#07202e;color:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 8px 28px rgba(10,23,41,0.3);display:flex;gap:12px;align-items:center;z-index:1000;font-size:13px;font-family:inherit;max-width:calc(100% - 40px)';
+      bar.innerHTML=''
+        +'<span id="paiNewsCount" style="font-weight:500"></span>'
+        +'<span style="opacity:0.35">·</span>'
+        +'<button id="paiNewsPdfBtn" style="padding:7px 14px;border:0;border-radius:6px;background:#0176d3;color:#fff;font-weight:600;cursor:pointer;font-size:12.5px;">Create PDF report</button>'
+        +'<button id="paiNewsEmailBtn" style="padding:7px 14px;border:1px solid rgba(255,255,255,0.25);border-radius:6px;background:transparent;color:#fff;cursor:pointer;font-size:12.5px;">Email report</button>'
+        +'<button id="paiNewsClearBtn" style="padding:6px 10px;border:0;border-radius:6px;background:transparent;color:#fff;cursor:pointer;opacity:0.6;font-size:12.5px;" title="Clear selection">✕</button>';
+      document.body.appendChild(bar);
+      bar.querySelector('#paiNewsPdfBtn').addEventListener('click',createPdf);
+      bar.querySelector('#paiNewsEmailBtn').addEventListener('click',createEmail);
+      bar.querySelector('#paiNewsClearBtn').addEventListener('click',function(){
+        document.querySelectorAll('.pai-news-tick input:checked').forEach(function(i){ i.checked=false; });
+        updateBar();
+      });
+    }
+    bar.querySelector('#paiNewsCount').textContent=items.length+' selected';
+  }
+
+  function createPdf(){
+    var items=collectSelected();
+    if(!items.length) return;
+    var w=window.open('','_blank');
+    if(!w) return;
+    var rows=items.map(function(it,i){
+      return '<article style="margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #dbe1ea">'
+        +'<div style="font-family:monospace;font-size:10.5px;color:#5e6878;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Story '+(i+1)+' · PrinciplesAI report</div>'
+        +'<h2 style="margin:0 0 8px 0;font-size:18px;color:#07202e;letter-spacing:-0.01em">'+(it.title||'—')+'</h2>'
+        +(it.body?'<div style="font-size:12.5px;color:#5e6878;margin-bottom:6px">'+it.body+'</div>':'')
+        +(it.url?'<div style="font-size:12px"><a href="'+it.url+'" style="color:#0176d3">'+it.url+'</a></div>':'')
+        +'</article>';
+    }).join('');
+    var stamp=new Date().toISOString().slice(0,10);
+    w.document.write('<!doctype html><html><head><title>PrinciplesAI report '+stamp+'</title>'
+      +'<style>body{font-family:Inter,system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 24px;color:#0d2e42;line-height:1.5}h1{font-size:22px;margin:0 0 4px 0;color:#07202e}.report-meta{font-size:12px;color:#5e6878;margin-bottom:28px;font-family:monospace}@media print{@page{margin:18mm}}</style></head>'
+      +'<body>'
+      +'<h1>News report — '+items.length+' selected</h1>'
+      +'<div class="report-meta">PrinciplesAI · generated '+new Date().toLocaleString()+'</div>'
+      +rows
+      +'<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script>'
+      +'</body></html>');
+    w.document.close();
+  }
+
+  function createEmail(){
+    var items=collectSelected();
+    if(!items.length) return;
+    var NL = String.fromCharCode(10);
+    var subject='PrinciplesAI news report ('+items.length+' stories)';
+    var body='Here is a selection of stories from PrinciplesAI:'+NL+NL;
+    items.forEach(function(it,i){
+      body += (i+1)+'. '+(it.title||'—')+NL;
+      if(it.body) body += '   '+it.body+NL;
+      if(it.url)  body += '   '+it.url+NL;
+      body += NL;
+    });
+    body += '—'+NL+'Generated via PrinciplesAI';
+    var href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    if(href.length>1800) href=href.slice(0,1800);
+    window.location.href=href;
+  }
+
+  function scan(){
+    document.querySelectorAll('.wire-row,.news-lead,.news-second,.today-item,.today-row,.news-item').forEach(ensureCheckbox);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',scan);
+  else scan();
+  var wireEl=document.getElementById('wireList')||document.querySelector('.wire-list');
+  if(wireEl){ new MutationObserver(scan).observe(wireEl,{childList:true,subtree:false}); }
+  setInterval(scan,2000);
+})();
+</script>
 </body>
 </html>
