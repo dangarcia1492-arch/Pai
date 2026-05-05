@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — ECtHR Rules Poland Violated Privacy in Medical Records Disclosure · Case Law</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
+  --ink:#0a1729;--ink-strong:#06101e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#014486;--accent-3:#032e61;--accent-soft:#e3effc;--accent-soft-2:#cfe1f6;
+  --green:#2e844a;--green-bg:#d6f1dc;--green-fill:#2e844a;
+  --amber:#905200;--amber-bg:#fef0c7;
+  --display:'Inter',-apple-system,sans-serif;--sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --sidebar-collapsed:56px;--sidebar-expanded:280px;--header-height:52px;
+  --shadow-1:0 1px 2px rgba(10,23,41,.04);--shadow-2:0 2px 6px rgba(10,23,41,.07),0 8px 20px rgba(10,23,41,.05);
+  --radius:10px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:15px;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-width:1280px}
+a{color:var(--accent);text-decoration:none}
+button,input{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
+button{cursor:pointer}
+.icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden;box-shadow:var(--shadow-1)}
+.icon-sidebar:hover{width:var(--sidebar-expanded);box-shadow:var(--shadow-2)}
+.sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;gap:12px;flex-shrink:0;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+.sidebar-brand .brand-icon{width:28px;height:28px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--display);font-style:italic;font-weight:700;font-size:18px;color:#fff;letter-spacing:-.5px}
+.sidebar-brand .brand-text{font-family:var(--display);font-weight:600;font-size:18px;color:var(--ink);opacity:0;transition:opacity .15s .05s}
+.sidebar-brand .brand-text .ai{font-style:italic;font-weight:500}
+.icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
+.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:12px 8px;overflow-y:auto;overflow-x:hidden}
+.sidebar-nav-item{display:flex;align-items:center;gap:14px;height:40px;padding:0 12px;border-radius:4px;cursor:pointer;position:relative;color:var(--secondary);white-space:nowrap;flex-shrink:0;text-decoration:none}
+.sidebar-nav-item:hover{color:var(--ink);background:var(--surface-3)}
+.sidebar-nav-item.active{color:var(--accent-2);background:var(--accent-soft);font-weight:600}
+.sidebar-nav-item.active::before{content:'';position:absolute;left:-8px;top:8px;bottom:8px;width:3px;background:var(--accent);border-radius:0 3px 3px 0}
+.sidebar-nav-item svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none;flex-shrink:0}
+.sidebar-nav-item .nav-label{font-size:13.5px;font-weight:500;opacity:0;transition:opacity .15s .05s}
+.icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
+.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:18px;z-index:200;box-shadow:var(--shadow-1)}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:var(--secondary);background:transparent;border:1px solid var(--border);border-radius:5px;text-decoration:none}
+.header-logout:hover{background:var(--surface-2);color:var(--ink);border-color:var(--ink-faint)}
+.header-logout svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+.main-content{margin-left:var(--sidebar-collapsed);padding-top:var(--header-height);min-height:100vh}
+.page-view{padding:26px 40px 60px;max-width:1100px;margin:0}
+.ps-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--secondary);flex-wrap:wrap;padding-bottom:18px;margin-bottom:22px;border-bottom:1px solid var(--border)}
+.ps-breadcrumb a{color:var(--accent-2);font-weight:600}
+.ps-current{color:var(--ink-strong);font-weight:700}
+.ps-sep{color:var(--ink-faint)}
+.case-hero{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:24px 28px 20px;margin-bottom:20px;box-shadow:var(--shadow-1)}
+.case-court-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;background:var(--accent-soft);color:var(--accent-2);border:1px solid var(--accent-soft-2);margin-bottom:10px}
+.case-title{font-size:22px;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong);line-height:1.2;margin-bottom:10px}
+.case-meta-row{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--secondary);flex-wrap:wrap;margin-bottom:14px}
+.case-meta-row .dot{color:var(--border)}
+.case-lede{font-size:13px;color:var(--muted);line-height:1.55;border-top:1px solid var(--border-soft);padding-top:12px;margin-top:4px}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.case-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-1)}
+.case-card-title{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 12px;font-size:12.5px;margin-bottom:6px;align-items:baseline}
+.kv .k{color:var(--muted);font-weight:500}
+.kv .v{color:var(--ink);font-weight:600;word-break:break-word}
+.kv .v a{color:var(--accent-2);text-decoration:none;border-bottom:1px dotted var(--accent-soft-2)}
+.kv .v a:hover{color:var(--accent)}
+.case-body{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);padding:22px 24px;margin-bottom:20px;box-shadow:var(--shadow-1)}
+.case-body-title{font-size:14px;font-weight:700;color:var(--ink-strong);margin-bottom:14px;letter-spacing:-.005em}
+.case-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--border-soft)}
+.case-source{background:var(--surface-2);border:1px solid var(--border-soft);border-radius:8px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.case-source-label{font-size:11.5px;color:var(--muted);font-weight:500}
+.case-source a{font-size:12.5px;font-weight:600;color:var(--accent-2);text-decoration:none}
+.case-source a:hover{color:var(--accent);text-decoration:underline}
+.band-chip{display:inline-flex;align-items:center;height:20px;padding:0 8px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;background:var(--green-bg);color:var(--green)}
+</style>
+<script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
+</head>
+<body>
+<nav class="icon-sidebar">
+  <a href="pai-home-private" class="sidebar-brand" style="text-decoration:none;color:inherit;">
+    <div class="brand-icon" style="background:#fff;padding:2px;overflow:hidden;"><img src="pai-logo.png" alt="PAI" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+    <span class="brand-text">Principles<span class="ai">AI</span></span>
+  </a>
+  <div class="sidebar-nav-items">
+    <a class="sidebar-nav-item" href="pai-home-private"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></a>
+    <a class="sidebar-nav-item" href="pai-app-ai-notes"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
+    <a class="sidebar-nav-item" href="pai-app-news"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
+    <a class="sidebar-nav-item" href="pai-app-authorities"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
+    <a class="sidebar-nav-item" href="pai-app-tables"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
+    <a class="sidebar-nav-item active" href="pai-app-courts-v5.html"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a6 6 0 0112 0v2"/></svg><span class="nav-label">Courts</span></a>
+    <a class="sidebar-nav-item" href="pai-app-legislation"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+    <a class="sidebar-nav-item" href="pai-app-settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></a>
+  </div>
+</nav>
+<header class="header-bar">
+  <div class="header-right">
+    <a href="#" class="header-logout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view">
+
+  <div class="ps-left">
+    <span class="ps-breadcrumb"><a href="pai-home-private">Home</a> <span class="ps-sep">›</span> <a href="pai-app-courts-v5.html">Courts</a> <span class="ps-sep">›</span> <span class="ps-current">ECtHR · ECtHR Rules Poland Violated Privacy in Medical Records Discl…</span></span>
+  </div>
+
+  <!-- HERO -->
+  <div class="case-hero">
+    <div class="case-court-chip">ECtHR · European Court of Human Rights</div>
+    <div class="case-title">ECtHR Rules Poland Violated Privacy in Medical Records Disclosure</div>
+    <div class="case-meta-row">
+      <span><strong>Council of Europe</strong></span>
+      <span class="dot">·</span>
+      <span>13 November 2025</span>
+      <span class="dot">·</span>
+      <span style="display:inline-flex;align-items:center;height:20px;padding:0 8px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;background:#e3effc;color:#014486;">Privacy</span>
+    </div>
+    <div class="case-lede">ECHR ruled Poland violated Article 8 (right to private life) by disclosing applicant's medical records to prosecutor without consent or appeal mechanism.</div>
+  </div>
+
+  <!-- METADATA GRID -->
+  <div class="case-grid">
+    <div class="case-card">
+      <div class="case-card-title">Case</div>
+      <div class="kv"><span class="k">Source ref</span><span class="v">ECHR App. 001-245816</span></div>
+      <div class="kv"><span class="k">Court</span><span class="v"><a href="pai-app-authority-echr.html">European Court of Human Rights</a></span></div>
+      <div class="kv"><span class="k">Jurisdiction</span><span class="v">Council of Europe</span></div>
+      <div class="kv"><span class="k">Decision date</span><span class="v">13 November 2025</span></div>
+    </div>
+    <div class="case-card">
+      <div class="case-card-title">Issues</div>
+      <div class="kv"><span class="k">Pillar</span><span class="v">Privacy</span></div>
+      <div class="kv"><span class="k">Type</span><span class="v">ECtHR Judgment</span></div>
+      <div class="kv"><span class="k">Binding on</span><span class="v">Council of Europe members</span></div>
+      <div class="kv"><span class="k">Significance</span><span class="v" style="font-weight:400;color:var(--secondary);font-size:12px;">ECHR ruled Poland violated Article 8 (right to private life) by disclosing applicant's medical records to prosecutor wit…</span></div>
+    </div>
+  </div>
+
+  <!-- SOURCE LINK -->
+  <div class="case-source">
+    <span class="case-source-label">Primary source</span>
+    <a href="https://hudoc.echr.coe.int/eng?i=001-245816" target="_blank" rel="noopener">https://hudoc.echr.coe.int/eng?i=001-245816 &#x2197;</a>
+  </div>
+
+  <!-- BODY / SYNOPSIS -->
+  <div class="case-body">
+    <div class="case-body-title">Judgment</div>
+    <p style="margin:0 0 10px;font-size:13.5px;color:#0a1729;line-height:1.6;">On 13 November 2025, the European Court of Human Rights (First Section) delivered its judgment in A.G.-Ś. v. Poland (Application no. 10685/18), finding a violation of Article 8 of the Convention.</p>
+<p style="margin:0 0 10px;font-size:13.5px;color:#0a1729;line-height:1.6;">The case concerned a 2009 prosecutor's order. On 5 March 2009, the Cracow Regional Prosecutor ordered the National Health Fund to disclose medical records for the applicant and 11 of her relatives in connection with a criminal investigation against her husband. The order stated it was not subject to appeal.</p>
+<p style="margin:0 0 10px;font-size:13.5px;color:#0a1729;line-height:1.6;">On 5 and 6 March 2009, the National Health Fund provided the prosecutor with the applicant's medical history, including treatments received, medication prescribed with dosages, pharmacies used, and the names of treating practitioners. The case file, which included the applicant's medical history, was later made available to parties in related criminal and unspecified court proceedings.</p>
+<p style="margin:0 0 10px;font-size:13.5px;color:#0a1729;line-height:1.6;">The applicant lodged a criminal complaint in 2012. The Polish Supreme Court had ruled on 22 March 2017 that the prosecutor's order was lawful. The European Court of Human Rights disagreed, declaring the application admissible and finding Poland in violation of Article 8.</p>
+    <div class="case-tags">
+      <span style="display:inline-flex;align-items:center;height:20px;padding:0 8px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;background:#e5f3e9;color:#2e844a;">Case Law</span>
+    </div>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
