@@ -703,6 +703,142 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     render();
   })();
   </script>
+
+  <!-- PAI VERIFIED JUDGMENTS ──────────────────────────────────────────── -->
+  <div style="margin-top:36px;padding-top:28px;border-top:2px solid var(--border)">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
+      <h2 style="font-size:20px;font-weight:700;color:var(--ink-strong);letter-spacing:-.01em">PAI Verified Judgments</h2>
+      <span style="display:inline-flex;align-items:center;height:22px;padding:0 9px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;background:var(--green-bg);color:var(--green-fill);">39 judgments</span>
+      <span style="display:inline-flex;align-items:center;height:22px;padding:0 9px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;background:var(--accent-soft);color:var(--accent-2);">Score 9–10 · CJEU + ECtHR</span>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Claim-careful summaries of high-significance CJEU and ECtHR judgments. Each links to a full case record.</p>
+
+    <style>
+      .pj-toolbar{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+      .pj-search{flex:1;min-width:220px;padding:8px 12px;border:1px solid var(--border);border-radius:5px;font:inherit;font-size:13px;background:var(--surface)}
+      .pj-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+      .pj-tabs{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:5px;overflow:hidden}
+      .pj-tab{padding:7px 12px;font-size:12px;font-weight:600;color:var(--muted);background:transparent;border:0;cursor:pointer;border-right:1px solid var(--border);font-family:inherit}
+      .pj-tab:last-child{border-right:none}
+      .pj-tab.on{background:var(--accent);color:#fff}
+      .pj-list{display:flex;flex-direction:column;gap:0}
+      .pj-row{display:grid;grid-template-columns:60px minmax(0,1fr) 80px 90px;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border-soft);text-decoration:none;color:inherit;border-radius:4px;transition:background .1s}
+      .pj-row:last-child{border-bottom:none}
+      .pj-row:hover{background:var(--surface-2)}
+      .pj-court{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);background:var(--accent-soft);padding:3px 7px;border-radius:3px;text-align:center;white-space:nowrap}
+      .pj-court.echr{color:#5a3996;background:#ede5fb}
+      .pj-headline{font-size:13px;font-weight:600;color:var(--ink-strong);line-height:1.35}
+      .pj-topic{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 6px;border-radius:3px}
+      .pj-topic.privacy{background:var(--accent-soft);color:var(--accent-2)}
+      .pj-topic.ai{background:#ede5fb;color:#5a3996}
+      .pj-topic.cyber{background:var(--green-bg);color:var(--green-fill)}
+      .pj-date{font-size:11.5px;color:var(--muted);font-weight:500;text-align:right;white-space:nowrap}
+      .pj-empty{padding:32px 0;text-align:center;color:var(--muted);font-size:13.5px}
+      .pj-count{font-size:11.5px;color:var(--muted);margin-bottom:8px}
+    </style>
+
+    <div class="pj-toolbar">
+      <input class="pj-search" id="pj-q" placeholder="Search judgments…">
+      <div class="pj-tabs" role="tablist">
+        <button class="pj-tab on" data-court="all">All courts</button>
+        <button class="pj-tab" data-court="CJEU">CJEU</button>
+        <button class="pj-tab" data-court="ECtHR">ECtHR</button>
+      </div>
+      <div class="pj-tabs" role="tablist">
+        <button class="pj-tab on" data-ptopic="all">All topics</button>
+        <button class="pj-tab" data-ptopic="privacy">Privacy</button>
+        <button class="pj-tab" data-ptopic="ai">AI</button>
+        <button class="pj-tab" data-ptopic="cyber">Cyber</button>
+      </div>
+    </div>
+    <div class="pj-count" id="pj-count">39 judgments</div>
+    <div class="pj-list" id="pj-list"></div>
+  </div>
+
+  <script>
+  const PAI_JUDGMENTS = [
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Finds San Marino Breached Right to Lawful Tribunal",date:"2026-04-09",score:9,url:"pai-app-case-ecthr-finds-san-marino-breached-right-to-lawful-tribunal.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"CJEU Rules GDPR Access Requests Can Be Abusive",date:"2026-03-19",score:10,url:"pai-app-case-cjeu-rules-gdpr-access-requests-can-be-abusive.html"},
+  {court:"CJEU",country:"European Union",topic:"cyber",headline:"AG Opinion: EU States May Ban Huawei on Security Grounds",date:"2026-03-19",score:9,url:"pai-app-case-ag-opinion-eu-states-may-ban-huawei-on-security-grounds.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"CJEU Rules on Police Biometric Data Collection in Criminal Probes",date:"2026-03-19",score:9,url:"pai-app-case-cjeu-rules-on-police-biometric-data-collection-in-criminal-probes.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Finds Ukraine Violated Detention Conditions Rights",date:"2026-03-12",score:9,url:"pai-app-case-ecthr-finds-ukraine-violated-detention-conditions-rights.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Rules Albania Violated Article 8 in Magistrate Bar Case",date:"2026-03-10",score:9,url:"pai-app-case-ecthr-rules-albania-violated-article-8-in-magistrate-bar-case.html"},
+  {court:"ECtHR",country:"Bulgaria",topic:"privacy",headline:"ECtHR Rules Bulgaria Undercover Agent Rules Breach Article 8",date:"2026-02-17",score:9,url:"pai-app-case-ecthr-rules-bulgaria-undercover-agent-rules-breach-article-8.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"AG Kokott: Hungary Sovereignty Law Breaches EU Rules",date:"2026-02-12",score:9,url:"pai-app-case-ag-kokott-hungary-sovereignty-law-breaches-eu-rules.html"},
+  {court:"ECtHR",country:"Hungary",topic:"privacy",headline:"ECtHR Rules Hungary Integrity Testing Laws Breach Article 8",date:"2026-02-03",score:9,url:"pai-app-case-ecthr-rules-hungary-integrity-testing-laws-breach-article-8.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Rules Ukraine Covert Surveillance Breached Article 8",date:"2026-01-22",score:9,url:"pai-app-case-ecthr-rules-ukraine-covert-surveillance-breached-article-8.html"},
+  {court:"ECtHR",country:"Italy",topic:"privacy",headline:"ECtHR Rules Italy's Bank Data Access Breaches Article 8",date:"2026-01-08",score:9,url:"pai-app-case-ecthr-rules-italys-bank-data-access-breaches-article-8.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"CJEU Rules on GDPR Info Duties for Body Camera Use",date:"2025-12-18",score:9,url:"pai-app-case-cjeu-rules-on-gdpr-info-duties-for-body-camera-use.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECHR Rules on CJEU Referral Refusal Reasoning Duty",date:"2025-12-16",score:9,url:"pai-app-case-echr-rules-on-cjeu-referral-refusal-reasoning-duty.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"CJEU Rules Online Marketplaces Are GDPR Controllers",date:"2025-12-02",score:9,url:"pai-app-case-cjeu-rules-online-marketplaces-are-gdpr-controllers.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"CJEU Rules on Police Storage of Biometric Data",date:"2025-11-20",score:9,url:"pai-app-case-cjeu-rules-on-police-storage-of-biometric-data.html"},
+  {court:"CJEU",country:"European Union",topic:"ai",headline:"EU General Court Dismisses Amazon DSA Designation Challenge",date:"2025-11-19",score:9,url:"pai-app-case-eu-general-court-dismisses-amazon-dsa-designation-challenge.html"},
+  {court:"ECtHR",country:"Armenia",topic:"privacy",headline:"ECtHR Finds Armenia Violated Privacy Rights in NSS Coercion Case",date:"2025-11-13",score:9,url:"pai-app-case-ecthr-finds-armenia-violated-privacy-rights-in-nss-coercion-case.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Rules Poland Violated Privacy in Medical Records Disclosure",date:"2025-11-13",score:9,url:"pai-app-case-ecthr-rules-poland-violated-privacy-in-medical-records-disclosure.html"},
+  {court:"ECtHR",country:"Azerbaijan",topic:"privacy",headline:"ECtHR Rules Against Azerbaijan in Journalist Info Access Case",date:"2025-10-14",score:9,url:"pai-app-case-ecthr-rules-against-azerbaijan-in-journalist-info-access-case.html"},
+  {court:"ECtHR",country:"European Union",topic:"privacy",headline:"ECHR Finds Greece Violated Fair Trial Rights in Disciplinary Case",date:"2025-10-14",score:9,url:"pai-app-case-echr-finds-greece-violated-fair-trial-rights-in-disciplinary-case.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"CJEU Clarifies Personal Data Scope for Pseudonymised Transfers",date:"2025-09-04",score:9,url:"pai-app-case-cjeu-clarifies-personal-data-scope-for-pseudonymised-transfers.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"General Court Upholds Zalando's VLOP Designation Under DSA",date:"2025-09-03",score:9,url:"pai-app-case-general-court-upholds-zalandos-vlop-designation-under-dsa.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Finds Turkey Violated Rights in ByLock Terror Convictions",date:"2025-07-22",score:9,url:"pai-app-case-ecthr-finds-turkey-violated-rights-in-bylock-terror-convictions.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECHR Rules Hungary Violated Collective Expulsion Ban",date:"2025-06-24",score:9,url:"pai-app-case-echr-rules-hungary-violated-collective-expulsion-ban.html"},
+  {court:"ECtHR",country:"Russia",topic:"privacy",headline:"ECtHR Rules Russia Violated Rights of Blocked Election Candidates",date:"2025-05-27",score:9,url:"pai-app-case-ecthr-rules-russia-violated-rights-of-blocked-election-candidates.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Finds Russia Violated Free Expression Rights",date:"2025-05-15",score:9,url:"pai-app-case-ecthr-finds-russia-violated-free-expression-rights.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Finds Russia Breached Free Expression Rights in Ten Cases",date:"2025-05-15",score:9,url:"pai-app-case-ecthr-finds-russia-breached-free-expression-rights-in-ten-cases.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Finds Russia Breached Free Expression Rights",date:"2025-05-15",score:9,url:"pai-app-case-ecthr-finds-russia-breached-free-expression-rights.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Rules Russia Violated Rights in LGBT Workshop Raid",date:"2025-04-29",score:9,url:"pai-app-case-ecthr-rules-russia-violated-rights-in-lgbt-workshop-raid.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"CJEU Rules GDPR Bars Surgery Proof for Gender Data Rectification",date:"2025-03-13",score:9,url:"pai-app-case-cjeu-rules-gdpr-bars-surgery-proof-for-gender-data-rectification.html"},
+  {court:"ECtHR",country:"Portugal",topic:"privacy",headline:"ECHR Finds Portugal Violated Detention Conditions Rights",date:"2025-03-06",score:9,url:"pai-app-case-echr-finds-portugal-violated-detention-conditions-rights.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"EU Court Fines Five States for Whistleblower Directive Failure",date:"2025-03-06",score:9,url:"pai-app-case-eu-court-fines-five-states-for-whistleblower-directive-failure.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Rules Bulgaria Breached Journalist's Access to Acquittal Reasons",date:"2025-03-04",score:9,url:"pai-app-case-ecthr-rules-bulgaria-breached-journalists-access-to-acquittal-reasons.html"},
+  {court:"CJEU",country:"European Union",topic:"privacy",headline:"CJEU Rules on GDPR Explanation Rights for Automated Credit Scores",date:"2025-02-27",score:9,url:"pai-app-case-cjeu-rules-on-gdpr-explanation-rights-for-automated-credit-scores.html"},
+  {court:"ECtHR",country:"Ukraine",topic:"privacy",headline:"ECHR Rules Ukraine Secret Surveillance Violated Rights",date:"2025-02-13",score:9,url:"pai-app-case-echr-rules-ukraine-secret-surveillance-violated-rights.html"},
+  {court:"ECtHR",country:"Russian Federation",topic:"privacy",headline:"ECtHR Rules Russia Violated Press Freedom Over Ukraine War Reporting",date:"2025-02-11",score:9,url:"pai-app-case-ecthr-rules-russia-violated-press-freedom-over-ukraine-war-reporting.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Finds Russia Violated Free Expression in Religious Offence Cases",date:"2025-02-06",score:9,url:"pai-app-case-ecthr-finds-russia-violated-free-expression-in-religious-offence-cases.html"},
+  {court:"ECtHR",country:"Council of Europe",topic:"privacy",headline:"ECtHR Finds Russia Failed LGBTI Applicants in Data Leak Cases",date:"2025-02-04",score:9,url:"pai-app-case-ecthr-finds-russia-failed-lgbti-applicants-in-data-leak-cases.html"},
+  {court:"ECtHR",country:"Armenia",topic:"privacy",headline:"ECtHR Finds Armenia Breached LGBT Activists' Rights in Hate Speech Case",date:"2025-01-07",score:9,url:"pai-app-case-ecthr-finds-armenia-breached-lgbt-activists-rights-in-hate-speech-case.html"}
+  ];
+  (function(){
+    function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+    var court='all', ptopic='all';
+    document.querySelectorAll('.pj-tab[data-court]').forEach(function(t){
+      t.addEventListener('click',function(){
+        document.querySelectorAll('.pj-tab[data-court]').forEach(function(x){x.classList.remove('on');});
+        t.classList.add('on'); court=t.getAttribute('data-court'); renderPJ();
+      });
+    });
+    document.querySelectorAll('.pj-tab[data-ptopic]').forEach(function(t){
+      t.addEventListener('click',function(){
+        document.querySelectorAll('.pj-tab[data-ptopic]').forEach(function(x){x.classList.remove('on');});
+        t.classList.add('on'); ptopic=t.getAttribute('data-ptopic'); renderPJ();
+      });
+    });
+    document.getElementById('pj-q').addEventListener('input', renderPJ);
+    function fmtDate(d){if(!d)return'';var p=d.split('-');if(p.length<3)return d;var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return parseInt(p[2],10)+' '+months[parseInt(p[1],10)-1]+' '+p[0];}
+    function renderPJ(){
+      var q=(document.getElementById('pj-q').value||'').toLowerCase().trim();
+      var rows=PAI_JUDGMENTS.filter(function(j){
+        if(court!=='all'&&j.court!==court)return false;
+        if(ptopic!=='all'&&j.topic!==ptopic)return false;
+        if(q&&(j.headline+' '+j.court+' '+j.country).toLowerCase().indexOf(q)<0)return false;
+        return true;
+      });
+      document.getElementById('pj-count').textContent=rows.length+' judgment'+(rows.length===1?'':'s');
+      if(!rows.length){document.getElementById('pj-list').innerHTML='<div class="pj-empty">No judgments match the current filters.</div>';return;}
+      document.getElementById('pj-list').innerHTML=rows.map(function(j){
+        var courtCls=j.court==='ECtHR'?'echr':'';
+        var score10=j.score===10?'<span style="color:var(--green-fill);font-weight:700;font-size:10px;margin-left:4px">★10</span>':'';
+        return '<a class="pj-row" href="'+esc(j.url)+'">'
+          +'<span class="pj-court '+courtCls+'">'+esc(j.court)+'</span>'
+          +'<span class="pj-headline">'+esc(j.headline)+score10+'</span>'
+          +'<span class="pj-topic '+esc(j.topic)+'">'+esc(j.topic.toUpperCase())+'</span>'
+          +'<span class="pj-date">'+esc(fmtDate(j.date))+'</span>'
+        +'</a>';
+      }).join('');
+    }
+    renderPJ();
+  })();
+  </script>
+
 </div>
 </div>
 <!-- Mobile nav shim -->
