@@ -359,34 +359,45 @@ button { cursor: pointer; }
 .panel-link::after { content: '→'; font-family: var(--mono); font-weight: 400; }
 .panel-link:hover { text-decoration: underline; }
 
-/* MAP (hero) */
-.map-wrap { padding: 20px 22px 14px; }
-.map-frame {
-  position: relative;
-  background: var(--surface-3);
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-  aspect-ratio: 2.1 / 1;
-  overflow: hidden;
-}
+/* MAP (hero) — 3-tab d3 world map */
+.panel.map-panel { display: flex; flex-direction: column; }
+.map-head { padding: 10px 22px 6px !important; align-items: center; gap: 16px; }
+.map-tabs { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: 6px; padding: 2px; flex-wrap: nowrap; gap: 0; }
+.map-tab { font-family: var(--sans); font-size: 11.5px; font-weight: 600; color: var(--muted); padding: 6px 12px; border-radius: 4px; cursor: pointer; border: 0; background: transparent; transition: background .12s, color .12s; white-space: nowrap; }
+.map-tab:hover { color: var(--ink); }
+.map-tab[aria-selected="true"] { background: var(--surface); color: var(--accent-2); box-shadow: var(--shadow-1); }
+.map-pin { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; padding: 5px 10px; border: 1px solid var(--border); border-radius: 5px; background: transparent; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: background .12s, color .12s, border-color .12s; }
+.map-pin:hover { color: var(--ink); border-color: var(--ink-faint); background: var(--surface-2); }
+.map-pin.is-pinned { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent-2); }
+.map-pin svg { stroke: currentColor; flex-shrink: 0; }
+
+.map-wrap { padding: 8px 22px 14px; flex: 1; }
+.map-frame { position: relative; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: 8px; aspect-ratio: 2.13 / 1; overflow: hidden; }
 .map-frame svg { width: 100%; height: 100%; display: block; }
-.graticule line { stroke: #e0e5ec; stroke-width: 0.5; }
-.continent { fill: #d6dde6; stroke: #c2cad6; stroke-width: 0.4; }
-.marker-dot.ai { fill: var(--accent); }
-.marker-dot.privacy { fill: var(--ink); }
-.marker-dot.cyber { fill: var(--amber-fill); }
-.map-legend {
-  position: absolute; bottom: 10px; left: 10px;
-  background: rgba(255,255,255,0.96);
-  border: 1px solid var(--border-soft);
-  border-radius: 5px;
-  padding: 6px 10px;
-  display: flex; gap: 14px;
-  font-size: 11.5px; font-weight: 500;
-  color: var(--secondary);
-}
+
+/* Country base + status fills */
+#js-world-map .country { fill: #dbe1ea; stroke: #c2cad6; stroke-width: 0.4; transition: fill .12s; cursor: default; }
+#js-world-map .country.scope-bloc { fill: #cfe1f6; }                   /* EU 27 + EFTA + UK on EU tab; US on US tab */
+#js-world-map .country.tier-comprehensive { fill: #2e844a; }           /* Strong tier — green */
+#js-world-map .country.tier-sectoral { fill: #c47a00; }                /* Sectoral / partial — amber */
+#js-world-map .country.tier-draft { fill: #d6dde6; }                   /* Draft / limited — light grey */
+#js-world-map .country.scope-bloc:hover,
+#js-world-map .country.tier-comprehensive:hover,
+#js-world-map .country.tier-sectoral:hover { filter: brightness(1.08); cursor: pointer; }
+
+/* US-state markers (rendered as projected dots) */
+#js-world-map .state-dot { fill: var(--accent-2); stroke: #fff; stroke-width: 0.8; cursor: pointer; }
+#js-world-map .state-dot:hover { fill: var(--accent); stroke-width: 1.2; }
+#js-world-map .city-dot { fill: var(--ink-strong); stroke: #fff; stroke-width: 0.8; }
+
+/* Hover tooltip */
+.map-tip { position: absolute; pointer-events: none; padding: 6px 10px; background: rgba(6,16,30,0.95); color: #fff; border-radius: 4px; font-size: 11.5px; font-weight: 500; box-shadow: 0 4px 14px rgba(0,0,0,0.32); display: none; z-index: 4; max-width: 240px; line-height: 1.4; }
+.map-tip b { font-weight: 700; display: block; margin-bottom: 2px; }
+
+/* Legend */
+.map-legend { position: relative; left: 0; bottom: 0; background: transparent; border: 0; padding: 8px 0 0; display: flex; gap: 16px; font-size: 11.5px; font-weight: 500; color: var(--secondary); flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 6px; }
-.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.06); }
 
 /* TODAY feed (hero right) */
 .today-list { list-style: none; padding: 4px 0; }
@@ -1193,61 +1204,25 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <!-- HERO: MAP + TODAY -->
   <section class="hero">
 
-    <!-- MAP (hero) -->
-    <div class="panel">
-      <div class="panel-head">
-        <div class="panel-title">Coverage <span class="count">last 7 days · <b id="covRead">—</b> read · <b id="covKept">—</b> kept · <b id="covFlagged">—</b> flagged in your scope</span></div>
-        <span class="panel-link">Open coverage</span>
+    <!-- MAP (hero) — 3-tab d3 world map -->
+    <div class="panel map-panel">
+      <div class="panel-head map-head">
+        <div class="map-tabs" role="tablist">
+          <button class="map-tab" role="tab" data-tab="eu" aria-selected="true">EU AI Act / NIS2 / GDPR</button>
+          <button class="map-tab" role="tab" data-tab="us">US AI &amp; privacy</button>
+          <button class="map-tab" role="tab" data-tab="global">Global privacy laws</button>
+        </div>
+        <button class="map-pin" id="mapPin" title="Pin this view as default">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 17v5M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></svg>
+          <span id="mapPinLabel">Pin as default</span>
+        </button>
       </div>
       <div class="map-wrap">
         <div class="map-frame map-hero">
-<svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
-            <g class="graticule"><line x1="0" y1="120" x2="1000" y2="120"/><line x1="0" y1="240" x2="1000" y2="240"/><line x1="0" y1="360" x2="1000" y2="360"/><line x1="167" y1="0" x2="167" y2="480"/><line x1="333" y1="0" x2="333" y2="480"/><line x1="500" y1="0" x2="500" y2="480"/><line x1="667" y1="0" x2="667" y2="480"/><line x1="833" y1="0" x2="833" y2="480"/></g>
-            <g>
-              <path class="continent" d="M 140,105 L 180,91 L 230,82 L 290,88 L 320,111 L 315,140 L 290,158 L 260,163 L 240,173 L 230,197 L 210,202 L 195,187 L 175,168 L 155,155 L 140,140 Z"/>
-              <path class="continent" d="M 210,202 L 230,207 L 240,216 L 245,230 L 240,240 L 230,245 L 225,236 L 220,226 L 215,216 Z"/>
-              <path class="continent" d="M 280,254 L 305,250 L 325,258 L 345,282 L 360,316 L 362,346 L 355,370 L 340,380 L 325,370 L 310,346 L 298,321 L 290,297 L 285,273 Z"/>
-              <path class="continent" d="M 475,91 L 505,84 L 540,88 L 565,101 L 555,120 L 535,130 L 510,135 L 490,127 L 478,110 Z"/>
-              <path class="continent" d="M 495,158 L 540,149 L 580,158 L 610,178 L 620,211 L 615,250 L 600,283 L 580,307 L 560,317 L 540,312 L 520,293 L 505,259 L 495,226 L 490,193 Z"/>
-              <path class="continent" d="M 610,149 L 645,144 L 670,154 L 675,173 L 665,187 L 640,192 L 620,178 L 612,163 Z"/>
-              <path class="continent" d="M 570,91 L 640,82 L 720,82 L 790,91 L 850,101 L 890,115 L 900,134 L 885,154 L 860,158 L 825,154 L 780,154 L 740,158 L 710,163 L 685,154 L 665,139 L 640,130 L 610,120 L 580,111 Z"/>
-              <path class="continent" d="M 695,158 L 720,154 L 740,163 L 735,192 L 720,207 L 705,197 L 698,178 Z"/>
-              <path class="continent" d="M 770,187 L 800,182 L 815,197 L 810,216 L 790,226 L 775,221 L 768,207 Z"/>
-              <path class="continent" d="M 880,134 L 895,130 L 900,144 L 895,158 L 885,161 L 878,149 Z"/>
-              <path class="continent" d="M 830,307 L 880,298 L 920,302 L 935,321 L 925,346 L 895,356 L 855,353 L 830,341 L 822,326 Z"/>
-              <path class="continent" d="M 945,360 L 960,357 L 962,374 L 952,379 L 945,373 Z"/>
-              <path class="continent" d="M 478,91 L 490,88 L 493,104 L 485,110 L 478,104 Z"/>
-              <path class="continent" d="M 515,72 L 540,67 L 545,86 L 535,96 L 520,91 Z"/>
-            </g>
-            <circle class="marker-dot ai" cx="510" cy="110" r="3.8"/>
-            <circle class="marker-dot privacy" cx="485" cy="102" r="3.8"/>
-            <circle class="marker-dot privacy" cx="520" cy="106" r="3.8"/>
-            <circle class="marker-dot ai" cx="535" cy="129" r="3.8"/>
-            <circle class="marker-dot privacy" cx="490" cy="131" r="3.8"/>
-            <circle class="marker-dot ai" cx="483" cy="98" r="3.8"/>
-            <circle class="marker-dot cyber" cx="514" cy="100" r="3.8"/>
-            <circle class="marker-dot ai" cx="172" cy="150" r="3.8"/>
-            <circle class="marker-dot privacy" cx="286" cy="136" r="3.8"/>
-            <circle class="marker-dot privacy" cx="290" cy="119" r="3.8"/>
-            <circle class="marker-dot ai" cx="340" cy="298" r="3.8"/>
-            <circle class="marker-dot privacy" cx="225" cy="192" r="3.8"/>
-            <circle class="marker-dot cyber" cx="888" cy="144" r="3.8"/>
-            <circle class="marker-dot privacy" cx="855" cy="139" r="3.8"/>
-            <circle class="marker-dot ai" cx="788" cy="211" r="3.8"/>
-            <circle class="marker-dot privacy" cx="905" cy="331" r="3.8"/>
-            <circle class="marker-dot ai" cx="715" cy="177" r="3.8"/>
-            <circle class="marker-dot privacy" cx="650" cy="173" r="3.8"/>
-            <circle class="marker-dot privacy" cx="568" cy="307" r="3.8"/>
-            <circle class="marker-dot privacy" cx="605" cy="245" r="3.8"/>
-            <circle class="marker-dot ai" cx="530" cy="216" r="3.8"/>
-            <circle class="marker-dot privacy" cx="515" cy="142" r="3.8"/>
-          </svg>
-          <div class="map-legend">
-            <div class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span>AI</div>
-            <div class="legend-item"><span class="legend-dot" style="background:var(--ink)"></span>Privacy</div>
-            <div class="legend-item"><span class="legend-dot" style="background:var(--amber-fill)"></span>Cyber</div>
-          </div>
+          <svg id="js-world-map" viewBox="0 0 980 460" preserveAspectRatio="xMidYMid meet" aria-label="Regulatory map"></svg>
+          <div class="map-tip" id="mapTip" aria-hidden="true"></div>
         </div>
+        <div class="map-legend" id="mapLegend"></div>
       </div>
     </div>
 
@@ -1259,55 +1234,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
       <ul class="today-list" id="todayList"></ul>
     </aside>
-  </section>
-
-  <!-- FEATURED FACULTY -->
-  <div class="section-eyebrow">
-    <span class="lbl">Featured faculty</span>
-    <span class="meta">Practitioner-contributed AI-regulation analysis</span>
-  </div>
-  <section class="featured-faculty">
-    <a class="ff-card" href="pai-app-faculty-edsel-tupaz">
-      <div class="ff-portrait has-photo">
-        <img src="edsel-tupaz.jpg" alt="Edsel F. Tupaz">
-        <span class="ff-badge">Faculty</span>
-        <span class="ff-flag">&#x1F1F5;&#x1F1ED;</span>
-      </div>
-      <div class="ff-body">
-        <div class="ff-eyebrow">Philippines AI Note · Contributor</div>
-        <div class="ff-name">Edsel F. Tupaz</div>
-        <div class="ff-role">Senior Partner · Head, Data Privacy, Cybersecurity &amp; AI Initiatives</div>
-        <div class="ff-firm">Gorriceta Africa Cauton &amp; Saavedra · Manila</div>
-        <p class="ff-blurb">Dual-qualified under the Philippine and New York Bars. Advises Fortune 500 and NASDAQ-listed companies on AI, data privacy, and cybersecurity across Southeast Asia, and serves as Data Protection Officer for leading startups and incumbents.</p>
-        <span class="ff-cta">Read faculty profile →</span>
-      </div>
-    </a>
-  </section>
-
-  <!-- BRIEFINGS ROW -->
-  <div class="section-eyebrow">
-    <span class="lbl">PAI Briefings</span>
-    <span class="meta">Bi-monthly explainers from the practitioners shaping AI governance</span>
-  </div>
-  <section class="briefings-row">
-    <div class="briefings-track" role="list">
-      <a class="briefing-card feature" href="pai-app-leg-eu-omnibus-simplification-package" role="listitem"
-         style="background-image:url('petruta-banner.png')"
-         aria-label="EU Omnibus: What Changed in March & What to Expect Next — Petruta Pirvan">
-        <span class="bc-pill">New</span>
-      </a>
-      <a class="briefing-card if-compact feature" href="pai-app-glossary#ai-system" role="listitem" aria-label="In focus: AI system">
-        <div class="ifc-eyebrow">In focus &middot; this week</div>
-        <h3 class="ifc-term">AI system</h3>
-        <p class="ifc-blurb">EU AI Act, OECD and the Five Eyes&#39; agentic-AI guidance each define this differently &mdash; what&#39;s current.</p>
-        <div class="ifc-chips">
-          <span class="ifc-chip">EU AI Act &middot; Art. 3(1)</span>
-          <span class="ifc-chip">OECD C(2019)142</span>
-          <span class="ifc-chip">Five Eyes &middot; agentic AI</span>
-        </div>
-        <span class="ifc-cta">Open glossary entry &rarr;</span>
-      </a>
-    </div>
   </section>
 
   <!-- RESOURCES — recent guidance docs -->
@@ -1357,6 +1283,32 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     </a>
   </section>
 
+  <!-- BRIEFINGS ROW -->
+  <div class="section-eyebrow">
+    <span class="lbl">PAI Briefings</span>
+    <span class="meta">Bi-monthly explainers from the practitioners shaping AI governance</span>
+  </div>
+  <section class="briefings-row">
+    <div class="briefings-track" role="list">
+      <a class="briefing-card feature" href="pai-app-leg-eu-omnibus-simplification-package" role="listitem"
+         style="background-image:url('petruta-banner.png')"
+         aria-label="EU Omnibus: What Changed in March & What to Expect Next — Petruta Pirvan">
+        <span class="bc-pill">New</span>
+      </a>
+      <a class="briefing-card if-compact feature" href="pai-app-glossary#ai-system" role="listitem" aria-label="In focus: AI system">
+        <div class="ifc-eyebrow">In focus &middot; this week</div>
+        <h3 class="ifc-term">AI system</h3>
+        <p class="ifc-blurb">EU AI Act, OECD and the Five Eyes&#39; agentic-AI guidance each define this differently &mdash; what&#39;s current.</p>
+        <div class="ifc-chips">
+          <span class="ifc-chip">EU AI Act &middot; Art. 3(1)</span>
+          <span class="ifc-chip">OECD C(2019)142</span>
+          <span class="ifc-chip">Five Eyes &middot; agentic AI</span>
+        </div>
+        <span class="ifc-cta">Open glossary entry &rarr;</span>
+      </a>
+    </div>
+  </section>
+
   <!-- DEVELOPMENTS -->
   <div class="section-eyebrow">
     <span class="lbl">Recent developments</span>
@@ -1365,6 +1317,29 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <section class="developments">
     <div class="dev-grid" id="js-dev-grid"></div>
     <div class="dev-footer">Load earlier developments →</div>
+  </section>
+
+  <!-- FEATURED FACULTY -->
+  <div class="section-eyebrow">
+    <span class="lbl">Featured faculty</span>
+    <span class="meta">Practitioner-contributed AI-regulation analysis</span>
+  </div>
+  <section class="featured-faculty">
+    <a class="ff-card" href="pai-app-faculty-edsel-tupaz">
+      <div class="ff-portrait has-photo">
+        <img src="edsel-tupaz.jpg" alt="Edsel F. Tupaz">
+        <span class="ff-badge">Faculty</span>
+        <span class="ff-flag">&#x1F1F5;&#x1F1ED;</span>
+      </div>
+      <div class="ff-body">
+        <div class="ff-eyebrow">Philippines AI Note · Contributor</div>
+        <div class="ff-name">Edsel F. Tupaz</div>
+        <div class="ff-role">Senior Partner · Head, Data Privacy, Cybersecurity &amp; AI Initiatives</div>
+        <div class="ff-firm">Gorriceta Africa Cauton &amp; Saavedra · Manila</div>
+        <p class="ff-blurb">Dual-qualified under the Philippine and New York Bars. Advises Fortune 500 and NASDAQ-listed companies on AI, data privacy, and cybersecurity across Southeast Asia, and serves as Data Protection Officer for leading startups and incumbents.</p>
+        <span class="ff-cta">Read faculty profile →</span>
+      </div>
+    </a>
   </section>
 
   <footer class="footer">
@@ -3318,5 +3293,229 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   setInterval(scan,2000);
 })();
 </script>
+
+<!-- Hero map: d3 + topojson-client; 3 tabs (EU / US / Global), pin-as-default -->
+<script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script>
+(function(){
+  const SVG_ID = 'js-world-map';
+  const WORLD_URL = 'https://unpkg.com/world-atlas@2/countries-50m.json';
+  const US_URL    = 'https://unpkg.com/us-atlas@3/states-10m.json';
+  const PIN_KEY   = 'pai-map-default-tab-v1';
+
+  // ---------- Datasets (verifiable, ICP-relevant) ----------
+  const EU27 = ['Austria','Belgium','Bulgaria','Croatia','Cyprus','Czechia','Denmark','Estonia','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Latvia','Lithuania','Luxembourg','Malta','Netherlands','Poland','Portugal','Romania','Slovakia','Slovenia','Spain','Sweden'];
+  const EFTA_UK = ['Iceland','Liechtenstein','Norway','Switzerland','United Kingdom'];
+  // Major regulator hubs (approximate capital coords [lon, lat])
+  const EU_REGULATOR_DOTS = [
+    {name:'EDPB / EDPS — Brussels', coord:[4.35,50.85]},
+    {name:'CNIL — Paris',            coord:[2.35,48.86]},
+    {name:'ICO — London',            coord:[-0.13,51.51]},
+    {name:'BfDI — Bonn',             coord:[7.10,50.74]},
+    {name:'Garante — Rome',          coord:[12.50,41.90]},
+    {name:'AEPD — Madrid',           coord:[-3.70,40.42]},
+    {name:'IMY — Stockholm',         coord:[18.07,59.33]},
+    {name:'DPC — Dublin',            coord:[-6.27,53.34]},
+    {name:'NIS2 — Belgium adopted plan 27 Apr 2026', coord:[4.35,50.85]}
+  ];
+
+  // US states with comprehensive privacy laws (verified through 2025; conservative list)
+  const US_PRIVACY_STATES = ['California','Colorado','Connecticut','Delaware','Florida','Indiana','Iowa','Kentucky','Maryland','Minnesota','Montana','Nebraska','New Hampshire','New Jersey','Oregon','Rhode Island','Tennessee','Texas','Utah','Virginia'];
+  // State capital coords [lon, lat] for marker dots
+  const US_STATE_CAPS = {
+    'California':[-121.49,38.58],'Colorado':[-104.99,39.74],'Connecticut':[-72.68,41.76],'Delaware':[-75.55,39.16],
+    'Florida':[-84.28,30.44],'Indiana':[-86.16,39.77],'Iowa':[-93.62,41.59],'Kentucky':[-84.86,38.20],
+    'Maryland':[-76.50,38.97],'Minnesota':[-93.10,44.95],'Montana':[-112.04,46.59],'Nebraska':[-96.69,40.81],
+    'New Hampshire':[-71.55,43.21],'New Jersey':[-74.76,40.22],'Oregon':[-123.03,44.93],'Rhode Island':[-71.42,41.83],
+    'Tennessee':[-86.78,36.16],'Texas':[-97.74,30.27],'Utah':[-111.89,40.76],'Virginia':[-77.43,37.54]
+  };
+  const US_FEDERAL_DOTS = [
+    {name:'NIST / OMB / White House — Washington DC', coord:[-77.04,38.91]},
+    {name:'FTC — Washington DC',                       coord:[-77.04,38.89]},
+    {name:'NY DFS — New York (Delta Dental settlement 30 Apr 2026)', coord:[-74.01,40.71]}
+  ];
+
+  // Global comprehensive privacy tiers
+  const GLOBAL_COMPREHENSIVE = ['Austria','Belgium','Bulgaria','Croatia','Cyprus','Czechia','Denmark','Estonia','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Latvia','Lithuania','Luxembourg','Malta','Netherlands','Poland','Portugal','Romania','Slovakia','Slovenia','Spain','Sweden','United Kingdom','Norway','Iceland','Liechtenstein','Switzerland','Brazil','Argentina','Uruguay','Colombia','Chile','Mexico','Canada','Japan','South Korea','Singapore','Australia','New Zealand','India','South Africa','Kenya','Nigeria','Israel','Turkey','Philippines','Indonesia'];
+  const GLOBAL_SECTORAL    = ['United States of America','China','Russia','Saudi Arabia','United Arab Emirates','Egypt','Vietnam','Thailand','Malaysia'];
+
+  // ---------- Tabs ----------
+  const TABS = {
+    eu: {
+      label: 'EU AI Act / NIS2 / GDPR',
+      classify: (name) => EU27.includes(name) ? 'scope-bloc' : (EFTA_UK.includes(name) ? 'scope-bloc' : ''),
+      dots: EU_REGULATOR_DOTS,
+      stateLayer: false,
+      legend: [
+        {cls:'scope-bloc', label:'EU 27 + EFTA + UK — AI Act / NIS2 / GDPR scope'},
+        {cls:'dot-reg', label:'Major regulator hub'}
+      ],
+      caption: 'Bloc-level regulatory scope. Click a dot to see the named regulator.'
+    },
+    us: {
+      label: 'US AI & privacy',
+      classify: (name) => (name === 'United States of America' ? 'scope-bloc' : ''),
+      dots: US_FEDERAL_DOTS,
+      stateLayer: true,
+      legend: [
+        {cls:'scope-bloc', label:'United States — federal scope'},
+        {cls:'dot-state', label:'State with comprehensive privacy law (20 states)'},
+        {cls:'dot-fed',   label:'Federal regulator / recent action'}
+      ],
+      caption: '20 US states have enacted comprehensive privacy laws (verified through 2025).'
+    },
+    global: {
+      label: 'Global privacy laws',
+      classify: (name) => {
+        if (GLOBAL_COMPREHENSIVE.includes(name)) return 'tier-comprehensive';
+        if (GLOBAL_SECTORAL.includes(name))      return 'tier-sectoral';
+        return 'tier-draft';
+      },
+      dots: [],
+      stateLayer: false,
+      legend: [
+        {cls:'tier-comprehensive', label:'Comprehensive (GDPR-style or equivalent)'},
+        {cls:'tier-sectoral',      label:'Sectoral / partial'},
+        {cls:'tier-draft',         label:'Draft / limited / none'}
+      ],
+      caption: 'Tiering reflects the 2025–2026 state of national comprehensive privacy laws.'
+    }
+  };
+
+  // ---------- Render ----------
+  let world = null, us = null, projection = null, path = null;
+  const svg = document.getElementById(SVG_ID);
+  const tip = document.getElementById('mapTip');
+  const legendEl = document.getElementById('mapLegend');
+  if (!svg || !window.d3) return;
+
+  const W = 980, H = 460;
+  const d3svg = d3.select(svg);
+  projection = d3.geoEqualEarth().scale(180).translate([W/2, H/2 + 10]);
+  path = d3.geoPath(projection);
+
+  function showTip(html, evt) {
+    tip.innerHTML = html;
+    tip.style.display = 'block';
+    const rect = svg.getBoundingClientRect();
+    const x = (evt.clientX - rect.left) + 12;
+    const y = (evt.clientY - rect.top) + 12;
+    tip.style.left = Math.min(x, rect.width - 240) + 'px';
+    tip.style.top  = Math.min(y, rect.height - 80) + 'px';
+  }
+  function hideTip() { tip.style.display = 'none'; }
+
+  function renderTab(tabKey) {
+    const tab = TABS[tabKey];
+    if (!tab || !world) return;
+
+    d3svg.selectAll('*').remove();
+
+    // Country base layer
+    const countries = topojson.feature(world, world.objects.countries).features;
+    d3svg.append('g').attr('class','countries-layer').selectAll('path')
+      .data(countries)
+      .join('path')
+        .attr('d', path)
+        .attr('class', d => 'country ' + (tab.classify(d.properties.name) || ''))
+        .on('mousemove', (evt, d) => {
+          const cls = tab.classify(d.properties.name);
+          if (!cls) return;
+          let label = d.properties.name;
+          let detail = '';
+          if (cls === 'scope-bloc' && tabKey === 'eu') detail = 'In EU AI Act / NIS2 / GDPR scope';
+          else if (cls === 'scope-bloc' && tabKey === 'us') detail = 'US federal jurisdiction';
+          else if (cls === 'tier-comprehensive') detail = 'Comprehensive privacy law (GDPR-style or equivalent)';
+          else if (cls === 'tier-sectoral')      detail = 'Sectoral or partial privacy framework';
+          showTip('<b>' + label + '</b>' + (detail ? detail : ''), evt);
+        })
+        .on('mouseleave', hideTip);
+
+    // US states layer (only for US tab)
+    if (tab.stateLayer && us) {
+      const states = topojson.feature(us, us.objects.states).features;
+      // Render states as a faint outline layer scaled into the US projection
+      const usProj = d3.geoAlbersUsa().fitSize([260, 130], topojson.feature(us, us.objects.states));
+      // Map US-state lat/lon dots through the world projection (simpler + consistent)
+      const stateDots = US_PRIVACY_STATES.map(s => ({name:s, coord:US_STATE_CAPS[s]})).filter(d => d.coord);
+      d3svg.append('g').attr('class','state-dots-layer').selectAll('circle')
+        .data(stateDots)
+        .join('circle')
+          .attr('class','state-dot')
+          .attr('cx', d => projection(d.coord)[0])
+          .attr('cy', d => projection(d.coord)[1])
+          .attr('r', 4)
+          .on('mousemove', (evt, d) => showTip('<b>' + d.name + '</b>Comprehensive privacy law enacted', evt))
+          .on('mouseleave', hideTip);
+    }
+
+    // Federal / regulator dots
+    if (tab.dots && tab.dots.length) {
+      d3svg.append('g').attr('class','reg-dots-layer').selectAll('circle')
+        .data(tab.dots)
+        .join('circle')
+          .attr('class','city-dot')
+          .attr('cx', d => projection(d.coord)[0])
+          .attr('cy', d => projection(d.coord)[1])
+          .attr('r', 4.5)
+          .on('mousemove', (evt, d) => showTip('<b>' + d.name + '</b>', evt))
+          .on('mouseleave', hideTip);
+    }
+
+    // Legend
+    legendEl.innerHTML = tab.legend.map(item => {
+      let swatch;
+      if (item.cls === 'dot-state') swatch = '<span class="legend-dot" style="background:#014486;border-radius:50%"></span>';
+      else if (item.cls === 'dot-fed' || item.cls === 'dot-reg') swatch = '<span class="legend-dot" style="background:#06101e;border-radius:50%"></span>';
+      else if (item.cls === 'scope-bloc') swatch = '<span class="legend-dot" style="background:#cfe1f6"></span>';
+      else if (item.cls === 'tier-comprehensive') swatch = '<span class="legend-dot" style="background:#2e844a"></span>';
+      else if (item.cls === 'tier-sectoral') swatch = '<span class="legend-dot" style="background:#c47a00"></span>';
+      else if (item.cls === 'tier-draft') swatch = '<span class="legend-dot" style="background:#d6dde6"></span>';
+      else swatch = '<span class="legend-dot" style="background:#dbe1ea"></span>';
+      return '<span class="legend-item">' + swatch + item.label + '</span>';
+    }).join('') + '<span class="legend-item" style="color:var(--ink-faint);margin-left:auto;font-style:italic">' + tab.caption + '</span>';
+
+    // Tab UI state
+    document.querySelectorAll('.map-tab').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === tabKey ? 'true' : 'false'));
+  }
+
+  function setActiveTab(tabKey, persist) {
+    if (!TABS[tabKey]) tabKey = 'eu';
+    renderTab(tabKey);
+    if (persist) {
+      try { localStorage.setItem(PIN_KEY, tabKey); } catch(_){}
+      const pin = document.getElementById('mapPin');
+      const lbl = document.getElementById('mapPinLabel');
+      if (pin && lbl) { pin.classList.add('is-pinned'); lbl.textContent = 'Default'; setTimeout(() => { pin.classList.remove('is-pinned'); lbl.textContent = 'Pin as default'; }, 1800); }
+    }
+  }
+
+  // Wire up tabs
+  document.querySelectorAll('.map-tab').forEach(btn => {
+    btn.addEventListener('click', () => setActiveTab(btn.dataset.tab, false));
+  });
+  // Pin button — persist current tab
+  const pinBtn = document.getElementById('mapPin');
+  if (pinBtn) pinBtn.addEventListener('click', () => {
+    const active = document.querySelector('.map-tab[aria-selected="true"]');
+    if (active) setActiveTab(active.dataset.tab, true);
+  });
+
+  // Load both topojsons in parallel, then render saved-or-default tab
+  Promise.all([
+    fetch(WORLD_URL).then(r => r.json()),
+    fetch(US_URL).then(r => r.json()).catch(()=>null)
+  ]).then(([w, u]) => {
+    world = w; us = u;
+    let saved = null;
+    try { saved = localStorage.getItem(PIN_KEY); } catch(_){}
+    setActiveTab(saved || 'eu', false);
+  }).catch(err => {
+    console.warn('PAI map load error:', err);
+  });
+})();
+</script>
+
 </body>
 </html>
