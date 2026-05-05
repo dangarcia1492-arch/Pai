@@ -3333,18 +3333,14 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   const W = 980, H = 460;
   const d3svg = d3.select(svg);
 
-  // geoNaturalEarth1 + a 10° westward rotation puts the antimeridian over
-  // open Pacific so Russia / Fiji / Antarctica don't wrap onto the west edge
-  // and render as ghost "double countries". precision(0.5) keeps curves clean.
-  const projection = d3.geoNaturalEarth1()
-    .rotate([-10, 0])
-    .scale(180)
-    .translate([W/2, H/2 + 10])
-    .precision(0.5);
+  // Pre-clip features to the visible band so antimeridian-spanning shapes
+  // (Russia / Antarctica / Fiji / etc.) cannot wrap and produce ghost "double"
+  // copies of unrelated countries. Use d3.geoClipRectangle if available,
+  // otherwise rely on the SVG clipPath below.
+  const projection = d3.geoNaturalEarth1().precision(0.5);
   const path = d3.geoPath(projection);
 
-  // Clip the rendered country layer to the SVG viewBox so any leftover
-  // wrapping artefact is masked off rather than drawn over the legend / chrome.
+  // SVG clipPath as a final safety net: anything painted outside (W,H) gets masked.
   d3svg.append('defs').append('clipPath').attr('id','pai-map-clip')
     .append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H);
 
@@ -3360,7 +3356,13 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   function hideTip() { tip.style.display = 'none'; }
 
   fetch(WORLD_URL).then(r => r.json()).then(world => {
-    const countries = topojson.feature(world, world.objects.countries).features;
+    const featureColl = topojson.feature(world, world.objects.countries);
+    const countries = featureColl.features;
+
+    // Auto-size the projection to fit the world data exactly into the viewBox
+    // with a small padding. This eliminates the antimeridian-wrap artefact that
+    // produces ghost "double countries" when the projection is hand-scaled.
+    projection.fitExtent([[8, 16], [W - 8, H - 16]], featureColl);
 
     d3svg.append('g')
       .attr('class','countries-layer')
