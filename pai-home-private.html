@@ -359,36 +359,19 @@ button { cursor: pointer; }
 .panel-link::after { content: '→'; font-family: var(--mono); font-weight: 400; }
 .panel-link:hover { text-decoration: underline; }
 
-/* MAP (hero) — 3-tab d3 world map */
+/* MAP (hero) — single d3 world map */
 .panel.map-panel { display: flex; flex-direction: column; }
-.map-head { padding: 10px 22px 6px !important; align-items: center; gap: 16px; }
-.map-tabs { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: 6px; padding: 2px; flex-wrap: nowrap; gap: 0; }
-.map-tab { font-family: var(--sans); font-size: 11.5px; font-weight: 600; color: var(--muted); padding: 6px 12px; border-radius: 4px; cursor: pointer; border: 0; background: transparent; transition: background .12s, color .12s; white-space: nowrap; }
-.map-tab:hover { color: var(--ink); }
-.map-tab[aria-selected="true"] { background: var(--surface); color: var(--accent-2); box-shadow: var(--shadow-1); }
-.map-pin { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; padding: 5px 10px; border: 1px solid var(--border); border-radius: 5px; background: transparent; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: background .12s, color .12s, border-color .12s; }
-.map-pin:hover { color: var(--ink); border-color: var(--ink-faint); background: var(--surface-2); }
-.map-pin.is-pinned { background: var(--accent-soft); border-color: var(--accent-soft-2); color: var(--accent-2); }
-.map-pin svg { stroke: currentColor; flex-shrink: 0; }
-
 .map-wrap { padding: 8px 22px 14px; flex: 1; }
 .map-frame { position: relative; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: 8px; aspect-ratio: 2.13 / 1; overflow: hidden; }
 .map-frame svg { width: 100%; height: 100%; display: block; }
 
-/* Country base + status fills */
-#js-world-map .country { fill: #dbe1ea; stroke: #c2cad6; stroke-width: 0.4; transition: fill .12s; cursor: default; }
-#js-world-map .country.scope-bloc { fill: #cfe1f6; }                   /* EU 27 + EFTA + UK on EU tab; US on US tab */
-#js-world-map .country.tier-comprehensive { fill: #2e844a; }           /* Strong tier — green */
-#js-world-map .country.tier-sectoral { fill: #c47a00; }                /* Sectoral / partial — amber */
-#js-world-map .country.tier-draft { fill: #d6dde6; }                   /* Draft / limited — light grey */
-#js-world-map .country.scope-bloc:hover,
+/* Country base + 3-tier status fills (only these three classes are valid; no scope-bloc, no dots) */
+#js-world-map .country { fill: #d6dde6; stroke: #c2cad6; stroke-width: 0.4; transition: fill .12s; cursor: default; }
+#js-world-map .country.tier-comprehensive { fill: #2e844a; }
+#js-world-map .country.tier-sectoral     { fill: #c47a00; }
+#js-world-map .country.tier-draft        { fill: #d6dde6; }
 #js-world-map .country.tier-comprehensive:hover,
 #js-world-map .country.tier-sectoral:hover { filter: brightness(1.08); cursor: pointer; }
-
-/* US-state markers (rendered as projected dots) */
-#js-world-map .state-dot { fill: var(--accent-2); stroke: #fff; stroke-width: 0.8; cursor: pointer; }
-#js-world-map .state-dot:hover { fill: var(--accent); stroke-width: 1.2; }
-#js-world-map .city-dot { fill: var(--ink-strong); stroke: #fff; stroke-width: 0.8; }
 
 /* Hover tooltip */
 .map-tip { position: absolute; pointer-events: none; padding: 6px 10px; background: rgba(6,16,30,0.95); color: #fff; border-radius: 4px; font-size: 11.5px; font-weight: 500; box-shadow: 0 4px 14px rgba(0,0,0,0.32); display: none; z-index: 4; max-width: 240px; line-height: 1.4; }
@@ -3355,13 +3338,16 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   }
   function hideTip() { tip.style.display = 'none'; }
 
-  fetch(WORLD_URL).then(r => r.json()).then(world => {
+  // Cache-bust the topojson fetch on this version of the JS (force-fresh).
+  fetch(WORLD_URL + '?v=4').then(r => r.json()).then(world => {
+    // HARD reset: nuke any previously rendered children before drawing.
+    d3svg.selectAll('*').remove();
+    // Re-attach the clipPath after the wipe.
+    d3svg.append('defs').append('clipPath').attr('id','pai-map-clip')
+      .append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H);
+
     const featureColl = topojson.feature(world, world.objects.countries);
     const countries = featureColl.features;
-
-    // Auto-size the projection to fit the world data exactly into the viewBox
-    // with a small padding. This eliminates the antimeridian-wrap artefact that
-    // produces ghost "double countries" when the projection is hand-scaled.
     projection.fitExtent([[8, 16], [W - 8, H - 16]], featureColl);
 
     d3svg.append('g')
