@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IRDAI Issues Revised Information and Cyber Security Guidelines for All Insurers and Intermediaries — PrinciplesAI</title>
+<title>PrinciplesAI — India's Information Technology Act, 2000 · Legislation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght..60,400;8..60,600;8..60,700&family=Inter:wght;500;600;700;800&display=swap" rel="stylesheet">
@@ -371,69 +371,103 @@ body { min-width: 320px !important; }
 }
 /* ==END_MOBILE_RESPONSIVE== */
 </style>
-<style id="page-story-ico-nhs-css">
-/* News story page — narrative + ops notes + always sources */
-.story-page { max-width: 820px; }
-.story-eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5e6878; margin-bottom: 14px; }
-.story-eyebrow .eb-juris { padding: 3px 8px; background: #014486; color: #fff; border-radius: 3px; letter-spacing: 0.06em; }
-.story-eyebrow .eb-auth a { color: #014486; text-decoration: none; font-weight: 700; }
-.story-eyebrow .eb-auth a:hover { color: #0176d3; text-decoration: underline; }
-.story-eyebrow .eb-type { padding: 3px 8px; border-radius: 3px; }
-.story-eyebrow .eb-type.enf { background: #fbeecd; color: #905200; }
-.story-eyebrow .eb-type.guid { background: #e3effc; color: #014486; }
-.story-eyebrow .eb-type.case { background: #e5f3e9; color: #2e844a; }
-.story-eyebrow .eb-dot { color: #c8d0dc; }
-.story-eyebrow .eb-date { color: #5e6878; }
+<style id="page-authority-ico-css">
+/* Authority directory page — compact, dense, no long scroll */
+.auth-page { max-width: 1200px; }
+.auth-hero { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; padding: 22px 24px; background: #fff; border: 1px solid #ebeff5; border-radius: 10px; margin-bottom: 20px; }
+.auth-hero-left { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.auth-hero-flag { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; background: #014486; color: #fff; border-radius: 8px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.04em; flex-shrink: 0; }
+.auth-hero .auth-name { font-size: 24px; font-weight: 700; color: #06101e; letter-spacing: -0.015em; line-height: 1.15; margin: 0 0 2px 0; }
+.auth-hero .auth-acronym { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #014486; letter-spacing: 0.08em; margin-bottom: 6px; }
+.auth-hero .auth-local-name { font-style: italic; color: #5e6878; font-size: 13.5px; margin: 4px 0 8px; line-height: 1.4; }
+.auth-hero .auth-scope-row { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12.5px; color: #5e6878; align-items: center; }
+.auth-hero .auth-scope-row .auth-on { color: #2e844a; font-weight: 600; }
+.auth-save { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; font-size: 12.5px; font-weight: 600; border-radius: 6px; border: 1px solid #0176d3; background: #0176d3; color: #fff; cursor: pointer; font-family: inherit; }
+.auth-save:hover { background: #014486; border-color: #014486; }
+.auth-save.saved { background: #2e844a; border-color: #2e844a; }
 
-.story-title { font-size: 36px; font-weight: 700; color: #06101e; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 16px 0; }
-.story-deck { font-size: 17px; color: #2a3548; line-height: 1.5; margin: 0 0 32px 0; font-weight: 400; }
-.story-deck::first-letter { color: #014486; }
+.auth-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 24px; }
+.auth-card { background: #fff; border: 1px solid #ebeff5; border-radius: 10px; padding: 18px 20px; }
+.auth-card-title { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; color: #8a93a3; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+.auth-card p { font-size: 13px; color: #2a3548; line-height: 1.55; margin: 0; }
+.auth-card p + p { margin-top: 8px; }
+.auth-card .ac-anchor { display: block; margin-top: 10px; font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #5e6878; text-decoration: none; }
+.auth-card .ac-anchor b { color: #014486; font-weight: 700; }
+.auth-card a.ac-anchor:hover { color: #014486; }
+.auth-card a.ac-anchor:hover b { color: #0176d3; text-decoration: underline; }
+.auth-kv { display: grid; grid-template-columns: 120px 1fr; gap: 10px; padding: 5px 0; font-size: 12.5px; line-height: 1.4; }
+.auth-kv .k { color: #8a93a3; font-weight: 500; }
+.auth-kv .v { color: #0a1729; font-weight: 600; word-break: break-word; }
+.auth-kv .v a { color: #014486; text-decoration: none; }
+.auth-kv .v a:hover { color: #0176d3; text-decoration: underline; }
+.auth-list { list-style: none; padding: 0; margin: 0; font-size: 12.5px; line-height: 1.65; }
+.auth-list li { padding: 3px 0; color: #0a1729; }
+.auth-list li a { color: #014486; text-decoration: none; }
+.auth-list li a:hover { color: #0176d3; text-decoration: underline; }
+.auth-list li::before { content: '→ '; color: #c8d0dc; font-family: 'Inter', sans-serif; margin-right: 4px; }
 
-.story-body { margin-bottom: 32px; }
-.story-body p { font-size: 15.5px; color: #0a1729; line-height: 1.7; margin: 0 0 16px 0; font-weight: 400; }
-.story-body p:last-child { margin-bottom: 0; }
+.auth-activity { background: #fff; border: 1px solid #ebeff5; border-radius: 10px; padding: 18px 20px 14px; margin-bottom: 24px; }
+.auth-activity-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+.auth-activity-head h2 { font-size: 16px; font-weight: 700; color: #0a1729; letter-spacing: -0.005em; margin: 0; }
+.auth-activity-head a { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: #014486; text-decoration: none; text-transform: uppercase; }
+.auth-activity-head a:hover { color: #0176d3; text-decoration: underline; }
+.auth-activity-row { display: grid; grid-template-columns: 60px 100px 1fr; gap: 14px; padding: 11px 4px; border-bottom: 1px solid #ebeff5; align-items: center; text-decoration: none; color: inherit; transition: background .1s; }
+.auth-activity-row:last-child { border-bottom: none; }
+.auth-activity-row:hover { background: #f8fafc; }
+.auth-activity-row .aa-date { font-family: 'Inter', sans-serif; font-size: 11px; color: #5e6878; font-weight: 500; }
+.auth-activity-row .aa-type { font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; width: fit-content; }
+.auth-activity-row .aa-type.enf { background: #fbeecd; color: #905200; }
+.auth-activity-row .aa-type.guid { background: #e3effc; color: #014486; }
+.auth-activity-row .aa-type.case { background: #e5f3e9; color: #2e844a; }
+.auth-activity-row .aa-type.analysis { background: #f0e6fa; color: #6b2fb0; }
+.auth-activity-row .aa-type.update { background: #eff2f7; color: #5e6878; }
+.auth-activity-row .aa-h { font-size: 13.5px; font-weight: 600; color: #0a1729; line-height: 1.35; }
 
-.story-ops { background: #f6f7f9; border: 1px solid #ebeff5; border-left: 3px solid #0176d3; border-radius: 8px; padding: 18px 22px 16px; margin-bottom: 32px; }
-.story-ops .ops-title { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #014486; margin-bottom: 12px; }
-.story-ops ul { list-style: none; padding: 0; margin: 0; }
-.story-ops li { font-size: 14px; color: #06101e; line-height: 1.55; padding: 6px 0 6px 18px; position: relative; font-weight: 500; }
-.story-ops li::before { content: '→'; position: absolute; left: 0; color: #0176d3; font-weight: 700; font-family: 'Inter', sans-serif; }
+/* Practical guidance section — curated topic tiles + recent updates rail */
+.auth-guidance { background: #fff; border: 1px solid #ebeff5; border-radius: 10px; padding: 18px 20px 14px; margin-bottom: 24px; }
+.ag-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.ag-head-text h2 { font-size: 16px; font-weight: 700; color: #0a1729; letter-spacing: -0.005em; margin: 0; }
+.ag-sub { font-size: 11.5px; color: #5e6878; margin-top: 3px; }
+.ag-source { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #014486; white-space: nowrap; flex-shrink: 0; text-decoration: none; }
+.ag-source:hover { color: #0176d3; text-decoration: underline; }
+.ag-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.ag-tile { display: flex; flex-direction: column; padding: 13px 14px 11px; border: 1px solid #ebeff5; border-radius: 8px; background: #f8fafc; text-decoration: none; color: inherit; transition: border-color .12s, background .12s; }
+.ag-tile:hover { border-color: #cfe1f6; background: #fff; }
+.ag-tile-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.ag-tag { font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; }
+.ag-tag.ai { background: #ede5fb; color: #5a3996; }
+.ag-tag.priv { background: #e3effc; color: #014486; }
+.ag-tag.cyb { background: #fbeecd; color: #905200; }
+.ag-tag.cross { background: #eff2f7; color: #5e6878; }
+.ag-count { font-family: 'Inter', sans-serif; font-size: 10.5px; color: #5e6878; }
+.ag-title { font-size: 13px; font-weight: 700; color: #0a1729; margin: 0 0 5px; line-height: 1.3; }
+.ag-desc { font-size: 11.5px; color: #5e6878; margin: 0 0 9px; line-height: 1.4; flex-grow: 1; }
+.ag-foot { font-family: 'Inter', sans-serif; font-size: 10px; color: #8a93a3; }
+.ag-recent { border-top: 1px solid #ebeff5; padding-top: 12px; margin-top: 4px; }
+.ag-recent h3 { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8a93a3; margin: 0 0 8px; }
+.ag-recent-list { list-style: none; padding: 0; margin: 0; }
+.ag-recent-list li { display: grid; grid-template-columns: 60px 1fr 180px; gap: 14px; padding: 7px 4px; font-size: 12px; align-items: baseline; border-bottom: 1px solid #f4f6fa; }
+.ag-recent-list li:last-child { border-bottom: none; }
+.ag-recent-list .agr-date { font-family: 'Inter', sans-serif; font-size: 10.5px; color: #5e6878; }
+.ag-recent-list .agr-section { font-family: 'Inter', sans-serif; font-size: 10px; color: #8a93a3; text-transform: uppercase; letter-spacing: 0.05em; text-align: right; }
+.ag-recent-list a { color: #0a1729; text-decoration: none; }
+.ag-recent-list a:hover { color: #0176d3; text-decoration: underline; }
 
-.story-sources { border-top: 1px solid #ebeff5; padding-top: 22px; margin-bottom: 32px; }
-.story-sources .src-title { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8a93a3; margin-bottom: 12px; }
-.story-sources ul { list-style: none; padding: 0; margin: 0 0 12px 0; }
-.story-sources li { padding: 6px 0; font-size: 13px; line-height: 1.5; }
-.story-sources li a { color: #014486; font-weight: 600; text-decoration: none; }
-.story-sources li a:hover { color: #0176d3; text-decoration: underline; }
-.story-sources li a::after { content: ' ↗'; font-family: 'Inter', sans-serif; font-size: 10px; color: #8a93a3; }
-.story-sources .src-meta { font-family: 'Inter', sans-serif; font-size: 10.5px; color: #8a93a3; margin-left: 8px; font-weight: 400; letter-spacing: 0.02em; }
-.story-sources .src-note { font-size: 12px; color: #5e6878; font-style: italic; line-height: 1.5; margin: 10px 0 0 0; padding-top: 10px; border-top: 1px dashed #ebeff5; }
-
-.story-related { border-top: 1px solid #ebeff5; padding-top: 22px; margin-bottom: 32px; }
-.story-related .rel-title { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8a93a3; margin-bottom: 12px; }
-.story-related .rel-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.story-related .rel-card { background: #fff; border: 1px solid #ebeff5; border-radius: 8px; padding: 14px 16px; text-decoration: none; color: inherit; transition: border-color .12s, box-shadow .12s; display: flex; flex-direction: column; gap: 4px; }
-.story-related .rel-card:hover { border-color: #0176d3; box-shadow: 0 4px 14px rgba(10,23,41,0.04); }
-.story-related .rel-kick { font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em; color: #8a93a3; text-transform: uppercase; }
-.story-related .rel-h { font-size: 13.5px; font-weight: 700; color: #06101e; line-height: 1.35; letter-spacing: -0.005em; }
-.story-related .rel-p { font-size: 12px; color: #5e6878; line-height: 1.45; }
-
-.story-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0 0; border-top: 1px solid #ebeff5; flex-wrap: wrap; }
-.story-footer .btn-primary { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; font-size: 13px; font-weight: 600; border-radius: 6px; border: 1px solid #0176d3; background: #0176d3; color: #fff; cursor: pointer; font-family: inherit; }
-.story-footer .btn-primary:hover { background: #014486; border-color: #014486; }
-.story-footer-note { font-family: 'Inter', sans-serif; font-size: 10.5px; color: #8a93a3; letter-spacing: 0.02em; }
-
-/* Mobile */
-@media (max-width: 900px) { .story-related .rel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Mobile responsive for auth grid */
+@media (max-width: 900px) { .auth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ag-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) {
-  .story-title { font-size: 26px; }
-  .story-deck { font-size: 15px; }
-  .story-body p { font-size: 15px; }
-  .story-ops li { font-size: 13.5px; }
-  .story-related .rel-grid { grid-template-columns: 1fr; }
-  .story-footer { flex-direction: column; align-items: stretch; }
-  .story-footer .btn-primary { justify-content: center; height: 44px; }
-  .story-footer-note { text-align: center; }
+  .auth-grid { grid-template-columns: 1fr; }
+  .ag-grid { grid-template-columns: 1fr; }
+  .ag-recent-list li { grid-template-columns: 50px 1fr; gap: 10px; }
+  .ag-recent-list .agr-section { display: none; }
+  .auth-hero { grid-template-columns: 1fr; gap: 14px; padding: 18px; }
+  .auth-hero-left { gap: 14px; }
+  .auth-hero-flag { width: 44px; height: 44px; font-size: 15px; }
+  .auth-hero .auth-name { font-size: 20px; }
+  .auth-save { width: 100%; justify-content: center; height: 42px; }
+  .auth-activity-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 4px; }
+  .auth-activity-row .aa-type { margin-top: 2px; }
+  .auth-kv { grid-template-columns: 100px 1fr; font-size: 12px; }
 }
 </style>
 <script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
@@ -527,7 +561,6 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
-<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 <nav class="icon-sidebar">
@@ -545,7 +578,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
-      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
@@ -572,64 +604,99 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </header>
 
 <div class="main-content">
-<div class="page-view story-page">
+<div class="page-view auth-page">
 
-    <div class="page-statusbar">
+  <div class="page-statusbar">
     <div class="ps-left">
       <span class="ps-breadcrumb">
-        <a href="pai-app-news">News</a>
-        <span class="ps-sep">&#8250;</span>
-        <span class="ps-current">IMY fines Sportadmin SEK 6 M</span>
+        <a href="pai-home-private">Home</a>
+        <span class="ps-sep">›</span>
+        <a href="pai-app-legislation">Legislation</a>
+        <span class="ps-sep">›</span>
+        <span class="ps-current">India · IT Act 2000</span>
       </span>
-      <span class="ps-sep">&#183;</span>
-      <span class="ps-scope-chip">Sweden · Enforcement</span>
-      <span class="ps-sep">&#183;</span>
-      <span class="ps-ok">Editor-reviewed · 28 Jan 2026</span>
+      <span class="ps-sep">·</span>
+      <span class="ps-scope-chip">IN · Act 21 of 2000</span>
+      <span class="ps-sep">·</span>
+      <span class="ps-ok">In force</span>
     </div>
   </div>
 
-  <div class="story-eyebrow">
-    <span class="eb-juris">India</span>
-    <span class="eb-auth"></span>
-    <span class="eb-dot">&#183;</span>
-    <span class="eb-type alerts">Update</span>
-    <span class="eb-dot">&#183;</span>
-    <span class="eb-date">6 Apr 2026</span>
+  <!-- HERO CARD -->
+  <div class="auth-hero">
+    <div class="auth-hero-left">
+      <div class="auth-hero-flag">India · IT Act 2000</div>
+      <div>
+        <div class="auth-acronym">IN · Statute</div>
+        <h1 class="auth-name">India's Information Technology Act, 2000</h1>
+        <div class="auth-local-name">India's Information Technology Act, 2000</div>
+        <div class="auth-scope-row">
+          <span><a href="pai-app-juris-india" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">India</a></span>
+          <span>·</span>
+          <span>Region: Asia Pacific | Type: Sectoral | Links to MEITY homepage; correct source added</span>
+          <span>·</span>
+          <span class="auth-on">● In force</span>
+        </div>
+      </div>
+    </div>
+    <div class="auth-hero-right">
+      <button class="auth-save" onclick="this.classList.toggle('saved'); this.textContent = this.classList.contains('saved') ? '● Saved to watchlist' : '● Save to watchlist';">● Save to watchlist</button>
+    </div>
   </div>
 
-  <h1 class="story-title">IRDAI Issues Revised Information and Cyber Security Guidelines for All Insurers and Intermediaries</h1>
-
-  <p class="story-deck">The Insurance Regulatory and Development Authority of India has issued the IRDAI Information and Cyber Security Guidelines, 2026, replacing its 2023 framework and setting revised minimum standards and governance requirements applicable to all regulated entities in the Indian insurance sector.</p>
-
-  <section class="story-body">
-    <p>On 6 April 2026, the Insurance Regulatory and Development Authority of India (IRDAI) published Circular Ref No. IRDAI/GA&amp;HR/CIR/MISC/51/4/2026, addressed to all insurers, insurance intermediaries and the Insurance Information Bureau of India (IIB). The circular supersedes the earlier guidelines issued under Circular Ref IRDAI/GA&amp;HR/GDL/MISC/88/04/2023 dated 24 April 2023. IRDAI states that no financial penalty is associated with this guidance instrument.</p>
-    <p>IRDAI states that the revised guidelines have been issued in view of the evolving threat landscape, industry feedback, and recommendations from various IRDAI committees. The authority finds that the updated framework is intended to enable the insurance industry to further strengthen its defences and related governance mechanisms to address emerging cyber threats. The guidelines, attached as Annexure B to the circular, set out the minimum standards and governance mechanisms to be adopted by all regulated entities, with a summary of major changes from the prior framework provided separately as Annexure A.</p>
-    <p>IRDAI states that all insurers, including Foreign Reinsurance Branches, and all insurance intermediaries, covering brokers, corporate agents, web aggregators, third-party administrators, insurance marketing firms, insurance repositories, insurance self-network platforms, corporate surveyors, motor insurance service providers and common service centres, along with the IIB, are required to strictly adhere to the guidelines and ensure compliance from the current financial year. The circular was issued under the signature of A. R. Nithiyanantham, Executive Director (GA&amp;HR), at IRDAI&#39;s offices in the Financial District, Hyderabad.</p>
-  </section>
-
-  <section class="story-ops">
-    <div class="ops-title">Operational notes</div>
-    <div class="muted" style="font-size:13px;color:#5e6878">Operational notes not yet written. Editorial review pending.</div>
-  </section>
-
-  <section class="story-sources">
-    <div class="src-title">Sources</div>
-    <ul>
-    <li><a href="https://irdai.gov.in/" target="_blank" rel="noopener">Source (6 Apr 2026)</a><span class="src-meta">irdai.gov.in</span></li>
-    </ul>
-    <p class="src-note">Generated from PAI Research Team source review. Status: Pending. Verified Status: Unverified.</p>
-  </section>
-
-  <section class="story-related">
-    <div class="rel-title">Related</div>
-    <div class="muted" style="font-size:13px;color:#5e6878">Related content surfacing not yet wired.</div>
-  </section>
-
-  <div class="story-footer">
-    <button class="btn-primary" onclick="this.textContent = this.textContent.indexOf('Saved') > -1 ? '&#9679; Save to watchlist' : '&#9679; Saved to watchlist';">&#9679; Save to watchlist</button>
-    <span class="story-footer-note">Unverified &middot; published 6 Apr 2026 &middot; <span style="color:#905200;font-weight:600">● Pending claim check</span></span>
+  <!-- DIRECTORY GRID — slim v0, 3 cards from AT2 fields only -->
+  <div class="auth-grid">
+    <div class="auth-card">
+      <div class="auth-card-title">Citation</div>
+      <div class="auth-kv"><span class="k">Name</span><span class="v">India's Information Technology Act, 2000</span></div>
+      <div class="auth-kv"><span class="k">Type</span><span class="v">Act</span></div>
+      <div class="auth-kv"><span class="k">Topic</span><span class="v">Cyber</span></div>
+      <div class="auth-kv"><span class="k">Verified</span><span class="v">Verified</span></div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-card-title">Source</div>
+      <div class="auth-kv"><span class="k">URL</span><span class="v"><a href="https://www.meity.gov.in/content/information-technology-act-2000" target="_blank" rel="noopener" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">meity.gov.in &#x2197;</a></span></div>
+      <div class="auth-kv"><span class="k">Date enacted</span><span class="v">9 Jun 2000 (Act 21 of 2000); §70B inserted by IT (Amendment) Act 2008</span></div>
+      <div class="auth-kv"><span class="k">Date in force</span><span class="v">—</span></div>
+      <div class="auth-kv"><span class="k">Status</span><span class="v">In force</span></div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-card-title">Jurisdiction &amp; enforcer</div>
+      <div class="auth-kv"><span class="k">Jurisdiction</span><span class="v"><a href="pai-app-juris-india" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">India</a></span></div>
+      <div class="auth-kv"><span class="k">ISO</span><span class="v">IN</span></div>
+      <div class="auth-kv"><span class="k">Region</span><span class="v">Asia Pacific</span></div>
+      <div class="auth-kv"><span class="k">Issuing ministry</span><span class="v"><a href="pai-app-authority-meity.html" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">MeitY</a></span></div>
+      <div class="auth-kv"><span class="k">Key §70B body</span><span class="v"><a href="pai-app-authority-cert-in.html" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">Indian Computer Emergency Response Team (CERT-In)</a></span></div>
+    </div>
   </div>
 
+  <!-- NOTES — Notes field from AT2 (free text) -->
+  <div class="auth-card" style="grid-column: 1 / -1; margin-bottom: 24px;">
+    <div class="auth-card-title">Notes &amp; provenance</div>
+    <p style="font-size: 13px; color: #5e6878; line-height: 1.55;">Information Technology Act, 2000 (Act 21 of 2000), enacted 9 June 2000 by the Parliament of India. Foundational cyber-and-electronic-records statute giving legal recognition to digital signatures and electronic transactions, defining cybercrime offences, and (via the IT (Amendment) Act 2008) inserting §70B which designates the Indian Computer Emergency Response Team (CERT-In) as the national agency for cyber-incident response, threat coordination and emergency measures. Implementing rules include the IT (Reasonable Security Practices and Procedures) Rules 2011, the IT Intermediary Guidelines and Digital Media Ethics Code Rules 2021, and the IT Amendment Rules on SGI 2026. The DPDP Act 2023 amends §43A (data-protection compensation) and §81 (overriding effect) to dovetail with the new privacy framework. PAI: AT2 verified Legislation recMPyCFZcrN3ONzb.</p>
+  </div>
+
+  <!-- PRACTICAL GUIDANCE — empty-state until per-instrument guidance is wired -->
+  <div class="auth-guidance" id="guidance">
+    <div class="ag-head">
+      <div class="ag-head-text">
+        <h2>Practical guidance</h2>
+        <div class="ag-sub">Per-instrument guidance indexing pending. Until wired, see the issuing authority's guidance hub.</div>
+      </div>
+    </div>
+    <div style="padding: 18px 0; color: #5e6878; font-size: 13px; line-height: 1.55;">
+      The IT Act 2000 is an enabling/foundational statute. For practical guidance under §70B (cyber-incident response), see the <a href="pai-app-authority-cert-in.html" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">CERT-In authority page</a>. For the IT (Reasonable Security Practices) Rules 2011 and the Intermediary Guidelines / IT Amendment Rules on SGI, see the <a href="pai-app-leg-india-it-amendment-rules-on-sgi.html" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">SGI Rules page</a> and the <a href="pai-app-juris-india.html" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">India jurisdiction page</a>.
+    </div>
+  </div>
+
+  <!-- RECENT ACTIVITY — PG-driven slot, empty until activity wiring lands -->
+  <div class="auth-activity">
+    <div class="auth-activity-head">
+      <h2>Recent activity citing the IT Act 2000</h2>
+      <a href="pai-app-news?legislation=india-digital-personal-data-protection-act-2023">See all →</a>
+    </div>
+    <div style="padding: 14px 4px; font-size: 12.5px; color: #5e6878; line-height: 1.55;">Activity feed indexing pending · per-instrument citation tracking comes online with Phase 2.D.</div>
+  </div>
 </div>
 </div>
 
