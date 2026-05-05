@@ -474,22 +474,37 @@ button { cursor: pointer; }
 .fc-type-pill.legislation { background: var(--amber-fill); color: #fff; }
 .fc-type-pill.guidance    { background: var(--green-fill); color: #fff; }
 
-/* ============ IN FOCUS — terminology widget ============ */
-.in-focus { margin-bottom: 36px; }
-.if-card { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); padding: 26px 28px 22px; }
-.if-head { padding-bottom: 14px; border-bottom: 1px solid var(--border-soft); margin-bottom: 18px; display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
-.if-term { font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--ink-strong); letter-spacing: -0.015em; margin: 0; }
-.if-context { font-size: 13.5px; color: var(--secondary); line-height: 1.5; max-width: 640px; }
-.if-defs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 18px; }
-.if-def { display: flex; flex-direction: column; gap: 8px; padding-right: 8px; }
-.if-def-head { display: flex; flex-direction: column; gap: 2px; }
-.if-source { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-2); }
-.if-cite { font-size: 11px; color: var(--muted); font-weight: 500; }
-.if-def p { font-size: 13px; line-height: 1.55; color: var(--ink); margin: 0; }
-.if-cta { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--accent-2); text-decoration: none; }
-.if-cta:hover { text-decoration: underline; }
-@media (max-width: 900px) {
-  .if-defs { grid-template-columns: 1fr; gap: 18px; }
+/* ============ IN FOCUS — compact card sitting next to Petruta in briefings row ============ */
+.briefing-card.if-compact {
+  background: linear-gradient(160deg, #0d2433 0%, #1a3145 60%, #0176d3 130%);
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 22px 26px 20px;
+  color: #fff;
+  text-decoration: none;
+}
+.briefing-card.if-compact:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--accent-soft-2); }
+.briefing-card.if-compact .ifc-eyebrow {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,.74);
+}
+.briefing-card.if-compact .ifc-term {
+  font-family: var(--display); font-size: 28px; font-weight: 700;
+  color: #fff; letter-spacing: -0.015em; line-height: 1.05; margin: 0;
+}
+.briefing-card.if-compact .ifc-blurb {
+  font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,.86);
+  margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.briefing-card.if-compact .ifc-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.briefing-card.if-compact .ifc-chip {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+  padding: 3px 8px; border-radius: 3px;
+  background: rgba(255,255,255,.14); color: #fff;
+}
+.briefing-card.if-compact .ifc-cta {
+  margin-top: auto; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: #fff; opacity: .92;
 }
 .fc-duration { position: absolute; bottom: 12px; right: 12px; font-family: var(--mono); font-size: 11px; font-weight: 600; background: rgba(6, 16, 30, 0.92); color: #fff; padding: 3px 8px; border-radius: 3px; }
 .fc-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 58px; height: 58px; background: rgba(255,255,255,0.96); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.32); transition: transform .18s; }
@@ -623,9 +638,9 @@ button { cursor: pointer; }
 }
 .dev-item {
   display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 22px;
-  padding: 14px 26px;
+  grid-template-columns: 60px 1fr;
+  gap: 14px;
+  padding: 12px 22px;
   border-bottom: 1px solid var(--border-soft);
   cursor: pointer;
   transition: background .12s;
@@ -1281,95 +1296,75 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
          aria-label="EU Omnibus: What Changed in March & What to Expect Next — Petruta Pirvan">
         <span class="bc-pill">New</span>
       </a>
-      <a class="briefing-card placeholder" href="#" role="listitem" aria-label="Next briefing coming soon"></a>
-      <a class="briefing-card placeholder" href="#" role="listitem" aria-label="Next briefing coming soon"></a>
+      <a class="briefing-card if-compact feature" href="pai-app-glossary#ai-system" role="listitem" aria-label="In focus: AI system">
+        <div class="ifc-eyebrow">In focus &middot; this week</div>
+        <h3 class="ifc-term">AI system</h3>
+        <p class="ifc-blurb">EU AI Act, OECD and the Five Eyes&#39; agentic-AI guidance each define this differently &mdash; what&#39;s current.</p>
+        <div class="ifc-chips">
+          <span class="ifc-chip">EU AI Act &middot; Art. 3(1)</span>
+          <span class="ifc-chip">OECD C(2019)142</span>
+          <span class="ifc-chip">Five Eyes &middot; agentic AI</span>
+        </div>
+        <span class="ifc-cta">Open glossary entry &rarr;</span>
+      </a>
     </div>
   </section>
 
-  <!-- RESOURCES — typed cards (Enforcement / Commitments / Legislation) -->
+  <!-- RESOURCES — recent guidance docs -->
   <div class="section-eyebrow">
-    <span class="lbl">Resources · this week</span>
-    <span class="meta">Enforcement · Commitments · Legislation</span>
+    <span class="lbl">Resources</span>
+    <span class="meta">Recent guidance documents</span>
   </div>
   <section class="featured-trio">
-    <a class="featured-card" href="pai-app-news-story-ny-dfs-delta-dental-moveit-settlement">
+    <a class="featured-card" href="pai-app-news-story-five-eyes-agentic-ai-cyber-security-guidance">
       <div class="fc-thumb r2">
-        <span class="fc-type-pill enforcement">Enforcement</span>
-        <span class="country-flag">&#x1F1FA;&#x1F1F8;</span>
-        <div class="silhouette">DFS</div>
-        <div class="country-strip"><span class="name">United States · New York</span><span class="auth">NY DFS</span></div>
+        <span class="fc-type-pill guidance">Guidance</span>
+        <span class="country-flag">&#x1F310;</span>
+        <div class="silhouette">5EYES</div>
+        <div class="country-strip"><span class="name">Five Eyes</span><span class="auth">ASD &middot; CISA &middot; NSA &middot; CCCS &middot; NCSC-NZ &middot; NCSC-UK</span></div>
       </div>
       <div class="fc-body">
-        <h3 class="fc-title">NY DFS Fines Delta Dental $2.25 Million Over MOVEit Breach Notification Failures</h3>
-        <p class="fc-deck">$2.25M penalty &middot; 60,000 files exfiltrated &middot; 5-month notification delay &middot; 4 &sect;&nbsp;500 violations</p>
-        <div class="fc-meta"><span class="fc-author">NY DFS</span><span class="sep">&middot;</span><span>30 Apr 2026</span></div>
+        <h3 class="fc-title">Five Eyes Agencies Issue Joint Guidance on Careful Adoption of Agentic AI Services</h3>
+        <p class="fc-deck">Joint advisory across six cyber agencies &middot; least-privilege default &middot; sub-agent risk vector &middot; low-risk-task scope</p>
+        <div class="fc-meta"><span class="fc-author">ASD ACSC &amp; partners</span><span class="sep">&middot;</span><span>1 May 2026</span></div>
       </div>
     </a>
-    <a class="featured-card" href="pai-app-news-story-italy-agcm-deepseek-mistral-novaai-hallucinations">
+    <a class="featured-card" href="pai-app-news-story-sweden-imy-ai-transcription-social-services-kalmar">
       <div class="fc-thumb r2">
-        <span class="fc-type-pill commitments">Commitments</span>
+        <span class="fc-type-pill guidance">Guidance</span>
+        <span class="country-flag">&#x1F1F8;&#x1F1EA;</span>
+        <div class="silhouette">IMY</div>
+        <div class="country-strip"><span class="name">Sweden</span><span class="auth">Integritetsskyddsmyndigheten</span></div>
+      </div>
+      <div class="fc-body">
+        <h3 class="fc-title">Sweden's IMY Issues Innovation-Sandbox Guidance on AI Transcription in Social Services Following Kalmar Pilot</h3>
+        <p class="fc-deck">IMY-2026-6527 &middot; Kalmar kommun pilot &middot; human review non-negotiable &middot; gallring + encryption + access logging required</p>
+        <div class="fc-meta"><span class="fc-author">IMY</span><span class="sep">&middot;</span><span>13 Apr 2026</span></div>
+      </div>
+    </a>
+    <a class="featured-card" href="pai-app-news-story-agid-publishes-draft-guidelines-for-ai-system">
+      <div class="fc-thumb r2">
+        <span class="fc-type-pill guidance">Guidance</span>
         <span class="country-flag">&#x1F1EE;&#x1F1F9;</span>
-        <div class="silhouette">AGCM</div>
-        <div class="country-strip"><span class="name">Italy</span><span class="auth">AGCM</span></div>
+        <div class="silhouette">AgID</div>
+        <div class="country-strip"><span class="name">Italy</span><span class="auth">Agenzia per l&#39;Italia Digitale</span></div>
       </div>
       <div class="fc-body">
-        <h3 class="fc-title">Italy Closes Three AI-Hallucination Cases After DeepSeek, Mistral and NOVA AI Commit to Transparency Disclosures</h3>
-        <p class="fc-deck">PS12942 &middot; PS12968 &middot; PS12973 &middot; 6 commitments accepted &middot; Decision 16 Dec 2025</p>
-        <div class="fc-meta"><span class="fc-author">AGCM</span><span class="sep">&middot;</span><span>30 Apr 2026</span></div>
-      </div>
-    </a>
-    <a class="featured-card" href="pai-app-news-story-us-senate-judiciary-hawley-guard-act-committee-passed">
-      <div class="fc-thumb r2">
-        <span class="fc-type-pill legislation">Legislation</span>
-        <span class="country-flag">&#x1F1FA;&#x1F1F8;</span>
-        <div class="silhouette">GUARD</div>
-        <div class="country-strip"><span class="name">United States</span><span class="auth">Senate Judiciary</span></div>
-      </div>
-      <div class="fc-body">
-        <h3 class="fc-title">US Senate Judiciary Committee Unanimously Passes Hawley GUARD Act on AI Chatbots and Minors</h3>
-        <p class="fc-deck">Unanimous committee passage &middot; criminal penalties for chatbots &middot; minor-companion ban &middot; disclosure mandate</p>
-        <div class="fc-meta"><span class="fc-author">Senate Judiciary</span><span class="sep">&middot;</span><span>30 Apr 2026</span></div>
+        <h3 class="fc-title">AgID Publishes Draft Guidelines for AI System Development in Italian Public Administration</h3>
+        <p class="fc-deck">Issued under D.P.C.M. of 12 Jan 2024 &middot; covers AI systems built or procured by Italian public bodies &middot; Three-Year IT Plan 2024&ndash;2026</p>
+        <div class="fc-meta"><span class="fc-author">AgID</span><span class="sep">&middot;</span><span>11 Mar 2026</span></div>
       </div>
     </a>
   </section>
 
   <!-- DEVELOPMENTS -->
   <div class="section-eyebrow">
-    <span class="lbl">Developments · this week</span>
-    <span class="meta">Filtered to your jurisdictions</span>
+    <span class="lbl">Recent developments</span>
+    <span class="meta">Across your jurisdictions</span>
   </div>
   <section class="developments">
     <div class="dev-grid" id="js-dev-grid"></div>
     <div class="dev-footer">Load earlier developments →</div>
-  </section>
-
-  <!-- IN FOCUS — terminology widget (week-driven) -->
-  <div class="section-eyebrow">
-    <span class="lbl">In focus</span>
-    <span class="meta">Terminology with the news peg this week</span>
-  </div>
-  <section class="in-focus">
-    <div class="if-card">
-      <div class="if-head">
-        <h3 class="if-term">AI system</h3>
-        <span class="if-context">Multiple regulators define this term differently. Five Eyes&#39; agentic-AI guidance this week pushes the definition further.</span>
-      </div>
-      <div class="if-defs">
-        <div class="if-def">
-          <div class="if-def-head"><span class="if-source">EU AI Act</span><span class="if-cite">Regulation (EU) 2024/1689, Art. 3(1)</span></div>
-          <p>A machine-based system designed to operate with varying levels of autonomy and that may exhibit adaptiveness after deployment, and that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations or decisions that can influence physical or virtual environments.</p>
-        </div>
-        <div class="if-def">
-          <div class="if-def-head"><span class="if-source">OECD</span><span class="if-cite">Recommendation C(2019)142, updated 2024</span></div>
-          <p>A machine-based system that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations or decisions that can influence physical or virtual environments. (The EU AI Act is explicitly aligned with this OECD framing.)</p>
-        </div>
-        <div class="if-def">
-          <div class="if-def-head"><span class="if-source">Five Eyes — agentic AI</span><span class="if-cite">ASD ACSC + CISA + NSA + CCCS + NCSC-NZ + NCSC-UK joint guidance, 1 May 2026</span></div>
-          <p>A subclass: agentic AI systems are composed of one or more agents that rely on a foundation model — typically an LLM — to interpret state, make decisions and take actions with limited continuous human intervention. Distinguishing features: underspecified objectives, autonomous action, goal-directed behaviour, long-term planning, sub-agent spawning.</p>
-        </div>
-      </div>
-      <a class="if-cta" href="pai-app-glossary#ai-system">Read the full glossary entry &rarr;</a>
-    </div>
   </section>
 
   <footer class="footer">
@@ -3111,7 +3106,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       const body = escHTML(row.body_name || '');
       const topic = escHTML(row.topic || '');
       const title = escHTML(row.title || '');
-      const summary = escHTML(row.summary || '');
+      const rawSummary = row.summary || '';
+      const summary = escHTML(rawSummary.length > 240 ? rawSummary.slice(0, 240).replace(/\s+\S*$/, '') + '…' : rawSummary);
       const url = escHTML(row.source_url || '#');
       const host = escHTML(sourceHost(row.source_url || ''));
       const metaParts = [juris, body].filter(Boolean).join(' · ');
@@ -3198,7 +3194,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
             return '<article class="dev-item">' +
               '<div class="dev-when">' + dStr + small + '</div>' +
               '<div class="dev-body">' +
-              '<div class="dev-meta"><span class="status-pill">Update</span><span class="juris">' + escHTML(row.jurisdiction_name) + '</span></div>' +
+              '<div class="dev-meta"><span class="juris">' + escHTML(row.jurisdiction_name) + '</span></div>' +
               '<div class="dev-headline"><a href="pai-app-news-story-' + escHTML(row.at2_id) + '" style="color:inherit;text-decoration:none;">' + escHTML(row.title) + '</a></div>' +
               '</div></article>';
           }).join('');
