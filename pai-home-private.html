@@ -3332,8 +3332,21 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
   const W = 980, H = 460;
   const d3svg = d3.select(svg);
-  const projection = d3.geoEqualEarth().scale(180).translate([W/2, H/2 + 10]);
+
+  // geoNaturalEarth1 + a 10° westward rotation puts the antimeridian over
+  // open Pacific so Russia / Fiji / Antarctica don't wrap onto the west edge
+  // and render as ghost "double countries". precision(0.5) keeps curves clean.
+  const projection = d3.geoNaturalEarth1()
+    .rotate([-10, 0])
+    .scale(180)
+    .translate([W/2, H/2 + 10])
+    .precision(0.5);
   const path = d3.geoPath(projection);
+
+  // Clip the rendered country layer to the SVG viewBox so any leftover
+  // wrapping artefact is masked off rather than drawn over the legend / chrome.
+  d3svg.append('defs').append('clipPath').attr('id','pai-map-clip')
+    .append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', H);
 
   function showTip(html, evt) {
     tip.innerHTML = html;
@@ -3349,7 +3362,10 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   fetch(WORLD_URL).then(r => r.json()).then(world => {
     const countries = topojson.feature(world, world.objects.countries).features;
 
-    d3svg.append('g').attr('class','countries-layer').selectAll('path')
+    d3svg.append('g')
+      .attr('class','countries-layer')
+      .attr('clip-path','url(#pai-map-clip)')
+      .selectAll('path')
       .data(countries)
       .join('path')
         .attr('d', path)
