@@ -1204,22 +1204,15 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <!-- HERO: MAP + TODAY -->
   <section class="hero">
 
-    <!-- MAP (hero) — 3-tab d3 world map -->
+    <!-- MAP (hero) — single world map, privacy-law tiering -->
     <div class="panel map-panel">
-      <div class="panel-head map-head">
-        <div class="map-tabs" role="tablist">
-          <button class="map-tab" role="tab" data-tab="eu" aria-selected="true">EU AI Act / NIS2 / GDPR</button>
-          <button class="map-tab" role="tab" data-tab="us">US AI &amp; privacy</button>
-          <button class="map-tab" role="tab" data-tab="global">Global privacy laws</button>
-        </div>
-        <button class="map-pin" id="mapPin" title="Pin this view as default">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 17v5M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></svg>
-          <span id="mapPinLabel">Pin as default</span>
-        </button>
+      <div class="panel-head">
+        <div class="panel-title">Regulatory landscape <span class="count">comprehensive privacy laws by country</span></div>
+        <span class="panel-link">Open coverage</span>
       </div>
       <div class="map-wrap">
         <div class="map-frame map-hero">
-          <svg id="js-world-map" viewBox="0 0 980 460" preserveAspectRatio="xMidYMid meet" aria-label="Regulatory map"></svg>
+          <svg id="js-world-map" viewBox="0 0 980 460" preserveAspectRatio="xMidYMid meet" aria-label="World privacy-law tiering"></svg>
           <div class="map-tip" id="mapTip" aria-hidden="true"></div>
         </div>
         <div class="map-legend" id="mapLegend"></div>
@@ -1234,6 +1227,29 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       </div>
       <ul class="today-list" id="todayList"></ul>
     </aside>
+  </section>
+
+  <!-- FEATURED FACULTY -->
+  <div class="section-eyebrow">
+    <span class="lbl">Featured faculty</span>
+    <span class="meta">Practitioner-contributed AI-regulation analysis</span>
+  </div>
+  <section class="featured-faculty">
+    <a class="ff-card" href="pai-app-faculty-edsel-tupaz">
+      <div class="ff-portrait has-photo">
+        <img src="edsel-tupaz.jpg" alt="Edsel F. Tupaz">
+        <span class="ff-badge">Faculty</span>
+        <span class="ff-flag">&#x1F1F5;&#x1F1ED;</span>
+      </div>
+      <div class="ff-body">
+        <div class="ff-eyebrow">Philippines AI Note · Contributor</div>
+        <div class="ff-name">Edsel F. Tupaz</div>
+        <div class="ff-role">Senior Partner · Head, Data Privacy, Cybersecurity &amp; AI Initiatives</div>
+        <div class="ff-firm">Gorriceta Africa Cauton &amp; Saavedra · Manila</div>
+        <p class="ff-blurb">Dual-qualified under the Philippine and New York Bars. Advises Fortune 500 and NASDAQ-listed companies on AI, data privacy, and cybersecurity across Southeast Asia, and serves as Data Protection Officer for leading startups and incumbents.</p>
+        <span class="ff-cta">Read faculty profile →</span>
+      </div>
+    </a>
   </section>
 
   <!-- RESOURCES — recent guidance docs -->
@@ -1317,29 +1333,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <section class="developments">
     <div class="dev-grid" id="js-dev-grid"></div>
     <div class="dev-footer">Load earlier developments →</div>
-  </section>
-
-  <!-- FEATURED FACULTY -->
-  <div class="section-eyebrow">
-    <span class="lbl">Featured faculty</span>
-    <span class="meta">Practitioner-contributed AI-regulation analysis</span>
-  </div>
-  <section class="featured-faculty">
-    <a class="ff-card" href="pai-app-faculty-edsel-tupaz">
-      <div class="ff-portrait has-photo">
-        <img src="edsel-tupaz.jpg" alt="Edsel F. Tupaz">
-        <span class="ff-badge">Faculty</span>
-        <span class="ff-flag">&#x1F1F5;&#x1F1ED;</span>
-      </div>
-      <div class="ff-body">
-        <div class="ff-eyebrow">Philippines AI Note · Contributor</div>
-        <div class="ff-name">Edsel F. Tupaz</div>
-        <div class="ff-role">Senior Partner · Head, Data Privacy, Cybersecurity &amp; AI Initiatives</div>
-        <div class="ff-firm">Gorriceta Africa Cauton &amp; Saavedra · Manila</div>
-        <p class="ff-blurb">Dual-qualified under the Philippine and New York Bars. Advises Fortune 500 and NASDAQ-listed companies on AI, data privacy, and cybersecurity across Southeast Asia, and serves as Data Protection Officer for leading startups and incumbents.</p>
-        <span class="ff-cta">Read faculty profile →</span>
-      </div>
-    </a>
   </section>
 
   <footer class="footer">
@@ -3294,106 +3287,53 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 })();
 </script>
 
-<!-- Hero map: d3 + topojson-client; 3 tabs (EU / US / Global), pin-as-default -->
+<!-- Hero map: single d3 world map showing privacy-law tiering -->
 <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
 <script src="https://unpkg.com/topojson-client@3"></script>
 <script>
 (function(){
-  const SVG_ID = 'js-world-map';
   const WORLD_URL = 'https://unpkg.com/world-atlas@2/countries-50m.json';
-  const US_URL    = 'https://unpkg.com/us-atlas@3/states-10m.json';
-  const PIN_KEY   = 'pai-map-default-tab-v1';
-
-  // ---------- Datasets (verifiable, ICP-relevant) ----------
-  const EU27 = ['Austria','Belgium','Bulgaria','Croatia','Cyprus','Czechia','Denmark','Estonia','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Latvia','Lithuania','Luxembourg','Malta','Netherlands','Poland','Portugal','Romania','Slovakia','Slovenia','Spain','Sweden'];
-  const EFTA_UK = ['Iceland','Liechtenstein','Norway','Switzerland','United Kingdom'];
-  // Major regulator hubs (approximate capital coords [lon, lat])
-  const EU_REGULATOR_DOTS = [
-    {name:'EDPB / EDPS — Brussels', coord:[4.35,50.85]},
-    {name:'CNIL — Paris',            coord:[2.35,48.86]},
-    {name:'ICO — London',            coord:[-0.13,51.51]},
-    {name:'BfDI — Bonn',             coord:[7.10,50.74]},
-    {name:'Garante — Rome',          coord:[12.50,41.90]},
-    {name:'AEPD — Madrid',           coord:[-3.70,40.42]},
-    {name:'IMY — Stockholm',         coord:[18.07,59.33]},
-    {name:'DPC — Dublin',            coord:[-6.27,53.34]},
-    {name:'NIS2 — Belgium adopted plan 27 Apr 2026', coord:[4.35,50.85]}
-  ];
-
-  // US states with comprehensive privacy laws (verified through 2025; conservative list)
-  const US_PRIVACY_STATES = ['California','Colorado','Connecticut','Delaware','Florida','Indiana','Iowa','Kentucky','Maryland','Minnesota','Montana','Nebraska','New Hampshire','New Jersey','Oregon','Rhode Island','Tennessee','Texas','Utah','Virginia'];
-  // State capital coords [lon, lat] for marker dots
-  const US_STATE_CAPS = {
-    'California':[-121.49,38.58],'Colorado':[-104.99,39.74],'Connecticut':[-72.68,41.76],'Delaware':[-75.55,39.16],
-    'Florida':[-84.28,30.44],'Indiana':[-86.16,39.77],'Iowa':[-93.62,41.59],'Kentucky':[-84.86,38.20],
-    'Maryland':[-76.50,38.97],'Minnesota':[-93.10,44.95],'Montana':[-112.04,46.59],'Nebraska':[-96.69,40.81],
-    'New Hampshire':[-71.55,43.21],'New Jersey':[-74.76,40.22],'Oregon':[-123.03,44.93],'Rhode Island':[-71.42,41.83],
-    'Tennessee':[-86.78,36.16],'Texas':[-97.74,30.27],'Utah':[-111.89,40.76],'Virginia':[-77.43,37.54]
-  };
-  const US_FEDERAL_DOTS = [
-    {name:'NIST / OMB / White House — Washington DC', coord:[-77.04,38.91]},
-    {name:'FTC — Washington DC',                       coord:[-77.04,38.89]},
-    {name:'NY DFS — New York (Delta Dental settlement 30 Apr 2026)', coord:[-74.01,40.71]}
-  ];
-
-  // Global comprehensive privacy tiers
-  const GLOBAL_COMPREHENSIVE = ['Austria','Belgium','Bulgaria','Croatia','Cyprus','Czechia','Denmark','Estonia','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Latvia','Lithuania','Luxembourg','Malta','Netherlands','Poland','Portugal','Romania','Slovakia','Slovenia','Spain','Sweden','United Kingdom','Norway','Iceland','Liechtenstein','Switzerland','Brazil','Argentina','Uruguay','Colombia','Chile','Mexico','Canada','Japan','South Korea','Singapore','Australia','New Zealand','India','South Africa','Kenya','Nigeria','Israel','Turkey','Philippines','Indonesia'];
-  const GLOBAL_SECTORAL    = ['United States of America','China','Russia','Saudi Arabia','United Arab Emirates','Egypt','Vietnam','Thailand','Malaysia'];
-
-  // ---------- Tabs ----------
-  const TABS = {
-    eu: {
-      label: 'EU AI Act / NIS2 / GDPR',
-      classify: (name) => EU27.includes(name) ? 'scope-bloc' : (EFTA_UK.includes(name) ? 'scope-bloc' : ''),
-      dots: EU_REGULATOR_DOTS,
-      stateLayer: false,
-      legend: [
-        {cls:'scope-bloc', label:'EU 27 + EFTA + UK — AI Act / NIS2 / GDPR scope'},
-        {cls:'dot-reg', label:'Major regulator hub'}
-      ],
-      caption: 'Bloc-level regulatory scope. Click a dot to see the named regulator.'
-    },
-    us: {
-      label: 'US AI & privacy',
-      classify: (name) => (name === 'United States of America' ? 'scope-bloc' : ''),
-      dots: US_FEDERAL_DOTS,
-      stateLayer: true,
-      legend: [
-        {cls:'scope-bloc', label:'United States — federal scope'},
-        {cls:'dot-state', label:'State with comprehensive privacy law (20 states)'},
-        {cls:'dot-fed',   label:'Federal regulator / recent action'}
-      ],
-      caption: '20 US states have enacted comprehensive privacy laws (verified through 2025).'
-    },
-    global: {
-      label: 'Global privacy laws',
-      classify: (name) => {
-        if (GLOBAL_COMPREHENSIVE.includes(name)) return 'tier-comprehensive';
-        if (GLOBAL_SECTORAL.includes(name))      return 'tier-sectoral';
-        return 'tier-draft';
-      },
-      dots: [],
-      stateLayer: false,
-      legend: [
-        {cls:'tier-comprehensive', label:'Comprehensive (GDPR-style or equivalent)'},
-        {cls:'tier-sectoral',      label:'Sectoral / partial'},
-        {cls:'tier-draft',         label:'Draft / limited / none'}
-      ],
-      caption: 'Tiering reflects the 2025–2026 state of national comprehensive privacy laws.'
-    }
-  };
-
-  // ---------- Render ----------
-  let world = null, us = null, projection = null, path = null;
-  const svg = document.getElementById(SVG_ID);
+  const svg = document.getElementById('js-world-map');
   const tip = document.getElementById('mapTip');
   const legendEl = document.getElementById('mapLegend');
-  if (!svg || !window.d3) return;
+  if (!svg || !window.d3 || !window.topojson) return;
+
+  // Comprehensive privacy laws (GDPR-style or equivalent): EU 27 + EFTA + UK
+  // plus major non-EU comprehensive frameworks. Names match world-atlas
+  // countries-50m `properties.name` strings exactly.
+  const COMPREHENSIVE = new Set([
+    // EU 27
+    'Austria','Belgium','Bulgaria','Croatia','Cyprus','Czechia','Denmark','Estonia',
+    'Finland','France','Germany','Greece','Hungary','Ireland','Italy','Latvia',
+    'Lithuania','Luxembourg','Malta','Netherlands','Poland','Portugal','Romania',
+    'Slovakia','Slovenia','Spain','Sweden',
+    // EFTA + UK
+    'Iceland','Liechtenstein','Norway','Switzerland','United Kingdom',
+    // Other comprehensive frameworks
+    'Brazil','Argentina','Uruguay','Colombia','Chile','Mexico','Canada',
+    'Japan','South Korea','Singapore','Australia','New Zealand',
+    'India','South Africa','Kenya','Nigeria','Israel','Philippines','Indonesia','Turkey'
+  ]);
+  const SECTORAL = new Set([
+    'United States of America','China','Russia','Saudi Arabia',
+    'United Arab Emirates','Egypt','Vietnam','Thailand','Malaysia'
+  ]);
+
+  function tierFor(name) {
+    if (COMPREHENSIVE.has(name)) return 'tier-comprehensive';
+    if (SECTORAL.has(name))      return 'tier-sectoral';
+    return 'tier-draft';
+  }
+  function tierLabel(t) {
+    if (t === 'tier-comprehensive') return 'Comprehensive privacy law (GDPR-style or equivalent)';
+    if (t === 'tier-sectoral')      return 'Sectoral or partial privacy framework';
+    return 'Draft, limited or no comprehensive law';
+  }
 
   const W = 980, H = 460;
   const d3svg = d3.select(svg);
-  projection = d3.geoEqualEarth().scale(180).translate([W/2, H/2 + 10]);
-  path = d3.geoPath(projection);
+  const projection = d3.geoEqualEarth().scale(180).translate([W/2, H/2 + 10]);
+  const path = d3.geoPath(projection);
 
   function showTip(html, evt) {
     tip.innerHTML = html;
@@ -3406,114 +3346,23 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   }
   function hideTip() { tip.style.display = 'none'; }
 
-  function renderTab(tabKey) {
-    const tab = TABS[tabKey];
-    if (!tab || !world) return;
-
-    d3svg.selectAll('*').remove();
-
-    // Country base layer
+  fetch(WORLD_URL).then(r => r.json()).then(world => {
     const countries = topojson.feature(world, world.objects.countries).features;
+
     d3svg.append('g').attr('class','countries-layer').selectAll('path')
       .data(countries)
       .join('path')
         .attr('d', path)
-        .attr('class', d => 'country ' + (tab.classify(d.properties.name) || ''))
-        .on('mousemove', (evt, d) => {
-          const cls = tab.classify(d.properties.name);
-          if (!cls) return;
-          let label = d.properties.name;
-          let detail = '';
-          if (cls === 'scope-bloc' && tabKey === 'eu') detail = 'In EU AI Act / NIS2 / GDPR scope';
-          else if (cls === 'scope-bloc' && tabKey === 'us') detail = 'US federal jurisdiction';
-          else if (cls === 'tier-comprehensive') detail = 'Comprehensive privacy law (GDPR-style or equivalent)';
-          else if (cls === 'tier-sectoral')      detail = 'Sectoral or partial privacy framework';
-          showTip('<b>' + label + '</b>' + (detail ? detail : ''), evt);
-        })
+        .attr('class', d => 'country ' + tierFor(d.properties.name))
+        .on('mousemove', (evt, d) => showTip('<b>' + d.properties.name + '</b>' + tierLabel(tierFor(d.properties.name)), evt))
         .on('mouseleave', hideTip);
 
-    // US states layer (only for US tab)
-    if (tab.stateLayer && us) {
-      const states = topojson.feature(us, us.objects.states).features;
-      // Render states as a faint outline layer scaled into the US projection
-      const usProj = d3.geoAlbersUsa().fitSize([260, 130], topojson.feature(us, us.objects.states));
-      // Map US-state lat/lon dots through the world projection (simpler + consistent)
-      const stateDots = US_PRIVACY_STATES.map(s => ({name:s, coord:US_STATE_CAPS[s]})).filter(d => d.coord);
-      d3svg.append('g').attr('class','state-dots-layer').selectAll('circle')
-        .data(stateDots)
-        .join('circle')
-          .attr('class','state-dot')
-          .attr('cx', d => projection(d.coord)[0])
-          .attr('cy', d => projection(d.coord)[1])
-          .attr('r', 4)
-          .on('mousemove', (evt, d) => showTip('<b>' + d.name + '</b>Comprehensive privacy law enacted', evt))
-          .on('mouseleave', hideTip);
-    }
-
-    // Federal / regulator dots
-    if (tab.dots && tab.dots.length) {
-      d3svg.append('g').attr('class','reg-dots-layer').selectAll('circle')
-        .data(tab.dots)
-        .join('circle')
-          .attr('class','city-dot')
-          .attr('cx', d => projection(d.coord)[0])
-          .attr('cy', d => projection(d.coord)[1])
-          .attr('r', 4.5)
-          .on('mousemove', (evt, d) => showTip('<b>' + d.name + '</b>', evt))
-          .on('mouseleave', hideTip);
-    }
-
-    // Legend
-    legendEl.innerHTML = tab.legend.map(item => {
-      let swatch;
-      if (item.cls === 'dot-state') swatch = '<span class="legend-dot" style="background:#014486;border-radius:50%"></span>';
-      else if (item.cls === 'dot-fed' || item.cls === 'dot-reg') swatch = '<span class="legend-dot" style="background:#06101e;border-radius:50%"></span>';
-      else if (item.cls === 'scope-bloc') swatch = '<span class="legend-dot" style="background:#cfe1f6"></span>';
-      else if (item.cls === 'tier-comprehensive') swatch = '<span class="legend-dot" style="background:#2e844a"></span>';
-      else if (item.cls === 'tier-sectoral') swatch = '<span class="legend-dot" style="background:#c47a00"></span>';
-      else if (item.cls === 'tier-draft') swatch = '<span class="legend-dot" style="background:#d6dde6"></span>';
-      else swatch = '<span class="legend-dot" style="background:#dbe1ea"></span>';
-      return '<span class="legend-item">' + swatch + item.label + '</span>';
-    }).join('') + '<span class="legend-item" style="color:var(--ink-faint);margin-left:auto;font-style:italic">' + tab.caption + '</span>';
-
-    // Tab UI state
-    document.querySelectorAll('.map-tab').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === tabKey ? 'true' : 'false'));
-  }
-
-  function setActiveTab(tabKey, persist) {
-    if (!TABS[tabKey]) tabKey = 'eu';
-    renderTab(tabKey);
-    if (persist) {
-      try { localStorage.setItem(PIN_KEY, tabKey); } catch(_){}
-      const pin = document.getElementById('mapPin');
-      const lbl = document.getElementById('mapPinLabel');
-      if (pin && lbl) { pin.classList.add('is-pinned'); lbl.textContent = 'Default'; setTimeout(() => { pin.classList.remove('is-pinned'); lbl.textContent = 'Pin as default'; }, 1800); }
-    }
-  }
-
-  // Wire up tabs
-  document.querySelectorAll('.map-tab').forEach(btn => {
-    btn.addEventListener('click', () => setActiveTab(btn.dataset.tab, false));
-  });
-  // Pin button — persist current tab
-  const pinBtn = document.getElementById('mapPin');
-  if (pinBtn) pinBtn.addEventListener('click', () => {
-    const active = document.querySelector('.map-tab[aria-selected="true"]');
-    if (active) setActiveTab(active.dataset.tab, true);
-  });
-
-  // Load both topojsons in parallel, then render saved-or-default tab
-  Promise.all([
-    fetch(WORLD_URL).then(r => r.json()),
-    fetch(US_URL).then(r => r.json()).catch(()=>null)
-  ]).then(([w, u]) => {
-    world = w; us = u;
-    let saved = null;
-    try { saved = localStorage.getItem(PIN_KEY); } catch(_){}
-    setActiveTab(saved || 'eu', false);
-  }).catch(err => {
-    console.warn('PAI map load error:', err);
-  });
+    legendEl.innerHTML =
+      '<span class="legend-item"><span class="legend-dot" style="background:#2e844a"></span>Comprehensive (GDPR-style or equivalent)</span>' +
+      '<span class="legend-item"><span class="legend-dot" style="background:#c47a00"></span>Sectoral / partial</span>' +
+      '<span class="legend-item"><span class="legend-dot" style="background:#d6dde6"></span>Draft / limited / none</span>' +
+      '<span class="legend-item" style="color:var(--ink-faint);margin-left:auto;font-style:italic">National comprehensive privacy laws as of 2026.</span>';
+  }).catch(err => console.warn('PAI map load error:', err));
 })();
 </script>
 
