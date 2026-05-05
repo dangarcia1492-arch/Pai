@@ -6,7 +6,7 @@
 <title>PrinciplesAI — NDPC · Authority</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght..60,400;8..60,600;8..60,700&family=Inter:wght;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
@@ -561,12 +561,11 @@ body.sidebar-expanded .icon-sidebar,
 body.sidebar-expanded .nav-scrim { opacity: 1; }
 body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </style>
-<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 <nav class="icon-sidebar">
   <a href="pai-home-private" class="sidebar-brand" style="text-decoration:none;color:inherit;">
-    <div class="brand-icon" style="background:#fff; padding:2px; overflow:hidden;"><img src="pai-logo.png" alt="PAI" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
+    <div class="brand-icon" style="background:var(--accent); padding:0; overflow:hidden;"><img src="pai-mark-white-128.png" alt="PAI" style="width:70%;height:70%;object-fit:contain;display:block;"></div>
     <span class="brand-text">Principles<span class="ai">AI</span></span>
   </a>
   <div class="sidebar-nav-items">
@@ -579,7 +578,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
-      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
@@ -618,9 +616,9 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <span class="ps-current">NDPC</span>
       </span>
       <span class="ps-sep">·</span>
-      <span class="ps-scope-chip">NG · Data protection</span>
+      <span class="ps-scope-chip">NG · Data Protection Authority</span>
       <span class="ps-sep">·</span>
-      <span class="ps-ok">On-watch · last captured 27 Apr 2026</span>
+      <span class="ps-ok">Verified · 22 Apr 2026</span>
     </div>
   </div>
 
@@ -629,14 +627,14 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <div class="auth-hero-left">
       <div class="auth-hero-flag">NDPC</div>
       <div>
-        <div class="auth-acronym">NG · National DPA</div>
+        <div class="auth-acronym">NG · Data Protection Authority</div>
         <h1 class="auth-name">Nigeria Data Protection Commission</h1>
         <div class="auth-scope-row">
-          <span><a href="https://www.principlesai.org/pai-app-juris-nigeria" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">Nigeria</a></span>
+          <span><a href="pai-app-juris-nigeria" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">Nigeria</a></span>
           <span>·</span>
-          <span>Data protection authority</span>
+          <span>Data Protection Authority</span>
           <span>·</span>
-          <span class="auth-on">● On-watch</span>
+          <span class="auth-on">● Verified</span>
         </div>
       </div>
     </div>
@@ -645,93 +643,57 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     </div>
   </div>
 
-  <!-- DIRECTORY GRID -->
+  <!-- DIRECTORY GRID — slim v0, 3 cards from AT2 fields only -->
   <div class="auth-grid">
     <div class="auth-card">
-      <div class="auth-card-title">About</div>
-      <p>Established by the Nigeria Data Protection Act 2023 &mdash; replaces the earlier NITDA-led NDPB regime.</p>
-      <p>Investigates breaches, registers data controllers/processors of major importance, issues administrative penalties.</p>
-      <p>Active in cross-African DPA coordination (NADPA).</p>
-      <a class="ac-anchor" href="https://ndpc.gov.ng/" target="_blank" rel="noopener">Establishing statute · <b>Nigeria Data Protection Act 2023</b> ↗</a>
+      <div class="auth-card-title">Identity</div>
+      <div class="auth-kv"><span class="k">Name</span><span class="v">Nigeria Data Protection Commission</span></div>
+      <div class="auth-kv"><span class="k">Type</span><span class="v">Data Protection Authority</span></div>
+      <div class="auth-kv"><span class="k">Verified</span><span class="v">Verified</span></div>
+      <div class="auth-kv"><span class="k">Verified date</span><span class="v">22 Apr 2026</span></div>
     </div>
     <div class="auth-card">
-      <div class="auth-card-title">Leadership</div>
-      <div class="auth-kv"><span class="k">Commissioner</span><span class="v">— (verify pending)</span></div>
-      <div class="auth-kv"><span class="k">Authority</span><span class="v">Nigeria Data Protection Commission — NDPC</span></div>
-      <div class="auth-kv"><span class="k">Established</span><span class="v">NDPA 2023 (replacing NITDA NDPB regime)</span></div>
-      <div class="auth-kv"><span class="k">Coordination</span><span class="v">NADPA member</span></div>
+      <div class="auth-card-title">Source</div>
+      <div class="auth-kv"><span class="k">Web</span><span class="v"><a href="https://ndpc.gov.ng/" target="_blank" rel="noopener" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">ndpc.gov.ng &#x2197;</a></span></div>
     </div>
     <div class="auth-card">
-      <div class="auth-card-title">Mandate</div>
-      <ul class="auth-list">
-        <li>Nigeria Data Protection Act 2023</li>
-        <li>Registration of Data Controllers / Processors of Major Importance (DCPMI)</li>
-        <li>Investigation, fines, enforcement orders</li>
-        <li>Cross-border transfer oversight</li>
-      </ul>
-    </div>
-    <div class="auth-card">
-      <div class="auth-card-title">Contact</div>
-      <div class="auth-kv"><span class="k">Web</span><span class="v"><a href="https://ndpc.gov.ng/" target="_blank" rel="noopener">ndpc.gov.ng ↗</a></span></div>
-      <div class="auth-kv"><span class="k">Note</span><span class="v">English-language site; replaces NITDA NDPB regime</span></div>
-    </div>
-    <div class="auth-card">
-      <div class="auth-card-title">On-patrol</div>
-      <div class="auth-kv"><span class="k">Instruments</span><span class="v">1 enforced</span></div>
-      <div class="auth-kv"><span class="k">Guidance</span><span class="v">indexing</span></div>
-      <div class="auth-kv"><span class="k">Last fetched</span><span class="v">27 Apr 2026</span></div>
-      <div class="auth-kv"><span class="k">PAI items/wk</span><span class="v">— (indexing)</span></div>
-    </div>
-    <div class="auth-card">
-      <div class="auth-card-title">Instruments enforced</div>
-      <ul class="auth-list">
-        <li>Nigeria Data Protection Act 2023 <span style="color:#8a93a3;font-size:10.5px;font-family:'Inter',sans-serif">· indexing pending</span></li>
-      </ul>
+      <div class="auth-card-title">Jurisdiction</div>
+      <div class="auth-kv"><span class="k">Country/state</span><span class="v"><a href="pai-app-juris-nigeria" style="color:#014486;text-decoration:none;border-bottom:1px dotted #cfe1f6">Nigeria</a></span></div>
+      <div class="auth-kv"><span class="k">ISO</span><span class="v">NG</span></div>
+      <div class="auth-kv"><span class="k">Region</span><span class="v">Africa</span></div>
+      <div class="auth-kv"><span class="k">Instruments</span><span class="v">— (indexing pending)</span></div>
     </div>
   </div>
 
-  <!-- PRACTICAL GUIDANCE — curated topic tiles + recently-updated rail -->
+  <!-- NOTES -->
+  <div class="auth-card" style="grid-column: 1 / -1; margin-bottom: 24px;">
+    <div class="auth-card-title">Notes &amp; provenance</div>
+    <p style="font-size: 13px; color: #5e6878; line-height: 1.55;">Seeded from AT1 (recov1NLxiysTNnJ1) on 2026-04-22. Original Body Type: Data Protection Authority</p>
+  </div>
+
+  <!-- PRACTICAL GUIDANCE — empty-state until per-authority guidance pipeline lands -->
   <div class="auth-guidance" id="guidance">
     <div class="ag-head">
       <div class="ag-head-text">
         <h2>Practical guidance</h2>
-        <div class="ag-sub">Curated index of NDPC enforcement &amp; registrations &middot; first-of-its-kind dedicated DPA in Nigeria</div>
+        <div class="ag-sub">Per-authority guidance topic tiles indexing pending. Until wired, see the authority's website.</div>
       </div>
-      <a class="ag-source" href="https://ndpc.gov.ng/" target="_blank" rel="noopener">NDPC home ↗</a>
+      <a class="ag-source" href="https://ndpc.gov.ng/" target="_blank" rel="noopener">NDPC website &#x2197;</a>
     </div>
-    <div class="ag-grid">
-      <a class="ag-tile" href="https://ndpc.gov.ng/" target="_blank" rel="noopener">
-        <div class="ag-tile-head"><span class="ag-tag priv">PRIVACY</span><span class="ag-count">1 pages</span></div>
-        <h3 class="ag-title">NDPC home</h3>
-        <p class="ag-desc">Nigeria Data Protection Commission — primary regulator hub.</p>
-        <div class="ag-foot">live hub</div>
-      </a>
-      <div class="ag-tile" style="cursor:default">
-        <div class="ag-tile-head"><span class="ag-tag priv">PRIVACY</span><span class="ag-count">topic</span></div>
-        <h3 class="ag-title">Nigeria Data Protection Act 2023</h3>
-        <p class="ag-desc">Comprehensive Nigerian data-protection statute &mdash; in force 14 Jun 2023.</p>
-        <div class="ag-foot">in force · indexing pending</div>
-      </div>
-    </div>
-    <div class="ag-recent">
-      <h3>Recently updated</h3>
-      <ul class="ag-recent-list">
-        <li><span class="agr-date">Live</span><a href="https://ndpc.gov.ng/" target="_blank" rel="noopener">Nigeria Data Protection Commission</a><span class="agr-section">NDPC</span></li>
-        <li><span class="agr-date">In force</span>Nigeria Data Protection Act 2023 <span style="color:#8a93a3;font-size:10px;font-family:'Inter',sans-serif">· indexing pending</span><span class="agr-section">NDPA</span></li>
-      </ul>
+    <div style="padding: 18px 0; color: #5e6878; font-size: 13px; line-height: 1.55;">
+      Curated guidance topics for NDPC will appear here once the per-authority guidance pipeline is online.
     </div>
   </div>
 
-  <!-- RECENT ACTIVITY -->
+  <!-- RECENT ACTIVITY — PG-driven slot, empty until activity wiring lands -->
   <div class="auth-activity">
     <div class="auth-activity-head">
       <h2>Recent activity from NDPC</h2>
       <a href="pai-app-news?authority=ndpc">See all →</a>
     </div>
-    <div style="padding: 14px 4px; font-size: 12.5px; color: #5e6878; line-height: 1.55;">
-      Activity feed indexing started · NDPC enforcement orders, DCPMI registrations, and breach notifications rolling in over the next ingest cycle.
-    </div>
+    <div style="padding: 14px 4px; font-size: 12.5px; color: #5e6878; line-height: 1.55;">Activity feed indexing pending · per-authority citation tracking comes online with Phase 2.D.</div>
   </div>
+
 </div>
 </div>
 
