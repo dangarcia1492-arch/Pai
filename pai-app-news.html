@@ -185,6 +185,68 @@ button{cursor:pointer}
 .wire-pager a{color:var(--accent-2);font-weight:600}
 
 /* ==NEWS_LAYOUT== wire + right rail */
+/* ==BEGIN_NEWS_FACET_PANEL== */
+.news-research-wrap{display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:start;margin-top:18px}
+.news-research-main{min-width:0}
+.facet-panel{position:sticky;top:calc(var(--header-height) + 20px);max-height:calc(100vh - var(--header-height) - 40px);overflow-y:auto;padding:4px 8px 12px 0;font-size:13px}
+.facet-search-wrap{position:relative;margin-bottom:18px}
+.facet-search{width:100%;height:36px;padding:0 14px 0 34px;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:inherit;color:var(--ink)}
+.facet-search::placeholder{color:var(--muted)}
+.facet-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.facet-search-ico{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--muted);pointer-events:none}
+.facet-search-ico svg{width:100%;height:100%;stroke:currentColor;stroke-width:2;fill:none}
+.facet-group{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border-soft)}
+.facet-group:last-of-type{border-bottom:none}
+.facet-group-head{display:flex;align-items:baseline;justify-content:space-between;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.facet-group-clear{font-size:10px;font-weight:600;color:var(--accent-2);cursor:pointer;letter-spacing:.04em;text-transform:none}
+.facet-opt{display:flex;align-items:center;gap:9px;padding:4px 4px;border-radius:4px;cursor:pointer;font-size:12.5px;color:var(--secondary);transition:background .12s,color .12s}
+.facet-opt:hover{background:var(--surface-3);color:var(--ink)}
+.facet-opt.on{color:var(--ink);font-weight:600}
+.facet-cb{width:15px;height:15px;border:1.5px solid #cbd2da;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface);transition:background .12s,border-color .12s}
+.facet-opt.on>.facet-cb,.ftree-row.on>.facet-cb{background:var(--accent);border-color:var(--accent)}
+.facet-opt.on>.facet-cb::after,.ftree-row.on>.facet-cb::after{content:'';width:7px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.facet-opt .name{flex:1;min-width:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.facet-opt .count{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);font-weight:500}
+.facet-opt.on .count{color:var(--accent-2)}
+.facet-radio{display:flex;align-items:center;gap:9px;padding:4px 4px;font-size:12.5px;color:var(--secondary);cursor:pointer;border-radius:4px}
+.facet-radio:hover{background:var(--surface-3)}
+.facet-radio .dot{width:14px;height:14px;border-radius:50%;border:1.5px solid #cbd2da;background:var(--surface);flex-shrink:0}
+.facet-radio.on .dot{border-color:var(--accent);background:radial-gradient(circle at center,var(--accent) 0 4px,#fff 5px 100%)}
+.facet-radio.on{color:var(--ink);font-weight:600}
+.facet-clear-all{display:block;width:100%;height:32px;background:var(--surface-3);border:1px solid var(--border);border-radius:6px;font-size:11.5px;font-weight:600;color:var(--secondary);cursor:pointer;margin-top:8px;letter-spacing:.02em;font-family:inherit}
+.facet-clear-all:hover{background:var(--surface);color:var(--ink)}
+/* Region & Jurisdiction tree */
+.ftree-region{margin-bottom:1px}
+.ftree-row{display:flex;align-items:center;gap:8px;padding:4px 4px;border-radius:4px;cursor:pointer;font-size:12.5px;color:var(--secondary);transition:background .12s,color .12s}
+.ftree-row:hover{background:var(--surface-3);color:var(--ink)}
+.ftree-row.on{color:var(--ink);font-weight:600}
+.ftree-region-row{font-weight:600;color:var(--ink)}
+.ftree-caret{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;font-size:10px;color:var(--muted);flex-shrink:0;cursor:pointer;border-radius:2px}
+.ftree-caret:hover{background:var(--surface);color:var(--ink)}
+.ftree-children{display:none;padding-left:18px;margin-top:1px;margin-left:7px;border-left:1px solid var(--border-soft)}
+.ftree-children.open{display:block}
+.ftree-juris-row{font-size:12px;color:#5e6878;font-weight:400}
+.ftree-region-sentinel{margin-top:8px;padding-top:8px;border-top:1px dashed var(--border-soft)}
+.ftree-region-sentinel .ftree-region-row{color:#8a93a3;font-weight:500}
+.ftree-region-sentinel .ftree-region-row .name{font-style:italic}
+.ftree-row .name{flex:1;min-width:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.ftree-row .count{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);font-weight:500;flex-shrink:0}
+.ftree-row.on .count{color:var(--accent-2)}
+/* Applied chips (above main wire) */
+.applied-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;min-height:24px;align-items:center}
+.applied-empty{font-size:12px;color:var(--muted);font-style:italic}
+.applied-chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 4px 0 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11.5px;font-weight:600}
+.applied-chip .group{opacity:.72;font-weight:500;margin-right:2px}
+.applied-chip .x{width:18px;height:18px;background:rgba(255,255,255,.18);border:none;border-radius:3px;color:#fff;cursor:pointer;font-size:13px;line-height:1;display:inline-flex;align-items:center;justify-content:center;padding:0;font-family:inherit}
+.applied-chip .x:hover{background:rgba(255,255,255,.3)}
+@media (max-width:1100px){
+  .news-research-wrap{grid-template-columns:1fr}
+  .facet-panel{position:static;max-height:none;padding:0}
+}
+/* Lead + seconds collapse symmetrically when filters are active */
+.news-leads-wrap{overflow:hidden;max-height:1000px;opacity:1;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s ease,margin-bottom .35s cubic-bezier(.4,0,.2,1)}
+.news-leads-wrap.is-collapsed{max-height:0;opacity:0;margin-bottom:0;pointer-events:none}
+/* ==END_NEWS_FACET_PANEL== */
 .news-wire-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:32px;align-items:start}
 .news-main{min-width:0}
 .news-rail{position:sticky;top:calc(var(--header-height) + 18px);display:flex;flex-direction:column;gap:22px;font-size:12.5px}
@@ -600,7 +662,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <div class="page-head">
     <div class="page-eyebrow">AI · Privacy · Cyber</div>
     <h1 class="page-title">News</h1>
-    <p class="page-sub">Every substantive item captured this week from <b>tier-1 regulators, courts and agencies</b>, classified and ranked. <b id="newsTotal">—</b> items in the last 7 days across your filters.</p>
+    <p class="page-sub">Every substantive item captured this week from <b>tier-1 regulators, courts and agencies</b>, classified and ranked.<br><b id="newsTotal">—</b> items shown · refine with the filters on the left.</p>
   </div>
 
   <!-- Personalised to watchlist -->
@@ -613,25 +675,44 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     </div>
   </div>
 
-  <!-- Filter bar -->
-  <div class="nf-bar">
-    <div class="nf-search-wrap">
-      <svg class="nf-search-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="nf-search" placeholder="Search headlines, bodies, jurisdictions…">
-    </div>
-    <div class="nf-facets">
-      <button class="nf-btn"><span class="lbl">Type</span><span class="val">All</span><span class="car">▾</span></button>
-      <button class="nf-btn"><span class="lbl">Region</span><span class="val">All</span><span class="car">▾</span></button>
-      <button class="nf-btn"><span class="lbl">Jurisdiction</span><span class="val">All</span><span class="car">▾</span></button>
-      <button class="nf-btn"><span class="lbl">Body</span><span class="val">All</span><span class="car">▾</span></button>
-      <div class="nf-spacer"></div>
-      <button class="nf-btn"><span class="lbl">Sort</span><span class="val">Newest first</span><span class="car">▾</span></button>
-    </div>
-  </div>
+  <!-- ==BEGIN_NEWS_RESEARCH_WRAP== facet panel (left) + main column (right) -->
+  <div class="news-research-wrap">
 
-  <div class="applied-chips"><span class="applied-empty">No filters applied · personalised by your watchlist</span></div>
+    <aside class="facet-panel">
+      <div class="facet-search-wrap">
+        <span class="facet-search-ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <input class="facet-search" id="nfFacetSearch" placeholder="Search headlines, bodies, jurisdictions…" autocomplete="off">
+      </div>
 
-          <!-- LEAD -->
+      <!-- Region & Jurisdiction (drill-down tree) -->
+      <div class="facet-group">
+        <div class="facet-group-head"><span>Region &amp; Jurisdiction</span><span class="facet-group-clear" onclick="nfClearGroup('region')">Clear</span></div>
+        <div id="nfRegionTree"><div style="font-size:11.5px;color:var(--muted);padding:6px 4px">Loading…</div></div>
+      </div>
+
+      <!-- Type (multi-select) — values populated dynamically from news.json -->
+      <div class="facet-group">
+        <div class="facet-group-head"><span>Type</span><span class="facet-group-clear" onclick="nfClearGroup('type')">Clear</span></div>
+        <div id="nfTypeList"></div>
+      </div>
+
+      <!-- Date (radio) -->
+      <div class="facet-group">
+        <div class="facet-group-head"><span>Date</span></div>
+        <div class="facet-radio on" data-facet="date" data-value="all" onclick="nfDateRadio(this)"><span class="dot"></span><span>All time</span></div>
+        <div class="facet-radio" data-facet="date" data-value="7d" onclick="nfDateRadio(this)"><span class="dot"></span><span>Last 7 days</span></div>
+        <div class="facet-radio" data-facet="date" data-value="30d" onclick="nfDateRadio(this)"><span class="dot"></span><span>Last 30 days</span></div>
+      </div>
+
+      <button class="facet-clear-all" type="button" onclick="nfClearAll()">Clear all filters</button>
+    </aside>
+
+    <div class="news-research-main">
+
+      <div class="applied-chips" id="appliedChips"><span class="applied-empty">No filters applied · showing all news</span></div>
+
+          <!-- LEAD + SECONDS — collapse together when filters are active (see nfApply) -->
+  <div class="news-leads-wrap" id="newsLeadsWrap">
   <div class="news-lead">
     <div class="nl-kick">TODAY'S LEAD &middot; SWEDEN &middot; &mdash; &middot; <span class="status-pill-sm enf">Enforcement</span></div>
     <h2><a href="pai-app-news-story-imy-sportadmin-2026">IMY imposes SEK 6 million fine on Sportadmin after data breach exposes 2.1 million individuals</a></h2>
@@ -641,7 +722,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <span><strong>Authority</strong> IMY</span>
       <span><strong>Source</strong> <a href="https://www.imy.se" target="_blank" rel="noopener">imy.se &#8599;</a></span>
     </div>
-    <button class="nl-save on" title="Saved" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
+    <button class="nl-save" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
   </div>
   <!-- SECONDS -->
   <div class="news-seconds">
@@ -658,12 +739,13 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <button class="ns-save" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
     </div>
   </div>
+  </div><!-- /news-leads-wrap -->
 <!-- WIRE + RIGHT RAIL -->
   <div class="news-wire-layout">
   <div class="news-main">
   <div class="wire-header">
     <h2>The wire</h2>
-    <div class="wh-count"><strong>142</strong> dispatches · real-time from the coverage engine</div>
+    <div class="wh-count"><strong>—</strong> items · real-time from the coverage engine</div>
   </div>
 
   <div class="wire-list" id="wireList">
@@ -681,37 +763,21 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   </style>iv>
   </div><!-- /news-main -->
   <aside class="news-rail">
-    <div class="rail-card">
-      <div class="rail-title">What you cover <a href="pai-app-settings#yourBrief" class="rt-edit">Adjust</a></div>
-      <div class="rb-line" id="briefRegions">—</div>
-      <div class="rb-sub"><span id="briefDomains">—</span> · <b id="briefBodies">—</b> watched bodies</div>
-      <div class="rb-chips" id="briefChips">
-        <span class="rb-chip">—</span>
-      </div>
+    <div class="rail-card" id="topSourcesCard">
+      <div class="rail-title">Top sources · last 30 days</div>
+      <!-- Rows rendered by paiNewsRenderTopSources() from news.json -->
     </div>
-    <div class="rail-card">
-      <div class="rail-title">Top sources this week</div>
-      <div class="rs-row"><span class="rs-name"><span class="rs-juris">GB</span> ICO</span><span class="rs-count" id="topSrcIco">—</span></div>
-      <div class="rs-row" style="color:var(--muted);font-style:italic;">More sources populate from AT2.</div>
-    </div>
-    <div class="rail-card">
-      <div class="rail-title">Coming up · 30 days</div>
-      <div class="cu-row">
-        <div class="cu-date"><span id="cuDate1">—</span><span class="cu-days" id="cuDays1">—</span></div>
-        <div class="cu-h" id="cuHead1">—</div>
-        <div class="cu-body" id="cuBody1">Deadlines populate from AT2 once consultations are tracked.</div>
-      </div>
-    </div>
-    <div class="rail-card">
+    <div class="rail-card" id="recentlySavedCard">
       <div class="rail-title">Recently saved <a href="pai-app-watchlist" class="rt-edit">All</a></div>
-      <div class="sv-row">
-        <a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a>
-        <span class="sv-star">★</span>
-      </div>
+      <!-- Rows rendered by paiNewsRenderRail() from localStorage -->
     </div>
   
   </aside>
   </div><!-- /news-wire-layout -->
+
+    </div><!-- /news-research-main -->
+  </div><!-- /news-research-wrap -->
+  <!-- ==END_NEWS_RESEARCH_WRAP== -->
 
   <footer class="footer">
     <div class="left">
@@ -726,10 +792,172 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </div>
 
 <script>
-function saveToggle(e,btn){e.stopPropagation();btn.classList.toggle('on');const row=btn.closest('.wire-row');if(row){row.classList.toggle('watched',btn.classList.contains('on'))}}
+/* ============ NEWS SAVES (localStorage) ============ */
+// Storage shape:  pai-news-saves = [{href, title, savedAt}, ...]  newest first, capped at 100
+var PAI_NEWS_SAVES_KEY = 'pai-news-saves';
+function paiNewsLoadSaves(){ try { return JSON.parse(localStorage.getItem(PAI_NEWS_SAVES_KEY)||'[]'); } catch(e) { return []; } }
+function paiNewsStoreSaves(s){ try { localStorage.setItem(PAI_NEWS_SAVES_KEY, JSON.stringify(s||[])); } catch(e) {} }
 
-/* ============ NEWS STAT SLOTS ============ */
-/* Wire rendering is deferred until AT2 News table exists; currently shows pattern rows. */
+function saveToggle(e, btn){
+  if (e && e.stopPropagation) e.stopPropagation();
+  if (e && e.preventDefault) e.preventDefault();
+  var row = btn.closest('.wire-row, .news-lead, .news-second');
+  if (!row) return;
+  var anchor = row.querySelector('a[href^="pai-app-news-story-"]');
+  if (!anchor) return;
+  var href = anchor.getAttribute('href');
+  var title = (anchor.textContent || '').trim();
+  var saves = paiNewsLoadSaves();
+  var idx = -1;
+  for (var i=0; i<saves.length; i++) { if (saves[i].href === href) { idx = i; break; } }
+  if (idx >= 0) {
+    // Unsave
+    saves.splice(idx, 1);
+    btn.classList.remove('on');
+    btn.setAttribute('title', 'Save');
+    if (row.classList.contains('wire-row')) row.classList.remove('watched');
+  } else {
+    // Save (newest first, cap 100)
+    saves.unshift({ href: href, title: title, savedAt: Date.now() });
+    if (saves.length > 100) saves.length = 100;
+    btn.classList.add('on');
+    btn.setAttribute('title', 'Saved');
+    if (row.classList.contains('wire-row')) row.classList.add('watched');
+  }
+  paiNewsStoreSaves(saves);
+  paiNewsRenderRail();
+}
+
+// Restore on/off state for every save button currently in the DOM. Idempotent — safe to call after
+// renderNewsRows() repopulates the wire, or after a juris filter change re-renders rows.
+function paiNewsRestoreSavedState(){
+  var saves = paiNewsLoadSaves();
+  var hrefs = {};
+  for (var i=0; i<saves.length; i++) hrefs[saves[i].href] = 1;
+  document.querySelectorAll('.news-lead, .news-second, .wire-row').forEach(function(row){
+    var anchor = row.querySelector('a[href^="pai-app-news-story-"]');
+    var btn = row.querySelector('.nl-save, .ns-save, .wr-star');
+    if (!anchor || !btn) return;
+    var on = !!hrefs[anchor.getAttribute('href')];
+    btn.classList.toggle('on', on);
+    btn.setAttribute('title', on ? 'Saved' : 'Save');
+    if (row.classList.contains('wire-row')) row.classList.toggle('watched', on);
+  });
+}
+
+// Render the "Top sources · last 30 days" rail card from news.json (body_name tally).
+// Falls back to a quiet placeholder when no source data is available in the window.
+function paiNewsRenderTopSources(){
+  var card = document.getElementById('topSourcesCard');
+  if (!card) return;
+  var rows = window.__newsAllRows || [];
+  var todayStart = new Date(); todayStart.setHours(0,0,0,0);
+  var cutoff = new Date(todayStart.getTime() - 30 * 86400000);
+  var counts = {};
+  rows.forEach(function(r){
+    if (!r.date_published || !r.body_name) return;
+    var p = String(r.date_published).split('-');
+    var rd = new Date(+p[0], (+p[1])-1, +p[2]);
+    if (rd < cutoff) return;
+    counts[r.body_name] = (counts[r.body_name]||0) + 1;
+  });
+  var top = Object.keys(counts).map(function(k){ return [k, counts[k]]; })
+    .sort(function(a,b){ return b[1] - a[1]; })
+    .slice(0, 5);
+  // Wipe any prior rs-rows + placeholder
+  card.querySelectorAll('.rs-row, .rs-empty').forEach(function(n){ n.remove(); });
+  if (!top.length) {
+    var empty = document.createElement('div');
+    empty.className = 'rs-empty';
+    empty.style.cssText = 'font-size:11.5px;color:var(--muted);font-style:italic;padding:4px 0;line-height:1.45';
+    empty.textContent = 'No source data in the last 30 days.';
+    card.appendChild(empty);
+    return;
+  }
+  top.forEach(function(entry){
+    var row = document.createElement('div');
+    row.className = 'rs-row';
+    var name = document.createElement('span');
+    name.className = 'rs-name';
+    name.textContent = entry[0];
+    name.title = entry[0];
+    var cnt = document.createElement('span');
+    cnt.className = 'rs-count';
+    cnt.textContent = entry[1];
+    row.appendChild(name);
+    row.appendChild(cnt);
+    card.appendChild(row);
+  });
+}
+
+// Render the "Recently saved" rail card from localStorage. Newest 5 rows + remove (★ click).
+function paiNewsRenderRail(){
+  var titles = document.querySelectorAll('.news-rail .rail-card .rail-title');
+  var card = null;
+  for (var i=0; i<titles.length; i++) {
+    if (titles[i].textContent.indexOf('Recently saved') !== -1) { card = titles[i].parentElement; break; }
+  }
+  if (!card) return;
+  // Remove all sv-row + any prior empty placeholder
+  card.querySelectorAll('.sv-row, .sv-empty').forEach(function(n){ n.remove(); });
+  var saves = paiNewsLoadSaves();
+  if (!saves.length) {
+    var empty = document.createElement('div');
+    empty.className = 'sv-empty';
+    empty.style.cssText = 'font-size:11.5px;color:var(--muted);font-style:italic;padding:4px 0;line-height:1.45';
+    empty.textContent = 'Nothing saved yet. Tap a bookmark on any story to save it.';
+    card.appendChild(empty);
+    return;
+  }
+  saves.slice(0, 5).forEach(function(s){
+    var row = document.createElement('div');
+    row.className = 'sv-row';
+    var a = document.createElement('a');
+    a.href = s.href;
+    a.textContent = s.title || s.href;
+    var star = document.createElement('span');
+    star.className = 'sv-star';
+    star.textContent = '★';
+    star.title = 'Remove from saved';
+    star.style.cursor = 'pointer';
+    star.addEventListener('click', function(ev){
+      ev.preventDefault(); ev.stopPropagation();
+      var ss = paiNewsLoadSaves();
+      var k = -1;
+      for (var i=0; i<ss.length; i++) { if (ss[i].href === s.href) { k = i; break; } }
+      if (k >= 0) {
+        ss.splice(k, 1);
+        paiNewsStoreSaves(ss);
+        paiNewsRestoreSavedState();
+        paiNewsRenderRail();
+      }
+    });
+    row.appendChild(a);
+    row.appendChild(star);
+    card.appendChild(row);
+  });
+}
+
+// Boot: paint the rail + restore lead/second-lead state on initial DOM ready.
+// Wire-row state is restored by renderNewsRows() after the wire loads.
+(function(){
+  function bootSaves(){ paiNewsRestoreSavedState(); paiNewsRenderRail(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootSaves);
+  else bootSaves();
+})();
+
+/* ============ NEWS WIRE + FACET FILTERS ============ */
+// Master row store — populated once from news.json. All filters operate on this array
+// and re-render via nfApply().
+window.__newsAllRows = [];
+window.__newsFilters = {
+  search: '',
+  regions: new Set(),
+  juris:   new Set(),
+  types:   new Set(),
+  date:    'all'  // 'all' | '7d' | '30d'
+};
+
 (async function loadNewsStats(){
   try {
     const [statsR, newsR] = await Promise.all([
@@ -746,17 +974,284 @@ function saveToggle(e,btn){e.stopPropagation();btn.classList.toggle('on');const 
     }
     if (newsR.ok) {
       const n = await newsR.json();
-      if (typeof n.total === 'number') setTx('wireTotal', n.total.toLocaleString());
-      renderNewsRows(n.rows || []);
+      window.__newsAllRows = n.rows || [];
+      const whCount = document.querySelector('.wh-count');
+      if (whCount) whCount.innerHTML = '<strong>' + window.__newsAllRows.length.toLocaleString() + '</strong> items · real-time from the coverage engine';
+      nfBuildFacets();
+      nfApply();
+      paiNewsRenderTopSources();
     }
   } catch (_) { /* keep — on failure */ }
 })();
+
+// Canonicalise jurisdiction names so the filter matches across the inconsistencies
+// in news.json: 'USA' vs 'United States', 'US - New Hampshire' prefix, etc.
+function newsCanonJur(name) {
+  if (!name) return '';
+  var s = String(name).trim();
+  s = s.replace(/^US\s*-\s*/i, '');
+  if (s === 'USA' || s === 'United States of America') s = 'United States';
+  return s;
+}
+
+// Build the Region & Jurisdiction tree + Type list. Counts come from current row data.
+// Sentinel keys used so the filter can match rows that don't fit a real region/juris:
+//   region '__unattributed__' / juris '__none__'  → rows with empty jurisdiction_name
+//   region 'Global' (label 'International')        → rows whose juris has region='Global'
+function nfBuildFacets() {
+  var rows = window.__newsAllRows || [];
+  // Per-region + per-juris counts (incl. the sentinel buckets so all 300 rows are reachable)
+  var regionCounts = {}, jurisCounts = {}, typeCounts = {};
+  rows.forEach(function(r){
+    var j = newsCanonJur(r.jurisdiction_name);
+    if (j) {
+      jurisCounts[j] = (jurisCounts[j]||0) + 1;
+      var d = (typeof jurData !== 'undefined') ? jurData[j] : null;
+      if (d && d.region) regionCounts[d.region] = (regionCounts[d.region]||0) + 1;
+    } else {
+      // Empty / missing jurisdiction — bucket as Unattributed
+      jurisCounts['__none__'] = (jurisCounts['__none__']||0) + 1;
+      regionCounts['__unattributed__'] = (regionCounts['__unattributed__']||0) + 1;
+    }
+    var t = r.story_type || '(none)';
+    typeCounts[t] = (typeCounts[t]||0) + 1;
+  });
+
+  // Build per-region juris list. Order: real regions, then International (Global), then Unattributed.
+  var REGION_ORDER = ['Europe','North America','Latin America','Caribbean','Africa','Middle East','Asia Pacific','Global','__unattributed__'];
+  var REGION_DISPLAY = { 'Global': 'International', '__unattributed__': 'Unattributed' };
+  var JURIS_DISPLAY  = { '__none__': '(no jurisdiction)' };
+  var buckets = {}; REGION_ORDER.forEach(function(r){ buckets[r] = []; });
+  Object.keys(jurisCounts).forEach(function(name){
+    if (name === '__none__') { buckets['__unattributed__'].push(name); return; }
+    var d = (typeof jurData !== 'undefined') ? jurData[name] : null;
+    var region = d ? d.region : null;
+    if (region && buckets[region]) buckets[region].push(name);
+  });
+  // Real region juris alphabetical; sentinels stay as-is
+  ['Europe','North America','Latin America','Caribbean','Africa','Middle East','Asia Pacific','Global'].forEach(function(r){ buckets[r].sort(); });
+
+  // Render tree
+  var host = document.getElementById('nfRegionTree');
+  if (host) {
+    var html = '';
+    REGION_ORDER.forEach(function(region){
+      var jurs = buckets[region];
+      if (!jurs.length) return; // skip regions with no news rows
+      var rcnt = regionCounts[region] || 0;
+      var rLabel = REGION_DISPLAY[region] || region;
+      var isSentinel = (region === '__unattributed__');
+      html += '<div class="ftree-region' + (isSentinel ? ' ftree-region-sentinel' : '') + '">';
+      html += '<div class="ftree-row ftree-region-row" data-region="' + escAttr(region) + '">';
+      html += '<span class="ftree-caret">&#9656;</span>';
+      html += '<span class="facet-cb"></span>';
+      html += '<span class="name">' + escHtml(rLabel) + '</span>';
+      html += '<span class="count">' + rcnt + '</span>';
+      html += '</div>';
+      html += '<div class="ftree-children" data-region-children="' + escAttr(region) + '">';
+      jurs.forEach(function(j){
+        var jLabel = JURIS_DISPLAY[j] || j;
+        html += '<div class="ftree-row ftree-juris-row" data-juris="' + escAttr(j) + '">';
+        html += '<span class="facet-cb"></span>';
+        html += '<span class="name">' + escHtml(jLabel) + '</span>';
+        html += '<span class="count">' + (jurisCounts[j]||0) + '</span>';
+        html += '</div>';
+      });
+      html += '</div></div>';
+    });
+    host.innerHTML = html || '<div style="font-size:11.5px;color:#5e6878;padding:6px 4px">No data.</div>';
+    // Caret: stop propagation so it only toggles expand
+    host.querySelectorAll('.ftree-caret').forEach(function(c){
+      c.addEventListener('click', function(e){
+        e.stopPropagation();
+        var row = c.closest('.ftree-region-row');
+        var region = row && row.dataset.region;
+        var children = host.querySelector('[data-region-children="' + cssEsc(region) + '"]');
+        if (!children) return;
+        var open = !children.classList.contains('open');
+        children.classList.toggle('open', open);
+        c.innerHTML = open ? '&#9662;' : '&#9656;';
+      });
+    });
+    // Region row click (anywhere except caret) → toggle region selection
+    host.querySelectorAll('.ftree-region-row').forEach(function(row){
+      row.addEventListener('click', function(){
+        var region = row.dataset.region;
+        var f = window.__newsFilters;
+        if (f.regions.has(region)) { f.regions.delete(region); row.classList.remove('on'); }
+        else { f.regions.add(region); row.classList.add('on'); }
+        nfApply();
+      });
+    });
+    // Juris row click → toggle juris selection
+    host.querySelectorAll('.ftree-juris-row').forEach(function(row){
+      row.addEventListener('click', function(){
+        var j = row.dataset.juris;
+        var f = window.__newsFilters;
+        if (f.juris.has(j)) { f.juris.delete(j); row.classList.remove('on'); }
+        else { f.juris.add(j); row.classList.add('on'); }
+        nfApply();
+      });
+    });
+  }
+
+  // Render Type list — sort by frequency desc
+  var typeHost = document.getElementById('nfTypeList');
+  if (typeHost) {
+    var typeKeys = Object.keys(typeCounts).filter(function(k){ return k !== '(none)'; })
+      .sort(function(a,b){ return typeCounts[b] - typeCounts[a]; });
+    typeHost.innerHTML = typeKeys.map(function(t){
+      return '<div class="facet-opt" data-facet="type" data-value="' + escAttr(t) + '" onclick="nfTypeToggle(this)">' +
+        '<span class="facet-cb"></span><span class="name">' + escHtml(t) + '</span><span class="count">' + typeCounts[t] + '</span></div>';
+    }).join('');
+  }
+
+  // Wire search input
+  var search = document.getElementById('nfFacetSearch');
+  if (search && !search.dataset.wired) {
+    search.dataset.wired = '1';
+    search.addEventListener('input', function(){
+      window.__newsFilters.search = search.value || '';
+      nfApply();
+    });
+  }
+}
+
+function nfTypeToggle(opt) {
+  var v = opt.dataset.value;
+  var f = window.__newsFilters;
+  if (f.types.has(v)) { f.types.delete(v); opt.classList.remove('on'); }
+  else { f.types.add(v); opt.classList.add('on'); }
+  nfApply();
+}
+function nfDateRadio(el) {
+  document.querySelectorAll('.facet-radio[data-facet="date"]').forEach(function(e){ e.classList.remove('on'); });
+  el.classList.add('on');
+  window.__newsFilters.date = el.dataset.value;
+  nfApply();
+}
+function nfClearGroup(g) {
+  var f = window.__newsFilters;
+  if (g === 'region') {
+    f.regions.clear(); f.juris.clear();
+    document.querySelectorAll('#nfRegionTree .ftree-row.on').forEach(function(r){ r.classList.remove('on'); });
+  } else if (g === 'type') {
+    f.types.clear();
+    document.querySelectorAll('.facet-opt[data-facet="type"].on').forEach(function(r){ r.classList.remove('on'); });
+  } else if (g === 'date') {
+    f.date = 'all';
+    document.querySelectorAll('.facet-radio[data-facet="date"]').forEach(function(r){ r.classList.remove('on'); });
+    var a = document.querySelector('.facet-radio[data-facet="date"][data-value="all"]'); if (a) a.classList.add('on');
+  }
+  nfApply();
+}
+function nfClearAll() {
+  window.__newsFilters = { search:'', regions:new Set(), juris:new Set(), types:new Set(), date:'all' };
+  document.querySelectorAll('.facet-opt.on, .ftree-row.on, .facet-radio.on').forEach(function(r){ r.classList.remove('on'); });
+  var a = document.querySelector('.facet-radio[data-facet="date"][data-value="all"]'); if (a) a.classList.add('on');
+  var s = document.getElementById('nfFacetSearch'); if (s) s.value = '';
+  nfApply();
+}
+
+function nfApply() {
+  var f = window.__newsFilters;
+  var rows = (window.__newsAllRows || []).filter(function(r){
+    var j = newsCanonJur(r.jurisdiction_name);
+    var d = (typeof jurData !== 'undefined') ? jurData[j] : null;
+    var region = d ? d.region : '';
+    // For empty-juris rows: bucket them under sentinel keys so the Unattributed branch can match.
+    var isUnattr = !j;
+    var effRegion = isUnattr ? '__unattributed__' : region;
+    var effJuris  = isUnattr ? '__none__'         : j;
+    // Region & Jurisdiction (OR within group): if any selection, juris must be in either set
+    if (f.regions.size || f.juris.size) {
+      if (!f.regions.has(effRegion) && !f.juris.has(effJuris)) return false;
+    }
+    // Type
+    if (f.types.size && !f.types.has(r.story_type)) return false;
+    // Date — compare at day-boundary so "Last 7 days" includes the day that started 7 days ago,
+    // regardless of time-of-day. Without this, a row dated YYYY-MM-DD (parsed as UTC midnight)
+    // gets excluded if `now` is later than midnight on the cutoff day.
+    if (f.date !== 'all') {
+      if (!r.date_published) return false;
+      var days = f.date === '7d' ? 7 : 30;
+      var todayStart = new Date(); todayStart.setHours(0,0,0,0);
+      var cutoff = new Date(todayStart.getTime() - days * 86400000);
+      var p = String(r.date_published).split('-');
+      var rowDay = new Date(+p[0], (+p[1])-1, +p[2]);  // local midnight on the row's date
+      if (rowDay < cutoff) return false;
+    }
+    // Search
+    if (f.search) {
+      var q = f.search.toLowerCase();
+      var hay = [(r.title||''),(r.summary||''),(r.body_name||''),(r.jurisdiction_name||'')].join(' ').toLowerCase();
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
+  renderNewsRows(rows);
+  var newsTotalEl = document.getElementById('newsTotal');
+  if (newsTotalEl) newsTotalEl.textContent = rows.length.toLocaleString();
+  nfRenderAppliedChips();
+  // Hide editorial leads (static cards) whenever any filter is active; restore on full clear
+  var anyActive = !!(f.search || f.regions.size || f.juris.size || f.types.size || f.date !== 'all');
+  var leadsWrap = document.getElementById('newsLeadsWrap');
+  if (leadsWrap) leadsWrap.classList.toggle('is-collapsed', anyActive);
+}
+
+function nfRenderAppliedChips() {
+  var box = document.getElementById('appliedChips');
+  if (!box) return;
+  var f = window.__newsFilters;
+  var chips = [];
+  var REGION_CHIP_LABEL = { 'Global': 'International', '__unattributed__': 'Unattributed' };
+  var JURIS_CHIP_LABEL  = { '__none__': '(no jurisdiction)' };
+  f.regions.forEach(function(r){ chips.push({grp:'Region', val:(REGION_CHIP_LABEL[r]||r), key:'region:'+r}); });
+  f.juris.forEach(function(j){ chips.push({grp:'Jurisdiction', val:(JURIS_CHIP_LABEL[j]||j), key:'juris:'+j}); });
+  f.types.forEach(function(t){ chips.push({grp:'Type', val:t, key:'type:'+t}); });
+  if (f.date !== 'all') chips.push({grp:'Date', val:(f.date==='7d'?'Last 7 days':'Last 30 days'), key:'date'});
+  if (f.search)         chips.push({grp:'Search', val:f.search, key:'search'});
+  if (!chips.length) {
+    box.innerHTML = '<span class="applied-empty">No filters applied · showing all news</span>';
+    return;
+  }
+  box.innerHTML = chips.map(function(c){
+    return '<span class="applied-chip"><span class="group">' + escHtml(c.grp) + ':</span> ' + escHtml(c.val) +
+           '<button class="x" data-key="' + escAttr(c.key) + '" type="button">&times;</button></span>';
+  }).join('');
+  box.querySelectorAll('.applied-chip .x').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var key = btn.dataset.key, f = window.__newsFilters;
+      if (key.indexOf('region:') === 0) {
+        var r = key.slice(7); f.regions.delete(r);
+        var row = document.querySelector('.ftree-region-row[data-region="' + cssEsc(r) + '"]'); if (row) row.classList.remove('on');
+      } else if (key.indexOf('juris:') === 0) {
+        var j = key.slice(6); f.juris.delete(j);
+        var row = document.querySelector('.ftree-juris-row[data-juris="' + cssEsc(j) + '"]'); if (row) row.classList.remove('on');
+      } else if (key.indexOf('type:') === 0) {
+        var t = key.slice(5); f.types.delete(t);
+        var opt = document.querySelector('.facet-opt[data-facet="type"][data-value="' + cssEsc(t) + '"]'); if (opt) opt.classList.remove('on');
+      } else if (key === 'date') {
+        nfClearGroup('date'); return;
+      } else if (key === 'search') {
+        f.search = ''; var s = document.getElementById('nfFacetSearch'); if (s) s.value = '';
+      }
+      nfApply();
+    });
+  });
+}
+
+function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+function escAttr(s){return escHtml(s);}
+function cssEsc(s){return (typeof CSS!=='undefined'&&CSS.escape)?CSS.escape(String(s)):String(s).replace(/"/g,'\\"');}
 
 function renderNewsRows(rows){
   const list = document.getElementById('wireList');
   if (!list) return;
   if (!rows.length){
-    list.innerHTML = '<div style="padding:24px 18px;color:#5e6878;font-size:13px;text-align:center">No news yet.</div>';
+    var st = window.__newsFilterState || {};
+    var msg = st.juris ? ('No items for ' + st.juris + '. Try clearing the filter.') : 'No news yet.';
+    list.innerHTML = '<div style="padding:24px 18px;color:#5e6878;font-size:13px;text-align:center">' + msg + '</div>';
     return;
   }
   // ISO map for the 2-letter jurisdiction column
@@ -805,10 +1300,13 @@ function renderNewsRows(rows){
       +   '<div class="wr-src"><strong>' + body + '</strong>' + (src? ' &middot; ' + escHtml(src) : '') + claimBadge + '</div>'
       + '</div>'
       + '<div class="wr-tag ' + t.cls + '">' + t.label + '</div>'
-      + '<button class="wr-star" title="Save" onclick="event.stopPropagation();event.preventDefault();this.classList.toggle(\'on\')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>';
+      + '<button class="wr-star" title="Save" onclick="saveToggle(event,this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>';
     list.appendChild(row);
   });
+  // After rendering, re-apply saved state for the new rows
+  if (typeof paiNewsRestoreSavedState === 'function') paiNewsRestoreSavedState();
 }
+
 </script>
 <!-- Mobile nav shim -->
 <style>
@@ -1092,7 +1590,8 @@ function renderNewsRows(rows){
   function buildExpandableCountryRow(name, dataKey, children){
     var wrap = document.createElement('div');
     var row = rowEl(name, 'country', { expandable: true, onClick: function(ev){
-      // Toggle (not navigate) if we're already on this jurisdiction's page OR a child of it
+      // Toggle (not navigate) if we're already on this jurisdiction's page OR a child of it,
+      // OR if we're in filter-pick mode (where parents must expand so users can drill into states).
       var cur = window.PAI_JURIS;
       var isHere = cur === dataKey || cur === name;
       var isChild = cur && (PARENT_OF[cur] === dataKey || PARENT_OF[cur] === name);
