@@ -1223,7 +1223,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <div class="view active" id="view-A" data-view="A">
 
     <div class="nr-stream-block anim-in" style="--d:2">
-      <div class="nr-stream-head"><h2>What's happening</h2><span class="meta">142 United Kingdom stories tracked</span></div><div class="nr-stream-grid"><a class="nr-card hero-card" href="https://www.ncsc.gov.uk/blogs/prepare-for-vulnerability-patch-wave"><div class="nr-meta"><span></span><span class="pill pill-source">Update</span></div><h3>Preparing for a ‘vulnerability patch wave’</h3><p>Organisations must act now to prepare for a wave of patches that will address decades of technical debt.</p></a><a class="nr-card" href="https://www.aisi.gov.uk/blog/an-evaluation-framework-for-ai-misuse-in-fraud-and-cybercrime"><div class="nr-meta"><span></span><span class="pill pill-source">Blog</span></div><h3>An evaluation framework for AI misuse in fraud and cybercrime</h3><p>An evaluation framework for AI misuse in fraud and cybercrime</p></a><a class="nr-card" href="https://www.aisi.gov.uk/blog/funding-60-projects-to-advance-ai-alignment-research"><div class="nr-meta"><span></span><span class="pill pill-source">Blog</span></div><h3>Funding 60 projects to advance AI alignment research</h3><p>Funding 60 projects to advance AI alignment research</p></a><a class="nr-card" href="https://www.aisi.gov.uk/blog/our-evaluation-of-openais-gpt-5-5-cyber-capabilities"><div class="nr-meta"><span></span><span class="pill pill-source">Blog</span></div><h3>Our evaluation of OpenAI&#39;s GPT-5.5 cyber capabilities</h3><p>Our evaluation of OpenAI&#39;s GPT-5.5 cyber capabilities</p></a><a class="nr-card" href="https://www.aisi.gov.uk/blog/can-ai-agents-escape-their-sandboxes-a-benchmark-for-safely-measuring-container-breakout-capabilities"><div class="nr-meta"><span></span><span class="pill pill-source">Blog</span></div><h3>Can AI agents escape their sandboxes? A benchmark for safely measuring container breakout capabilities</h3><p>Can AI agents escape their sandboxes? A benchmark for safely measuring container breakout capabilities</p></a><a class="nr-card" href="https://www.aisi.gov.uk/blog/ai-safety-summit-2023"><div class="nr-meta"><span></span><span class="pill pill-source">Blog</span></div><h3>First AI Safety Summit</h3><p>First AI Safety Summit</p></a></div><div style="text-align:right;margin-top:14px"><a href="pai-app-news?juris=united-kingdom" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;text-decoration:none">See all 142 United Kingdom items →</a></div>
+      <div class="nr-stream-head"><h2>What's happening</h2><span class="meta" id="uk-news-meta">Loading United Kingdom stories…</span></div><div class="nr-stream-grid" id="uk-news-grid"></div><div style="text-align:right;margin-top:14px"><a href="pai-app-news?juris=united-kingdom" id="uk-news-see-all" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;text-decoration:none">See all United Kingdom stories →</a></div>
     </div>
 
     <div class="impl-strip anim-in" style="--d:3" id="impl-strip-A">
@@ -2249,6 +2249,66 @@ window.addEventListener('load', function(){
     })
     .catch(function(){});
 });
+</script>
+<script>
+/* "What's happening" — pulls 5 latest UK stories from news.json + applies hero-pick rule.
+   Hero rule (memory: feedback_juris_hero_lead_rule.md):
+     0 leads in top 5 -> most recent
+     1 lead -> that one
+     2+ leads -> most recent of the leads
+     same date among contenders -> Enforcement/Case law/Legislation > Update
+     still tied -> alphabetical by title */
+(async function loadUKWhatsHappening(){
+  const grid = document.getElementById('uk-news-grid');
+  const meta = document.getElementById('uk-news-meta');
+  const seeAll = document.getElementById('uk-news-see-all');
+  if (!grid) return;
+  const PRIORITY_TYPES = new Set(['Enforcement','Case law','Legislation']);
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
+  function fmtDate(iso){
+    const m = (iso||'').match(/^(\d{4})-(\d{2})-(\d{2})/);
+    return m ? `${parseInt(m[3],10)} ${MONTHS[parseInt(m[2],10)-1]} ${m[1]}` : '';
+  }
+  function pickHero(rows){
+    const leads = rows.filter(r => r.is_lead);
+    const pool = leads.length === 0 ? rows.slice() : leads.slice();
+    pool.sort((a,b) => {
+      const d = (b.date_published||'').localeCompare(a.date_published||'');
+      if (d !== 0) return d;
+      const ap = PRIORITY_TYPES.has(a.story_type) ? 0 : 1;
+      const bp = PRIORITY_TYPES.has(b.story_type) ? 0 : 1;
+      if (ap !== bp) return ap - bp;
+      return (a.title||'').localeCompare(b.title||'');
+    });
+    return pool[0];
+  }
+  try {
+    const r = await fetch('./news.json', {cache:'no-cache'});
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    const d = await r.json();
+    const all = (d.rows||[]).filter(x => x.jurisdiction_name === 'United Kingdom');
+    all.sort((a,b) => (b.date_published||'').localeCompare(a.date_published||''));
+    if (meta) meta.textContent = all.length
+      ? `${all.length} United Kingdom stories · latest ${fmtDate(all[0].date_published)}`
+      : 'No United Kingdom stories yet';
+    if (seeAll) seeAll.textContent = `See all ${all.length} United Kingdom stories →`;
+    if (!all.length) { grid.innerHTML = ''; return; }
+    const top5 = all.slice(0, 5);
+    const hero = pickHero(top5);
+    const ordered = [hero, ...top5.filter(r => r !== hero)];
+    grid.innerHTML = ordered.map((r,i) => {
+      const heroCls = i === 0 ? ' hero-card' : '';
+      const url = r.slug ? `pai-app-news-story-${r.slug}` : (r.source_url || '#');
+      const date = fmtDate(r.date_published);
+      const pill = r.story_type || 'News';
+      return `<a class="nr-card${heroCls}" href="${esc(url)}"><div class="nr-meta"><span>${esc(date)}</span><span class="pill pill-source">${esc(pill)}</span></div><h3>${esc(r.title||'')}</h3><p>${esc(r.summary||'')}</p></a>`;
+    }).join('');
+  } catch (e) {
+    grid.innerHTML = '<div style="grid-column:1/-1;padding:24px;text-align:center;color:#a33;font-size:13px;background:#fff;border-radius:8px">Could not load United Kingdom stories.</div>';
+    if (meta) meta.textContent = '—';
+  }
+})();
 </script>
 </body>
 </html>
