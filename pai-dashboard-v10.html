@@ -1092,49 +1092,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <div class="panel-title">Today <span class="count"><b id="todayPublished">—</b> published</span></div>
         <span class="panel-link">Full feed</span>
       </div>
-      <ul class="today-list">
-        <li class="today-item lead priority">
-          <div class="today-time">—<span class="day">—</span></div>
-          <div>
-            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
-            <div class="today-headline"><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-            <div class="today-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a DPIA, without algorithmic-bias testing, and without documenting the lawful basis.</div>
-            <div class="today-source">ico.org.uk</div>
-          </div>
-        </li>
-        <li class="today-item">
-          <div class="today-time">—<span class="day">—</span></div>
-          <div>
-            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
-            <div class="today-headline"><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-            <div class="today-source">ico.org.uk</div>
-          </div>
-        </li>
-        <li class="today-item">
-          <div class="today-time">—<span class="day">—</span></div>
-          <div>
-            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
-            <div class="today-headline"><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-            <div class="today-source">ico.org.uk</div>
-          </div>
-        </li>
-        <li class="today-item">
-          <div class="today-time">—<span class="day">—</span></div>
-          <div>
-            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
-            <div class="today-headline"><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-            <div class="today-source">ico.org.uk</div>
-          </div>
-        </li>
-        <li class="today-item">
-          <div class="today-time">—<span class="day">—</span></div>
-          <div>
-            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
-            <div class="today-headline"><a href="pai-app-news-story-ico-nhs">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-            <div class="today-source">ico.org.uk</div>
-          </div>
-        </li>
-      </ul>
+      <ul class="today-list" id="todayList"></ul>
     </aside>
   </section>
 
@@ -1964,6 +1922,7 @@ function setHotView(view, btn) {
     if (statsR.ok) {
       const d = await statsR.json();
       if (d.news_count != null) setTx('ftPublished', d.news_count.toLocaleString() + ' published');
+      if (d.news_count != null) setTx('todayPublished', d.news_count.toLocaleString());
     }
     if (authR.ok) {
       const auth = await authR.json();
@@ -1992,6 +1951,47 @@ function setHotView(view, btn) {
       });
     }
   } catch (_) { /* leave — on failure */ }
+})();
+
+/* Today panel — top 5 from news.json */
+(async function loadTodayFeed() {
+  const list = document.getElementById('todayList');
+  if (!list) return;
+  const escHTML = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const sourceHost = u => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(_) { return ''; } };
+  try {
+    const r = await fetch('./news.json', { cache: 'no-cache' });
+    if (!r.ok) return;
+    const d = await r.json();
+    const rows = (d.rows || []).slice(0, 5);
+    if (!rows.length) return;
+    list.innerHTML = rows.map((row, i) => {
+      const isLead = i === 0;
+      const cls = isLead ? 'today-item lead priority' : 'today-item';
+      const day = escHTML(row.date_display || '');
+      const juris = escHTML(row.jurisdiction_name || '');
+      const body = escHTML(row.body_name || '');
+      const topic = escHTML(row.topic || '');
+      const title = escHTML(row.title || '');
+      const rawSummary = row.summary || '';
+      const summary = escHTML(rawSummary.length > 240 ? rawSummary.slice(0, 240).replace(/\s+\S*$/, '') + '…' : rawSummary);
+      const at2 = escHTML(row.at2_id || '');
+      const url = at2 ? `pai-app-news-story-${at2}` : escHTML(row.source_url || '#');
+      const host = escHTML(sourceHost(row.source_url || ''));
+      const metaParts = [juris, body].filter(Boolean).join(' · ');
+      const deckHTML = (isLead && summary) ? `<div class="today-deck">${summary}</div>` : '';
+      const topicHTML = topic ? `<span class="dot">·</span><span>${topic}</span>` : '';
+      return `<li class="${cls}">
+        <div class="today-time">${day || '—'}<span class="day">${day ? '' : '—'}</span></div>
+        <div>
+          <div class="today-meta"><span class="today-juris">${metaParts}</span>${topicHTML}</div>
+          <div class="today-headline"><a href="${url}">${title}</a></div>
+          ${deckHTML}
+          ${host ? `<div class="today-source">${host}</div>` : ''}
+        </div>
+      </li>`;
+    }).join('');
+  } catch (_) { /* leave fallback empty on error */ }
 })();
 </script>
 <div class="nav-scrim" aria-hidden="true"></div>

@@ -2095,15 +2095,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <span class="panel-link">Full feed</span>
       </div>
       <ul class="today-list">
-        <li class="today-item lead priority">
-          <div class="today-time" style="font-size:10.5px; letter-spacing:0.08em;">NEW<span class="day" style="display:block; font-weight:400; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">TODAY</span></div>
-          <div>
-            <div class="today-meta"><span class="today-juris">UK · ICO</span><span class="dot">·</span><span>Enforcement</span></div>
-            <div class="today-headline"><a href="pai-app-news-story-ico-nhs.html">ICO fines NHS Trust £750,000 over AI diagnostic DPIA failure</a></div>
-            <div class="today-deck">An English NHS Foundation Trust deployed a commercial AI triage tool on radiology workflows without running a Data Protection Impact Assessment, without algorithmic-bias testing, and without documenting the lawful basis for the downstream profiling.</div>
-            <div class="today-source">ico.org.uk</div>
-          </div>
-        </li>
+        <li class="today-item lead priority" id="publicTodayLead"></li>
         <li class="today-item" style="opacity:0.85;">
           <div class="today-time" style="font-size:10.5px; color:var(--muted); letter-spacing:0.08em;">MORE<span class="day" style="display:block; font-weight:400; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">TODAY</span></div>
           <div>
@@ -2566,6 +2558,7 @@ function setHotView(view, btn) {
       if (d.authorities_count)   setTx('heroBodies', d.authorities_count.toLocaleString());
       if (d.jurisdictions_count) setTx('heroJuris',  d.jurisdictions_count.toString());
       if (d.news_count != null)  setTx('ftPublished', d.news_count.toLocaleString());
+      if (d.news_count != null)  setTx('todayPublished', d.news_count.toLocaleString());
     }
     if (authR.ok) {
       const auth = await authR.json();
@@ -2599,6 +2592,40 @@ function setHotView(view, btn) {
       });
     }
   } catch (_) { /* leave — on failure */ }
+})();
+
+/* Today panel lead — public teaser (one fresh story; the second <li> is a static signup CTA) */
+(async function loadTodayLead() {
+  const slot = document.getElementById('publicTodayLead');
+  if (!slot) return;
+  const escHTML = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const sourceHost = u => { try { return new URL(u).hostname.replace(/^www\./,''); } catch(_) { return ''; } };
+  try {
+    const r = await fetch('./news.json', { cache: 'no-cache' });
+    if (!r.ok) return;
+    const d = await r.json();
+    const row = (d.rows || [])[0];
+    if (!row) return;
+    const day = escHTML(row.date_display || '');
+    const juris = escHTML(row.jurisdiction_name || '');
+    const body = escHTML(row.body_name || '');
+    const topic = escHTML(row.topic || '');
+    const title = escHTML(row.title || '');
+    const rawSummary = row.summary || '';
+    const summary = escHTML(rawSummary.length > 240 ? rawSummary.slice(0, 240).replace(/\s+\S*$/, '') + '…' : rawSummary);
+    const at2 = escHTML(row.at2_id || '');
+    const url = at2 ? `pai-app-news-story-${at2}` : escHTML(row.source_url || '#');
+    const host = escHTML(sourceHost(row.source_url || ''));
+    const metaParts = [juris, body].filter(Boolean).join(' · ');
+    slot.innerHTML = `
+      <div class="today-time" style="font-size:10.5px; letter-spacing:0.08em;">NEW<span class="day" style="display:block; font-weight:400; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em;">${day || 'TODAY'}</span></div>
+      <div>
+        <div class="today-meta"><span class="today-juris">${metaParts}</span>${topic ? `<span class="dot">·</span><span>${topic}</span>` : ''}</div>
+        <div class="today-headline"><a href="${url}">${title}</a></div>
+        ${summary ? `<div class="today-deck">${summary}</div>` : ''}
+        ${host ? `<div class="today-source">${host}</div>` : ''}
+      </div>`;
+  } catch (_) { /* leave empty on failure */ }
 })();
 </script>
 <button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>

@@ -3063,7 +3063,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       const title = escHTML(row.title || '');
       const rawSummary = row.summary || '';
       const summary = escHTML(rawSummary.length > 240 ? rawSummary.slice(0, 240).replace(/\s+\S*$/, '') + '…' : rawSummary);
-      const url = escHTML(row.source_url || '#');
+      const at2 = escHTML(row.at2_id || '');
+      const url = at2 ? `pai-app-news-story-${at2}` : escHTML(row.source_url || '#');
       const host = escHTML(sourceHost(row.source_url || ''));
       const metaParts = [juris, body].filter(Boolean).join(' · ');
       const deckHTML = (isLead && summary) ? `<div class="today-deck">${summary}</div>` : '';
@@ -3072,7 +3073,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <div class="today-time">${day || '—'}<span class="day">${day ? '' : '—'}</span></div>
         <div>
           <div class="today-meta"><span class="today-juris">${metaParts}</span>${topicHTML}</div>
-          <div class="today-headline"><a href="${url}" target="_blank" rel="noopener">${title}</a></div>
+          <div class="today-headline"><a href="${url}">${title}</a></div>
           ${deckHTML}
           ${host ? `<div class="today-source">${host}</div>` : ''}
         </div>

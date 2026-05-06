@@ -211,26 +211,39 @@
     </div>
   </div>
 
-  <div class="since-row">
-    <a class="since-card" href="#">
-      <div class="sc-eyebrow t-new">New rule · 6h ago</div>
-      <div class="sc-head">CCPA automated decision-making rules adopted — in force 1 Oct 2026</div>
-      <div class="sc-sum">Pre-deployment risk assessment + opt-out for "significant decisions" effective in 5 months.</div>
-      <div class="sc-juris">California · CPPA</div>
-    </a>
-    <a class="since-card" href="#">
-      <div class="sc-eyebrow t-fed">Federal · yesterday</div>
-      <div class="sc-head">EO on federal AI procurement — agencies must publish use-case inventories quarterly</div>
-      <div class="sc-sum">Restates and expands OMB M-24-10 procurement requirements; effective immediately.</div>
-      <div class="sc-juris">White House</div>
-    </a>
-    <a class="since-card" href="#">
-      <div class="sc-eyebrow t-enf">Texas · yesterday</div>
-      <div class="sc-head">Texas AG opens TDPSA investigation into ad-tech firm</div>
-      <div class="sc-sum">First public TDPSA investigation. Sensitive-data inferences from biometric and location signals.</div>
-      <div class="sc-juris">Texas · OAG</div>
-    </a>
-  </div>
+  <div class="since-row" id="dsSince"></div>
+  <script>
+  (async function loadDashSince(){
+    const root = document.getElementById('dsSince');
+    if (!root) return;
+    const escHTML = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const ebMap = {'Enforcement':'t-enf','Legislation':'t-new','Decision':'t-enf','Case law':''};
+    try {
+      const r = await fetch('./news.json', { cache: 'no-cache' });
+      if (!r.ok) return;
+      const d = await r.json();
+      const rows = (d.rows || []).slice(0, 3);
+      if (!rows.length) return;
+      root.innerHTML = rows.map(row => {
+        const st = escHTML(row.story_type || 'Update');
+        const cls = ebMap[row.story_type] || '';
+        const day = escHTML(row.date_display || '');
+        const head = escHTML(row.title || '');
+        const rawSum = (row.summary || '');
+        const sum = escHTML(rawSum.length > 180 ? rawSum.slice(0, 180).replace(/\s+\S*$/, '') + '…' : rawSum);
+        const juris = escHTML(row.jurisdiction_name || '');
+        const at2 = escHTML(row.at2_id || '');
+        const url = at2 ? `pai-app-news-story-${at2}` : escHTML(row.source_url || '#');
+        return `<a class="since-card" href="${url}">
+          <div class="sc-eyebrow ${cls}">${st}${day ? ' · ' + day : ''}</div>
+          <div class="sc-head">${head}</div>
+          ${sum ? `<div class="sc-sum">${sum}</div>` : ''}
+          ${juris ? `<div class="sc-juris">${juris}</div>` : ''}
+        </a>`;
+      }).join('');
+    } catch (_) { /* leave empty on failure */ }
+  })();
+  </script>
 
   <div class="map-panel">
     <div class="map-head">
