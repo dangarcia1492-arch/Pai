@@ -689,6 +689,7 @@ function fpClearAll(){document.querySelectorAll('.facet-opt.on').forEach(e=>e.cl
 function fpApply(){
   const box=document.getElementById('appliedChips');
   const chips=[];
+  if(window.JURIS_FILTER_SLUG)chips.push({group:'juris',value:window.JURIS_FILTER_SLUG,label:window.JURIS_FILTER_NAME||window.JURIS_FILTER_SLUG});
   document.querySelectorAll('.facet-opt.on').forEach(el=>{chips.push({group:el.dataset.facet,value:el.dataset.value,label:el.querySelector('.name').textContent})});
   document.querySelectorAll('.facet-radio.on').forEach(el=>{if(el.dataset.value!=='all')chips.push({group:el.dataset.facet,value:el.dataset.value,label:el.querySelector('span:last-child').textContent})});
   box.innerHTML=chips.length===0?'<span class="applied-empty">No filters applied · newest activity first</span>':chips.map(c=>`<span class="applied-chip"><span class="group">${c.group}:</span> ${c.label}<button class="x" onclick="fpRemoveChip('${c.group}','${c.value}')">×</button></span>`).join('');
@@ -720,7 +721,9 @@ function fpApply(){
     // Search: data-search holds lowercased haystack; token-AND.
     const hay=row.dataset.search||'';
     const searchOk=searchTokens.length===0||searchTokens.every(t=>hay.includes(t));
-    const ok=(onRegions.length===0||onRegions.includes(r))&&(onStatuses.length===0||onStatuses.includes(s))&&domainOk&&(!watchMine||w)&&(!landmarkOn||lm)&&activityOk&&searchOk;
+    const jSlug=row.dataset.jurisSlug||'';
+    const jOk=!window.JURIS_FILTER_SLUG||jSlug===window.JURIS_FILTER_SLUG;
+    const ok=(onRegions.length===0||onRegions.includes(r))&&(onStatuses.length===0||onStatuses.includes(s))&&domainOk&&(!watchMine||w)&&(!landmarkOn||lm)&&activityOk&&searchOk&&jOk;
     row.style.display=ok?'':'none';
     if(ok)shown++;
   });
@@ -728,7 +731,7 @@ function fpApply(){
   const rc=document.getElementById('resultCount');if(rc)rc.textContent=shown.toLocaleString()+' of '+total.toLocaleString();
   const pc=document.getElementById('pagerCount');if(pc)pc.textContent=shown.toLocaleString();
 }
-function fpRemoveChip(g,v){const el=document.querySelector('.facet-opt[data-facet="'+g+'"][data-value="'+v+'"]');if(el)el.classList.remove('on');fpApply()}
+function fpRemoveChip(g,v){if(g==='juris'){window.JURIS_FILTER_SLUG=null;window.JURIS_FILTER_NAME=null;const u=new URL(location);u.searchParams.delete('juris');history.replaceState(null,'',u);fpApply();return}const el=document.querySelector('.facet-opt[data-facet="'+g+'"][data-value="'+v+'"]');if(el)el.classList.remove('on');fpApply()}
 function dgStar(e,btn){e.stopPropagation();btn.classList.toggle('on');const row=btn.closest('.dg-row');if(btn.classList.contains('on')){row.classList.add('watched');row.dataset.watchlist='on'}else{row.classList.remove('watched');row.dataset.watchlist='off'}}
 function dgNav(row,e){
   // Skip nav if the user clicked an interactive control inside the row.
@@ -744,6 +747,8 @@ function dgNav(row,e){
 const STATUS_DISPLAY={'proposed':'Proposed','in-progress':'In progress','consultation':'Consultation','enacted':'Enacted','in-force':'In force','lapsed':'Lapsed'};
 const DOMAIN_DISPLAY={ai:'AI',privacy:'Privacy',cyber:'Cyber'};
 function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
+(function(){const p=new URLSearchParams(location.search);const s=p.get('juris');if(s){window.JURIS_FILTER_SLUG=s;window.JURIS_FILTER_NAME=s.split('-').map(w=>w?w[0].toUpperCase()+w.slice(1):'').join(' ');}})();
+function nameToSlug(n){return String(n||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function renderLegislationRow(r){
   const statusCls=r.status||'in-progress';
   const statusTxt=STATUS_DISPLAY[statusCls]||statusCls;
@@ -771,6 +776,7 @@ function renderLegislationRow(r){
     '<div class="dg-row" data-region="'+escHtml(r.region)+'" data-status="'+escHtml(r.status)+'"' +
     ' data-domain="'+(r.domain||[]).join(',')+'" data-activity="'+activity+'"' +
     ' data-landmark="'+(r.featured?'1':'0')+'"' +
+    ' data-juris-slug="'+escHtml(r.jurisdiction_slug||nameToSlug(r.jurisdiction_name))+'"' +
     ' data-search="'+escHtml(searchHay)+'"' +
     ' data-source="'+escHtml(r.source_url)+'" data-summary="'+escHtml(r.summary)+'"'+slugAttr+'>' +
       '<div class="dg-iso">'+escHtml(r.iso)+'</div>' +

@@ -728,6 +728,7 @@ function fpView(v,btn){document.querySelectorAll('.rt-view-btn').forEach(b=>b.cl
 function fpApply(){
   const box=document.getElementById('appliedChips');
   const chips=[];
+  if(window.JURIS_FILTER_SLUG)chips.push({group:'juris',value:window.JURIS_FILTER_SLUG,label:window.JURIS_FILTER_NAME||window.JURIS_FILTER_SLUG});
   document.querySelectorAll('.facet-opt.on').forEach(el=>{chips.push({group:el.dataset.facet,value:el.dataset.value,label:el.querySelector('.name').textContent})});
   document.querySelectorAll('.facet-radio.on').forEach(el=>{if(el.dataset.value!=='all')chips.push({group:el.dataset.facet,value:el.dataset.value,label:el.querySelector('span:last-child').textContent})});
   box.innerHTML=chips.length===0
@@ -736,13 +737,15 @@ function fpApply(){
   const watchMine=document.querySelector('.facet-opt[data-facet="watchlist"][data-value="mine"].on');
   const onRegions=[...document.querySelectorAll('.facet-opt[data-facet="region"].on')].map(e=>e.dataset.value);
   const onTypes=[...document.querySelectorAll('.facet-opt[data-facet="type"].on')].map(e=>e.dataset.value);
+  const jurisFilter=window.JURIS_FILTER_SLUG;
   let shown=0;
   document.querySelectorAll('.dg-row').forEach(row=>{
-    const region=row.dataset.region||'',type=row.dataset.type||'',watch=row.dataset.watchlist==='on';
+    const region=row.dataset.region||'',type=row.dataset.type||'',watch=row.dataset.watchlist==='on',jSlug=row.dataset.jurisSlug||'';
     const rOk=onRegions.length===0||onRegions.includes(region);
     const tOk=onTypes.length===0||onTypes.includes(type);
     const wOk=!watchMine||watch;
-    const ok=rOk&&tOk&&wOk;
+    const jOk=!jurisFilter||jSlug===jurisFilter;
+    const ok=rOk&&tOk&&wOk&&jOk;
     row.style.display=ok?'':'none';
     if(ok)shown++;
   });
@@ -750,7 +753,7 @@ function fpApply(){
   const rc=document.getElementById('resultCount');if(rc)rc.textContent=shown.toLocaleString()+' of '+total.toLocaleString();
   const pc=document.getElementById('pagerCount');if(pc)pc.textContent=shown.toLocaleString();
 }
-function fpRemoveChip(g,v){const el=document.querySelector('.facet-opt[data-facet="'+g+'"][data-value="'+v+'"]');if(el)el.classList.remove('on');fpApply()}
+function fpRemoveChip(g,v){if(g==='juris'){window.JURIS_FILTER_SLUG=null;window.JURIS_FILTER_NAME=null;const u=new URL(location);u.searchParams.delete('juris');history.replaceState(null,'',u);fpApply();return}const el=document.querySelector('.facet-opt[data-facet="'+g+'"][data-value="'+v+'"]');if(el)el.classList.remove('on');fpApply()}
 function dgStar(e,btn){e.stopPropagation();btn.classList.toggle('on');const row=btn.closest('.dg-row');if(btn.classList.contains('on')){row.classList.add('watched');row.dataset.watchlist='on'}else{row.classList.remove('watched');row.dataset.watchlist='off'}}
 
 /* ============ LIVE AUTHORITIES DATA ============ */
@@ -767,17 +770,20 @@ const FACET_TO_PILL_LABEL = {
   standards:'Standards body',sectoral:'Sector regulator',ag:'Attorney General',eu:'EU body',
 };
 function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
+(function(){const p=new URLSearchParams(location.search);const s=p.get('juris');if(s){window.JURIS_FILTER_SLUG=s;window.JURIS_FILTER_NAME=s.split('-').map(w=>w?w[0].toUpperCase()+w.slice(1):'').join(' ');}})();
+function nameToSlug(n){return String(n||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function renderAuthorityRow(r){
   const facet=TYPE_TO_FACET[r.type]||'agency';
   const pillLabel=FACET_TO_PILL_LABEL[facet]||escHtml(r.type);
   const iso=r.iso||'';
   const slug=r.slug||'';
+  const jSlug=r.jurisdiction_slug||nameToSlug(r.jurisdiction_name);
   // Whole row is an anchor when we have a resolved slug. Otherwise plain div.
   const tag = slug ? 'a' : 'div';
   const hrefAttr = slug ? ' href="pai-app-authority-'+escHtml(slug)+'"' : '';
   const styleAttr = slug ? ' style="text-decoration:none;color:inherit;cursor:pointer"' : '';
   return (
-    '<'+tag+' class="dg-row" data-region="'+escHtml(r.region)+'" data-type="'+facet+'" data-website="'+escHtml(r.website)+'"'+hrefAttr+styleAttr+'>' +
+    '<'+tag+' class="dg-row" data-region="'+escHtml(r.region)+'" data-type="'+facet+'" data-juris-slug="'+escHtml(jSlug)+'" data-website="'+escHtml(r.website)+'"'+hrefAttr+styleAttr+'>' +
       '<div class="dg-iso">'+escHtml(iso)+'</div>' +
       '<div class="dg-name-wrap"><div class="dg-name">'+escHtml(r.name)+(r.acronym?'<span class="acr">'+escHtml(r.acronym)+'</span>':'')+'</div></div>' +
       '<div class="dg-country">'+escHtml(r.jurisdiction_name)+'</div>' +
