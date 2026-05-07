@@ -628,8 +628,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <section class="threads">
         <div class="threads-head">
           <div>
-            <h2>#eu-ai-act</h2>
-            <div class="desc">28 threads · 134 members · practitioners only</div>
+            <h2 id="channel-title">#eu-ai-act</h2>
+            <div class="desc" id="channel-desc">Loading…</div>
           </div>
           <div class="actions">
             <button class="btn sm">Sort: recent</button>
@@ -638,143 +638,35 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         </div>
         <div class="composer">
           <div class="composer-bar">
-            <input placeholder="Ask the community or share something you're seeing.">
-            <button>Post</button>
+            <input id="composer-input" placeholder="Ask the community or share something you're seeing." autocomplete="off">
+            <button id="composer-btn" onclick="communityApp.postThread()">Post</button>
           </div>
+          <div id="typing-indicator" style="height:16px;font-size:11.5px;color:var(--muted);padding:2px 0;display:none"></div>
         </div>
-        <div class="thread-list">
-          <div class="thread-row selected">
-            <div class="top"><span class="author">Helena Kowalski</span><span class="time">2h ago</span><span class="tag priority">Article 9</span></div>
-            <div class="title">GPAI downstream duties: how are deployers splitting the Annex XII work from provider onboarding?</div>
-            <div class="snippet">We're mid-reorg and the new RFP template is trying to cover both provider attestations and the deployer risk register in one document. Wondering how others are carving the boundary for multi-model integrations.</div>
-            <div class="meta"><span><b>14</b> replies</span><span><b>6</b> participants</span><span>last <b>11m</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Marco Venturi</span><span class="time">4h ago</span><span class="tag">Fines</span></div>
-            <div class="title">First AI Office enforcement notice landed in Italy last night. Short read.</div>
-            <div class="snippet">Posting the public notice and a fast summary. The deployer triggered Article 6 high-risk without conformity records. 72-hour remediation window.</div>
-            <div class="meta"><span><b>22</b> replies</span><span><b>9</b> participants</span><span>last <b>28m</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Priya Sundaram</span><span class="time">Yesterday</span><span class="tag">FRIA</span></div>
-            <div class="title">Public-body FRIA template. Does anyone have one that survived contact with a regulator?</div>
-            <div class="snippet">Our internal template covers the eight required categories but the structure is ugly. Looking for a version that has been stress-tested with a supervisory authority.</div>
-            <div class="meta"><span><b>9</b> replies</span><span><b>7</b> participants</span><span>last <b>3h</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Jonas Reinhardt</span><span class="time">Yesterday</span><span class="tag">Standards</span></div>
-            <div class="title">CEN-CENELEC JTC 21 draft on risk management: anyone read the late December version?</div>
-            <div class="snippet">Comments close 9 May. The definitions of foreseeable misuse have tightened versus the October draft. Worth a collective pass.</div>
-            <div class="meta"><span><b>6</b> replies</span><span><b>4</b> participants</span><span>last <b>5h</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Sophie Laurent</span><span class="time">2 days</span><span class="tag">GPAI</span></div>
-            <div class="title">Does "integrated into an AI system" catch orchestration layers that only route prompts?</div>
-            <div class="snippet">Asking because our orchestration layer does no inference itself. The working view here is that Annex XI still applies because of effective control.</div>
-            <div class="meta"><span><b>18</b> replies</span><span><b>11</b> participants</span><span>last <b>6h</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Daniel Okafor</span><span class="time">2 days</span><span class="tag">Transparency</span></div>
-            <div class="title">Emotion recognition in the workplace: prohibited or high-risk with a narrow exception?</div>
-            <div class="snippet">Our people team wants to deploy sentiment analytics on sales calls. My read is Article 5(1)(f) applies unless it is a medical or safety purpose.</div>
-            <div class="meta"><span><b>27</b> replies</span><span><b>14</b> participants</span><span>last <b>1d</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Anna Eriksson</span><span class="time">3 days</span><span class="tag">Post-market</span></div>
-            <div class="title">Post-market monitoring plan template aligned to Article 72</div>
-            <div class="snippet">Sharing the template we landed on after three rounds with our notified body. Uses a four-column matrix.</div>
-            <div class="meta"><span><b>11</b> replies</span><span><b>6</b> participants</span><span>last <b>1d</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Liam Fitzpatrick</span><span class="time">3 days</span><span class="tag">Sandbox</span></div>
-            <div class="title">Irish sandbox applications: practical notes after two weeks of pre-filing calls</div>
-            <div class="snippet">Sharing what the DPC and the AI Office are actually asking in intake. Short version: more concrete test protocols, fewer slide-ware diagrams.</div>
-            <div class="meta"><span><b>8</b> replies</span><span><b>5</b> participants</span><span>last <b>2d</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Rachel Fontaine</span><span class="time">4 days</span><span class="tag">Derogations</span></div>
-            <div class="title">Member-state biometrics derogations: a working matrix</div>
-            <div class="snippet">Started a matrix covering FR, IT, NL, ES, DE. Will update as transposition notes land. Happy to co-maintain.</div>
-            <div class="meta"><span><b>16</b> replies</span><span><b>9</b> participants</span><span>last <b>2d</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Tomasz Wozniak</span><span class="time">5 days</span><span class="tag priority">Training data</span></div>
-            <div class="title">Training-data summary under Article 53(1)(d): how specific do you go on web-scraped sources?</div>
-            <div class="snippet">Disclosure granularity is becoming the real question. Named domains versus dataset families versus statistical summaries.</div>
-            <div class="meta"><span><b>31</b> replies</span><span><b>16</b> participants</span><span>last <b>3d</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Isabel Moreno</span><span class="time">6 days</span><span class="tag">Code of Practice</span></div>
-            <div class="title">Signed the GPAI Code. What changes operationally this quarter?</div>
-            <div class="snippet">Short list of what we rewrote: model-card template, incident routing, training-data log schema. Not as much as I feared.</div>
-            <div class="meta"><span><b>13</b> replies</span><span><b>8</b> participants</span><span>last <b>4d</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Ben Halstead</span><span class="time">1 week</span><span class="tag">Insurance</span></div>
-            <div class="title">AI liability insurance quotes: anyone seen a market price that is not six figures?</div>
-            <div class="snippet">Three brokers quoted. Range is wide. Posting numbers as ranges, not names.</div>
-            <div class="meta"><span><b>19</b> replies</span><span><b>11</b> participants</span><span>last <b>5d</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Mei-Lin Chen</span><span class="time">1 week</span><span class="tag">Audit</span></div>
-            <div class="title">Second-party AI audit scopes: what is on your checklist?</div>
-            <div class="snippet">Sharing our nine-section scope document after two contested supplier audits. Happy to take criticism.</div>
-            <div class="meta"><span><b>24</b> replies</span><span><b>13</b> participants</span><span>last <b>6d</b></span></div>
-          </div>
-          <div class="thread-row">
-            <div class="top"><span class="author">Noah Klein</span><span class="time">1 week</span><span class="tag">Prohibited</span></div>
-            <div class="title">Social-scoring carve-outs for fraud risk engines: is anyone comfortable?</div>
-            <div class="snippet">I am not. The line between allowed credit-risk scoring and prohibited social scoring is being tested in two member states right now.</div>
-            <div class="meta"><span><b>15</b> replies</span><span><b>10</b> participants</span><span>last <b>1w</b></span></div>
+        <div class="thread-list" id="thread-list">
+          <div class="thread-empty" id="thread-empty" style="padding:32px 24px;color:var(--muted);font-size:13.5px;text-align:center;display:none">
+            No threads yet. Start the conversation above.
           </div>
         </div>
       </section>
 
-      <section class="detail">
-        <div class="detail-head">
-          <div class="crumb">#eu-ai-act<span class="sep">·</span>thread</div>
-          <h3>GPAI downstream duties: how are deployers splitting the Annex XII work from provider onboarding?</h3>
-          <div class="stats"><span><b>14</b> replies</span><span><b>6</b> participants</span><span>started <b>2h ago</b></span></div>
+      <section class="detail" id="detail-pane">
+        <div class="detail-empty" id="detail-empty" style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:13.5px">
+          Select a thread to read and reply.
         </div>
-        <div class="msg">
-          <div class="msg-top"><div class="av c1">HK</div><div><div class="name">Helena Kowalski</div><div class="role">Head of Privacy, Lindqvist &amp; Bauer</div></div><div class="time">2h ago</div></div>
-          <div class="msg-body">
-            <p>We are mid-reorg. The new RFP template is trying to cover both provider attestations and the deployer-side risk register in one document. I suspect this is a mistake, but the procurement team likes the single-artefact view.</p>
-            <p>Two specific questions. First, when a provider already supplies an Annex XII disclosure, how much of it are you treating as deployer input versus independent review? Second, for multi-model integrations, does anyone maintain separate registers per model, or one consolidated register with a provider matrix?</p>
+        <div id="detail-content" style="display:none;height:100%;display:none;flex-direction:column">
+          <div class="detail-head" id="detail-head">
+            <div class="crumb" id="detail-crumb"></div>
+            <h3 id="detail-title"></h3>
+            <div class="stats" id="detail-stats"></div>
           </div>
-        </div>
-        <div class="msg">
-          <div class="msg-top"><div class="av c4">SL</div><div><div class="name">Sophie Laurent</div><div class="role">DPO, Banque Atlantique</div></div><div class="time">1h ago</div></div>
-          <div class="msg-body">
-            <p>We split the two. Provider disclosure goes into an attestations register owned by procurement; the deployer risk register sits with the second line. Pains at first, worth it when a provider switches mid-contract and nothing has to be renamed.</p>
-            <p>For multi-model, we run one consolidated register with a provider matrix column. Copying per-model was unmanageable past four models.</p>
-          </div>
-        </div>
-        <div class="msg">
-          <div class="msg-top"><div class="av c2">JR</div><div><div class="name">Jonas Reinhardt</div><div class="role">GC, Reinhardt Industrie</div></div><div class="time">38m ago</div></div>
-          <div class="msg-body">
-            <p>Agree with Sophie on the split. One warning: if you run a consolidated register, be very careful that your provider-specific controls do not get averaged out. The notified body pushed back hard when ours did.</p>
-            <blockquote>First, when a provider already supplies an Annex XII disclosure, how much of it are you treating as deployer input versus independent review?</blockquote>
-            <p>We treat it as input. Not review. The independent-review position got us into an awkward conversation about who has the technical competence.</p>
-          </div>
-        </div>
-        <div class="msg">
-          <div class="msg-top"><div class="av c5">PS</div><div><div class="name">Priya Sundaram</div><div class="role">Compliance Director, Mercer Halliday</div></div><div class="time">24m ago</div></div>
-          <div class="msg-body">
-            <p>Single-artefact view never survives audit. Every time we have tried it the audit team has forced us back to two artefacts with a mapping table.</p>
-          </div>
-        </div>
-        <div class="msg">
-          <div class="msg-top"><div class="av c7">DL</div><div><div class="name">David Longford</div><div class="role">Founder, Principles AI</div></div><div class="time">11m ago</div></div>
-          <div class="msg-body">
-            <p>Noting that the AI Office draft guidance on Annex XII (26 March) explicitly contemplates the deployer-side artefact as distinct. I will post the relevant paragraphs as a separate thread later today for reference.</p>
-          </div>
-        </div>
-        <div class="reply-box">
-          <textarea placeholder="Reply to this thread. Markdown supported."></textarea>
-          <div class="bar">
-            <div class="hint"><kbd>⌘</kbd><kbd>↵</kbd> to send</div>
-            <button class="btn btn-primary">Send reply</button>
+          <div class="msg-list" id="msg-list" style="flex:1;overflow-y:auto;padding:0 24px"></div>
+          <div class="reply-box" id="reply-box">
+            <textarea id="reply-input" placeholder="Reply to this thread…"></textarea>
+            <div class="bar">
+              <div class="hint"><kbd>⌘</kbd><kbd>↵</kbd> to send</div>
+              <button class="btn btn-primary" onclick="communityApp.sendReply()">Send reply</button>
+            </div>
           </div>
         </div>
       </section>
@@ -2526,5 +2418,413 @@ document.querySelectorAll('.tab').forEach(t=>{
 </div>
 
 <div class="nav-scrim" aria-hidden="true"></div>
+
+<!-- Community chat runtime -->
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+(function(){
+'use strict';
+
+var COMMUNITY_API = 'https://api.principlesai.org/community';
+var token = localStorage.getItem('pai_community_token');
+var member = JSON.parse(localStorage.getItem('pai_community_member') || 'null');
+var socket = null;
+var currentChannel = null;
+var currentThread = null;
+var typingTimer = null;
+var channels = [];
+
+// ── Init ────────────────────────────────────────────────────────────────────
+
+function init() {
+  if (!token) {
+    window.location.href = 'login.html';
+    return;
+  }
+  connectSocket();
+  loadChannels();
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+      if (document.activeElement === document.getElementById('composer-input')) {
+        communityApp.postThread();
+      } else if (document.activeElement === document.getElementById('reply-input')) {
+        communityApp.sendReply();
+      }
+    }
+  });
+
+  // Typing detection
+  var composerInput = document.getElementById('composer-input');
+  if (composerInput) {
+    composerInput.addEventListener('input', function() {
+      if (!currentChannel || !socket) return;
+      clearTimeout(typingTimer);
+      socket.emit('typing', {channel_slug: currentChannel});
+      typingTimer = setTimeout(function(){}, 2000);
+    });
+  }
+}
+
+// ── Socket ───────────────────────────────────────────────────────────────────
+
+function connectSocket() {
+  socket = io(COMMUNITY_API, {auth: {token: token}, transports: ['websocket','polling']});
+
+  socket.on('connect', function() {
+    if (currentChannel) socket.emit('join_channel', {slug: currentChannel});
+  });
+
+  socket.on('connect_error', function(err) {
+    if (err.message === 'invalid token' || err.message === 'unauthorized') {
+      localStorage.removeItem('pai_community_token');
+      localStorage.removeItem('pai_community_member');
+      window.location.href = 'login.html';
+    }
+  });
+
+  socket.on('new_message', function(msg) {
+    if (msg.parent_id === null || msg.parent_id === undefined) {
+      prependThread(msg);
+      updateChannelUnread(msg.channel_slug, 1);
+    } else if (currentThread && msg.parent_id === currentThread) {
+      appendReply(msg);
+      scrollDetailToBottom();
+    }
+  });
+
+  socket.on('user_typing', function(data) {
+    if (data.channel_slug !== currentChannel) return;
+    var el = document.getElementById('typing-indicator');
+    if (!el) return;
+    el.style.display = 'block';
+    el.textContent = data.display_name + ' is typing…';
+    clearTimeout(el._timer);
+    el._timer = setTimeout(function(){ el.style.display = 'none'; }, 3000);
+  });
+
+  socket.on('reaction_update', function(data) {
+    refreshReactions(data.message_id);
+  });
+}
+
+// ── API helpers ───────────────────────────────────────────────────────────────
+
+function apiFetch(path, opts) {
+  opts = opts || {};
+  opts.headers = Object.assign({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token}, opts.headers || {});
+  return fetch(COMMUNITY_API + path, opts).then(function(r) {
+    if (r.status === 401) {
+      localStorage.removeItem('pai_community_token');
+      window.location.href = 'login.html';
+      return Promise.reject('unauthorized');
+    }
+    return r.json();
+  });
+}
+
+// ── Channels ──────────────────────────────────────────────────────────────────
+
+function loadChannels() {
+  apiFetch('/api/channels').then(function(data) {
+    channels = data;
+    renderChannels(data);
+    if (data.length > 0) switchChannel(data[0].slug);
+  }).catch(function(e) { console.error('loadChannels', e); });
+}
+
+function renderChannels(data) {
+  var groups = {pinned:[], topics:[], jurisdictions:[], practice:[]};
+  data.forEach(function(ch) {
+    if (groups[ch.category]) groups[ch.category].push(ch);
+  });
+
+  var aside = document.querySelector('.channels');
+  if (!aside) return;
+  aside.innerHTML = '';
+
+  var labels = {pinned:'Pinned', topics:'Topics', jurisdictions:'Jurisdictions', practice:'Practice'};
+  Object.keys(groups).forEach(function(cat) {
+    var list = groups[cat];
+    if (!list.length) return;
+    var grp = document.createElement('div');
+    grp.className = 'channel-group';
+    var h3 = document.createElement('h3');
+    h3.textContent = labels[cat];
+    grp.appendChild(h3);
+    list.forEach(function(ch) {
+      var el = document.createElement('div');
+      el.className = 'channel' + (ch.slug === currentChannel ? ' active' : '');
+      el.dataset.slug = ch.slug;
+      el.innerHTML = '<span><span class="hash">#</span>' + esc(ch.slug) + '</span>' +
+        '<span class="ch-count" id="unread-' + ch.slug + '">' + (ch.unread > 0 ? ch.unread : '') + '</span>';
+      el.addEventListener('click', function() { switchChannel(ch.slug); });
+      grp.appendChild(el);
+    });
+    aside.appendChild(grp);
+  });
+}
+
+function switchChannel(slug) {
+  if (currentChannel && socket) socket.emit('leave_channel', {slug: currentChannel});
+  currentChannel = slug;
+  currentThread = null;
+
+  // Update sidebar active state
+  document.querySelectorAll('.channel').forEach(function(el) {
+    el.classList.toggle('active', el.dataset.slug === slug);
+  });
+
+  // Clear thread list
+  var tl = document.getElementById('thread-list');
+  if (tl) tl.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted)">Loading…</div>';
+
+  // Hide detail
+  showDetailEmpty();
+
+  // Update header
+  var titleEl = document.getElementById('channel-title');
+  if (titleEl) titleEl.textContent = '#' + slug;
+
+  if (socket) {
+    socket.emit('join_channel', {slug: slug});
+    socket.emit('mark_read', {channel_slug: slug, message_id: 0});
+  }
+
+  apiFetch('/api/channels/' + slug + '/threads').then(function(data) {
+    var ch = data.channel;
+    var descEl = document.getElementById('channel-desc');
+    if (descEl) descEl.textContent = (data.threads.length || 0) + ' threads · ' + (ch.description || '');
+    renderThreads(data.threads, slug);
+    clearUnread(slug);
+  }).catch(function(e) { console.error('switchChannel', e); });
+}
+
+function updateChannelUnread(slug, delta) {
+  if (slug === currentChannel) return;
+  var el = document.getElementById('unread-' + slug);
+  if (!el) return;
+  var cur = parseInt(el.textContent) || 0;
+  el.textContent = cur + delta;
+}
+
+function clearUnread(slug) {
+  var el = document.getElementById('unread-' + slug);
+  if (el) el.textContent = '';
+}
+
+// ── Threads ───────────────────────────────────────────────────────────────────
+
+function renderThreads(threads, slug) {
+  var tl = document.getElementById('thread-list');
+  if (!tl) return;
+  tl.innerHTML = '';
+  if (!threads.length) {
+    tl.innerHTML = '<div style="padding:32px 24px;color:var(--muted);font-size:13.5px;text-align:center">No threads yet. Start the conversation above.</div>';
+    return;
+  }
+  threads.forEach(function(t) { tl.appendChild(makeThreadRow(t, slug)); });
+}
+
+function makeThreadRow(t, slug) {
+  var el = document.createElement('div');
+  el.className = 'thread-row';
+  el.dataset.id = t.id;
+  var ago = timeAgo(t.created_at);
+  var lastAgo = t.last_reply ? timeAgo(t.last_reply) : ago;
+  var snippet = t.body.replace(/<[^>]+>/g,'').substring(0, 120);
+  el.innerHTML =
+    '<div class="top"><span class="author">' + esc(t.author.display_name) + '</span>' +
+    '<span class="time">' + ago + '</span></div>' +
+    '<div class="title">' + esc(firstLine(t.body)) + '</div>' +
+    '<div class="snippet">' + esc(snippet) + '</div>' +
+    '<div class="meta"><span><b>' + t.reply_count + '</b> replies</span>' +
+    '<span><b>' + (t.participant_count || 1) + '</b> participants</span>' +
+    '<span>last <b>' + lastAgo + '</b></span></div>';
+  el.addEventListener('click', function() { openThread(t.id, slug, el); });
+  return el;
+}
+
+function prependThread(msg) {
+  var tl = document.getElementById('thread-list');
+  if (!tl) return;
+  var emptyMsg = tl.querySelector('div[style]');
+  if (emptyMsg) emptyMsg.remove();
+  var t = {
+    id: msg.id, body: msg.body, created_at: msg.created_at,
+    author: msg.author, reply_count: 0, participant_count: 1, last_reply: null
+  };
+  var row = makeThreadRow(t, msg.channel_slug);
+  tl.insertBefore(row, tl.firstChild);
+}
+
+// ── Thread detail ─────────────────────────────────────────────────────────────
+
+function openThread(threadId, channelSlug, rowEl) {
+  document.querySelectorAll('.thread-row').forEach(function(r) { r.classList.remove('selected'); });
+  if (rowEl) rowEl.classList.add('selected');
+  currentThread = threadId;
+
+  showDetailContent();
+  var ml = document.getElementById('msg-list');
+  if (ml) ml.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted)">Loading…</div>';
+
+  apiFetch('/api/threads/' + threadId + '/replies').then(function(data) {
+    var crumb = document.getElementById('detail-crumb');
+    var titleEl = document.getElementById('detail-title');
+    var statsEl = document.getElementById('detail-stats');
+    if (crumb) crumb.innerHTML = '#' + esc(channelSlug) + '<span class="sep">·</span>thread';
+    if (titleEl) titleEl.textContent = firstLine(data.thread.body);
+    if (statsEl) statsEl.innerHTML =
+      '<span><b>' + data.replies.length + '</b> replies</span>' +
+      '<span>started <b>' + timeAgo(data.thread.created_at) + '</b></span>';
+
+    if (ml) {
+      ml.innerHTML = '';
+      ml.appendChild(makeMsg(data.thread, true));
+      data.replies.forEach(function(r) { ml.appendChild(makeMsg(r, false)); });
+      scrollDetailToBottom();
+    }
+
+    if (socket) socket.emit('mark_read', {channel_slug: channelSlug, message_id: data.thread.id});
+  }).catch(function(e) { console.error('openThread', e); });
+}
+
+function makeMsg(msg, isOp) {
+  var el = document.createElement('div');
+  el.className = 'msg' + (isOp ? ' msg-op' : '');
+  el.dataset.id = msg.id;
+  var av = msg.author.initials || '??';
+  var col = msg.author.color_class || 'c1';
+  var bodyHtml = renderMarkdown(msg.body);
+  el.innerHTML =
+    '<div class="msg-top">' +
+    '<div class="av ' + esc(col) + '">' + esc(av) + '</div>' +
+    '<div><div class="name">' + esc(msg.author.display_name) + '</div>' +
+    '<div class="role">' + esc(msg.author.role_title || '') + '</div></div>' +
+    '<div class="time">' + timeAgo(msg.created_at) + '</div>' +
+    '</div>' +
+    '<div class="msg-body">' + bodyHtml + '</div>' +
+    '<div class="msg-reactions" id="reactions-' + msg.id + '"></div>';
+  return el;
+}
+
+function appendReply(msg) {
+  var ml = document.getElementById('msg-list');
+  if (!ml) return;
+  ml.appendChild(makeMsg(msg, false));
+  var statsEl = document.getElementById('detail-stats');
+  if (statsEl) {
+    var b = statsEl.querySelector('b');
+    if (b) b.textContent = (parseInt(b.textContent)||0) + 1;
+  }
+}
+
+function scrollDetailToBottom() {
+  var ml = document.getElementById('msg-list');
+  if (ml) setTimeout(function(){ ml.scrollTop = ml.scrollHeight; }, 50);
+}
+
+function showDetailEmpty() {
+  var empty = document.getElementById('detail-empty');
+  var content = document.getElementById('detail-content');
+  if (empty) empty.style.display = 'flex';
+  if (content) content.style.display = 'none';
+}
+
+function showDetailContent() {
+  var empty = document.getElementById('detail-empty');
+  var content = document.getElementById('detail-content');
+  if (empty) empty.style.display = 'none';
+  if (content) { content.style.display = 'flex'; content.style.flexDirection = 'column'; }
+}
+
+// ── Reactions ─────────────────────────────────────────────────────────────────
+
+function refreshReactions(messageId) {
+  // Simple: re-fetch reaction state — good enough for MVP
+  apiFetch('/api/messages/' + messageId + '/reactions').then(function(data) {
+    var el = document.getElementById('reactions-' + messageId);
+    if (!el) return;
+    el.innerHTML = '';
+    var grouped = {};
+    (data.reactions || []).forEach(function(r) {
+      grouped[r.emoji] = (grouped[r.emoji] || 0) + 1;
+    });
+    Object.keys(grouped).forEach(function(emoji) {
+      var btn = document.createElement('button');
+      btn.className = 'reaction-btn';
+      btn.textContent = emoji + ' ' + grouped[emoji];
+      btn.onclick = function() {
+        if (socket) socket.emit('add_reaction', {message_id: messageId, emoji: emoji, channel_slug: currentChannel});
+      };
+      el.appendChild(btn);
+    });
+  }).catch(function(){});
+}
+
+// ── Compose ───────────────────────────────────────────────────────────────────
+
+window.communityApp = {
+  postThread: function() {
+    var inp = document.getElementById('composer-input');
+    if (!inp || !currentChannel || !socket) return;
+    var body = inp.value.trim();
+    if (!body) return;
+    inp.value = '';
+    socket.emit('send_message', {channel_slug: currentChannel, body: body, parent_id: null});
+  },
+
+  sendReply: function() {
+    var inp = document.getElementById('reply-input');
+    if (!inp || !currentChannel || !currentThread || !socket) return;
+    var body = inp.value.trim();
+    if (!body) return;
+    inp.value = '';
+    socket.emit('send_message', {channel_slug: currentChannel, body: body, parent_id: currentThread});
+  }
+};
+
+// ── Utilities ─────────────────────────────────────────────────────────────────
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function firstLine(s) {
+  return (s||'').split('\n')[0].substring(0,200);
+}
+
+function renderMarkdown(s) {
+  // Minimal: bold, italic, code, blockquote, paragraphs
+  return esc(s)
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g,'<em>$1</em>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/^&gt; (.+)$/gm,'<blockquote>$1</blockquote>')
+    .replace(/\n\n/g,'</p><p>')
+    .replace(/^(.+)$/,'<p>$1</p>');
+}
+
+function timeAgo(iso) {
+  if (!iso) return '';
+  var diff = (Date.now() - new Date(iso)) / 1000;
+  if (diff < 60)   return 'just now';
+  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+  if (diff < 604800) return Math.floor(diff/86400) + 'd ago';
+  return Math.floor(diff/604800) + 'w ago';
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
+})();
+</script>
 </body>
 </html>

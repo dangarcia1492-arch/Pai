@@ -177,12 +177,54 @@ body::before{
 </div>
 
 <script>
+var COMMUNITY_API = 'https://api.principlesai.org/community';
+
 function handleSignIn(e) {
   e.preventDefault();
   var btn = document.getElementById('btn-submit');
+  var email = document.getElementById('inp-email').value.trim();
+  var password = document.getElementById('inp-pass').value;
+  var errEl = document.getElementById('login-error');
+  if (errEl) errEl.remove();
+
+  if (!email || !password) {
+    showError('Please enter your email and password.');
+    return;
+  }
+
   btn.textContent = 'Signing in…';
   btn.disabled = true;
-  setTimeout(function() { window.location.href = 'index.html'; }, 600);
+
+  fetch(COMMUNITY_API + '/auth/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({email: email, password: password})
+  })
+  .then(function(r) { return r.json().then(function(d) { return {ok: r.ok, data: d}; }); })
+  .then(function(res) {
+    if (!res.ok) {
+      btn.textContent = 'Sign In';
+      btn.disabled = false;
+      showError(res.data.error || 'Sign-in failed. Please try again.');
+      return;
+    }
+    localStorage.setItem('pai_community_token', res.data.token);
+    localStorage.setItem('pai_community_member', JSON.stringify(res.data.member));
+    window.location.href = 'pai-app-community.html';
+  })
+  .catch(function() {
+    btn.textContent = 'Sign In';
+    btn.disabled = false;
+    showError('Unable to connect. Please check your connection and try again.');
+  });
+}
+
+function showError(msg) {
+  var el = document.createElement('div');
+  el.id = 'login-error';
+  el.style.cssText = 'margin-top:12px;padding:10px 14px;background:#feded8;color:#ba0517;font-size:13px;border-radius:5px;border:1px solid #fbc8c0';
+  el.textContent = msg;
+  document.querySelector('form').after(el);
 }
 </script>
 </body>
