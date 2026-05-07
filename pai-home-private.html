@@ -3056,14 +3056,14 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     list.innerHTML = rows.map((row, i) => {
       const isLead = i === 0;
       const cls = isLead ? 'today-item lead priority' : 'today-item';
-      const day = escHTML(row.date_display || '');
+      const day = escHTML(row.date_published || '');
       const juris = escHTML(row.jurisdiction_name || '');
-      const body = escHTML(row.body_name || '');
-      const topic = escHTML(row.topic || '');
-      const title = escHTML(row.title || '');
+      const body = escHTML(row.authority || '');
+      const topic = escHTML(row.story_type || '');
+      const title = escHTML(row.headline || '');
       const rawSummary = row.summary || '';
       const summary = escHTML(rawSummary.length > 240 ? rawSummary.slice(0, 240).replace(/\s+\S*$/, '') + '…' : rawSummary);
-      const at2 = escHTML(row.at2_id || '');
+      const at2 = escHTML(row.slug || '');
       const url = at2 ? `pai-app-news-story-${at2}` : escHTML(row.source_url || '#');
       const host = escHTML(sourceHost(row.source_url || ''));
       const metaParts = [juris, body].filter(Boolean).join(' · ');
@@ -3109,19 +3109,19 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         var code = ISO2[row.jurisdiction_name] || '';
         var flagHtml = flag(row.jurisdiction_name);
         var deck = (row.summary || '').slice(0, 260);
-        return '<a class="featured-card" href="pai-app-news-story-' + escHTML(row.at2_id) + '">' +
+        return '<a class="featured-card" href="pai-app-news-story-' + escHTML(row.slug) + '">' +
           '<div class="fc-thumb r2">' +
           '<span class="fc-badge"><span class="dot"></span>News</span>' +
           (flagHtml ? '<span class="country-flag">' + flagHtml + '</span>' : '') +
           (code ? '<span class="silhouette">' + escHTML(code) + '</span>' : '') +
-          '<span class="country-strip"><span class="name">' + escHTML(row.jurisdiction_name) + '</span><span class="auth">&middot; ' + escHTML(row.body_name) + '</span></span>' +
+          '<span class="country-strip"><span class="name">' + escHTML(row.jurisdiction_name) + '</span><span class="auth">&middot; ' + escHTML(row.authority) + '</span></span>' +
           '</div>' +
           '<div class="fc-body">' +
-          '<div class="fc-title">' + escHTML(row.title) + '</div>' +
+          '<div class="fc-title">' + escHTML(row.headline) + '</div>' +
           '<div class="fc-deck">' + escHTML(deck) + '</div>' +
           '<div class="fc-meta">' +
           '<span class="fc-author"><span class="fc-avatar" style="background:#014486">P</span>PAI Editors</span>' +
-          '<span class="sep">&middot;</span><span class="fc-when">' + escHTML(row.date_display) + '</span>' +
+          '<span class="sep">&middot;</span><span class="fc-when">' + escHTML(row.date_published) + '</span>' +
           '<span class="sep">&middot;</span><span>' + escHTML(row.jurisdiction_name) + '</span>' +
           '</div></div></a>';
       }).join('');
@@ -3151,7 +3151,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
               '<div class="dev-when">' + dStr + small + '</div>' +
               '<div class="dev-body">' +
               '<div class="dev-meta"><span class="juris">' + escHTML(row.jurisdiction_name) + '</span></div>' +
-              '<div class="dev-headline"><a href="pai-app-news-story-' + escHTML(row.at2_id) + '" style="color:inherit;text-decoration:none;">' + escHTML(row.title) + '</a></div>' +
+              '<div class="dev-headline"><a href="pai-app-news-story-' + escHTML(row.slug) + '" style="color:inherit;text-decoration:none;">' + escHTML(row.headline) + '</a></div>' +
               '</div></article>';
           }).join('');
       }).join('');
