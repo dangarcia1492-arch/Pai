@@ -1519,8 +1519,8 @@ function escHtml(s) {
 // Tag = enforcement/guidance/consultation/caselaw/legislation/alert.
 // Inferred from body name + title keywords since Topic is not populated.
 function inferTag(r) {
-  const body = (r.body_name || '').toLowerCase();
-  const title = (r.title || '').toLowerCase();
+  const body = (r.authority || '').toLowerCase();
+  const title = (r.headline || '').toLowerCase();
   if (/court|tribunal|judgment|case of|judgement/.test(body + ' ' + title)) return { cls: 'case', label: 'Case law' };
   if (/parliament|legislature|bill|act\b|assembly|congress|bundestag|stortinget/.test(body + ' ' + title)) return { cls: 'legi', label: 'Legislation' };
   if (/consultation|public comment|draft for comment/.test(body + ' ' + title)) return { cls: 'cons', label: 'Consultation' };
@@ -1541,11 +1541,11 @@ function renderLead(r) {
   return (
     '<div class="nl-kick">TODAY\'S LEAD · ' + escHtml(r.jurisdiction_name || '—') + ' · ' + escHtml(r.date_published || '—') +
       ' · <span class="status-pill-sm ' + tag.cls + '">' + tag.label + '</span></div>' +
-    '<h2><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.title) + '</a></h2>' +
+    '<h2><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.headline) + '</a></h2>' +
     (r.summary ? '<p class="nl-standfirst">' + escHtml(r.summary) + '</p>' : '') +
     '<div class="nl-footer">' +
       '<span><strong>Type</strong> ' + tag.label + '</span>' +
-      (r.body_name ? '<span><strong>Authority</strong> ' + escHtml(r.body_name) + '</span>' : '') +
+      (r.authority ? '<span><strong>Authority</strong> ' + escHtml(r.authority) + '</span>' : '') +
       (host ? '<span><strong>Source</strong> <a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + host + ' ↗</a></span>' : '') +
     '</div>'
   );
@@ -1554,10 +1554,10 @@ function renderSecond(r) {
   const tag = inferTag(r);
   return (
     '<div class="news-second">' +
-      '<div class="ns-kick">SECOND LEAD · ' + escHtml(r.jurisdiction_name || '—') + ' · ' + escHtml(r.date_display || '—') + '</div>' +
-      '<h3><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.title) + '</a></h3>' +
+      '<div class="ns-kick">SECOND LEAD · ' + escHtml(r.jurisdiction_name || '—') + ' · ' + escHtml(r.date_published || '—') + '</div>' +
+      '<h3><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.headline) + '</a></h3>' +
       '<div class="ns-meta"><span class="status-pill-sm ' + tag.cls + '">' + tag.label + '</span>' +
-        (r.body_name ? ' · ' + escHtml(r.body_name) : '') + '</div>' +
+        (r.authority ? ' · ' + escHtml(r.authority) : '') + '</div>' +
     '</div>'
   );
 }
@@ -1566,12 +1566,12 @@ function renderWire(r) {
   const host = hostOf(r.source_url);
   return (
     '<div class="wire-row">' +
-      '<div class="wr-ts">' + escHtml(r.date_display || '—') + '</div>' +
+      '<div class="wr-ts">' + escHtml(r.date_published || '—') + '</div>' +
       '<div class="wr-jur">' + escHtml((r.jurisdiction_name || '').slice(0, 3).toUpperCase()) + '</div>' +
       '<div class="wr-info">' +
-        '<h4><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.title) + '</a></h4>' +
-        '<div class="wr-src">' + (r.body_name ? '<strong>' + escHtml(r.body_name) + '</strong>' : '') +
-          (host ? (r.body_name ? ' · ' : '') + '<span>' + host + '</span>' : '') + '</div>' +
+        '<h4><a href="' + escHtml(r.source_url) + '" target="_blank" rel="noopener">' + escHtml(r.headline) + '</a></h4>' +
+        '<div class="wr-src">' + (r.authority ? '<strong>' + escHtml(r.authority) + '</strong>' : '') +
+          (host ? (r.authority ? ' · ' : '') + '<span>' + host + '</span>' : '') + '</div>' +
       '</div>' +
       '<div class="wr-tag ' + tag.cls + '">' + tag.label + '</div>' +
     '</div>'
