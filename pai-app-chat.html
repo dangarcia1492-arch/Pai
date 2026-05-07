@@ -378,8 +378,30 @@ var COMMUNITY_API  = 'https://api.principlesai.org/community';
 var EMOJI_SET      = ['👍','❤️','😂','🙏','💯','✅','🔥','👀','🤔','⚠️','🎉','💡','📋','🤝','⭐','🙌'];
 var GROUP_GAP_MS   = 5 * 60 * 1000;
 
+var DEMO_CHANNELS = [
+  {id:1,slug:'eu-ai-act',name:'eu-ai-act',description:'EU AI Act implementation discussions',category:'pinned',sort_order:1,unread:0},
+  {id:2,slug:'uk-data-reform',name:'uk-data-reform',description:'UK DPDI Act and ICO developments',category:'pinned',sort_order:2,unread:0},
+  {id:3,slug:'enforcement-watch',name:'enforcement-watch',description:'Enforcement actions and regulatory decisions',category:'pinned',sort_order:3,unread:0},
+  {id:4,slug:'dpia',name:'dpia',description:'Data Protection Impact Assessments',category:'topics',sort_order:10,unread:0},
+  {id:5,slug:'vendor-risk',name:'vendor-risk',description:'Third-party and supplier risk management',category:'topics',sort_order:11,unread:0},
+  {id:6,slug:'sccs-transfers',name:'sccs-transfers',description:'Standard Contractual Clauses and transfers',category:'topics',sort_order:12,unread:0},
+  {id:7,slug:'rope-guidance',name:'rope-guidance',description:'Rules of procedure and guidance documents',category:'topics',sort_order:13,unread:0},
+  {id:8,slug:'model-cards',name:'model-cards',description:'AI model documentation and transparency',category:'topics',sort_order:14,unread:0},
+  {id:9,slug:'incident-response',name:'incident-response',description:'Breach and incident response',category:'topics',sort_order:15,unread:0},
+  {id:10,slug:'ccpa-cpra',name:'ccpa-cpra',description:'California privacy law',category:'topics',sort_order:16,unread:0},
+  {id:11,slug:'uk',name:'uk',description:'United Kingdom regulatory updates',category:'jurisdictions',sort_order:20,unread:0},
+  {id:12,slug:'eu',name:'eu',description:'European Union regulatory updates',category:'jurisdictions',sort_order:21,unread:0},
+  {id:13,slug:'us-federal',name:'us-federal',description:'US federal regulatory developments',category:'jurisdictions',sort_order:22,unread:0},
+  {id:14,slug:'us-states',name:'us-states',description:'US state-level privacy and AI laws',category:'jurisdictions',sort_order:23,unread:0},
+  {id:15,slug:'apac',name:'apac',description:'Asia-Pacific regulatory updates',category:'jurisdictions',sort_order:24,unread:0},
+  {id:16,slug:'board-reporting',name:'board-reporting',description:'Board and exec reporting on AI/privacy',category:'practice',sort_order:30,unread:0},
+  {id:17,slug:'gc-roundtable',name:'gc-roundtable',description:'General Counsel discussion group',category:'practice',sort_order:31,unread:0},
+  {id:18,slug:'privacy-ops',name:'privacy-ops',description:'Privacy operations and programme management',category:'practice',sort_order:32,unread:0},
+];
+
 var token          = localStorage.getItem('pai_community_token');
 var member         = JSON.parse(localStorage.getItem('pai_community_member') || 'null');
+var offlineMode    = false;
 var socket         = null;
 var currentChannel = null;
 var currentThread  = null;
@@ -394,12 +416,17 @@ var jumpCount      = 0;
 // ── Init ──────────────────────────────────────────────────────────────────
 
 function init() {
-  if (!token) { window.location.href = 'login.html'; return; }
+  if (!token) {
+    member = {display_name: 'Demo User', initials: 'DU', color_class: 'c1'};
+    offlineMode = true;
+  }
 
-  // If opened via hash (e.g. #eu-ai-act), switch to that channel
+  var nameEl = document.getElementById('header-user-name');
+  if (nameEl && member) nameEl.textContent = member.display_name || '';
+
   var hashChannel = window.location.hash.replace('#','');
 
-  connectSocket();
+  if (!offlineMode) connectSocket();
   loadChannels(hashChannel || null);
   setupKeyboard();
   setupReplyTextarea();
@@ -456,7 +483,9 @@ function connectSocket() {
     if (err.message === 'invalid token' || err.message === 'unauthorized') {
       localStorage.removeItem('pai_community_token');
       window.location.href = 'login.html';
+      return;
     }
+    offlineMode = true;
   });
 
   socket.on('new_message', function(msg) {
@@ -497,9 +526,10 @@ function connectSocket() {
 
 function apiFetch(path, opts) {
   opts = opts || {};
-  opts.headers = Object.assign({'Content-Type':'application/json','Authorization':'Bearer '+token}, opts.headers||{});
+  opts.headers = Object.assign({'Content-Type':'application/json','Authorization':'Bearer '+(token||'')}, opts.headers||{});
   return fetch(COMMUNITY_API + path, opts).then(function(r) {
-    if (r.status === 401) { localStorage.removeItem('pai_community_token'); window.location.href = 'login.html'; return Promise.reject(); }
+    if (r.status === 401 && !offlineMode) { localStorage.removeItem('pai_community_token'); window.location.href = 'login.html'; return Promise.reject(); }
+    if (!r.ok) return Promise.reject(new Error('http ' + r.status));
     return r.json();
   });
 }
@@ -512,7 +542,13 @@ function loadChannels(defaultSlug) {
     renderChannels(data);
     var target = defaultSlug || (data.length > 0 ? data[0].slug : null);
     if (target) switchChannel(target);
-  }).catch(function(e){ console.error(e); });
+  }).catch(function() {
+    offlineMode = true;
+    channels = DEMO_CHANNELS;
+    renderChannels(DEMO_CHANNELS);
+    var target = defaultSlug || 'eu-ai-act';
+    switchChannel(target);
+  });
 }
 
 function renderChannels(data) {
@@ -572,13 +608,18 @@ function switchChannel(slug) {
     socket.emit('mark_read', {channel_slug: slug, message_id: 0});
   }
 
+  var chMeta = channels.find(function(c){ return c.slug === slug; });
+  var descEl = document.getElementById('channel-desc');
+  if (descEl && chMeta) descEl.textContent = chMeta.description || '';
+
   apiFetch('/api/channels/' + slug + '/threads').then(function(data) {
     var ch = data.channel;
-    var descEl = document.getElementById('channel-desc');
     if (descEl) descEl.textContent = (data.threads.length||0) + ' threads · ' + (ch.description||'');
     renderThreads(data.threads, slug);
     clearUnread(slug);
-  }).catch(function(e){ console.error(e); });
+  }).catch(function() {
+    renderThreads([], slug);
+  });
 }
 
 function updateChannelUnread(slug, delta) {
@@ -689,7 +730,23 @@ function openThread(threadId, channelSlug, rowEl) {
     if (socket) socket.emit('mark_read', {channel_slug: channelSlug, message_id: data.thread.id});
     var ta = document.getElementById('reply-input');
     if (ta) setTimeout(function(){ ta.focus(); }, 100);
-  }).catch(function(e){ console.error(e); });
+  }).catch(function() {
+    var localRow = document.querySelector('.thread-row[data-id="' + threadId + '"]');
+    var body = localRow ? (localRow.querySelector('.title')||{}).textContent || '' : '';
+    var crumb   = document.getElementById('detail-crumb');
+    var titleEl = document.getElementById('detail-title');
+    var statsEl = document.getElementById('detail-stats');
+    if (crumb)   crumb.innerHTML = '#' + esc(channelSlug) + '<span class="sep">·</span>thread';
+    if (titleEl) titleEl.textContent = body;
+    if (statsEl) statsEl.innerHTML = '<span><b>0</b> replies</span>';
+    if (ml) {
+      var jb2 = document.getElementById('jump-btn');
+      ml.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">No replies yet. Be the first to respond.</div>';
+      if (jb2) ml.appendChild(jb2);
+    }
+    var ta = document.getElementById('reply-input');
+    if (ta) setTimeout(function(){ ta.focus(); }, 100);
+  });
 }
 
 function makeMsg(msg, isOp) {
@@ -851,22 +908,45 @@ function clearTabBadge() { tabBadgeCount = 0; document.title = 'PrinciplesAI —
 
 // ── Compose ───────────────────────────────────────────────────────────────
 
+function localMsg(body, parentId) {
+  var m = member || {display_name:'Demo User', initials:'DU', color_class:'c1'};
+  return {
+    id: Date.now(),
+    body: body,
+    channel_slug: currentChannel,
+    parent_id: parentId,
+    created_at: new Date().toISOString(),
+    author: {display_name: m.display_name, role_title: m.role_title||'', initials: m.initials||'DU', color_class: m.color_class||'c1'}
+  };
+}
+
 window.communityApp = {
   postThread: function() {
     var inp = document.getElementById('composer-input');
-    if (!inp || !currentChannel || !socket) return;
+    if (!inp || !currentChannel) return;
     var body = inp.value.trim();
     if (!body) return;
     inp.value = '';
-    socket.emit('send_message', {channel_slug: currentChannel, body: body, parent_id: null});
+    if (offlineMode || !socket) {
+      prependThread(localMsg(body, null));
+    } else {
+      socket.emit('send_message', {channel_slug: currentChannel, body: body, parent_id: null});
+    }
   },
   sendReply: function() {
     var inp = document.getElementById('reply-input');
-    if (!inp || !currentChannel || !currentThread || !socket) return;
+    if (!inp || !currentChannel || !currentThread) return;
     var body = inp.value.trim();
     if (!body) return;
     inp.value = ''; inp.style.height = '';
-    socket.emit('send_message', {channel_slug: currentChannel, body: body, parent_id: currentThread});
+    if (offlineMode || !socket) {
+      var msg = localMsg(body, currentThread);
+      appendReply(msg);
+      scrollDetailToBottom();
+      updateThreadRowCount(currentThread);
+    } else {
+      socket.emit('send_message', {channel_slug: currentChannel, body: body, parent_id: currentThread});
+    }
   },
   jumpToBottom: function() {
     scrollDetailToBottom();
