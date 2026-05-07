@@ -431,6 +431,8 @@ button { cursor: pointer; }
 .today-item.lead .today-deck b { color: var(--ink); font-weight: 600; }
 .today-item.lead .today-source { font-size: 11.5px; font-weight: 600; color: var(--accent-2); }
 .today-item.lead .today-source::after { content: ' ↗'; font-family: var(--mono); }
+/* Non-lead today items also get a deck */
+.today-item .today-deck { font-size: 12px; color: var(--secondary); line-height: 1.5; margin-bottom: 6px; }
 
 /* ============ SECTION EYEBROW ============ */
 .section-eyebrow { display: flex; align-items: baseline; gap: 16px; margin: 8px 2px 16px; }
@@ -3062,12 +3064,13 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       const topic = escHTML(row.story_type || '');
       const title = escHTML(row.headline || '');
       const rawSummary = row.summary || '';
-      const summary = escHTML(rawSummary.length > 240 ? rawSummary.slice(0, 240).replace(/\s+\S*$/, '') + '…' : rawSummary);
+      const cap = isLead ? 320 : 180;
+      const summary = escHTML(rawSummary.length > cap ? rawSummary.slice(0, cap).replace(/\s+\S*$/, '') + '…' : rawSummary);
       const at2 = escHTML(row.slug || '');
       const url = at2 ? `pai-app-news-story-${at2}` : escHTML(row.source_url || '#');
       const host = escHTML(sourceHost(row.source_url || ''));
       const metaParts = [juris, body].filter(Boolean).join(' · ');
-      const deckHTML = (isLead && summary) ? `<div class="today-deck">${summary}</div>` : '';
+      const deckHTML = summary ? `<div class="today-deck">${summary}</div>` : '';
       const topicHTML = topic ? `<span class="dot">·</span><span>${topic}</span>` : '';
       return `<li class="${cls}">
         <div class="today-time">${day || '—'}<span class="day">${day ? '' : '—'}</span></div>
@@ -3147,11 +3150,18 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
             var days = daysBetween(row.date_published);
             var dStr = days < 1 ? 'today' : days + 'd';
             var small = days < 1 ? '' : '<small>ago</small>';
+            var rawSummary = row.summary || '';
+            var summary = escHTML(rawSummary.length > 280 ? rawSummary.slice(0, 280).replace(/\s+\S*$/, '') + '…' : rawSummary);
+            var deckHTML = summary ? '<div class="dev-deck">' + summary + '</div>' : '';
+            var auth = escHTML(row.authority || '');
+            var metaParts = [escHTML(row.jurisdiction_name)];
+            if (auth) metaParts.push(auth);
             return '<article class="dev-item">' +
               '<div class="dev-when">' + dStr + small + '</div>' +
               '<div class="dev-body">' +
-              '<div class="dev-meta"><span class="juris">' + escHTML(row.jurisdiction_name) + '</span></div>' +
+              '<div class="dev-meta"><span class="juris">' + metaParts.join(' &middot; ') + '</span></div>' +
               '<div class="dev-headline"><a href="pai-app-news-story-' + escHTML(row.slug) + '" style="color:inherit;text-decoration:none;">' + escHTML(row.headline) + '</a></div>' +
+              deckHTML +
               '</div></article>';
           }).join('');
       }).join('');
