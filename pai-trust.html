@@ -702,7 +702,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <li><b>Three independent judges.</b> Gemini extracts claims; Sonnet checks domain accuracy; Sonar checks external corroboration. Fabrication rarely survives all three.</li>
         <li><b>Every claim carries verbatim evidence.</b> A deterministic validator on the production side rejects anything whose evidence snippet isn't a verbatim source substring.</li>
         <li><b>A human research team is the final word.</b> Our editors and regional specialists read every claim at Stage 5 Select and again at post-Stage-7 editorial review. The machine pipeline is a quality filter, not a substitute for their judgment.</li>
-        <li><b>No AI can publish.</b> The member-facing site auto-deploys from a separate GitHub account the AI assistant holds no credential for — the last step is the controller's hands on his own keyboard.</li>
+        <li><b>No AI can publish.</b> The live site ships only when the controller runs <code>wrangler pages deploy</code> himself. The AI holds no Cloudflare API token and is configured by hard policy to never invoke wrangler — every deploy is one human, one OAuth session, on one keyboard.</li>
         <li><b>Member content is never sent to any model.</b> The sandbox only sees public regulatory source text. Your saved items, lists, searches and correspondence stay in the account-data layer.</li>
         <li><b>Account data in Amsterdam, sub-processors disclosed in full.</b> DigitalOcean AMS + Airtable (SCC). 30-day notice on any change. Direct line to the controller at <a href="mailto:privacy@principlesai.org">privacy@principlesai.org</a>.</li>
       </ol>
@@ -779,7 +779,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
       <div class="tr-fstrip">
         <div><span class="lbl">Transport</span>Production initiates every call. Sandbox cannot push back.</div>
-        <div><span class="lbl">Publish</span>Cloudflare site, deployed from <code>DaveLong38/pai</code>. Claude has zero credentials.</div>
+        <div><span class="lbl">Publish</span>Cloudflare Pages, uploaded by the controller running <code>wrangler pages deploy</code> on his own workstation. The AI holds no Cloudflare API token.</div>
       </div>
       <p>The production intake box carries no large-language-model SDK imports at all. The sandbox VPS carries vendor API keys and nothing else — no Airtable token, no GitHub credential, no Cloudflare credential, no SSH key to any other machine.</p>
       <p>Communication is one-way at the network layer: production HTTPS-POSTs jobs to the sandbox drop service and HTTPS-GETs results back. <strong>The sandbox has no IP, hostname, or credential for any production machine.</strong> If the sandbox is compromised, the blast radius stops at three rotatable vendor API keys.</p>
@@ -897,10 +897,11 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <!-- 07 The publish chain -->
     <section class="tr-section" id="s7">
       <h2 class="tr-section-h"><span class="num">07</span>The publish chain</h2>
-      <p class="kicker">Two-account GitHub separation. The AI assistant that helps build the platform has no credential for the path that publishes it.</p>
-      <p>The member-facing site hosts on Cloudflare and auto-deploys from a single repository: <code>DaveLong38/pai</code>. This repo is owned by the controller's personal GitHub account. <strong>The AI coding assistant used to build PrinciplesAI was removed as a collaborator on 2026-04-17 and now holds no credential for that repo</strong> — no SSH key, no personal access token, no OAuth app, no third-party GitHub App install.</p>
-      <p>The development GitHub account (used by the assistant during build) sits on separate repositories. Pushes from development to the publish-serving repository require the controller's hands on his own keyboard. This is <strong>structurally enforced, not policy-enforced</strong>: there is no chain of credentials from the AI's working environment into the path that publishes to members.</p>
-      <p>The result: <em>no AI can publish</em>. Every item that reaches the member site has been staged for review by a human, approved twice (Stage 5 Select and post-Stage-7 editorial review), and pushed by the controller.</p>
+      <p class="kicker">The AI helps build the platform but cannot publish to it. Two barriers — one structural, one a hard operating rule.</p>
+      <p>The live member-facing site is served by Cloudflare Pages (project <code>pai-platform</code>, custom domain <code>app.principlesai.org</code>). <strong>The Pages project has no Git auto-build wired in</strong> — it accepts uploads only via <code>wrangler pages deploy</code>, run interactively on the controller's workstation against an OAuth session tied to his personal Cloudflare account. The AI assistant holds <strong>no Cloudflare API token, no Cloudflare account password, and no separate wrangler session of its own</strong>. The OAuth refresh token on disk is the controller's, not the AI's.</p>
+      <p>On top of that structural absence, a hard operating rule forbids the AI from invoking the <code>wrangler</code> binary at all. Even when the AI prepares a deploy-ready change, the AI prints the command and stops; the controller types it. There is no auto-pilot mode where the AI can publish.</p>
+      <p>A second repository, <code>DaveLong38/pai</code>, exists for the next-generation Next.js member surface. The AI's GitHub account has no push access to it — every attempt returns <code>Repository not found</code>. When that codebase becomes the live publish path, it will be wired through the same controller-only chokepoint.</p>
+      <p>The result: <em>no AI can publish</em>. Every item that reaches the member site has been staged for review by a human, approved twice (Stage 5 Select and post-Stage-7 editorial review), and uploaded to Cloudflare by the controller.</p>
     </section>
 
     <!-- 08 Hard rules -->
@@ -917,7 +918,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <li><strong>Sandbox cannot push to production.</strong> Communication is one-way: production-initiated only.</li>
         <li><strong>Deterministic validator on every LLM output.</strong> Claims must carry a verbatim evidence snippet; verdicts must come from the judge-ID allowlist; source bytes are re-hashed after return.</li>
         <li><strong>Two human gates.</strong> Stage 5 Select and post-Stage-7 editorial review. Every published item is approved twice.</li>
-        <li><strong>No AI can publish.</strong> The publish path is a separate GitHub account that the AI assistant holds no credential for.</li>
+        <li><strong>No AI can publish.</strong> The live site is uploaded only by the controller running <code>wrangler pages deploy</code> on his own workstation. The AI holds no Cloudflare API token and is forbidden by hard rule from invoking wrangler.</li>
       </ul>
     </section>
 
