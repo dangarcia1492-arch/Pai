@@ -461,10 +461,7 @@ body { min-width: 320px !important; }
 .cs-card.background::before{background:var(--accent)}
 .cs-card.basis::before{background:#905200}
 .cs-card.ruling::before{background:var(--green-fill,#2e844a)}
-.cs-card .cs-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.cs-card .cs-eyebrow .badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--accent);color:#fff;border-radius:50%;font-size:11px;font-weight:700}
-.cs-card.basis .cs-eyebrow .badge{background:#905200}
-.cs-card.ruling .cs-eyebrow .badge{background:#2e844a}
+.cs-card .cs-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .cs-card h2{font-family:'Source Serif 4',Georgia,serif;font-size:18px;font-weight:600;color:var(--ink-strong);margin-bottom:10px;letter-spacing:-.005em}
 .cs-card p{font-family:'Source Serif 4',Georgia,serif;font-size:14.5px;line-height:1.6;color:var(--ink)}
 .cs-card p+p{margin-top:8px}
@@ -643,7 +640,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
 <div class="main-content">
   <div class="page-view" style="padding:24px 36px 60px;max-width:1180px;margin:0 auto">
-    <div class="mockup-banner"><b>Mockup V3 · Colour-card stack</b> — 3 colour-coded numbered cards (1 Background blue · 2 Legal basis amber · 3 Ruling green) + facts/sources/instruments rails right.</div>
+    <div class="mockup-banner"><b>Mockup V3 final</b> — 3 colour-coded prose cards (Background · Legal basis · Ruling, no badges) + <em>More cases on this issue</em> discovery rail at top + case facts / sources / cited instruments rails. Designed for "find the one out of 50 you'd otherwise miss" — Belgian compliance person reads São Paulo IP/AI case, follows the cluster.</div>
     <div class="ps-left" style="font-size:12.5px;color:var(--secondary);padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--border)">
     <span class="ps-breadcrumb"><a href="pai-home-private" style="color:var(--accent-2);font-weight:600">Home</a><span class="ps-sep" style="color:var(--ink-faint);margin:0 6px">›</span><a href="pai-app-case-law" style="color:var(--accent-2);font-weight:600">Case Law</a><span class="ps-sep" style="color:var(--ink-faint);margin:0 6px">›</span><span class="ps-current" style="color:var(--ink-strong);font-weight:700">C-829/24 — AG Kokott</span></span>
   </div>
@@ -666,7 +663,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <div class="body-wrap-2col">
       <div>
         <article class="cs-card background">
-          <div class="cs-eyebrow"><span class="badge">1</span> Background</div>
+          <div class="cs-eyebrow">Background</div>
           
 <h2>Hungary's Sovereignty Protection Office and the Commission's infringement action</h2>
 <p>In December 2023, Hungary adopted <em>Law LXXXVIII of 2023 on the protection of national sovereignty</em>. The law establishes an independent <em>Sovereignty Protection Office</em> empowered to identify organisations or individuals carrying out activities "in the interest of other States and foreign actors". The Office can compel disclosure of information (including personal data), forward findings to other authorities, and publish accusatory annual reports. Its investigative powers are not subject to judicial review.</p>
@@ -674,7 +671,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
         </article>
         <article class="cs-card basis">
-          <div class="cs-eyebrow"><span class="badge">2</span> Legal basis</div>
+          <div class="cs-eyebrow">Legal basis</div>
           
 <h2>Provisions invoked</h2>
 <p>The Commission and AG Kokott rely on a combination of EU primary and secondary law:</p>
@@ -687,7 +684,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
         </article>
         <article class="cs-card ruling">
-          <div class="cs-eyebrow"><span class="badge">3</span> Ruling</div>
+          <div class="cs-eyebrow">Ruling</div>
           <div class="cs-pull">"Hungary failed to fulfil its obligations under EU law in several respects."</div>
           
 <h2>AG Opinion: Hungary infringed EU law in several respects</h2>
@@ -697,7 +694,28 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         </article>
       </div>
       <aside>
-        
+
+<div class="rail-card" style="border-color:var(--accent-soft-2);background:linear-gradient(180deg,#f4f9ff 0%,var(--surface) 60%)">
+  <div class="rt" style="color:var(--accent-2);border-bottom-color:var(--accent-soft-2)">More cases on this issue</div>
+  <div style="font-size:11px;color:var(--muted);margin:-6px 0 10px;line-height:1.4">EU institutional · sovereignty · foreign-influence · fundamental rights</div>
+  <a href="pai-app-case-ag-opinion-eu-states-may-ban-huawei-on-security-grounds" style="display:block;padding:10px 0;border-bottom:1px solid var(--border-soft);text-decoration:none;color:inherit">
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);background:var(--accent-soft);padding:1px 6px;border-radius:3px">CJEU AG</span><span style="font-size:10.5px;color:var(--muted)">19 Mar 2026</span></div>
+    <div style="font-size:12.5px;font-weight:600;color:var(--ink-strong);line-height:1.3">EU States May Ban Huawei on Security Grounds (C-354/24)</div>
+  </a>
+  <a href="pai-app-case-eu-court-fines-five-states-for-whistleblower-directive-failure" style="display:block;padding:10px 0;border-bottom:1px solid var(--border-soft);text-decoration:none;color:inherit">
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);background:var(--accent-soft);padding:1px 6px;border-radius:3px">CJEU</span><span style="font-size:10.5px;color:var(--muted)">6 Mar 2025</span></div>
+    <div style="font-size:12.5px;font-weight:600;color:var(--ink-strong);line-height:1.3">CJEU Fines DE/LU/CZ/EE/HU for Whistleblower Directive Failure</div>
+  </a>
+  <a href="pai-app-case-ecthr-rules-hungary-integrity-testing-laws-breach-article-8" style="display:block;padding:10px 0;border-bottom:1px solid var(--border-soft);text-decoration:none;color:inherit">
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8b3939;background:#fce8e8;padding:1px 6px;border-radius:3px">ECtHR</span><span style="font-size:10.5px;color:var(--muted)">3 Feb 2026</span></div>
+    <div style="font-size:12.5px;font-weight:600;color:var(--ink-strong);line-height:1.3">Hungary Integrity-Testing Laws Breach Article 8</div>
+  </a>
+  <a href="pai-app-case-ecthr-rules-russia-violated-press-freedom-over-ukraine-war-reporting" style="display:block;padding:10px 0;text-decoration:none;color:inherit">
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px"><span style="font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8b3939;background:#fce8e8;padding:1px 6px;border-radius:3px">ECtHR</span><span style="font-size:10.5px;color:var(--muted)">11 Feb 2025</span></div>
+    <div style="font-size:12.5px;font-weight:600;color:var(--ink-strong);line-height:1.3">Russia Press Freedom Violated (Novaya Gazeta)</div>
+  </a>
+</div>
+
 <div class="rail-card">
   <div class="rt">Case facts</div>
   <div class="fact-row"><span class="fl">Court</span><span class="fv"><a href="#">CJEU</a></span></div>
