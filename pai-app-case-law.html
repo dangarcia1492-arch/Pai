@@ -738,9 +738,9 @@ function dgNav(row,e){
   if(e.target.closest('.dg-star,.dg-source,a,button,input'))return;
   const slug=row.dataset.slug;
   if(!slug)return;
-  // Match the URL-without-.html pattern used elsewhere on the site (memory:
-  // pai-juris pages use slug-only URLs for SEO and Cloudflare routing).
-  window.location.href='pai-app-leg-'+slug;
+  // Case-law slugs already include the 'case-' prefix (e.g. 'case-cjeu-…',
+  // 'case-uk-ftt-grc-2026-617', 'case-law-okedara-2019').
+  window.location.href='pai-app-'+slug;
 }
 
 /* ============ LIVE CASE LAW DATA ============ */
@@ -783,6 +783,7 @@ function renderCaseLawRow(r){
     :'<span class="dg-source disabled" title="No source URL on file"><svg viewBox="0 0 24 24"><path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/></svg></span>';
   const searchHay = [r.title, primaryJuris, primaryAuth, r.summary, r.subtype, primaryIso]
                       .filter(Boolean).join(' ').toLowerCase();
+  const slugAttr = r.slug ? ' data-slug="'+escHtml(r.slug)+'" onclick="dgNav(this,event)" style="cursor:pointer"' : '';
   return (
     '<div class="dg-row" data-region="'+escHtml(primaryRegion)+'" data-status="'+escHtml(r.status||'final')+'"' +
     ' data-domain="'+topics.join(',')+'" data-activity="'+activity+'"' +
@@ -790,7 +791,7 @@ function renderCaseLawRow(r){
     ' data-subtype="'+escHtml(r.subtype||'')+'"' +
     ' data-juris-slug="'+escHtml(nameToSlug(primaryJuris))+'"' +
     ' data-search="'+escHtml(searchHay)+'"' +
-    ' data-source="'+escHtml(srcUrl)+'" data-summary="'+escHtml(r.summary||'')+'">' +
+    ' data-source="'+escHtml(srcUrl)+'" data-summary="'+escHtml(r.summary||'')+'"'+slugAttr+'>' +
       '<div class="dg-iso">'+escHtml(primaryIso)+'</div>' +
       '<div class="dg-name-wrap"><div class="dg-name"><span class="full">'+escHtml(r.title)+'</span><span class="ref">'+escHtml(primaryAuth)+'</span></div></div>' +
       '<div class="dg-country">'+escHtml(primaryJuris)+'</div>' +

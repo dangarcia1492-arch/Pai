@@ -32,7 +32,8 @@
 "decision_date": "2026-05-01",
 "published_date": "2026-05-01",
 "outcome": "",
-"archived": false
+"archived": false,
+"slug": "case-uk-ftt-grc-2026-648"
 },
 {
 "id": "recWlP1T1pI9JbYWD",
@@ -64,7 +65,8 @@
 "decision_date": "2026-04-30",
 "published_date": "2026-04-30",
 "outcome": "",
-"archived": false
+"archived": false,
+"slug": "case-uk-ftt-grc-2026-639"
 },
 {
 "id": "recNXX169vlqPH5O9",
@@ -96,7 +98,8 @@
 "decision_date": "2026-04-30",
 "published_date": "2026-04-30",
 "outcome": "",
-"archived": false
+"archived": false,
+"slug": "case-uk-ftt-grc-2026-645"
 },
 {
 "id": "recaaa2GyNSuTcv2f",
@@ -128,7 +131,8 @@
 "decision_date": "2026-04-29",
 "published_date": "2026-04-29",
 "outcome": "",
-"archived": false
+"archived": false,
+"slug": "case-uk-ftt-grc-2026-631"
 },
 {
 "id": "recx5wqVj9yBH8wrh",
@@ -160,7 +164,8 @@
 "decision_date": "2026-04-28",
 "published_date": "2026-04-28",
 "outcome": "",
-"archived": false
+"archived": false,
+"slug": "case-uk-ftt-grc-2026-620"
 },
 {
 "id": "recQlX00FjrDeZyDH",
@@ -192,7 +197,8 @@
 "decision_date": "2026-04-24",
 "published_date": "2026-04-24",
 "outcome": "",
-"archived": false
+"archived": false,
+"slug": "case-uk-ftt-grc-2026-617"
 },
 {
 "id": "rec71Qz4x0uGUW3fb",
@@ -225,7 +231,8 @@
 "decision_date": "2026-04-09",
 "published_date": "2026-04-09",
 "outcome": "ECHR judgment Simoncini v. San Marino on right to tribunal established by law in disciplinary proceedings — binding precedent on procedural fairness.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-san-marino-breached-right-to-lawful-tribunal"
 },
 {
 "id": "recIeCrcUeZfPjNL7",
@@ -257,7 +264,8 @@
 "decision_date": "2026-03-19",
 "published_date": "2026-03-19",
 "outcome": "CJEU ruled biometric data collection in criminal investigations must meet 'strictly necessary' test with case-by-case reasons; systematic collection violates EU law. Binding precedent on Directive 2016/680.",
-"archived": false
+"archived": false,
+"slug": "case-cjeu-rules-on-police-biometric-data-collection-in-criminal-probes"
 },
 {
 "id": "recPNotbQOR9OcLN6",
@@ -289,7 +297,8 @@
 "decision_date": "2026-03-19",
 "published_date": "2026-03-19",
 "outcome": "CJEU ruled excessive GDPR access requests for compensation may be abusive; controllers can refuse and data subjects must prove actual damage. Binding precedent on GDPR Article 12 abuse-of-rights.",
-"archived": false
+"archived": false,
+"slug": "case-cjeu-rules-gdpr-access-requests-can-be-abusive"
 },
 {
 "id": "rec5snvqKHzIOMf29",
@@ -321,7 +330,8 @@
 "decision_date": "2026-03-19",
 "published_date": "2026-03-19",
 "outcome": "AG Ćapeta proposed CJEU finding that Member States may exclude telecom hardware/software (e.g. Huawei) on national-security grounds, subject to proportionality. AG Opinion only — Court judgment pending.",
-"archived": false
+"archived": false,
+"slug": "case-ag-opinion-eu-states-may-ban-huawei-on-security-grounds"
 },
 {
 "id": "recmSdo0pOFIZSaTs",
@@ -353,7 +363,8 @@
 "decision_date": "2026-03-12",
 "published_date": "2026-03-12",
 "outcome": "ECHR judgment finds Ukraine violated Articles 3 & 13 via inadequate detention conditions; no effective remedy available.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-ukraine-violated-detention-conditions-rights"
 },
 {
 "id": "rec9EHmoCfTN1D3Qk",
@@ -387,7 +398,8 @@
 "decision_date": "2026-03-10",
 "published_date": "2026-03-10",
 "outcome": "ECHR judgment — Manjani v. Albania — struck down absolute professional ban based on spent juvenile conviction; precedent on rehabilitation and proportionality in employment screening.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-albania-violated-article-8-in-magistrate-bar-case"
 },
 {
 "id": "recDjXK4JbYwJcRxS",
@@ -422,7 +434,8 @@
 "decision_date": "2026-02-17",
 "published_date": "2026-02-17",
 "outcome": "ECHR rules Bulgaria's undercover-agent infiltration regulations violate Article 8 (privacy) for lacking safeguards against arbitrariness.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-bulgaria-undercover-agent-rules-breach-article-8"
 },
 {
 "id": "recJnXDOZrXpFp5Iq",
@@ -457,7 +470,8 @@
 "decision_date": "2026-02-12",
 "published_date": "2026-02-12",
 "outcome": "AG Kokott proposed CJEU finding that Hungary infringed EU law (GDPR Articles 5, 6, 9, 10 + Charter rights) by adopting Law LXXXVII (Sovereignty Protection Office). AG Opinion only — Court judgment pending.",
-"archived": false
+"archived": false,
+"slug": "case-ag-kokott-hungary-sovereignty-law-breaches-eu-rules"
 },
 {
 "id": "recXx2Kd644lyF2ao",
@@ -492,7 +506,8 @@
 "decision_date": "2026-02-03",
 "published_date": "2026-02-03",
 "outcome": "ECHR strikes down Hungary's integrity-testing regime for state employees — covert surveillance without adequate judicial safeguards violates Article 8.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-hungary-integrity-testing-laws-breach-article-8"
 },
 {
 "id": "recEPsntIiG7cciYq",
@@ -527,7 +542,8 @@
 "decision_date": "2026-01-22",
 "published_date": "2026-01-22",
 "outcome": "ECHR Vykhor v. Ukraine — Article 8 (private life), covert surveillance, interception of communications; binding precedent on state surveillance and right to remedy.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-ukraine-covert-surveillance-breached-article-8"
 },
 {
 "id": "rec8gy9R3s86LMZDS",
@@ -562,7 +578,8 @@
 "decision_date": "2026-01-08",
 "published_date": "2026-01-08",
 "outcome": "ECHR ruling: Italian tax authority's warrantless banking-data access violates Article 8 (private life); law lacks safeguards — binding precedent on data-protection compliance.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-italys-bank-data-access-breaches-article-8"
 },
 {
 "id": "recTKJZFNGwvQuncW",
@@ -594,7 +611,8 @@
 "decision_date": "2025-12-18",
 "published_date": "2025-12-18",
 "outcome": "CJEU ruled body-camera ticket-inspection data is direct collection under GDPR; immediate transparency obligations under Articles 13/14 apply; multi-layered disclosure permitted.",
-"archived": false
+"archived": false,
+"slug": "case-cjeu-rules-on-gdpr-info-duties-for-body-camera-use"
 },
 {
 "id": "recRcM267MuHYk7Eh",
@@ -624,7 +642,8 @@
 "decision_date": "2025-12-16",
 "published_date": "2025-12-16",
 "outcome": "ECHR ruled national courts must give reasons when refusing CJEU preliminary-ruling requests — procedural fairness in EU law application affects controllers' remedies.",
-"archived": false
+"archived": false,
+"slug": "case-echr-rules-on-cjeu-referral-refusal-reasoning-duty"
 },
 {
 "id": "recLiGJOMEYmtBppZ",
@@ -656,7 +675,8 @@
 "decision_date": "2025-12-02",
 "published_date": "2025-12-02",
 "outcome": "CJEU ruled online marketplace operator is GDPR controller; must identify & verify sensitive-data ads before publication; cannot rely on e-Commerce Directive intermediary safe harbours.",
-"archived": false
+"archived": false,
+"slug": "case-cjeu-rules-online-marketplaces-are-gdpr-controllers"
 },
 {
 "id": "recStJZLaRiI14UF0",
@@ -688,7 +708,8 @@
 "decision_date": "2025-11-20",
 "published_date": "2025-11-20",
 "outcome": "CJEU ruled police may collect biometric/genetic data with periodic necessity review; no fixed maximum-storage period required. Binding precedent on Directive 2016/680 storage limits.",
-"archived": false
+"archived": false,
+"slug": "case-cjeu-rules-on-police-storage-of-biometric-data"
 },
 {
 "id": "rec9yPjwx8Bt3bD8J",
@@ -721,7 +742,8 @@
 "decision_date": "2025-11-19",
 "published_date": "2025-11-19",
 "outcome": "General Court upheld European Commission designation of Amazon Store as Very Large Online Platform under DSA Regulation 2022/2065. Binding precedent on DSA scope and fundamental-rights balancing.",
-"archived": false
+"archived": false,
+"slug": "case-eu-general-court-dismisses-amazon-dsa-designation-challenge"
 },
 {
 "id": "recY69YY90NtUr0Ob",
@@ -756,7 +778,8 @@
 "decision_date": "2025-11-13",
 "published_date": "2025-11-13",
 "outcome": "ECHR ruled Poland violated Article 8 (right to private life) by disclosing applicant's medical records to prosecutor without consent or appeal mechanism.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-poland-violated-privacy-in-medical-records-disclosure"
 },
 {
 "id": "rechQEP3YdlW17uUr",
@@ -790,7 +813,8 @@
 "decision_date": "2025-11-13",
 "published_date": "2025-11-13",
 "outcome": "ECHR Final judgment — Manukyan v. Armenia: unlawful personal-data collection by security services, coercion via threats, violates Article 8 ECHR, no legal basis shown.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-armenia-violated-privacy-rights-in-nss-coercion-case"
 },
 {
 "id": "recypa774teyC3d8d",
@@ -823,7 +847,8 @@
 "decision_date": "2025-10-14",
 "published_date": "2025-10-14",
 "outcome": "ECHR judgment (Tsatani v. Greece) on impartiality in disciplinary proceedings — binding precedent on fair trial + data processing; Article 6 ECHR violation found.",
-"archived": false
+"archived": false,
+"slug": "case-echr-finds-greece-violated-fair-trial-rights-in-disciplinary-case"
 },
 {
 "id": "recBky6UH8fRVPAzR",
@@ -855,7 +880,8 @@
 "decision_date": "2025-10-14",
 "published_date": "2025-10-14",
 "outcome": "ECHR ruled journalist's right to access public-interest information (Articles 10, 13) — binding precedent on data access / government transparency obligations.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-against-azerbaijan-in-journalist-info-access-case"
 },
 {
 "id": "reciZcWF2OhtyFtBi",
@@ -887,7 +913,8 @@
 "decision_date": "2025-09-04",
 "published_date": "2025-09-04",
 "outcome": "CJEU set aside General Court judgment in C-413/23 P (EDPS v SRB) and referred case back. Binding precedent on scope of personal data in pseudonymised-data transfers under Regulation 2018/1725.",
-"archived": false
+"archived": false,
+"slug": "case-cjeu-clarifies-personal-data-scope-for-pseudonymised-transfers"
 },
 {
 "id": "recRjjD6QRMg6fRGg",
@@ -920,7 +947,8 @@
 "decision_date": "2025-09-03",
 "published_date": "2025-09-03",
 "outcome": "General Court upheld Commission designation of Zalando as Very Large Online Platform under DSA. Binding precedent on VLP classification and active-recipient counting methodology.",
-"archived": false
+"archived": false,
+"slug": "case-general-court-upholds-zalandos-vlop-designation-under-dsa"
 },
 {
 "id": "reckBsTjuj4QTW6gf",
@@ -956,7 +984,8 @@
 "decision_date": "2025-07-22",
 "published_date": "2025-07-22",
 "outcome": "ECtHR: 239 Turkish applicants' convictions based on ByLock encryption-app use violated Art. 6 & 7 ECHR — precedent on encrypted-comms evidence and mass digital-surveillance cases.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-turkey-violated-rights-in-bylock-terror-convictions"
 },
 {
 "id": "recDDrVvAClmIBAu6",
@@ -989,7 +1018,8 @@
 "decision_date": "2025-06-24",
 "published_date": "2025-06-24",
 "outcome": "ECtHR H.Q. v. Hungary: violations of Art. 4 Protocol 4 (collective expulsion), Art. 13 (effective remedy), Art. 3 — Article 46 order to Hungary to reform asylum procedures.",
-"archived": false
+"archived": false,
+"slug": "case-echr-rules-hungary-violated-collective-expulsion-ban"
 },
 {
 "id": "recswChboSis5kl7Y",
@@ -1022,7 +1052,8 @@
 "decision_date": "2025-05-27",
 "published_date": "2025-05-27",
 "outcome": "ECHR ruled Russia violated Articles 8, 10, 11 — warrantless political-data collection without legal framework, retention rules, or deletion mechanism.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-russia-violated-rights-of-blocked-election-candidates"
 },
 {
 "id": "rec0iZnAtMmUwhI9Y",
@@ -1055,7 +1086,8 @@
 "decision_date": "2025-05-15",
 "published_date": "2025-05-15",
 "outcome": "ECHR ruled freedom-of-expression violations (Article 10) + deprivation of liberty & fair-trial breaches (Articles 5, 6) in Russia administrative-offence cases.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-russia-violated-free-expression-rights"
 },
 {
 "id": "recLL1gh0GBg5B3Id",
@@ -1088,7 +1120,8 @@
 "decision_date": "2025-05-15",
 "published_date": "2025-05-15",
 "outcome": "ECHR judgment finding breach of Article 10 in Russian press-restriction cases; binding precedent on freedom-of-expression limits. Ten applicants awarded EUR 10k each.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-russia-breached-free-expression-rights-in-ten-cases"
 },
 {
 "id": "recsrdS2IOis4jgfc",
@@ -1121,7 +1154,8 @@
 "decision_date": "2025-05-15",
 "published_date": "2025-05-15",
 "outcome": "ECHR rules on Article 10 freedom-of-expression violations; awarded damages for extremism prosecutions. Binding precedent on state conduct affecting fundamental rights.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-russia-breached-free-expression-rights"
 },
 {
 "id": "recShhsx2MTJIvLQv",
@@ -1154,7 +1188,8 @@
 "decision_date": "2025-04-29",
 "published_date": "2025-04-29",
 "outcome": "ECHR judgment on police raid, Articles 3, 5, 11, 14 — degrading treatment, unlawful detention, freedom of assembly violations in LGBT context.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-russia-violated-rights-in-lgbt-workshop-raid"
 },
 {
 "id": "rec5Gw2w7JYkOl8at",
@@ -1186,7 +1221,8 @@
 "decision_date": "2025-03-13",
 "published_date": "2025-03-13",
 "outcome": "CJEU ruled GDPR right to rectification of gender identity data; Member States cannot condition rectification on gender-reassignment surgery. Binding precedent on GDPR Article 16 rectification rights.",
-"archived": false
+"archived": false,
+"slug": "case-cjeu-rules-gdpr-bars-surgery-proof-for-gender-data-rectification"
 },
 {
 "id": "recH2KiHYg8YSfpEG",
@@ -1219,7 +1255,8 @@
 "decision_date": "2025-03-06",
 "published_date": "2025-03-06",
 "outcome": "ECHR ruled inadequate detention conditions violated Article 3 (inhuman/degrading treatment) + lack of effective remedy (Article 13); awarded damages.",
-"archived": false
+"archived": false,
+"slug": "case-echr-finds-portugal-violated-detention-conditions-rights"
 },
 {
 "id": "rec0YcxdS4XEhva3Y",
@@ -1266,7 +1303,8 @@
 "decision_date": "2025-03-06",
 "published_date": "2025-03-06",
 "outcome": "CJEU under Article 258/260 TFEU ordered 5 Member States to pay penalties for failure to transpose Whistleblowers Directive 2019/1937 by 17 Dec 2021 deadline. Lump-sum + daily-penalty coefficient methodology.",
-"archived": false
+"archived": false,
+"slug": "case-eu-court-fines-five-states-for-whistleblower-directive-failure"
 },
 {
 "id": "recxcOuwBWVkCgUcK",
@@ -1299,7 +1337,8 @@
 "decision_date": "2025-03-04",
 "published_date": "2025-03-04",
 "outcome": "ECHR Girginova v. Bulgaria — journalist freedom-of-information + Article 10 rights breach; precedent on public-interest disclosure + classified-information balance.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-bulgaria-breached-journalists-access-to-acquittal-reasons"
 },
 {
 "id": "rechTPxDZJyRiItce",
@@ -1332,7 +1371,8 @@
 "decision_date": "2025-02-27",
 "published_date": "2025-02-27",
 "outcome": "CJEU ruled controllers must explain automated credit-decision logic to data subjects under GDPR Article 15(1)(h); trade-secret claims do not shield explanation. Binding precedent on automated decision-making transparency.",
-"archived": false
+"archived": false,
+"slug": "case-cjeu-rules-on-gdpr-explanation-rights-for-automated-credit-scores"
 },
 {
 "id": "recOgmGxzwx8iEkfN",
@@ -1367,7 +1407,8 @@
 "decision_date": "2025-02-13",
 "published_date": "2025-02-13",
 "outcome": "ECHR ruling: Ukraine's secret surveillance/phone-tapping lacked lawful safeguards and lawyer-client privilege protection (Article 8 violation).",
-"archived": false
+"archived": false,
+"slug": "case-echr-rules-ukraine-secret-surveillance-violated-rights"
 },
 {
 "id": "receC6L5LwDPgENFN",
@@ -1400,7 +1441,8 @@
 "decision_date": "2025-02-11",
 "published_date": "2025-02-11",
 "outcome": "ECHR Chamber ruling: 161 media applicants; violations of Articles 10, 5, 8, 34 — prosecution, shutdown, detention for critical coverage of military action.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-rules-russia-violated-press-freedom-over-ukraine-war-reporting"
 },
 {
 "id": "rechp24CxqaFFGoop",
@@ -1433,7 +1475,8 @@
 "decision_date": "2025-02-06",
 "published_date": "2025-02-06",
 "outcome": "ECHR Samodurov v. Russia: violation of Article 10 (freedom of expression) — binding precedent on state interference with expression; landmark on religious-sensibility balancing.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-russia-violated-free-expression-in-religious-offence-cases"
 },
 {
 "id": "recqnsxJYmF3rE2ch",
@@ -1469,7 +1512,8 @@
 "decision_date": "2025-02-04",
 "published_date": "2025-02-04",
 "outcome": "ECHR Third Section rules domestic authorities failed positive obligation to protect applicants' personal data and privacy against non-consensual social-media dissemination.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-russia-failed-lgbti-applicants-in-data-leak-cases"
 },
 {
 "id": "recbNqrvvfSzXToXj",
@@ -1501,7 +1545,8 @@
 "decision_date": "2025-01-07",
 "published_date": "2025-01-07",
 "outcome": "ECtHR finds Armenia violated Article 8 (private life) and 14 (discrimination) — state failed positive obligation to protect LGBT activists against online hate speech and incitement.",
-"archived": false
+"archived": false,
+"slug": "case-ecthr-finds-armenia-breached-lgbt-activists-rights-in-hate-speech-case"
 },
 {
 "id": "rec1hiLoywyXN4gD5",
@@ -1529,7 +1574,8 @@
 "decision_date": "2024-03-01",
 "published_date": null,
 "outcome": "§ 24 of Cybercrimes Act 2015 contravenes Art. 9 of the African Charter on Human and Peoples' Rights and the ICCPR; Nigeria ordered to amend.",
-"archived": false
+"archived": false,
+"slug": "case-law-serap-ecowas-2024"
 },
 {
 "id": "recm4j6nxOCOJmug6",
@@ -1561,7 +1607,8 @@
 "decision_date": "2019-01-01",
 "published_date": null,
 "outcome": "Court of Appeal Lagos rejected free-expression challenge; § 24(1) of Cybercrimes Act 2015 upheld.",
-"archived": false
+"archived": false,
+"slug": "case-law-okedara-2019"
 },
 {
 "id": "reckVW04a8u9f4IgH",
@@ -1591,7 +1638,8 @@
 "decision_date": "2017-08-24",
 "published_date": "2017-08-24",
 "outcome": "Unanimous 9-judge constitutional bench held that the right to privacy is a fundamental right protected under Article 21 (right to life and personal liberty) and Part III of the Constitution. Overruled M.P. Sharma (1954) and Kharak Singh (1962) to the extent inconsistent. Privacy attaches to the person (not place) and includes informational privacy. Any state intrusion must satisfy a three-fold test: (i) legality (existence of a law); (ii) need (legitimate state aim); (iii) proportionality.",
-"archived": false
+"archived": false,
+"slug": "case-india-puttaswamy-v-union-of-india-2017"
 },
 {
 "id": "recTbHJJabUprHkwB",
@@ -1627,7 +1675,8 @@
 "decision_date": null,
 "published_date": null,
 "outcome": "Preliminary reference C-806/24 from Bulgaria — pending CJEU judgment.",
-"archived": false
+"archived": false,
+"slug": "case-bulgaria-cjeu-c-806-24-sofia-telecom-adm"
 },
 {
 "id": "rec0xWOWHil99RPHE",
@@ -1663,7 +1712,8 @@
 "decision_date": null,
 "published_date": null,
 "outcome": "Preliminary reference C-245/25 from Bulgaria — pending CJEU judgment.",
-"archived": false
+"archived": false,
+"slug": "case-bulgaria-cjeu-c-245-25-ai-expert-reports"
 }
 ]
 }
