@@ -185,6 +185,12 @@ button{cursor:pointer}
 .dg-type-pill.financial{background:#014486}
 .dg-type-pill.telecoms{background:#0e8a7d}
 .dg-type-pill.standards{background:var(--accent)}
+.dg-type-pill.legislature{background:#b91c1c}
+.dg-type-pill.ag{background:#7c2d12}
+.dg-type-pill.sectoral{background:#334155}
+.dg-type-pill.eu{background:#003399}
+.dg-type-pill.intl{background:#3730a3}
+.dg-type-pill.other{background:#94a3b8;color:#1f2937}
 .dg-num{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--ink-strong);text-align:right;font-feature-settings:'tnum' 1}
 .dg-num.muted{color:var(--muted);font-weight:500}
 .dg-last{font-size:11.5px;color:var(--muted);white-space:nowrap;text-align:right}
@@ -757,17 +763,57 @@ function fpRemoveChip(g,v){if(g==='juris'){window.JURIS_FILTER_SLUG=null;window.
 function dgStar(e,btn){e.stopPropagation();btn.classList.toggle('on');const row=btn.closest('.dg-row');if(btn.classList.contains('on')){row.classList.add('watched');row.dataset.watchlist='on'}else{row.classList.remove('watched');row.dataset.watchlist='off'}}
 
 /* ============ LIVE AUTHORITIES DATA ============ */
-const TYPE_TO_FACET = {
-  'DPA':'dpa','Court':'court','Cyber agency':'cyber','AI regulator':'agency',
-  'Competition authority':'competition','Ministry':'agency','Standards body':'standards',
-  'Legislature':'legislature','Government agency':'agency','Financial regulator':'financial',
-  'Telecoms regulator':'telecoms','Sector regulator':'sectoral','Attorney General':'ag',
-  'International body':'agency',' EU body':'eu','EU body':'eu','Other':'agency',
+/* Map of authorities.json `type` value (normalized to lower-case) -> facet slug.
+   Facet slugs match the .dg-type-pill.<slug> CSS classes and the data-value
+   attributes on the Body type facet group. New live values must be added
+   here AND a pill color in CSS, otherwise rows fall through to 'other'. */
+const TYPE_TO_FACET_RAW = {
+  'court':'court',
+  'legislature':'legislature',
+  'government agency':'agency',
+  'financial regulator':'financial',
+  'data protection authority':'dpa',
+  'dpa':'dpa',
+  'telecoms regulator':'telecoms',
+  'cyber agency':'cyber',
+  'competition authority':'competition',
+  'state attorney general':'ag',
+  'attorney general':'ag',
+  'sector regulator':'sectoral',
+  'eu body':'eu',
+  'international organisation':'intl',
+  'international organization':'intl',
+  'international org':'intl',
+  'international body':'intl',
+  'standards body':'standards',
+  'ministry':'agency',
+  'ai regulator':'agency',
+  'advisory':'other',
+  'civil society':'other',
+  'industry association':'other',
+  'legal database':'other',
+  'dpa network':'other',
+  'other':'other',
 };
+function typeToFacet(t){
+  if(!t) return 'other';
+  return TYPE_TO_FACET_RAW[String(t).trim().toLowerCase()] || 'other';
+}
 const FACET_TO_PILL_LABEL = {
-  court:'Court',legislature:'Legislature',agency:'Agency',financial:'Financial regulator',
-  dpa:'DPA',telecoms:'Telecoms regulator',cyber:'Cyber agency',competition:'Competition authority',
-  standards:'Standards body',sectoral:'Sector regulator',ag:'Attorney General',eu:'EU body',
+  court:'Court',
+  legislature:'Legislature',
+  agency:'Government agency',
+  financial:'Financial regulator',
+  dpa:'DPA',
+  telecoms:'Telecoms regulator',
+  cyber:'Cyber agency',
+  competition:'Competition authority',
+  standards:'Standards body',
+  sectoral:'Sector regulator',
+  ag:'Attorney General',
+  eu:'EU body',
+  intl:'International body',
+  other:'Other',
 };
 function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
 (function(){const p=new URLSearchParams(location.search);const s=p.get('juris');if(s){window.JURIS_FILTER_SLUG=s;window.JURIS_FILTER_NAME=s.split('-').map(w=>w?w[0].toUpperCase()+w.slice(1):'').join(' ');}})();
@@ -782,8 +828,8 @@ function renderAuthorityRow(r){
   const website = r.website || r.url || '';
   const region = r.region || '';
   const iso = r.iso || '';
-  const facet=TYPE_TO_FACET[r.type]||'agency';
-  const pillLabel=FACET_TO_PILL_LABEL[facet]||escHtml(r.type||'');
+  const facet=typeToFacet(r.type);
+  const pillLabel=FACET_TO_PILL_LABEL[facet]||escHtml(r.type||'Other');
   // Whole row is an anchor when we have a resolved slug. Otherwise plain div.
   const tag = slug ? 'a' : 'div';
   const hrefAttr = slug ? ' href="pai-app-authority-'+escHtml(slug)+'"' : '';
