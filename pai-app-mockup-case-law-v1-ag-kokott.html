@@ -3,84 +3,479 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrinciplesAI — AG Kokott · Hungary Sovereignty Law · C-829/24 · Case Law (Mockup V1)</title>
+<title>PrinciplesAI — AG Kokott · C-829/24 · Case Law (Mockup V1)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght..60,400;8..60,600;8..60,700&family=Inter:wght;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
-  --ink:#0a1729;--ink-strong:#06101e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
+  --ink:#0d2e42;--ink-strong:#07202e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
   --border:#dbe1ea;--border-soft:#ebeff5;
   --accent:#0176d3;--accent-2:#014486;--accent-3:#032e61;--accent-soft:#e3effc;--accent-soft-2:#cfe1f6;
-  --green:#2e844a;--green-bg:#d6f1dc;--amber:#905200;--amber-bg:#fef0c7;--red:#ba0517;--red-bg:#feded8;
-  --serif:'Source Serif 4',Georgia,serif;
-  --sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --green:#2e844a;--green-bg:#d6f1dc;--green-fill:#2e844a;
+  --amber:#905200;--amber-bg:#fef0c7;--amber-fill:#ca8501;
+  --red:#ba0517;--red-bg:#feded8;--red-fill:#ba0517;
+  --display:'Inter',-apple-system,sans-serif;--sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --mono:'Inter',sans-serif;
   --sidebar-collapsed:56px;--sidebar-expanded:280px;--header-height:52px;
   --shadow-1:0 1px 2px rgba(10,23,41,.04);--shadow-2:0 2px 6px rgba(10,23,41,.07),0 8px 20px rgba(10,23,41,.05);
   --radius:10px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-size:15px}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-width:1280px}
+html{font-size:15px;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;min-width:1280px}
 a{color:var(--accent);text-decoration:none}
-button{cursor:pointer;border:none;background:none;font-family:inherit;font-size:inherit;color:inherit}
+button,input{font-family:inherit;font-size:inherit;color:inherit;border:none;background:none;outline:none}
+button{cursor:pointer}
+
+/* Shell */
 .icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden;box-shadow:var(--shadow-1)}
 .icon-sidebar:hover{width:var(--sidebar-expanded);box-shadow:var(--shadow-2)}
-.sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;gap:12px;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
-.sidebar-brand .brand-icon{width:28px;height:28px;background:#fff;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:2px;overflow:hidden}
-.sidebar-brand .brand-icon img{width:100%;height:100%;object-fit:contain;display:block}
-.sidebar-brand .brand-text{font-weight:600;font-size:18px;color:var(--ink);opacity:0;transition:opacity .15s .05s}
+.sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;gap:12px;flex-shrink:0;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+.sidebar-brand .brand-icon{width:28px;height:28px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--display);font-style:italic;font-weight:700;font-size:18px;color:#fff;letter-spacing:-.5px}
+.sidebar-brand .brand-text{font-family:var(--display);font-weight:600;font-size:18px;color:var(--ink);opacity:0;transition:opacity .15s .05s}
 .sidebar-brand .brand-text .ai{font-style:italic;font-weight:500}
 .icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
-.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:12px 8px;overflow-y:auto}
-.sidebar-nav-item{display:flex;align-items:center;gap:14px;height:40px;padding:0 12px;border-radius:4px;color:var(--secondary);text-decoration:none;white-space:nowrap}
+.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:12px 8px;overflow-y:auto;overflow-x:hidden}
+.sidebar-nav-item{display:flex;align-items:center;gap:14px;height:40px;padding:0 12px;border-radius:4px;cursor:pointer;position:relative;color:var(--secondary);transition:color .15s,background .15s;white-space:nowrap;flex-shrink:0;text-decoration:none}
 .sidebar-nav-item:hover{color:var(--ink);background:var(--surface-3)}
 .sidebar-nav-item.active{color:var(--accent-2);background:var(--accent-soft);font-weight:600}
+.sidebar-nav-item.active::before{content:'';position:absolute;left:-8px;top:8px;bottom:8px;width:3px;background:var(--accent);border-radius:0 3px 3px 0}
 .sidebar-nav-item svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none;flex-shrink:0}
 .sidebar-nav-item .nav-label{font-size:13.5px;font-weight:500;opacity:0;transition:opacity .15s .05s}
+.sidebar-nav-item.active .nav-label{font-weight:600}
 .icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
-.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;z-index:200;box-shadow:var(--shadow-1)}
-.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
-.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:var(--secondary);border:1px solid var(--border);border-radius:5px;text-decoration:none}
+.sidebar-user{border-top:1px solid var(--border);padding:8px;flex-shrink:0;display:flex;align-items:center}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+
+.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:18px;z-index:200;box-shadow:var(--shadow-1)}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:var(--secondary);background:transparent;border:1px solid var(--border);border-radius:5px;text-decoration:none;transition:background .12s,color .12s,border-color .12s}
+.header-logout:hover{background:var(--surface-2);color:var(--ink);border-color:var(--ink-faint)}
+.header-logout svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
 .main-content{margin-left:var(--sidebar-collapsed);padding-top:var(--header-height);min-height:100vh}
-.page-view{padding:28px 40px 60px;max-width:980px;margin:0 auto}
-.ps-left{font-size:12.5px;color:var(--secondary);padding-bottom:14px;margin-bottom:22px;border-bottom:1px solid var(--border)}
+.page-view{padding:26px 40px 40px;max-width:1600px;margin:0}
+
+.page-statusbar{display:grid;grid-template-columns:1fr auto;gap:20px;padding:0 0 18px;margin-bottom:22px;border-bottom:1px solid var(--border);align-items:start;min-height:55px;margin-bottom:22px}
+.ps-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--secondary);flex-wrap:wrap}
 .ps-breadcrumb a{color:var(--accent-2);font-weight:600}
+.ps-breadcrumb a:hover{text-decoration:underline}
 .ps-current{color:var(--ink-strong);font-weight:700}
-.ps-sep{color:var(--ink-faint);margin:0 6px}
-.mockup-banner{background:#fff8e1;border:1px solid #ffe69c;border-radius:6px;padding:8px 14px;font-size:12px;color:#7c5b00;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.ps-sep{color:var(--ink-faint)}
+.ps-scope-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;font-size:11px;font-weight:600;color:var(--accent-2);background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:4px;letter-spacing:.02em}
+.ps-ok{color:var(--green);font-weight:600;font-size:12px}
+.ps-ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
+
+.page-actions{display:flex;gap:10px;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;font-size:12.5px;font-weight:600;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--secondary);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--surface-2);border-color:var(--ink-faint);color:var(--ink)}
+.btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 1px 2px rgba(1,118,211,.22)}
+.btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2);color:#fff}
+
+.page-head{margin-bottom:18px}
+.page-title{font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--ink-strong);line-height:1.1}
+.page-sub{font-size:13.5px;color:var(--secondary);margin-top:8px;max-width:760px;line-height:1.55}
+.page-sub b{color:var(--ink);font-weight:600}
+.page-sub.fine{font-size:12px;color:var(--ink-faint);margin-top:4px}
+.page-sub.fine b{color:var(--muted);font-weight:600}
+
+/* Research layout */
+.research-wrap{display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:start;margin-top:18px}
+.facet-panel{position:sticky;top:calc(var(--header-height) + 20px);max-height:calc(100vh - var(--header-height) - 40px);overflow-y:auto;padding:4px 8px 12px 0;font-size:13px}
+.facet-pinned{background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:6px;padding:10px 12px;margin-bottom:16px;display:flex;flex-direction:column;gap:6px}
+.facet-pinned .pinned-head{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-2)}
+.facet-pinned .pinned-head svg{width:12px;height:12px;stroke:currentColor;stroke-width:2.2;fill:currentColor;fill-opacity:.15}
+.facet-pinned .facet-opt{padding:4px 6px;font-size:12.5px}
+.facet-pinned .facet-opt:hover{background:rgba(255,255,255,.5)}
+.facet-search-wrap{position:relative;margin-bottom:18px}
+.facet-search{width:100%;height:36px;padding:0 14px 0 34px;background:var(--surface);border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--ink)}
+.facet-search::placeholder{color:var(--muted)}
+.facet-search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.facet-search-ico{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--muted);pointer-events:none}
+.facet-search-ico svg{width:100%;height:100%;stroke:currentColor;stroke-width:2;fill:none}
+.facet-group{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border-soft)}
+.facet-group:last-of-type{border-bottom:none}
+.facet-group-head{display:flex;align-items:baseline;justify-content:space-between;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.facet-group-clear{font-size:10px;font-weight:600;color:var(--accent-2);cursor:pointer}
+.facet-opt{display:flex;align-items:center;gap:9px;padding:4px;border-radius:4px;cursor:pointer;font-size:12.5px;color:var(--secondary)}
+.facet-opt:hover{background:var(--surface-3);color:var(--ink)}
+.facet-opt.on{color:var(--ink);font-weight:600}
+.facet-cb{width:15px;height:15px;border:1.5px solid #cbd2da;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface)}
+.facet-opt.on .facet-cb{background:var(--accent);border-color:var(--accent)}
+.facet-opt.on .facet-cb::after{content:'';width:7px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.facet-opt .name{flex:1;min-width:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.facet-opt .count{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);font-weight:500}
+.facet-opt.on .count{color:var(--accent-2)}
+.facet-radio{display:flex;align-items:center;gap:9px;padding:4px;font-size:12.5px;color:var(--secondary);cursor:pointer;border-radius:4px}
+.facet-radio:hover{background:var(--surface-3)}
+.facet-radio .dot{width:14px;height:14px;border-radius:50%;border:1.5px solid #cbd2da;background:var(--surface);flex-shrink:0}
+.facet-radio.on .dot{border-color:var(--accent);background:radial-gradient(circle at center,var(--accent) 0 4px,#fff 5px 100%)}
+.facet-radio.on{color:var(--ink);font-weight:600}
+.facet-clear-all{display:block;width:100%;padding:9px 12px;background:transparent;border:1px solid var(--border);border-radius:5px;font-size:12px;font-weight:600;color:var(--secondary);cursor:pointer;margin-top:6px;font-family:inherit}
+.facet-clear-all:hover{background:var(--red-bg);border-color:var(--red-fill);color:var(--red-fill)}
+
+.research-main{min-width:0}
+.research-toolbar{display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);margin-bottom:12px;flex-wrap:wrap}
+.rt-count{font-size:13px;color:var(--secondary)}
+.rt-count b{color:var(--ink);font-weight:700;font-family:var(--mono)}
+.rt-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.rt-sort{height:30px;padding:0 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:5px;font-size:12.5px;font-weight:600;color:var(--secondary);cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+.rt-export{display:inline-flex;border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--surface-2)}
+.rt-export-btn{height:30px;padding:0 11px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--secondary);cursor:pointer;font-size:11.5px;font-weight:600;font-family:inherit;display:inline-flex;align-items:center;gap:5px}
+.rt-export-btn:last-child{border-right:none}
+.rt-export-btn:hover{background:var(--surface);color:var(--ink)}
+.rt-export-btn svg{width:12px;height:12px;stroke:currentColor;stroke-width:2;fill:none}
+.rt-views{display:inline-flex;border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--surface-2)}
+.rt-view-btn{width:32px;height:30px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.rt-view-btn:last-child{border-right:none}
+.rt-view-btn.on{background:var(--ink);color:#fff}
+.rt-view-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
+
+.applied-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;min-height:22px;align-items:center}
+.applied-empty{font-size:12px;color:var(--muted)}
+.applied-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 4px 0 9px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600}
+.applied-chip .group{opacity:.72;font-weight:500;margin-right:2px}
+.applied-chip .x{width:16px;height:16px;background:rgba(255,255,255,.18);border:none;border-radius:3px;color:#fff;cursor:pointer;font-size:11px;display:inline-flex;align-items:center;justify-content:center;padding:0}
+
+/* Data grid */
+.data-grid{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);box-shadow:var(--shadow-1);overflow:hidden}
+.dg-head-row,.dg-row{display:grid;grid-template-columns:36px minmax(0,2.3fr) 118px 120px 90px 100px 96px 32px 36px;gap:12px;padding:11px 18px;border-bottom:1px solid var(--border-soft);align-items:center}
+.dg-source{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:4px;color:var(--ink-faint);text-decoration:none;transition:color .12s,background .12s}
+.dg-source:hover{color:var(--accent);background:var(--surface-3)}
+.dg-source svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+.dg-source.disabled{opacity:.25;pointer-events:none}
+.dg-landmark{display:inline-flex;align-items:center;height:16px;padding:0 6px;margin-left:8px;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:var(--accent-2,#b45309);border-radius:3px;vertical-align:middle}
+.dg-head-row{background:var(--surface-2);border-bottom:1px solid var(--border);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 18px}
+.dg-sort-btn{background:none;border:none;padding:0;font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:4px;text-align:left}
+.dg-sort-btn:hover{color:var(--ink)}
+.dg-sort-btn.on{color:var(--accent-2)}
+.dg-sort-btn .dg-sort-ind{font-family:var(--mono);font-weight:400;font-size:11px;opacity:0}
+.dg-sort-btn.on .dg-sort-ind{opacity:1}
+.dg-row:last-child{border-bottom:none}
+.dg-row{cursor:pointer;transition:background .1s}
+.dg-row:hover{background:var(--surface-2)}
+.dg-row.watched{border-left:2px solid var(--accent);padding-left:16px}
+.dg-iso{width:32px;height:22px;background:var(--surface-3);border:1px solid var(--border-soft);border-radius:3px;font-family:var(--mono);font-size:10px;font-weight:700;color:var(--secondary);letter-spacing:.04em;display:inline-flex;align-items:center;justify-content:center}
+.dg-name-wrap{min-width:0;display:flex;flex-direction:column;gap:4px}
+.dg-name{min-width:0}
+.dg-name .full{display:block;font-size:13px;font-weight:600;color:var(--ink-strong);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dg-name .ref{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:500;margin-top:2px}
+.dg-tags{display:flex;gap:5px;flex-wrap:wrap}
+.dg-tag{display:inline-flex;align-items:center;height:17px;padding:0 7px;font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--secondary);background:var(--surface-3);border:1px solid var(--border-soft);border-radius:3px;letter-spacing:.03em;text-transform:uppercase}
+.dg-tag.priority{background:var(--red-bg);color:var(--red);border-color:rgba(186,5,23,.22)}
+.dg-tag.team{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent-soft-2)}
+.dg-tag.client{background:#fef3c7;color:var(--amber);border-color:rgba(202,133,1,.22)}
+.dg-tag-add{display:inline-flex;align-items:center;justify-content:center;height:17px;width:17px;background:transparent;border:1px dashed var(--border);border-radius:3px;color:var(--ink-faint);font-size:11px;font-weight:700;cursor:pointer;padding:0}
+.dg-tag-add:hover{border-color:var(--accent);color:var(--accent)}
+.dg-country{font-size:12px;color:var(--secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dg-status-pill{display:inline-flex;align-items:center;height:20px;padding:0 9px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#fff;border-radius:10px;white-space:nowrap}
+.dg-status-pill.in-force,.dg-status-pill.enacted{background:var(--green-fill)}
+.dg-status-pill.in-progress{background:var(--amber-fill)}
+.dg-status-pill.proposed,.dg-status-pill.consultation{background:var(--accent)}
+.dg-status-pill.lapsed{background:var(--ink-faint)}
+.dg-domain-chip{display:inline-flex;align-items:center;height:18px;padding:0 6px;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-radius:3px;background:var(--surface-3);color:var(--secondary);border:1px solid var(--border-soft);margin-right:3px}
+.dg-domain-chip.ai{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent-soft-2)}
+.dg-domain-chip.privacy{background:#eef0f4;color:var(--ink);border-color:var(--border)}
+.dg-domain-chip.cyber{background:var(--amber-bg);color:var(--amber);border-color:#f5dea2}
+.dg-when{font-family:var(--mono);font-size:11.5px;color:var(--secondary);white-space:nowrap;font-feature-settings:'tnum' 1;text-align:right}
+.dg-when.pending{color:var(--ink-faint)}
+.dg-last{font-size:11.5px;color:var(--muted);white-space:nowrap;text-align:right}
+.dg-last.recent{color:var(--accent-2);font-weight:600}
+.dg-star{background:none;border:none;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-faint);cursor:pointer;border-radius:4px}
+.dg-star:hover{color:var(--accent);background:var(--surface-3)}
+.dg-star.on{color:var(--accent)}
+.dg-star svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:currentColor;fill-opacity:0}
+.dg-star.on svg{fill-opacity:1}
+.dg-pager{padding:12px 18px;border-top:1px solid var(--border-soft);background:var(--surface-2);font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
+.dg-pager a{color:var(--accent-2);font-weight:600}
+
+.footer{border-top:1px solid var(--border);padding:20px 4px 4px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.footer .ok{color:var(--green);font-weight:600}
+.footer .ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
+.footer .left{display:flex;gap:26px;align-items:center;font-weight:500}
+
+@media (max-width:1100px){.research-wrap{grid-template-columns:1fr}.facet-panel{position:static;max-height:none}}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#d0d7e0;border-radius:4px}
+
+
+
+
+
+
+
+
+
+.sidebar-nav-divider { height: 1px; background: #c8d0dc; margin: 12px 16px; flex-shrink: 0; }
+/* ==BEGIN_JUR_OVERLAY== Jurisdictions slide-in overlay (DG pattern) */
+#jur-overlay { position: fixed !important; top: 0 !important; left: var(--sidebar-collapsed, 56px); bottom: 0; width: 340px; background: #fff; border-right: 1px solid #dbe1ea; z-index: 9000; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform .32s cubic-bezier(.4,0,.2,1); box-shadow: 0 12px 40px rgba(10,23,41,0.10); visibility: hidden; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+#jur-overlay.open { transform: translateX(0) !important; visibility: visible !important; display: flex !important; pointer-events: auto !important; }
+#jur-overlay-backdrop { position: fixed; top: 0; right: 0; bottom: 0; left: calc(var(--sidebar-collapsed, 56px) + 340px); background: rgba(10,23,41,0.30); z-index: 540; opacity: 0; transition: opacity .25s; pointer-events: none; }
+#jur-overlay-backdrop.open { opacity: 1; pointer-events: auto; }
+#jur-overlay .jo-header { padding: 16px 14px 10px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+#jur-overlay .jo-title { font-size: 17px; font-weight: 600; color: #0d2e42; letter-spacing: -0.01em; margin: 0; }
+#jur-overlay .jo-close { background: #eff2f7; border: none; cursor: pointer; color: #2a3548; padding: 5px; border-radius: 999px; display: flex; width: 26px; height: 26px; align-items: center; justify-content: center; }
+#jur-overlay .jo-close:hover { background: #dbe1ea; }
+#jur-overlay .jo-search { margin: 0 14px 8px; position: relative; }
+#jur-overlay .jo-search input { width: 100%; padding: 8px 12px 8px 34px; border: 1px solid #dbe1ea; border-radius: 6px; font-family: inherit; font-size: 13.5px; color: #0d2e42; outline: none; background: #fff; }
+#jur-overlay .jo-search input:focus { border-color: #0176d3; box-shadow: 0 0 0 3px rgba(1,118,211,0.10); }
+#jur-overlay .jo-search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: #8a93a3; fill: none; stroke-width: 2; }
+#jur-overlay .jo-list { flex: 1; overflow-y: auto; padding: 4px 0 20px; }
+.jo-section-label { padding: 10px 18px 4px; font-size: 10.5px; font-weight: 700; color: #8a93a3; letter-spacing: 0.09em; text-transform: uppercase; }
+.jo-home-row { background: linear-gradient(90deg, #f6f7f9 0%, #ffffff 100%); }
+.jo-home-row .jo-name { font-weight: 600; color: #014486; }
+.jo-home-icon { width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; color: #0176d3; font-size: 10px; flex-shrink: 0; }
+.jo-home-row:hover { background: #eff2f7; }
+.jo-row { display: flex; align-items: center; gap: 10px; padding: 7px 18px 7px 14px; cursor: pointer; font-size: 13.5px; color: #0d2e42; transition: background .1s; }
+.jo-row:hover { background: #f6f7f9; }
+.jo-row.is-active { background: #e3effc; color: #014486; font-weight: 600; }
+.jo-row .jo-caret { width: 10px; color: #8a93a3; font-size: 10px; flex-shrink: 0; transition: transform .15s; }
+.jo-row.is-open .jo-caret { transform: rotate(90deg); color: #0176d3; }
+.jo-row .jo-icon { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #5e6878; }
+.jo-row .jo-icon svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.6; fill: none; }
+.jo-row .jo-name { flex: 1; line-height: 1.3; }
+.jo-children { display: none; padding: 2px 0 4px; }
+.jo-children.is-open { display: block; }
+.jo-children .jo-row { padding-left: 42px; font-size: 13px; color: #2a3548; }
+.jo-children .jo-row.is-federal { font-weight: 600; color: #0d2e42; }
+.jo-section-sep { height: 1px; background: #ebeff5; margin: 6px 14px; }
+.jo-pinned-sep { height: 1px; background: #ebeff5; margin: 4px 42px 4px; }
+.jo-row .jo-pin-btn { opacity: 0; background: transparent; border: none; color: #8a93a3; cursor: pointer; padding: 4px 5px; border-radius: 4px; transition: opacity .12s, color .12s, background .12s; flex-shrink: 0; display: flex; align-items: center; margin-left: auto; }
+.jo-row .jo-pin-btn svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2; fill: none; }
+.jo-row:hover .jo-pin-btn { opacity: .65; }
+.jo-row .jo-pin-btn:hover { opacity: 1; color: #014486; background: #e3effc; }
+.jo-row .jo-pin-btn.is-home { opacity: 1; color: #2e844a; }
+.jo-row .jo-pin-btn.is-home svg { fill: #2e844a; stroke: #2e844a; }
+#jur-overlay .jo-hint { margin: 2px 14px 6px; padding: 8px 10px; background: #f6f7f9; border: 1px solid #ebeff5; border-radius: 6px; font-size: 11.5px; color: #5e6878; line-height: 1.4; display: flex; align-items: center; gap: 8px; }
+#jur-overlay .jo-hint svg { width: 12px; height: 12px; flex-shrink: 0; stroke: #0176d3; fill: none; stroke-width: 2; }
+#jur-overlay .jo-hint b { color: #0d2e42; font-weight: 600; }
+
+#jur-overlay .jo-empty { padding: 24px 18px; color: #8a93a3; font-size: 13px; text-align: center; }
+@media (max-width: 640px) { #jur-overlay { width: 100vw; left: 0; } #jur-overlay-backdrop { display: none; } }
+
+body.jur-overlay-open .icon-sidebar { width: var(--sidebar-collapsed, 56px) !important; pointer-events: none !important; }
+body.jur-overlay-open .icon-sidebar:hover { width: var(--sidebar-collapsed, 56px) !important; }
+body.jur-overlay-open .icon-sidebar .nav-label,
+body.jur-overlay-open .icon-sidebar .brand-text { opacity: 0 !important; }
+
+/* ==END_JUR_OVERLAY== */
+
+
+.page-eyebrow { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #014486; margin-bottom: 10px; }
+.page-head { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid #ebeff5; }
+.page-head .page-title { font-size: 44px; font-weight: 700; color: #07202e; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 8px 0; }
+.page-head .page-sub { font-size: 15px; color: #5e6878; max-width: 780px; line-height: 1.55; margin: 0; }
+
+/* Sidebar hover-expand: labels reveal + main-content shifts right so it's not covered */
+.icon-sidebar { transition: width .22s cubic-bezier(.4,0,.2,1); }
+body.sidebar-expanded .icon-sidebar { width: var(--sidebar-expanded, 240px) !important; }
+body.sidebar-expanded .icon-sidebar .sidebar-nav-item .nav-label,
+body.sidebar-expanded .icon-sidebar .sidebar-brand .brand-text,
+body.sidebar-expanded .icon-sidebar .sb-invite-body,
+body.sidebar-expanded .icon-sidebar .sidebar-user .nav-label { opacity: 1 !important; pointer-events: auto !important; }
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar { margin-left: var(--sidebar-expanded, 240px) !important; transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+body.sidebar-expanded #jur-overlay { left: var(--sidebar-expanded, 240px) !important; }
+.main-content, .header-bar { transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+
+/* ==CANONICAL_HEADER_CSS== */
+.header-bar { position: fixed; top: 0; left: var(--sidebar-collapsed); right: 0; height: var(--header-height); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 18px; z-index: 200; box-shadow: var(--shadow-1); }
+.header-bar { left: 0; padding: 0 14px; }
+.header-bar { left: 0 !important; padding-left: 60px !important; }
+.header-nav-arrows { display: flex; gap: 4px; }
+.header-nav-arrows button { width: 30px; height: 30px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.header-nav-arrows button:hover { background: var(--surface-3); color: var(--ink); }
+.header-nav-arrows button svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; }
+.header-user-name { font-size: 13px; font-weight: 500; color: var(--secondary); white-space: nowrap; }
+.header-user-name { display: none; }
+.header-search { flex: 1; max-width: 460px; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 14px; background: var(--surface-3); border-radius: 5px; border: 1px solid transparent; }
+.header-search:focus-within { background: var(--surface); border-color: var(--accent-soft-2); }
+.header-search svg { width: 15px; height: 15px; stroke: var(--muted); stroke-width: 2; fill: none; }
+.header-search input { flex: 1; font-size: 13px; background: transparent; }
+.header-search input::placeholder { color: var(--muted); }
+.header-search kbd { font-family: var(--mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--border); border-radius: 3px; padding: 1px 6px; background: var(--surface); }
+.header-search { max-width: none; }
+.header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.home-jur-btn { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--secondary); cursor: pointer; padding: 6px 12px; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); font-weight: 500; }
+.hjb-flag { font-size: 17px; line-height: 1; }
+.header-icon-btn { width: 36px; height: 36px; border-radius: 5px; display: flex; align-items: center; justify-content: center; color: var(--muted); position: relative; }
+.header-icon-btn:hover { background: var(--surface-3); color: var(--ink); }
+.header-icon-btn svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 1.7; fill: none; }
+.header-icon-btn .badge-count { position: absolute; top: 4px; right: 3px; min-width: 17px; height: 17px; padding: 0 5px; background: var(--red-fill); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 600; border-radius: 9px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--surface); box-sizing: content-box; }
+.badge-count { position: absolute; top: 4px; right: 3px; min-width: 17px; height: 17px; padding: 0 5px; background: var(--red-fill); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 600; border-radius: 9px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--surface); box-sizing: content-box; }
+
+/* ==MOBILE_RESPONSIVE== */
+body { min-width: 320px !important; }
+
+/* --- Below 900px: 2-col grids collapse, sidebar fold --- */
+@media (max-width: 900px) {
+  .page-view { padding: 20px 22px 32px !important; max-width: 100% !important; }
+  .law-section { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .law-section .kpi-stack { grid-column: 1 !important; border-top: 1px solid #ebeff5; }
+  .law-section .domain-rows { grid-column: 1 !important; }
+  .page-head { grid-template-columns: 1fr !important; gap: 18px !important; }
+  .page-head .ph-map { justify-self: start !important; margin-top: 4px; }
+  .page-head .ph-map svg { width: 110px !important; }
+  .page-head .page-title { font-size: clamp(30px, 6vw, 44px) !important; }
+  .latest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .impl-cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; }
+  .reg-list-compact .reg-row { grid-template-columns: 110px 1fr auto !important; gap: 14px !important; font-size: 12.5px; }
+  .dr-detail { grid-template-columns: 1fr !important; padding-left: 94px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 94px !important; }
+  .stream-panel { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+  .pulse-line { font-size: 12px !important; padding: 7px 12px !important; }
+  .news-wire-layout { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .news-rail { position: static !important; order: 2 !important; flex-direction: row !important; flex-wrap: wrap !important; }
+  .news-rail .rail-card { flex: 1 1 280px !important; }
+}
+
+/* --- Below 640px: phone-first, sidebar hidden behind hamburger --- */
+@media (max-width: 640px) {
+  .page-view { padding: 16px 16px 28px !important; }
+  .main-content { margin-left: 0 !important; }
+  .header-bar { left: 0 !important; padding: 0 12px 0 56px !important; }
+  .icon-sidebar { display: none !important; }
+  body.mobile-nav-open .icon-sidebar { display: flex !important; width: 280px !important; z-index: 500 !important; box-shadow: 0 12px 40px rgba(0,0,0,0.25) !important; }
+  body.mobile-nav-open .icon-sidebar .nav-label,
+  body.mobile-nav-open .icon-sidebar .brand-text { opacity: 1 !important; }
+  /* Sidebar stops overriding content */
+  :root { --sidebar-collapsed: 0px !important; }
+  /* Hero */
+  .page-head .page-title { font-size: clamp(26px, 8vw, 34px) !important; letter-spacing: -0.02em !important; }
+  .page-head .page-sub { font-size: 13.5px !important; }
+  .page-head .ph-map { display: none !important; }
+  .page-head { margin-bottom: 28px !important; padding-bottom: 18px !important; }
+  .pulse-line { flex-wrap: wrap; font-size: 11.5px !important; padding: 6px 10px !important; }
+  /* Domain row — stack label/primary/meta vertically */
+  .domain-row { grid-template-columns: 1fr 24px !important; grid-template-areas: "label chev" "primary chev" "meta chev" !important; gap: 4px 10px !important; padding: 12px 4px !important; min-height: auto !important; align-items: start !important; }
+  .domain-row .dr-label { grid-area: label; font-size: 10px !important; }
+  .domain-row .dr-content { grid-area: primary; font-size: 13px !important; }
+  .domain-row .dr-meta { grid-area: meta; margin-top: 4px; font-size: 11px !important; }
+  .domain-row .dr-chev { grid-area: chev; align-self: center; }
+  .dr-detail { padding-left: 10px !important; }
+  .domain-group.is-open .dr-detail { padding-left: 10px !important; }
+  /* KPI stack horizontal */
+  .kpi-stack { flex-direction: row !important; gap: 0 !important; border-top: none !important; }
+  .kpi-stack .kpi { flex: 1; border-bottom: none !important; border-right: 1px solid #ebeff5; padding: 12px 10px !important; min-height: auto !important; }
+  .kpi-stack .kpi:last-child { border-right: none; }
+  .kpi-value { font-size: 20px !important; }
+  .kpi-value.small { font-size: 13px !important; }
+  /* Latest + impl + stream — single column */
+  .latest-grid { grid-template-columns: 1fr !important; }
+  .impl-cards { grid-template-columns: 1fr !important; }
+  .stream-panel { grid-template-columns: 1fr !important; }
+  /* Regulator rows stack */
+  .reg-list-compact .reg-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 14px 4px !important; }
+  .reg-list-compact .reg-row .r-open { justify-self: start; margin-top: 4px; }
+  /* Stream cards tighten */
+  .stream-row { padding: 14px 16px 12px !important; }
+  .stream-row .sr-h { font-size: 13.5px !important; }
+  /* Tabs scrollable */
+  .stream-tabs { overflow-x: auto; flex-wrap: nowrap !important; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+  .stream-tab { white-space: nowrap; flex-shrink: 0; }
+  /* Overlay full width */
+  #jur-overlay { width: 100vw !important; left: 0 !important; }
+  #jur-overlay-backdrop { display: none !important; }
+  body.jur-overlay-open .icon-sidebar { display: none !important; }
+  /* Header icons — bigger tap targets */
+  .header-icon-btn { width: 40px !important; height: 40px !important; }
+  .header-logout { padding: 0 11px !important; }
+  .header-logout span { display: none; }
+  .header-search { display: none !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Footer padding */
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 8px; }
+  .footer .left { flex-wrap: wrap; gap: 12px !important; font-size: 11px !important; }
+  /* Page statusbar tighten */
+  .page-statusbar { flex-wrap: wrap; padding-bottom: 12px !important; margin-bottom: 16px !important; min-height: auto !important; }
+  .page-statusbar .page-actions { display: none !important; }
+  /* Typography on body */
+  html { font-size: 14.5px; }
+}
+
+/* --- Below 420px: most cramped phones --- */
+@media (max-width: 420px) {
+  .page-view { padding: 14px 12px 24px !important; }
+  .page-head .page-title { font-size: 26px !important; }
+  .kpi-value { font-size: 18px !important; }
+  .home-jur-btn { padding: 5px 8px !important; font-size: 11.5px !important; }
+  .home-jur-btn span:nth-of-type(2) { max-width: 80px; }
+  .pulse-line { font-size: 11px !important; }
+}
+
+/* Mobile hamburger toggle button */
+.mobile-nav-toggle { display: none; position: fixed; top: 8px; left: 8px; z-index: 500; width: 40px; height: 40px; background: #fff; border: 1px solid #dbe1ea; border-radius: 6px; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(10,23,41,0.12); padding: 0; }
+.mobile-nav-toggle svg { width: 20px; height: 20px; stroke: #0d2e42; stroke-width: 2; fill: none; }
+.mobile-nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,23,41,0.4); z-index: 450; }
+@media (max-width: 640px) {
+  .mobile-nav-toggle { display: flex; }
+  body.mobile-nav-open .mobile-nav-backdrop { display: block; }
+}
+/* ==END_MOBILE_RESPONSIVE== */
+
+.mockup-banner{background:#fff8e1;border:1px solid #ffe69c;border-radius:6px;padding:8px 14px;font-size:12px;color:#7c5b00;margin:10px 0 18px;display:flex;align-items:center;gap:10px}
 .mockup-banner b{color:#5a3f00}
 
-/* HERO */
-.hero{margin-bottom:30px}
-.hero-chip{display:inline-flex;align-items:center;height:22px;padding:0 9px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;background:var(--accent-soft);color:var(--accent-2);border:1px solid var(--accent-soft-2);margin-bottom:14px}
-.hero-ref{font-family:var(--sans);font-size:12px;color:var(--muted);font-weight:500;margin-bottom:10px;letter-spacing:0.01em}
-.hero-ref .ref-code{color:var(--accent-2);font-weight:700;border-bottom:1px dotted var(--accent-soft-2);padding-bottom:1px}
-.hero-title{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.018em;color:var(--ink-strong);line-height:1.18;margin-bottom:14px}
-.hero-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--secondary);flex-wrap:wrap;margin-bottom:18px}
-.hero-meta .dot{color:var(--border)}
-.hero-meta strong{color:var(--ink-strong)}
-.hero-deck{font-family:var(--serif);font-size:16.5px;line-height:1.5;color:var(--ink-strong);font-weight:500;border-top:1px solid var(--border-soft);padding-top:18px;max-width:780px}
-.topic-pill{display:inline-flex;align-items:center;height:20px;padding:0 8px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;background:#e3effc;color:#014486}
+/* HERO common */
+.case-hero{margin-bottom:26px}
+.case-court-chip-l{display:inline-flex;align-items:center;height:22px;padding:0 9px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;background:var(--accent-soft);color:var(--accent-2);border:1px solid var(--accent-soft-2);margin-bottom:10px;margin-right:6px}
+.case-status-chip{display:inline-flex;align-items:center;height:22px;padding:0 9px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;background:#fef0c7;color:#905200;border:1px solid #f5dea2;margin-bottom:10px}
+.case-ref-line{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:8px}
+.case-ref-line code{font-family:'Inter',sans-serif;background:var(--surface-3);color:var(--accent-2);padding:2px 6px;border-radius:3px;font-weight:700;font-size:11.5px}
+.case-h1{font-family:'Source Serif 4',Georgia,serif;font-size:28px;font-weight:600;letter-spacing:-.018em;color:var(--ink-strong);line-height:1.2;margin-bottom:12px}
+.case-meta-row{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--secondary);flex-wrap:wrap;margin-bottom:14px}
+.case-meta-row strong{color:var(--ink-strong)}
+.case-meta-row .dot{color:var(--border)}
+.topic-pill{display:inline-flex;align-items:center;height:20px;padding:0 8px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;background:#e3effc;color:#014486;margin-right:4px}
 .topic-pill.cyber{background:#fef0c7;color:#905200}
 .topic-pill.ai{background:#e5f3e9;color:#2e844a}
+.case-deck{font-family:'Source Serif 4',Georgia,serif;font-size:16px;line-height:1.5;color:var(--ink-strong);font-weight:500;border-top:1px solid var(--border-soft);padding-top:14px;max-width:780px}
 
-/* SECTIONS */
-.section{margin-bottom:26px}
-.section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.section-eyebrow::before{content:'';width:14px;height:1px;background:var(--ink-faint)}
-.section h2{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink-strong);margin-bottom:10px;letter-spacing:-.005em}
-.section p{font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--ink);max-width:780px}
-.section p + p{margin-top:10px}
-.section em{font-style:italic;color:var(--ink-strong)}
-.section strong{font-weight:600;color:var(--ink-strong)}
+/* SECTIONS (V1 prose) */
+.cl-section{margin-bottom:24px}
+.cl-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.cl-eyebrow::before{content:'';width:14px;height:1px;background:var(--ink-faint)}
+.cl-section h2{font-family:'Source Serif 4',Georgia,serif;font-size:18px;font-weight:600;color:var(--ink-strong);margin-bottom:10px;letter-spacing:-.005em}
+.cl-section p{font-family:'Source Serif 4',Georgia,serif;font-size:15px;line-height:1.6;color:var(--ink);max-width:780px}
+.cl-section p+p{margin-top:10px}
+.cl-section em{font-style:italic;color:var(--ink-strong)}
+.cl-section strong{font-weight:600;color:var(--ink-strong)}
+.cl-section a{color:var(--accent-2);border-bottom:1px dotted var(--accent-soft-2)}
+.cl-section a:hover{color:var(--accent)}
 
-/* SOURCES BLOCK */
-.sources{margin-top:36px;padding-top:24px;border-top:2px solid var(--border)}
+/* V2 metadata grid */
+.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.meta-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;padding:14px 16px;box-shadow:var(--shadow-1)}
+.meta-card .mc-title{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.meta-card .kv{display:grid;grid-template-columns:90px 1fr;gap:4px 10px;font-size:12px;margin-bottom:5px;align-items:baseline}
+.meta-card .kv .k{color:var(--muted);font-weight:500}
+.meta-card .kv .v{color:var(--ink);font-weight:600;word-break:break-word}
+.meta-card .kv .v a{color:var(--accent-2);border-bottom:1px dotted var(--accent-soft-2)}
+
+/* V3 colour cards */
+.cs-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;padding:22px 24px;box-shadow:var(--shadow-1);position:relative;overflow:hidden;margin-bottom:14px}
+.cs-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.cs-card.background::before{background:var(--accent)}
+.cs-card.basis::before{background:#905200}
+.cs-card.ruling::before{background:var(--green-fill,#2e844a)}
+.cs-card .cs-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.cs-card .cs-eyebrow .badge{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;background:var(--accent);color:#fff;border-radius:50%;font-size:11px;font-weight:700}
+.cs-card.basis .cs-eyebrow .badge{background:#905200}
+.cs-card.ruling .cs-eyebrow .badge{background:#2e844a}
+.cs-card h2{font-family:'Source Serif 4',Georgia,serif;font-size:18px;font-weight:600;color:var(--ink-strong);margin-bottom:10px;letter-spacing:-.005em}
+.cs-card p{font-family:'Source Serif 4',Georgia,serif;font-size:14.5px;line-height:1.6;color:var(--ink)}
+.cs-card p+p{margin-top:8px}
+.cs-card a{color:var(--accent-2);border-bottom:1px dotted var(--accent-soft-2)}
+.cs-card .cs-pull{font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--accent-3);border-left:2px solid var(--accent-soft-2);padding:6px 0 6px 14px;margin:10px 0;font-size:14.5px;line-height:1.5}
+
+/* Sources block */
+.sources-block{margin-top:30px;padding-top:24px;border-top:2px solid var(--border)}
 .sources-head{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 .sources-list{display:flex;flex-direction:column;gap:8px}
-.source-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;transition:border-color .12s,background .12s}
+.source-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px}
 .source-row:hover{border-color:var(--accent-soft-2);background:var(--surface-2)}
 .source-kind{flex-shrink:0;display:inline-flex;align-items:center;height:20px;padding:0 8px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;background:var(--surface-3);color:var(--secondary);min-width:118px;justify-content:center}
 .source-kind.primary{background:var(--accent-soft);color:var(--accent-2)}
@@ -88,138 +483,251 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;font-size:
 .source-kind.opinion{background:#fce8e8;color:#ba0517}
 .source-kind.indexed{background:#fef0c7;color:#905200}
 .source-row .src-title{flex:1;font-size:13px;color:var(--ink-strong);font-weight:500;min-width:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
-.source-row .src-meta{font-size:11.5px;color:var(--muted);font-family:var(--sans)}
-.source-row a.src-link{color:var(--accent-2);font-size:11.5px;font-weight:600;text-decoration:none;border:1px solid var(--accent-soft-2);padding:4px 10px;border-radius:4px;background:var(--surface)}
+.source-row .src-meta{font-size:11.5px;color:var(--muted)}
+.source-row a.src-link{color:var(--accent-2);font-size:11.5px;font-weight:600;border:1px solid var(--accent-soft-2);padding:4px 10px;border-radius:4px;background:var(--surface)}
 .source-row a.src-link:hover{background:var(--accent-soft);color:var(--accent-2)}
 
-/* RELATED RAIL (small) */
-.related{margin-top:30px;padding:18px 22px;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:8px}
-.related-head{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.related-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.related-grid .card-mini .label{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.related-grid .card-mini a{font-size:13px;color:var(--accent-2);font-weight:600}
+/* Right rail (V2/V3) */
+.body-wrap-2col{display:grid;grid-template-columns:1fr 320px;gap:24px}
+.rail-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow-1)}
+.rail-card .rt{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-soft)}
+.fact-row{display:flex;align-items:baseline;gap:10px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border-soft)}
+.fact-row:last-child{border-bottom:none}
+.fact-row .fl{color:var(--muted);min-width:78px;font-weight:500;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.fact-row .fv{color:var(--ink-strong);font-weight:600}
+.fact-row .fv a{color:var(--accent-2);border-bottom:1px dotted var(--accent-soft-2)}
+.src-mini{display:flex;flex-direction:column;gap:3px;padding:8px 0;border-bottom:1px solid var(--border-soft)}
+.src-mini:last-child{border-bottom:none}
+.src-mini .src-kind-mini{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.src-mini .src-kind-mini.primary{color:var(--accent-2)}
+.src-mini .src-kind-mini.judgment{color:#2e844a}
+.src-mini .src-kind-mini.opinion{color:#ba0517}
+.src-mini .src-title-mini{font-size:12px;font-weight:600;color:var(--ink-strong);line-height:1.3}
+.src-mini a{font-size:11px;color:var(--accent-2);font-weight:600;display:inline-block;margin-top:1px}
+
 </style>
+<script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
+<script>
+  window.addEventListener("error", function(e) {
+    if (window.GlitchTip) {
+      GlitchTip.captureException(e.error || e);
+    }
+  });
+  window.addEventListener("unhandledrejection", function(e) {
+    if (window.GlitchTip) {
+      GlitchTip.captureException(e.reason);
+    }
+  });
+</script>
+<script src="https://cdn.glitchtip.com/glitchtip.min.js"></script>
+<script>
+  if (window.GlitchTip) {
+    GlitchTip.init({
+      apiUrl: "https://errors.principlesai.org/api/0/",
+      projectId: 1
+    });
+  }
+</script>
+<script id="pai-clerk-sdk" async crossorigin="anonymous" data-clerk-publishable-key="pk_live_Y2xlcmsucHJpbmNpcGxlc2FpLm9yZyQ" src="https://clerk.principlesai.org/npm/@clerk/clerk-js@5/dist/clerk.browser.js" type="text/javascript" onload="window.__paiClerkLoaded=true;window.dispatchEvent(new Event('pai:clerk-loaded'))"></script>
+<script id="pai-clerk-v1">
+(function(){
+  if(window.__paiClerkV1) return;
+  window.__paiClerkV1 = true;
+
+  function setHeaderName(user){
+    var el = document.querySelector('.header-user-name');
+    if(!el) return;
+    if(user && user.firstName){
+      el.textContent = 'Hello ' + user.firstName + (user.lastName ? ' ' + user.lastName : '');
+    }
+    // if no user, leave hardcoded — pai-app-* is public by design
+  }
+
+  function boot(){
+    if(!window.Clerk || typeof window.Clerk.load !== 'function') return;
+    window.Clerk.load().then(function(){
+      setHeaderName(window.Clerk.user);
+      // react to sign-in / sign-out events
+      if(typeof window.Clerk.addListener === 'function'){
+        window.Clerk.addListener(function(state){ setHeaderName(state && state.user); });
+      }
+    }).catch(function(){ /* no-op, keep hardcoded fallback */ });
+  }
+
+  if(window.__paiClerkLoaded){ boot(); }
+  else { window.addEventListener('pai:clerk-loaded', boot); }
+})();
+</script>
+<style id="pai-nav-v46">
+/* v46 — overlay pattern. Sidebar expands visually (original behaviour),
+   content stays put (we kill the push), scrim dims content, shadow lifts sidebar. */
+
+/* KILL the main-content / header-bar push. This is the entire "squash" feeling. */
+body.sidebar-expanded .main-content,
+body.sidebar-expanded .header-bar {
+  margin-left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Keep jur-overlay anchored at 56 when sidebar expands */
+body.sidebar-expanded #jur-overlay {
+  left: var(--sidebar-collapsed, 56px) !important;
+}
+
+/* Elevation cues on the expanded sidebar — reads as floating over content */
+body.sidebar-expanded .icon-sidebar,
+.icon-sidebar:hover {
+  box-shadow: 8px 0 32px rgba(7, 32, 46, 0.14) !important;
+  z-index: 500 !important;
+}
+
+/* Scrim: light dim over content while sidebar is expanded */
+.nav-scrim {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-collapsed, 56px);
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 32, 46, 0.10);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease-out;
+  z-index: 450;
+}
+.icon-sidebar:hover ~ .nav-scrim,
+body.sidebar-expanded .nav-scrim { opacity: 1; }
+body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
+</style>
+<link rel="stylesheet" href="mobile-overrides.css?v=20260430">
 </head>
 <body>
 <nav class="icon-sidebar">
   <a href="pai-home-private" class="sidebar-brand" style="text-decoration:none;color:inherit;">
-    <div class="brand-icon"><img src="pai-logo.png" alt="PAI"></div>
+    <div class="brand-icon" style="background:#fff; padding:2px; overflow:hidden;"><img src="pai-logo.png" alt="PAI" style="width:100%;height:100%;object-fit:contain;display:block;"></div>
     <span class="brand-text">Principles<span class="ai">AI</span></span>
   </a>
   <div class="sidebar-nav-items">
-    <a class="sidebar-nav-item" href="pai-home-private"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></a>
-    <a class="sidebar-nav-item" href="pai-app-news"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/></svg><span class="nav-label">News</span></a>
-    <a class="sidebar-nav-item" href="pai-app-authorities"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
-    <a class="sidebar-nav-item" href="pai-app-legislation"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span class="nav-label">Legislation</span></a>
-    <a class="sidebar-nav-item active" href="pai-app-case-law"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a6 6 0 0112 0v2"/></svg><span class="nav-label">Case Law</span></a>
+    <a class="sidebar-nav-item" href="pai-home-private" style="text-decoration:none;"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></a>
+      <a class="sidebar-nav-item" href="pai-app-ai-notes" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 8h8M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="nav-label">AI Notes</span></a>
+    <div class="sidebar-nav-item" onclick="openJurisdictions()" style="cursor:pointer;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span class="nav-label">Jurisdictions</span></div>
+    <a class="sidebar-nav-item" href="pai-app-news" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><path d="M20 8h2v10a2 2 0 01-2 2"/><line x1="7" y1="8" x2="15" y2="8"/><line x1="7" y1="12" x2="15" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg><span class="nav-label">News</span></a>
+    <div class="sidebar-regions-zone">
+      <div class="sidebar-nav-divider"></div>
+      <a class="sidebar-nav-item" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
+      <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
+      <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
+      <a class="sidebar-nav-item" href="pai-app-case-law" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Case Law</span></a>
+      <div class="sidebar-nav-divider"></div>
+      <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
+      <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
+      <a class="sidebar-nav-item" href="pai-app-watchlist" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg><span class="nav-label">Watchlist</span></a>
+      <a class="sidebar-nav-item" href="pai-app-settings" style="text-decoration:none;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="nav-label">Settings</span></a>
+    </div>
   </div>
 </nav>
 <header class="header-bar">
+  <div class="header-nav-arrows">
+    <button><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <span class="header-user-name"></span>
+  <div class="header-search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search jurisdictions, enforcement, case law…">
+    <kbd>⌘K</kbd>
+  </div>
   <div class="header-right">
-    <a href="#" class="header-logout"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
+    <div class="home-jur-btn"><span class="hjb-flag">&#x1F1EC;&#x1F1E7;</span><span>Set home</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <a href="pai-app-settings" class="header-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></a><a href="#" class="header-logout" onclick="paiLogout(event)" title="Log out"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
   </div>
 </header>
 
 <div class="main-content">
-<div class="page-view">
-
-  <div class="mockup-banner"><b>Mockup V1 · Tight & literal</b> — 3 prose sections, sources rail at bottom, no metadata grid. Reachable from <a href="pai-app-case-law" style="color:#7c5b00;text-decoration:underline;font-weight:600">Case Law index</a>.</div>
-
-  <div class="ps-left">
-    <span class="ps-breadcrumb"><a href="pai-home-private">Home</a><span class="ps-sep">›</span><a href="pai-app-case-law">Case Law</a><span class="ps-sep">›</span><span class="ps-current">AG Kokott — Hungary Sovereignty Law</span></span>
+  <div class="page-view" style="padding:28px 40px 60px;max-width:980px;margin:0 auto">
+    <div class="mockup-banner"><b>Mockup V1 · Tight prose</b> — single column, 3 sections (Background · Legal basis · Ruling), sources block at bottom.</div>
+    <div class="ps-left" style="font-size:12.5px;color:var(--secondary);padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--border)">
+    <span class="ps-breadcrumb"><a href="pai-home-private" style="color:var(--accent-2);font-weight:600">Home</a><span class="ps-sep" style="color:var(--ink-faint);margin:0 6px">›</span><a href="pai-app-case-law" style="color:var(--accent-2);font-weight:600">Case Law</a><span class="ps-sep" style="color:var(--ink-faint);margin:0 6px">›</span><span class="ps-current" style="color:var(--ink-strong);font-weight:700">C-829/24 — AG Kokott</span></span>
   </div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-chip">CJEU · Advocate General Opinion</div>
-    <div class="hero-ref"><span class="ref-code">C-829/24</span> · Commission v Hungary (Protection against foreign political interference) · ECLI:EU:C:2026:———</div>
-    <div class="hero-title">AG Kokott: Hungary's Sovereignty Protection Office breaches EU law</div>
-    <div class="hero-meta">
-      <span><strong>European Union</strong> · Hungary</span>
-      <span class="dot">·</span>
-      <span>12 February 2026</span>
-      <span class="dot">·</span>
-      <span class="topic-pill">Privacy</span>
-      <span class="topic-pill ai">AI</span>
+    <div class="case-hero">
+      <span class="case-court-chip-l">CJEU · Advocate General Opinion</span>
+      <span class="case-status-chip">Pending judgment</span>
+      <div class="case-ref-line"><code>C-829/24</code> · ECLI:EU:C:2026:——— · Commission v Hungary (Protection against foreign political interference)</div>
+      <h1 class="case-h1">AG Kokott: Hungary's Sovereignty Protection Office breaches EU law</h1>
+      <div class="case-meta-row">
+        <span><strong>European Union</strong> · Hungary</span>
+        <span class="dot">·</span>
+        <span>12 February 2026</span>
+        <span class="dot">·</span>
+        <span class="topic-pill">Privacy</span>
+        <span class="topic-pill ai">AI</span>
+      </div>
+      <p class="case-deck">Advocate General Juliane Kokott proposes the Court of Justice find Hungary infringed EU law by adopting <em>Law LXXXVIII of 2023</em>, which establishes a Sovereignty Protection Office with broad investigative powers and no judicial oversight.</p>
     </div>
-    <p class="hero-deck">Advocate General Juliane Kokott proposes that the Court of Justice find Hungary infringed EU law by adopting Law LXXXVIII of 2023, which establishes a Sovereignty Protection Office with broad investigative powers and no judicial review. Non-binding Opinion; Court judgment to follow.</p>
-  </div>
 
-  <!-- SECTION 1 — Decision -->
-  <section class="section">
-    <div class="section-eyebrow">What was decided</div>
-    <h2>Opinion: Hungary failed to fulfil obligations under EU law</h2>
-    <p>On <strong>12 February 2026</strong>, AG Juliane Kokott delivered her Opinion in <em>Commission v Hungary (Protection against foreign political interference)</em>, recommending the Court of Justice find that Hungary's <em>Law LXXXVIII of 2023 on the protection of national sovereignty</em> infringes several provisions of EU primary and secondary law, the Charter of Fundamental Rights, and the GDPR.</p>
-    <p>The Opinion is non-binding; the Court of Justice will deliver its own judgment in due course. The Commission's infringement action under Article 258 TFEU was lodged on 19 December 2024.</p>
-  </section>
+    <section class="cl-section">
+      <div class="cl-eyebrow">1 · Background</div>
+      
+<h2>Hungary's Sovereignty Protection Office and the Commission's infringement action</h2>
+<p>In December 2023, Hungary adopted <em>Law LXXXVIII of 2023 on the protection of national sovereignty</em>. The law establishes an independent <em>Sovereignty Protection Office</em> empowered to identify organisations or individuals carrying out activities "in the interest of other States and foreign actors". The Office can compel disclosure of information (including personal data), forward findings to other authorities, and publish accusatory annual reports. Its investigative powers are not subject to judicial review.</p>
+<p>On 19 December 2024, the European Commission lodged an action for failure to fulfil obligations against Hungary under <a href="#">Article 258 TFEU</a>, alleging breaches of fundamental freedoms, the Charter of Fundamental Rights, the GDPR, and — for the first time in an infringement action — the EU's foundational values under <a href="#">Article 2 TEU</a>. The hearing took place on 19 November 2025; AG Kokott delivered her Opinion on 12 February 2026; the Court's judgment is pending.</p>
 
-  <!-- SECTION 2 — At stake -->
-  <section class="section">
-    <div class="section-eyebrow">What was at stake</div>
-    <h2>Sovereignty Protection Office: powers and reach</h2>
-    <p>The contested Hungarian law establishes an independent <em>Sovereignty Protection Office</em> empowered to investigate organisations and individuals carrying out activities "in the interest of other States and foreign actors". The Office can compel information disclosure (including personal data), forward findings to other authorities, and publish accusatory or stigmatising annual reports. <strong>Its investigative powers are not subject to judicial review.</strong></p>
-    <p>Kokott found the Office's powers indirectly discriminate against foreign service providers, breach the free movement of information society services (Directive 2000/31), the free movement of capital, and the Services Directive (2006/123). The processing of personal data — including data revealing political opinions — engages Articles 9 and 10 of the GDPR; the absence of safeguards renders that processing unlawful.</p>
-  </section>
+    </section>
 
-  <!-- SECTION 3 — What this means -->
-  <section class="section">
-    <div class="section-eyebrow">What this means</div>
-    <h2>Binding precedent if confirmed by the Court</h2>
-    <p>If the Court adopts Kokott's reasoning, the judgment will bind all EU Member States and require Hungary to dismantle or substantially reform the Sovereignty Protection Office. The case is the first time the Commission has invoked breaches of <strong>Article 2 TEU</strong> values alongside concrete GDPR and Charter violations in a single infringement action — a precedent for future rule-of-law actions where data-protection breaches are part of a wider pattern.</p>
-  </section>
+    <section class="cl-section">
+      <div class="cl-eyebrow">2 · Legal basis</div>
+      
+<h2>Provisions invoked</h2>
+<p>The Commission and AG Kokott rely on a combination of EU primary and secondary law:</p>
+<p>
+<strong>Primary law:</strong> <a href="#">Article 2 TEU</a> (values of the Union); <a href="#">Articles 1, 7, 11, 21</a> of the Charter of Fundamental Rights of the European Union (dignity, private life, expression, non-discrimination); <a href="#">Article 8(2)</a> Charter (data protection).<br>
+<strong>Internal-market freedoms:</strong> <a href="#">Article 3(2)</a> e-Commerce Directive 2000/31/EC; <a href="#">Articles 16 and 19</a> Services Directive 2006/123/EC.<br>
+<strong>Data protection:</strong> <a href="#">Articles 9 and 10</a> GDPR (special-category data and data on criminal convictions).
+</p>
+<p>The contested national instrument is <em>Law LXXXVIII of 2023 on the protection of national sovereignty</em> (Hungary).</p>
 
-  <!-- SOURCES BLOCK -->
-  <div class="sources">
-    <div class="sources-head">Official sources captured</div>
-    <div class="sources-list">
-      <div class="source-row">
-        <span class="source-kind primary">Press release</span>
-        <span class="src-title">Press Release No 16/26 — Court of Justice of the European Union</span>
-        <span class="src-meta">PDF · 122 KB · 12 Feb 2026</span>
-        <a class="src-link" href="https://curia.europa.eu/site/upload/docs/application/pdf/2026-02/cp260016en.pdf" target="_blank" rel="noopener">Open ↗</a>
-      </div>
-      <div class="source-row">
-        <span class="source-kind opinion">AG Opinion</span>
-        <span class="src-title">Opinion of Advocate General Kokott (Case C-829/24) · CELEX 62024CC0829</span>
-        <span class="src-meta">EUR-Lex · pending publication</span>
-        <a class="src-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62024CC0829" target="_blank" rel="noopener">Open ↗</a>
-      </div>
-      <div class="source-row">
-        <span class="source-kind judgment">Court Order</span>
-        <span class="src-title">Order of the Court (Case C-829/24) · CELEX 62024CO0829</span>
-        <span class="src-meta">PDF · 379 KB · captured 7 May 2026</span>
-        <a class="src-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:62024CO0829" target="_blank" rel="noopener">Open ↗</a>
-      </div>
-      <div class="source-row">
-        <span class="source-kind indexed">Case file</span>
-        <span class="src-title">InfoCuria — full case index for C-829/24</span>
-        <span class="src-meta">curia.europa.eu</span>
-        <a class="src-link" href="https://curia.europa.eu/juris/liste.jsf?num=C-829/24&language=en" target="_blank" rel="noopener">Open ↗</a>
-      </div>
+    </section>
+
+    <section class="cl-section">
+      <div class="cl-eyebrow">3 · Ruling</div>
+      
+<h2>AG Opinion: Hungary infringed EU law in several respects</h2>
+<p>On <strong>12 February 2026</strong>, AG Juliane Kokott proposed that the Court of Justice find Hungary failed to fulfil its obligations under EU law. She concluded the Office's investigative powers and disclosure obligations <strong>indirectly discriminate</strong> against foreign service providers and breach the free movement of information society services, the free movement of capital, and the Services Directive. The Office's processing of personal data — including data revealing political opinions — engages Articles 9 and 10 GDPR; absence of safeguards renders that processing unlawful.</p>
+<p>The AG Opinion is non-binding; the Court of Justice will deliver its judgment in due course. If the Court adopts Kokott's reasoning, the ruling will <strong>bind all EU Member States</strong> and require Hungary to dismantle or substantially reform the Office. The Commission stated this is the first infringement action invoking <em>Article 2 TEU values</em> alongside concrete GDPR and Charter violations in a single action.</p>
+
+    </section>
+
+    
+<div class="sources-block">
+  <div class="sources-head">Official sources captured</div>
+  <div class="sources-list">
+    <div class="source-row">
+      <span class="source-kind primary">Press release</span>
+      <span class="src-title">Press Release No 16/26 — Court of Justice of the European Union</span>
+      <span class="src-meta">PDF · 122 KB · 12 Feb 2026</span>
+      <a class="src-link" href="https://curia.europa.eu/site/upload/docs/application/pdf/2026-02/cp260016en.pdf" target="_blank" rel="noopener">Open ↗</a>
     </div>
-  </div>
-
-  <!-- RELATED -->
-  <div class="related">
-    <div class="related-head">Related on PrinciplesAI</div>
-    <div class="related-grid">
-      <div class="card-mini">
-        <div class="label">Authority</div>
-        <a href="#">Court of Justice of the European Union</a>
-      </div>
-      <div class="card-mini">
-        <div class="label">Cited legislation</div>
-        <a href="#">GDPR · Articles 9, 10</a>
-      </div>
-      <div class="card-mini">
-        <div class="label">Jurisdictions</div>
-        <a href="#">European Union · Hungary</a>
-      </div>
+    <div class="source-row">
+      <span class="source-kind opinion">AG Opinion</span>
+      <span class="src-title">Opinion of Advocate General Kokott (Case C-829/24) · CELEX 62024CC0829</span>
+      <span class="src-meta">EUR-Lex</span>
+      <a class="src-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62024CC0829" target="_blank" rel="noopener">Open ↗</a>
+    </div>
+    <div class="source-row">
+      <span class="source-kind judgment">Court Order</span>
+      <span class="src-title">Order of the Court (Case C-829/24) · CELEX 62024CO0829</span>
+      <span class="src-meta">PDF · 379 KB</span>
+      <a class="src-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:62024CO0829" target="_blank" rel="noopener">Open ↗</a>
+    </div>
+    <div class="source-row">
+      <span class="source-kind indexed">Case file</span>
+      <span class="src-title">InfoCuria — full case index for C-829/24</span>
+      <span class="src-meta">curia.europa.eu</span>
+      <a class="src-link" href="https://curia.europa.eu/juris/liste.jsf?num=C-829/24&language=en" target="_blank" rel="noopener">Open ↗</a>
     </div>
   </div>
-
-</div>
 </div>
 
+  </div>
+</div>
 </body>
 </html>
