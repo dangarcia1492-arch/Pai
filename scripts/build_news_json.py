@@ -58,21 +58,31 @@ def first(xs):
 def to_row(rec, slug_map):
     f = rec.get("fields", {})
     rid = rec["id"]
+    headline = f.get("Name") or ""
+    summary = f.get("Summary") or ""
+    authority = first(f.get("Name (from Authorities)")) or None
     return {
         "id": rid,
+        "at2_id": rid,           # alias — older loaders read at2_id
         "slug": slug_map.get(rid),
-        "headline": f.get("Name") or "",
-        "summary": f.get("Summary") or "",
+        "headline": headline,
+        "title": headline,        # alias — older loaders read .title
+        "summary": summary,
         "source_url": f.get("Source URL") or "",
         "date_published": f.get("Date Published") or None,
         "jurisdiction_name": first(f.get("Name (from Jurisdiction)")) or None,
+        "jurisdictions": f.get("Name (from Jurisdiction)") or [],
+        "juris_isos": f.get("ISO Code (from Jurisdiction)") or [],
         "iso": first(f.get("ISO Code (from Jurisdiction)")) or None,
         "region": first(f.get("Region (from Jurisdiction)")) or None,
-        "authority": first(f.get("Name (from Authorities)")) or None,
+        "authority": authority,
+        "body_name": authority,   # alias — older loaders read .body_name (the "body" = the regulator)
         "authority_type": first(f.get("Type (from Authorities)")) or None,
         "story_type": f.get("Story Type") or None,
         "tags": f.get("Tags") or [],
+        "topic": (f.get("Tags") or [None])[0],   # legacy single-value field
         "verified_status": f.get("Verified Status") or None,
+        "is_lead": False,         # juris hero rule reads this; populated when the lead-flagging step exists
     }
 
 
