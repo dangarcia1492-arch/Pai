@@ -21,9 +21,10 @@ import collections
 from datetime import datetime, timezone
 from pathlib import Path
 
-OUT = Path("/Users/claude-sandbox/Pai-edit-hub-filters/news.json")
-SLUG_MAP = Path("/Users/claude-sandbox/Pai-edit-hub-filters/news_slug_map.json")
-STATS = Path("/Users/claude-sandbox/Pai-edit-hub-filters/stats.json")
+_ROOT = Path(__file__).resolve().parents[1]
+OUT = _ROOT / "news.json"
+SLUG_MAP = _ROOT / "news_slug_map.json"
+STATS = _ROOT / "stats.json"
 NEWS_TABLE = "tbl15HFEi0fXTLZQc"
 
 
