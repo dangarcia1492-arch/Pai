@@ -536,7 +536,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <a class="sidebar-nav-item active" href="pai-app-authorities" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg><span class="nav-label">Authorities</span></a>
       <a class="sidebar-nav-item" href="pai-app-tables" style="text-decoration:none;"><svg viewBox="0 0 24 24"><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg><span class="nav-label">Tables</span></a>
       <a class="sidebar-nav-item" href="pai-app-legislation" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg><span class="nav-label">Legislation</span></a>
-      <a class="sidebar-nav-item" href="pai-app-courts" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Courts</span></a>
+      <a class="sidebar-nav-item" href="pai-app-case-law" style="text-decoration:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V11l7-7 7 7v10"/><path d="M9 21v-6h6v6"/></svg><span class="nav-label">Case Law</span></a>
       <div class="sidebar-nav-divider"></div>
       <a class="sidebar-nav-item" href="pai-app-glossary" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span class="nav-label">Glossary</span></a>
       <a class="sidebar-nav-item" href="pai-app-community" style="text-decoration:none;"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="nav-label">Community</span></a>
@@ -773,20 +773,26 @@ function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&am
 (function(){const p=new URLSearchParams(location.search);const s=p.get('juris');if(s){window.JURIS_FILTER_SLUG=s;window.JURIS_FILTER_NAME=s.split('-').map(w=>w?w[0].toUpperCase()+w.slice(1):'').join(' ');}})();
 function nameToSlug(n){return String(n||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function renderAuthorityRow(r){
+  // authorities.json schema: id, name, jurisdiction, type, status, url, major_source,
+  // confidence_score, confidence_level, items_per_week, last_new_content, synced_at.
+  // No region/iso/acronym/slug on the row — derive what we can.
+  const jurisName = r.jurisdiction_name || r.jurisdiction || '';
+  const jSlug = r.jurisdiction_slug || nameToSlug(jurisName);
+  const slug = r.slug || nameToSlug(r.name);
+  const website = r.website || r.url || '';
+  const region = r.region || '';
+  const iso = r.iso || '';
   const facet=TYPE_TO_FACET[r.type]||'agency';
-  const pillLabel=FACET_TO_PILL_LABEL[facet]||escHtml(r.type);
-  const iso=r.iso||'';
-  const slug=r.slug||'';
-  const jSlug=r.jurisdiction_slug||nameToSlug(r.jurisdiction_name);
+  const pillLabel=FACET_TO_PILL_LABEL[facet]||escHtml(r.type||'');
   // Whole row is an anchor when we have a resolved slug. Otherwise plain div.
   const tag = slug ? 'a' : 'div';
   const hrefAttr = slug ? ' href="pai-app-authority-'+escHtml(slug)+'"' : '';
   const styleAttr = slug ? ' style="text-decoration:none;color:inherit;cursor:pointer"' : '';
   return (
-    '<'+tag+' class="dg-row" data-region="'+escHtml(r.region)+'" data-type="'+facet+'" data-juris-slug="'+escHtml(jSlug)+'" data-website="'+escHtml(r.website)+'"'+hrefAttr+styleAttr+'>' +
+    '<'+tag+' class="dg-row" data-region="'+escHtml(region)+'" data-type="'+facet+'" data-juris-slug="'+escHtml(jSlug)+'" data-website="'+escHtml(website)+'"'+hrefAttr+styleAttr+'>' +
       '<div class="dg-iso">'+escHtml(iso)+'</div>' +
       '<div class="dg-name-wrap"><div class="dg-name">'+escHtml(r.name)+(r.acronym?'<span class="acr">'+escHtml(r.acronym)+'</span>':'')+'</div></div>' +
-      '<div class="dg-country">'+escHtml(r.jurisdiction_name)+'</div>' +
+      '<div class="dg-country">'+escHtml(jurisName)+'</div>' +
       '<div><span class="dg-type-pill '+facet+'">'+pillLabel+'</span></div>' +
       '<div class="dg-num">—</div>' +
       '<div class="dg-num">—</div>' +
@@ -801,17 +807,20 @@ async function loadAuthorities(){
     const r=await fetch('./authorities.json',{cache:'no-cache'});
     if(!r.ok) throw new Error('HTTP '+r.status);
     const data=await r.json();
-    window.AUTH_TOTAL=data.total;
-    if(!data.rows.length){
+    // Accept either {rows:[...], total:N} (wrapped) or [...] (bare list) shape.
+    const rows = Array.isArray(data) ? data : (data.rows || []);
+    const total = (data && typeof data.total === 'number') ? data.total : rows.length;
+    window.AUTH_TOTAL=total;
+    if(!rows.length){
       container.innerHTML='<div style="padding:40px 18px;text-align:center;color:var(--muted);font-size:13px;">No authorities to show.</div>';
     } else {
-      container.innerHTML=data.rows.map(renderAuthorityRow).join('');
+      container.innerHTML=rows.map(renderAuthorityRow).join('');
     }
-    const juris=new Set(data.rows.map(x=>x.jurisdiction_name).filter(Boolean)).size;
+    const juris=new Set(rows.map(x=>x.jurisdiction_name||x.jurisdiction).filter(Boolean)).size;
     const setTx=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
-    setTx('authTotal',data.total.toLocaleString());
+    setTx('authTotal',total.toLocaleString());
     setTx('authJuris',juris.toLocaleString());
-    setTx('ftAuthTotal',data.total.toLocaleString());
+    setTx('ftAuthTotal',total.toLocaleString());
     setTx('ftAuthJuris',juris.toLocaleString());
     fpApply();
   } catch(err){
