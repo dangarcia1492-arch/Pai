@@ -1,0 +1,1643 @@
+{
+  "generated_at": "2026-05-08T08:49:46.116521+00:00",
+  "jurisdictions": {
+    "China": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "China GB/T45654-2025 (Generative AI Security Standard)",
+            "status": "In force",
+            "date_enacted": "2025-11-01"
+          },
+          {
+            "name": "China Regulation on Network Data Security Management",
+            "status": "In force",
+            "date_enacted": "2025-01-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Estonia": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "United Kingdom": {
+      "AI": {
+        "leads": [
+          "AISI",
+          "ICO",
+          "DSIT"
+        ],
+        "leads_full": [
+          "AI Security Institute (AISI)",
+          "Information Commissioner's Office",
+          "Department for Science, Innovation and Technology"
+        ],
+        "others_count": 4,
+        "news_total_in_pillar": 37,
+        "recent": [
+          {
+            "headline": "UK AISI Publishes Evaluation Framework for AI Misuse in Fraud and Cybercrime",
+            "slug": null,
+            "date_published": "2026-04-30",
+            "authority_short": "AISI",
+            "story_type": "Blog"
+          },
+          {
+            "headline": "UK AISI Funds 60 Projects to Advance AI Alignment Research",
+            "slug": null,
+            "date_published": "2026-04-30",
+            "authority_short": "AISI",
+            "story_type": "Blog"
+          },
+          {
+            "headline": "UK AISI Publishes Cyber-Capability Evaluation of OpenAI's GPT-5.5",
+            "slug": null,
+            "date_published": "2026-04-30",
+            "authority_short": "AISI",
+            "story_type": "Blog"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "UK Data (Use and Access) Act 2025",
+            "status": "In force",
+            "date_enacted": "2025-06-01"
+          },
+          {
+            "name": "UK AI Regulation Policy Paper",
+            "status": "In force",
+            "date_enacted": "2023-03-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [
+          "ICO"
+        ],
+        "leads_full": [
+          "Information Commissioner's Office"
+        ],
+        "others_count": 1,
+        "news_total_in_pillar": 90,
+        "recent": [
+          {
+            "headline": "UK ICO Publishes Finalised Guidance on Storage and Access Technologies",
+            "slug": null,
+            "date_published": "2026-04-15",
+            "authority_short": "ICO",
+            "story_type": "Guidance"
+          },
+          {
+            "headline": "UK DSIT Proposes Criminal Sanctions for Incest and Age-Disguise Pornography",
+            "slug": null,
+            "date_published": "2026-04-10",
+            "authority_short": "DSIT",
+            "story_type": "Update"
+          },
+          {
+            "headline": "UK ICO Sets Out Data Protection Framework for Police Facial Recognition Use",
+            "slug": null,
+            "date_published": "2026-03-15",
+            "authority_short": "ICO",
+            "story_type": "Update"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "UK General Data Protection Regulation (UK GDPR)",
+            "status": "In force",
+            "date_enacted": null
+          },
+          {
+            "name": "UK Investigatory Powers Act 2016",
+            "status": "In force",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [
+          "ICO",
+          "NCSC"
+        ],
+        "leads_full": [
+          "Information Commissioner's Office",
+          "UK National Cyber Security Centre (NCSC)"
+        ],
+        "others_count": 1,
+        "news_total_in_pillar": 33,
+        "recent": [
+          {
+            "headline": "UK NCSC Warns Organisations to Prepare for Incoming Vulnerability Patch Wave",
+            "slug": null,
+            "date_published": "2026-05-01",
+            "authority_short": "NCSC",
+            "story_type": "Update"
+          },
+          {
+            "headline": "UK NCSC and Allies Issue Advisory on China-Linked Covert Network Tactics",
+            "slug": null,
+            "date_published": "2026-04-23",
+            "authority_short": "NCSC",
+            "story_type": "Update"
+          },
+          {
+            "headline": "UK NCSC Issues Guidance on China-Nexus Compromised-Device Covert Networks",
+            "slug": null,
+            "date_published": "2026-04-23",
+            "authority_short": "NCSC",
+            "story_type": "Update"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "UK Telecommunications Security Act 2021",
+            "status": "In force",
+            "date_enacted": null
+          },
+          {
+            "name": "UK Computer Misuse Act 1990",
+            "status": "In force",
+            "date_enacted": null
+          }
+        ]
+      }
+    },
+    "Czech Republic": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Türkiye": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Turkey KVKK Agentic AI Guidance",
+            "status": "In force",
+            "date_enacted": "2026-03-01"
+          },
+          {
+            "name": "Turkey National AI Strategy 2021-2025",
+            "status": "In force",
+            "date_enacted": "2021-01-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "European Union": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "EU AI Act (Regulation 2024/1689)",
+            "status": "In force",
+            "date_enacted": "2024-08-01"
+          },
+          {
+            "name": "EU Data Act",
+            "status": "In force",
+            "date_enacted": "2023-11-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Regulation 2018/1725",
+            "status": "",
+            "date_enacted": null
+          },
+          {
+            "name": "Regulation (EU) 2022/868 on European data governance",
+            "status": "",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Cybersecurity Act",
+            "status": "",
+            "date_enacted": null
+          }
+        ]
+      }
+    },
+    "Hamburg": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Poland": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Poland AI Act Implementation Bill (KRiBSI)",
+            "status": "Proposed",
+            "date_enacted": "2025-01-01"
+          },
+          {
+            "name": "AI Systems Act (project UC71)",
+            "status": "",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "France": {
+      "AI": {
+        "leads": [
+          "CNIL"
+        ],
+        "leads_full": [
+          "Commission Nationale de l'Informatique et des Libertes"
+        ],
+        "others_count": 1,
+        "news_total_in_pillar": 4,
+        "recent": [
+          {
+            "headline": "France's CNIL and Groupe VYV Find Nine in Ten Young French People Use Conversational AI",
+            "slug": null,
+            "date_published": "2026-05-05",
+            "authority_short": "CNIL",
+            "story_type": "Analysis"
+          },
+          {
+            "headline": "France's CNIL Publishes 2026 Work Programme for GDPR and EU AI Act Compliance Support",
+            "slug": null,
+            "date_published": "2026-04-07",
+            "authority_short": "CNIL",
+            "story_type": "Update"
+          },
+          {
+            "headline": "France's ANSSI Seeks Trial Participants for PANAME Joint AI-Model GDPR Audit Tool",
+            "slug": null,
+            "date_published": "2026-03-18",
+            "authority_short": "ANSSI France",
+            "story_type": "Update"
+          }
+        ],
+        "top_instruments": []
+      },
+      "Privacy": {
+        "leads": [
+          "CNIL"
+        ],
+        "leads_full": [
+          "Commission Nationale de l'Informatique et des Libertes"
+        ],
+        "others_count": 1,
+        "news_total_in_pillar": 10,
+        "recent": [
+          {
+            "headline": "France's CNIL and Groupe VYV Find Nine in Ten Young French People Use Conversational AI",
+            "slug": null,
+            "date_published": "2026-05-05",
+            "authority_short": "CNIL",
+            "story_type": "Analysis"
+          },
+          {
+            "headline": "France's CNIL Approves Alliance du Commerce Article 40 Code of Conduct for Apparel and Footwear Retail",
+            "slug": null,
+            "date_published": "2026-04-28",
+            "authority_short": "CNIL",
+            "story_type": "Guidance"
+          },
+          {
+            "headline": "France's CNIL Publishes Recommended DPO Activity-Report Template for Organisations",
+            "slug": null,
+            "date_published": "2026-04-27",
+            "authority_short": "CNIL",
+            "story_type": "Guidance"
+          }
+        ],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [
+          "ANSSI France"
+        ],
+        "leads_full": [
+          "ANSSI France"
+        ],
+        "others_count": 1,
+        "news_total_in_pillar": 7,
+        "recent": [
+          {
+            "headline": "France's CNIL Updates Electronic-Voting-by-Correspondence Security Recommendation After Public Consultation",
+            "slug": null,
+            "date_published": "2026-04-24",
+            "authority_short": "CNIL",
+            "story_type": "Guidance"
+          },
+          {
+            "headline": "France's ANSSI Releases 2026-2027 State Cybersecurity Priority Roadmap Under NIS2 Pressure",
+            "slug": null,
+            "date_published": "2026-04-22",
+            "authority_short": "ANSSI France",
+            "story_type": "Update"
+          },
+          {
+            "headline": "France's ANSSI Launches Public Consultation on Security-Supervision Reference Architectures and Technologies",
+            "slug": null,
+            "date_published": "2026-04-09",
+            "authority_short": "ANSSI France",
+            "story_type": "Update"
+          }
+        ],
+        "top_instruments": []
+      }
+    },
+    "Belgium": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Belgian Royal Decree of 9 June 2024 implementing the Law of 26 April 2024 (NIS2)",
+            "status": "In force",
+            "date_enacted": "2024-06-09"
+          },
+          {
+            "name": "Belgian Law of 26 April 2024 establishing a framework for the cybersecurity of networks and information systems of public interest",
+            "status": "In force",
+            "date_enacted": "2024-04-26"
+          }
+        ]
+      }
+    },
+    "USA": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "US Executive Order on AI (2025)",
+            "status": "In force",
+            "date_enacted": "2025-01-01"
+          },
+          {
+            "name": "TAKE IT DOWN Act",
+            "status": "In force",
+            "date_enacted": "2025-01-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "International": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Spain": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 3,
+        "news_total_in_pillar": 3,
+        "recent": [
+          {
+            "headline": "Spain's INCIBE and AESIA Launch Joint AI and Digital Safety Campaign for Young People",
+            "slug": null,
+            "date_published": "2026-04-28",
+            "authority_short": "Instituto Nacional de Ciberseguridad",
+            "story_type": "Update"
+          },
+          {
+            "headline": "Spain's AEPD Launches Public Research Network on Privacy and Emerging Technologies",
+            "slug": null,
+            "date_published": "2026-04-22",
+            "authority_short": "Agencia Espanola de Proteccion de Datos",
+            "story_type": "Update"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "Real Decreto 729/2023 — AESIA Statute",
+            "status": "In force",
+            "date_enacted": null
+          },
+          {
+            "name": "Spain National AI Law (Draft)",
+            "status": "Proposed",
+            "date_enacted": "2025-03-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [
+          "Agencia Espanola de Proteccion de Datos"
+        ],
+        "leads_full": [
+          "Agencia Espanola de Proteccion de Datos"
+        ],
+        "others_count": 5,
+        "news_total_in_pillar": 12,
+        "recent": [
+          {
+            "headline": "Spain's AEPD Launches Interactive Tool for Public Breach Notification Consultation",
+            "slug": null,
+            "date_published": "2026-04-30",
+            "authority_short": "Agencia Espanola de Proteccion de Datos",
+            "story_type": "Update"
+          },
+          {
+            "headline": "Spain's INCIBE and AESIA Launch Joint AI and Digital Safety Campaign for Young People",
+            "slug": null,
+            "date_published": "2026-04-28",
+            "authority_short": "Instituto Nacional de Ciberseguridad",
+            "story_type": "Update"
+          },
+          {
+            "headline": "Spain's Four Data Protection Authorities Sign Joint Declaration on GDPR's Tenth Anniversary",
+            "slug": null,
+            "date_published": "2026-04-24",
+            "authority_short": "Agencia Espanola de Proteccion de Datos",
+            "story_type": "Update"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "Ley Orgánica 3/2018 (LOPDGDD)",
+            "status": "In force",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [
+          "Instituto Nacional de Ciberseguridad"
+        ],
+        "leads_full": [
+          "Instituto Nacional de Ciberseguridad"
+        ],
+        "others_count": 1,
+        "news_total_in_pillar": 4,
+        "recent": [
+          {
+            "headline": "Spain's INCIBE and AESIA Launch Joint AI and Digital Safety Campaign for Young People",
+            "slug": null,
+            "date_published": "2026-04-28",
+            "authority_short": "Instituto Nacional de Ciberseguridad",
+            "story_type": "Update"
+          },
+          {
+            "headline": "Spain's INCIBE and CONETIC Publish 2025 Cybersecurity Industry Study Showing Sector Growth",
+            "slug": null,
+            "date_published": "2026-03-18",
+            "authority_short": "Instituto Nacional de Ciberseguridad",
+            "story_type": "Analysis"
+          },
+          {
+            "headline": "Spain's INCIBE Detected 122,000 Cybersecurity Incidents and Handled 142,767 Helpline Queries in 2025",
+            "slug": null,
+            "date_published": "2026-02-09",
+            "authority_short": "Instituto Nacional de Ciberseguridad",
+            "story_type": "Update"
+          }
+        ],
+        "top_instruments": []
+      }
+    },
+    "Andalusia": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 2,
+        "news_total_in_pillar": 3,
+        "recent": [
+          {
+            "headline": "Andalusia's CTPDA Updates Public-Sector AI Methodology to Address Agentic Systems",
+            "slug": null,
+            "date_published": "2026-04-09",
+            "authority_short": "Consejo de Transparencia y Protección de Datos de Andalucía",
+            "story_type": "Guidance"
+          },
+          {
+            "headline": "Andalusia's CTPDA Launches Responsible AI Methodology Tool for Public Administrations",
+            "slug": null,
+            "date_published": "2026-01-26",
+            "authority_short": "Consejo de Transparencia y Protección de Datos de Andalucía",
+            "story_type": "Guidance"
+          }
+        ],
+        "top_instruments": []
+      },
+      "Privacy": {
+        "leads": [
+          "Consejo de Transparencia y Protección de Datos de Andalucía"
+        ],
+        "leads_full": [
+          "Consejo de Transparencia y Protección de Datos de Andalucía"
+        ],
+        "others_count": 1,
+        "news_total_in_pillar": 4,
+        "recent": [
+          {
+            "headline": "Andalusia's CTPDA Updates Public-Sector AI Methodology to Address Agentic Systems",
+            "slug": null,
+            "date_published": "2026-04-09",
+            "authority_short": "Consejo de Transparencia y Protección de Datos de Andalucía",
+            "story_type": "Guidance"
+          },
+          {
+            "headline": "Andalusia's CTPDA Finds Strong Public-Sector Compliance in EDPB Erasure-Right Action",
+            "slug": null,
+            "date_published": "2026-02-19",
+            "authority_short": "Consejo de Transparencia y Protección de Datos de Andalucía",
+            "story_type": "Analysis"
+          },
+          {
+            "headline": "Andalusia's CTPDA Launches Responsible AI Methodology Tool for Public Administrations",
+            "slug": null,
+            "date_published": "2026-01-26",
+            "authority_short": "Consejo de Transparencia y Protección de Datos de Andalucía",
+            "story_type": "Guidance"
+          }
+        ],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Germany": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Germany AI Market Surveillance and Innovation Act (KI-MIG)",
+            "status": "Proposed",
+            "date_enacted": "2026-02-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Japan": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Japan AI Promotion Act",
+            "status": "In force",
+            "date_enacted": "2025-05-01"
+          },
+          {
+            "name": "Japan AI Guidelines for Business v1.1",
+            "status": "In force",
+            "date_enacted": "2024-04-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Morocco": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Morocco Digital X.0 Framework Law",
+            "status": "Proposed",
+            "date_enacted": "2025-11-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Morocco Data Protection Implementing Decree (Decree 2-09-165)",
+            "status": "In force",
+            "date_enacted": null
+          },
+          {
+            "name": "Morocco Constitution (2011)",
+            "status": "In force",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Morocco Electronic Exchange of Legal Data Law (Law 53-05)",
+            "status": "In force",
+            "date_enacted": null
+          },
+          {
+            "name": "Morocco Cybersecurity Law (Law 05-20)",
+            "status": "In force",
+            "date_enacted": null
+          }
+        ]
+      }
+    },
+    "Australia": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Australia Voluntary AI Safety Standard",
+            "status": "In force",
+            "date_enacted": "2024-01-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Nigeria": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 4,
+        "news_total_in_pillar": 5,
+        "recent": [
+          {
+            "headline": "Nigeria's NDPC and Meta Adopt $32.8 Million Privacy Settlement Terms",
+            "slug": null,
+            "date_published": "2025-11-03",
+            "authority_short": "Nigeria Data Protection Commission",
+            "story_type": "Enforcement"
+          },
+          {
+            "headline": "Nigeria's FCCPC Tribunal Upholds $220 Million Penalty Against Meta and WhatsApp",
+            "slug": null,
+            "date_published": "2025-04-25",
+            "authority_short": "Nigeria Federal Competition and Consumer Protection Commission",
+            "story_type": "Enforcement"
+          },
+          {
+            "headline": "Nigeria's President Tinubu Signs Investments and Securities Act 2025 into Law",
+            "slug": null,
+            "date_published": "2025-03-29",
+            "authority_short": "Nigeria Securities and Exchange Commission",
+            "story_type": "Legislation"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "Nigeria Investments and Securities Act 2025",
+            "status": "In force",
+            "date_enacted": "2025-03-29"
+          },
+          {
+            "name": "Nigeria National AI Strategy",
+            "status": "In force",
+            "date_enacted": "2025-09-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [
+          "Nigeria Data Protection Commission"
+        ],
+        "leads_full": [
+          "Nigeria Data Protection Commission"
+        ],
+        "others_count": 3,
+        "news_total_in_pillar": 8,
+        "recent": [
+          {
+            "headline": "Nigeria's NDPC and Meta Adopt $32.8 Million Privacy Settlement Terms",
+            "slug": null,
+            "date_published": "2025-11-03",
+            "authority_short": "Nigeria Data Protection Commission",
+            "story_type": "Enforcement"
+          },
+          {
+            "headline": "Nigeria's NDPC Fines MultiChoice $500,000 for Cross-Border Data Transfers",
+            "slug": null,
+            "date_published": "2025-07-06",
+            "authority_short": "Nigeria Data Protection Commission",
+            "story_type": "Enforcement"
+          },
+          {
+            "headline": "Nigeria's FCCPC Tribunal Upholds $220 Million Penalty Against Meta and WhatsApp",
+            "slug": null,
+            "date_published": "2025-04-25",
+            "authority_short": "Nigeria Federal Competition and Consumer Protection Commission",
+            "story_type": "Enforcement"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "Nigeria Investments and Securities Act 2025",
+            "status": "In force",
+            "date_enacted": "2025-03-29"
+          },
+          {
+            "name": "Nigeria Data Protection Act General Application and Implementation Directive 2025",
+            "status": "In force",
+            "date_enacted": "2025-03-20"
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 2,
+        "news_total_in_pillar": 2,
+        "recent": [
+          {
+            "headline": "ECOWAS Court Orders Nigeria to Amend Cybercrimes Act § 24 in SERAP Case",
+            "slug": null,
+            "date_published": "2024-03-01",
+            "authority_short": "",
+            "story_type": "Case law"
+          },
+          {
+            "headline": "Nigeria Signs Cybercrimes Amendment Act 2024 Following ECOWAS Court Ruling",
+            "slug": null,
+            "date_published": "2024-02-28",
+            "authority_short": "Nigeria Office of the National Security Adviser",
+            "story_type": "Legislation"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "Nigeria Cybercrimes Amendment Act 2024",
+            "status": "In force",
+            "date_enacted": "2024-02-28"
+          },
+          {
+            "name": "Nigeria NCC Consumer Code of Practice Regulations 2024",
+            "status": "In force",
+            "date_enacted": "2024-07-30"
+          }
+        ]
+      }
+    },
+    "Egypt": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Egypt National AI Strategy",
+            "status": "In force",
+            "date_enacted": "2023-01-01"
+          },
+          {
+            "name": "Egypt Personal Data Protection Law (Law No. 151/2020)",
+            "status": "In force",
+            "date_enacted": "2020-10-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Saudi Arabia": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Saudi Arabia SDAIA AI Adoption Framework",
+            "status": "In force",
+            "date_enacted": "2024-09-01"
+          },
+          {
+            "name": "Saudi Arabia SDAIA Generative AI Guidelines",
+            "status": "In force",
+            "date_enacted": "2024-01-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Philippines": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 2,
+        "news_total_in_pillar": 2,
+        "recent": [
+          {
+            "headline": "Philippines NPC Issues Advisory 2026-01 on Scraping Publicly Available Personal Data",
+            "slug": null,
+            "date_published": "2026-04-13",
+            "authority_short": "Philippines National Privacy Commission",
+            "story_type": "Guidance"
+          },
+          {
+            "headline": "Philippines Supreme Court Sets Risk-Based AI Governance Framework for Judiciary",
+            "slug": null,
+            "date_published": "2026-02-18",
+            "authority_short": "Philippines Supreme Court",
+            "story_type": "Legislation"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "Philippines NPC Advisory No. 2026-01 (Guidelines on Data Scraping of Publicly Available Personal Data)",
+            "status": "In force",
+            "date_enacted": "2026-04-13"
+          },
+          {
+            "name": "Philippines Supreme Court A.M. No. 25-11-28-SC (AI Governance in Judiciary)",
+            "status": "In force",
+            "date_enacted": "2026-02-18"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 1,
+        "news_total_in_pillar": 2,
+        "recent": [
+          {
+            "headline": "Philippines NPC Issues Advisory 2026-01 on Scraping Publicly Available Personal Data",
+            "slug": null,
+            "date_published": "2026-04-13",
+            "authority_short": "Philippines National Privacy Commission",
+            "story_type": "Guidance"
+          },
+          {
+            "headline": "Philippines NPC Opens Applications for APEC and Global CBPR Accountability Agents",
+            "slug": null,
+            "date_published": "2026-01-27",
+            "authority_short": "Philippines National Privacy Commission",
+            "story_type": "Guidance"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "Philippines NPC Advisory No. 2026-01 (Guidelines on Data Scraping of Publicly Available Personal Data)",
+            "status": "In force",
+            "date_enacted": "2026-04-13"
+          },
+          {
+            "name": "Philippines DepEd Order No. 003, s. 2026 (AI in Education)",
+            "status": "In force",
+            "date_enacted": "2026-01-01"
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Philippines BSP Memorandum M-2024-029 (AFASA IT Risk Management)",
+            "status": "In force",
+            "date_enacted": "2024-08-13"
+          },
+          {
+            "name": "Philippines BSP Memorandum M-2023-013 (Transaction Monitoring System Guidance Paper)",
+            "status": "In force",
+            "date_enacted": "2023-04-20"
+          }
+        ]
+      }
+    },
+    "Canada": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Canada AIDA",
+            "status": "Repealed",
+            "date_enacted": "2022-01-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "India": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 2,
+        "news_total_in_pillar": 2,
+        "recent": [
+          {
+            "headline": "India Publishes the AI Governance Guidelines, Setting Out Seven Sutras and a New Safety Institute",
+            "slug": null,
+            "date_published": "2025-11-04",
+            "authority_short": "Ministry of Electronics and Information Technology",
+            "story_type": "Guidance"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "India IT Amendment Rules on SGI",
+            "status": "In force",
+            "date_enacted": "2026-02-01"
+          },
+          {
+            "name": "India DPIIT Working Paper on Generative AI and Copyright",
+            "status": "In force",
+            "date_enacted": "2025-12-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 3,
+        "news_total_in_pillar": 3,
+        "recent": [
+          {
+            "headline": "India's IRDAI Replaces 2023 Cyber Rules With Updated Insurance Sector Guidelines",
+            "slug": null,
+            "date_published": "2026-04-06",
+            "authority_short": "Insurance Regulatory and Development Authority of India",
+            "story_type": "Guidance"
+          },
+          {
+            "headline": "India Notifies the DPDP Rules 2025, Operationalising the Data Protection Board",
+            "slug": null,
+            "date_published": "2025-11-14",
+            "authority_short": "Data Protection Board of India",
+            "story_type": "Update"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "India's Digital Personal Data Protection Rules, 2025",
+            "status": "In force",
+            "date_enacted": "2025-11-14"
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 1,
+        "news_total_in_pillar": 1,
+        "recent": [
+          {
+            "headline": "India's IRDAI Replaces 2023 Cyber Rules With Updated Insurance Sector Guidelines",
+            "slug": null,
+            "date_published": "2026-04-06",
+            "authority_short": "Insurance Regulatory and Development Authority of India",
+            "story_type": "Guidance"
+          }
+        ],
+        "top_instruments": [
+          {
+            "name": "India's Information Technology Act, 2000",
+            "status": "In force",
+            "date_enacted": "2000-06-09"
+          }
+        ]
+      }
+    },
+    "Ecuador": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Strategy for Ethical and Responsible AI Development and Use",
+            "status": "",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "US - California": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "California SB 942",
+            "status": "In force",
+            "date_enacted": null
+          },
+          {
+            "name": "California AB 2013",
+            "status": "In force",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Israel": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Israel National Program for Artificial Intelligence",
+            "status": "In force",
+            "date_enacted": "2025-04-01"
+          },
+          {
+            "name": "Israel AI Regulation and Ethics Policy",
+            "status": "In force",
+            "date_enacted": "2023-01-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Italy": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Italy AI Law (Law No. 132/2025)",
+            "status": "In force",
+            "date_enacted": "2025-10-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "US - Hawaii": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Hawaii SB 59",
+            "status": "",
+            "date_enacted": null
+          },
+          {
+            "name": "Hawaii SB 2967",
+            "status": "",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Brazil": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Brazil AI Bill (PL 2338/2023)",
+            "status": "Proposed",
+            "date_enacted": "2024-01-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Lei Geral de Proteção de Dados (LGPD)",
+            "status": "",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "California": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "California Transparency in Frontier AI Act",
+            "status": "In force",
+            "date_enacted": "2024-09-01"
+          },
+          {
+            "name": "California AB 2013",
+            "status": "In force",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "CPRA — California Privacy Rights Act (2020)",
+            "status": "In force",
+            "date_enacted": null
+          },
+          {
+            "name": "California Consumer Privacy Act (CCPA)",
+            "status": "In force",
+            "date_enacted": null
+          }
+        ]
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Denmark": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": [
+          {
+            "name": "Denmark Supplementary AI Provisions Act (Law No. 467/2025)",
+            "status": "In force",
+            "date_enacted": "2025-08-01"
+          }
+        ]
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    },
+    "Norway": {
+      "AI": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Privacy": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      },
+      "Cyber": {
+        "leads": [],
+        "leads_full": [],
+        "others_count": 0,
+        "news_total_in_pillar": 0,
+        "recent": [],
+        "top_instruments": []
+      }
+    }
+  }
+}
