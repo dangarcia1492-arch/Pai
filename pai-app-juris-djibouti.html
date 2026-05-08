@@ -1175,7 +1175,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <!-- VIEW BAR -->
   <div class="view-bar anim-in" style="--d:0">
     <div class="view-bar-l">
-      <span class="crumb"><a href="pai-app-news">Jurisdictions</a> / Sweden</span>
+      <span class="crumb"><a href="pai-app-news">Jurisdictions</a> / Djibouti</span>
     </div>
     <div class="view-bar-r">
       <div class="seg" role="tablist" aria-label="Page view">
@@ -1186,8 +1186,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
       <button class="save-btn" id="save-btn" type="button">Save as default</button>
       <div class="save-pop" id="save-pop">
         <button class="save-opt" id="opt-country">
-          <span class="save-opt-title">Default for <strong>Sweden</strong> <span class="badge" id="badge-country" style="display:none">current</span></span>
-          <span class="save-opt-sub">Pin this view for Sweden only. Other jurisdictions follow the global default.</span>
+          <span class="save-opt-title">Default for <strong>Djibouti</strong> <span class="badge" id="badge-country" style="display:none">current</span></span>
+          <span class="save-opt-sub">Pin this view for Djibouti only. Other jurisdictions follow the global default.</span>
         </button>
         <button class="save-opt" id="opt-global">
           <span class="save-opt-title">Default for <strong>all jurisdictions</strong> <span class="badge" id="badge-global" style="display:none">current</span></span>
@@ -1195,7 +1195,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         </button>
         <div class="save-opt-divider"></div>
         <button class="save-opt" id="opt-reset">
-          <span class="save-opt-title">Reset Sweden to global default</span>
+          <span class="save-opt-title">Reset Djibouti to global default</span>
           <span class="save-opt-sub" id="opt-reset-sub">Removes the per-country pin.</span>
         </button>
       </div>
@@ -1223,7 +1223,73 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <div class="view active" id="view-A" data-view="A">
 
     <div class="nr-stream-block anim-in" style="--d:2">
-      <div class="nr-stream-head"><h2>What's happening</h2><span class="meta">No items captured yet</span></div><div class="nr-stream-grid"><a class="nr-card" href="pai-app-news?juris=djibouti" style="grid-column:span 3"><div class="nr-meta"><span class="pill pill-source">Coverage starts here</span></div><h3>Djibouti coverage queue</h3><p>Items will land here as the PAI Research Team verifies sources for Djibouti.</p></a></div>
+      <style>
+        .nr-stream-block .nr-stream-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:14px}
+        .nr-stream-block .nr-card{display:flex;flex-direction:column;gap:8px;min-height:0}
+        .nr-stream-block .nr-card.hero-card{grid-column:1;grid-row:1 / span 2}
+        @media (max-width:900px){.nr-stream-block .nr-stream-grid{grid-template-columns:1fr;grid-template-rows:none}.nr-stream-block .nr-card.hero-card{grid-column:auto;grid-row:auto}}
+      </style>
+      <div class="nr-stream-head"><h2>What's happening</h2><span class="meta" id="jn-meta">Loading…</span></div>
+      <div class="nr-stream-grid" id="jn-grid"></div>
+      <div style="text-align:right;margin-top:14px"><a id="jn-seeall" href="pai-app-news?juris=djibouti" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;text-decoration:none">See all Djibouti stories →</a></div>
+      <script>
+      (async function loadJurisNews(){
+        const JURIS = "Djibouti";
+        const grid = document.getElementById('jn-grid');
+        const meta = document.getElementById('jn-meta');
+        const seeall = document.getElementById('jn-seeall');
+        const TYPE_PRIO = {'Enforcement':3,'Case law':2,'Legislation':1};
+        const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+        const fmtDate = iso => { const m=(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? (parseInt(m[3],10)+' '+MONTHS[parseInt(m[2],10)-1]+' '+m[1]) : ''; };
+        function pickHero(rows){
+          const leads = rows.filter(r => r.is_lead);
+          const pool = leads.length ? leads.slice() : rows.slice();
+          pool.sort((a,b) => {
+            const d = (b.date_published||'').localeCompare(a.date_published||'');
+            if (d !== 0) return d;
+            const sa = TYPE_PRIO[a.story_type] || 0;
+            const sb = TYPE_PRIO[b.story_type] || 0;
+            if (sa !== sb) return sb - sa;
+            return (a.headline||'').localeCompare(b.headline||'');
+          });
+          return pool[0];
+        }
+        try {
+          const r = await fetch('./news.json',{cache:'no-cache'});
+          if (!r.ok) throw new Error('HTTP '+r.status);
+          const d = await r.json();
+          const all = (d.rows||[]).filter(x => (x.jurisdiction_name||'') === JURIS);
+          all.sort((a,b) => (b.date_published||'').localeCompare(a.date_published||''));
+          const top5 = all.slice(0,5);
+          if (!top5.length) {
+            if (meta) meta.textContent = 'No items yet';
+            grid.innerHTML = '<div style="padding:24px;color:var(--text-mute);font-size:13px;grid-column:1/-1;text-align:center">No '+esc(JURIS)+' news in archive yet.</div>';
+            if (seeall) seeall.textContent = 'See all 0 '+JURIS+' stories →';
+            return;
+          }
+          const hero = pickHero(top5);
+          const ordered = [hero, ...top5.filter(x => x !== hero)];
+          grid.innerHTML = ordered.map((row,i) => {
+            const isHero = i === 0;
+            const url = row.slug ? ('pai-app-news-story-' + row.slug) : (row.source_url || '#');
+            const ext = !row.slug;
+            const target = ext ? ' target="_blank" rel="noopener"' : '';
+            return '<a class="nr-card' + (isHero ? ' hero-card' : '') + '" href="' + esc(url) + '"' + target + '>'
+              + '<div class="nr-meta"><span>' + esc(fmtDate(row.date_published)) + '</span>'
+              + '<span class="pill pill-source">' + esc(row.story_type || 'Update') + '</span></div>'
+              + '<h3>' + esc(row.headline || '') + '</h3>'
+              + '<p>' + esc((row.summary || '').slice(0, 220)) + '</p>'
+              + '</a>';
+          }).join('');
+          if (meta) meta.textContent = all.length + ' items in archive';
+          if (seeall) seeall.textContent = 'See all ' + all.length + ' ' + JURIS + ' stories →';
+        } catch (e) {
+          if (meta) meta.textContent = '—';
+          grid.innerHTML = '<div style="padding:24px;color:#a33;font-size:13px;grid-column:1/-1;text-align:center">Could not load '+esc(JURIS)+' stories.</div>';
+        }
+      })();
+      </script>
     </div>
 
     <section class="kl anim-in" style="--d:3" id="kl-A">
@@ -1290,7 +1356,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     <div>
       State (mockup, persisted in localStorage):
       &nbsp; global default = <strong id="s-global">A</strong>
-      &nbsp; · &nbsp; sweden override = <strong id="s-sweden">none (follows global)</strong>
+      &nbsp; · &nbsp; djibouti override = <strong id="s-djibouti">none (follows global)</strong>
       &nbsp; · &nbsp; effective view = <strong id="s-effective">A</strong>
     </div>
     <button class="reset" id="reset-all">Clear all prefs</button>
@@ -1302,7 +1368,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
 <script>
 (function(){
-  const SLUG = 'sweden';
+  const SLUG = 'djibouti';
   const KEYS = { global: 'pai-juris-view-default', overrides: 'pai-juris-view-overrides' };
 
   // ── State helpers ──
@@ -1324,7 +1390,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   const saveBtn = document.getElementById('save-btn'), savePop = document.getElementById('save-pop');
   const optCountry = document.getElementById('opt-country'), optGlobal = document.getElementById('opt-global'), optReset = document.getElementById('opt-reset');
   const badgeCountry = document.getElementById('badge-country'), badgeGlobal = document.getElementById('badge-global'), optResetSub = document.getElementById('opt-reset-sub');
-  const sGlobal = document.getElementById('s-global'), sSweden = document.getElementById('s-sweden'), sEffective = document.getElementById('s-effective');
+  const sGlobal = document.getElementById('s-global'), sDjibouti = document.getElementById('s-djibouti'), sEffective = document.getElementById('s-effective');
   const toast = document.getElementById('toast');
   const resetAll = document.getElementById('reset-all');
 
@@ -1350,7 +1416,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     segD.classList.toggle('active', currentView === 'D');
     positionThumb(segThumb, currentView === 'A' ? segA : segD);
 
-    // Default-dot indicators (which option is the effective default for sweden)
+    // Default-dot indicators (which option is the effective default for djibouti)
     const ov = getOverrides()[SLUG];
     const gd = getGlobalDefault();
     const effDefault = ov || gd;
@@ -1362,10 +1428,10 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     badgeGlobal.style.display  = (gd === currentView && !ov) ? '' : 'none';
     if (ov){
       optReset.removeAttribute('disabled');
-      optResetSub.textContent = `Sweden currently pinned to ${ov === 'A' ? 'Newsroom' : 'Domain-first'}. Reset → follow global (${gd === 'A' ? 'Newsroom' : 'Domain-first'}).`;
+      optResetSub.textContent = `Djibouti currently pinned to ${ov === 'A' ? 'Newsroom' : 'Domain-first'}. Reset → follow global (${gd === 'A' ? 'Newsroom' : 'Domain-first'}).`;
     } else {
       optReset.setAttribute('disabled', 'true');
-      optResetSub.textContent = 'No per-country pin set. Sweden already follows the global default.';
+      optResetSub.textContent = 'No per-country pin set. Djibouti already follows the global default.';
     }
 
     // Settings panel state
@@ -1396,7 +1462,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
     // State strip
     sGlobal.textContent = gd === 'A' ? 'A · Newsroom' : 'D · Domain-first';
-    sSweden.textContent = ov ? (ov === 'A' ? 'A · Newsroom' : 'D · Domain-first') : 'none (follows global)';
+    sDjibouti.textContent = ov ? (ov === 'A' ? 'A · Newsroom' : 'D · Domain-first') : 'none (follows global)';
     sEffective.textContent = currentView === 'A' ? 'A · Newsroom' : 'D · Domain-first';
 
     // Trigger progress-bar animations on the active view
@@ -1445,9 +1511,9 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   // Save popover
   saveBtn.addEventListener('click', e => { e.stopPropagation(); savePop.classList.toggle('open'); saveBtn.classList.toggle('open'); });
   document.addEventListener('click', e => { if (!savePop.contains(e.target) && e.target !== saveBtn) { savePop.classList.remove('open'); saveBtn.classList.remove('open'); } });
-  optCountry.addEventListener('click', () => { setOverride(SLUG, currentView); savePop.classList.remove('open'); saveBtn.classList.remove('open'); render(); showToast(`Sweden pinned to ${currentView === 'A' ? 'Newsroom' : 'Domain-first'}`); });
+  optCountry.addEventListener('click', () => { setOverride(SLUG, currentView); savePop.classList.remove('open'); saveBtn.classList.remove('open'); render(); showToast(`Djibouti pinned to ${currentView === 'A' ? 'Newsroom' : 'Domain-first'}`); });
   optGlobal.addEventListener('click', () => { setGlobalDefault(currentView); savePop.classList.remove('open'); saveBtn.classList.remove('open'); render(); showToast(`Default for all jurisdictions: ${currentView === 'A' ? 'Newsroom' : 'Domain-first'}`); });
-  optReset.addEventListener('click', () => { if (optReset.hasAttribute('disabled')) return; clearOverride(SLUG); currentView = getGlobalDefault(); savePop.classList.remove('open'); saveBtn.classList.remove('open'); render(); showToast(`Sweden pin removed - following global default`); });
+  optReset.addEventListener('click', () => { if (optReset.hasAttribute('disabled')) return; clearOverride(SLUG); currentView = getGlobalDefault(); savePop.classList.remove('open'); saveBtn.classList.remove('open'); render(); showToast(`Djibouti pin removed - following global default`); });
   resetAll.addEventListener('click', () => { localStorage.clear(); currentView = effectiveView(SLUG); render(); showToast('All view preferences cleared'); });
 
   // ── KL accordion (key legislation rows) ──
@@ -1459,8 +1525,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   const BOARD_LABELS = { aiact:'EU AI Act', nis2:'NIS2', gdpr:'GDPR' };
   function gotoTopics(board){
     const lbl = BOARD_LABELS[board] || board;
-    showToast(`Would open Topics page → ${lbl} tab → full notes for Sweden`);
-    // Real impl: window.location = `/pai-app-tables?juris=sweden&tab=${board}#impl`
+    showToast(`Would open Topics page → ${lbl} tab → full notes for Djibouti`);
+    // Real impl: window.location = `/pai-app-tables?juris=djibouti&tab=${board}#impl`
   }
 
   // ── A's impl-strip drill-in ──

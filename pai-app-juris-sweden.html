@@ -1223,7 +1223,73 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
   <div class="view active" id="view-A" data-view="A">
 
     <div class="nr-stream-block anim-in" style="--d:2">
-      <div class="nr-stream-head"><h2>What's happening</h2><span class="meta">Updated 09:11 · 2 items in archive</span></div><div class="nr-stream-grid"><a class="nr-card hero-card" href="https://www.imy.se/en/news/imys-prioriteringar-2026--ai-barn-och-brottsbekampning/"><div class="nr-meta"><span></span><span class="pill pill-source">Update</span></div><h3>IMY Sets 2026 Supervisory Priorities: AI in Public Sector, Children&#39;s Data and Law Enforcement Tools</h3><p>The Swedish Authority for Privacy Protection (IMY) has published its supervisory and guidance priorities for 2026, identifying AI use in the public sector, data protection for children and young peopl</p></a><a class="nr-card" href="https://www.imy.se/en/news/administrative-fine-against-sportadmin/"><div class="nr-meta"><span></span><span class="pill pill-source">Update</span></div><h3>IMY Fines Sportadmin SEK 6 Million for Inadequate Security Following Data Breach Affecting 2.1 Million Individuals</h3><p>Sweden&#39;s Integritetsskyddsmyndigheten (IMY) has imposed an administrative fine of SEK 6 million (approximately EUR 530,000) on sports administration platform Sportadmin following a cyber attack that e</p></a></div><div style="text-align:right;margin-top:14px"><a href="pai-app-news?juris=sweden" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;text-decoration:none">See all 2 Sweden items →</a></div>
+      <style>
+        .nr-stream-block .nr-stream-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:14px}
+        .nr-stream-block .nr-card{display:flex;flex-direction:column;gap:8px;min-height:0}
+        .nr-stream-block .nr-card.hero-card{grid-column:1;grid-row:1 / span 2}
+        @media (max-width:900px){.nr-stream-block .nr-stream-grid{grid-template-columns:1fr;grid-template-rows:none}.nr-stream-block .nr-card.hero-card{grid-column:auto;grid-row:auto}}
+      </style>
+      <div class="nr-stream-head"><h2>What's happening</h2><span class="meta" id="jn-meta">Loading…</span></div>
+      <div class="nr-stream-grid" id="jn-grid"></div>
+      <div style="text-align:right;margin-top:14px"><a id="jn-seeall" href="pai-app-news?juris=sweden" style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;text-decoration:none">See all Sweden stories →</a></div>
+      <script>
+      (async function loadJurisNews(){
+        const JURIS = "Sweden";
+        const grid = document.getElementById('jn-grid');
+        const meta = document.getElementById('jn-meta');
+        const seeall = document.getElementById('jn-seeall');
+        const TYPE_PRIO = {'Enforcement':3,'Case law':2,'Legislation':1};
+        const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+        const fmtDate = iso => { const m=(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? (parseInt(m[3],10)+' '+MONTHS[parseInt(m[2],10)-1]+' '+m[1]) : ''; };
+        function pickHero(rows){
+          const leads = rows.filter(r => r.is_lead);
+          const pool = leads.length ? leads.slice() : rows.slice();
+          pool.sort((a,b) => {
+            const d = (b.date_published||'').localeCompare(a.date_published||'');
+            if (d !== 0) return d;
+            const sa = TYPE_PRIO[a.story_type] || 0;
+            const sb = TYPE_PRIO[b.story_type] || 0;
+            if (sa !== sb) return sb - sa;
+            return (a.headline||'').localeCompare(b.headline||'');
+          });
+          return pool[0];
+        }
+        try {
+          const r = await fetch('./news.json',{cache:'no-cache'});
+          if (!r.ok) throw new Error('HTTP '+r.status);
+          const d = await r.json();
+          const all = (d.rows||[]).filter(x => (x.jurisdiction_name||'') === JURIS);
+          all.sort((a,b) => (b.date_published||'').localeCompare(a.date_published||''));
+          const top5 = all.slice(0,5);
+          if (!top5.length) {
+            if (meta) meta.textContent = 'No items yet';
+            grid.innerHTML = '<div style="padding:24px;color:var(--text-mute);font-size:13px;grid-column:1/-1;text-align:center">No '+esc(JURIS)+' news in archive yet.</div>';
+            if (seeall) seeall.textContent = 'See all 0 '+JURIS+' stories →';
+            return;
+          }
+          const hero = pickHero(top5);
+          const ordered = [hero, ...top5.filter(x => x !== hero)];
+          grid.innerHTML = ordered.map((row,i) => {
+            const isHero = i === 0;
+            const url = row.slug ? ('pai-app-news-story-' + row.slug) : (row.source_url || '#');
+            const ext = !row.slug;
+            const target = ext ? ' target="_blank" rel="noopener"' : '';
+            return '<a class="nr-card' + (isHero ? ' hero-card' : '') + '" href="' + esc(url) + '"' + target + '>'
+              + '<div class="nr-meta"><span>' + esc(fmtDate(row.date_published)) + '</span>'
+              + '<span class="pill pill-source">' + esc(row.story_type || 'Update') + '</span></div>'
+              + '<h3>' + esc(row.headline || '') + '</h3>'
+              + '<p>' + esc((row.summary || '').slice(0, 220)) + '</p>'
+              + '</a>';
+          }).join('');
+          if (meta) meta.textContent = all.length + ' items in archive';
+          if (seeall) seeall.textContent = 'See all ' + all.length + ' ' + JURIS + ' stories →';
+        } catch (e) {
+          if (meta) meta.textContent = '—';
+          grid.innerHTML = '<div style="padding:24px;color:#a33;font-size:13px;grid-column:1/-1;text-align:center">Could not load '+esc(JURIS)+' stories.</div>';
+        }
+      })();
+      </script>
     </div>
 
     <section class="kl anim-in" style="--d:3" id="kl-A">
