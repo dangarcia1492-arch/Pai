@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrinciplesAI — AG Kokott · Hungary Sovereignty Law · C-829/24 · Case Law (Mockup V2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
+  --ink:#0a1729;--ink-strong:#06101e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#014486;--accent-3:#032e61;--accent-soft:#e3effc;--accent-soft-2:#cfe1f6;
+  --green:#2e844a;--amber:#905200;
+  --serif:'Source Serif 4',Georgia,serif;
+  --sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --sidebar-collapsed:56px;--sidebar-expanded:280px;--header-height:52px;
+  --shadow-1:0 1px 2px rgba(10,23,41,.04);
+  --radius:10px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-width:1280px}
+a{color:var(--accent);text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit;font-size:inherit;color:inherit}
+.icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;transition:width .25s cubic-bezier(.4,0,.2,1);overflow:hidden;box-shadow:var(--shadow-1)}
+.icon-sidebar:hover{width:var(--sidebar-expanded)}
+.sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;gap:12px;border-bottom:1px solid var(--border);overflow:hidden;white-space:nowrap}
+.sidebar-brand .brand-icon{width:28px;height:28px;background:#fff;border-radius:5px;flex-shrink:0;padding:2px;overflow:hidden}
+.sidebar-brand .brand-icon img{width:100%;height:100%;object-fit:contain}
+.sidebar-brand .brand-text{font-weight:600;font-size:18px;color:var(--ink);opacity:0;transition:opacity .15s .05s}
+.icon-sidebar:hover .sidebar-brand .brand-text{opacity:1}
+.sidebar-nav-items{flex:1;display:flex;flex-direction:column;gap:2px;padding:12px 8px;overflow-y:auto}
+.sidebar-nav-item{display:flex;align-items:center;gap:14px;height:40px;padding:0 12px;border-radius:4px;color:var(--secondary);text-decoration:none;white-space:nowrap}
+.sidebar-nav-item:hover{color:var(--ink);background:var(--surface-3)}
+.sidebar-nav-item.active{color:var(--accent-2);background:var(--accent-soft);font-weight:600}
+.sidebar-nav-item svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.7;fill:none;flex-shrink:0}
+.sidebar-nav-item .nav-label{font-size:13.5px;font-weight:500;opacity:0;transition:opacity .15s .05s}
+.icon-sidebar:hover .sidebar-nav-item .nav-label{opacity:1}
+.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;z-index:200;box-shadow:var(--shadow-1)}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.header-logout{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:var(--secondary);border:1px solid var(--border);border-radius:5px;text-decoration:none}
+.main-content{margin-left:var(--sidebar-collapsed);padding-top:var(--header-height);min-height:100vh}
+.page-view{padding:24px 36px 60px;max-width:1180px;margin:0 auto}
+.ps-left{font-size:12.5px;color:var(--secondary);padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--border)}
+.ps-breadcrumb a{color:var(--accent-2);font-weight:600}
+.ps-current{color:var(--ink-strong);font-weight:700}
+.ps-sep{color:var(--ink-faint);margin:0 6px}
+.mockup-banner{background:#fff8e1;border:1px solid #ffe69c;border-radius:6px;padding:8px 14px;font-size:12px;color:#7c5b00;margin-bottom:18px}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 320px;gap:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:22px;box-shadow:var(--shadow-1)}
+.hero-main .chip{display:inline-flex;align-items:center;height:22px;padding:0 9px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;background:var(--accent-soft);color:var(--accent-2);border:1px solid var(--accent-soft-2);margin-bottom:10px;margin-right:6px}
+.hero-main .chip.status{background:#fef0c7;color:#905200;border-color:#f5dea2}
+.hero-main .ref{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:8px}
+.hero-main .ref code{font-family:var(--sans);background:var(--surface-3);padding:2px 6px;border-radius:3px;color:var(--accent-2);font-weight:700;font-size:11.5px}
+.hero-main h1{font-family:var(--serif);font-size:28px;font-weight:600;letter-spacing:-.018em;color:var(--ink-strong);line-height:1.2;margin-bottom:12px}
+.hero-main .deck{font-family:var(--serif);font-size:15.5px;line-height:1.5;color:var(--ink-strong);font-weight:500}
+
+.hero-side{background:var(--surface-2);border:1px solid var(--border-soft);border-radius:8px;padding:14px 16px;align-self:start}
+.hero-side .ssect{margin-bottom:10px}
+.hero-side .ssect:last-child{margin-bottom:0}
+.hero-side .ss-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.hero-side .ss-val{font-size:13px;color:var(--ink-strong);font-weight:600;line-height:1.4}
+.hero-side .ss-val.small{font-size:12px;font-weight:500;color:var(--ink)}
+.topic-pill{display:inline-flex;align-items:center;height:20px;padding:0 8px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;background:#e3effc;color:#014486;margin-right:4px}
+.topic-pill.cyber{background:#fef0c7;color:#905200}
+.topic-pill.ai{background:#e5f3e9;color:#2e844a}
+
+/* METADATA GRID (Digibeetle-style, 3-col) */
+.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.meta-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;padding:14px 16px;box-shadow:var(--shadow-1)}
+.meta-card .mc-title{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.meta-card .kv{display:grid;grid-template-columns:90px 1fr;gap:4px 10px;font-size:12px;margin-bottom:5px;align-items:baseline}
+.meta-card .kv .k{color:var(--muted);font-weight:500}
+.meta-card .kv .v{color:var(--ink);font-weight:600;word-break:break-word}
+.meta-card .kv .v a{color:var(--accent-2);border-bottom:1px dotted var(--accent-soft-2)}
+
+/* SECTIONS */
+.body-wrap{display:grid;grid-template-columns:1fr 320px;gap:24px}
+.body-main .section{margin-bottom:24px}
+.body-main .section .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.body-main .section .eyebrow::before{content:'';width:14px;height:1px;background:var(--ink-faint)}
+.body-main .section h2{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink-strong);margin-bottom:10px;letter-spacing:-.005em}
+.body-main .section p{font-family:var(--serif);font-size:15px;line-height:1.6;color:var(--ink)}
+.body-main .section p + p{margin-top:10px}
+.body-main em{font-style:italic;color:var(--ink-strong)}
+.body-main strong{font-weight:600;color:var(--ink-strong)}
+
+/* RIGHT RAIL — sources */
+.rail .rail-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow-1)}
+.rail .rt{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.rail .src{display:flex;flex-direction:column;gap:4px;padding:10px 0;border-bottom:1px solid var(--border-soft)}
+.rail .src:last-child{border-bottom:none;padding-bottom:0}
+.rail .src .kind{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.rail .src .kind.primary{color:var(--accent-2)}
+.rail .src .kind.judgment{color:var(--green)}
+.rail .src .kind.opinion{color:#ba0517}
+.rail .src .title{font-size:12.5px;font-weight:600;color:var(--ink-strong);line-height:1.3}
+.rail .src a{font-size:11.5px;color:var(--accent-2);font-weight:600;display:inline-block;margin-top:2px}
+</style>
+</head>
+<body>
+<nav class="icon-sidebar">
+  <a href="pai-home-private" class="sidebar-brand" style="text-decoration:none;color:inherit;">
+    <div class="brand-icon"><img src="pai-logo.png" alt="PAI"></div>
+    <span class="brand-text">Principles<span style="font-style:italic;font-weight:500">AI</span></span>
+  </a>
+  <div class="sidebar-nav-items">
+    <a class="sidebar-nav-item" href="pai-home-private"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nav-label">Home</span></a>
+    <a class="sidebar-nav-item" href="pai-app-news"><svg viewBox="0 0 24 24"><path d="M4 4h14a2 2 0 012 2v12a2 2 0 01-2 2H4V4z"/><line x1="7" y1="8" x2="15" y2="8"/></svg><span class="nav-label">News</span></a>
+    <a class="sidebar-nav-item" href="pai-app-authorities"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/></svg><span class="nav-label">Authorities</span></a>
+    <a class="sidebar-nav-item" href="pai-app-legislation"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg><span class="nav-label">Legislation</span></a>
+    <a class="sidebar-nav-item active" href="pai-app-case-law"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a6 6 0 0112 0v2"/></svg><span class="nav-label">Case Law</span></a>
+  </div>
+</nav>
+<header class="header-bar">
+  <div class="header-right">
+    <a href="#" class="header-logout"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Log out</span></a>
+  </div>
+</header>
+
+<div class="main-content">
+<div class="page-view">
+
+  <div class="mockup-banner"><b>Mockup V2 · Hero + dense metadata grid</b> — Digibeetle-style: hero + side-card + metadata grid + sections + sources rail.</div>
+
+  <div class="ps-left">
+    <span class="ps-breadcrumb"><a href="pai-home-private">Home</a><span class="ps-sep">›</span><a href="pai-app-case-law">Case Law</a><span class="ps-sep">›</span><span class="ps-current">C-829/24 — Commission v Hungary</span></span>
+  </div>
+
+  <!-- HERO with side-card -->
+  <div class="hero">
+    <div class="hero-main">
+      <span class="chip">CJEU · AG Opinion</span>
+      <span class="chip status">Pending judgment</span>
+      <div class="ref"><code>C-829/24</code> · ECLI:EU:C:2026:——— · Commission v Hungary (Protection against foreign political interference)</div>
+      <h1>AG Kokott: Hungary's Sovereignty Protection Office breaches EU law</h1>
+      <p class="deck">Advocate General Juliane Kokott proposes the Court of Justice find Hungary infringed Articles of the GDPR, Charter, and Services Directive by adopting Law LXXXVIII of 2023, which empowers a state body to investigate persons "in the interest of foreign States" without judicial oversight.</p>
+    </div>
+    <aside class="hero-side">
+      <div class="ssect">
+        <div class="ss-label">Court</div>
+        <div class="ss-val"><a href="#" style="color:var(--accent-2);border-bottom:1px dotted">Court of Justice of the European Union</a></div>
+      </div>
+      <div class="ssect">
+        <div class="ss-label">Decision date</div>
+        <div class="ss-val">12 February 2026</div>
+      </div>
+      <div class="ssect">
+        <div class="ss-label">Procedure</div>
+        <div class="ss-val small">Article 258 TFEU · infringement</div>
+      </div>
+      <div class="ssect">
+        <div class="ss-label">Topics</div>
+        <div class="ss-val"><span class="topic-pill">Privacy</span><span class="topic-pill ai">AI</span><span class="topic-pill cyber">Cyber</span></div>
+      </div>
+      <div class="ssect">
+        <div class="ss-label">Jurisdictions</div>
+        <div class="ss-val small">European Union · Hungary</div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- METADATA GRID -->
+  <div class="meta-grid">
+    <div class="meta-card">
+      <div class="mc-title">Case timeline</div>
+      <div class="kv"><span class="k">Application lodged</span><span class="v">19 Dec 2024</span></div>
+      <div class="kv"><span class="k">Hearing</span><span class="v">— pending</span></div>
+      <div class="kv"><span class="k">AG Opinion</span><span class="v">12 Feb 2026</span></div>
+      <div class="kv"><span class="k">Judgment</span><span class="v">— pending</span></div>
+    </div>
+    <div class="meta-card">
+      <div class="mc-title">Cited instruments</div>
+      <div class="kv"><span class="k">GDPR</span><span class="v"><a href="#">Arts. 9, 10</a></span></div>
+      <div class="kv"><span class="k">Charter</span><span class="v"><a href="#">Art. 2 TEU</a></span></div>
+      <div class="kv"><span class="k">Directives</span><span class="v"><a href="#">2000/31</a> · <a href="#">2006/123</a></span></div>
+      <div class="kv"><span class="k">National law</span><span class="v"><em>Law LXXXVIII/2023</em></span></div>
+    </div>
+    <div class="meta-card">
+      <div class="mc-title">Court level &amp; type</div>
+      <div class="kv"><span class="k">Subtype</span><span class="v">Procedural</span></div>
+      <div class="kv"><span class="k">Court Level</span><span class="v">Supreme</span></div>
+      <div class="kv"><span class="k">Status</span><span class="v">Pending</span></div>
+      <div class="kv"><span class="k">Binding on</span><span class="v">EU Member States</span></div>
+    </div>
+  </div>
+
+  <!-- BODY + RAIL -->
+  <div class="body-wrap">
+    <div class="body-main">
+      <section class="section">
+        <div class="eyebrow">What was decided</div>
+        <h2>Opinion: Hungary failed to fulfil obligations under EU law</h2>
+        <p>On <strong>12 February 2026</strong>, AG Juliane Kokott delivered her Opinion in <em>Commission v Hungary (Protection against foreign political interference)</em>, recommending the Court find Hungary's <em>Law LXXXVIII of 2023 on the protection of national sovereignty</em> infringes EU primary and secondary law, the Charter, and the GDPR. The Opinion is non-binding; the Court will deliver its own judgment in due course.</p>
+      </section>
+
+      <section class="section">
+        <div class="eyebrow">What was at stake</div>
+        <h2>Sovereignty Protection Office: powers and reach</h2>
+        <p>The contested law establishes a <em>Sovereignty Protection Office</em> empowered to investigate organisations and persons carrying out activities "in the interest of other States and foreign actors". The Office can compel disclosure (including personal data), forward findings to other authorities, and publish accusatory annual reports. <strong>Its investigative powers are not subject to judicial review.</strong></p>
+        <p>Kokott found these powers indirectly discriminate against foreign service providers and breach the free movement of information society services, the free movement of capital, and the Services Directive. The processing of personal data — including data revealing political opinions — engages Articles 9 and 10 of the GDPR; the absence of safeguards renders that processing unlawful.</p>
+      </section>
+
+      <section class="section">
+        <div class="eyebrow">What this means</div>
+        <h2>First Article 2 TEU action coupled with GDPR breaches</h2>
+        <p>If the Court adopts Kokott's reasoning, the judgment will bind all Member States and force Hungary to dismantle or substantially reform the Office. The case is the first time the Commission has invoked breaches of <strong>Article 2 TEU</strong> values alongside concrete GDPR and Charter violations in a single infringement action — a precedent for future rule-of-law actions where data-protection breaches are part of a wider pattern.</p>
+      </section>
+    </div>
+
+    <aside class="rail">
+      <div class="rail-card">
+        <div class="rt">Official sources</div>
+        <div class="src">
+          <span class="kind primary">Press release</span>
+          <span class="title">CJEU PR No 16/26</span>
+          <a href="https://curia.europa.eu/site/upload/docs/application/pdf/2026-02/cp260016en.pdf" target="_blank" rel="noopener">curia.europa.eu PDF ↗</a>
+        </div>
+        <div class="src">
+          <span class="kind opinion">AG Opinion</span>
+          <span class="title">CELEX 62024CC0829</span>
+          <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62024CC0829" target="_blank" rel="noopener">EUR-Lex ↗</a>
+        </div>
+        <div class="src">
+          <span class="kind judgment">Court Order</span>
+          <span class="title">CELEX 62024CO0829</span>
+          <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:62024CO0829" target="_blank" rel="noopener">EUR-Lex PDF ↗</a>
+        </div>
+        <div class="src">
+          <span class="kind">Case file</span>
+          <span class="title">InfoCuria — full index</span>
+          <a href="https://curia.europa.eu/juris/liste.jsf?num=C-829/24&language=en" target="_blank" rel="noopener">curia.europa.eu ↗</a>
+        </div>
+      </div>
+      <div class="rail-card">
+        <div class="rt">Related on PAI</div>
+        <div class="src">
+          <span class="kind">Authority</span>
+          <a href="#">Court of Justice of the European Union</a>
+        </div>
+        <div class="src">
+          <span class="kind">Legislation</span>
+          <a href="#">GDPR · Articles 9, 10</a>
+        </div>
+        <div class="src">
+          <span class="kind">Jurisdiction</span>
+          <a href="#">Hungary · European Union</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
