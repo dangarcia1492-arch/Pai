@@ -55,12 +55,27 @@ def first(xs):
     return xs[0] if xs else None
 
 
+_MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+
+def fmt_date_display(iso):
+    """ISO 'YYYY-MM-DD' -> '1 May 2026' (PAI house style; matches juris-page fmtDate)."""
+    if not iso or len(iso) < 10:
+        return None
+    try:
+        y, m, d = int(iso[0:4]), int(iso[5:7]), int(iso[8:10])
+        return f"{d} {_MONTHS_SHORT[m - 1]} {y}"
+    except (ValueError, IndexError):
+        return None
+
+
 def to_row(rec, slug_map):
     f = rec.get("fields", {})
     rid = rec["id"]
     headline = f.get("Name") or ""
     summary = f.get("Summary") or ""
     authority = first(f.get("Name (from Authorities)")) or None
+    date_published = f.get("Date Published") or None
     return {
         "id": rid,
         "at2_id": rid,           # alias — older loaders read at2_id
@@ -69,7 +84,8 @@ def to_row(rec, slug_map):
         "title": headline,        # alias — older loaders read .title
         "summary": summary,
         "source_url": f.get("Source URL") or "",
-        "date_published": f.get("Date Published") or None,
+        "date_published": date_published,
+        "date_display": fmt_date_display(date_published),  # alias — pre-formatted for legacy loaders ("1 May 2026")
         "jurisdiction_name": first(f.get("Name (from Jurisdiction)")) or None,
         "jurisdictions": f.get("Name (from Jurisdiction)") or [],
         "juris_isos": f.get("ISO Code (from Jurisdiction)") or [],
