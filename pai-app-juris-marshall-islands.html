@@ -1307,7 +1307,82 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
   <!-- ═══════════ D - DOMAIN-FIRST ═══════════ -->
   <div class="view" id="view-D" data-view="D">
-    <div style="padding:60px 32px;text-align:center;background:#fff;border:1px solid #ebeff5;border-radius:14px"><div style="font-family:'Inter',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8a93a3;margin-bottom:8px">Domain-first view</div><h2 style="font-family:'Inter',-apple-system,sans-serif;font-size:22px;font-weight:600;color:#0a1729;margin:0 0 8px">Marshall Islands · by domain</h2><p style="font-size:14px;color:#56657a;margin:0 0 18px;max-width:520px;line-height:1.55;margin-left:auto;margin-right:auto">AI / Privacy / Cybersecurity domain breakdown for Marshall Islands is being sourced. Switch back to <strong>Newsroom</strong> for the latest activity stream.</p></div>
+    <style>
+      .df-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+      .df-card{background:#fff;border:1px solid #ebeff5;border-radius:10px;padding:24px 26px;box-shadow:0 1px 2px rgba(10,23,41,.04);display:flex;flex-direction:column;gap:18px}
+      .df-card.ai{border-top:4px solid #5b21b6}
+      .df-card.privacy{border-top:4px solid #0176d3}
+      .df-card.cyber{border-top:4px solid #ba0517}
+      .df-pill-name{font-family:'Inter',sans-serif;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+      .df-pill-name.ai{color:#5b21b6}
+      .df-pill-name.privacy{color:#014486}
+      .df-pill-name.cyber{color:#ba0517}
+      .df-surface{padding:16px 18px;background:#f8fafc;border-radius:8px;border:1px solid #ebeff5}
+      .df-surface-h{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5e6878;margin-bottom:8px}
+      .df-leads{display:flex;flex-wrap:wrap;gap:6px}
+      .df-lead{display:inline-block;font-family:'Source Serif 4','Inter',sans-serif;font-size:16px;font-weight:700;color:#06101e;padding:5px 10px;border-radius:5px;background:#fff;border:1px solid #ebeff5}
+      .df-lead.others{background:#f8fafc;color:#5e6878;font-weight:500;font-size:13px}
+      .df-section-h{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5e6878;margin-bottom:8px}
+      .df-list{list-style:none;margin:0;padding:0}
+      .df-list li{font-size:13px;padding:8px 0;border-top:1px solid #ebeff5;color:#0a1729;line-height:1.4}
+      .df-list li:first-child{border-top:none}
+      .df-list li .meta{font-size:11px;color:#8a93a3;display:block;margin-top:2px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+      .df-list li .meta .auth{color:#2a3548;font-weight:600;letter-spacing:.04em;text-transform:none;margin-right:6px;font-size:11.5px}
+      .df-empty{padding:60px 32px;text-align:center;background:#fff;border:1px solid #ebeff5;border-radius:14px;color:#5e6878;font-size:13px}
+      @media (max-width:900px){.df-grid{grid-template-columns:1fr}}
+    </style>
+    <div id="df-root"><div class="df-empty">Loading…</div></div>
+    <script>
+    (async function loadDomainFirst(){
+      const JURIS_DF = "Marshall Islands";
+      const root = document.getElementById('df-root');
+      const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+      const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const fmtDate = iso => { const m=(iso||'').match(/^(\\d{4})-(\\d{2})-(\\d{2})/); return m ? (parseInt(m[3],10)+' '+MONTHS[parseInt(m[2],10)-1]+' '+m[1]) : ''; };
+      try {
+        const r = await fetch('./domain-first.json',{cache:'no-cache'});
+        if (!r.ok) throw new Error('HTTP '+r.status);
+        const d = await r.json();
+        const block = (d.jurisdictions||{})[JURIS_DF];
+        if (!block) {
+          root.innerHTML = '<div class="df-empty">Domain-first view for ' + esc(JURIS_DF) + ' is being sourced. Switch back to <strong>Newsroom</strong> for the latest activity stream.</div>';
+          return;
+        }
+        function renderLeadsRow(p){
+          const items = (p.leads||[]).map(n => '<span class="df-lead">' + esc(n) + '</span>').join('');
+          const others = p.others_count > 0 ? '<span class="df-lead others">+' + p.others_count + ' other' + (p.others_count===1?'':'s') + '</span>' : '';
+          return items + others;
+        }
+        function renderRecent(p){
+          if (!p.recent || !p.recent.length) return '<li style="color:#8a93a3;font-style:italic">No recent activity in this pillar</li>';
+          return p.recent.map(r =>
+            '<li>' + esc(r.headline) + '<span class="meta"><span class="auth">' + esc(r.authority_short || '') + '</span>' + esc(fmtDate(r.date_published)) + (r.story_type ? ' · ' + esc(r.story_type) : '') + '</span></li>'
+          ).join('');
+        }
+        function renderInstruments(p){
+          if (!p.top_instruments || !p.top_instruments.length) return '<li style="color:#8a93a3;font-style:italic">No instruments tagged in this pillar</li>';
+          return p.top_instruments.map(i =>
+            '<li>' + esc(i.name) + '<span class="meta">' + esc(i.status || '') + (i.date_enacted ? ' · ' + esc(i.date_enacted.slice(0,4)) : '') + '</span></li>'
+          ).join('');
+        }
+        function card(pillarKey, label, cls){
+          const p = block[pillarKey] || {leads:[],others_count:0,recent:[],top_instruments:[]};
+          const leadsLabel = (p.leads||[]).length === 1 ? 'Lead regulator' : 'Lead regulators';
+          return ''
+            + '<div class="df-card ' + cls + '">'
+            +   '<div class="df-pill-name ' + cls + '">' + esc(label) + '</div>'
+            +   '<div class="df-surface"><div class="df-surface-h">' + leadsLabel + '</div><div class="df-leads">' + renderLeadsRow(p) + '</div></div>'
+            +   '<div><div class="df-section-h">Recent</div><ul class="df-list">' + renderRecent(p) + '</ul></div>'
+            +   '<div><div class="df-section-h">Top instruments</div><ul class="df-list">' + renderInstruments(p) + '</ul></div>'
+            + '</div>';
+        }
+        root.innerHTML = '<div class="df-grid">' + card('AI','AI','ai') + card('Privacy','Privacy','privacy') + card('Cyber','Cyber','cyber') + '</div>';
+      } catch (e) {
+        root.innerHTML = '<div class="df-empty">Could not load domain-first data (' + esc(e.message) + '). Switch back to <strong>Newsroom</strong>.</div>';
+      }
+    })();
+    </script>
+
   </div></div><!-- /view-stage -->
 
   <!-- ═══════════ SETTINGS PREVIEW ═══════════ -->
