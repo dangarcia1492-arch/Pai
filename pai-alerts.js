@@ -25,7 +25,67 @@
     try { return localStorage.getItem(VISIT_KEY) || new Date(0).toISOString(); }
     catch(e){ return new Date(0).toISOString(); }
   }
-  function genId(){ return 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+  function genId(prefix){ return (prefix||'a') + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+  // ============ Watchlist items (entity-level) ============
+  // Items share the pai-alerts-v1 storage with type='item' (vs type='news' for filter views).
+  function loadItems(){ return loadAlerts().filter(function(a){ return a.type === 'item'; }); }
+  function loadNewsAlerts(){ return loadAlerts().filter(function(a){ return a.type !== 'item'; }); }
+  function entityKindFromUrl(path){
+    if (/pai-app-leg-/.test(path)) return 'legislation';
+    if (/pai-app-authority-/.test(path)) return 'authority';
+    if (/pai-app-juris-/.test(path)) return 'jurisdiction';
+    if (/pai-app-case-/.test(path)) return 'case-law';
+    if (/pai-app-news-story-/.test(path)) return 'news-story';
+    return 'page';
+  }
+  function currentEntityRef(){
+    var slug = location.pathname.replace(/^\//,'').replace(/\.html$/,'');
+    var title = (document.title || '').replace(/^PrinciplesAI\s*[—-]\s*/,'').trim();
+    return { url: slug, name: title || slug, entityKind: entityKindFromUrl(slug) };
+  }
+  function isItemSaved(url){
+    return loadItems().some(function(i){ return i.url === url; });
+  }
+  function saveItem(ref){
+    if (isItemSaved(ref.url)) return;
+    var all = loadAlerts();
+    all.push({
+      id: genId('i'),
+      type: 'item',
+      name: ref.name,
+      url: ref.url,
+      entityKind: ref.entityKind || 'page',
+      createdAt: new Date().toISOString()
+    });
+    saveAlerts(all);
+  }
+  function removeItem(url){
+    var all = loadAlerts().filter(function(a){ return !(a.type === 'item' && a.url === url); });
+    saveAlerts(all);
+  }
+  function setupItemButtons(){
+    // Auto-wire any .auth-save button (the existing "● Save to watchlist" on entity pages)
+    var btns = document.querySelectorAll('.auth-save');
+    if (!btns.length) return;
+    var ref = currentEntityRef();
+    btns.forEach(function(btn){
+      // Reflect saved state on load
+      if (isItemSaved(ref.url) && !btn.classList.contains('saved')){
+        btn.classList.add('saved');
+        if (/Save to watchlist/i.test(btn.textContent)) btn.textContent = '● Saved to watchlist';
+      }
+      // Persist on click (capture phase so we run before the inline onclick toggles state)
+      btn.addEventListener('click', function(){
+        // After the inline onclick fires, the .saved class reflects desired state
+        setTimeout(function(){
+          if (btn.classList.contains('saved')) saveItem(ref);
+          else removeItem(ref.url);
+          renderBell();
+        }, 0);
+      });
+    });
+  }
 
   // ============ Filter helpers ============
   function filterStateToJSON(f){
@@ -101,28 +161,33 @@
     var bell = document.querySelector('.pai-bell');
     if (!bell) return;
     var badge = bell.querySelector('.badge-count');
-    var alerts = loadAlerts();
-    if (!alerts.length){
+    var newsAlerts = loadNewsAlerts();
+    var items = loadItems();
+    if (!newsAlerts.length && !items.length){
       if (badge) badge.style.display = 'none';
       window.__paiAlerts = [];
+      window.__paiItems = [];
       return;
     }
     fetchNews(function(rows){
       var since = getLastVisit();
-      var total = 0;
-      alerts.forEach(function(a){
+      var totalNew = 0;
+      newsAlerts.forEach(function(a){
         a._new = countNewForAlert(a, rows, since);
-        total += a._new;
+        totalNew += a._new;
       });
+      // Badge shows news-alert "new since visit" count only.
+      // Watchlist items don't have change-detection yet (follow-up ticket).
       if (badge){
-        if (total > 0){
-          badge.textContent = total > 99 ? '99+' : String(total);
+        if (totalNew > 0){
+          badge.textContent = totalNew > 99 ? '99+' : String(totalNew);
           badge.style.display = '';
         } else {
           badge.style.display = 'none';
         }
       }
-      window.__paiAlerts = alerts;
+      window.__paiAlerts = newsAlerts;
+      window.__paiItems = items;
     });
   }
 
@@ -133,7 +198,8 @@
     var bell = document.querySelector('.pai-bell');
     if (!bell) return;
     var rect = bell.getBoundingClientRect();
-    var alerts = window.__paiAlerts || loadAlerts();
+    var newsAlerts = window.__paiAlerts || loadNewsAlerts();
+    var items = window.__paiItems || loadItems();
 
     var d = document.createElement('div');
     d.id = 'pai-alerts-dropdown';
@@ -142,22 +208,34 @@
     d.style.right = (window.innerWidth - rect.right) + 'px';
 
     var html = '';
-    if (!alerts.length){
-      html += '<div class="pad-empty">No alerts yet.<br><span class="hint">Create one from the News page filter panel.</span></div>';
-      html += '<a class="pad-see-all" href="pai-app-alerts">Manage alerts →</a>';
+    if (!newsAlerts.length && !items.length){
+      html += '<div class="pad-empty">Nothing in your alerts or watchlist yet.<br><span class="hint">Create a news alert from the News filter panel, or save a law/regulator/case from its page.</span></div>';
+      html += '<a class="pad-see-all" href="pai-app-alerts">Manage alerts &amp; watchlist →</a>';
     } else {
-      var total = 0; alerts.forEach(function(a){ total += a._new || 0; });
-      html += '<div class="pad-head">' + (total > 0
-        ? (total + ' new item' + (total===1?'':'s') + ' across your alerts')
+      var totalNew = 0; newsAlerts.forEach(function(a){ totalNew += a._new || 0; });
+      html += '<div class="pad-head">' + (totalNew > 0
+        ? (totalNew + ' new item' + (totalNew===1?'':'s') + ' across your alerts')
         : 'No new items since last visit') + '</div>';
-      alerts.forEach(function(a){
-        var n = a._new || 0;
-        html += '<a class="pad-row" href="pai-app-news?alert=' + encodeURIComponent(a.id) + '">' +
-                  '<span class="pad-name">' + escapeHtml(a.name) + '</span>' +
-                  '<span class="pad-count' + (n > 0 ? ' has-new' : '') + '">' + (n > 0 ? '+' + n : '0') + '</span>' +
-                '</a>';
-      });
-      html += '<a class="pad-see-all" href="pai-app-alerts">Manage alerts →</a>';
+      if (newsAlerts.length){
+        html += '<div class="pad-section">News alerts</div>';
+        newsAlerts.forEach(function(a){
+          var n = a._new || 0;
+          html += '<a class="pad-row" href="pai-app-news?alert=' + encodeURIComponent(a.id) + '">' +
+                    '<span class="pad-name">' + escapeHtml(a.name) + '</span>' +
+                    '<span class="pad-count' + (n > 0 ? ' has-new' : '') + '">' + (n > 0 ? '+' + n : '0') + '</span>' +
+                  '</a>';
+        });
+      }
+      if (items.length){
+        html += '<div class="pad-section">Watching · ' + items.length + ' item' + (items.length===1?'':'s') + '</div>';
+        items.slice(0, 6).forEach(function(it){
+          html += '<a class="pad-row" href="' + escapeHtml(it.url) + '">' +
+                    '<span class="pad-name">' + escapeHtml(it.name) + '</span>' +
+                    '<span class="pad-count pad-kind">' + escapeHtml(it.entityKind || 'page') + '</span>' +
+                  '</a>';
+        });
+      }
+      html += '<a class="pad-see-all" href="pai-app-alerts">Manage alerts &amp; watchlist →</a>';
     }
     d.innerHTML = html;
     document.body.appendChild(d);
@@ -299,6 +377,8 @@
       '.facet-set-alert:hover { background: rgba(1,118,211,0.14); }' +
       '.pai-alerts-dropdown { position: fixed; z-index: 9000; min-width: 280px; max-width: 360px; background: var(--surface, #fff); border: 1px solid var(--border, #d9dee6); border-radius: 8px; box-shadow: 0 8px 24px rgba(10,23,41,0.16); padding: 8px 0; font-family: "Inter", sans-serif; }' +
       '.pai-alerts-dropdown .pad-head { font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted, #6b7a8f); padding: 6px 14px 8px; border-bottom: 1px solid var(--border-soft, #e5e9f0); }' +
+      '.pai-alerts-dropdown .pad-section { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint, #8a93a3); padding: 10px 14px 4px; }' +
+      '.pai-alerts-dropdown .pad-kind { background: transparent; color: var(--muted, #6b7a8f); border: 1px solid var(--border, #d9dee6); }' +
       '.pai-alerts-dropdown .pad-empty { padding: 18px 16px; text-align: center; font-size: 13px; color: var(--secondary, #4a556b); }' +
       '.pai-alerts-dropdown .pad-empty .hint { display: block; margin-top: 6px; font-size: 11.5px; color: var(--muted, #8a93a3); }' +
       '.pai-alerts-dropdown .pad-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; text-decoration: none; color: inherit; border-bottom: 1px solid var(--border-soft, #f0f3f7); }' +
@@ -339,6 +419,7 @@
   function init(){
     injectCSS();
     setupNewsButton();
+    setupItemButtons();
     renderBell();
     var bell = document.querySelector('.pai-bell');
     if (bell) bell.addEventListener('click', function(e){ e.preventDefault(); toggleDropdown(); });
@@ -347,6 +428,123 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
+  // ============ Dashboard renderer (for pai-app-alerts.html) ============
+  function renderDashboard(containerSelector){
+    var container = document.querySelector(containerSelector);
+    if (!container) return;
+    var newsAlerts = loadNewsAlerts();
+    var items = loadItems();
+    if (!newsAlerts.length && !items.length){
+      container.innerHTML =
+        '<div class="alerts-empty">' +
+          '<div class="ae-illustration"><svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="1.4" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>' +
+          '<h2>Nothing tracked yet</h2>' +
+          '<p>Save a filtered news view as an alert from the News page, or watchlist a law / regulator / case from its page. Everything you save appears here.</p>' +
+          '<a class="ae-cta" href="pai-app-news">Go to News →</a>' +
+        '</div>';
+      return;
+    }
+    fetchNews(function(rows){
+      var since = getLastVisit();
+      newsAlerts.forEach(function(a){ a._new = countNewForAlert(a, rows, since); });
+      var totalNew = newsAlerts.reduce(function(s,a){ return s + (a._new || 0); }, 0);
+      var html = '';
+      html += '<div class="alerts-stats">' +
+        '<div class="as-stat"><div class="as-num">' + newsAlerts.length + '</div><div class="as-lbl">news alert' + (newsAlerts.length===1?'':'s') + '</div></div>' +
+        '<div class="as-stat"><div class="as-num">' + items.length + '</div><div class="as-lbl">watching</div></div>' +
+        '<div class="as-stat"><div class="as-num">' + totalNew + '</div><div class="as-lbl">new since last visit</div></div>' +
+        '</div>';
+      if (newsAlerts.length){
+        html += '<h2 class="alerts-section-head">News alerts</h2>';
+        html += '<div class="alerts-list">';
+        newsAlerts.forEach(function(a){
+          var n = a._new || 0;
+          html += '<div class="alert-card" data-id="' + escapeHtml(a.id) + '">' +
+                    '<div class="ac-head"><h3 class="ac-name">' + escapeHtml(a.name) + '</h3><span class="ac-freq">' + escapeHtml(a.frequency || 'daily') + '</span></div>' +
+                    '<div class="ac-summary">' + escapeHtml(alertSummary(a.filters)) + '</div>' +
+                    '<div class="ac-foot">' +
+                      '<span class="ac-count' + (n>0?' has-new':'') + '">' + (n>0 ? '+' + n + ' new' : 'No new items') + '</span>' +
+                      '<div class="ac-actions"><a class="ac-btn ac-see" href="pai-app-news?alert=' + encodeURIComponent(a.id) + '">See in News →</a><button class="ac-btn ac-del" type="button" data-id="' + escapeHtml(a.id) + '" data-kind="news">Delete</button></div>' +
+                    '</div>' +
+                  '</div>';
+        });
+        html += '</div>';
+      }
+      if (items.length){
+        html += '<h2 class="alerts-section-head">Watching</h2>';
+        html += '<div class="alerts-list">';
+        items.forEach(function(it){
+          html += '<div class="alert-card" data-id="' + escapeHtml(it.id) + '">' +
+                    '<div class="ac-head"><h3 class="ac-name">' + escapeHtml(it.name) + '</h3><span class="ac-freq">' + escapeHtml(it.entityKind || 'page') + '</span></div>' +
+                    '<div class="ac-summary">Watched since ' + escapeHtml((it.createdAt || '').slice(0,10)) + '</div>' +
+                    '<div class="ac-foot">' +
+                      '<span class="ac-count">Tracking</span>' +
+                      '<div class="ac-actions"><a class="ac-btn ac-see" href="' + escapeHtml(it.url) + '">Open →</a><button class="ac-btn ac-del" type="button" data-id="' + escapeHtml(it.id) + '" data-kind="item" data-url="' + escapeHtml(it.url) + '">Remove</button></div>' +
+                    '</div>' +
+                  '</div>';
+        });
+        html += '</div>';
+      }
+      container.innerHTML = html;
+      container.querySelectorAll('.ac-del').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var kind = btn.getAttribute('data-kind');
+          var label = kind === 'item' ? 'Remove from watchlist?' : 'Delete this alert? This cannot be undone.';
+          if (!confirm(label)) return;
+          var id = btn.getAttribute('data-id');
+          var arr = loadAlerts().filter(function(a){ return a.id !== id; });
+          saveAlerts(arr);
+          renderDashboard(containerSelector);
+          renderBell();
+          showToast(kind === 'item' ? 'Removed from watchlist' : 'Alert deleted');
+        });
+      });
+    });
+  }
+
+  function injectDashboardCSS(){
+    if (document.getElementById('pai-alerts-dashboard-css')) return;
+    var css =
+      '.alerts-empty { padding: 60px 24px; text-align: center; max-width: 480px; margin: 0 auto; }' +
+      '.alerts-empty .ae-illustration { color: var(--muted, #8a93a3); margin-bottom: 14px; }' +
+      '.alerts-empty h2 { font-size: 18px; font-weight: 600; margin: 0 0 8px; color: var(--ink, #07202e); }' +
+      '.alerts-empty p { font-size: 14px; line-height: 1.55; color: var(--secondary, #4a556b); margin: 0 0 18px; }' +
+      '.alerts-empty .ae-cta { display: inline-block; padding: 9px 16px; background: var(--accent, #0176d3); color: #fff; text-decoration: none; border-radius: 5px; font-size: 13px; font-weight: 600; }' +
+      '.alerts-empty .ae-cta:hover { background: var(--accent-2, #014486); }' +
+      '.alerts-stats { display: flex; gap: 32px; padding: 20px 0 28px; border-bottom: 1px solid var(--border-soft, #e5e9f0); margin-bottom: 22px; }' +
+      '.alerts-stats .as-stat { display: flex; flex-direction: column; }' +
+      '.alerts-stats .as-num { font-size: 30px; font-weight: 600; color: var(--ink, #07202e); line-height: 1; font-family: var(--mono, ui-monospace); }' +
+      '.alerts-stats .as-lbl { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted, #6b7a8f); margin-top: 6px; }' +
+      '.alerts-section-head { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted, #6b7a8f); margin: 18px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border-soft, #e5e9f0); }' +
+      '.alerts-section-head:first-of-type { margin-top: 4px; }' +
+      '.alerts-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }' +
+      '.alert-card { background: var(--surface, #fff); border: 1px solid var(--border, #d9dee6); border-radius: 8px; padding: 16px 20px; transition: border-color .15s, box-shadow .15s; }' +
+      '.alert-card:hover { border-color: var(--accent-soft-2, #cfe1f6); box-shadow: 0 1px 4px rgba(10,23,41,0.06); }' +
+      '.alert-card .ac-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }' +
+      '.alert-card .ac-name { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink, #07202e); }' +
+      '.alert-card .ac-freq { font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted, #6b7a8f); background: var(--surface-3, #f0f3f7); padding: 3px 9px; border-radius: 9px; }' +
+      '.alert-card .ac-summary { font-size: 13px; color: var(--secondary, #4a556b); margin-bottom: 14px; }' +
+      '.alert-card .ac-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }' +
+      '.alert-card .ac-count { font-size: 12.5px; font-weight: 600; padding: 4px 10px; border-radius: 9px; background: var(--surface-3, #f0f3f7); color: var(--muted, #6b7a8f); }' +
+      '.alert-card .ac-count.has-new { background: var(--red-fill, #e23131); color: #fff; }' +
+      '.alert-card .ac-actions { display: flex; gap: 8px; }' +
+      '.alert-card .ac-btn { padding: 6px 12px; border-radius: 5px; font-size: 12.5px; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid transparent; text-decoration: none; }' +
+      '.alert-card .ac-see { background: var(--accent, #0176d3); color: #fff; }' +
+      '.alert-card .ac-see:hover { background: var(--accent-2, #014486); }' +
+      '.alert-card .ac-del { background: transparent; color: var(--secondary, #4a556b); border-color: var(--border, #d9dee6); }' +
+      '.alert-card .ac-del:hover { background: var(--surface-3, #f0f3f7); color: var(--ink, #07202e); }';
+    var s = document.createElement('style');
+    s.id = 'pai-alerts-dashboard-css';
+    s.textContent = css;
+    document.head.appendChild(s);
+  }
+
   // Debug surface
-  window.paiAlerts = { load: loadAlerts, save: saveAlerts, render: renderBell, open: openSaveAlertModal };
+  window.paiAlerts = {
+    load: loadAlerts,
+    save: saveAlerts,
+    render: renderBell,
+    open: openSaveAlertModal,
+    renderDashboard: function(sel){ injectDashboardCSS(); renderDashboard(sel); }
+  };
 })();
