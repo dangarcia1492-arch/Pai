@@ -1,0 +1,52 @@
+/* PaiCompareWidget — shared chrome for tick/pin/save/share pattern.
+   Extracted verbatim from pai-app-tables-eu-regulation-tracker.html (commit b58e76af on mobile/burger-and-buttons).
+   Page-specific styling (matrix-sticky-group, matrix-row.frozen, tab.custom, col-check) stays in the host page.
+   This file ONLY contains widget chrome: create-bar, custom-actions, frozen-bar (collapsed 3+), saved-searches. */
+
+/* ── Create-tracker bar (visible when 1+ items ticked) ─────────────── */
+.create-tracker-bar{display:flex;align-items:center;gap:14px;padding:12px 18px;margin-bottom:14px;background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:8px;font-family:var(--sans);font-size:13px;color:var(--ink-strong);flex-wrap:wrap}
+.create-tracker-bar[hidden]{display:none}
+.ctb-count{font-weight:700;color:var(--accent-2)}
+.ctb-input{flex:1;min-width:200px;max-width:340px;height:32px;padding:0 12px;font-size:13px;font-family:inherit;color:var(--ink);background:#fff;border:1px solid var(--border);border-radius:5px;outline:none}
+.ctb-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.ctb-btn{height:32px;padding:0 14px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:1px solid var(--accent);border-radius:5px;cursor:pointer;font-family:inherit}
+.ctb-btn:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.ctb-btn.ghost{color:var(--secondary);background:transparent;border-color:var(--border)}
+.ctb-btn.ghost:hover{background:var(--surface-2);color:var(--ink);border-color:var(--ink-faint)}
+
+/* ── Custom-actions bar (visible on a custom/shared view) ──────────── */
+.custom-actions{display:flex;gap:8px;align-items:center;margin-bottom:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:6px;font-size:12.5px}
+.custom-actions .ca-name{font-weight:700;color:var(--ink-strong);flex:1}
+.custom-actions[hidden]{display:none}
+
+/* ── Collapsed-summary banner (3+ selections, above the list) ─────── */
+.frozen-bar{margin-bottom:10px;border:1px solid var(--accent-soft-2);border-radius:8px;background:var(--accent-soft);overflow:hidden;box-shadow:var(--shadow-1)}
+.frozen-bar[hidden]{display:none}
+.frozen-summary{display:flex;align-items:center;gap:14px;padding:14px 18px;font-size:13px;color:var(--ink-strong);background:var(--accent-soft);min-height:56px;flex-wrap:wrap}
+.frozen-summary .fs-label{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--accent-2);font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.frozen-summary .fs-label .pin-glyph{font-size:13px;-webkit-text-stroke:0}
+.frozen-summary .fs-count{font-family:var(--mono);font-weight:700;color:var(--ink-strong);font-size:13.5px}
+.frozen-summary .initials{display:inline-flex;flex-wrap:wrap;gap:5px;flex:1}
+.frozen-summary .initial-chip{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;background:#fff;border:1px solid var(--accent-soft-2);border-radius:11px;font-family:var(--mono);font-size:11px;color:var(--accent-2);font-weight:700;letter-spacing:.06em;cursor:pointer;transition:background var(--t-fast),border-color var(--t-fast)}
+.frozen-summary .initial-chip:hover{background:var(--red-bg);border-color:var(--red-fill);color:var(--red-fill)}
+.frozen-summary .initial-chip:hover .chip-x{color:var(--red-fill)}
+.frozen-summary .initial-chip .chip-x{color:var(--text-soft);font-weight:700;font-size:13px;line-height:1}
+.frozen-summary .fs-clear{height:26px;padding:0 12px;background:transparent;border:1px solid var(--accent-soft-2);border-radius:5px;font-size:11.5px;font-weight:600;color:var(--accent-2);cursor:pointer;font-family:inherit}
+.frozen-summary .fs-clear:hover{background:#fff;border-color:var(--accent)}
+
+/* ── Saved-searches panel (right-side, max 2 by default) ──────────── */
+.saved-searches{position:fixed;top:96px;right:18px;width:260px;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-2);padding:14px 14px 12px;z-index:50;font-size:12.5px}
+.saved-searches[hidden]{display:none}
+.ss-title{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px}
+.ss-title .ss-cap{font-family:var(--mono);font-size:10px;color:var(--ink-faint);text-transform:none;letter-spacing:0}
+.ss-empty{color:var(--muted);font-size:11.5px;font-style:italic;padding:8px 0}
+.ss-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border-soft);border-radius:6px;margin-bottom:6px;background:var(--surface-2)}
+.ss-item:hover{background:#fff;border-color:var(--accent-soft-2)}
+.ss-meta{flex:1;min-width:0}
+.ss-name{font-weight:600;color:var(--ink-strong);font-size:12.5px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ss-count{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.ss-load{height:24px;padding:0 9px;background:var(--accent);color:#fff;border:0;border-radius:4px;cursor:pointer;font-size:10.5px;font-weight:700;font-family:inherit;letter-spacing:.04em;text-transform:uppercase}
+.ss-load:hover{background:var(--accent-2)}
+.ss-remove{width:20px;height:20px;background:transparent;border:0;color:var(--text-soft);cursor:pointer;font-size:15px;line-height:1;padding:0;border-radius:3px}
+.ss-remove:hover{color:var(--red-fill);background:var(--red-bg)}
+@media(max-width:1400px){.saved-searches{position:static;width:auto;margin-bottom:12px}}
