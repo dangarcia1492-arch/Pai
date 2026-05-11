@@ -2999,6 +2999,27 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 </script>
 
 <script>
+/* Home news ordering rule (memory: feedback_pai_home_news_order.md):
+   - Hero (position 0) = most-recent lead; fallback = most-recent overall
+   - Rest = most-recent by date, alphabetical tie-break; null dates sink */
+function paiOrderHomeNews(rows) {
+  if (!Array.isArray(rows) || !rows.length) return [];
+  var cmp = function(a, b) {
+    var ad = (a && a.date_published) || '';
+    var bd = (b && b.date_published) || '';
+    if (ad !== bd) return bd.localeCompare(ad);
+    var ah = ((a && a.headline) || '').toLowerCase();
+    var bh = ((b && b.headline) || '').toLowerCase();
+    return ah.localeCompare(bh);
+  };
+  var sortedAll = rows.slice().sort(cmp);
+  var leads = rows.filter(function(r) { return r && r.is_lead; }).sort(cmp);
+  var hero = leads[0] || sortedAll[0];
+  if (!hero) return [];
+  var rest = sortedAll.filter(function(r) { return r !== hero; });
+  return [hero].concat(rest);
+}
+
 /* Home stats — loaded from stats.json + authorities.json (written by build_marketing_data.py) */
 (async function loadHomeStats() {
   const setTx = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
@@ -3051,7 +3072,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     const r = await fetch('./news.json', { cache: 'no-cache' });
     if (!r.ok) return;
     const d = await r.json();
-    const rows = (d.rows || []).slice(0, 5);
+    const rows = paiOrderHomeNews(d.rows || []).slice(0, 5);
     if (!rows.length) return;
     list.innerHTML = rows.map((row, i) => {
       const isLead = i === 0;
@@ -3100,7 +3121,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     var r = await fetch('./news.json', {cache: 'no-cache'});
     if (!r.ok) return;
     var d = await r.json();
-    var rows = d.rows || [];
+    var rows = paiOrderHomeNews(d.rows || []);
     if (!rows.length) return;
 
     /* Featured trio — top 3 rows */
