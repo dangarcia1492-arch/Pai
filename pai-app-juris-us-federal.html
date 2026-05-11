@@ -2441,5 +2441,24 @@ window.addEventListener('load', function(){
     .catch(function(){});
 });
 </script>
+
+<!-- PRI-141: keep jurisdictions overlay open on arrival (US Federal only) -->
+<script>
+(function(){
+  function tryOpen(){
+    if (typeof window.openJurisdictions === 'function') {
+      window.openJurisdictions();
+    } else {
+      setTimeout(tryOpen, 50);
+    }
+  }
+  function onReady(){ setTimeout(tryOpen, 120); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', onReady);
+  } else {
+    onReady();
+  }
+})();
+</script>
 </body>
 </html>
