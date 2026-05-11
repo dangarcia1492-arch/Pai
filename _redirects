@@ -17,3 +17,7 @@
 # Contributor → Faculty rename (May 2026): old URL was deployed briefly before naming convention was settled
 /pai-app-contributor-edsel-tupaz      /pai-app-faculty-edsel-tupaz 302
 /pai-app-contributor-edsel-tupaz.html /pai-app-faculty-edsel-tupaz 302
+
+# Tables: legacy un-prefixed name retired in favour of -eu- prefixed file (PRI-136, May 2026)
+/pai-app-tables-regulation-tracker      /pai-app-tables-eu-regulation-tracker 301
+/pai-app-tables-regulation-tracker.html /pai-app-tables-eu-regulation-tracker 301

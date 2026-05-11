@@ -147,10 +147,6 @@ button{cursor:pointer}
 .tp-cell:hover .tip{opacity:1}
 .tp-total{background:var(--surface-2);border-left:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink-strong);padding:8px}
 
-.tp-callout{margin:18px 0 24px;padding:14px 18px;background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:var(--radius);color:var(--accent-2);font-size:12.5px}
-.tp-callout b{color:var(--accent-2);font-weight:700}
-.tp-callout .ico{display:inline-block;width:16px;height:16px;vertical-align:-3px;margin-right:6px}
-
 .footer{border-top:1px solid var(--border);padding:20px 4px 4px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
 .footer .ok{color:var(--green);font-weight:600}
 .footer .ok::before{content:'';display:inline-block;width:7px;height:7px;background:var(--green-fill);border-radius:50%;margin-right:6px;vertical-align:middle}
@@ -614,365 +610,88 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     </a>
   </section>
 
-  <div class="build-strip">
-    <div class="bs-head">
-      <span class="bs-title">How each reference table is built</span>
-      <span class="bs-sub">Four-stage process · every statement is hash-pinned to source and reviewed by a human editor before publication.</span>
-    </div>
-    <div class="bs-steps">
-      <div class="bs-step">
-        <div class="bs-n">Stage 1 · <b>Machine</b></div>
-        <div class="bs-name">Source archival</div>
-        <div class="bs-desc">Primary regulator texts are fetched directly from official portals and hash-pinned.</div>
+
+<section class="hub-methodology" style="margin:36px auto 28px;max-width:1320px;padding:0 40px">
+  <div style="border:1px solid var(--border-soft,#ebeff5);border-radius:10px;background:var(--surface,#fff);padding:30px 34px;box-shadow:0 1px 2px rgba(10,23,41,.04)">
+    <div style="font-family:'Inter',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2,#014486);margin-bottom:10px">Methodology</div>
+    <h2 style="font-family:'Inter',sans-serif;font-size:22px;font-weight:700;color:var(--ink-strong,#07202e);letter-spacing:-0.01em;margin:0 0 8px">How each table is built</h2>
+    <p style="font-size:13.5px;color:var(--muted,#5e6878);line-height:1.55;max-width:840px;margin:0 0 24px">Every statement on every Topic Map passes a four-stage verification pipeline before publication. Each table then has its own builder, data source and update cadence.</p>
+
+    <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#5e6878);margin:6px 0 14px">Verification pipeline · every claim</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border:1px solid var(--border-soft,#ebeff5);border-radius:8px;background:var(--surface-2,#f8fafc);margin-bottom:30px;overflow:hidden">
+      <div style="padding:16px 18px;border-right:1px solid var(--border-soft,#ebeff5)">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint,#8a93a3);margin-bottom:6px">Stage 1 · <b style="color:var(--accent-2,#014486)">Machine</b></div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:4px">Source archival</div>
+        <div style="font-size:11.5px;color:var(--muted,#5e6878);line-height:1.5">Primary regulator texts are fetched directly from official portals and hash-pinned.</div>
       </div>
-      <div class="bs-step">
-        <div class="bs-n">Stage 2 · <b>AI</b></div>
-        <div class="bs-name">Dual-judge verification</div>
-        <div class="bs-desc">Two independent AI systems must both locate the exact supporting text in the source.</div>
+      <div style="padding:16px 18px;border-right:1px solid var(--border-soft,#ebeff5)">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint,#8a93a3);margin-bottom:6px">Stage 2 · <b style="color:var(--accent-2,#014486)">AI</b></div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:4px">Dual-judge verification</div>
+        <div style="font-size:11.5px;color:var(--muted,#5e6878);line-height:1.5">Two independent AI systems must both locate the exact supporting text in the source.</div>
       </div>
-      <div class="bs-step">
-        <div class="bs-n">Stage 3 · <b>Machine</b></div>
-        <div class="bs-name">Reconciliation</div>
-        <div class="bs-desc">Disagreements between the two judges are flagged and escalated to the editor.</div>
+      <div style="padding:16px 18px;border-right:1px solid var(--border-soft,#ebeff5)">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint,#8a93a3);margin-bottom:6px">Stage 3 · <b style="color:var(--accent-2,#014486)">Machine</b></div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:4px">Reconciliation</div>
+        <div style="font-size:11.5px;color:var(--muted,#5e6878);line-height:1.5">Disagreements between the two judges are flagged and escalated to the editor.</div>
       </div>
-      <div class="bs-step">
-        <div class="bs-n">Stage 4 · <b>Human</b></div>
-        <div class="bs-name">Editorial sign-off</div>
-        <div class="bs-desc">The PAI editor reviews every page, checks a sample against source, and signs before publication.</div>
+      <div style="padding:16px 18px">
+        <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint,#8a93a3);margin-bottom:6px">Stage 4 · <b style="color:var(--accent-2,#014486)">Human</b></div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:4px">Editorial sign-off</div>
+        <div style="font-size:11.5px;color:var(--muted,#5e6878);line-height:1.5">The PAI editor reviews every page, checks a sample against source, and signs before publication.</div>
       </div>
     </div>
-  </div>
 
-
-<details class="claims-matrix-reveal" style="margin:24px auto;max-width:1400px;padding:0 24px">
-  <summary style="cursor:pointer;background:var(--surface,#fff);border:1px solid var(--border,#dbe1ea);border-radius:8px;padding:18px 20px;display:flex;align-items:center;gap:12px;list-style:none;transition:background .15s"><div style="width:36px;height:36px;border-radius:6px;background:var(--accent-soft,#e3effc);color:var(--accent,#0176d3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" fill="none" stroke="currentColor" stroke-width="2"/></svg></div><div style="flex:1"><div style="font-weight:600;font-size:14.5px;color:var(--ink-strong,#07202e)">Claim coverage · Jurisdiction × topic matrix</div><div style="font-size:12.5px;color:var(--muted,#5e6878);margin-top:2px">Claims captured in the last 30 days, by jurisdiction and topic. Click to reveal.</div></div><span style="color:var(--accent,#0176d3);font-family:var(--mono,monospace);font-size:12px;font-weight:600">Show →</span></summary>
-  <div style="padding-top:20px">
-<div class="section-divider">
-    <div class="sd-tag">Live coverage</div>
-    <h2 class="sd-title">Jurisdiction × topic matrix</h2>
-    <p class="sd-sub">Verified-claim counts captured by the coverage engine at every jurisdiction × topic intersection in the last 30 days. Empty cells mean no claim has been captured yet — <b>not</b> that nothing happened.</p>
-  </div>
-  <!-- ==END_TOPIC_GRID== -->
-
-  <div class="tp-toolbar">
-    <div class="tp-legend">
-      <span>Claims · 30d</span>
-      <span class="scale-ends">0</span>
-      <span class="swatches"><span class="sw s0"></span><span class="sw s1"></span><span class="sw s2"></span><span class="sw s3"></span><span class="sw s4"></span><span class="sw s5"></span></span>
-      <span class="scale-ends">80+</span>
+    <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#5e6878);margin:6px 0 14px">Per-table data sources</div>
+    <style>.hm-bullets{font-size:12.5px;color:var(--muted,#5e6878);line-height:1.6;margin:0;padding:0;list-style:none}.hm-bullets li{position:relative;padding-left:14px;margin-bottom:3px}.hm-bullets li::before{content:'';position:absolute;left:2px;top:9px;width:4px;height:4px;border-radius:50%;background:var(--accent,#0176d3)}.hm-bullets code{font-family:'Inter',sans-serif;font-size:11.5px;color:var(--ink-strong,#07202e)}</style>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px 28px">
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:6px">EU Regulation Tracker</div>
+        <ul class="hm-bullets">
+          <li>27 member states × 16 slots</li>
+          <li>Coverage: AI Act, NIS2, GDPR</li>
+          <li>Built nightly by <code>build_eu_regulation_tracker.py</code></li>
+          <li>Source: approved <code>intake.site_claim</code> rows</li>
+          <li>Each cell links to that jurisdiction's regulation note</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:6px">US States Regulation Tracker</div>
+        <ul class="hm-bullets">
+          <li>53 jurisdictions (50 states + DC + territories) × 13 slots</li>
+          <li>Coverage: Comprehensive Privacy, AI Regulation, Cybersecurity</li>
+          <li>Same engine as EU tracker, US data source</li>
+          <li>Cross-referenced from the US Federal jurisdiction page</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:6px">AI Notes</div>
+        <ul class="hm-bullets">
+          <li>External-expert authored, one note per jurisdiction</li>
+          <li>Listed only when the underlying note carries a named external-expert author</li>
+          <li>Placeholder notes are never surfaced</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:6px">IP &amp; AI</div>
+        <ul class="hm-bullets">
+          <li>Copyright, patent and ownership questions for AI-involved works</li>
+          <li>Mapped cross-jurisdiction</li>
+          <li>Built from the IP&amp;AI Frameworks table in AT2</li>
+          <li>Each claim cited to a primary regulator or court source</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:var(--ink-strong,#07202e);margin-bottom:6px">Trust &amp; Safety</div>
+        <ul class="hm-bullets">
+          <li>Cross-jurisdiction matrix of online-safety regimes</li>
+          <li>Six dimensions: illegal content, child safety, transparency, complaints, risk assessment, age assurance</li>
+          <li>Built from <code>intake.claim</code> + approved AT2 records</li>
+        </ul>
+      </div>
     </div>
-    <span class="tp-sep"></span>
-    <div class="tp-select"><span>Window</span><select><option>Last 30 days</option><option>Last 7 days</option><option>Last quarter</option><option>Last 12 months</option></select></div>
-    <div class="tp-select"><span>Metric</span><select><option>Claim count</option><option>Enforcement total (€/$)</option><option>Instruments in force</option></select></div>
-    <div class="tp-mode" role="tablist">
-      <button class="tp-mode-btn on" title="Matrix view">Matrix</button>
-      <button class="tp-mode-btn" title="Heatmap only (no counts)">Heat</button>
-      <button class="tp-mode-btn" title="List view">List</button>
-    </div>
-    <div class="tp-search-wrap">
-      <svg class="tp-search-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="tp-search" placeholder="Filter jurisdictions…">
-    </div>
-  </div>
-
-  <div class="tp-wrap">
-    <table class="tp-matrix">
-      <thead>
-        <tr>
-          <th class="corner">Jurisdiction</th>
-          <th>Privacy<span class="sub">GDPR-family, local DPAs</span></th>
-          <th>AI<span class="sub">AI Act, NIST-AI RMF, sector</span></th>
-          <th>Cyber<span class="sub">NIS2, CISA, NCSC</span></th>
-          <th>Enforcement<span class="sub">fines, orders, settlements</span></th>
-          <th>Consultations<span class="sub">open rulemaking</span></th>
-          <th>Standards<span class="sub">ISO/IEC, CEN, NIST</span></th>
-          <th>IP<span class="sub">training-data, trade secret</span></th>
-          <th class="total">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">EU</span><div><span class="tp-jname">European Union</span><span class="tp-jsub">EU institutions · 27 MS</span></div></div></td>
-          <td class="tp-cell lvl-5"><span class="n">84</span><span class="d">today</span><span class="tip">84 claims · 30d · last today</span></td>
-          <td class="tp-cell lvl-5"><span class="n">72</span><span class="d">today</span><span class="tip">72 claims · 30d · last today</span></td>
-          <td class="tp-cell lvl-4"><span class="n">43</span><span class="d">yesterday</span><span class="tip">43 claims · 30d · last yesterday</span></td>
-          <td class="tp-cell lvl-5"><span class="n">91</span><span class="d">today</span><span class="tip">91 claims · 30d · last today</span></td>
-          <td class="tp-cell lvl-3"><span class="n">18</span><span class="d">3d ago</span><span class="tip">18 open consultations</span></td>
-          <td class="tp-cell lvl-2"><span class="n">9</span><span class="d">14 Apr</span><span class="tip">9 standards claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">4</span><span class="d">11 Apr</span><span class="tip">4 IP claims</span></td>
-          <td class="tp-total">321</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">GB</span><div><span class="tp-jname">United Kingdom</span><span class="tp-jsub">UK-wide + devolved</span></div></div></td>
-          <td class="tp-cell lvl-4"><span class="n">51</span><span class="d">today</span><span class="tip">51 privacy claims · 30d</span></td>
-          <td class="tp-cell lvl-4"><span class="n">46</span><span class="d">today</span><span class="tip">46 AI claims · 30d</span></td>
-          <td class="tp-cell lvl-3"><span class="n">24</span><span class="d">yesterday</span><span class="tip">24 cyber claims · NCSC-led</span></td>
-          <td class="tp-cell lvl-3"><span class="n">19</span><span class="d">16 Apr</span><span class="tip">19 enforcement claims</span></td>
-          <td class="tp-cell lvl-2"><span class="n">7</span><span class="d">17 Apr</span><span class="tip">7 open consultations</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">12 Apr</span><span class="tip">3 standards claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">09 Apr</span><span class="tip">2 IP claims</span></td>
-          <td class="tp-total">152</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">DE</span><div><span class="tp-jname">Germany</span><span class="tp-jsub">Bund + 16 Länder</span></div></div></td>
-          <td class="tp-cell lvl-5"><span class="n">67</span><span class="d">today</span><span class="tip">67 privacy claims · 17 DPAs</span></td>
-          <td class="tp-cell lvl-3"><span class="n">28</span><span class="d">today</span><span class="tip">28 AI claims</span></td>
-          <td class="tp-cell lvl-3"><span class="n">22</span><span class="d">today</span><span class="tip">22 cyber claims · BSI-led</span></td>
-          <td class="tp-cell lvl-4"><span class="n">38</span><span class="d">today</span><span class="tip">38 enforcement claims</span></td>
-          <td class="tp-cell lvl-2"><span class="n">8</span><span class="d">15 Apr</span><span class="tip">8 open consultations</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">10 Apr</span><span class="tip">3 standards claims (DIN)</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No IP claims captured yet</span></td>
-          <td class="tp-total">166</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">FR</span><div><span class="tp-jname">France</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-5"><span class="n">78</span><span class="d">today</span><span class="tip">78 privacy claims · CNIL-led</span></td>
-          <td class="tp-cell lvl-3"><span class="n">19</span><span class="d">yesterday</span><span class="tip">19 AI claims</span></td>
-          <td class="tp-cell lvl-2"><span class="n">11</span><span class="d">15 Apr</span><span class="tip">11 cyber claims · ANSSI</span></td>
-          <td class="tp-cell lvl-4"><span class="n">42</span><span class="d">today</span><span class="tip">42 enforcement claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">4</span><span class="d">12 Apr</span><span class="tip">4 open consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No standards claims captured yet</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No IP claims captured yet</span></td>
-          <td class="tp-total">154</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">IT</span><div><span class="tp-jname">Italy</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-3"><span class="n">29</span><span class="d">today</span><span class="tip">29 privacy claims · Garante</span></td>
-          <td class="tp-cell lvl-2"><span class="n">12</span><span class="d">16 Apr</span><span class="tip">12 AI claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">5</span><span class="d">11 Apr</span><span class="tip">5 cyber claims · ACN</span></td>
-          <td class="tp-cell lvl-2"><span class="n">14</span><span class="d">17 Apr</span><span class="tip">14 enforcement claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">09 Apr</span><span class="tip">2 open consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No standards claims captured yet</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No IP claims captured yet</span></td>
-          <td class="tp-total">62</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">ES</span><div><span class="tp-jname">Spain</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-3"><span class="n">26</span><span class="d">today</span><span class="tip">26 privacy claims · AEPD</span></td>
-          <td class="tp-cell lvl-2"><span class="n">11</span><span class="d">17 Apr</span><span class="tip">11 AI claims · AESIA-led</span></td>
-          <td class="tp-cell lvl-1"><span class="n">6</span><span class="d">12 Apr</span><span class="tip">6 cyber claims</span></td>
-          <td class="tp-cell lvl-2"><span class="n">13</span><span class="d">16 Apr</span><span class="tip">13 enforcement claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">10 Apr</span><span class="tip">3 open consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No standards claims captured yet</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No IP claims captured yet</span></td>
-          <td class="tp-total">59</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">IE</span><div><span class="tp-jname">Ireland</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-2"><span class="n">12</span><span class="d">today</span><span class="tip">12 privacy claims · DPC</span></td>
-          <td class="tp-cell lvl-1"><span class="n">4</span><span class="d">14 Apr</span><span class="tip">4 AI claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">11 Apr</span><span class="tip">3 cyber claims</span></td>
-          <td class="tp-cell lvl-3"><span class="n">18</span><span class="d">today</span><span class="tip">18 enforcement claims — DPC Meta/Google</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">08 Apr</span><span class="tip">2 consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No standards claims captured yet</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No IP claims captured yet</span></td>
-          <td class="tp-total">39</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">US</span><div><span class="tp-jname">United States (federal)</span><span class="tp-jsub">FTC, NIST, CISA, agencies</span></div></div></td>
-          <td class="tp-cell lvl-3"><span class="n">22</span><span class="d">today</span><span class="tip">22 privacy claims · no federal statute yet</span></td>
-          <td class="tp-cell lvl-4"><span class="n">44</span><span class="d">today</span><span class="tip">44 AI claims</span></td>
-          <td class="tp-cell lvl-4"><span class="n">48</span><span class="d">today</span><span class="tip">48 cyber claims · CISA + NIST</span></td>
-          <td class="tp-cell lvl-3"><span class="n">27</span><span class="d">today</span><span class="tip">27 enforcement claims · FTC-led</span></td>
-          <td class="tp-cell lvl-3"><span class="n">16</span><span class="d">15 Apr</span><span class="tip">16 open rulemakings</span></td>
-          <td class="tp-cell lvl-4"><span class="n">34</span><span class="d">today</span><span class="tip">34 standards claims · NIST CSF / AI RMF</span></td>
-          <td class="tp-cell lvl-2"><span class="n">8</span><span class="d">13 Apr</span><span class="tip">8 IP claims · USCO GenAI guidance</span></td>
-          <td class="tp-total">199</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">US</span><div><span class="tp-jname">California</span><span class="tp-jsub">State</span></div></div></td>
-          <td class="tp-cell lvl-4"><span class="n">39</span><span class="d">today</span><span class="tip">39 privacy claims · CPPA + CA AG</span></td>
-          <td class="tp-cell lvl-3"><span class="n">28</span><span class="d">today</span><span class="tip">28 AI claims · ADMT-led</span></td>
-          <td class="tp-cell lvl-1"><span class="n">5</span><span class="d">10 Apr</span><span class="tip">5 cyber claims</span></td>
-          <td class="tp-cell lvl-3"><span class="n">22</span><span class="d">today</span><span class="tip">22 enforcement claims · CA AG + CPPA</span></td>
-          <td class="tp-cell lvl-2"><span class="n">11</span><span class="d">16 Apr</span><span class="tip">11 open rulemakings</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No standards claims captured yet</span></td>
-          <td class="tp-cell empty"><span class="n">—</span><span class="tip">No IP claims captured yet</span></td>
-          <td class="tp-total">105</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">US</span><div><span class="tp-jname">Colorado</span><span class="tp-jsub">State</span></div></div></td>
-          <td class="tp-cell lvl-1"><span class="n">4</span><span class="d">14 Apr</span><span class="tip">4 privacy claims</span></td>
-          <td class="tp-cell lvl-3"><span class="n">17</span><span class="d">today</span><span class="tip">17 AI claims · Colorado AI Act</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">09 Apr</span><span class="tip">2 enforcement claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">11 Apr</span><span class="tip">3 open consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">26</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">CA</span><div><span class="tp-jname">Canada</span><span class="tp-jsub">Federal + provinces</span></div></div></td>
-          <td class="tp-cell lvl-2"><span class="n">12</span><span class="d">yesterday</span><span class="tip">12 privacy claims · OPC-led</span></td>
-          <td class="tp-cell lvl-2"><span class="n">10</span><span class="d">15 Apr</span><span class="tip">10 AI claims · AIDA still in committee</span></td>
-          <td class="tp-cell lvl-1"><span class="n">6</span><span class="d">13 Apr</span><span class="tip">6 cyber claims · CSE-led</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">10 Apr</span><span class="tip">3 enforcement claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">08 Apr</span><span class="tip">2 open consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">33</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">JP</span><div><span class="tp-jname">Japan</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-2"><span class="n">9</span><span class="d">today</span><span class="tip">9 privacy claims · PPC</span></td>
-          <td class="tp-cell lvl-3"><span class="n">16</span><span class="d">today</span><span class="tip">16 AI claims · AI Promotion Act</span></td>
-          <td class="tp-cell lvl-1"><span class="n">5</span><span class="d">11 Apr</span><span class="tip">5 cyber claims · NISC</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">09 Apr</span><span class="tip">2 enforcement claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">13 Apr</span><span class="tip">2 open consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">34</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">KR</span><div><span class="tp-jname">South Korea</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-1"><span class="n">5</span><span class="d">16 Apr</span><span class="tip">5 privacy claims · PIPC</span></td>
-          <td class="tp-cell lvl-3"><span class="n">22</span><span class="d">today</span><span class="tip">22 AI claims · AI Basic Act in force</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell lvl-1"><span class="n">4</span><span class="d">12 Apr</span><span class="tip">4 enforcement claims</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">31</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">CN</span><div><span class="tp-jname">China</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-2"><span class="n">8</span><span class="d">14 Apr</span><span class="tip">8 privacy claims · CAC</span></td>
-          <td class="tp-cell lvl-4"><span class="n">36</span><span class="d">today</span><span class="tip">36 AI claims · CAC + MIIT</span></td>
-          <td class="tp-cell lvl-1"><span class="n">6</span><span class="d">10 Apr</span><span class="tip">6 cyber claims · MSS / MIIT</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">15 Apr</span><span class="tip">2 open consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">52</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">SG</span><div><span class="tp-jname">Singapore</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-1"><span class="n">4</span><span class="d">13 Apr</span><span class="tip">4 privacy claims · PDPC</span></td>
-          <td class="tp-cell lvl-2"><span class="n">11</span><span class="d">today</span><span class="tip">11 AI claims · IMDA AI Verify</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">12 Apr</span><span class="tip">3 cyber claims · CSA</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">11 Apr</span><span class="tip">2 standards · ISO participation</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">20</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">AU</span><div><span class="tp-jname">Australia</span><span class="tp-jsub">Federal</span></div></div></td>
-          <td class="tp-cell lvl-2"><span class="n">11</span><span class="d">today</span><span class="tip">11 privacy claims · OAIC</span></td>
-          <td class="tp-cell lvl-1"><span class="n">6</span><span class="d">13 Apr</span><span class="tip">6 AI claims · DISR-led</span></td>
-          <td class="tp-cell lvl-1"><span class="n">4</span><span class="d">11 Apr</span><span class="tip">4 cyber claims · ASD</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">09 Apr</span><span class="tip">2 enforcement claims</span></td>
-          <td class="tp-cell lvl-2"><span class="n">7</span><span class="d">12 Apr</span><span class="tip">7 open consultations · Privacy Act Tranche 2</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">30</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">BR</span><div><span class="tp-jname">Brazil</span><span class="tp-jsub">National</span></div></div></td>
-          <td class="tp-cell lvl-2"><span class="n">9</span><span class="d">today</span><span class="tip">9 privacy claims · ANPD</span></td>
-          <td class="tp-cell lvl-2"><span class="n">8</span><span class="d">15 Apr</span><span class="tip">8 AI claims · PL 2338 in Senate</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">11 Apr</span><span class="tip">3 enforcement claims</span></td>
-          <td class="tp-cell lvl-1"><span class="n">2</span><span class="d">10 Apr</span><span class="tip">2 open consultations</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">22</td>
-        </tr>
-        <tr>
-          <td class="tp-rowhead"><div class="tp-rh-top"><span class="tp-flag">IN</span><div><span class="tp-jname">India</span><span class="tp-jsub">National + states</span></div></div></td>
-          <td class="tp-cell lvl-2"><span class="n">13</span><span class="d">today</span><span class="tip">13 privacy claims · MeitY drafting rules</span></td>
-          <td class="tp-cell lvl-1"><span class="n">6</span><span class="d">16 Apr</span><span class="tip">6 AI claims · MeitY advisory</span></td>
-          <td class="tp-cell lvl-1"><span class="n">3</span><span class="d">13 Apr</span><span class="tip">3 cyber claims · CERT-In</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell lvl-2"><span class="n">8</span><span class="d">today</span><span class="tip">8 consultations · DPDPA rules</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-cell empty"><span class="n">—</span></td>
-          <td class="tp-total">30</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  </div>
-</details>
-
-<!-- ==US_STATES_TRACKER_CARD_BEGIN== hand-edited; mirrors EU27 card style -->
-<style>
-.us-states-tracker{margin:32px 0 32px;background:#fff;border:1px solid #ebeff5;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(10,23,41,.04)}
-.us-states-tracker-head{padding:24px 28px;display:flex;flex-direction:column;gap:6px}
-.us-states-tracker-eyebrow{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5e6878}
-.us-states-tracker-title{font-size:22px;font-weight:700;color:#06101e;letter-spacing:-0.01em;margin:0}
-.us-states-tracker-sub{font-size:13.5px;color:#5e6878;line-height:1.5;margin:0;max-width:760px}
-.us-states-tracker-cta{margin-top:12px;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:#0176d3;text-decoration:none;align-self:flex-start}
-.us-states-tracker-cta:hover{text-decoration:underline}
-.us-states-tracker-cta:after{content:"→"}
-@media (max-width:720px){.us-states-tracker-head{padding:18px 18px}}
-</style>
-<section class="us-states-tracker">
-  <div class="us-states-tracker-head">
-    <div class="us-states-tracker-eyebrow">US States Regulation Tracker</div>
-    <h2 class="us-states-tracker-title">US state-level AI, privacy and cybersecurity laws</h2>
-    <p class="us-states-tracker-sub">Designated authorities, enacted statutes and pending bills across the 50 US states. Sister tracker to the EU 27 implementation matrix below; cross-referenced from the US Federal jurisdiction page.</p>
-    <a class="us-states-tracker-cta" href="pai-app-tables-us-states">Open the US States Regulation Tracker</a>
   </div>
 </section>
-<!-- ==US_STATES_TRACKER_CARD_END== -->
 
-<!-- ==EU27_IMPL_BEGIN== generated by build_topics_eu27_tables.py — do not edit by hand -->
-
-<style>
-.eu27-tracker{margin:32px 0 48px;background:#fff;border:1px solid #ebeff5;border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(10,23,41,.04)}
-.eu27-tracker-head{padding:24px 28px 0;border-bottom:1px solid #ebeff5}
-.eu27-tracker-eyebrow{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5e6878;margin-bottom:6px}
-.eu27-tracker-title{font-size:22px;font-weight:700;color:#06101e;letter-spacing:-0.01em;margin:0 0 6px}
-.eu27-tracker-sub{font-size:13.5px;color:#5e6878;line-height:1.5;margin:0 0 18px;max-width:760px}
-.eu27-tabs{display:flex;gap:0;border-bottom:1px solid #ebeff5;padding:0 28px;margin-top:8px}
-.eu27-tab{appearance:none;background:none;border:none;padding:14px 0;margin-right:32px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;color:#5e6878;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;display:inline-flex;align-items:baseline;gap:8px}
-.eu27-tab:hover{color:#06101e}
-.eu27-tab.is-active{color:#06101e;border-bottom-color:#014486}
-.eu27-tab .tab-count{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:700;color:#8a93a3;background:#f4f6fa;padding:2px 7px;border-radius:10px}
-.eu27-tab.is-active .tab-count{color:#014486;background:#e3effc}
-.eu27-panel{display:none;padding:20px 28px 28px}
-.eu27-panel.is-active{display:block}
-.panel-sub{font-size:12.5px;color:#5e6878;margin:0 0 14px;line-height:1.5}
-.eu27-stats{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:#5e6878;background:#fafbfc;border:1px solid #ebeff5;border-radius:8px;padding:10px 14px;margin:0 0 18px;align-items:center}
-.eu27-stats .stat .ic{font-weight:700;margin-right:4px}
-.eu27-stats .stat b{color:#06101e;font-weight:700;margin-right:2px}
-.eu27-stats .stat-total{color:#8a93a3;margin-left:auto;font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
-.eu27-table-scroll{overflow-x:auto;border:1px solid #ebeff5;border-radius:8px;background:#fff}
-.eu27-tbl{border-collapse:collapse;width:100%;font-size:12.5px;color:#0a1729}
-.eu27-tbl thead th{background:#fafbfc;border-bottom:1px solid #cfd6e0;padding:10px 12px;text-align:left;vertical-align:bottom;font-weight:600}
-.eu27-tbl thead th.ms-col{min-width:160px}
-.eu27-tbl thead .col-name{font-size:12px;color:#06101e;letter-spacing:-0.005em}
-.eu27-tbl thead .col-stat{font-family:'Inter',sans-serif;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8a93a3;margin-top:3px}
-.eu27-tbl tbody tr:hover{background:#fafbfc}
-.eu27-tbl tbody td{padding:10px 12px;border-bottom:1px solid #f0f3f7;vertical-align:middle}
-.eu27-tbl tbody td.ms-col{font-weight:600;background:#fff;position:sticky;left:0;border-right:1px solid #ebeff5;white-space:nowrap}
-.eu27-tbl tbody tr:hover td.ms-col{background:#fafbfc}
-.eu27-tbl tbody td.ms-col a{color:#014486;text-decoration:none}
-.eu27-tbl tbody td.ms-col a:hover{text-decoration:underline}
-.eu27-tbl tbody td.cell .chip{display:inline-flex;align-items:baseline;gap:6px;padding:3px 10px 3px 8px;border-radius:14px;font-size:11.5px;line-height:1.4;font-weight:500;max-width:100%}
-.eu27-tbl tbody td.cell .chip .ic{font-weight:700;font-size:11.5px}
-.eu27-tbl tbody td.cell .chip .lbl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
-.eu27-tbl tbody td.cell.is-pending .chip{font-style:italic;opacity:.85}
-.eu27-tracker-key{display:flex;flex-wrap:wrap;gap:18px;padding:14px 28px;background:#fafbfc;border-top:1px solid #ebeff5;font-size:11.5px;color:#5e6878;font-family:'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase}
-.eu27-tracker-key .key-item{display:inline-flex;align-items:baseline;gap:6px}
-.eu27-tracker-key .key-item .ic{font-weight:700;font-size:13px}
-@media (max-width:760px){
-  .eu27-tracker-head{padding:18px 18px 0}
-  .eu27-tabs{padding:0 18px;overflow-x:auto;white-space:nowrap}
-  .eu27-tab{margin-right:20px}
-  .eu27-panel{padding:14px 0 18px}
-  .panel-sub,.eu27-stats{margin-left:18px;margin-right:18px}
-}
-</style>
-
-<!-- ==EU27_IMPL_END== -->
-
-
-  <div class="tp-callout">
-    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <b>Why are some cells empty?</b> Coverage is live from each body's tracking-start date (from 1 Jan 2025 onward for most). An em-dash means no verified claim has yet been captured at that intersection — <b>not</b> that the topic is inactive. Use the Activity filter on a jurisdiction page to see what that jurisdiction's bodies are currently publishing on.
-  </div>
 
   <footer class="footer">
     <div class="left"><span>PrinciplesAI · Tables matrix</span><span><span class="ok"></span>Coverage engine operational</span><span>18 jurisdictions × 7 topics · last 30 days</span></div>
@@ -1034,17 +753,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 .topic-card.coming .tc-enter { color: #c8d0dc; }
 .topic-card.coming .tc-meta .sign { color: #8a93a3; }
 
-.build-strip { background: #f8fafc; border: 1px solid #ebeff5; border-radius: 10px; padding: 20px 24px; margin: 0 0 16px; }
-.build-strip .bs-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-.build-strip .bs-title { font-size: 14px; font-weight: 700; color: #07202e; letter-spacing: -.01em; }
-.build-strip .bs-sub { font-size: 12px; color: #5e6878; }
-.build-strip .bs-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.build-strip .bs-step { position: relative; padding-right: 6px; }
-.build-strip .bs-step + .bs-step { border-left: 1px solid #ebeff5; padding-left: 18px; }
-.build-strip .bs-step .bs-n { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; color: #8a93a3; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 6px; }
-.build-strip .bs-step .bs-n b { color: #014486; font-weight: 700; }
-.build-strip .bs-step .bs-name { font-size: 13px; font-weight: 700; color: #07202e; margin-bottom: 4px; letter-spacing: -.005em; }
-.build-strip .bs-step .bs-desc { font-size: 11.5px; color: #5e6878; line-height: 1.5; }
 
 .signoff-block { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: #fff; border: 1px solid #ebeff5; border-left: 3px solid #2e844a; border-radius: 8px; margin: 0 0 44px; }
 .signoff-block .so-avatar { width: 36px; height: 36px; border-radius: 50%; background: #014486; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12.5px; flex-shrink: 0; letter-spacing: .02em; }
@@ -1056,7 +764,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 .section-divider .sd-tag { font-family: 'Inter', sans-serif; font-size: 10.5px; font-weight: 700; color: #8a93a3; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
 .section-divider .sd-title { font-size: 22px; font-weight: 700; color: #07202e; letter-spacing: -.015em; margin-bottom: 6px; line-height: 1.2; }
 .section-divider .sd-sub { font-size: 13px; color: #5e6878; max-width: 820px; line-height: 1.5; }
-@media (max-width: 960px) { .build-strip .bs-steps { grid-template-columns: repeat(2, 1fr); } .build-strip .bs-step + .bs-step { border-left: none; padding-left: 0; } }
 /* ==END_TOPIC_INDEX== */
 </style>
 <button class="mobile-nav-toggle" aria-label="Open navigation" onclick="document.body.classList.toggle('mobile-nav-open')"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
