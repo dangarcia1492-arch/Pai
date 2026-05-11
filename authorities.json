@@ -29500,7 +29500,7 @@
   {
     "id": 2335,
     "name": "ADGM Financial Services Regulatory Authority",
-    "jurisdiction": "UAE - ADGM",
+    "jurisdiction": "Abu Dhabi Global Market",
     "type": "Financial Regulator",
     "status": "ok",
     "url": "https://www.adgm.com/financial-services-regulatory-authority",
@@ -29514,7 +29514,7 @@
   {
     "id": 2057,
     "name": "Office of Data Protection",
-    "jurisdiction": "UAE - ADGM",
+    "jurisdiction": "Abu Dhabi Global Market",
     "type": "Data Protection Authority",
     "status": "ok",
     "url": "https://www.adgm.com",
@@ -29528,7 +29528,7 @@
   {
     "id": 728,
     "name": "Commissioner of Data Protection",
-    "jurisdiction": "UAE - DIFC",
+    "jurisdiction": "Dubai International Financial Centre",
     "type": "Data Protection Authority",
     "status": "ok",
     "url": "https://difc.ae",
@@ -29542,7 +29542,7 @@
   {
     "id": 1618,
     "name": "DIFC Courts",
-    "jurisdiction": "UAE - DIFC",
+    "jurisdiction": "Dubai International Financial Centre",
     "type": "Court",
     "status": "ok",
     "url": "https://www.difccourts.ae/",
@@ -29556,7 +29556,7 @@
   {
     "id": 364,
     "name": "Dubai Financial Services Authority",
-    "jurisdiction": "UAE - DIFC",
+    "jurisdiction": "Dubai International Financial Centre",
     "type": "Financial Regulator",
     "status": "ok",
     "url": "https://www.dfsa.ae/",

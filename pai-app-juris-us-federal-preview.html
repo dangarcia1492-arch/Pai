@@ -1841,6 +1841,7 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     'Canada':['Canada Federal','Alberta','British Columbia','Manitoba','New Brunswick','Newfoundland and Labrador','Northwest Territories','Nova Scotia','Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'],
     'Australia':['Australia Federal','New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','Australian Capital Territory','Northern Territory'],
     'United Arab Emirates':['Abu Dhabi Global Market','Dubai Health Care City','Dubai International Financial Centre','Emirate of Abu Dhabi','Emirate of Dubai','United Arab Emirates Federal'],
+    'UAE':['Abu Dhabi','Abu Dhabi Global Market','Dubai','Dubai Healthcare City','Dubai International Financial Centre'],
     'Qatar':['Qatar Financial Centre','Qatar State']
   };
   // Reverse map: child name → parent
@@ -1864,7 +1865,10 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     'United Kingdom':'pai-app-juris-united-kingdom.html',
     'California':'pai-app-juris-california.html',
     'Quebec':'pai-app-juris-quebec.html',
-    'OECD':'pai-app-juris-oecd.html'
+    'OECD':'pai-app-juris-oecd.html',
+    'Abu Dhabi':'pai-app-juris-uae.html',
+    'Dubai':'pai-app-juris-uae.html',
+    'Dubai Healthcare City':'pai-app-juris-uae.html'
   };
 
   var SKIP_EXPAND = {'United Kingdom':1};
@@ -2099,6 +2103,8 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
   function goJurisdiction(name){
     closeJurisdictions();
+    var override = (typeof JURIS_PAGES !== 'undefined') ? JURIS_PAGES[name] : null;
+    if(override){ location.href = override; return; }
     var slug = slugify(name);
     location.href = 'pai-app-juris-' + slug + '.html';
   }
