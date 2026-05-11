@@ -21,3 +21,9 @@
 # Tables: legacy un-prefixed name retired in favour of -eu- prefixed file (PRI-136, May 2026)
 /pai-app-tables-regulation-tracker      /pai-app-tables-eu-regulation-tracker 301
 /pai-app-tables-regulation-tracker.html /pai-app-tables-eu-regulation-tracker 301
+
+# UAE sub-jurisdiction rename (PRI-141, May 2026): UAE - ADGM / UAE - DIFC → proper jurisdiction names
+/pai-app-juris-uae-adgm      /pai-app-juris-abu-dhabi-global-market              301
+/pai-app-juris-uae-adgm.html /pai-app-juris-abu-dhabi-global-market              301
+/pai-app-juris-uae-difc      /pai-app-juris-dubai-international-financial-centre 301
+/pai-app-juris-uae-difc.html /pai-app-juris-dubai-international-financial-centre 301
