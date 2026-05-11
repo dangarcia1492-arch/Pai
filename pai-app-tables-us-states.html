@@ -641,6 +641,8 @@ a.col-slot:hover .summary-line{color:var(--accent)}
 .ss-remove:hover{color:var(--red-fill);background:var(--red-bg)}
 @media(max-width:1400px){.saved-searches{position:static;width:auto;margin-bottom:12px}}
 </style>
+<link rel="stylesheet" href="pai-compare-widget.css">
+<script src="pai-compare-widget.js"></script>
 <script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
 <script>
   window.addEventListener("error", function(e) {
@@ -2865,7 +2867,7 @@ loadAuthorities();
           return;
         }
         activeTab = t.dataset.tab;
-        renderTabs(); renderMatrix(); updateCustomActions();
+        renderTabs(); renderMatrix(); paiCompareWidget.refreshUI();
       });
     });
   }
@@ -2942,8 +2944,8 @@ loadAuthorities();
 
     // Inline frozen rows below the header (only when 1-2 selected and not on a custom tab)
     const activeIsCustom = tab.custom;
-    if (!activeIsCustom && selectedStates.size > 0 && selectedStates.size <= 2){
-      const pinnedList = Array.from(selectedStates)
+    if (!activeIsCustom && paiCompareWidget.size() > 0 && paiCompareWidget.size() <= 2){
+      const pinnedList = paiCompareWidget.getSelected()
         .map(slug => states.find(s => s.slug === slug))
         .filter(Boolean)
         .sort((a,b) => a.name.localeCompare(b.name));
@@ -2966,11 +2968,11 @@ loadAuthorities();
 
     let filtered = states.filter(passesFilter).filter(passesColumnFilters);
     if (tabStateFilter) filtered = filtered.filter(s => tabStateFilter.has(s.slug));
-    else if (selectedStates.size > 0 && selectedStates.size <= 2) filtered = filtered.filter(s => !selectedStates.has(s.slug));
+    else if (paiCompareWidget.size() > 0 && paiCompareWidget.size() <= 2) filtered = filtered.filter(s => !paiCompareWidget.has(s.slug));
     const sorted = applySort(filtered);
     sorted.forEach(state => {
       html += `<div class="matrix-row" style="grid-template-columns:${cols}">`;
-      const checked = selectedStates.has(state.slug) ? 'checked' : '';
+      const checked = paiCompareWidget.has(state.slug) ? 'checked' : '';
       html += `<div class="col-check"><input type="checkbox" data-slug="${state.slug}" ${checked}></div>`;
       const jurisHref = state.juris_path || `pai-app-juris-${state.slug}.html`;
       html += `<div class="col-juris"><div class="name"><a href="${jurisHref}">${state.name}</a></div><div class="iso">${state.iso}</div></div>`;
@@ -3085,20 +3087,13 @@ loadAuthorities();
   function openDetail(){ /* removed — cells navigate via <a> */ }
   function closeDetail(){ /* removed */ }
 
-  // === PRI-144: Comparison-tracker feature ===
-  const LS_KEY = `paiCustomTrackers:${location.pathname.split('/').pop()}`;
-  const selectedStates = new Set();
+  // === PRI-144 + PRI-149: Comparison-tracker feature ===
+  // Selection state, saved-searches, share-link, collapsed-summary banner, pin/chip click
+  // delegation, print/share/clear buttons are all owned by pai-compare-widget.js.
+  // This page keeps only its custom-tab management (tracker-specific concept).
 
-  const createBar = document.getElementById('createTrackerBar');
-  const ctbCount = document.getElementById('ctbCount');
-  const ctbName = document.getElementById('ctbName');
-  const ctbCreate = document.getElementById('ctbCreate');
-  const ctbClear = document.getElementById('ctbClear');
-  const customActions = document.getElementById('customActions');
-  const caName = document.getElementById('caName');
-  const caPrint = document.getElementById('caPrint');
-  const caShare = document.getElementById('caShare');
-  const caRemove = document.getElementById('caRemove');
+  const LS_KEY = `paiCustomTrackers:${location.pathname.split('/').pop()}`;
+  let paiCompareWidget;
 
   function loadCustomTabs(){
     try {
@@ -3112,39 +3107,22 @@ loadAuthorities();
     const custom = tabs.filter(t => t.custom);
     try { localStorage.setItem(LS_KEY, JSON.stringify(custom)); } catch (e){ /* ignore */ }
   }
-  function updateCreateBar(){
-    const n = selectedStates.size;
-    ctbCount.textContent = n;
-    createBar.hidden = (n === 0);
-  }
-  function updateCustomActions(){
-    const tab = tabs.find(t => t.key === activeTab);
-    if (tab && tab.custom){
-      customActions.hidden = false;
-      caName.textContent = tab.label;
-    } else {
-      customActions.hidden = true;
-    }
-  }
-  function createCustomTab(name){
-    const baseTab = tabs.find(t => t.key === activeTab && !t.custom) || tabs[0];
-    const stateList = Array.from(selectedStates);
+  function createCustomTab(name, slugList, sourceTabKey){
+    const baseTab = (sourceTabKey && tabs.find(t => t.key === sourceTabKey && !t.custom))
+                 || tabs.find(t => t.key === activeTab && !t.custom)
+                 || tabs[0];
     const key = `custom_${Date.now().toString(36)}`;
-    const newTab = {
+    tabs.push({
       key,
       label: name,
       slots: baseTab.slots,
-      stateFilter: stateList,
+      stateFilter: slugList,
       custom: true,
       sourceTab: baseTab.key
-    };
-    tabs.push(newTab);
+    });
     saveCustomTabs();
     activeTab = key;
-    selectedStates.clear();
-    ctbName.value = '';
-    updateCreateBar();
-    renderTabs(); renderMatrix(); updateCustomActions();
+    renderTabs(); renderMatrix(); paiCompareWidget.refreshUI();
   }
   function removeCustomTab(key){
     const idx = tabs.findIndex(t => t.key === key);
@@ -3152,20 +3130,38 @@ loadAuthorities();
     tabs.splice(idx, 1);
     saveCustomTabs();
     if (activeTab === key) activeTab = tabs[0].key;
-    renderTabs(); renderMatrix(); updateCustomActions();
+    renderTabs(); renderMatrix(); paiCompareWidget.refreshUI();
   }
-  function buildShareUrl(tab){
-    const payload = { n: tab.label, s: tab.stateFilter, src: tab.sourceTab };
-    const enc = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-    const u = new URL(location.href);
-    u.searchParams.set('compare', enc);
-    return u.toString();
-  }
-  function parseShareUrl(){
-    const enc = new URLSearchParams(location.search).get('compare');
-    if (!enc) return;
-    try {
-      const payload = JSON.parse(decodeURIComponent(escape(atob(enc))));
+
+  // ── Widget callbacks ──
+  function isCustomViewActive(){ return !!tabs.find(t => t.key === activeTab)?.custom; }
+  function activeCustomViewLabel(){ return tabs.find(t => t.key === activeTab)?.label || ''; }
+  function currentSourceTabLabel(){ return tabs.find(t => t.key === activeTab && !t.custom)?.label || 'mixed'; }
+  function activeNonCustomTabKey(){ return tabs.find(t => t.key === activeTab && !t.custom)?.key || tabs[0].key; }
+
+  loadCustomTabs();  // run before widget init — parseShareUrl below needs tabs populated
+
+  paiCompareWidget = PaiCompareWidget.init({
+    storagePrefix: `paiCompare:${location.pathname.split('/').pop()}`,
+    shareParam: 'compare',
+    maxSavedSearches: 2,
+    itemContainer: 'matrix',
+    getItemName: (slug) => states.find(s => s.slug === slug)?.name || slug,
+    getItemIso: (slug) => states.find(s => s.slug === slug)?.iso || slug.slice(0,3).toUpperCase(),
+    isCustomViewActive,
+    activeCustomViewLabel,
+    sourceTabLabel: currentSourceTabLabel,
+    onCreateView: (name, slugs) => createCustomTab(name, slugs, activeNonCustomTabKey()),
+    onRemoveActiveView: () => {
+      const t = tabs.find(x => x.key === activeTab);
+      if (t && t.custom) removeCustomTab(t.key);
+    },
+    onShareView: () => {
+      const t = tabs.find(x => x.key === activeTab);
+      if (!t || !t.custom) return null;
+      return { n: t.label, s: t.stateFilter, src: t.sourceTab };
+    },
+    onLoadSharedView: (payload) => {
       const baseTab = tabs.find(t => t.key === payload.src && !t.custom) || tabs[0];
       const key = `custom_share_${Date.now().toString(36)}`;
       tabs.push({
@@ -3173,183 +3169,29 @@ loadAuthorities();
         stateFilter: payload.s, custom: true, sourceTab: baseTab.key
       });
       activeTab = key;
-    } catch (e){ /* ignore */ }
-  }
-
-  // === Frozen rows (pinned selections at top) ===
-  const frozenBar = document.getElementById('frozenBar');
-
-  function renderFrozen(){
-    // 1-2 selections render INSIDE the matrix sticky group (see renderMatrix).
-    // This function now only handles the 3+ collapsed-summary banner above the matrix.
-    const activeIsCustom = tabs.find(t => t.key === activeTab)?.custom;
-    if (activeIsCustom || selectedStates.size < 3){
-      frozenBar.hidden = true;
-      frozenBar.innerHTML = '';
-      return;
-    }
-    frozenBar.hidden = false;
-    const selectedList = Array.from(selectedStates)
-      .map(slug => states.find(s => s.slug === slug))
-      .filter(Boolean)
-      .sort((a,b) => a.name.localeCompare(b.name));
-    const initials = selectedList.map(s =>
-      `<button type="button" class="initial-chip" data-unpin="${s.slug}" title="Unpin ${s.name}">${s.iso}<span class="chip-x">×</span></button>`
-    ).join('');
-    frozenBar.innerHTML = `
-      <div class="frozen-summary">
-        <span class="fs-label"><span class="pin-glyph">📌</span> Pinned</span>
-        <span class="fs-count">${selectedList.length} selected</span>
-        <span class="initials">${initials}</span>
-        <button class="fs-clear" id="fsClear">Clear all</button>
-      </div>`;
-    document.getElementById('fsClear').addEventListener('click', () => {
-      selectedStates.clear();
-      updateAfterSelectionChange();
-    });
-    frozenBar.querySelectorAll('.initial-chip[data-unpin]').forEach(chip => {
-      chip.addEventListener('click', (e) => {
-        e.preventDefault();
-        selectedStates.delete(chip.dataset.unpin);
-        updateAfterSelectionChange();
-      });
-    });
-  }
-
-  function updateAfterSelectionChange(){
-    updateCreateBar();
-    renderFrozen();
-    renderMatrix();
-  }
-
-  // === Saved searches (max 2) ===
-  const SS_KEY = `paiSavedSearches:${location.pathname.split('/').pop()}`;
-  const SS_MAX = 2;
-  let savedSearches = [];
-  const ssListEl = document.getElementById('ssList');
-  const ssCapEl = document.getElementById('ssCap');
-  const savedSearchesAside = document.getElementById('savedSearches');
-
-  function loadSavedSearches(){
-    try {
-      const raw = localStorage.getItem(SS_KEY);
-      if (raw) savedSearches = JSON.parse(raw).slice(0, SS_MAX);
-    } catch(e){ savedSearches = []; }
-  }
-  function persistSavedSearches(){
-    try { localStorage.setItem(SS_KEY, JSON.stringify(savedSearches)); } catch(e){}
-  }
-  function renderSavedSearches(){
-    ssCapEl.textContent = `${savedSearches.length} / ${SS_MAX}`;
-    if (savedSearches.length === 0){
-      ssListEl.innerHTML = `<div class="ss-empty">Tick states + click <b>Save search</b> to pin a draft selection here.</div>`;
-      return;
-    }
-    ssListEl.innerHTML = savedSearches.map((s, i) => `
-      <div class="ss-item">
-        <div class="ss-meta">
-          <div class="ss-name" title="${s.name}">${s.name}</div>
-          <div class="ss-count">${s.states.length} state${s.states.length===1?'':'s'} · ${s.sourceTab || 'mixed'}</div>
-        </div>
-        <button class="ss-load" data-load="${i}">Load</button>
-        <button class="ss-remove" data-remove="${i}" title="Remove">×</button>
-      </div>
-    `).join('');
-  }
-  function saveCurrentSearch(){
-    if (selectedStates.size === 0) return;
-    const name = (ctbName.value || '').trim() || `Search ${savedSearches.length + 1}`;
-    const search = {
-      name, states: Array.from(selectedStates),
-      sourceTab: tabs.find(t => t.key === activeTab && !t.custom)?.label || 'mixed',
-      ts: Date.now()
-    };
-    if (savedSearches.length >= SS_MAX){
-      const overwrite = confirm(`You have ${SS_MAX} saved searches (max). Replace the oldest ("${savedSearches[0].name}")?`);
-      if (!overwrite) return;
-      savedSearches.shift();
-    }
-    savedSearches.push(search);
-    persistSavedSearches();
-    renderSavedSearches();
-    ctbName.value = '';
-  }
-  function loadSavedSearch(idx){
-    const s = savedSearches[idx];
-    if (!s) return;
-    selectedStates.clear();
-    s.states.forEach(slug => selectedStates.add(slug));
-    if (s.name && !ctbName.value) ctbName.value = s.name;
-    updateAfterSelectionChange();
-  }
-  function removeSavedSearch(idx){
-    savedSearches.splice(idx, 1);
-    persistSavedSearches();
-    renderSavedSearches();
-  }
-  ssListEl.addEventListener('click', (e) => {
-    if (e.target.dataset.load !== undefined) loadSavedSearch(+e.target.dataset.load);
-    else if (e.target.dataset.remove !== undefined) removeSavedSearch(+e.target.dataset.remove);
+    },
+    onSelectionChange: () => renderMatrix()
   });
 
-  // === Wire up checkbox + buttons ===
-  // Click delegation on the matrix — catches pin-btn unpin clicks on frozen rows
-  document.getElementById('matrix').addEventListener('click', (e) => {
-    const pinBtn = e.target.closest('.pin-btn[data-unpin]');
-    if (pinBtn){
-      e.preventDefault();
-      e.stopPropagation();
-      selectedStates.delete(pinBtn.dataset.unpin);
-      updateAfterSelectionChange();
-    }
-  });
+  // ── Matrix checkbox change listener (widget owns the resulting selection state) ──
   document.getElementById('matrix').addEventListener('change', (e) => {
     const t = e.target;
     if (t.matches('input[data-slug]')){
       const slug = t.dataset.slug;
-      if (t.checked) selectedStates.add(slug); else selectedStates.delete(slug);
-      updateAfterSelectionChange();
+      if (t.checked) paiCompareWidget.add(slug); else paiCompareWidget.remove(slug);
     } else if (t.id === 'selectAll'){
       const checked = t.checked;
+      const slugs = [];
       document.querySelectorAll('#matrix input[data-slug]').forEach(cb => {
         cb.checked = checked;
-        const slug = cb.dataset.slug;
-        if (checked) selectedStates.add(slug); else selectedStates.delete(slug);
+        if (checked) slugs.push(cb.dataset.slug);
       });
-      updateAfterSelectionChange();
+      paiCompareWidget.setSelected(slugs);
     }
   });
-  // Frozen-row click on a cell <a> works natively. Frozen-rows have no checkboxes (they're pinned by being selected; un-pin via Clear or summary Clear).
 
-  ctbCreate.addEventListener('click', () => {
-    const name = (ctbName.value || '').trim() || `Custom tracker ${tabs.filter(t=>t.custom).length + 1}`;
-    if (selectedStates.size === 0) return;
-    createCustomTab(name);
-    renderFrozen();
-  });
-  document.getElementById('ctbSave').addEventListener('click', saveCurrentSearch);
-  ctbClear.addEventListener('click', () => {
-    selectedStates.clear();
-    ctbName.value = '';
-    updateAfterSelectionChange();
-  });
-  caPrint.addEventListener('click', () => window.print());
-  caShare.addEventListener('click', async () => {
-    const tab = tabs.find(t => t.key === activeTab);
-    if (!tab || !tab.custom) return;
-    const url = buildShareUrl(tab);
-    try { await navigator.clipboard.writeText(url); caShare.textContent = 'Copied ✓'; setTimeout(()=>caShare.textContent='Copy share link', 1500); }
-    catch(e){ prompt('Share URL:', url); }
-  });
-  caRemove.addEventListener('click', () => {
-    const tab = tabs.find(t => t.key === activeTab);
-    if (tab && tab.custom && confirm(`Remove tracker "${tab.label}"?`)) removeCustomTab(tab.key);
-  });
-
-  loadCustomTabs();
-  loadSavedSearches();
-  parseShareUrl();
-  renderTabs(); renderFilters(); renderMatrix(); updateCreateBar(); updateCustomActions(); renderFrozen(); renderSavedSearches();
+  // ── Initial render (widget already loaded saved searches + parsed share URL internally) ──
+  renderTabs(); renderFilters(); renderMatrix();
 })();
 </script>
 </body>
