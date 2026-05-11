@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PrinciplesAI — Interactive pattern explorations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
+  --ink:#0d2e42;--ink-strong:#07202e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#014486;--accent-soft:#e3effc;--accent-soft-2:#cfe1f6;
+  --green:#2e844a;--green-bg:#d6f1dc;
+  --amber:#905200;--amber-bg:#fef0c7;
+  --red:#ba0517;--red-bg:#feded8;
+  --purple:#6b21a8;--purple-bg:#f3e8ff;
+  --teal:#0e8a7d;--teal-bg:#d0f0eb;
+  --sans:'Inter',-apple-system,sans-serif;
+  --serif:'Source Serif 4',serif;
+  --mono:'Inter',sans-serif;
+  --shadow-1:0 1px 2px rgba(10,23,41,.04);
+  --shadow-2:0 2px 6px rgba(10,23,41,.07),0 8px 20px rgba(10,23,41,.05);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+button,input{font-family:inherit;font-size:inherit;color:inherit;border:0;background:none;outline:none}
+button{cursor:pointer}
+
+/* Page chrome */
+.page{max-width:1280px;margin:0 auto;padding:36px 28px 80px}
+.crumb{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+.crumb a{color:var(--muted)}
+.crumb a:hover{color:var(--accent)}
+.crumb .sep{margin:0 6px;color:var(--ink-faint)}
+.page-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);margin-bottom:10px}
+h1.page-title{font-size:44px;font-weight:700;letter-spacing:-.025em;line-height:1.05;color:var(--ink-strong);margin-bottom:10px}
+.page-sub{font-size:15px;color:var(--muted);max-width:780px;line-height:1.55;margin-bottom:36px}
+.page-sub b{color:var(--ink);font-weight:600}
+
+/* Sections */
+.candidate{margin-bottom:56px;padding-top:32px;border-top:1px solid var(--border)}
+.candidate:first-of-type{border-top:0;padding-top:0}
+.candidate-header{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+.candidate-number{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--ink-strong);color:#fff;border-radius:50%;font-family:var(--mono);font-size:13px;font-weight:700}
+.candidate h2{font-family:var(--serif);font-size:28px;font-weight:600;letter-spacing:-.015em;color:var(--ink-strong);line-height:1.2}
+.candidate-page{font-family:var(--mono);font-size:11px;color:var(--ink-faint);font-weight:500}
+.candidate-job{font-size:14px;color:var(--secondary);max-width:880px;line-height:1.55;margin-bottom:20px}
+.candidate-job b{color:var(--ink-strong);font-weight:600}
+
+.variants{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+@media(max-width:980px){.variants{grid-template-columns:1fr}}
+
+.variant{background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow-1)}
+.variant-tag{display:inline-flex;align-items:center;height:20px;padding:0 8px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;border-radius:3px;text-transform:uppercase}
+.variant-tag.a{background:var(--accent-soft);color:var(--accent-2)}
+.variant-tag.b{background:var(--purple-bg);color:var(--purple)}
+.variant h3{font-size:17px;font-weight:700;color:var(--ink-strong);margin:8px 0 6px;letter-spacing:-.01em}
+.variant-pitch{font-size:12.5px;color:var(--secondary);margin-bottom:14px;line-height:1.55}
+.variant-mockup{background:var(--surface-2);border:1px dashed var(--border);border-radius:7px;padding:14px;margin-bottom:12px;min-height:240px;position:relative;overflow:hidden}
+.variant-mockup.with-fixed-h{height:280px}
+
+.variant-features{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--secondary)}
+.variant-features li{list-style:none;padding-left:18px;position:relative}
+.variant-features li::before{content:'';position:absolute;left:6px;top:7px;width:5px;height:5px;background:var(--accent);border-radius:50%}
+.variant-features .key{font-weight:600;color:var(--ink-strong)}
+
+/* === Per-mockup styling === */
+
+/* News A — pinboard cards */
+.news-pinboard{display:flex;flex-direction:column;gap:6px}
+.np-pinned{background:var(--accent-soft);border:1px solid var(--accent-soft-2);border-radius:6px;padding:8px 10px;display:flex;gap:8px;align-items:center}
+.np-pinned-meta{flex:1;min-width:0}
+.np-pinned-h{font-size:11.5px;font-weight:700;color:var(--ink-strong);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np-pinned-tag{font-family:var(--mono);font-size:9.5px;color:var(--accent-2);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.np-pin{font-size:11px;color:var(--accent-2);cursor:pointer}
+.np-row{background:#fff;border:1px solid var(--border-soft);border-radius:6px;padding:8px 10px;display:flex;gap:8px;align-items:center;font-size:11px;color:var(--secondary)}
+.np-cb{width:13px;height:13px;border:1.5px solid var(--ink-faint);border-radius:2px;flex-shrink:0}
+.np-cb.checked{background:var(--accent);border-color:var(--accent);position:relative}
+.np-cb.checked::after{content:'';position:absolute;left:3px;top:1px;width:5px;height:7px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg)}
+.np-row-meta{flex:1;font-size:11px;line-height:1.3}
+.np-row-h{color:var(--ink-strong);font-weight:600}
+.np-row-sub{color:var(--muted);font-size:10px}
+.np-cta{margin-top:10px;padding:9px 11px;background:var(--ink-strong);color:#fff;border-radius:5px;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.np-cta .ai-glyph{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.06em}
+.np-cta-btn{height:22px;padding:0 9px;background:rgba(255,255,255,.18);color:#fff;border-radius:3px;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+
+/* News B — drag-to-tray */
+.news-dragtray{display:grid;grid-template-columns:1fr 150px;gap:8px;height:100%}
+.ndt-list{display:flex;flex-direction:column;gap:5px}
+.ndt-item{background:#fff;border:1px solid var(--border-soft);border-radius:5px;padding:8px 10px;font-size:11px;line-height:1.3;cursor:grab;position:relative}
+.ndt-item .ndt-handle{display:inline-block;color:var(--ink-faint);font-family:var(--mono);font-size:10px;margin-right:6px;vertical-align:middle}
+.ndt-tray{background:var(--purple-bg);border:1px dashed var(--purple);border-radius:6px;padding:8px;display:flex;flex-direction:column;gap:5px}
+.ndt-tray-title{font-family:var(--mono);font-size:9.5px;color:var(--purple);font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-bottom:3px}
+.ndt-tray-item{background:#fff;border:1px solid #d8b4fe;border-radius:4px;padding:6px 7px;font-size:10px;color:var(--ink-strong);font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.ndt-tray-time{font-family:var(--mono);font-size:9px;color:var(--purple);font-weight:600}
+.ndt-tray-cta{margin-top:6px;padding:6px 8px;background:var(--purple);color:#fff;border-radius:4px;font-size:10px;font-weight:700;text-align:center}
+.ndt-time-total{font-family:var(--mono);font-size:10px;color:var(--purple);text-align:center;margin-top:auto;padding-top:6px;border-top:1px solid #d8b4fe}
+
+/* Authorities A — compare table */
+.auth-compare-table{display:grid;grid-template-columns:120px repeat(3,1fr);gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);border-radius:6px;overflow:hidden;font-size:11px}
+.act-cell{background:#fff;padding:8px 9px}
+.act-cell.head{background:var(--surface-3);font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.act-cell.row-label{background:var(--surface-3);font-weight:600;color:var(--ink-strong);font-size:10.5px}
+.act-cell.value{color:var(--ink-strong);font-weight:600}
+.act-cell .pip{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:5px;vertical-align:middle}
+.act-cell .num{font-family:var(--mono);font-size:11px;color:var(--accent-2);font-weight:700}
+
+/* Authorities B — capability radar */
+.auth-radar{display:grid;grid-template-columns:1fr 130px;gap:10px;height:100%}
+.radar-svg{background:#fff;border:1px solid var(--border-soft);border-radius:6px;padding:6px;display:flex;align-items:center;justify-content:center}
+.radar-legend{display:flex;flex-direction:column;gap:6px}
+.radar-leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink-strong);font-weight:600}
+.radar-leg-swatch{width:10px;height:10px;border-radius:2px}
+.radar-axes-list{display:flex;flex-direction:column;gap:3px;margin-top:auto;font-family:var(--mono);font-size:9.5px;color:var(--muted);font-weight:500}
+
+/* Case law A — vertical bundle */
+.cl-bundle{display:flex;flex-direction:column;gap:6px}
+.cl-case{background:#fff;border:1px solid var(--border-soft);border-radius:6px;padding:9px 10px}
+.cl-case-h{font-family:var(--serif);font-size:13px;font-weight:700;color:var(--ink-strong);margin-bottom:3px;line-height:1.2}
+.cl-case-cite{font-family:var(--mono);font-size:9.5px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.cl-case-sections{display:flex;gap:5px;margin-top:5px;flex-wrap:wrap}
+.cl-case-section{display:inline-flex;align-items:center;height:18px;padding:0 7px;background:var(--surface-3);border-radius:9px;font-size:9.5px;color:var(--secondary);font-weight:600}
+.cl-bundle-cta{display:flex;gap:6px;margin-top:8px}
+.cl-bundle-btn{flex:1;padding:8px;background:var(--accent);color:#fff;border-radius:5px;font-size:10.5px;font-weight:700;text-align:center;letter-spacing:.04em;text-transform:uppercase}
+.cl-bundle-btn.ghost{background:#fff;color:var(--accent-2);border:1px solid var(--accent-soft-2)}
+
+/* Case law B — citation graph */
+.cl-graph{display:flex;flex-direction:column;gap:10px;height:100%}
+.cl-graph-svg{background:#fff;border:1px solid var(--border-soft);border-radius:6px;flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:180px}
+.cl-graph-controls{display:flex;gap:6px;font-size:10px;align-items:center}
+.cl-graph-toggle{padding:5px 9px;background:#fff;border:1px solid var(--border);border-radius:4px;font-size:10px;font-weight:600;color:var(--secondary)}
+.cl-graph-toggle.on{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+
+/* Legislation A — side-by-side articles */
+.leg-sxs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;height:100%}
+.leg-col{background:#fff;border:1px solid var(--border-soft);border-radius:5px;padding:8px;display:flex;flex-direction:column;gap:5px;font-size:10.5px}
+.leg-col-h{font-family:var(--serif);font-size:11px;font-weight:700;color:var(--ink-strong);line-height:1.25}
+.leg-col-cite{font-family:var(--mono);font-size:9px;color:var(--muted);font-weight:600}
+.leg-col-art{background:var(--surface-2);border-left:2px solid var(--accent);padding:5px 6px;border-radius:3px;font-size:10px;color:var(--ink-strong);line-height:1.35}
+.leg-col-art .art-label{font-family:var(--mono);font-size:9px;color:var(--accent-2);font-weight:700;display:block;margin-bottom:2px}
+
+/* Legislation B — memo builder */
+.leg-memo{display:grid;grid-template-columns:130px 1fr;gap:8px;height:100%}
+.leg-memo-picker{background:#fff;border:1px solid var(--border-soft);border-radius:5px;padding:7px;display:flex;flex-direction:column;gap:4px;font-size:10px}
+.leg-memo-pick-h{font-family:var(--mono);font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.leg-memo-pick{background:var(--surface-2);border:1px solid var(--border-soft);border-radius:3px;padding:5px 6px;font-size:10px;color:var(--ink-strong);font-weight:600;line-height:1.2}
+.leg-memo-preview{background:#fff;border:1px solid var(--border-soft);border-radius:5px;padding:10px;font-family:var(--serif);font-size:11.5px;color:var(--ink);line-height:1.5;overflow:hidden}
+.leg-memo-preview b{font-weight:600;color:var(--ink-strong)}
+.leg-memo-preview sup{font-family:var(--mono);font-size:8px;color:var(--accent)}
+.leg-memo-style{display:flex;gap:4px;margin-top:auto;flex-wrap:wrap}
+.leg-memo-style-pill{height:18px;padding:0 7px;background:var(--surface-3);border-radius:9px;font-family:var(--mono);font-size:9px;font-weight:700;color:var(--muted);display:inline-flex;align-items:center;letter-spacing:.04em;text-transform:uppercase}
+.leg-memo-style-pill.on{background:var(--accent);color:#fff}
+.leg-memo-export{margin-top:auto;padding:8px;background:var(--purple);color:#fff;border-radius:4px;font-size:10.5px;font-weight:700;text-align:center;letter-spacing:.04em;text-transform:uppercase}
+
+/* Home A — manual curation */
+.home-build{background:#fff;border:1px solid var(--accent-soft-2);border-radius:7px;padding:11px;height:100%;display:flex;flex-direction:column;gap:7px}
+.home-build-h{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--ink-strong);line-height:1.2}
+.home-build-sub{font-size:10.5px;color:var(--muted);margin-bottom:4px}
+.home-build-item{background:var(--surface-2);border-radius:5px;padding:7px 9px;display:flex;gap:7px;align-items:center;font-size:11px}
+.home-build-item .np-cb{margin-right:0}
+.home-build-cta{margin-top:auto;padding:8px;background:var(--accent);color:#fff;border-radius:5px;font-size:11px;font-weight:700;text-align:center}
+
+/* Home B — triage assistant */
+.home-triage{display:flex;flex-direction:column;gap:6px;height:100%}
+.home-triage-h{font-size:11.5px;font-weight:700;color:var(--ink-strong);margin-bottom:2px;display:flex;justify-content:space-between;align-items:baseline}
+.home-triage-h .count{font-family:var(--mono);font-size:10.5px;color:var(--teal);font-weight:700;background:var(--teal-bg);padding:2px 7px;border-radius:9px}
+.home-triage-item{background:#fff;border:1px solid var(--border-soft);border-radius:6px;padding:7px 9px;display:flex;align-items:center;gap:8px}
+.hti-meta{flex:1;font-size:10.5px;line-height:1.3}
+.hti-h{color:var(--ink-strong);font-weight:600}
+.hti-sub{color:var(--muted);font-size:9.5px;font-family:var(--mono);letter-spacing:.04em}
+.hti-actions{display:flex;gap:3px}
+.hti-btn{width:24px;height:24px;border-radius:4px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.hti-yes{background:var(--green-bg);color:var(--green)}
+.hti-no{background:var(--red-bg);color:var(--red)}
+.hti-snooze{background:var(--surface-3);color:var(--secondary);font-size:13px}
+
+/* Common */
+.mockup-note{position:absolute;bottom:6px;right:9px;font-family:var(--mono);font-size:9px;color:var(--ink-faint);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+.mockup-label{position:absolute;top:7px;left:9px;font-family:var(--mono);font-size:8.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+
+.workflow-note{background:var(--amber-bg);border:1px solid #f9d774;border-radius:6px;padding:9px 11px;margin-top:10px;font-size:11.5px;color:var(--amber);line-height:1.5}
+.workflow-note b{color:var(--amber);font-weight:700}
+
+.footer-note{margin-top:64px;padding:20px;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:8px;font-size:12.5px;color:var(--secondary);line-height:1.6}
+.footer-note h4{font-size:13px;color:var(--ink-strong);font-weight:700;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="crumb">
+    <a href="pai-home-private.html">Home</a><span class="sep">›</span>
+    <a href="pai-app-tables.html">Topic Maps</a><span class="sep">›</span>
+    Interactive pattern explorations
+  </div>
+  <div class="page-eyebrow">Design exploration · May 11 2026</div>
+  <h1 class="page-title">Interactive pattern explorations</h1>
+  <p class="page-sub">
+    Five candidates for extending the EU + US tracker's pin-and-pick interaction across the platform.
+    <b>Two variants per candidate</b> — each pair is intentionally different in mental model, not just visual style.
+    Each variant asks: <i>what is the user's actual job here, and what's the most satisfying interaction for that job?</i>
+  </p>
+
+  <!-- ============ 1. NEWS ============ -->
+  <section class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-number">1</span>
+      <h2>News — Daily Brief</h2>
+      <span class="candidate-page">pai-app-news.html</span>
+    </div>
+    <p class="candidate-job">
+      <b>The job:</b> A practitioner wakes up Monday and has 15 minutes before standup. She wants to skim what regulators did over the weekend, save what's worth reading deeper, send 2-3 to her team. She is <b>not</b> doing comparative analysis — she's doing curation under time pressure.
+    </p>
+    <div class="variants">
+      <div class="variant">
+        <span class="variant-tag a">Variant A</span>
+        <h3>Stories pinboard + AI-written digest intro</h3>
+        <p class="variant-pitch">Tick stories → they pin at the top as compact cards. Click <b>Generate digest</b> → Claude writes a 2-paragraph intro tying them together. Output: a single shareable "Monday brief".</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant A · Pinboard digest</span>
+          <div class="news-pinboard" style="margin-top:18px">
+            <div class="np-pinned">
+              <div class="np-pin">📌</div>
+              <div class="np-pinned-meta">
+                <div class="np-pinned-h">CNIL fines Apple €8M over targeted-ads in iOS 14</div>
+                <div class="np-pinned-tag">France · Enforcement · 2 hrs ago</div>
+              </div>
+            </div>
+            <div class="np-pinned">
+              <div class="np-pin">📌</div>
+              <div class="np-pinned-meta">
+                <div class="np-pinned-h">EDPB clarifies Schrems II compliance after Microsoft win</div>
+                <div class="np-pinned-tag">EU · Guidance · 5 hrs ago</div>
+              </div>
+            </div>
+            <div class="np-row">
+              <span class="np-cb"></span>
+              <div class="np-row-meta">
+                <div class="np-row-h">UK ICO opens probe into NHS app data-sharing</div>
+                <div class="np-row-sub">UK · Enforcement · 7 hrs ago</div>
+              </div>
+            </div>
+            <div class="np-row">
+              <span class="np-cb"></span>
+              <div class="np-row-meta">
+                <div class="np-row-h">South Korea PIPC issues AI deployer guidance</div>
+                <div class="np-row-sub">KR · Guidance · 9 hrs ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="np-cta" style="margin-top:8px">
+            <span class="ai-glyph">✨ AI · Sonnet</span>
+            <span class="np-cta-btn">Generate digest</span>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">AI intro paragraph</span> ties the 2-3 pinned stories together (theme detection)</li>
+          <li><span class="key">Email to me at 7am</span> schedules tomorrow's brief</li>
+          <li><span class="key">Print / PDF</span> ready-to-print digest with citations</li>
+        </ul>
+      </div>
+      <div class="variant">
+        <span class="variant-tag b">Variant B</span>
+        <h3>Reading-list sequencer (drag-to-tray, time-budgeted)</h3>
+        <p class="variant-pitch">Drag stories into a right-side tray. Tray shows <b>estimated reading time</b> per story, with a running total. Re-order by drag. Schedule delivery. Share read-only link. Like a custom magazine, not a digest.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant B · Drag-to-tray</span>
+          <div class="news-dragtray" style="margin-top:18px;height:calc(100% - 18px)">
+            <div class="ndt-list">
+              <div class="ndt-item"><span class="ndt-handle">⋮⋮</span><b>CNIL fines Apple €8M</b> · France · 4 min read</div>
+              <div class="ndt-item"><span class="ndt-handle">⋮⋮</span><b>EDPB Schrems II clarity</b> · EU · 7 min read</div>
+              <div class="ndt-item" style="opacity:.4"><span class="ndt-handle">⋮⋮</span>UK ICO NHS app probe · 5 min</div>
+              <div class="ndt-item" style="opacity:.4"><span class="ndt-handle">⋮⋮</span>South Korea PIPC AI guidance · 6 min</div>
+              <div class="ndt-item" style="opacity:.4"><span class="ndt-handle">⋮⋮</span>FTC AI ban for kids platforms · 3 min</div>
+            </div>
+            <div class="ndt-tray">
+              <div class="ndt-tray-title">Monday brief</div>
+              <div class="ndt-tray-item">CNIL Apple <span class="ndt-tray-time">4m</span></div>
+              <div class="ndt-tray-item">EDPB Schrems <span class="ndt-tray-time">7m</span></div>
+              <div class="ndt-time-total">11 min total</div>
+              <div class="ndt-tray-cta">Send Mon 7am →</div>
+            </div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">Time-aware</span> — running total tells the user when they've over-budgeted</li>
+          <li><span class="key">Drag-to-reorder</span> within the tray (reading sequence matters)</li>
+          <li><span class="key">Send-to-colleague</span> annotated with personal notes per story</li>
+        </ul>
+      </div>
+    </div>
+    <div class="workflow-note">
+      <b>Why these differ:</b> A treats the output as <i>one document</i> (the digest). B treats the output as <i>a queue</i> (the reading session). A optimises for sharing; B optimises for personal triage. Built side-by-side they cover different days of the same user's week.
+    </div>
+  </section>
+
+  <!-- ============ 2. AUTHORITIES ============ -->
+  <section class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-number">2</span>
+      <h2>Authorities — Regulator shortlist</h2>
+      <span class="candidate-page">pai-app-authorities.html</span>
+    </div>
+    <p class="candidate-job">
+      <b>The job:</b> An in-house counsel at a multinational is preparing a cross-border data flow assessment. She needs to compare the UK's ICO, Germany's BfDI, France's CNIL and Ireland's DPC — not the full 246 DPAs, just these four — across activity, enforcement intensity, and recent guidance. She's building input for a board memo.
+    </p>
+    <div class="variants">
+      <div class="variant">
+        <span class="variant-tag a">Variant A</span>
+        <h3>Compare-table (column-per-authority)</h3>
+        <p class="variant-pitch">Tick 2–5 authorities → 4th tab opens a row-keyed comparison table. Each authority is a column; rows are the dimensions a board memo needs. Copy-paste-ready into Word.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant A · Compare-table</span>
+          <div class="auth-compare-table" style="margin-top:18px">
+            <div class="act-cell head">Dimension</div>
+            <div class="act-cell head">ICO 🇬🇧</div>
+            <div class="act-cell head">BfDI 🇩🇪</div>
+            <div class="act-cell head">CNIL 🇫🇷</div>
+            <div class="act-cell row-label">7d activity</div>
+            <div class="act-cell"><span class="num">14</span></div>
+            <div class="act-cell"><span class="num">8</span></div>
+            <div class="act-cell"><span class="num">22</span></div>
+            <div class="act-cell row-label">Last fine</div>
+            <div class="act-cell">£12.7M</div>
+            <div class="act-cell">€2.5M</div>
+            <div class="act-cell">€8.0M</div>
+            <div class="act-cell row-label">Active probes</div>
+            <div class="act-cell">7</div>
+            <div class="act-cell">3</div>
+            <div class="act-cell">11</div>
+            <div class="act-cell row-label">Cross-border</div>
+            <div class="act-cell"><span class="pip"></span>Yes</div>
+            <div class="act-cell"><span class="pip"></span>Yes</div>
+            <div class="act-cell"><span class="pip"></span>Yes</div>
+            <div class="act-cell row-label">Last guidance</div>
+            <div class="act-cell">3 May</div>
+            <div class="act-cell">28 Apr</div>
+            <div class="act-cell">9 May</div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">Memo-shaped</span> — columns map to what a counsel writes in the board doc</li>
+          <li><span class="key">Copy-as-table</span> button → tab-delimited paste into Word/Notion</li>
+          <li><span class="key">Sort by row</span> — click a row label to rank authorities by that dimension</li>
+        </ul>
+      </div>
+      <div class="variant">
+        <span class="variant-tag b">Variant B</span>
+        <h3>Capability radar (Gartner-style visualization)</h3>
+        <p class="variant-pitch">Same picks, different output: a polar chart showing each authority's profile across 6 axes (Enforcement intensity / Guidance volume / Cross-border activity / Cooperation / Transparency / Public engagement). Tells the story in 2 seconds.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant B · Capability radar</span>
+          <div class="auth-radar" style="margin-top:18px;height:calc(100% - 18px)">
+            <div class="radar-svg">
+              <svg viewBox="0 0 220 220" width="190" height="190">
+                <polygon points="110,10 199,55 199,165 110,210 21,165 21,55" fill="none" stroke="#dbe1ea" stroke-width="1"/>
+                <polygon points="110,40 174,72 174,148 110,180 46,148 46,72" fill="none" stroke="#dbe1ea" stroke-width="1"/>
+                <polygon points="110,70 150,90 150,130 110,150 70,130 70,90" fill="none" stroke="#dbe1ea" stroke-width="1"/>
+                <line x1="110" y1="10" x2="110" y2="210" stroke="#ebeff5"/>
+                <line x1="21" y1="55" x2="199" y2="165" stroke="#ebeff5"/>
+                <line x1="21" y1="165" x2="199" y2="55" stroke="#ebeff5"/>
+                <polygon points="110,30 170,72 175,150 110,170 56,142 38,75" fill="rgba(1,118,211,.18)" stroke="#0176d3" stroke-width="2"/>
+                <polygon points="110,50 140,80 165,140 110,190 60,135 75,65" fill="rgba(46,132,74,.18)" stroke="#2e844a" stroke-width="2"/>
+                <polygon points="110,20 195,60 160,160 110,180 35,150 28,60" fill="rgba(186,5,23,.15)" stroke="#ba0517" stroke-width="2"/>
+                <text x="110" y="6" font-size="8" text-anchor="middle" fill="#5e6878" font-family="Inter">Enforcement</text>
+                <text x="206" y="55" font-size="8" fill="#5e6878" font-family="Inter">Guidance</text>
+                <text x="206" y="170" font-size="8" fill="#5e6878" font-family="Inter">X-border</text>
+                <text x="110" y="220" font-size="8" text-anchor="middle" fill="#5e6878" font-family="Inter">Cooperation</text>
+                <text x="14" y="170" font-size="8" text-anchor="end" fill="#5e6878" font-family="Inter">Transparency</text>
+                <text x="14" y="55" font-size="8" text-anchor="end" fill="#5e6878" font-family="Inter">Engagement</text>
+              </svg>
+            </div>
+            <div class="radar-legend">
+              <div class="radar-leg-item"><span class="radar-leg-swatch" style="background:#0176d3"></span>ICO</div>
+              <div class="radar-leg-item"><span class="radar-leg-swatch" style="background:#2e844a"></span>BfDI</div>
+              <div class="radar-leg-item"><span class="radar-leg-swatch" style="background:#ba0517"></span>CNIL</div>
+              <div class="radar-axes-list">
+                <div>6 axes · 0–100 scale</div>
+                <div>Hover for raw nums</div>
+                <div>Export SVG / PNG</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">Pre-attentive comparison</span> — shape difference is read in &lt; 2 seconds</li>
+          <li><span class="key">Click an axis</span> → drill into the underlying data (e.g., what counts as "Enforcement intensity")</li>
+          <li><span class="key">Export SVG/PNG</span> → drop directly into a board slide</li>
+        </ul>
+      </div>
+    </div>
+    <div class="workflow-note">
+      <b>Why these differ:</b> A is a <i>data-extraction</i> tool. B is a <i>narrative</i> tool. A wins when the user is writing prose (the memo body). B wins when the user is presenting verbally (the board slide). Built together, the same selection drives both — pick the right format for the audience.
+    </div>
+  </section>
+
+  <!-- ============ 3. CASE LAW ============ -->
+  <section class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-number">3</span>
+      <h2>Case Law — Casebook builder</h2>
+      <span class="candidate-page">pai-app-case-law.html</span>
+    </div>
+    <p class="candidate-job">
+      <b>The job:</b> A litigator is preparing for a hearing on Article 22 GDPR (automated decision-making). He needs <i>Schrems I</i>, <i>Bosphorus</i>, and three German Federal Court rulings in a single bundle to file with the court — and he needs to know which cases <b>argue against</b> his position so he can address them in his brief.
+    </p>
+    <div class="variants">
+      <div class="variant">
+        <span class="variant-tag a">Variant A</span>
+        <h3>Vertical bundle (court-ready PDF)</h3>
+        <p class="variant-pitch">Tick cases → stacked view with each case's <b>Background · Legal basis · Ruling</b> sections expanded, instrument cross-links inline. Send to client / file with court / print as bundle.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant A · Casebook bundle</span>
+          <div class="cl-bundle" style="margin-top:18px">
+            <div class="cl-case">
+              <div class="cl-case-h">Schrems v Data Protection Commissioner</div>
+              <div class="cl-case-cite">CJEU C-362/14 · 6 Oct 2015</div>
+              <div class="cl-case-sections">
+                <span class="cl-case-section">Background</span>
+                <span class="cl-case-section">Legal basis</span>
+                <span class="cl-case-section">Ruling</span>
+              </div>
+            </div>
+            <div class="cl-case">
+              <div class="cl-case-h">Bosphorus v Ireland</div>
+              <div class="cl-case-cite">ECtHR 45036/98 · 30 Jun 2005</div>
+              <div class="cl-case-sections">
+                <span class="cl-case-section">Background</span>
+                <span class="cl-case-section">Legal basis</span>
+                <span class="cl-case-section">Ruling</span>
+              </div>
+            </div>
+            <div class="cl-case">
+              <div class="cl-case-h">BVerfG Microcensus Decision</div>
+              <div class="cl-case-cite">BVerfGE 27, 1 · 16 Jul 1969</div>
+              <div class="cl-case-sections">
+                <span class="cl-case-section">Background</span>
+                <span class="cl-case-section">Legal basis</span>
+                <span class="cl-case-section">Ruling</span>
+              </div>
+            </div>
+            <div class="cl-bundle-cta">
+              <span class="cl-bundle-btn">Send to client →</span>
+              <span class="cl-bundle-btn ghost">Print bundle</span>
+            </div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">Court-bundle format</span> — title page, ToC, paragraph numbers preserved, cited instruments linked</li>
+          <li><span class="key">Email-to-client</span> with cover note template</li>
+          <li><span class="key">Persistent URL</span> the client can open and download</li>
+        </ul>
+      </div>
+      <div class="variant">
+        <span class="variant-tag b">Variant B</span>
+        <h3>Citation graph (cited-by / distinguishes / overrules)</h3>
+        <p class="variant-pitch">Pick <i>Schrems I</i> → graph view. Nodes = cases. Edges = "cited by", "distinguishes", "overrules". Toggle <b>"What argues against this?"</b> to highlight distinguishing cases in red. Click any node to add to bundle.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant B · Citation graph</span>
+          <div class="cl-graph" style="margin-top:18px;height:calc(100% - 18px)">
+            <div class="cl-graph-svg">
+              <svg viewBox="0 0 360 160" width="100%" height="100%" style="max-height:170px">
+                <line x1="180" y1="80" x2="80" y2="40" stroke="#0176d3" stroke-width="1.5"/>
+                <line x1="180" y1="80" x2="80" y2="120" stroke="#0176d3" stroke-width="1.5"/>
+                <line x1="180" y1="80" x2="280" y2="40" stroke="#0176d3" stroke-width="1.5"/>
+                <line x1="180" y1="80" x2="280" y2="120" stroke="#ba0517" stroke-width="2" stroke-dasharray="4 2"/>
+                <line x1="280" y1="40" x2="320" y2="80" stroke="#0176d3" stroke-width="1.5"/>
+                <circle cx="180" cy="80" r="22" fill="#0176d3" stroke="#014486" stroke-width="2"/>
+                <text x="180" y="84" font-size="9" text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700">Schrems I</text>
+                <circle cx="80" cy="40" r="16" fill="#fff" stroke="#0176d3" stroke-width="1.5"/>
+                <text x="80" y="44" font-size="8" text-anchor="middle" fill="#0d2e42" font-family="Inter">Maximillian</text>
+                <circle cx="80" cy="120" r="16" fill="#fff" stroke="#0176d3" stroke-width="1.5"/>
+                <text x="80" y="124" font-size="8" text-anchor="middle" fill="#0d2e42" font-family="Inter">Bosphorus</text>
+                <circle cx="280" cy="40" r="16" fill="#fff" stroke="#0176d3" stroke-width="1.5"/>
+                <text x="280" y="44" font-size="8" text-anchor="middle" fill="#0d2e42" font-family="Inter">Schrems II</text>
+                <circle cx="280" cy="120" r="16" fill="#fff" stroke="#ba0517" stroke-width="2"/>
+                <text x="280" y="124" font-size="7" text-anchor="middle" fill="#ba0517" font-family="Inter" font-weight="700">Microsoft</text>
+                <circle cx="320" cy="80" r="14" fill="#fff" stroke="#0176d3" stroke-width="1.5"/>
+                <text x="320" y="83" font-size="7" text-anchor="middle" fill="#0d2e42" font-family="Inter">DPC v MI</text>
+              </svg>
+            </div>
+            <div class="cl-graph-controls">
+              <span class="cl-graph-toggle on">⚠ Argues against</span>
+              <span class="cl-graph-toggle">Cited by</span>
+              <span class="cl-graph-toggle">Distinguishes</span>
+              <span style="margin-left:auto;font-family:var(--mono);font-size:9.5px;color:var(--muted)">Click node → add to bundle</span>
+            </div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">"What argues against this?"</span> — the question litigators actually ask, surfaced as a toggle</li>
+          <li><span class="key">Graph → bundle</span> — clicking a node both highlights its relations AND adds it to the case bundle on the right</li>
+          <li><span class="key">Depth control</span> — 1-hop / 2-hop / 3-hop reach (avoid overwhelming graph)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="workflow-note">
+      <b>Why these differ:</b> A is <i>output-first</i> (the user knows what they want; deliver the bundle). B is <i>discovery-first</i> (the user knows their position; show them what they need to confront). A litigator uses B before drafting, then A after.
+    </div>
+  </section>
+
+  <!-- ============ 4. LEGISLATION ============ -->
+  <section class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-number">4</span>
+      <h2>Legislation — Cite stack</h2>
+      <span class="candidate-page">pai-app-legislation.html</span>
+    </div>
+    <p class="candidate-job">
+      <b>The job:</b> An academic is writing a comparative article: "Profiling rules across GDPR Art 22, UK DPA s.14, Brazil LGPD Art 20, and California CCPA §1798.185." She needs the article text of each clause side-by-side, AND she needs the citations formatted for her journal (Bluebook).
+    </p>
+    <div class="variants">
+      <div class="variant">
+        <span class="variant-tag a">Variant A</span>
+        <h3>Side-by-side article view (clause-level parallel reading)</h3>
+        <p class="variant-pitch">Tick instruments → pick specific articles within each → 4th tab shows them as parallel columns. Original-language toggle (per the house style rule on verbatim titles). Cross-references hyperlinked.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant A · Side-by-side</span>
+          <div class="leg-sxs" style="margin-top:18px;height:calc(100% - 18px)">
+            <div class="leg-col">
+              <div class="leg-col-h">GDPR Art 22</div>
+              <div class="leg-col-cite">EU 2016/679</div>
+              <div class="leg-col-art">
+                <span class="art-label">Art 22(1)</span>
+                The data subject shall have the right not to be subject to a decision based solely on automated processing…
+              </div>
+              <div class="leg-col-art">
+                <span class="art-label">Art 22(2)(a)</span>
+                Exceptions: necessary for entering into or performance of a contract…
+              </div>
+            </div>
+            <div class="leg-col">
+              <div class="leg-col-h">UK DPA s.14</div>
+              <div class="leg-col-cite">UK Data Protection Act 2018</div>
+              <div class="leg-col-art">
+                <span class="art-label">s.14(1)</span>
+                The controller must take reasonable steps to provide the data subject with information about the decision…
+              </div>
+              <div class="leg-col-art">
+                <span class="art-label">s.14(4)</span>
+                Considering only "qualifying significant decisions"…
+              </div>
+            </div>
+            <div class="leg-col">
+              <div class="leg-col-h">LGPD Art 20</div>
+              <div class="leg-col-cite">Lei 13.709/2018</div>
+              <div class="leg-col-art">
+                <span class="art-label">Art 20</span>
+                <i>"O titular dos dados tem direito a solicitar a revisão…"</i>
+              </div>
+              <div class="leg-col-art">
+                <span class="art-label">Art 20 §1</span>
+                Right to request review of decisions taken solely on automated processing…
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">Clause-level granularity</span> — not the whole instrument, just the articles the user cares about</li>
+          <li><span class="key">Original-language toggle</span> — Portuguese / German / French shown verbatim, English on hover</li>
+          <li><span class="key">Highlight differences</span> — Claude diff-highlights phrases that differ across columns</li>
+        </ul>
+      </div>
+      <div class="variant">
+        <span class="variant-tag b">Variant B</span>
+        <h3>Memo builder (citation style + .docx export)</h3>
+        <p class="variant-pitch">Pick instruments + articles → assemble into a memo template. Pick citation style (Bluebook / OSCOLA / AGPS / plain). Preview shows formatted citations. <b>Copy to clipboard for Word</b> or download .docx — integrates with the user's writing tool, not the platform.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant B · Memo builder</span>
+          <div class="leg-memo" style="margin-top:18px;height:calc(100% - 18px)">
+            <div class="leg-memo-picker">
+              <div class="leg-memo-pick-h">Picked</div>
+              <div class="leg-memo-pick">GDPR Art 22</div>
+              <div class="leg-memo-pick">UK DPA s.14</div>
+              <div class="leg-memo-pick">LGPD Art 20</div>
+              <div class="leg-memo-pick">CCPA §185</div>
+              <div class="leg-memo-style">
+                <span class="leg-memo-style-pill on">Bluebook</span>
+                <span class="leg-memo-style-pill">OSCOLA</span>
+                <span class="leg-memo-style-pill">AGPS</span>
+              </div>
+              <div class="leg-memo-export">Copy → Word</div>
+            </div>
+            <div class="leg-memo-preview">
+              Article 22 of the GDPR establishes that data subjects have the right not to be subject to automated decision-making.<sup>1</sup> The UK has mirrored this in s.14 of the DPA 2018,<sup>2</sup> while Brazil's LGPD Article 20 grants a comparable right of review.<sup>3</sup> California has not yet enacted a direct equivalent.<sup>4</sup>
+              <div style="margin-top:8px;font-family:var(--mono);font-size:9.5px;color:var(--muted);border-top:1px solid var(--border-soft);padding-top:6px">
+                <sup>1</sup> Regulation 2016/679, art. 22.<br>
+                <sup>2</sup> Data Protection Act 2018 c.12, §14 (UK).<br>
+                <sup>3</sup> Lei 13.709/2018, art. 20 (Braz.).<br>
+                <sup>4</sup> CCPA, Cal. Civ. Code §1798.185.
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">Writes into the user's tool</span> — Word/Docs are where the work happens, not the platform</li>
+          <li><span class="key">Style switcher</span> — Bluebook / OSCOLA / AGPS / Harvard / plain (academic vs barrister vs gov)</li>
+          <li><span class="key">Footnote auto-numbering</span> updates as articles are added/removed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="workflow-note">
+      <b>Why these differ:</b> A keeps the user inside the platform (compare-and-read). B respects that the user's job lives in Word or Google Docs (extract-and-paste). A is for the moment of analysis; B is for the moment of writing. Same picks, different output destinations.
+    </div>
+  </section>
+
+  <!-- ============ 5. HOME PAGE ============ -->
+  <section class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-number">5</span>
+      <h2>Home page — Today's brief</h2>
+      <span class="candidate-page">pai-home-private.html</span>
+    </div>
+    <p class="candidate-job">
+      <b>The job:</b> The user lands on the home page first thing in the morning. The home page is the trailhead — they're not doing focused work, they're orienting. The question is: <i>can the home page do enough that they don't need to navigate elsewhere?</i>
+    </p>
+    <div class="variants">
+      <div class="variant">
+        <span class="variant-tag a">Variant A</span>
+        <h3>Manual curation card ("Build my brief")</h3>
+        <p class="variant-pitch">Top-of-home widget. Tick items from the news ticker, regulatory updates, watchlist hits → the widget transforms into your personal brief card. Save as bookmark, schedule for email delivery.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant A · Manual curation</span>
+          <div class="home-build" style="margin-top:18px">
+            <div class="home-build-h">Build my brief</div>
+            <div class="home-build-sub">Tick the items you want in your morning summary.</div>
+            <div class="home-build-item"><span class="np-cb checked"></span><div class="np-row-meta"><div class="np-row-h">CNIL fines Apple €8M</div></div></div>
+            <div class="home-build-item"><span class="np-cb checked"></span><div class="np-row-meta"><div class="np-row-h">EDPB Schrems II clarity</div></div></div>
+            <div class="home-build-item"><span class="np-cb"></span><div class="np-row-meta"><div class="np-row-h">UK ICO NHS probe</div></div></div>
+            <div class="home-build-item"><span class="np-cb"></span><div class="np-row-meta"><div class="np-row-h">South Korea AI guidance</div></div></div>
+            <div class="home-build-cta">Build brief · 2 items →</div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">Trailhead UX</span> — same tick interaction the user knows from News + Trackers</li>
+          <li><span class="key">Recurring brief</span> — "Send me this curation every weekday at 8am"</li>
+          <li><span class="key">Continuity</span> — picks up where they left off via localStorage</li>
+        </ul>
+      </div>
+      <div class="variant">
+        <span class="variant-tag b">Variant B</span>
+        <h3>Triage assistant ("Since you were last here, 14 things changed")</h3>
+        <p class="variant-pitch">System-curated. The home page surfaces what's changed since last login — scoped to the user's home jurisdiction + watchlist. Each item has Yes / No / Snooze. Yes pins to a personal board. No archives. Snooze defers. The user <i>triages</i> rather than <i>curates</i>.</p>
+        <div class="variant-mockup with-fixed-h">
+          <span class="mockup-label">Variant B · Triage assistant</span>
+          <div class="home-triage" style="margin-top:18px">
+            <div class="home-triage-h">Since you were last here <span class="count">14 new</span></div>
+            <div class="home-triage-item">
+              <div class="hti-meta"><div class="hti-h">UK ICO opens NHS app probe</div><div class="hti-sub">UK · Enforcement · matches your "DPA enforcement" watch</div></div>
+              <div class="hti-actions"><span class="hti-btn hti-yes">✓</span><span class="hti-btn hti-no">×</span><span class="hti-btn hti-snooze">⏱</span></div>
+            </div>
+            <div class="home-triage-item">
+              <div class="hti-meta"><div class="hti-h">CNIL fines Apple €8M</div><div class="hti-sub">FR · Enforcement · matches your "ePrivacy" watch</div></div>
+              <div class="hti-actions"><span class="hti-btn hti-yes">✓</span><span class="hti-btn hti-no">×</span><span class="hti-btn hti-snooze">⏱</span></div>
+            </div>
+            <div class="home-triage-item">
+              <div class="hti-meta"><div class="hti-h">EDPB clarifies Schrems II</div><div class="hti-sub">EU · Guidance · cross-border data flows</div></div>
+              <div class="hti-actions"><span class="hti-btn hti-yes">✓</span><span class="hti-btn hti-no">×</span><span class="hti-btn hti-snooze">⏱</span></div>
+            </div>
+            <div class="home-triage-item">
+              <div class="hti-meta"><div class="hti-h">South Korea PIPC AI guidance</div><div class="hti-sub">KR · Guidance · matches your "AI deployer rules" watch</div></div>
+              <div class="hti-actions"><span class="hti-btn hti-yes">✓</span><span class="hti-btn hti-no">×</span><span class="hti-btn hti-snooze">⏱</span></div>
+            </div>
+          </div>
+        </div>
+        <ul class="variant-features">
+          <li><span class="key">System makes the picks</span> — user only validates/rejects, much less cognitive load</li>
+          <li><span class="key">Snooze with a date</span> — "remind me in 3 days" for items that need internal discussion first</li>
+          <li><span class="key">Yes → watch board</span> on the right; over time it becomes the user's reading list</li>
+        </ul>
+      </div>
+    </div>
+    <div class="workflow-note">
+      <b>Why these differ:</b> A is <i>active curation</i> (the user knows what they want). B is <i>passive triage</i> (the system proposes, the user filters). A treats the user as expert; B treats the system as expert. The right answer probably depends on the user's seniority — a junior in-house counsel benefits from B; a partner benefits from A. Could co-exist.
+    </div>
+  </section>
+
+  <div class="footer-note">
+    <h4>How to ship this without rebuilding 5×</h4>
+    Each variant pair runs on the same underlying widget primitive — selectable rows + pinned-summary + saved-list — but customised per surface. The right move is to extract <code>pai-compare-widget.js</code> + <code>pai-compare-widget.css</code> as a shared module that each page imports and configures (data-source selector, "what does the comparison view render" callback, localStorage prefix, share-URL encoder). Then EU + US (already built) + News + Authorities + Case Law + Legislation + Home = one widget, seven surfaces.
+    <div style="margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--ink-faint)">
+      Carry-over for next session: see <code>~/workboard/research/interactive_patterns_5_candidates.md</code>
+    </div>
+  </div>
+</div>
+</body>
+</html>
