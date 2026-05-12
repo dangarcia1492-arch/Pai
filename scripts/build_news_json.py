@@ -98,7 +98,7 @@ def to_row(rec, slug_map):
         "tags": f.get("Tags") or [],
         "topic": (f.get("Tags") or [None])[0],   # legacy single-value field
         "verified_status": f.get("Verified Status") or None,
-        "is_lead": False,         # juris hero rule reads this; populated when the lead-flagging step exists
+        "is_lead": bool(f.get("Is Lead")),   # editorial flag from AT2 News "Is Lead" checkbox; drives hero card on home + juris pages
     }
 
 
