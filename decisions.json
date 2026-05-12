@@ -1,0 +1,1610 @@
+{
+  "generated_at": "2026-05-12T09:41:56.441762+00:00",
+  "total": 45,
+  "rows": [
+    {
+      "id": "rectyDzf78lR8oRRk",
+      "at2_id": "rectyDzf78lR8oRRk",
+      "slug": "reddit-inc",
+      "title": "Reddit, Inc.",
+      "summary": "Reddit, Inc. (Fine: £14,472,500.00)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£14,472,500.00",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2026/02/reddit-inc/",
+      "decision_date": "2026-02-23",
+      "published_date": "2026-02-23",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recxgna4sIv8pG4bV",
+      "at2_id": "recxgna4sIv8pG4bV",
+      "slug": "the-commissioner-of-police-for-the-city-of-london",
+      "title": "The Commissioner of Police for the City of London",
+      "summary": "The Commissioner of Police for the City of London",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2026/02/the-commissioner-of-police-for-the-city-of-london/",
+      "decision_date": "2026-02-20",
+      "published_date": "2026-02-20",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recT4yf8OQD5zkmTU",
+      "at2_id": "recT4yf8OQD5zkmTU",
+      "slug": "christopher-munro-and-william-chipoma",
+      "title": "Christopher Munro and William Chipoma",
+      "summary": "Two further people have been convicted following our extensive investigation into the unlawful accessing and sale of personal information obtained from over 400 garages across the UK, as well as claims management and insurance companies.   (Fine: £16,000)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£16,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2026/02/christopher-munro-and-william-chipoma/",
+      "decision_date": "2026-02-11",
+      "published_date": "2026-02-11",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recruXEFmTMtDHT5L",
+      "at2_id": "recruXEFmTMtDHT5L",
+      "slug": "medialab-ai-inc",
+      "title": "MediaLab.AI, Inc.",
+      "summary": "MediaLab.AI, Inc. (Fine: £247,590)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£247,590",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2026/02/medialabai-inc/",
+      "decision_date": "2026-02-04",
+      "published_date": "2026-02-04",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "rec7Iv50JijrNTydE",
+      "at2_id": "rec7Iv50JijrNTydE",
+      "slug": "tmac-ltd",
+      "title": "TMAC Ltd",
+      "summary": "TMAC Ltd (Fine: £100,000)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£100,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2026/02/tmac-ltd-mpn/",
+      "decision_date": "2026-02-03",
+      "published_date": "2026-02-03",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recdM9mQnjEmHLgPL",
+      "at2_id": "recdM9mQnjEmHLgPL",
+      "slug": "tmac-ltd-2",
+      "title": "TMAC Ltd",
+      "summary": "TMAC Ltd (Fine: £100,000)",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": "£100,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2026/02/tmac-ltd-en/",
+      "decision_date": "2026-02-03",
+      "published_date": "2026-02-03",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recCyEFK6AcwLyj8g",
+      "at2_id": "recCyEFK6AcwLyj8g",
+      "slug": "allay-claims-ltd",
+      "title": "Allay Claims Ltd",
+      "summary": "Allay Claims Ltd",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2026/01/allay-claims-ltd-en/",
+      "decision_date": "2026-01-15",
+      "published_date": "2026-01-15",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recmoFS5FcPILYpOU",
+      "at2_id": "recmoFS5FcPILYpOU",
+      "slug": "allay-claims-ltd-2",
+      "title": "Allay Claims Ltd",
+      "summary": "Allay Claims Ltd",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2026/01/allay-claims-ltd-mpn/",
+      "decision_date": "2026-01-15",
+      "published_date": "2026-01-15",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recb5Bguq7svKJ81S",
+      "at2_id": "recb5Bguq7svKJ81S",
+      "slug": "staines-health-group",
+      "title": "Staines Health Group",
+      "summary": "Staines Health Group",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/12/staines-health-group/",
+      "decision_date": "2025-12-16",
+      "published_date": "2025-12-16",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "rectuHAexlsdrl6n4",
+      "at2_id": "rectuHAexlsdrl6n4",
+      "slug": "police-service-of-scotland",
+      "title": "Police Service of Scotland",
+      "summary": "The Information Commissioner's Office (ICO) has fined the Police Service of Scotland £66,000 and issued a Reprimand for serious failures in the handling of sensitive personal information. ",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£66,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/12/police-service-of-scotland/",
+      "decision_date": "2025-12-12",
+      "published_date": "2025-12-12",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recOwmmJpi3Uhwl2D",
+      "at2_id": "recOwmmJpi3Uhwl2D",
+      "slug": "zmluk-limited",
+      "title": "ZMLUK Limited",
+      "summary": "ZMLUK Limited",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/12/zmluk-limited/",
+      "decision_date": "2025-12-11",
+      "published_date": "2025-12-11",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recNuAOyu5c88h53P",
+      "at2_id": "recNuAOyu5c88h53P",
+      "slug": "post-office-limited",
+      "title": "Post Office Limited",
+      "summary": "Post Office Limited",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/12/post-office-limited/",
+      "decision_date": "2025-12-02",
+      "published_date": "2025-12-02",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "rec7YhkyHu71RbJit",
+      "at2_id": "rec7YhkyHu71RbJit",
+      "slug": "lastpass-uk-ltd",
+      "title": "LastPass UK Ltd",
+      "summary": "LastPass UK Ltd (Fine: £1,228,283)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£1,228,283",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/11/lastpass-uk-ltd/",
+      "decision_date": "2025-11-20",
+      "published_date": "2025-11-20",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recgwJHySmqJD1R0p",
+      "at2_id": "recgwJHySmqJD1R0p",
+      "slug": "lead-pronto-ltd",
+      "title": "Lead Pronto Ltd",
+      "summary": "Lead Pronto Ltd",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/11/lead-pronto-ltd-1/",
+      "decision_date": "2025-11-06",
+      "published_date": "2025-11-06",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recgzl8FOZIfsSWwF",
+      "at2_id": "recgzl8FOZIfsSWwF",
+      "slug": "lead-pronto-ltd-2",
+      "title": "Lead Pronto Ltd",
+      "summary": "Lead Pronto Ltd",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/11/lead-pronto-ltd/",
+      "decision_date": "2025-11-06",
+      "published_date": "2025-11-06",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recvsmb9hJ08swfNM",
+      "at2_id": "recvsmb9hJ08swfNM",
+      "slug": "capita-plc-and-capita-pension-solutions-ltd",
+      "title": "Capita plc and Capita Pension Solutions Ltd",
+      "summary": "Capita plc and Capita Pension Solutions Ltd (Fine: £14)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£14",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/10/capita-plc/",
+      "decision_date": "2025-10-15",
+      "published_date": "2025-10-15",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recowFVMpnPZRbwhu",
+      "at2_id": "recowFVMpnPZRbwhu",
+      "slug": "south-wales-police",
+      "title": "South Wales Police",
+      "summary": "South Wales Police",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/10/south-wales-police/",
+      "decision_date": "2025-10-09",
+      "published_date": "2025-10-09",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recEmq03wZXKZvknW",
+      "at2_id": "recEmq03wZXKZvknW",
+      "slug": "qonain-hussain",
+      "title": "Qonain Hussain",
+      "summary": "Qonain Hussain (Fine: £1,500)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£1,500",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/10/qonain-hussain/",
+      "decision_date": "2025-10-08",
+      "published_date": "2025-10-08",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recFkDVpAkxFKhXSL",
+      "at2_id": "recFkDVpAkxFKhXSL",
+      "slug": "bharat-singh-chand",
+      "title": "Bharat Singh Chand",
+      "summary": "Bharat Singh Chand (Fine: £200,000)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£200,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/09/bharat-singh-chand/",
+      "decision_date": "2025-09-16",
+      "published_date": "2025-09-16",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recg2vj708lpbQnWE",
+      "at2_id": "recg2vj708lpbQnWE",
+      "slug": "bharat-singh-chand-2",
+      "title": "Bharat Singh Chand",
+      "summary": "Bharat Singh Chand (Fine: £200,000)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£200,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/09/bharat-singh-chand-1/",
+      "decision_date": "2025-09-16",
+      "published_date": "2025-09-16",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "rec8jhVnWwEGivLDN",
+      "at2_id": "rec8jhVnWwEGivLDN",
+      "slug": "jason-blake",
+      "title": "Jason Blake",
+      "summary": "Jason Blake (Fine: £1,100)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£1,100",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/09/jason-blake/",
+      "decision_date": "2025-09-03",
+      "published_date": "2025-09-03",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recCvqEYHXJ1gwMtc",
+      "at2_id": "recCvqEYHXJ1gwMtc",
+      "slug": "home-improvement-marketing-ltd",
+      "title": "Home Improvement Marketing Ltd",
+      "summary": "Home Improvement Marketing Ltd",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/09/home-improvement-marketing-ltd-monetary-penalty-notice/",
+      "decision_date": "2025-08-28",
+      "published_date": "2025-08-28",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recIxspp0056PaRBc",
+      "at2_id": "recIxspp0056PaRBc",
+      "slug": "home-improvement-marketing-ltd-2",
+      "title": "Home Improvement Marketing Ltd",
+      "summary": "Home Improvement Marketing Ltd",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/09/home-improvement-marketing-ltd-enforcement-notice/",
+      "decision_date": "2025-08-28",
+      "published_date": "2025-08-28",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recflcYabRK9qQzi7",
+      "at2_id": "recflcYabRK9qQzi7",
+      "slug": "green-spark-energy-ltd",
+      "title": "Green Spark Energy Ltd",
+      "summary": "Green Spark Energy Ltd",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/09/green-spark-energy-ltd-monetary-penalty-notice/",
+      "decision_date": "2025-08-28",
+      "published_date": "2025-08-28",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "rectM6boNuJCSf3py",
+      "at2_id": "rectM6boNuJCSf3py",
+      "slug": "green-spark-energy-ltd-2",
+      "title": "Green Spark Energy Ltd",
+      "summary": "Green Spark Energy Ltd",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/09/green-spark-energy-ltd-enforcement-notice/",
+      "decision_date": "2025-08-28",
+      "published_date": "2025-08-28",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recEwwMRkQsW93FBt",
+      "at2_id": "recEwwMRkQsW93FBt",
+      "slug": "bristol-city-council",
+      "title": "Bristol City Council",
+      "summary": "Bristol City Council",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/09/bristol-city-council/",
+      "decision_date": "2025-08-27",
+      "published_date": "2025-08-27",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recCWoeqzZp7PpvDc",
+      "at2_id": "recCWoeqzZp7PpvDc",
+      "slug": "nigeria-ndpc-sanctions-multichoice-766-242-500-for-data-privacy-violations",
+      "title": "Nigeria NDPC sanctions MultiChoice ₦766,242,500 for data privacy violations",
+      "summary": "NDPC fined MultiChoice Nigeria ₦766,242,500 in July 2025 for breaching the NDPA. Investigation began Q2 2024; uncovered unauthorised processing of personal data of subscribers and non-subscribers, plus cross-border transfer of Nigerians' data without due process. NDPC ordered wider investigation across all MultiChoice data collection outlets.",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "₦766,242,500 fine.",
+      "source_url": "https://www.vanguardngr.com/2025/07/ndpc-fines-multichoice-n766m-for-data-breach/",
+      "decision_date": "2025-07-06",
+      "published_date": "2025-07-06",
+      "jurisdictions": [
+        "Nigeria"
+      ],
+      "juris_isos": [
+        "NG"
+      ],
+      "iso": "NG",
+      "regions": [
+        "Africa"
+      ],
+      "region": "Africa",
+      "authorities": [
+        "Nigeria Data Protection Commission"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Nigeria Data Protection Commission",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recr07Mhzx51bfSWw",
+      "at2_id": "recr07Mhzx51bfSWw",
+      "slug": "birthlink",
+      "title": "Birthlink",
+      "summary": "Birthlink (Fine: £18,000)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£18,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/06/birthlink/",
+      "decision_date": "2025-06-24",
+      "published_date": "2025-06-24",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "rec4nj5iT9D41jdri",
+      "at2_id": "rec4nj5iT9D41jdri",
+      "slug": "south-yorkshire-police",
+      "title": "South Yorkshire Police",
+      "summary": "South Yorkshire Police",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/08/south-yorkshire-police/",
+      "decision_date": "2025-06-06",
+      "published_date": "2025-06-06",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "rec30sRLkjulQZiUy",
+      "at2_id": "rec30sRLkjulQZiUy",
+      "slug": "23andme",
+      "title": "23andMe",
+      "summary": "23andMe (Fine: £2,310,000)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£2,310,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/06/23andme/",
+      "decision_date": "2025-06-05",
+      "published_date": "2025-06-05",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recsZE1kzBzyHHAkY",
+      "at2_id": "recsZE1kzBzyHHAkY",
+      "slug": "london-borough-of-hammersmith-and-fulham",
+      "title": "London Borough of Hammersmith and Fulham",
+      "summary": "We issued a reprimand to the London Borough of Hammersmith and Fulham after hidden data within a spreadsheet was inadvertently disclosed in response to a Freedom of Information Act request.",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/05/london-borough-of-hammersmith-and-fulham/",
+      "decision_date": "2025-05-16",
+      "published_date": "2025-05-16",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recCz6edqng0qp9mG",
+      "at2_id": "recCz6edqng0qp9mG",
+      "slug": "darian-bishop-trading-as-eco4u",
+      "title": "Darian Bishop trading as ECO4U",
+      "summary": "Darian Bishop trading as ECO4U",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/05/darian-bishop-trading-as-eco4u-en/",
+      "decision_date": "2025-04-24",
+      "published_date": "2025-04-24",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recUHVtu4ZkQK1vdz",
+      "at2_id": "recUHVtu4ZkQK1vdz",
+      "slug": "darian-bishop-trading-as-eco4u-2",
+      "title": "Darian Bishop trading as ECO4U",
+      "summary": "Darian Bishop trading as ECO4U",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/05/darian-bishop-trading-as-eco4u-mpn/",
+      "decision_date": "2025-04-24",
+      "published_date": "2025-04-24",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recxUapLwOUafANuz",
+      "at2_id": "recxUapLwOUafANuz",
+      "slug": "dpp-law-ltd",
+      "title": "DPP Law Ltd",
+      "summary": "DPP Law Ltd (Fine: £60,000)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£60,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/04/dpp-law-ltd/",
+      "decision_date": "2025-04-14",
+      "published_date": "2025-04-14",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "receXM7hp3XuKAEqu",
+      "at2_id": "receXM7hp3XuKAEqu",
+      "slug": "afk-letters-co-ltd",
+      "title": "AFK Letters Co Ltd",
+      "summary": "It was found that between January and September 2023, AFK made 95,277 spam calls resulting in several complaints being made to the ICO and TPS. AFK did not provide evidence that anyone whose number had been called had consented to receiving calls from the company. The ICO has issued a £90,000 fine.",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£90,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/04/afk-letters-co-ltd-mpn/",
+      "decision_date": "2025-03-27",
+      "published_date": "2025-03-27",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recliQN6KbqWjN3IH",
+      "at2_id": "recliQN6KbqWjN3IH",
+      "slug": "afk-letters-co-ltd-2",
+      "title": "AFK Letters Co Ltd",
+      "summary": "It was found that between January and September 2023, AFK made 95,277 spam calls resulting in several complaints being made to the ICO and TPS. AFK did not provide evidence that anyone whose number had been called had consented to receiving calls from the company. The ICO has issued a £90,000 fine.",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": "£90,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/04/afk-letters-co-ltd-en/",
+      "decision_date": "2025-03-27",
+      "published_date": "2025-03-27",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recYYCwlvzqT94o93",
+      "at2_id": "recYYCwlvzqT94o93",
+      "slug": "advanced-computer-software-group-limited",
+      "title": "Advanced Computer Software Group Limited",
+      "summary": "Advanced Computer Software Group Limited (Fine: £3.07)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£3.07",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/03/advanced-computer-software-group-limited/",
+      "decision_date": "2025-03-26",
+      "published_date": "2025-03-26",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "rectrvHzdVlGCMgyE",
+      "at2_id": "rectrvHzdVlGCMgyE",
+      "slug": "greater-manchester-police",
+      "title": "Greater Manchester Police",
+      "summary": "Greater Manchester Police",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/05/greater-manchester-police/",
+      "decision_date": "2025-03-14",
+      "published_date": "2025-03-14",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recpKK338Jg2PJSBK",
+      "at2_id": "recpKK338Jg2PJSBK",
+      "slug": "nigeria-ndpc-sanctions-meta-platforms-usd-32-8-million-for-behavioural-advertising-privacy-violations",
+      "title": "Nigeria NDPC sanctions Meta Platforms USD 32.8 million for behavioural advertising privacy violations",
+      "summary": "NDPC remedial fee of USD 32.8 million plus eight corrective orders against Meta Inc., for violating Nigerian users' fundamental privacy rights via behavioural advertising on Facebook and Instagram. Meta and NDPC reached settlement adopted 3 November 2025. Decision date approximate (February 2025); pending exact-day verification.",
+      "status": "Needs Review",
+      "subtype": "fine",
+      "outcome": "USD 32,800,000 remedial fee + 8 corrective orders; settlement terms adopted 3 November 2025.",
+      "source_url": "https://www.newdawnngr.com/2025/10/31/32-8m-data-privacy-sanction-meta-ndpc-to-adopt-terms-of-settlement-nov-3/",
+      "decision_date": "2025-02-15",
+      "published_date": "2025-11-03",
+      "jurisdictions": [
+        "Nigeria"
+      ],
+      "juris_isos": [
+        "NG"
+      ],
+      "iso": "NG",
+      "regions": [
+        "Africa"
+      ],
+      "region": "Africa",
+      "authorities": [
+        "Nigeria Data Protection Commission"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Nigeria Data Protection Commission",
+      "topics": [
+        "Privacy",
+        "AI"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recbZkhGYomkyHPfl",
+      "at2_id": "recbZkhGYomkyHPfl",
+      "slug": "glasgow-city-council",
+      "title": "Glasgow City Council",
+      "summary": "Glasgow City Council",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/02/glasgow-city-council/",
+      "decision_date": "2025-02-04",
+      "published_date": "2025-02-04",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recfvNzgbOx64hA9f",
+      "at2_id": "recfvNzgbOx64hA9f",
+      "slug": "city-of-edinburgh-council",
+      "title": "City of Edinburgh Council",
+      "summary": "City of Edinburgh Council",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/02/city-of-edinburgh-council/",
+      "decision_date": "2025-02-03",
+      "published_date": "2025-02-03",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recCkkvztQtXVmwOp",
+      "at2_id": "recCkkvztQtXVmwOp",
+      "slug": "esl-consultancy-services-ltd",
+      "title": "ESL Consultancy Services Ltd",
+      "summary": "ESL Consultancy Services Ltd (Fine: £200,000)",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "£200,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/01/esl-consultancy-services-ltd-mpn/",
+      "decision_date": "2024-12-05",
+      "published_date": "2024-12-05",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recS1pfIVmhdn8tty",
+      "at2_id": "recS1pfIVmhdn8tty",
+      "slug": "esl-consultancy-services-ltd-2",
+      "title": "ESL Consultancy Services Ltd",
+      "summary": "ESL Consultancy Services Ltd (Fine: £200,000)",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": "£200,000",
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/01/esl-consultancy-services-ltd-en/",
+      "decision_date": "2024-12-05",
+      "published_date": "2024-12-05",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recDnX7ci3YshjGZa",
+      "at2_id": "recDnX7ci3YshjGZa",
+      "slug": "nigeria-fccpc-fines-meta-platforms-and-whatsapp-usd-220-million-for-discriminatory-consumer-practices",
+      "title": "Nigeria FCCPC fines Meta Platforms and WhatsApp USD 220 million for discriminatory consumer practices",
+      "summary": "FCCPC Final Order issued 19 July 2024 imposing USD 220M penalty on Meta and WhatsApp after a 38-month joint investigation with NDPC into discriminatory and exploitative consumer practices, privacy practices and consumer data policies. Competition and Consumer Protection Tribunal upheld the order on 25 April 2025.",
+      "status": "Verified",
+      "subtype": "fine",
+      "outcome": "USD 220,000,000 administrative penalty + USD 35,000 investigation cost; Tribunal upheld 25 April 2025; payment due end of June 2025.",
+      "source_url": "https://fccpc.gov.ng/violations-tribunal-upholds-fccpcs-220-million-fine-against-meta-whatsapp/",
+      "decision_date": "2024-07-19",
+      "published_date": "2025-04-25",
+      "jurisdictions": [
+        "Nigeria"
+      ],
+      "juris_isos": [
+        "NG"
+      ],
+      "iso": "NG",
+      "regions": [
+        "Africa"
+      ],
+      "region": "Africa",
+      "authorities": [
+        "Nigeria Federal Competition and Consumer Protection Commission"
+      ],
+      "authority_types": [
+        "Competition Authority"
+      ],
+      "authority": "Nigeria Federal Competition and Consumer Protection Commission",
+      "topics": [
+        "Privacy",
+        "AI"
+      ],
+      "archived": false
+    },
+    {
+      "id": "recZQFOk8RnsqS0L9",
+      "at2_id": "recZQFOk8RnsqS0L9",
+      "slug": "smart-home-ensured-limited",
+      "title": "Smart Home Ensured Limited",
+      "summary": "Between 4 July 2023 to 24 August 2023 Smart Home Ensured Limited made 14,508 unsolicited calls for direct marketing purposes in breach of Regulation 21 of PECR. The company has been issued with an Enforcement Notice. ",
+      "status": "Verified",
+      "subtype": "other",
+      "outcome": null,
+      "source_url": "https://ico.org.uk/action-weve-taken/enforcement/2025/02/smart-home-ensured-limited/",
+      "decision_date": "2023-07-04",
+      "published_date": "2023-07-04",
+      "jurisdictions": [
+        "United Kingdom"
+      ],
+      "juris_isos": [
+        "GB"
+      ],
+      "iso": "GB",
+      "regions": [
+        "Europe"
+      ],
+      "region": "Europe",
+      "authorities": [
+        "Information Commissioner's Office"
+      ],
+      "authority_types": [
+        "Data Protection Authority"
+      ],
+      "authority": "Information Commissioner's Office",
+      "topics": [
+        "Privacy"
+      ],
+      "archived": false
+    }
+  ],
+  "facets": {
+    "region": {
+      "Europe": 42,
+      "Africa": 3
+    },
+    "status": {
+      "Verified": 44,
+      "Needs Review": 1
+    },
+    "topics": {
+      "Privacy": 45,
+      "AI": 2
+    },
+    "authority": {
+      "Information Commissioner's Office": 42,
+      "Nigeria Data Protection Commission": 2,
+      "Nigeria Federal Competition and Consumer Protection Commission": 1
+    },
+    "subtype": {
+      "fine": 36,
+      "other": 9
+    },
+    "jurisdiction": {
+      "United Kingdom": 42,
+      "Nigeria": 3
+    }
+  }
+}
