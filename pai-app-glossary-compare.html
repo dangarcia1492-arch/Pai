@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrinciplesAI — Glossary</title>
+<title>PrinciplesAI — Glossary · Compare regimes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght..60,400;8..60,600;8..60,700&family=Inter:wght;500;600;700;800&display=swap" rel="stylesheet">
@@ -120,13 +120,6 @@ button{cursor:pointer}
 .gl-def.watched{border-left:3px solid var(--accent);padding-left:22px}
 .gl-def-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px;padding-right:36px}
 .gl-term{font-family:var(--sans, inherit);font-size:26px;font-weight:600;letter-spacing:-.005em;color:var(--ink-strong);line-height:1.1}
-a.gl-term-link{color:inherit;text-decoration:none;display:inline-block}
-a.gl-term-link:hover{color:var(--accent-2);text-decoration:none}
-a.gl-term-link:hover::after{content:' →';font-size:18px;color:var(--accent-2);font-weight:500;margin-left:2px}
-.gl-def.clickable{cursor:pointer;transition:border-color .15s,box-shadow .15s}
-.gl-def.clickable:hover{border-color:var(--accent);box-shadow:var(--shadow-2)}
-.gl-cta{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;color:var(--accent-2);text-transform:uppercase;letter-spacing:.04em}
-.gl-cta:hover{text-decoration:underline}
 .gl-acr{font-family:var(--mono);font-size:12.5px;color:var(--muted);font-weight:500}
 .gl-tags{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto}
 .gl-tag{display:inline-flex;align-items:center;height:19px;padding:0 8px;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:3px}
@@ -369,6 +362,62 @@ body { min-width: 320px !important; }
   body.mobile-nav-open .mobile-nav-backdrop { display: block; }
 }
 /* ==END_MOBILE_RESPONSIVE== */
+
+/* ── Glossary compare page · V5 (anchor-on-two) ────────────────────── */
+.term-pill{display:inline-flex;align-items:center;height:20px;padding:0 9px;font-size:10.5px;font-weight:700;color:#fff;border-radius:3px;letter-spacing:.04em;text-transform:uppercase}
+.term-pill.gdpr{background:#1d4ed8}
+.term-pill.dpdpa{background:#b45309}
+.term-pill.ccpa{background:#0e7490}
+.term-pill.lgpd{background:#15803d}
+.term-pill.pipl{background:#9f1239}
+
+.v5-selector{padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-1);margin-bottom:16px}
+.v5-selector-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.v5-selector-row + .v5-selector-row{margin-top:10px;padding-top:10px;border-top:1px solid var(--border-soft)}
+.v5-selector-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;min-width:120px}
+.v5-active-pair{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap}
+.v5-active-chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;font-size:13px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;box-shadow:0 1px 3px rgba(1,118,211,.3)}
+.v5-active-chip .term{font-weight:500;font-size:12px;opacity:.88}
+.v5-active-chip.right{background:#9f1239;box-shadow:0 1px 3px rgba(159,18,57,.3)}
+.v5-vs{font-family:Georgia,serif;font-style:italic;font-size:14px;color:var(--muted);padding:0 4px}
+.v5-swap-btn{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;font-size:12px;font-weight:600;color:var(--secondary);background:var(--surface-2);border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:all .15s;text-decoration:none}
+.v5-swap-btn:hover{border-color:var(--accent);color:var(--accent-2);background:var(--surface)}
+.v5-swap-btn.active{border-color:var(--accent);color:var(--accent-2);background:var(--accent-soft)}
+.v5-swap-icon{display:inline-flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted)}
+
+.v5-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.v5-anchor{padding:22px 26px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-2)}
+.v5-anchor.left{border-left:4px solid var(--accent)}
+.v5-anchor.right{border-left:4px solid #9f1239}
+.v5-anchor .label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;padding:5px 10px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}
+.v5-anchor.left .label{color:var(--accent-2);background:var(--accent-soft)}
+.v5-anchor.right .label{color:#9f1239;background:#fde7ec}
+.v5-anchor-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.v5-anchor-flag{font-family:var(--sans);font-size:12px;font-weight:700;color:var(--ink-strong);text-transform:uppercase;letter-spacing:.1em}
+.v5-anchor-side-tag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em;margin-left:auto}
+.v5-anchor.left .v5-anchor-side-tag{color:var(--accent-2);background:var(--accent-soft);border:1px solid var(--accent-soft-2)}
+.v5-anchor.right .v5-anchor-side-tag{color:#9f1239;background:#fde7ec;border:1px solid #f5c2cd}
+.v5-anchor-name{font-size:26px;font-weight:700;color:var(--ink-strong);letter-spacing:-.015em;margin-bottom:4px;line-height:1.15}
+.v5-anchor-name .original{font-style:italic;color:var(--muted);font-weight:400;font-size:15px;margin-left:6px;letter-spacing:0}
+.v5-anchor-ref{font-size:12.5px;color:var(--muted);font-family:var(--mono);margin-top:4px;margin-bottom:16px;font-weight:600}
+.v5-anchor-quote{font-family:Georgia,serif;font-size:13.5px;color:var(--ink);font-style:italic;padding:14px 18px;background:var(--surface-2);border-left:3px solid var(--border);border-radius:0 5px 5px 0;line-height:1.6;margin-bottom:14px}
+.v5-anchor-quote.placeholder{color:var(--muted)}
+.v5-anchor-quote-bilingual{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.v5-anchor-quote-bilingual .lang-block{padding:12px 16px;background:var(--surface-2);border-left:3px solid var(--border);border-radius:0 5px 5px 0;font-family:Georgia,serif;font-size:13.5px;color:var(--ink);font-style:italic;line-height:1.55}
+.v5-anchor-quote-bilingual .lang-block.placeholder{color:var(--muted)}
+.v5-anchor-quote-bilingual .lang-tag{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:5px;font-style:normal}
+.v5-anchor-foot{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);padding-top:12px;border-top:1px solid var(--border-soft);gap:12px;flex-wrap:wrap}
+.v5-anchor-foot .reg-name{font-weight:500;color:var(--secondary)}
+.v5-anchor-foot a{font-weight:600;color:var(--accent-2)}
+.v5-anchor-cue{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.5;display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
+.v5-anchor-cue::before{content:'↳';color:var(--ink-faint);font-weight:700;flex-shrink:0}
+.v5-anchor-cue code{font-family:var(--mono);font-size:11px;background:var(--surface-2);padding:2px 7px;border-radius:3px;color:var(--ink-strong);font-weight:600;border:1px solid var(--border-soft)}
+.v5-anchor-cue a{color:var(--accent-2);font-weight:600}
+
+.v5-pane{display:none}
+.v5-pane.show{display:block}
+
+@media (max-width:900px){.v5-pair{grid-template-columns:1fr}}
 </style>
 <script defer data-domain="app.principlesai.org" src="https://plausible.principlesai.org/js/script.js"></script>
 <script>
@@ -512,308 +561,260 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
 
   <div class="page-statusbar">
     <div class="ps-left">
-      <span class="ps-breadcrumb"><a href="pai-home-private">Home</a><span class="ps-sep">›</span><span class="ps-current">Glossary</span></span>
-      <span class="ps-sep">·</span><span class="ps-scope-chip">AI · Privacy · Cyber</span>
-      <span class="ps-sep">·</span><span class="ps-ok">Sourced from tracked bodies</span>
+      <span class="ps-breadcrumb"><a href="pai-home-private">Home</a><span class="ps-sep">›</span><a href="pai-app-glossary">Glossary</a><span class="ps-sep">›</span><a href="pai-app-glossary-controller.html">Controller</a><span class="ps-sep">›</span><span class="ps-current">Compare</span></span>
+      <span class="ps-sep">·</span><span class="ps-scope-chip" id="psPair">GDPR ↔ DPDPA</span>
+      <span class="ps-sep">·</span><span class="ps-ok">Verbatim from primary sources</span>
     </div>
     <div class="page-actions">
-      <button class="btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M4 4l2 2m12-2l-2 2M4 20l2-2m12 2l-2-2"/></svg>Suggest term</button>
+      <a href="pai-app-glossary-controller.html" class="btn"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back to Controller</a>
+      <a href="pai-app-glossary" class="btn"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>All terms</a>
     </div>
   </div>
 
   <div class="page-head">
-    <div class="page-eyebrow">AI · Privacy · Cyber</div>
-    <h1 class="page-title">Glossary</h1>
-    <p class="page-sub"><b>214 definitions</b> sourced from tracked regulators, courts and standards bodies. Every entry cites the primary source the term came from — no dictionary filler. Filter by domain, jurisdiction, or tag your personal set.</p>
+    <div class="page-eyebrow">Privacy · Compare two regimes</div>
+    <h1 class="page-title">Controller — <span style="font-weight:500;color:var(--secondary)">comparing two regimes side-by-side</span></h1>
+    <p class="page-sub">Both regimes get the same real estate and the same full verbatim. Pick a left anchor + a right anchor; swap sides or change the right side without leaving the page. Anchor on any pair of the 5 regimes that recognise this role — GDPR · DPDPA · CCPA · LGPD · PIPL.</p>
   </div>
 
-  <div class="gl-toolbar">
-    <div class="gl-search-wrap">
-      <svg class="gl-search-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="gl-search" placeholder="Search terms, acronyms, definitions…" oninput="glSearch(this.value)">
+  <div class="v5-selector">
+    <div class="v5-selector-row">
+      <span class="v5-selector-label">Comparing</span>
+      <span class="v5-active-pair">
+        <span class="v5-active-chip" id="leftChip">GDPR <span class="term">· Controller</span></span>
+        <span class="v5-vs">vs</span>
+        <span class="v5-active-chip right" id="rightChip">DPDPA <span class="term">· Data Fiduciary</span></span>
+      </span>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSwap()"><span class="v5-swap-icon">⇄</span> Swap sides</button>
     </div>
-    <div class="gl-counts"><b id="glShown">214</b> definitions · <b>41</b> jurisdictions sourced</div>
+    <div class="v5-selector-row">
+      <span class="v5-selector-label">Set left anchor</span>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('left','gdpr')" data-side="left" data-key="gdpr">GDPR · Controller</button>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('left','dpdpa')" data-side="left" data-key="dpdpa">DPDPA · Data Fiduciary</button>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('left','ccpa')" data-side="left" data-key="ccpa">CCPA · Business</button>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('left','lgpd')" data-side="left" data-key="lgpd">LGPD · Controlador</button>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('left','pipl')" data-side="left" data-key="pipl">PIPL · PI Handler</button>
+    </div>
+    <div class="v5-selector-row">
+      <span class="v5-selector-label">Set right anchor</span>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('right','gdpr')" data-side="right" data-key="gdpr">GDPR · Controller</button>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('right','dpdpa')" data-side="right" data-key="dpdpa">DPDPA · Data Fiduciary</button>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('right','ccpa')" data-side="right" data-key="ccpa">CCPA · Business</button>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('right','lgpd')" data-side="right" data-key="lgpd">LGPD · Controlador</button>
+      <button class="v5-swap-btn" type="button" onclick="paiCompareSet('right','pipl')" data-side="right" data-key="pipl">PIPL · PI Handler</button>
+    </div>
   </div>
 
-  <div class="gl-az-row" id="azRow"></div>
+    <div class="v5-pair">
+    <!-- LEFT column · 5 panes, one shown at a time -->
+    <div id="leftCol">
+      <article class="v5-anchor left v5-pane" data-key="gdpr">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">European Union</span>
+          <span class="term-pill gdpr">GDPR</span>
+          <span class="v5-anchor-side-tag">Left anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Controller</h3>
+        <div class="v5-anchor-ref">Regulation (EU) 2016/679 · Art. 4(7)</div>
+        <blockquote class="v5-anchor-quote">"…the natural or legal person, public authority, agency or other body which, alone or jointly with others, determines the purposes and means of the processing of personal data. Where the purposes and means of such processing are determined by Union or Member State law, the controller or the specific criteria for its nomination may be provided for by Union or Member State law."</blockquote>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">Regulation (EU) 2016/679 (GDPR)</span>
+          <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679#art_4" target="_blank" rel="noopener">eur-lex.europa.eu / Art. 4 →</a>
+        </div>
+        <div class="v5-anchor-cue">Scroll to <code>(7) 'controller'</code>.</div>
+      </article>
+      <article class="v5-anchor left v5-pane" data-key="dpdpa">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">India</span>
+          <span class="term-pill dpdpa">DPDPA</span>
+          <span class="v5-anchor-side-tag">Left anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Data Fiduciary</h3>
+        <div class="v5-anchor-ref">DPDPA 2023 · s. 2(i)</div>
+        <blockquote class="v5-anchor-quote">"…any person who alone or in conjunction with other persons determines the purpose and means of processing of personal data."</blockquote>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">The Digital Personal Data Protection Act, 2023</span>
+          <a href="https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf#page=2" target="_blank" rel="noopener">meity.gov.in PDF / p. 2 →</a>
+        </div>
+        <div class="v5-anchor-cue">Link jumps to page 2. Definition <code>(i) "Data Fiduciary"</code> is mid-page.</div>
+      </article>
+      <article class="v5-anchor left v5-pane" data-key="ccpa">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">California, USA</span>
+          <span class="term-pill ccpa">CCPA</span>
+          <span class="v5-anchor-side-tag">Left anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Business</h3>
+        <div class="v5-anchor-ref">Cal. Civ. Code § 1798.140(d)</div>
+        <blockquote class="v5-anchor-quote placeholder">[verbatim from Cal. Civ. Code § 1798.140(d) — for-profit entity collecting CA-resident personal information meeting revenue / volume threshold (CPRA-amended). Fill before publish.]</blockquote>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">California Consumer Privacy Act (CPRA-amended)</span>
+          <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1798.140.&amp;lawCode=CIV" target="_blank" rel="noopener">leginfo.legislature.ca.gov / § 1798.140 →</a>
+        </div>
+        <div class="v5-anchor-cue">Source page lists subsections (a)–(ak) without anchors. Ctrl-F: <code>(d) "Business"</code>.</div>
+      </article>
+      <article class="v5-anchor left v5-pane" data-key="lgpd">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">Brazil</span>
+          <span class="term-pill lgpd">LGPD</span>
+          <span class="v5-anchor-side-tag">Left anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Controlador <span class="original">(EN: controller)</span></h3>
+        <div class="v5-anchor-ref">Lei nº 13.709/2018 · Art. 5, VI</div>
+        <div class="v5-anchor-quote-bilingual">
+          <div class="lang-block placeholder"><span class="lang-tag">Original — Português (BR)</span>[verbatim from Lei nº 13.709/2018 Art. 5, VI — PT-BR original to be filled before publish.]</div>
+          <div class="lang-block placeholder"><span class="lang-tag">English translation</span>[Working English translation alongside — to be filled before publish.]</div>
+        </div>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</span>
+          <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener">planalto.gov.br / Lei 13.709 →</a>
+        </div>
+        <div class="v5-anchor-cue">Source page has no article anchors. Ctrl-F: <code>Art. 5º</code> then scroll to <code>VI - controlador</code>.</div>
+      </article>
+      <article class="v5-anchor left v5-pane" data-key="pipl">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">China</span>
+          <span class="term-pill pipl">PIPL</span>
+          <span class="v5-anchor-side-tag">Left anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Personal Information Handler <span class="original">(个人信息处理者)</span></h3>
+        <div class="v5-anchor-ref">PIPL 2021 · Art. 73</div>
+        <div class="v5-anchor-quote-bilingual">
+          <div class="lang-block placeholder"><span class="lang-tag">Original — 中文 (Simplified Chinese)</span>[verbatim from PIPL 2021 Art. 73 — 中文 original to be filled before publish.]</div>
+          <div class="lang-block placeholder"><span class="lang-tag">English translation</span>[Working English translation alongside — to be filled before publish.]</div>
+        </div>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">中华人民共和国个人信息保护法 (PIPL, 2021)</span>
+          <a href="http://en.npc.gov.cn/2021-12/29/c_694559.htm" target="_blank" rel="noopener">en.npc.gov.cn (EN) →</a>
+        </div>
+        <div class="v5-anchor-cue">English at <a href="http://en.npc.gov.cn/2021-12/29/c_694559.htm" target="_blank" rel="noopener">en.npc.gov.cn</a> · Ctrl-F: <code>Article 73</code>. Chinese original at <a href="http://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html" target="_blank" rel="noopener">npc.gov.cn</a> · Ctrl-F: <code>第七十三条</code>.</div>
+      </article>
+    </div>
 
-  <div class="gl-wrap">
-    <aside class="gl-facet">
-      <div class="gl-facet-group">
-        <div class="gl-facet-head">My saved</div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Only saved terms</span><span class="count">6</span></div>
-      </div>
-      <div class="gl-facet-group">
-        <div class="gl-facet-head">Domain</div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">AI governance</span><span class="count">98</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Privacy</span><span class="count">76</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Cybersecurity</span><span class="count">52</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">IP / trade-secret</span><span class="count">14</span></div>
-      </div>
-      <div class="gl-facet-group">
-        <div class="gl-facet-head">Jurisdiction</div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">EU / EEA</span><span class="count">86</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">United Kingdom</span><span class="count">38</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">United States</span><span class="count">42</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">APAC</span><span class="count">31</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Germany</span><span class="count">24</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Canada</span><span class="count">11</span></div>
-      </div>
-      <div class="gl-facet-group">
-        <div class="gl-facet-head">Source</div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Regulator guidance</span><span class="count">74</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Statute</span><span class="count">68</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Standard</span><span class="count">31</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Case law</span><span class="count">24</span></div>
-        <div class="gl-facet-opt" onclick="this.classList.toggle('on')"><span class="gl-facet-cb"></span><span class="name">Technical spec</span><span class="count">17</span></div>
-      </div>
-    </aside>
-
-    <main class="gl-main" id="glMain">
-
-      <section class="gl-letter-block" data-letter="A">
-        <div class="gl-letter">A · <b>18 terms</b></div>
-
-        <article class="gl-def watched">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Accountability</h2>
-            <span class="gl-acr">GDPR Art. 5(2)</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>The controller's <b>obligation to demonstrate compliance</b> with the data-protection principles in Article 5(1), and to hold records, documentation, and governance capable of evidencing that compliance on demand to a supervisory authority.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 5(2)</span><span><b>Also cited by</b> EDPB Guidelines 07/2020</span></div>
-          <button class="gl-save on" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Adequacy decision</h2>
-            <span class="gl-acr">GDPR Art. 45</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>A decision by the European Commission that a third country (or territory, sector, or international organisation) ensures <b>an adequate level of protection</b> for personal data. Once adopted, transfers to that destination require no further authorisation under Chapter V.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 45</span><span><b>Current list</b> 15 countries + UK GDPR parallel</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-
-        <article class="gl-def watched">
-          <div class="gl-def-head">
-            <h2 class="gl-term">AI system</h2>
-            <span class="gl-acr">EU AI Act Art. 3(1)</span>
-            <div class="gl-tags"><span class="gl-tag ai">AI</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>A <b>machine-based system</b> designed to operate with varying levels of autonomy and that may exhibit adaptiveness after deployment, and that, for explicit or implicit objectives, infers, from the input it receives, how to generate outputs such as predictions, content, recommendations or decisions that can influence physical or virtual environments.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2024/1689, Art. 3(1)</span><span><b>Aligned with</b> OECD Recommendation C(2019)142</span></div>
-          <button class="gl-save on" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Automated decision-making</h2>
-            <span class="gl-acr">ADM · GDPR Art. 22</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag ai">AI</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>A decision based solely on automated processing, including profiling, which produces legal effects or similarly significantly affects the data subject. Article 22 <b>prohibits such decisions by default</b>, subject to enumerated exceptions (contract performance, consent, or authorised by law).</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 22</span><span><b>California cognate</b> ADMT (CPPA draft regs)</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="B">
-        <div class="gl-letter">B · <b>9 terms</b></div>
-
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Binding corporate rules</h2>
-            <span class="gl-acr">BCRs · GDPR Art. 47</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>Internal rules for data transfers within multinational companies, approved by the competent supervisory authority, providing <b>appropriate safeguards</b> for onward transfers of personal data to group members in third countries.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 47</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Biometric data</h2>
-            <span class="gl-acr">GDPR Art. 4(14)</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>Personal data resulting from specific technical processing relating to the physical, physiological or behavioural characteristics of a natural person, which <b>allow or confirm the unique identification</b> of that natural person, such as facial images or dactyloscopic data.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 4(14)</span><span><b>Special category</b> Art. 9(1)</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="C">
-        <div class="gl-letter">C · <b>24 terms</b></div>
-
-        <article class="gl-def watched clickable">
-          <div class="gl-def-head">
-            <h2 class="gl-term"><a class="gl-term-link" href="pai-app-glossary-controller.html">Controller</a></h2>
-            <span class="gl-acr">GDPR Art. 4(7)</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU · +4 regimes</span></div>
-          </div>
-          <div class="gl-body"><p>The natural or legal person, public authority, agency or other body which, alone or jointly with others, <b>determines the purposes and means</b> of the processing of personal data. Where determined by Union or Member State law, the controller (or the specific criteria for its nomination) may be provided for by law.</p></div>
-          <div class="gl-def-foot">
-            <span><b>Source</b> Regulation (EU) 2016/679, Art. 4(7)</span>
-            <span><b>Test</b> factual not contractual</span>
-            <a class="gl-cta" href="pai-app-glossary-controller.html">Open term · 5 regimes →</a>
-          </div>
-          <button class="gl-save on" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Critical infrastructure</h2>
-            <span class="gl-acr">NIS2 · Art. 2</span>
-            <div class="gl-tags"><span class="gl-tag cyber">Cyber</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>Essential and important entities in sectors including energy, transport, banking, health, drinking water, digital infrastructure, public administration, and space, whose <b>disruption would significantly impact</b> the Union's economy or the functioning of its society. NIS2 imposes risk-management, incident-reporting and governance obligations on these entities.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Directive (EU) 2022/2555, Arts. 2–3 + Annexes I–II</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="D">
-        <div class="gl-letter">D · <b>19 terms</b></div>
-
-        <article class="gl-def watched">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Data protection impact assessment</h2>
-            <span class="gl-acr">DPIA · GDPR Art. 35</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>A systematic <b>assessment of the risks</b> to rights and freedoms of natural persons arising from envisaged processing, particularly when using new technologies. Mandatory where processing is likely to result in a high risk (Art. 35(1)); the controller must consult the supervisory authority prior to processing if residual risks remain high (Art. 36).</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 35</span><span><b>WP29/EDPB list</b> WP248 rev.01</span></div>
-          <button class="gl-save on" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Deep-fake</h2>
-            <span class="gl-acr">AI Act Art. 50(4)</span>
-            <div class="gl-tags"><span class="gl-tag ai">AI</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>AI-generated or manipulated image, audio or video content that <b>resembles existing persons, objects, places, entities or events</b> and would falsely appear to a person to be authentic or truthful. Deployers must disclose that content is artificially generated (Art. 50(4)), subject to artistic, satirical and law-enforcement exceptions.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2024/1689, Art. 3(60), 50(4)</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="F">
-        <div class="gl-letter">F · <b>8 terms</b></div>
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Foundation model</h2>
-            <span class="gl-acr">GPAI · AI Act Art. 3(63)</span>
-            <div class="gl-tags"><span class="gl-tag ai">AI</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>A general-purpose AI model trained on a <b>broad dataset using self-supervision at scale</b> and designed for generality of output, capable of being integrated into a variety of downstream systems or applications. Providers of GPAI models with systemic risk are subject to Chapter V obligations including model-evaluation, risk mitigation, and incident reporting.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2024/1689, Art. 3(63)–(66)</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="H">
-        <div class="gl-letter">H · <b>5 terms</b></div>
-        <article class="gl-def watched">
-          <div class="gl-def-head">
-            <h2 class="gl-term">High-risk AI system</h2>
-            <span class="gl-acr">AI Act Chapter III</span>
-            <div class="gl-tags"><span class="gl-tag ai">AI</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>AI systems identified as <b>high-risk</b> under Article 6, in either of two routes: (a) embedded in products under EU harmonising legislation listed in Annex I; or (b) systems falling within the use-cases in Annex III (biometrics, critical infrastructure, education, employment, essential services, law enforcement, migration, administration of justice, democratic process). Subject to risk-management, data-governance, documentation, transparency, human-oversight, accuracy-robustness-cybersecurity obligations.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2024/1689, Arts. 6, 8–15</span></div>
-          <button class="gl-save on" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="L">
-        <div class="gl-letter">L · <b>7 terms</b></div>
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Legitimate interests</h2>
-            <span class="gl-acr">LIA · GDPR Art. 6(1)(f)</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>A lawful basis for processing where necessary for the legitimate interests pursued by the controller or a third party, except where such interests are <b>overridden by the interests or fundamental rights and freedoms of the data subject</b>. Requires a documented balancing test (LIA).</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 6(1)(f)</span><span><b>Guidance</b> EDPB 01/2024</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="P">
-        <div class="gl-letter">P · <b>16 terms</b></div>
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Processor</h2>
-            <span class="gl-acr">GDPR Art. 4(8)</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>A natural or legal person, public authority, agency or other body which <b>processes personal data on behalf of the controller</b>. Bound by Art. 28 written instructions and a controller-processor contract.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 4(8)</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Prompt injection</h2>
-            <span class="gl-acr">OWASP LLM01:2025</span>
-            <div class="gl-tags"><span class="gl-tag cyber">Cyber</span><span class="gl-tag ai">AI</span></div>
-          </div>
-          <div class="gl-body"><p>An attack against an LLM-backed application where a crafted input causes the model to <b>deviate from operator-intended instructions</b>, either directly (attacker enters prompt) or indirectly (poisoned content in retrieved context). Mitigations include instruction isolation, input filtering, and privilege separation for tool-calling.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> OWASP Top 10 for LLM Applications (2025 edition)</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="R">
-        <div class="gl-letter">R · <b>11 terms</b></div>
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Risk management system</h2>
-            <span class="gl-acr">AI Act Art. 9</span>
-            <div class="gl-tags"><span class="gl-tag ai">AI</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>A <b>continuous iterative process planned and run throughout the lifecycle</b> of a high-risk AI system. Must identify and analyse known and reasonably foreseeable risks, estimate risks arising from intended use and reasonably foreseeable misuse, evaluate risks from post-market monitoring, and adopt targeted mitigation measures.</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2024/1689, Art. 9</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="S">
-        <div class="gl-letter">S · <b>14 terms</b></div>
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Supervisory authority</h2>
-            <span class="gl-acr">SA · GDPR Art. 4(21)</span>
-            <div class="gl-tags"><span class="gl-tag privacy">Privacy</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>An independent public authority established by a Member State with the <b>competence to monitor the application of the GDPR</b> on the territory of that Member State. Cooperates under the one-stop-shop, consistency and mutual-assistance mechanisms (Arts. 56–67).</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2016/679, Art. 4(21)</span><span><b>Board</b> EDPB (Art. 68)</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <section class="gl-letter-block" data-letter="T">
-        <div class="gl-letter">T · <b>8 terms</b></div>
-        <article class="gl-def">
-          <div class="gl-def-head">
-            <h2 class="gl-term">Transparency obligations (AI Act)</h2>
-            <span class="gl-acr">AI Act Art. 50</span>
-            <div class="gl-tags"><span class="gl-tag ai">AI</span><span class="gl-tag juris">EU</span></div>
-          </div>
-          <div class="gl-body"><p>Disclosure requirements for providers and deployers of certain AI systems: users must be informed when interacting with an AI system (Art. 50(1)), synthetic outputs must be machine-detectable (Art. 50(2)), deep-fakes must be disclosed (Art. 50(4)), and emotion-recognition or biometric-categorisation systems must notify affected persons (Art. 50(3)).</p></div>
-          <div class="gl-def-foot"><span><b>Source</b> Regulation (EU) 2024/1689, Art. 50</span></div>
-          <button class="gl-save" onclick="saveT(this)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button>
-        </article>
-      </section>
-
-      <p style="text-align:center;color:var(--muted);font-size:12.5px;padding:24px 0;font-weight:500">Showing 18 of 214 definitions · A–T letters loaded · <a href="#" style="font-weight:600;color:var(--accent-2)">Load remaining terms →</a></p>
-
-    </main>
+    <!-- RIGHT column · 5 panes, one shown at a time -->
+    <div id="rightCol">
+      <article class="v5-anchor right v5-pane" data-key="gdpr">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">European Union</span>
+          <span class="term-pill gdpr">GDPR</span>
+          <span class="v5-anchor-side-tag">Right anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Controller</h3>
+        <div class="v5-anchor-ref">Regulation (EU) 2016/679 · Art. 4(7)</div>
+        <blockquote class="v5-anchor-quote">"…the natural or legal person, public authority, agency or other body which, alone or jointly with others, determines the purposes and means of the processing of personal data. Where the purposes and means of such processing are determined by Union or Member State law, the controller or the specific criteria for its nomination may be provided for by Union or Member State law."</blockquote>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">Regulation (EU) 2016/679 (GDPR)</span>
+          <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679#art_4" target="_blank" rel="noopener">eur-lex.europa.eu / Art. 4 →</a>
+        </div>
+        <div class="v5-anchor-cue">Scroll to <code>(7) 'controller'</code>.</div>
+      </article>
+      <article class="v5-anchor right v5-pane" data-key="dpdpa">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">India</span>
+          <span class="term-pill dpdpa">DPDPA</span>
+          <span class="v5-anchor-side-tag">Right anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Data Fiduciary</h3>
+        <div class="v5-anchor-ref">DPDPA 2023 · s. 2(i)</div>
+        <blockquote class="v5-anchor-quote">"…any person who alone or in conjunction with other persons determines the purpose and means of processing of personal data."</blockquote>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">The Digital Personal Data Protection Act, 2023</span>
+          <a href="https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf#page=2" target="_blank" rel="noopener">meity.gov.in PDF / p. 2 →</a>
+        </div>
+        <div class="v5-anchor-cue">Link jumps to page 2. Definition <code>(i) "Data Fiduciary"</code> is mid-page.</div>
+      </article>
+      <article class="v5-anchor right v5-pane" data-key="ccpa">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">California, USA</span>
+          <span class="term-pill ccpa">CCPA</span>
+          <span class="v5-anchor-side-tag">Right anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Business</h3>
+        <div class="v5-anchor-ref">Cal. Civ. Code § 1798.140(d)</div>
+        <blockquote class="v5-anchor-quote placeholder">[verbatim from Cal. Civ. Code § 1798.140(d) — for-profit entity collecting CA-resident personal information meeting revenue / volume threshold (CPRA-amended). Fill before publish.]</blockquote>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">California Consumer Privacy Act (CPRA-amended)</span>
+          <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1798.140.&amp;lawCode=CIV" target="_blank" rel="noopener">leginfo.legislature.ca.gov / § 1798.140 →</a>
+        </div>
+        <div class="v5-anchor-cue">Source page lists subsections (a)–(ak) without anchors. Ctrl-F: <code>(d) "Business"</code>.</div>
+      </article>
+      <article class="v5-anchor right v5-pane" data-key="lgpd">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">Brazil</span>
+          <span class="term-pill lgpd">LGPD</span>
+          <span class="v5-anchor-side-tag">Right anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Controlador <span class="original">(EN: controller)</span></h3>
+        <div class="v5-anchor-ref">Lei nº 13.709/2018 · Art. 5, VI</div>
+        <div class="v5-anchor-quote-bilingual">
+          <div class="lang-block placeholder"><span class="lang-tag">Original — Português (BR)</span>[verbatim from Lei nº 13.709/2018 Art. 5, VI — PT-BR original to be filled before publish.]</div>
+          <div class="lang-block placeholder"><span class="lang-tag">English translation</span>[Working English translation alongside — to be filled before publish.]</div>
+        </div>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</span>
+          <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener">planalto.gov.br / Lei 13.709 →</a>
+        </div>
+        <div class="v5-anchor-cue">Source page has no article anchors. Ctrl-F: <code>Art. 5º</code> then scroll to <code>VI - controlador</code>.</div>
+      </article>
+      <article class="v5-anchor right v5-pane" data-key="pipl">
+        <div class="v5-anchor-eyebrow">
+          <span class="v5-anchor-flag">China</span>
+          <span class="term-pill pipl">PIPL</span>
+          <span class="v5-anchor-side-tag">Right anchor</span>
+        </div>
+        <h3 class="v5-anchor-name">Personal Information Handler <span class="original">(个人信息处理者)</span></h3>
+        <div class="v5-anchor-ref">PIPL 2021 · Art. 73</div>
+        <div class="v5-anchor-quote-bilingual">
+          <div class="lang-block placeholder"><span class="lang-tag">Original — 中文 (Simplified Chinese)</span>[verbatim from PIPL 2021 Art. 73 — 中文 original to be filled before publish.]</div>
+          <div class="lang-block placeholder"><span class="lang-tag">English translation</span>[Working English translation alongside — to be filled before publish.]</div>
+        </div>
+        <div class="v5-anchor-foot">
+          <span class="reg-name">中华人民共和国个人信息保护法 (PIPL, 2021)</span>
+          <a href="http://en.npc.gov.cn/2021-12/29/c_694559.htm" target="_blank" rel="noopener">en.npc.gov.cn (EN) →</a>
+        </div>
+        <div class="v5-anchor-cue">English at <a href="http://en.npc.gov.cn/2021-12/29/c_694559.htm" target="_blank" rel="noopener">en.npc.gov.cn</a> · Ctrl-F: <code>Article 73</code>. Chinese original at <a href="http://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html" target="_blank" rel="noopener">npc.gov.cn</a> · Ctrl-F: <code>第七十三条</code>.</div>
+      </article>
+    </div>
   </div>
+
+<script>
+(function(){
+  var REG = {
+    gdpr:  { label:'GDPR',  term:'Controller' },
+    dpdpa: { label:'DPDPA', term:'Data Fiduciary' },
+    ccpa:  { label:'CCPA',  term:'Business' },
+    lgpd:  { label:'LGPD',  term:'Controlador' },
+    pipl:  { label:'PIPL',  term:'PI Handler' }
+  };
+  function param(k){ var m=new RegExp('[?&]'+k+'=([^&]+)').exec(location.search); return m? decodeURIComponent(m[1]).toLowerCase() : null; }
+  function valid(k){ return REG.hasOwnProperty(k) ? k : null; }
+  var stateA = valid(param('a')) || 'gdpr';
+  var stateB = valid(param('b')) || 'dpdpa';
+  if(stateA===stateB){ stateB = (stateA==='gdpr')?'dpdpa':'gdpr'; }
+  function render(){
+    document.querySelectorAll('#leftCol .v5-pane').forEach(function(p){ p.classList.toggle('show', p.dataset.key===stateA); });
+    document.querySelectorAll('#rightCol .v5-pane').forEach(function(p){ p.classList.toggle('show', p.dataset.key===stateB); });
+    var lc=document.getElementById('leftChip'); lc.innerHTML = REG[stateA].label + ' <span class="term">· ' + REG[stateA].term + '</span>';
+    var rc=document.getElementById('rightChip'); rc.innerHTML = REG[stateB].label + ' <span class="term">· ' + REG[stateB].term + '</span>';
+    var ps=document.getElementById('psPair'); if(ps) ps.textContent = REG[stateA].label + ' ↔ ' + REG[stateB].label;
+    document.querySelectorAll('.v5-swap-btn[data-side]').forEach(function(b){
+      var on = (b.dataset.side==='left' && b.dataset.key===stateA) || (b.dataset.side==='right' && b.dataset.key===stateB);
+      b.classList.toggle('active', on);
+    });
+    var u=new URL(location.href); u.searchParams.set('a',stateA); u.searchParams.set('b',stateB);
+    history.replaceState(null,'',u.toString());
+  }
+  window.paiCompareSet=function(side,key){
+    key=valid(key); if(!key) return;
+    if(side==='left'){ if(key===stateB){ stateB=stateA; } stateA=key; }
+    else { if(key===stateA){ stateA=stateB; } stateB=key; }
+    render();
+  };
+  window.paiCompareSwap=function(){ var t=stateA; stateA=stateB; stateB=t; render(); };
+  render();
+})();
+</script>
+
 
   <footer class="footer">
     <div class="left"><span>PrinciplesAI · Glossary</span><span><span class="ok"></span>Every entry sourced from tracked bodies</span><span>214 definitions · 41 jurisdictions</span></div>
