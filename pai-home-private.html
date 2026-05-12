@@ -348,9 +348,17 @@ button { cursor: pointer; }
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(360px, 1fr);
+  grid-template-rows: 1fr auto;
   gap: 24px;
   margin-bottom: 36px;
 }
+/* Today panel (right column) spans both grid rows; its height drives the column */
+.hero > aside.panel { grid-column: 2; grid-row: 1 / span 2; }
+/* Deadlines panel sits at top-left, stretches to fill row 1 → aligns with top of Today */
+.hero > .deadlines-panel { grid-column: 1; grid-row: 1; align-self: stretch; display: flex; flex-direction: column; }
+.hero > .deadlines-panel > div:last-child { flex: 1; display: flex; flex-direction: column; }
+/* Map panel sits at bottom-left, natural map content size (aspect-ratio drives height) */
+.hero > .panel.map-panel { grid-column: 1; grid-row: 2; align-self: end; }
 .panel { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-1); }
 .panel-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px 14px; border-bottom: 1px solid var(--border-soft); gap: 12px; }
 .panel-title { font-size: 15.5px; font-weight: 600; color: var(--ink-strong); display: flex; align-items: baseline; gap: 10px; letter-spacing: -0.005em; }
@@ -599,6 +607,165 @@ button { cursor: pointer; }
 @media (max-width: 900px) {
   .briefings-track { grid-auto-columns: minmax(280px, 1fr); }
 }
+
+/* ============ DEADLINES CALENDAR (universal must-know dates) ============ */
+.deadlines-panel {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  margin-bottom: 36px;
+  overflow: hidden;
+}
+.deadlines-panel .panel-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 14px 22px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--surface-2);
+}
+.deadlines-panel .panel-head .panel-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.deadlines-empty {
+  padding: 24px 22px; font-size: 13px; color: var(--muted); font-style: italic;
+}
+.deadline-row {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: 14px;
+  padding: 13px 22px;
+  border-bottom: 1px solid var(--border-soft);
+  align-items: center;
+  transition: background var(--t-fast, .2s);
+}
+.deadline-row:last-child { border-bottom: 0; }
+.deadline-row:hover { background: var(--surface-2); }
+.deadline-when {
+  font-family: 'Inter', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--amber, #905200);
+  white-space: nowrap;
+}
+.deadline-when.imminent { color: var(--red, #ba0517); }
+.deadline-when.far { color: var(--muted); }
+.deadline-when .date-iso {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 500;
+  color: var(--ink-faint, #8a93a3);
+  text-transform: none; letter-spacing: 0;
+  margin-top: 1px;
+}
+.deadline-name {
+  font-size: 13px; font-weight: 600; color: var(--ink-strong);
+  line-height: 1.35;
+}
+.deadline-name .deadline-note {
+  display: block;
+  font-size: 11.5px; font-weight: 400; color: var(--muted);
+  margin-top: 3px; line-height: 1.45;
+}
+.deadline-meta {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+}
+.deadline-juris {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.deadline-pillar {
+  font-size: 10px; font-weight: 600;
+  padding: 2px 7px; border-radius: 3px;
+  background: var(--accent-soft, #e3effc); color: var(--accent-2, #014486);
+}
+
+/* ── Panel CTA — one promoted call-to-action per panel ── */
+.panel-cta {
+  display: block;
+  padding: 13px 22px;
+  margin-top: auto;
+  border-top: 1px solid var(--border-soft);
+  background: var(--surface-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-2);
+  text-align: center;
+  letter-spacing: 0.01em;
+  transition: background var(--t-fast, .2s), color var(--t-fast, .2s);
+}
+.panel-cta:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+  text-decoration: none;
+}
+.panel-cta.coming-soon {
+  color: var(--muted);
+  cursor: not-allowed;
+  font-style: italic;
+}
+.panel-cta.coming-soon:hover {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+/* Today aside needs to be a column flex so panel-cta sits at the bottom */
+.hero > aside.panel { display: flex; flex-direction: column; }
+.today-list { flex: 1; }
+
+/* ── Timeline strip (Bloomberg-style 12-month track) ── */
+.deadline-timeline {
+  position: relative;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--border-soft);
+  background: linear-gradient(180deg, #fafbfc 0%, #fff 100%);
+}
+.deadline-timeline-svg {
+  display: block; width: 100%; height: 84px;
+  font-family: 'Inter', sans-serif;
+}
+.dt-axis { stroke: var(--border, #dbe1ea); stroke-width: 1; }
+.dt-month-tick { stroke: var(--border-soft, #ebeff5); stroke-width: 1; }
+.dt-month-label {
+  fill: var(--muted, #5e6878);
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.dt-today-line { stroke: var(--accent, #0176d3); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.dt-today-label {
+  fill: var(--accent-2, #014486); font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+}
+.dt-band-imminent {
+  fill: rgba(186, 5, 23, 0.06);
+}
+.dt-band-urgent {
+  fill: rgba(202, 133, 1, 0.05);
+}
+.dt-dot {
+  cursor: pointer; transition: r .15s, filter .15s;
+}
+.dt-dot:hover { filter: brightness(1.1); }
+.dt-dot.imminent { fill: var(--red, #ba0517); stroke: #fff; stroke-width: 2; }
+.dt-dot.urgent { fill: var(--amber-fill, #ca8501); stroke: #fff; stroke-width: 2; }
+.dt-dot.far { fill: var(--accent-2, #014486); stroke: #fff; stroke-width: 2; }
+.dt-dot-pulse {
+  fill: var(--red, #ba0517); fill-opacity: 0.18;
+  animation: dt-pulse 2.4s infinite ease-out;
+}
+@keyframes dt-pulse {
+  0% { r: 6; fill-opacity: 0.35; }
+  100% { r: 14; fill-opacity: 0; }
+}
+.dt-tooltip {
+  position: absolute; pointer-events: none;
+  background: rgba(7, 32, 46, 0.96); color: #fff;
+  padding: 7px 11px; border-radius: 5px;
+  font-size: 11.5px; font-weight: 500; line-height: 1.4;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.22); max-width: 260px;
+  opacity: 0; transition: opacity .12s; z-index: 10;
+}
+.dt-tooltip.on { opacity: 1; }
+.dt-tooltip b { font-weight: 700; display: block; }
+.dt-tooltip .tt-date { color: #b9c4d2; font-size: 10.5px; margin-top: 2px; font-family: 'Inter', sans-serif; letter-spacing: 0; }
 
 /* ============ DEVELOPMENTS (news feed) ============ */
 .developments {
@@ -1188,10 +1355,34 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
     </div>
   </section>
 
-  <!-- HERO: MAP + TODAY -->
+  <!-- HERO: DEADLINES + TODAY (top row) · MAP (below deadlines) -->
   <section class="hero">
 
-    <!-- MAP (hero) — single world map, privacy-law tiering -->
+    <!-- DEADLINES CALENDAR — top of left column, beside Today -->
+    <div class="panel deadlines-panel" id="js-deadlines-panel">
+      <div class="panel-head">
+        <div class="panel-title">Upcoming deadlines <span class="count"><b id="deadlinesCount">—</b> tracked across the next 12 months</span></div>
+        <div class="panel-meta">Verified sources</div>
+      </div>
+      <div class="deadline-timeline">
+        <svg class="deadline-timeline-svg" id="js-deadlines-timeline" viewBox="0 0 1000 84" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="dt-tooltip" id="js-deadlines-tooltip"></div>
+      </div>
+      <div id="js-deadlines-list">
+        <div class="deadlines-empty">Loading deadlines…</div>
+      </div>
+    </div>
+
+    <!-- TODAY -->
+    <aside class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Today <span class="count"><b id="todayPublished">—</b> published</span></div>
+      </div>
+      <ul class="today-list" id="todayList"></ul>
+      <a class="panel-cta" id="js-today-cta" href="pai-app-news">Read all news today →</a>
+    </aside>
+
+    <!-- MAP (hero) — single world map, privacy-law tiering — now below deadlines -->
     <div class="panel map-panel">
       <div class="panel-head">
         <div class="panel-title">Regulatory landscape <span class="count">comprehensive privacy laws by country</span></div>
@@ -1205,15 +1396,6 @@ body.jur-overlay-open .nav-scrim { opacity: 0 !important; }
         <div class="map-legend" id="mapLegend"></div>
       </div>
     </div>
-
-    <!-- TODAY -->
-    <aside class="panel">
-      <div class="panel-head">
-        <div class="panel-title">Today <span class="count"><b id="todayPublished">—</b> published</span></div>
-        <span class="panel-link">Full feed</span>
-      </div>
-      <ul class="today-list" id="todayList"></ul>
-    </aside>
   </section>
 
   <!-- FEATURED FACULTY -->
@@ -3072,7 +3254,12 @@ function paiOrderHomeNews(rows) {
     const r = await fetch('./news.json', { cache: 'no-cache' });
     if (!r.ok) return;
     const d = await r.json();
-    const rows = paiOrderHomeNews(d.rows || []).slice(0, 5);
+    const rows = paiOrderHomeNews(d.rows || []).slice(0, 3);
+    // Wire the panel CTA with the real total count from news.json
+    const ctaEl = document.getElementById('js-today-cta');
+    if (ctaEl && d.news_count != null){
+      ctaEl.textContent = 'Read all ' + d.news_count.toLocaleString() + ' news today →';
+    }
     if (!rows.length) return;
     list.innerHTML = rows.map((row, i) => {
       const isLead = i === 0;
@@ -3271,8 +3458,8 @@ function paiOrderHomeNews(rows) {
       +'<div class="report-meta">PrinciplesAI · generated '+new Date().toLocaleString()+'</div>'
       +rows
       +'<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script>'
-      +'<script src="pai-alerts.js" defer></script>
-</body></html>');
+      +'<script src="pai-alerts.js" defer><\/script>'
+      +'</body></html>');
     w.document.close();
   }
 
@@ -3422,6 +3609,192 @@ function paiOrderHomeNews(rows) {
     '<span class="legend-item"><span class="legend-dot" style="background:#c47a00"></span>Sectoral / partial</span>' +
     '<span class="legend-item"><span class="legend-dot" style="background:#d6dde6"></span>Draft / limited / none</span>' +
     '<span class="legend-item" style="color:var(--ink-faint);margin-left:auto;font-style:italic">National comprehensive privacy laws as of 2026.</span>';
+})();
+</script>
+
+<script>
+/* Deadlines calendar — fetch deadlines.json + render upcoming items.
+   Universal-only for now (PRI-148 phase 2 adds per-watchlist filter). */
+(function(){
+  var WINDOW_DAYS = 180;          // urgency-banding window for the list
+  var TIMELINE_MONTHS = 12;       // horizontal track spans 12 months from today
+  var listEl = document.getElementById('js-deadlines-list');
+  var countEl = document.getElementById('deadlinesCount');
+  var timelineEl = document.getElementById('js-deadlines-timeline');
+  var tooltipEl = document.getElementById('js-deadlines-tooltip');
+  if (!listEl) return;
+
+  function fmtDateLong(iso){
+    var d = new Date(iso + 'T00:00:00Z');
+    if (isNaN(d.getTime())) return iso;
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  }
+  function daysUntil(iso){
+    var d = new Date(iso + 'T00:00:00Z');
+    var now = new Date();
+    var today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    return Math.round((d - today) / (1000 * 60 * 60 * 24));
+  }
+  function urgencyClass(days){
+    if (days <= 14) return 'imminent';
+    if (days <= 90) return '';
+    return 'far';
+  }
+  function daysLabel(days){
+    if (days < 0) return 'In effect';
+    if (days === 0) return 'Today';
+    if (days === 1) return '1 day';
+    if (days < 60) return days + ' days';
+    var months = Math.round(days / 30);
+    return '~' + months + ' months';
+  }
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function render(items){
+    if (!items.length){
+      listEl.innerHTML = '<div class="deadlines-empty">No deadlines in the next ' + WINDOW_DAYS + ' days.</div>';
+      if (countEl) countEl.textContent = '0';
+      return;
+    }
+    if (countEl) countEl.textContent = String(items.length);
+    listEl.innerHTML = items.map(function(d){
+      var days = daysUntil(d.date);
+      var cls = urgencyClass(days);
+      var sourceLink = d.source_url
+        ? '<a href="' + esc(d.source_url) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">' +
+            esc(d.jurisdiction_label || '') +
+          '</a>'
+        : esc(d.jurisdiction_label || '');
+      return '<div class="deadline-row">' +
+        '<div class="deadline-when ' + cls + '">' +
+          esc(daysLabel(days)) +
+          '<span class="date-iso">' + esc(fmtDateLong(d.date)) + '</span>' +
+        '</div>' +
+        '<div class="deadline-name">' +
+          esc(d.name) +
+          (d.note ? '<span class="deadline-note">' + esc(d.note) + '</span>' : '') +
+        '</div>' +
+        '<div class="deadline-meta">' +
+          '<span class="deadline-juris">' + sourceLink + '</span>' +
+          (d.pillar ? '<span class="deadline-pillar">' + esc(d.pillar) + '</span>' : '') +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // ── Timeline strip (12-month horizontal track) ──
+  function renderTimeline(items){
+    if (!timelineEl) return;
+    var W = 1000, H = 84;
+    var padL = 8, padR = 8, padTop = 24, padBot = 24;
+    var trackW = W - padL - padR;
+    var axisY = padTop + (H - padTop - padBot) / 2;
+
+    var now = new Date();
+    var today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    var totalDays = TIMELINE_MONTHS * 30.44;  // calendar months avg
+    var endDate = new Date(today.getTime() + totalDays * 86400000);
+
+    function xForDate(d){
+      var dt = (typeof d === 'string') ? new Date(d + 'T00:00:00Z') : d;
+      var ratio = (dt - today) / (endDate - today);
+      ratio = Math.max(0, Math.min(1, ratio));
+      return padL + ratio * trackW;
+    }
+
+    var monthNames = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+    var svg = '';
+    // Urgency bands (14d red wash, 90d amber wash)
+    var x14 = xForDate(new Date(today.getTime() + 14 * 86400000));
+    var x90 = xForDate(new Date(today.getTime() + 90 * 86400000));
+    svg += '<rect class="dt-band-imminent" x="' + padL + '" y="' + (padTop - 6) + '" width="' + (x14 - padL) + '" height="' + (H - padTop - padBot + 12) + '" />';
+    svg += '<rect class="dt-band-urgent" x="' + x14 + '" y="' + (padTop - 6) + '" width="' + (x90 - x14) + '" height="' + (H - padTop - padBot + 12) + '" />';
+    // Horizontal axis
+    svg += '<line class="dt-axis" x1="' + padL + '" y1="' + axisY + '" x2="' + (W - padR) + '" y2="' + axisY + '" />';
+    // Month ticks + labels
+    var cursor = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), 1));
+    cursor.setUTCMonth(cursor.getUTCMonth() + 1);  // first day of next month
+    for (var i = 0; i < TIMELINE_MONTHS; i++){
+      var x = xForDate(cursor);
+      if (x > padL + 2 && x < W - padR - 2){
+        svg += '<line class="dt-month-tick" x1="' + x + '" y1="' + (axisY - 4) + '" x2="' + x + '" y2="' + (axisY + 4) + '" />';
+        svg += '<text class="dt-month-label" x="' + x + '" y="' + (H - 8) + '" text-anchor="middle">' + monthNames[cursor.getUTCMonth()] + '</text>';
+      }
+      cursor.setUTCMonth(cursor.getUTCMonth() + 1);
+    }
+    // Today marker (left edge)
+    svg += '<line class="dt-today-line" x1="' + padL + '" y1="' + (padTop - 6) + '" x2="' + padL + '" y2="' + (H - padBot + 6) + '" />';
+    svg += '<text class="dt-today-label" x="' + (padL + 6) + '" y="' + (padTop - 8) + '">TODAY</text>';
+
+    // Dots
+    items.forEach(function(d, idx){
+      var x = xForDate(d.date);
+      var days = daysUntil(d.date);
+      var cls = days <= 14 ? 'imminent' : (days <= 90 ? 'urgent' : 'far');
+      // Pulse halo for imminent
+      if (cls === 'imminent'){
+        svg += '<circle class="dt-dot-pulse" cx="' + x + '" cy="' + axisY + '" r="6" />';
+      }
+      svg += '<circle class="dt-dot ' + cls + '" cx="' + x + '" cy="' + axisY + '" r="6"' +
+             ' data-idx="' + idx + '" data-name="' + esc(d.name) + '" data-date="' + esc(fmtDateLong(d.date)) +
+             '" data-days="' + esc(daysLabel(days)) + '" data-juris="' + esc(d.jurisdiction_label || '') + '" />';
+    });
+
+    timelineEl.innerHTML = svg;
+
+    // Hover tooltip
+    var dots = timelineEl.querySelectorAll('.dt-dot');
+    dots.forEach(function(dot){
+      dot.addEventListener('mouseenter', function(e){
+        if (!tooltipEl) return;
+        var name = dot.getAttribute('data-name');
+        var date = dot.getAttribute('data-date');
+        var days = dot.getAttribute('data-days');
+        var juris = dot.getAttribute('data-juris');
+        tooltipEl.innerHTML = '<b>' + name + '</b>' +
+          '<div class="tt-date">' + juris + ' · ' + date + ' · ' + days + '</div>';
+        tooltipEl.classList.add('on');
+        positionTooltip(dot);
+      });
+      dot.addEventListener('mousemove', function(){ positionTooltip(dot); });
+      dot.addEventListener('mouseleave', function(){
+        if (tooltipEl) tooltipEl.classList.remove('on');
+      });
+    });
+    function positionTooltip(dot){
+      if (!tooltipEl) return;
+      var svgRect = timelineEl.getBoundingClientRect();
+      var dotRect = dot.getBoundingClientRect();
+      var parentRect = timelineEl.parentNode.getBoundingClientRect();
+      var x = (dotRect.left + dotRect.width / 2) - parentRect.left;
+      var y = dotRect.top - parentRect.top - 8;
+      tooltipEl.style.left = (x - tooltipEl.offsetWidth / 2) + 'px';
+      tooltipEl.style.top = (y - tooltipEl.offsetHeight) + 'px';
+    }
+  }
+
+  fetch('./deadlines.json', { cache: 'no-cache' })
+    .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(data){
+      var all = (data && data.deadlines) || [];
+      var listItems = all
+        .filter(function(d){ var n = daysUntil(d.date); return n >= 0 && n <= WINDOW_DAYS; })
+        .sort(function(a, b){ return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+      var timelineItems = all
+        .filter(function(d){ var n = daysUntil(d.date); return n >= 0 && n <= TIMELINE_MONTHS * 31; })
+        .sort(function(a, b){ return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+      render(listItems);
+      renderTimeline(timelineItems);
+    })
+    .catch(function(e){
+      listEl.innerHTML = '<div class="deadlines-empty">Could not load deadlines (' + esc(e.message) + ').</div>';
+      if (countEl) countEl.textContent = '—';
+    });
 })();
 </script>
 

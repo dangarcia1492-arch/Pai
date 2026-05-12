@@ -1,0 +1,38 @@
+{
+  "_meta": {
+    "schema": "v1",
+    "description": "Universal must-know regulatory deadlines for the PAI member dashboard calendar widget. Each entry must have a verified primary or authoritative-tracker source URL. Universal-flag means 'show to all users regardless of watchlist' — per-watchlist personalisation is future work (PRI-148 phase 2).",
+    "last_curated": "2026-05-12",
+    "curator_note": "Seed: 2 EU entries verified against primary regulator / FLI implementation tracker. Many other 2026-Q3 dates exist (UK Online Safety Act, DORA reviews, member-state NIS2 implementation) but were not added without source-fetch verification per feedback_verify_sources_before_citing memory."
+  },
+  "deadlines": [
+    {
+      "id": "eu-ai-act-aug-2026",
+      "date": "2026-08-02",
+      "name": "EU AI Act — main provisions become applicable",
+      "jurisdiction_label": "EU 27",
+      "jurisdiction_slug": "eu",
+      "pillar": "AI",
+      "instrument": "Regulation (EU) 2024/1689 (AI Act), Article 113",
+      "source_url": "https://artificialintelligenceact.eu/implementation-timeline/",
+      "source_kind": "implementation_tracker",
+      "primary_source_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "universal": true,
+      "note": "Remainder of the Act applies except Article 6(1); national AI regulatory sandboxes must be operational."
+    },
+    {
+      "id": "eu-cra-reporting-sep-2026",
+      "date": "2026-09-11",
+      "name": "EU Cyber Resilience Act — reporting obligations apply",
+      "jurisdiction_label": "EU 27",
+      "jurisdiction_slug": "eu",
+      "pillar": "Cybersecurity",
+      "instrument": "Regulation (EU) 2024/2847 (Cyber Resilience Act), Article 14",
+      "source_url": "https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act",
+      "source_kind": "regulator_official",
+      "primary_source_url": "https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng",
+      "universal": true,
+      "note": "Article 14 reporting obligations begin applying. Main security obligations apply 2027-12-11."
+    }
+  ]
+}
