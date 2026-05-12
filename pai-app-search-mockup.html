@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PRI-144 — Platform search inline mockup</title>
+<style>
+:root{
+  --bg:#fcfcfc;--surface:#ffffff;--surface-2:#f8fafc;--surface-3:#eff2f7;
+  --ink:#0d2e42;--ink-strong:#07202e;--secondary:#2a3548;--muted:#5e6878;--ink-faint:#8a93a3;
+  --border:#dbe1ea;--border-soft:#ebeff5;
+  --accent:#0176d3;--accent-2:#014486;--accent-3:#032e61;--accent-soft:#e3effc;--accent-soft-2:#cfe1f6;
+  --green:#2e844a;--green-bg:#d6f1dc;
+  --amber:#905200;--amber-bg:#fef0c7;
+  --display:'Inter',-apple-system,sans-serif;
+  --sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+  --sidebar-collapsed:56px;--header-height:52px;
+  --shadow-1:0 1px 2px rgba(10,23,41,.04);
+  --shadow-2:0 2px 6px rgba(10,23,41,.07),0 8px 20px rgba(10,23,41,.05);
+  --shadow-3:0 12px 32px rgba(7,32,46,.18),0 4px 12px rgba(7,32,46,.10);
+  --radius:10px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;min-width:1280px;-webkit-font-smoothing:antialiased}
+
+/* ==== Backdrop hub page (visual context) ==== */
+.icon-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-collapsed);background:var(--surface);border-right:1px solid var(--border);z-index:300;display:flex;flex-direction:column;box-shadow:var(--shadow-1)}
+.sidebar-brand{display:flex;align-items:center;height:var(--header-height);padding:0 16px;border-bottom:1px solid var(--border)}
+.brand-icon{width:28px;height:28px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;font-style:italic;font-weight:700;font-size:18px;color:#fff}
+.header-bar{position:fixed;top:0;left:var(--sidebar-collapsed);right:0;height:var(--header-height);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 28px;gap:18px;z-index:400;box-shadow:var(--shadow-1)}
+
+/* ==== Inline search input (the real one) ==== */
+.search-wrap{flex:1;max-width:640px;position:relative}
+.search-input-row{display:flex;align-items:center;gap:10px;height:34px;padding:0 12px;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;transition:background .12s,border-color .12s,box-shadow .12s}
+.search-input-row.focused{background:var(--surface);border-color:var(--accent);box-shadow:0 0 0 3px rgba(1,118,211,.12)}
+.search-icon{width:16px;height:16px;color:var(--muted);flex-shrink:0}
+.search-input{flex:1;height:32px;font-size:13.5px;color:var(--ink-strong);background:none;border:none;outline:none;font-family:var(--sans);font-weight:500}
+.search-input::placeholder{color:var(--ink-faint);font-weight:400}
+.kbd-hint{display:inline-flex;align-items:center;padding:2px 6px;font-size:11px;font-weight:600;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:4px}
+
+/* ==== Dropdown panel ==== */
+.dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;width:640px;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-3);display:none;flex-direction:column;max-height:520px;overflow:hidden;z-index:500;animation:fadeIn .12s ease-out}
+.dropdown.open{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
+.dd-chips{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border-soft);background:var(--surface-2);flex-wrap:wrap}
+.dd-chip{display:inline-flex;align-items:center;height:24px;padding:0 10px;font-size:11.5px;font-weight:600;color:var(--secondary);background:var(--surface);border:1px solid var(--border);border-radius:12px;cursor:pointer;user-select:none;transition:all .12s}
+.dd-chip:hover{border-color:var(--ink-faint);color:var(--ink)}
+.dd-chip.active{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent-soft-2)}
+.dd-chip.all.active{background:var(--ink-strong);color:#fff;border-color:var(--ink-strong)}
+
+.dd-body{flex:1;overflow-y:auto;padding:4px 0 6px}
+.dd-empty{padding:30px 16px;text-align:center;color:var(--ink-faint);font-size:12.5px}
+.dd-empty b{color:var(--secondary)}
+.dd-section-head{padding:9px 14px 3px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dd-row{display:flex;align-items:center;gap:10px;padding:7px 14px;cursor:pointer;border-left:3px solid transparent}
+.dd-row:hover,.dd-row.focused{background:var(--surface-2);border-left-color:var(--accent)}
+.dd-row.focused{background:var(--accent-soft)}
+.dd-title{flex:1;font-size:12.5px;font-weight:500;color:var(--ink-strong);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dd-jur{display:inline-flex;align-items:center;height:18px;padding:0 7px;font-size:10.5px;font-weight:600;color:var(--secondary);background:var(--surface-3);border-radius:3px;flex-shrink:0}
+.dd-type{display:inline-flex;align-items:center;height:18px;padding:0 7px;font-size:9.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:#fff;border-radius:3px;flex-shrink:0;min-width:70px;justify-content:center}
+.t-leg{background:#0176d3}
+.t-auth{background:#5b3fb6}
+.t-case{background:#8c5a00}
+.t-dec{background:#ba0517}
+.t-guid{background:#2e844a}
+.t-news{background:#5e6878}
+.t-glos{background:#0d2e42}
+.t-fac{background:#016b96}
+
+.dd-foot{display:flex;align-items:center;gap:14px;padding:7px 14px;border-top:1px solid var(--border-soft);background:var(--surface-2);font-size:11px;color:var(--muted)}
+.dd-foot .kb{display:inline-flex;align-items:center;padding:1px 5px;font-size:10px;font-weight:700;color:var(--secondary);background:var(--surface);border:1px solid var(--border);border-radius:3px;margin-right:3px}
+.dd-foot .spacer{flex:1}
+
+/* ==== Backdrop hub content ==== */
+main{margin-left:var(--sidebar-collapsed);padding:calc(var(--header-height) + 24px) 32px 32px}
+.page-statusbar{padding:0 0 18px;margin-bottom:22px;border-bottom:1px solid var(--border)}
+.ps-breadcrumb{font-size:12.5px;color:var(--muted)}
+.ps-breadcrumb a{color:var(--accent-2);font-weight:600;text-decoration:none}
+h1.page-title{margin:0 0 4px;font-size:22px;font-weight:600;color:var(--ink-strong)}
+.page-sub{color:var(--muted);font-size:13px;margin:0 0 24px}
+.placeholder-row{height:42px;background:var(--surface);border:1px solid var(--border-soft);border-radius:6px;margin-bottom:8px;display:flex;align-items:center;padding:0 14px;color:var(--ink-faint);font-size:12.5px}
+</style>
+</head>
+<body>
+
+<aside class="icon-sidebar">
+  <div class="sidebar-brand"><div class="brand-icon">P</div></div>
+</aside>
+
+<header class="header-bar">
+  <div class="search-wrap">
+    <div class="search-input-row" id="inputRow">
+      <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m14 14 3 3"/></svg>
+      <input class="search-input" id="input" placeholder="Search everything PAI tracks…" autocomplete="off" spellcheck="false">
+      <span class="kbd-hint">⌘ K</span>
+    </div>
+    <div class="dropdown" id="dropdown" role="listbox" aria-label="Search results">
+      <div class="dd-chips" id="chips">
+        <span class="dd-chip all active" data-pillar="all">All</span>
+        <span class="dd-chip" data-pillar="ai">AI</span>
+        <span class="dd-chip" data-pillar="privacy">Privacy</span>
+        <span class="dd-chip" data-pillar="cyber">Cyber</span>
+        <span class="dd-chip" data-pillar="data">Data</span>
+      </div>
+      <div class="dd-body" id="body"></div>
+      <div class="dd-foot">
+        <span><span class="kb">↑</span><span class="kb">↓</span> navigate</span>
+        <span><span class="kb">↵</span> open</span>
+        <span><span class="kb">esc</span> close</span>
+        <span class="spacer"></span>
+        <span id="counter"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-statusbar">
+    <div class="ps-breadcrumb"><a href="#">Home</a> / Legislation</div>
+  </div>
+  <h1 class="page-title">Legislation</h1>
+  <p class="page-sub">Hub backdrop — click the top-bar search or press ⌘K, then type. Results appear inline below the input.</p>
+  <div class="placeholder-row">Regulation (EU) 2016/679 — General Data Protection Regulation</div>
+  <div class="placeholder-row">Digital Personal Data Protection Act, 2023 (India)</div>
+  <div class="placeholder-row">California Consumer Privacy Act (CCPA)</div>
+  <div class="placeholder-row">Personal Information Protection Law (China)</div>
+  <div class="placeholder-row">EU AI Act (Regulation 2024/1689)</div>
+</main>
+
+<script>
+// ===== Static example data (mockup only — real impl queries Meilisearch) =====
+const FAKE = [
+  {title:"Regulation (EU) 2016/679 — General Data Protection Regulation",jur:"EU",type:"Legislation",t:"leg",pillars:["privacy"]},
+  {title:"Digital Personal Data Protection Act, 2023",jur:"India",type:"Legislation",t:"leg",pillars:["privacy"]},
+  {title:"California Consumer Privacy Act (CCPA)",jur:"California",type:"Legislation",t:"leg",pillars:["privacy"]},
+  {title:"EU AI Act (Regulation 2024/1689)",jur:"EU",type:"Legislation",t:"leg",pillars:["ai"]},
+  {title:"NIS 2 Directive",jur:"EU",type:"Legislation",t:"leg",pillars:["cyber"]},
+  {title:"EU Data Act",jur:"EU",type:"Legislation",t:"leg",pillars:["data"]},
+  {title:"Information Commissioner's Office",jur:"UK",type:"Authority",t:"auth",pillars:["privacy"]},
+  {title:"Commission nationale de l'informatique et des libertés",jur:"France",type:"Authority",t:"auth",pillars:["privacy"]},
+  {title:"Cyberspace Administration of China",jur:"China",type:"Authority",t:"auth",pillars:["cyber","data"]},
+  {title:"European Data Protection Board",jur:"EU",type:"Authority",t:"auth",pillars:["privacy"]},
+  {title:"Schrems II (C-311/18)",jur:"EU",type:"Case Law",t:"case",pillars:["privacy"]},
+  {title:"Puttaswamy v. Union of India",jur:"India",type:"Case Law",t:"case",pillars:["privacy"]},
+  {title:"CJEU Rules GDPR Access Requests Can Be Abusive (C-526/24)",jur:"EU",type:"Case Law",t:"case",pillars:["privacy"]},
+  {title:"Meta €1.2B GDPR Fine (Ireland DPC, May 2023)",jur:"Ireland",type:"Decision",t:"dec",pillars:["privacy"]},
+  {title:"Italian Garante ChatGPT Provisional Order",jur:"Italy",type:"Decision",t:"dec",pillars:["ai","privacy"]},
+  {title:"ICO Guidance on AI and Data Protection",jur:"UK",type:"Guidance",t:"guid",pillars:["ai","privacy"]},
+  {title:"EDPB Guidelines 03/2023 on Sensitive Data",jur:"EU",type:"Guidance",t:"guid",pillars:["privacy"]},
+  {title:"DPC fines TikTok €530M over China data transfers",jur:"Ireland",type:"News",t:"news",pillars:["privacy"]},
+  {title:"Texas AG settles biometric suit with Meta",jur:"Texas",type:"News",t:"news",pillars:["privacy"]},
+  {title:"Controller",jur:"GDPR Art. 4(7)",type:"Glossary",t:"glos",pillars:["privacy"]},
+  {title:"Processor",jur:"GDPR Art. 4(8)",type:"Glossary",t:"glos",pillars:["privacy"]},
+  {title:"Alaap Shah — Privacy & Cyber Practitioner",jur:"USA",type:"Faculty",t:"fac",pillars:["privacy","cyber"]},
+];
+
+const inputRow=document.getElementById('inputRow');
+const input=document.getElementById('input');
+const dropdown=document.getElementById('dropdown');
+const body=document.getElementById('body');
+const counter=document.getElementById('counter');
+const chips=document.querySelectorAll('.dd-chip');
+let activePillars=new Set(['all']);
+let focused=-1;
+let rendered=[];
+
+function openDD(){dropdown.classList.add('open');inputRow.classList.add('focused');}
+function closeDD(){dropdown.classList.remove('open');inputRow.classList.remove('focused');focused=-1;}
+
+input.addEventListener('focus',()=>{inputRow.classList.add('focused');if(input.value.trim()) openDD();});
+input.addEventListener('blur',()=>{ /* don't auto-close on blur — click in dropdown blurs input. handled by outside-click below */ });
+input.addEventListener('input',()=>{if(input.value.trim()){openDD();render();}else{closeDD();}});
+
+document.addEventListener('click',e=>{
+  if(!document.querySelector('.search-wrap').contains(e.target)) closeDD();
+});
+
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();input.focus();input.select();return;}
+  if(!dropdown.classList.contains('open')) return;
+  if(e.key==='Escape'){e.preventDefault();closeDD();input.blur();}
+  if(e.key==='ArrowDown'){e.preventDefault();move(1);}
+  if(e.key==='ArrowUp'){e.preventDefault();move(-1);}
+  if(e.key==='Enter'&&focused>=0){e.preventDefault();chooseRow(rendered[focused]);}
+});
+
+chips.forEach(c=>c.addEventListener('click',()=>{
+  const p=c.dataset.pillar;
+  if(p==='all'){activePillars=new Set(['all']);}
+  else{
+    activePillars.delete('all');
+    if(activePillars.has(p)) activePillars.delete(p); else activePillars.add(p);
+    if(activePillars.size===0) activePillars=new Set(['all']);
+  }
+  chips.forEach(x=>x.classList.toggle('active',activePillars.has(x.dataset.pillar)));
+  if(dropdown.classList.contains('open')) render();
+}));
+
+function matches(item,q){
+  if(!activePillars.has('all')&&![...activePillars].some(p=>item.pillars.includes(p))) return false;
+  if(!q) return true;
+  const haystack=(item.title+' '+item.jur+' '+item.type).toLowerCase();
+  return q.toLowerCase().split(/\s+/).filter(Boolean).every(tok=>haystack.includes(tok));
+}
+
+function render(){
+  const q=input.value.trim();
+  const hits=FAKE.filter(it=>matches(it,q));
+  rendered=hits;
+  focused=hits.length?0:-1;
+  body.innerHTML='';
+  counter.textContent=hits.length+' result'+(hits.length===1?'':'s');
+  if(!q){counter.textContent='';return;}
+  if(!hits.length){
+    body.innerHTML='<div class="dd-empty">No results for <b>"'+escapeHtml(q)+'"</b></div>';
+    return;
+  }
+  const order=['Legislation','Authority','Case Law','Decision','Guidance','News','Glossary','Faculty'];
+  const byType={};
+  hits.forEach(h=>{(byType[h.type]=byType[h.type]||[]).push(h);});
+  let idx=0;
+  order.forEach(group=>{
+    if(!byType[group]) return;
+    const h=document.createElement('div');
+    h.className='dd-section-head';
+    h.textContent=group+' · '+byType[group].length;
+    body.appendChild(h);
+    byType[group].forEach(it=>{
+      const myIdx=idx++;
+      const row=document.createElement('div');
+      row.className='dd-row';
+      row.dataset.idx=myIdx;
+      row.innerHTML='<div class="dd-title">'+escapeHtml(it.title)+'</div><span class="dd-jur">'+escapeHtml(it.jur)+'</span><span class="dd-type t-'+it.t+'">'+it.type+'</span>';
+      row.addEventListener('mouseenter',()=>setFocus(myIdx));
+      row.addEventListener('mousedown',e=>{e.preventDefault();chooseRow(it);});
+      body.appendChild(row);
+    });
+  });
+  setFocus(0);
+}
+
+function setFocus(i){
+  focused=i;
+  body.querySelectorAll('.dd-row').forEach(r=>r.classList.toggle('focused',+r.dataset.idx===i));
+  const el=body.querySelector('.dd-row.focused');
+  if(el) el.scrollIntoView({block:'nearest'});
+}
+function move(d){if(!rendered.length) return;setFocus((focused+d+rendered.length)%rendered.length);}
+function chooseRow(it){
+  console.log('Open:',it);
+  const el=body.querySelector('.dd-row.focused');
+  if(el){el.style.background='var(--green-bg)';setTimeout(()=>el.style.background='',180);}
+}
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+</script>
+</body>
+</html>
