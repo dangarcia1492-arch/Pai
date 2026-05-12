@@ -460,12 +460,6 @@ body { min-width: 320px !important; }
 .filter-pill:hover{border-color:var(--gray-3);color:var(--ink);background:var(--gray-1)}
 .filter-pill.active{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:500}
 .toolbar-r{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--text-mute)}
-.legend{display:flex;gap:12px;align-items:center;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--text-mute)}
-.legend-item{display:inline-flex;align-items:center;gap:5px}
-.legend-pip{width:11px;height:11px;border-radius:3px;background:var(--gray-2)}
-.legend-pip.s-verified{background:var(--green-fg)}
-.legend-pip.s-pending{background:var(--amber-fg)}
-.legend-pip.s-source{background:#c8d0dc}
 
 .tracker-shell{position:relative}
 .matrix{background:#fff;border:1px solid var(--border-soft);border-radius:14px;overflow:auto;max-height:74vh;box-shadow:0 1px 3px rgba(10,23,41,.04)}
@@ -486,7 +480,6 @@ a.col-slot:hover .summary-line{color:var(--accent)}
 .col-slot:last-of-type{border-right:0}
 .col-slot:hover{background:#fff;transform:scale(1.04);z-index:1;box-shadow:0 4px 14px rgba(10,23,41,.08)}
 .col-slot.is-active{background:var(--accent);box-shadow:inset 0 0 0 2px var(--accent)}
-.col-slot.is-active .pip{box-shadow:0 0 0 3px rgba(255,255,255,.5)}
 .col-slot.is-active .summary-line{color:#fff}
 .matrix-row.head .col-slot{cursor:default;align-items:stretch;background:var(--gray-1);transform:none;padding:10px 8px;gap:0}
 .matrix-row.head .col-slot:hover{background:var(--gray-1);transform:none;box-shadow:none}
@@ -497,31 +490,8 @@ a.col-slot:hover .summary-line{color:var(--accent)}
 .col-slot-label.is-sorted{color:var(--accent-2)}
 .col-slot-label.is-sorted .sort-ind{color:var(--accent)}
 .col-slot-controls{display:flex;justify-content:center;gap:2px;margin-top:4px;align-items:center}
-.th-filter{background:transparent;border:1px solid transparent;color:var(--text-soft);cursor:pointer;font-size:11px;padding:2px 7px;border-radius:4px;line-height:1;font-family:var(--sans);font-weight:600;transition:all var(--t-fast)}
-.th-filter:hover{background:var(--gray-2);color:var(--ink);border-color:var(--gray-3)}
-.th-filter.has-filter{background:var(--accent-soft);color:var(--accent-2);border-color:var(--accent-soft-2)}
-.th-filter .fcount{display:inline-block;padding:0 4px;background:var(--accent);color:#fff;border-radius:8px;font-size:9px;margin-left:3px;line-height:1.4}
 .matrix-row:not(.head):nth-child(even){background:rgba(10,23,41,.013)}
 .matrix-row:not(.head):nth-child(even):hover{background:var(--gray-1)}
-.th-filter-popover{position:fixed;background:#fff;border:1px solid var(--gray-2);border-radius:9px;box-shadow:0 8px 24px rgba(10,23,41,.15);padding:8px;min-width:220px;z-index:200;font-family:var(--sans)}
-.fpop-title{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);padding:4px 8px 8px;border-bottom:1px solid var(--gray-2);margin-bottom:4px}
-.fpop-row{display:flex;gap:9px;align-items:center;padding:6px 8px;border-radius:5px;cursor:pointer;font-size:12.5px;color:var(--ink)}
-.fpop-row:hover{background:var(--gray-1)}
-.fpop-row input{cursor:pointer;width:14px;height:14px;accent-color:var(--accent)}
-.fpop-row .fpip{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.fpop-row .fpip.s-verified{background:var(--green-fg)}
-.fpop-row .fpip.s-pending{background:var(--amber-fg)}
-.fpop-row .fpip.s-source{background:#c8d0dc}
-.fpop-actions{display:flex;gap:6px;padding:6px 4px 2px;border-top:1px solid var(--gray-2);margin-top:4px}
-.fpop-actions button{flex:1;padding:6px;border:1px solid var(--gray-3);background:#fff;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;color:var(--text-mute);font-family:var(--sans);transition:all var(--t-fast)}
-.fpop-actions button:hover{border-color:var(--ink);color:var(--ink)}
-.fpop-actions .fpop-apply{background:var(--accent);color:#fff;border-color:var(--accent)}
-.fpop-actions .fpop-apply:hover{background:var(--accent-2);border-color:var(--accent-2);color:#fff}
-
-.pip{width:14px;height:14px;border-radius:4px;background:var(--gray-2);transition:transform var(--t-fast)}
-.pip.s-verified{background:var(--green-fg)}
-.pip.s-pending{background:var(--amber-fg)}
-.pip.s-source{background:#c8d0dc}
 
 .summary-line{font-size:11px;color:var(--text-mute);text-align:center;line-height:1.35;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-family:var(--sans);letter-spacing:.02em}
 .col-slot:hover .summary-line{color:var(--ink)}
@@ -2799,9 +2769,6 @@ loadAuthorities();
   // sortState: {col: 'juris' | <slotKey>, dir: 'asc' | 'desc'}.
   // Default: by jurisdiction name asc.
   let sortState = { col: 'juris', dir: 'asc' };
-  // columnFilters: { <slotKey>: ['verified','pending','source'] } — empty array == no filter on that col.
-  let columnFilters = {};
-  const STATUS_LABELS = { verified: 'Verified', pending: 'Pending verify', source: 'Awaiting source' };
   const STATUS_RANK = { verified: 0, pending: 1, source: 2 };
 
   const matrix = document.getElementById('matrix');
@@ -2884,16 +2851,6 @@ loadAuthorities();
     });
   }
 
-  function passesColumnFilters(state){
-    for (const slotKey of Object.keys(columnFilters)){
-      const allowed = columnFilters[slotKey];
-      if (!allowed || allowed.length === 0) continue;
-      const c = getCell(state.slug, activeTab, slotKey);
-      if (!allowed.includes(c.status)) return false;
-    }
-    return true;
-  }
-
   function applySort(rows){
     if (!sortState.col) return rows;
     const dir = sortState.dir === 'asc' ? 1 : -1;
@@ -2966,7 +2923,7 @@ loadAuthorities();
 
     let html = stickyHtml;
 
-    let filtered = states.filter(passesFilter).filter(passesColumnFilters);
+    let filtered = states.filter(passesFilter);
     if (tabStateFilter) filtered = filtered.filter(s => tabStateFilter.has(s.slug));
     else if (paiCompareWidget.size() > 0 && paiCompareWidget.size() <= 2) filtered = filtered.filter(s => !paiCompareWidget.has(s.slug));
     const sorted = applySort(filtered);
@@ -2986,7 +2943,7 @@ loadAuthorities();
     });
 
     if (sorted.length === 0){
-      html += `<div class="matrix-row" style="grid-template-columns:1fr;padding:32px;text-align:center;color:var(--text-mute);font-size:13px">No rows match the current filters. <button onclick="window.__resetCols()" style="background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:13px;padding:0;margin-left:6px">Clear column filters</button></div>`;
+      html += `<div class="matrix-row" style="grid-template-columns:1fr;padding:32px;text-align:center;color:var(--text-mute);font-size:13px">No rows match the current filter.</div>`;
     }
 
     matrix.innerHTML = html;
@@ -3003,87 +2960,10 @@ loadAuthorities();
         renderMatrix();
       });
     });
-    matrix.querySelectorAll('.th-filter[data-filter-col]').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        openFilterPopover(btn, btn.dataset.filterCol);
-      });
-    });
   }
-
-  // expose reset for the empty-state link
-  window.__resetCols = function(){ columnFilters = {}; renderMatrix(); };
-
-  // ── Filter popover ─────────────────────────────────
-  function closeFilterPopover(){
-    document.getElementById('th-filter-popover')?.remove();
-    document.removeEventListener('click', closeFilterPopoverOnClickOutside, true);
-  }
-  function closeFilterPopoverOnClickOutside(e){
-    if (!e.target.closest('#th-filter-popover')) closeFilterPopover();
-  }
-  function openFilterPopover(anchor, slotKey){
-    closeFilterPopover();
-    const tab = tabs.find(t => t.key === activeTab);
-    const slot = tab.slots.find(s => s.key === slotKey);
-    const current = columnFilters[slotKey] || [];
-    const pop = document.createElement('div');
-    pop.className = 'th-filter-popover';
-    pop.id = 'th-filter-popover';
-    pop.innerHTML = `
-      <div class="fpop-title">Filter · ${slot.label}</div>
-      ${['verified','pending','source'].map(s => `
-        <label class="fpop-row">
-          <input type="checkbox" value="${s}" ${current.includes(s) ? 'checked' : ''}>
-          <span class="fpip s-${s}"></span>
-          <span>${STATUS_LABELS[s]}</span>
-        </label>`).join('')}
-      <div class="fpop-actions">
-        <button class="fpop-clear">Clear</button>
-        <button class="fpop-apply">Apply</button>
-      </div>`;
-    document.body.appendChild(pop);
-    const r = anchor.getBoundingClientRect();
-    pop.style.top = (r.bottom + 6) + 'px';
-    pop.style.left = Math.max(8, Math.min(window.innerWidth - 232, r.left + r.width/2 - 110)) + 'px';
-    pop.querySelector('.fpop-clear').addEventListener('click', () => {
-      delete columnFilters[slotKey];
-      closeFilterPopover();
-      renderMatrix();
-    });
-    pop.querySelector('.fpop-apply').addEventListener('click', () => {
-      const checked = Array.from(pop.querySelectorAll('input:checked')).map(i => i.value);
-      if (checked.length === 0) delete columnFilters[slotKey];
-      else columnFilters[slotKey] = checked;
-      closeFilterPopover();
-      renderMatrix();
-    });
-    pop.querySelectorAll('.fpop-row').forEach(row => {
-      row.addEventListener('click', e => {
-        if (e.target.tagName !== 'INPUT'){
-          const cb = row.querySelector('input');
-          cb.checked = !cb.checked;
-        }
-      });
-    });
-    setTimeout(() => document.addEventListener('click', closeFilterPopoverOnClickOutside, true), 0);
-  }
-
-  // Detail panel
-  const detail = document.getElementById('detail');
-  const dJuris = document.getElementById('d-juris');
-  const dSlot = document.getElementById('d-slot');
-  const dPill = document.getElementById('d-pill');
-  const dMeta = document.getElementById('d-meta');
-  const dShort = document.getElementById('d-short');
-  const dFull = document.getElementById('d-full');
-  const dIconText = document.getElementById('d-icon-text');
-  const dIconPip = document.getElementById('d-icon-pip');
-  const dSource = document.getElementById('d-source');
-  const dSourceWrap = document.getElementById('d-source-wrap');
-  const dClose = document.getElementById('d-close');
 
   // PRI-136: detail-panel popup removed. Cells are native <a href> links to the country juris page.
+  const detail = document.getElementById('detail');
   function openDetail(){ /* removed — cells navigate via <a> */ }
   function closeDetail(){ /* removed */ }
 
